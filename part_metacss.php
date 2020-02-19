@@ -14,7 +14,6 @@
 	<link rel="manifest" href="site.webmanifest">
 	<link rel="apple-touch-icon" href="icon.png">
 
-	<link rel="stylesheet" href="/dwaan/css/normalize.css?<?php echo filemtime('css/normalize.css') ?>">
-	<link rel="stylesheet" href="/dwaan/css/main.css?<?php echo filemtime('css/main.css') ?>">
+	<link rel="stylesheet" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
 
 	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
