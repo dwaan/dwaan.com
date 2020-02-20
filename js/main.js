@@ -758,7 +758,7 @@ var imageloading = {
 			// No image, just unhide the loading
 			loading.update({duration: .256, height: "100%"});
 			that.loaded = true;
-			that.done(callback, "zero");
+			that.done(callback);
 		} else {
 			// Found image, load them with ajax
 			for (var i = 0; i < imgs.length; i++) {
@@ -972,6 +972,8 @@ var Home = Barba
 			} else {
 				index = 0;
 			}
+
+			if (fruit[index] == undefined) index = 0;
 
 			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index])
 		},
