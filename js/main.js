@@ -722,11 +722,15 @@ var imageloading = {
 	barba_object: null,
 	first_loading: true,
 	first_animation_done: false,
+	callback: null,
 	init: function (elem, callback) {
 		var that = this,
 			imgs = null,
 			imgs_count = 0,
-			imgs_loaded = [];
+			imgs_loaded = [],
+			callback_called = 0;
+
+		that.callback = callback;
 
 		if (elem.newContainer != undefined) {
 			this.elem = elem.newContainer;
@@ -740,6 +744,7 @@ var imageloading = {
 			.querySelectorAll("img");
 		imgs_count = imgs.length * 100;
 
+
 		function checkProgress(index, url, percent) {
 			function totalValue(array_item) {
 				var total = 0;
@@ -749,7 +754,10 @@ var imageloading = {
 				return total;
 			}
 
-			imgs_loaded[index] = percent;
+			if(isNaN(index))
+				imgs_loaded[index.ajaxImageIndex] = percent;
+			else
+				imgs_loaded[index] = percent;
 			return Math.ceil(totalValue(imgs_loaded) / imgs_count * 100);
 		}
 
@@ -761,21 +769,30 @@ var imageloading = {
 			that.done(callback);
 		} else {
 			// Found image, load them with ajax
+			var progress = function(index, url, percent, bytes) {
+				var loaded = checkProgress(index, url, percent);
+
+				loading.update({
+					duration: .256,
+					height: loaded + "%"
+				});
+
+				if (loaded >= 100 && !that.loaded) {
+					that.loaded = true;
+					if(callback_called == 0) {
+						callback_called++;
+						that.done(that.callback);
+					}
+				}
+			}
 			for (var i = 0; i < imgs.length; i++) {
 				imgs_loaded[i] = 0;
-				imgs[i].load(i, imgs[i].getAttribute('src'), function (index, url, percent, bytes) {
-					var loaded = checkProgress(index, url, percent);
-
-					loading.update({
-						duration: .256,
-						height: loaded + "%"
-					});
-
-					if (loaded >= 100 && !that.loaded) {
-						that.loaded = true;
-						that.done(callback);
-					}
-				});
+				if (imgs[i].load != undefined) {
+					imgs[i].load(i, imgs[i].getAttribute('src'), progress);
+				} else {
+					imgs[i].ajaxImageIndex = i;
+					ajaxImage(imgs[i], imgs[i].getAttribute('src'), progress);
+				}
 			}
 		}
 	},
@@ -832,8 +849,8 @@ var imageloading = {
 		} else {
 			if (callback != undefined)
 				callback();
-			}
 		}
+	}
 }
 
 ///////////////////// Menu Functionality

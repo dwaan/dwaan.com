@@ -109,9 +109,17 @@ function parseStrToFloat(string_to_convert) {
 	}
 }());
 // Add new function for image
-Image.prototype.load = function (index, url, callback, bytes) {
+// Todo: Convert into regular function
+var ajaxImage = Image.prototype.load = function (index, url, callback, bytes) {
 	var thisImg = this;
 	var xmlHTTP = new XMLHttpRequest();
+
+	// If index is img element
+	if(isNaN(index)) {
+		thisImg.completedPercentage = 0;
+		thisImg = index;
+	}
+
 	thisImg.src = "";
 	xmlHTTP.open('GET', url, true);
 	xmlHTTP.responseType = 'arraybuffer';

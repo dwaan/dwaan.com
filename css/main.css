@@ -836,16 +836,17 @@ header {
 	position: absolute;
 	top: 0;
 	bottom: 0;
+	left: initial;
 	right: 2.334vw;
 	width: 2.23vw;
+	height: 100%;
 	pointer-events: auto;
 }
 .menu > a {
 	position: relative;
-	top: 50%;
 	display: block;
 	width: 100%;
-	height: 100%;
+	top: 50%;
 	transform: translate3d(0,-50%,0);
 }
 .menu > a svg {
@@ -983,8 +984,6 @@ header {
 		font-size: 1.1rem;
 	}
 }
-@media (max-aspect-ratio: 1/2) {
-}
 
 
 /* Bright/Dark Mode */
@@ -996,11 +995,11 @@ header {
 	width: 4.5vh;
 	height: 4.5vh;
 	cursor: pointer;
+	transform: translate3d(0,-50%,0);
 }
 #mode svg {
 	width: 100%;
 	height: auto;
-	transform: translate3d(0,-50%,0);
 }
 #mode svg #moon,
 #mode svg #sun,
@@ -2097,6 +2096,7 @@ main {
 	height: auto;
 	padding: 5.95vh 7.8125vw 5vh;
 	color: #C3DEE4;
+	overflow: hidden;
 }
 .work_float .work__container {
 	position: relative;
