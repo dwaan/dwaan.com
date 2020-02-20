@@ -1,261 +1,167 @@
-//////////////
-// Helper functions
-//
-// _q(element)
-// _qAll(elements)
-// removeClass(element, className)
-// addClass(element, className)
-// nextElementSibling(element)
-// getRandomInt(min, max)
-// roundToPrecision(x, precision)
-// parseStrToFloat(string_to_convert)
-var _q = function (argument) {
-    return document.querySelector(argument)
-};
-var _qAll = function (argument) {
-    return document.querySelectorAll(argument)
-};
-function removeClass(el, className) {
-    if (el.classList) {
-        el
-            .classList
-            .remove(className)
-    } else {
-        el.className = el
-            .className
-            .replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ')
-    }
-}
-function addClass(el, className) {
-    if (el.classList) {
-        el
-            .classList
-            .add(className)
-    } else {
-        var current = el.className,
-            found = false;
-        var all = current.split(' ');
-        for (var i = 0; i < all.length, !found; i += 1) {
-            found = all[i] === className
-        }
-        if (!found) {
-            if (current === '') {
-                el.className = className
-            } else {
-                el.className += ' ' + className
-            }
-        }
-    }
-}
-function nextElementSibling(el) {
-    do {
-        el = el.nextSibling
-    } while (el && el.nodeType !== 1);
-    return el
-}
-function getRandomInt(min, max) {
-    var temp;
-    if (min > max) {
-        temp = min;
-        min = max;
-        max = temp
-    }
-    temp = (max + 1) - min;
-    return Math.floor(Math.random() * Math.floor(temp)) + min
-}
-function roundToPrecision(x, precision) {
-    var y = +x + (precision === undefined
-        ? 0.5
-        : precision / 2);
-    return y - (y % (precision === undefined
-        ? 1
-        : + precision))
-}
-function parseStrToFloat(string_to_convert) {
-    if (typeof string_to_convert === 'string' || string_to_convert instanceof String) {
-        string_to_convert = string_to_convert.trim()
-    }
-    return parseFloat(string_to_convert)
-}
-(function () {
-    var method;
-    var noop = function () {};
-    var methods = [
-        'assert',
-        'clear',
-        'count',
-        'debug',
-        'dir',
-        'dirxml',
-        'error',
-        'exception',
-        'group',
-        'groupCollapsed',
-        'groupEnd',
-        'info',
-        'log',
-        'markTimeline',
-        'profile',
-        'profileEnd',
-        'table',
-        'time',
-        'timeEnd',
-        'timeline',
-        'timelineEnd',
-        'timeStamp',
-        'trace',
-        'warn'
-    ];
-    var length = methods.length;
-    var console = (window.console = window.console || {});
-    while (length--) {
-        method = methods[length];
-        if (!console[method]) {
-            console[method] = noop
-        }
-    }
-}());
-// Add new function for image
-Image.prototype.load = function (index, url, callback, bytes) {
-    var thisImg = this;
-    var xmlHTTP = new XMLHttpRequest();
-    thisImg.src = "";
-    xmlHTTP.open('GET', url, true);
-    xmlHTTP.responseType = 'arraybuffer';
-    xmlHTTP.onload = function (e) {
-        var blob = new Blob([this.response]);
-        thisImg.src = window
-            .URL
-            .createObjectURL(blob)
-    };
-    xmlHTTP.onprogress = function (e) {
-        thisImg.completedPercentage = parseInt((e.loaded / e.total) * 100);
-        if (thisImg.completedPercentage >= 100) {
-            thisImg.src = url
-        }
-        callback(index, url, thisImg.completedPercentage, e.total)
-    };
-    xmlHTTP.onloadstart = function () {
-        thisImg.completedPercentage = 0
-    };
-    xmlHTTP.send()
-};
-Image.prototype.completedPercentage = 0;
-////////////// Konami Code
-var konami = "38,38,40,40,37,39,37,39,66,65".split(","),
-    keyIndex = 0;
-document.onkeydown = function (t) {
-    konami[keyIndex] == t.keyCode
-        ? keyIndex++
-        : keyIndex = 0,
-    keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe title="YouTube video player" class="youtube-player"' +
-            ' type="text/html" width="905" height="510" src="https://www.youtube.com/embed/tg' +
-            'bNymZ7vqY?rel=0&autoplay=1" frameborder="0"></iframe></div>'), keyIndex = 0);
-    if (_q('#konamicode') != undefined) {
-        elem = _q('#konamicode');
-        elem.onclick = function (e) {
-            gsap.to('#konamicode', {
-                duration: 1.024,
-                ease: "expo.in",
-                opacity: 0,
-                onComplete: function () {
-                    elem
-                        .parentNode
-                        .removeChild(elem)
-                }
-            })
-        }
-    }
-};
-
-
-
-
 // General variables
 var dark_mode = false,
 	logo_svg = _q(".logo").innerHTML,
 	// Variables for barba views
 	current_barba = null,
 	controller = new ScrollMagic.Controller(),
-	els =  null,
+	els = null,
 	anim = null,
-	tl = null;
-
-
-
+	tl = null,
+	tinysliders = [];
 
 // Put mandatory html stuff
-_q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div class="cm__table"><div class="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if posible for better layout.</p></div></div></div></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>';
+_q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div class="cm__table"><div cla' +
+		'ss="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h' +
+		'3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me ' +
+		'to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if po' +
+		'sible for better layout.</p></div></div></div></div><div class="pswp" tabindex="' +
+		'-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="psw' +
+		'p__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div ' +
+		'class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__u' +
+		'i pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div>' +
+		' <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> ' +
+		'<button class="pswp__button pswp__button--share" title="Share"></button> <button' +
+		' class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <butt' +
+		'on class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div cla' +
+		'ss="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preload' +
+		'er__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div ' +
+		'class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=' +
+		'"pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arro' +
+		'w--left" title="Previous (arrow left)"> </button><button class="pswp__button psw' +
+		'p__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__' +
+		'caption"><div class="pswp__caption__center"></div></div></div></div></div>';
 
 // Snoop which text or url that are currently clicked
 var clicked_target = null,
 	clicked_text = "";
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
 	e = e || window.event;
 	clicked_target = e.target || e.srcElement;
 	clicked_text = clicked_target.textContent || clicked_target.innerText;
 }, false);
 
+////////////////////// Huge text animation
 
-
-
-//////////////////////
-// Huge text animation
-
-var hugeText = function(el) {
+var hugeText = function (el) {
 	this.element = _q(el);
 	this.element.innerHTML = "<span></span>";
 	this.cancelhide = false;
 	this.onshow = false;
 	this.tween = null;
 
-	gsap.set(this.element.children, { yPercent: 100 });
-	gsap.fromTo(this.element.children, { xPercent: -25 }, { duration: 10, repeat: -1, ease: "linear", xPercent: -75 });
+	gsap.set(this.element.children, {yPercent: 100});
+	gsap.fromTo(this.element.children, {
+		xPercent: -25
+	}, {
+		duration: 10,
+		repeat: -1,
+		ease: "linear",
+		xPercent: -75
+	});
 
-	this.show = function(text) {
+	this.show = function (text) {
 		this.cancelhide = true;
-		this.element.querySelector("span").innerHTML = "<i>" + text + "</i><i>" + text +  "</i><i>" + text +  "</i><i>" + text + "</i>";
-		if(this.tween != null) this.tween.kill();
-		this.tween = gsap.to(this.element.children, { duration: .512, ease: "expo", yPercent: 0 });
+		this
+			.element
+			.querySelector("span")
+			.innerHTML = "<i>" + text + "</i><i>" + text + "</i><i>" + text + "</i><i>" + text + "</i>";
+		if (this.tween != null)
+			this.tween.kill();
+		this.tween = gsap.to(this.element.children, {
+			duration: .512,
+			ease: "expo",
+			yPercent: 0
+		});
 	}
 
-	this.hide = function() {
+	this.hide = function () {
 		var that = this;
-		this.tween = gsap.to(this.element.children, { duration: .512, ease: "expo", yPercent: 100, onComplete: function() {
-			if (that.cancelhide) {
-				that.cancelhide = false;
-			} else {
-				that.element.querySelector("span").innerHTML = "";
+		this.tween = gsap.to(this.element.children, {
+			duration: .512,
+			ease: "expo",
+			yPercent: 100,
+			onComplete: function () {
+				if (that.cancelhide) {
+					that.cancelhide = false;
+				} else {
+					that
+						.element
+						.querySelector("span")
+						.innerHTML = "";
+				}
 			}
-		}});
+		});
 	}
 
 	return this;
 }
 
-/////////////////
-// Animate Number
+///////////////// Animate Number
 
-function animateNumber(selector){var that=this;this.game={score:0};this.selector=_q(selector);this.value=this.selector.textContent||this.selector.innerText;this.plus="+";this.value=this.value.split("+");if(this.value.length<=1){this.plus=""}this.value=this.value[0];this.selector.innerHTML="0"+this.plus;this.animate=function(){gsap.to(that.game,5,{score:"+="+that.value,roundProps:"score",onUpdate:that.updateHandler,ease:"expo.out"})};this.updateHandler=function(){that.selector.innerHTML=that.game.score+that.plus};this.animate()}function animateYear(selector,year){var that=this;this.game={score:0};this.selector=_q(selector);this.year__now=(new Date()).getFullYear(),this.year__animate=(this.year__now-year);this.animate=function(){gsap.to(that.game,5,{score:"+="+that.year__animate,roundProps:"score",onUpdate:that.updateHandler,ease:"expo.out"})};this.updateHandler=function(){that.selector.innerHTML=that.game.score+"+"};this.animate()}
+function animateNumber(selector) {
+	var that = this;
+	this.game = {
+		score: 0
+	};
+	this.selector = _q(selector);
+	this.value = this.selector.textContent || this.selector.innerText;
+	this.plus = "+";
+	this.value = this
+		.value
+		.split("+");
+	if (this.value.length <= 1) {
+		this.plus = ""
+	}
+	this.value = this.value[0];
+	this.selector.innerHTML = "0" + this.plus;
+	this.animate = function () {
+		gsap.to(that.game, 5, {
+			score: "+=" + that.value,
+			roundProps: "score",
+			onUpdate: that.updateHandler,
+			ease: "expo.out"
+		})
+	};
+	this.updateHandler = function () {
+		that.selector.innerHTML = that.game.score + that.plus
+	};
+	this.animate()
+}
+function animateYear(selector, year) {
+	var that = this;
+	this.game = {
+		score: 0
+	};
+	this.selector = _q(selector);
+	this.year__now = (new Date()).getFullYear(),
+	this.year__animate = (this.year__now - year);
+	this.animate = function () {
+		gsap.to(that.game, 5, {
+			score: "+=" + that.year__animate,
+			roundProps: "score",
+			onUpdate: that.updateHandler,
+			ease: "expo.out"
+		})
+	};
+	this.updateHandler = function () {
+		that.selector.innerHTML = that.game.score + "+"
+	};
+	this.animate()
+}
 
-
-
-
-
-/////////////////////
-// Menu Functionality
+///////////////////// Menu Functionality
 
 var menu = {
 	active: false,
 	el: null,
-	init: function() {
+	init: function () {
 		var that = this;
 
-		gsap.set('.menu__pop .menu__item', { opacity: 0 });
+		gsap.set('.menu__pop .menu__item', {opacity: 0});
 
 		// The bright/dark mode switcher
 		this.el = _q('#mode');
-		gsap.set(this.el.querySelector("#ray"), { transformOrigin: "center center" })
+		gsap.set(this.el.querySelector("#ray"), {transformOrigin: "center center"})
 		this.el.onclick = function (e) {
 			if (!dark_mode) {
 				dark_mode = true;
@@ -268,43 +174,95 @@ var menu = {
 			e.preventDefault();
 		}
 		this.el.onmouseenter = function () {
-			gsap.to(this.querySelector("#ray"), { duration: .512, ease: "expo", rotation: 180, scale: 1.1 });
+			gsap.to(this.querySelector("#ray"), {
+				duration: .512,
+				ease: "expo",
+				rotation: 180,
+				scale: 1.1
+			});
 		}
 		this.el.onmouseleave = function () {
-			gsap.to(this.querySelector("#ray"), { duration: .512, ease: "expo", rotation: 0, scale: 1 });
+			gsap.to(this.querySelector("#ray"), {
+				duration: .512,
+				ease: "expo",
+				rotation: 0,
+				scale: 1
+			});
 		}
 
 		// The main menu events
 		this.el = _q('.menu__pop > a');
-		gsap.set(this.el.querySelector("#menu-short"), { x: -7.5 });
+		gsap.set(this.el.querySelector("#menu-short"), {x: -7.5});
 		this.el.onclick = function (e) {
-			var tl = gsap.timeline({ defaults: { duration: .768, ease: "expo.out"} });
+			var tl = gsap.timeline({
+				defaults: {
+					duration: .768,
+					ease: "expo.out"
+				}
+			});
 
 			addClass(this.parentNode, "active");
 			that.active = true;
 
-			tl.fromTo('.menu__pop .menu__item', { yPercent: 0, xPercent: 0, opacity: 0 }, { yPercent: 0, opacity: 1, scaleY: 1 })
-				.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { transformOrigin: "0 0", xPercent: 200, opacity: 0 }, { xPercent: 0, opacity: 1, stagger: {
+			tl.fromTo('.menu__pop .menu__item', {
+				yPercent: 0,
+				xPercent: 0,
+				opacity: 0
+			}, {
+				yPercent: 0,
+				opacity: 1,
+				scaleY: 1
+			}).fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
+				transformOrigin: "0 0",
+				xPercent: 200,
+				opacity: 0
+			}, {
+				xPercent: 0,
+				opacity: 1,
+				stagger: {
 					from: 0,
 					amount: .128
-				}}, .128);
+				}
+			}, .128);
 
 			e.preventDefault();
 		}
 		this.el.onmouseenter = function () {
-			gsap.to(this.querySelector("#menu-short"), { duration: .512, ease: "expo", x: 0 });
+			gsap.to(this.querySelector("#menu-short"), {
+				duration: .512,
+				ease: "expo",
+				x: 0
+			});
 		}
 		this.el.onmouseleave = function () {
-			gsap.to(this.querySelector("#menu-short"), { duration: .512, ease: "expo", x: -7.5 });
+			gsap.to(this.querySelector("#menu-short"), {
+				duration: .512,
+				ease: "expo",
+				x: -7.5
+			});
 		}
 
 		// The logo events
 		this.el = _q('.logo');
 		this.el.onmouseenter = function () {
-			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: -3, xPercent: -1, rotation: 4, duration: 1.024, ease: "elastic.out" })
+			gsap.to(".logo .hat", {
+				transformOrigin: "50% 75%",
+				yPercent: -3,
+				xPercent: -1,
+				rotation: 4,
+				duration: 1.024,
+				ease: "elastic.out"
+			})
 		}
 		this.el.onmouseleave = function () {
-			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: 0, xPercent: 0, rotation: 0, duration: 1.024, ease: "elastic.out" });
+			gsap.to(".logo .hat", {
+				transformOrigin: "50% 75%",
+				yPercent: 0,
+				xPercent: 0,
+				rotation: 0,
+				duration: 1.024,
+				ease: "elastic.out"
+			});
 		}
 
 		// The main menu hover item animation
@@ -312,21 +270,34 @@ var menu = {
 			borderRadius,
 			_hugeText = new hugeText(border + " > div ");
 		for (var i = 2; i <= 6; i++) {
-			if (i == 5) i = 6;
+			if (i == 5)
+				i = 6;
 
 			this.el = _q('.menu__pop .menu__item li:nth-child(' + i + ') a');
 
-			if (i == 2) this.el.borderRadius = "25% 2% 2% 2%";
-			else if (i == 3) this.el.borderRadius = "2% 25% 2% 2%";
-			else if (i == 4) this.el.borderRadius = "2% 2% 25% 2%";
-			else this.el.borderRadius = "2% 2% 2% 25%";
+			if (i == 2)
+				this.el.borderRadius = "25% 2% 2% 2%";
+			else if (i == 3)
+				this.el.borderRadius = "2% 25% 2% 2%";
+			else if (i == 4)
+				this.el.borderRadius = "2% 2% 25% 2%";
+			else
+				this.el.borderRadius = "2% 2% 2% 25%";
 
 			this.el.onmouseenter = function () {
-				gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
+				gsap.to(border, {
+					duration: .386,
+					ease: "expo",
+					borderRadius: this.borderRadius
+				});
 				_hugeText.show(this.innerHTML);
 			}
 			this.el.onmouseleave = function () {
-				gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
+				gsap.to(border, {
+					duration: .386,
+					ease: "expo",
+					borderRadius: "2% 2% 2% 2%"
+				});
 				_hugeText.hide();
 			}
 		}
@@ -334,22 +305,47 @@ var menu = {
 		// The main menu close events
 		this.el = _q('.menu__item .close span');
 		this.el.onclick = function (e) {
-			var tl = gsap.timeline({ defaults: { duration: .512, ease: "expo.in"} });
-			tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { xPercent: 0, opacity: 1 }, { xPercent: -200, opacity: 0, stagger: {
+			var tl = gsap.timeline({
+				defaults: {
+					duration: .512,
+					ease: "expo.in"
+				}
+			});
+			tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
+				xPercent: 0,
+				opacity: 1
+			}, {
+				xPercent: -200,
+				opacity: 0,
+				stagger: {
 					from: 0,
 					amount: .128
-				}})
-				.fromTo('.menu__pop .menu__item', { yPercent: 0, xPercent: 0, opacity: 1 }, { opacity: 0 }, .128);
+				}
+			}).fromTo('.menu__pop .menu__item', {
+				yPercent: 0,
+				xPercent: 0,
+				opacity: 1
+			}, {
+				opacity: 0
+			}, .128);
 			removeClass(this.parentNode.parentNode.parentNode.parentNode.parentNode, "active");
 			that.active = false;
 
 			e.preventDefault();
 		}
 		this.el.onmouseover = function () {
-			gsap.to(this.querySelector(".icn_close"), { duration: .512, ease: "expo.out", rotation: 90 });
+			gsap.to(this.querySelector(".icn_close"), {
+				duration: .512,
+				ease: "expo.out",
+				rotation: 90
+			});
 		}
 		this.el.onmouseout = function () {
-			gsap.to(this.querySelector(".icn_close"), { duration: .512, ease: "expo.in", rotation: 0 });
+			gsap.to(this.querySelector(".icn_close"), {
+				duration: .512,
+				ease: "expo.in",
+				rotation: 0
+			});
 		}
 
 		// Lang events
@@ -383,52 +379,102 @@ var menu = {
 	}
 }
 
-
-
-
-////////////////////
-// Loading animation
+//////////////////// Loading animation
 
 var loading = {
 	selector: _q("#loading-cover"),
-	breath: gsap.timeline({ repeat: -1, ease: "linear" }),
-	float: gsap.timeline({ repeat: -1, ease: "ease", duration: .512 }),
-	init: function() {
+	breath: gsap.timeline({repeat: -1, ease: "linear"}),
+	float: gsap.timeline({repeat: -1, ease: "ease", duration: .512}),
+	init: function () {
 		var el = "";
 
-		gsap.set(this.selector, { top: 0, bottom: 0, left: 0, right: 0 });
+		gsap.set(this.selector, {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0
+		});
 
 		// Some floating animation for loading-cover
 		el = "#loading-cover";
-		this.breath
-			.to(el, { transformOrigin: "50%", scale: 1, duration: .9 })
-			.to(el, { scale: 1.15, duration: 1.7 })
-			.to(el, { scale: 1.15, duration: .6 })
-			.to(el, { scale: 1, duration: 1.7 })
-		;
-		this.breath.pause();
+		this
+			.breath
+			.to(el, {
+				transformOrigin: "50%",
+				scale: 1,
+				duration: .9
+			})
+			.to(el, {
+				scale: 1.15,
+				duration: 1.7
+			})
+			.to(el, {
+				scale: 1.15,
+				duration: .6
+			})
+			.to(el, {
+				scale: 1,
+				duration: 1.7
+			});
+		this
+			.breath
+			.pause();
 
 		// Some floating animation for hero image
 		el = ".loading > div";
-		this.float
-			.fromTo(el, { yPercent: -10 }, { yPercent: 10, duration: 1.024 })
-			.fromTo(el, { yPercent: 10 }, { yPercent: -10, duration: 1.024 })
-			.fromTo(el, { yPercent: -10 }, { yPercent: 5 })
-			.fromTo(el, { yPercent: 5 }, { yPercent: -5 })
-			.fromTo(el, { yPercent: -5 }, { yPercent: 10, duration: .768 })
-			.fromTo(el, { yPercent: 10 }, { yPercent: -10, duration: 1.024 })
-		;
+		this
+			.float
+			.fromTo(el, {
+				yPercent: -10
+			}, {
+				yPercent: 10,
+				duration: 1.024
+			})
+			.fromTo(el, {
+				yPercent: 10
+			}, {
+				yPercent: -10,
+				duration: 1.024
+			})
+			.fromTo(el, {
+				yPercent: -10
+			}, {yPercent: 5})
+			.fromTo(el, {
+				yPercent: 5
+			}, {yPercent: -5})
+			.fromTo(el, {
+				yPercent: -5
+			}, {
+				yPercent: 10,
+				duration: .768
+			})
+			.fromTo(el, {
+				yPercent: 10
+			}, {
+				yPercent: -10,
+				duration: 1.024
+			});
 	},
-	show: function(callback) {
+	show: function (callback) {
 		var that = this,
-			var_from = { xPercent: 0, yPercent: 100 },
-			var_to = { xPercent: 0, yPercent: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
-				if (callback != undefined) callback();
-			}};
+			var_from = {
+				xPercent: 0,
+				yPercent: 100
+			},
+			var_to = {
+				xPercent: 0,
+				yPercent: 0,
+				duration: .768,
+				ease: "expo.inOut",
+				onComplete: function () {
+					if (callback != undefined)
+						callback();
+					}
+				};
 
 		_q("#click-cover").style.display = "block";
 
-		if(menu.active) {
+		if (menu.active) {
 			var_from.xPercent = 100;
 			var_from.yPercent = 0;
 			var_to.xPercent = 0;
@@ -441,120 +487,234 @@ var loading = {
 
 		// Hide loading
 		if (clicked_text == "See All") {
-			var_from = { xPercent: -100, yPercent: 0 };
+			var_from = {
+				xPercent: -100,
+				yPercent: 0
+			};
 		} else if (clicked_text == "Back") {
-			var_from = { xPercent: 100, yPercent: 0 };
+			var_from = {
+				xPercent: 100,
+				yPercent: 0
+			};
 		}
 
-		if(_q("[data-namespace]").getAttribute("data-namespace") == "call") {
-			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo"} }),
+		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
+			var tl = gsap.timeline({
+					defaults: {
+						duration: .386,
+						ease: "expo"
+					}
+				}),
 				sl = that.selector;
 
 			removeClass(sl, "bubble");
-			tl.set(sl, { zIndex: 666 })
-				.to(sl.querySelector(".text"), { opacity: 0 })
-				.to(sl.querySelector(".light"), { height: 0 })
-				.fromTo(sl.querySelector(".loading"), { opacity: 0, yPercent: 100 }, { opacity: 1, yPercent: 0 }, 0)
-				.to(sl, { position: "fixed", top: 0, right: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
-					gsap.set(sl, { top: 0, bottom: 0, left: 0, right: 0, width: "auto", height: "auto" });
-					if (callback != undefined) callback();
-				}});
+			tl
+				.set(sl, {zIndex: 666})
+				.to(sl.querySelector(".text"), {opacity: 0})
+				.to(sl.querySelector(".light"), {height: 0})
+				.fromTo(sl.querySelector(".loading"), {
+					opacity: 0,
+					yPercent: 100
+				}, {
+					opacity: 1,
+					yPercent: -50
+				}, 0)
+				.to(sl, {
+					position: "fixed",
+					top: 0,
+					right: 0,
+					width: window.innerWidth,
+					height: window.innerHeight,
+					borderRadius: 0,
+					duration: .768,
+					ease: "expo.inOut",
+					onComplete: function () {
+						gsap.set(sl, {
+							top: 0,
+							bottom: 0,
+							left: 0,
+							right: 0,
+							width: "auto",
+							height: "auto"
+						});
+						if (callback != undefined)
+							callback();
+						}
+					});
 		} else {
 			gsap.fromTo(this.selector, var_from, var_to);
 		}
 	},
-	hide: function(callback) {
+	hide: function (callback) {
 		var that = this,
-			var_from = { xPercent: 0, yPercent: 0 },
-			var_to = { duration: .768, ease: "expo.inOut", xPercent: 0, yPercent: -100, onComplete: function() {
-				// Move loading
-				gsap.set(that.selector, { yPercent: -200 });
-				// Set progress bar back to zero
-				that.update({ duration: 0, height: 0 });
-				// Unhide loading
-				gsap.set(that.selector.querySelector(".loading"), { opacity: 1 });
-				// Run callback
-				if (callback != undefined) callback();
-			}};
+			var_from = {
+				xPercent: 0,
+				yPercent: 0
+			},
+			var_to = {
+				duration: .768,
+				ease: "expo.inOut",
+				xPercent: 0,
+				yPercent: -100,
+				onComplete: function () {
+					// Move loading
+					gsap.set(that.selector, {yPercent: -200});
+					// Set progress bar back to zero
+					that.update({duration: 0, height: 0});
+					// Unhide loading
+					gsap.set(that.selector.querySelector(".loading"), {opacity: 1});
+					// Run callback
+					if (callback != undefined)
+						callback();
+					}
+				};
 
 		// Hide loading
 		if (clicked_text == "See All") {
 			var_to.xPercent = -100;
-			var_to.yPercent = 0 ;
+			var_to.yPercent = 0;
 		} else if (clicked_text == "Back") {
 			var_to.xPercent = 100;
-			var_to.yPercent = 0 ;
+			var_to.yPercent = 0;
 		}
 
-		if(_q("[data-namespace]").getAttribute("data-namespace") == "call") {
-			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo.inOut"} }),
+		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
+			var tl = gsap.timeline({
+					defaults: {
+						duration: .386,
+						ease: "expo.inOut"
+					}
+				}),
 				sl = that.selector,
-				size = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
+				size = sl
+					.querySelector(".loading")
+					.offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
 
-			tl.to(sl.querySelector(".loading"), { opacity: 0 }, 0)
-				.to(sl.querySelector(".text"), { margin: 0, onComplete: function() {
-					sl.querySelector(".text").innerHTML = "<p class='hi'>hi!</p>";
+			tl.to(sl.querySelector(".loading"), {
+				opacity: 0
+			}, 0).to(sl.querySelector(".text"), {
+				margin: 0,
+				onComplete: function () {
+					sl
+						.querySelector(".text")
+						.innerHTML = "<p class='hi'>hi!</p>";
 					addClass(sl, "bubble");
-					gsap.set(sl.querySelector(".text"), { opacity: 1 })
-				}}, 0)
-				.to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
-				.set(sl, { position: "absolute", zIndex: 1 })
-			;
+					gsap.set(sl.querySelector(".text"), {opacity: 1})
+				}
+			}, 0).to(sl, {
+				width: size,
+				height: size,
+				top: "17.5vh",
+				left: "initial",
+				right: "11.5vw",
+				borderRadius: "1000px",
+				duration: .768
+			}, 0).set(sl, {
+				position: "absolute",
+				zIndex: 1
+			});
 
-			if (callback != undefined) callback();
-		} else {
+			if (callback != undefined)
+				callback();
+			}
+		else {
 			gsap.fromTo(that.selector, var_from, var_to);
 		}
 
 		_q("#click-cover").style.display = "none";
 	},
-	update: function(percent) {
+	update: function (percent) {
 		gsap.to("#loading-cover .loading .light", percent);
 	},
-	animate: function(view, callback) {
+	animate: function (view, callback) {
 		var animate = false;
 
-		switch(view) {
+		switch (view) {
 			case "first-time":
-				this.selector.querySelector(".text").innerHTML = "<div class='hi'><h1>hello!</h1></div><div class='dwan'><h1>this is dwan</h1></div>";
+				this
+					.selector
+					.querySelector(".text")
+					.innerHTML = "<div class='hi'><h1>hello!</h1></div><div class='dwan'><h1>this is dwan</h1></di" +
+						"v>";
 				animate = true;
-			break;
+				break;
 			case "404":
-				this.selector.querySelector(".text").innerHTML = "<div class='hi'><h1>oh 🦀,</h1></div><div class='dwan'><h2>you lost! 😢</h2></div>";
+				this
+					.selector
+					.querySelector(".text")
+					.innerHTML = "<div class='hi'><h1>oh 🦀,</h1></div><div class='dwan'><h2>you lost! 😢</h2></di" +
+						"v>";
 				animate = true;
-			break;
+				break;
 			default:
 				animate = false;
-			break;
+				break;
 		}
 
-		if(animate) {
+		if (animate) {
 			if (callback == undefined) {
-				callback = function() {}
+				callback = function () {}
 			}
 			var lv = "#loading-cover",
-				tl = gsap.timeline({ defaults: { duration: .768, ease: "expo.out"} });
-			tl.set(lv + " .text", { opacity: 1 })
-			  .to(lv + " .left-hand", { transformOrigin: "99% 0", duration: .256, ease: "expo", yPercent: 35, rotation: 65 })
-			  .to(lv + " .right-hand", { transformOrigin: "1% 0", duration: .256, ease: "expo", yPercent: 35, rotation: -65 }, "-=.256")
-			  .fromTo(lv + " .loading", { opacity: 1 }, { opacity: 0 }, "+=.512")
-			  .fromTo(lv + " .hi h1", { yPercent: 120 }, { yPercent: 0 }, "-=.512")
-			  .fromTo(lv + " .dwan h1", { yPercent: 120 }, { yPercent: 0 }, "-=.512")
-			  .set(lv + " .left-hand", { transformOrigin: "99% 0", yPercent: 0, rotation: 0 })
-			  .set(lv + " .right-hand", { transformOrigin: "1% 0", yPercent: 0, rotation: 0 })
-			  .call(callback);
+				tl = gsap.timeline({
+					defaults: {
+						duration: .768,
+						ease: "expo.out"
+					}
+				});
+			tl
+				.set(lv + " .text", {opacity: 1})
+				.to(lv + " .left-hand", {
+					transformOrigin: "99% 0",
+					duration: .256,
+					ease: "expo",
+					yPercent: 35,
+					rotation: 65
+				})
+				.to(lv + " .right-hand", {
+					transformOrigin: "1% 0",
+					duration: .256,
+					ease: "expo",
+					yPercent: 35,
+					rotation: -65
+				}, "-=.256")
+				.fromTo(lv + " .loading", {
+					opacity: 1
+				}, {
+					opacity: 0
+				}, "+=.512")
+				.fromTo(lv + " .hi h1", {
+					yPercent: 120
+				}, {
+					yPercent: 0
+				}, "-=.512")
+				.fromTo(lv + " .dwan h1", {
+					yPercent: 120
+				}, {
+					yPercent: 0
+				}, "-=.512")
+				.set(lv + " .left-hand", {
+					transformOrigin: "99% 0",
+					yPercent: 0,
+					rotation: 0
+				})
+				.set(lv + " .right-hand", {
+					transformOrigin: "1% 0",
+					yPercent: 0,
+					rotation: 0
+				})
+				.call(callback);
 		}
 	},
-	clear: function() {
-		this.selector.querySelector(".text").innerHTML = "";
+	clear: function () {
+		this
+			.selector
+			.querySelector(".text")
+			.innerHTML = "";
 	}
 }
 
-
-
-
-////////////////
-// Loading Image
+//////////////// Loading Image
 
 var imageloading = {
 	loaded: false,
@@ -562,7 +722,7 @@ var imageloading = {
 	barba_object: null,
 	first_loading: true,
 	first_animation_done: false,
-	init: function(elem, callback) {
+	init: function (elem, callback) {
 		var that = this,
 			imgs = null,
 			imgs_count = 0,
@@ -575,7 +735,9 @@ var imageloading = {
 			this.elem = elem;
 			this.barba_object = null;
 		}
-		imgs = this.elem.querySelectorAll("img");
+		imgs = this
+			.elem
+			.querySelectorAll("img");
 		imgs_count = imgs.length * 100;
 
 		function checkProgress(index, url, percent) {
@@ -594,7 +756,7 @@ var imageloading = {
 		this.loaded = false;
 		if (imgs.length <= 0) {
 			// No image, just unhide the loading
-			loading.update({ duration: .256, height: "100%" });
+			loading.update({duration: .256, height: "100%"});
 			that.loaded = true;
 			that.done(callback, "zero");
 		} else {
@@ -604,7 +766,10 @@ var imageloading = {
 				imgs[i].load(i, imgs[i].getAttribute('src'), function (index, url, percent, bytes) {
 					var loaded = checkProgress(index, url, percent);
 
-					loading.update({ duration: .256, height: loaded + "%" });
+					loading.update({
+						duration: .256,
+						height: loaded + "%"
+					});
 
 					if (loaded >= 100 && !that.loaded) {
 						that.loaded = true;
@@ -614,776 +779,1100 @@ var imageloading = {
 			}
 		}
 	},
-	done: function(callback) {
+	done: function (callback) {
 		var that = this;
 
 		if (that.first_animation_done) {
 			// Add delay before hiding loading
-			gsap.to(window, { duration: .256, onComplete: function() {
-				if (that.barba_object != null) {
-					that.elem.style.visibility = "visible";
-					that.barba_object.done();
-				}
+			gsap.to(window, {
+				duration: .256,
+				onComplete: function () {
+					if (that.barba_object != null) {
+						that.elem.style.visibility = "visible";
+						that
+							.barba_object
+							.done();
+					}
 
-				if (that.loaded) {
-					// Run custom onLoadedComplete method in barba
-					if(current_barba.onImageLoadComplete != undefined) current_barba.onImageLoadComplete();
+					if (that.loaded) {
+						// Run custom onLoadedComplete method in barba
+						if (current_barba.onImageLoadComplete != undefined)
+							current_barba.onImageLoadComplete();
 
-					// Scroll up instantly
-					gsap.to(window, { duration: 0, scrollTo: 0, onComplete: function() {
-						// Hide loading
-						loading.hide(function() {
-							if (that.first_loading) {
-								that.first_loading = false;
-								loading.clear();
+						// Scroll up instantly
+						gsap.to(window, {
+							duration: 0,
+							scrollTo: 0,
+							onComplete: function () {
+								// Hide loading
+								loading
+									.hide(function () {
+										if (that.first_loading) {
+											that.first_loading = false;
+											loading.clear();
+										}
+
+										that.loaded = false;
+
+										// Run custom onLoadedComplete method in barba
+										if (current_barba.onImageLoadAnimateComplete != undefined)
+											current_barba.onImageLoadAnimateComplete();
+										if (callback != undefined)
+											callback();
+										}
+									);
 							}
-
-							that.loaded = false;
-
-							// Run custom onLoadedComplete method in barba
-							if(current_barba.onImageLoadAnimateComplete != undefined) current_barba.onImageLoadAnimateComplete();
-							if(callback != undefined) callback();
 						});
-					}});
 
-					that.elem = null;
-					that.barba_object = null;
+						that.elem = null;
+						that.barba_object = null;
+					}
 				}
-			}});
+			});
 		} else {
-			if (callback != undefined) callback();
+			if (callback != undefined)
+				callback();
+			}
 		}
-	}
 }
 
-
-
-
-
-/////////////////////
-// Menu Functionality
+///////////////////// Menu Functionality
 
 var worklist = {
-	hover: function(el) {
+	hover: function (el) {
 		el = _qAll(el);
 		for (var i = el.length - 1; i >= 0; i--) {
-			el[i].gsap = gsap.timeline({ repeat: -1, ease: "expo" });
-			el[i].gsap
-				.to(el[i], { transformOrigin: "50%", scale: 1.05, duration: 1.7 })
-				.to(el[i], { scale: 1.05, duration: .6 })
-				.to(el[i], { scale: 1, duration: 1.7 })
-				.to(el[i], { scale: 1, duration: .9 })
-			;
-			el[i].gsap.pause();
+			el[i].gsap = gsap.timeline({repeat: -1, ease: "expo"});
+			el[i]
+				.gsap
+				.to(el[i], {
+					transformOrigin: "50%",
+					scale: 1.05,
+					duration: 1.7
+				})
+				.to(el[i], {
+					scale: 1.05,
+					duration: .6
+				})
+				.to(el[i], {
+					scale: 1,
+					duration: 1.7
+				})
+				.to(el[i], {
+					scale: 1,
+					duration: .9
+				});
+			el[i]
+				.gsap
+				.pause();
 			el[i].onmouseenter = function () {
-				this.gsap.restart();
+				this
+					.gsap
+					.restart();
 			}
 			el[i].onmouseleave = function () {
-				this.gsap.pause();
-				gsap.to(this, { transformOrigin: "50%", scale: 1, duration: .512 })
+				this
+					.gsap
+					.pause();
+				gsap.to(this, {
+					transformOrigin: "50%",
+					scale: 1,
+					duration: .512
+				})
 			}
 		}
 	}
 }
 
+//////////////////// Loading animation
 
+var FadeTransition = Barba
+	.BaseTransition
+	.extend({
+		start: function () {
+			var that = this;
 
-////////////////////
-// Loading animation
+			function animate() {
+				// Make the barba wrapper fix so it won't have jaggy animation
+				_q("#barba-wrapper").style.height = _q("#barba-wrapper").offsetHeight + "px";
 
-var FadeTransition = Barba.BaseTransition.extend({
-	start: function() {
-		var that = this;
+				// Show loading then load the new container
+				loading.show(function () {
+					gsap.set('.menu__pop .menu__item', {
+						opacity: 0,
+						yPercent: 100
+					}, .768)
+					that
+						.newContainerLoading
+						.then(that.finish.bind(that));
+				});
+			}
 
-		function animate() {
-			// Make the barba wrapper fix so it won't have jaggy animation
-			_q("#barba-wrapper").style.height = _q("#barba-wrapper").offsetHeight + "px";
+			if (menu.active) {
+				var tl = gsap.timeline({
+					defaults: {
+						duration: 1.024,
+						ease: "expo.out"
+					}
+				});
 
-			// Show loading then load the new container
-			loading.show (function () {
-				gsap.set('.menu__pop .menu__item', { opacity: 0, yPercent: 100 }, .768)
-				that.newContainerLoading.then(that.finish.bind(that));
-			});
+				removeClass(_q('.menu__pop'), "active");
+
+				animate();
+				tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
+					xPercent: 0,
+					opacity: 1
+				}, {
+					xPercent: -200,
+					opacity: 0,
+					stagger: {
+						from: 0,
+						amount: .128
+					}
+				});
+			} else {
+				animate();
+			}
+		},
+		finish: function () {
+			var that = this;
+
+			// Hide newContainer for a bit
+			that.newContainer.style.display = "block";
+			that.newContainer.style.visibility = "hidden";
+
+			// Remove previous height setting
+			_q("#barba-wrapper").style.height = "";
+
+			// Wait for all image to be loaded
+			imageloading.init(that);
 		}
-
-		if(menu.active) {
-			var tl = gsap.timeline({ defaults: { duration: 1.024, ease: "expo.out"} });
-
-			removeClass(_q('.menu__pop'), "active");
-
-			animate();
-			tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { xPercent: 0, opacity: 1 }, { xPercent: -200, opacity: 0, stagger: {
-					from: 0,
-					amount: .128
-				}});
-		} else {
-			animate();
-		}
-	},
-	finish: function() {
-		var that = this;
-
-		// Hide newContainer for a bit
-		that.newContainer.style.display = "block";
-		that.newContainer.style.visibility = "hidden";
-
-		// Remove previous height setting
-		_q("#barba-wrapper").style.height = "";
-
-		// Wait for all image to be loaded
-		imageloading.init(that);
-	}
-});
-Barba.Pjax.getTransition = function() {
+	});
+Barba.Pjax.getTransition = function () {
 	return FadeTransition;
 };
 
+////////////// Barba views
 
+var Home = Barba
+	.BaseView
+	.extend({
+		namespace: 'home',
+		onEnter: function () {
+			var fruit = [
+					"empty.png", "apple.png", "orange.png", "phone.png"
+				],
+				index = 0;
 
+			current_barba = this;
 
-//////////////
-// Barba views
-
-var Home = Barba.BaseView.extend({
-	namespace: 'home',
-	onEnter: function () {
-		var fruit = [
-				"empty.png",
-				"apple.png",
-				"orange.png",
-				"phone.png"
-			],
-			index = 0;
-
-		current_barba = this;
-
-		index = getRandomInt(1, 10);
-		if (index == 10) {
-			index = getRandomInt(1, fruit.length);
-		} else {
-			index = 0;
-		}
-
-		_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index])
-	},
-	onEnterCompleted: function () {
-		worklist.hover (".work__list a img");
-
-		controller.destroy();
-		controller = new ScrollMagic.Controller({
-			globalSceneOptions: {
-				triggerHook: 1,
+			index = getRandomInt(1, 10);
+			if (index == 10) {
+				index = getRandomInt(1, fruit.length);
+			} else {
+				index = 0;
 			}
-		});
-		els =  null;
-		anim = null;
 
-		// Scroll animate the hero wording
-		anim = gsap.timeline({ defaults: { duration: 1.024, ease: "linear" }});
-		anim.fromTo(".hero__text h1",{ y: 0 }, { y: -20 }, 0)
-			.fromTo(".hero__text p",{ y: 0 }, { y: -25 }, 0)
-			.fromTo(".hero .stats",{ y: 0 }, { y: -30 }, 0)
-			.fromTo(".hero img",{ y: 0 }, { y: 10 }, 0);
-		new ScrollMagic
-			.Scene({ triggerElement: ".work_float", duration: _q(".work_float").offsetHeight })
-			.setTween(anim)
-			.addTo(controller);
+			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index])
+		},
+		onEnterCompleted: function () {
+			worklist.hover(".work__list a img");
 
-		// Scroll animate the scroll
-		anim = gsap.timeline({ defaults: { duration: .128, ease: "expo" }});
-		anim.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0)
-			.fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
-		new ScrollMagic
-			.Scene({ triggerElement: "#trigger", offset: 10 })
-			.setTween(anim)
-			.addTo(controller);
+			controller.destroy();
+			controller = new ScrollMagic.Controller({
+				globalSceneOptions: {
+					triggerHook: 1
+				}
+			});
+			els = null;
+			anim = null;
 
-		// Scroll animate the stats
-		gsap.set(".work__list .stats p", { transformOrigin: "center", scale: 1.5, opacity: 0 });
-		anim = gsap.fromTo(".work__list .stats__content p", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .768, ease: "elastic.out", stagger: {
-			from: "end",
-			amount: .256
-		}});
-		new ScrollMagic
-			.Scene({ triggerElement: ".work__list .stats__content", offset: 20 })
-			.setTween(anim)
-			.addTo(controller);
-
-		// Scroll animate the wording float
-		anim = gsap.fromTo(".work__list .block__left > *", { transformOrigin: "center", y: 125 }, { y: 1, ease: "expo.out", stagger: {
-			from: 0,
-			amount: .128
-		}})
-		new ScrollMagic
-			.Scene({ triggerElement: ".work__list .block__left", offset: 20 })
-			.setTween(anim)
-			.addTo(controller);
-
-		// Scroll animate the work list
-		anim = gsap.fromTo(".work__list ul > li:not(last-child) a", { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: .768, ease: "expo", stagger: {
-			from: 0,
-			amount: .368
-		}});
-		new ScrollMagic
-			.Scene({ triggerElement: ".work__list ul", offset: 20 })
-			.setTween(anim)
-			.addTo(controller);
-
-		// First time need to be delayed a bit
-		new animateYear("#year__living", 1984);
-		new animateYear("#year__designer", 2008);
-		new animateYear("#year__managerial", 2011);
-	},
-	onImageLoadComplete: function() {
-		// Animate the appearing
-		anim = gsap.timeline({ defaults: { duration: .768, ease: "expo.out" }});
-		anim.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", { transformOrigin: "0 0", y: -100 }, { y: 0, stagger: {
-				from: "end",
-				amount: .256
-			}}, 0).fromTo(".hero__image, .work_float", { transformOrigin: "0 0", y: 100 }, { y: 0, stagger: {
-				from: 0,
-				amount: .256
-			}}, 0).fromTo(".hero .stats p", { transformOrigin: "center", scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, ease: "elastic.out", stagger: {
-				from: "end",
-				amount: .512
-			}}, "-=1.024")
-		;
-
-		// Some breathe in and breathe out animation for hero image
-		var loop = gsap.timeline({ repeat: -1, ease: "expo" });
-		loop.to(".hero .box", { transformOrigin: "50% 75%", scale: 1, duration: .9 })
-			.to(".hero .box", { scale: 1.015, duration: 1.7 })
-			.to(".hero .box", { scale: 1.015, duration: .6 })
-			.to(".hero .box", { scale: 1, duration: 1.7 })
-		;
-	}
-});
-
-var Work = Barba.BaseView.extend({
-	namespace: 'work',
-	onEnter: function () {
-		current_barba = this;
-	},
-	onEnterCompleted: function () {
-		worklist.hover (".work__list a img");
-
-		controller.destroy();
-		controller = new ScrollMagic.Controller({
-			globalSceneOptions: {
-				triggerHook: .95,
-			}
-		});
-		els =  null;
-		anim = null;
-
-		// Scroll animate the works
-		els = _qAll(".works");
-		for (var j = els.length - 1; j >= 0; j--) {
-			for (var i = 0; i < els[j].children.length; i++) {
-				anim = gsap.fromTo(els[j].children[i].children, { y: 100 + (i * 100), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-				new ScrollMagic
-					.Scene({ triggerElement: els[j].children[i] })
-					.setTween(anim)
-					.addTo(controller);
-			}
-		}
-
-		// Scroll animate the words
-		els = _qAll(".words");
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.fromTo(els[i].children, { y: 100 + (i * 100), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
+			// Scroll animate the hero wording
+			anim = gsap.timeline({
+				defaults: {
+					duration: 1.024,
+					ease: "linear"
+				}
+			});
+			anim.fromTo(".hero__text h1", {
+				y: 0
+			}, {
+				y: -20
+			}, 0).fromTo(".hero__text p", {
+				y: 0
+			}, {
+				y: -25
+			}, 0).fromTo(".hero .stats", {
+				y: 0
+			}, {
+				y: -30
+			}, 0).fromTo(".hero img", {
+				y: 0
+			}, {
+				y: 10
+			}, 0);
 			new ScrollMagic
-				.Scene({ triggerElement: els[i] })
+				.Scene({
+				triggerElement: ".work_float",
+				duration: _q(".work_float").offsetHeight
+			})
 				.setTween(anim)
 				.addTo(controller);
-		}
-	},
-	onImageLoadComplete: function() {
-		new animateNumber(".work__list .stats__content p:first-child b");
-		new animateNumber(".work__list .stats__content p:last-child b");
-	}
-});
 
-var tinysliders = [];
-var WorkDetail = Barba.BaseView.extend({
-	namespace: 'work-detail',
-	onEnter: function () {
-		current_barba = this;
-	},
-	onEnterCompleted: function () {
-		worklist.hover ("a img");
-	},
-	onImageLoadComplete: function() {
-		controller.destroy();
-		controller = new ScrollMagic.Controller({
-			globalSceneOptions: {
-				triggerHook: .95,
-			}
-		});
-		els =  null;
-		anim = null;
-
-		var tnsparam = {
-			mouseDrag: true,
-			swipeAngle: false,
-			speed: 400,
-			loop: false,
-			navPosition: "bottom",
-			controlsPosition: "bottom",
-			responsive: {
-				0 : {
-					items: 1
-				},
-				600 : {
-					items: 2
+			// Scroll animate the scroll
+			anim = gsap.timeline({
+				defaults: {
+					duration: .128,
+					ease: "expo"
 				}
-			}
-		};
-		tinysliders = [];
+			});
+			anim.fromTo(".scroll__up", {
+				opacity: 1
+			}, {
+				opacity: 0
+			}, 0).fromTo(".scroll__down", {
+				opacity: 0
+			}, {
+				opacity: 1
+			}, 0)
+			new ScrollMagic
+				.Scene({triggerElement: "#trigger", offset: 10})
+				.setTween(anim)
+				.addTo(controller);
 
-		els = _qAll(".gallery-normal");
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam;
-			_tnsparam.container = els[i];
-			tinysliders.push(new tns(_tnsparam));
-		}
-
-		els = _qAll(".gallery-auto-height");
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam;
-			_tnsparam.container = els[i];
-			_tnsparam.autoHeight = true;
-			tinysliders.push(new tns(_tnsparam));
-		}
-
-		els = _qAll(".work__timeline .wheel");
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam;
-			_tnsparam.container = els[i];
-			_tnsparam.autoHeight = true;
-			_tnsparam.responsive = {
-				0: {
-					items: 2
-				},
-				600: {
-					items: 3
+			// Scroll animate the stats
+			gsap.set(".work__list .stats p", {
+				transformOrigin: "center",
+				scale: 1.5,
+				opacity: 0
+			});
+			anim = gsap.fromTo(".work__list .stats__content p", {
+				scale: 1.5,
+				opacity: 0
+			}, {
+				scale: 1,
+				opacity: 1,
+				duration: .768,
+				ease: "elastic.out",
+				stagger: {
+					from: "end",
+					amount: .256
 				}
-			};
-			tinysliders.push(new tns(_tnsparam));
-		}
+			});
+			new ScrollMagic
+				.Scene({triggerElement: ".work__list .stats__content", offset: 20})
+				.setTween(anim)
+				.addTo(controller);
 
-		els = _qAll(".gallery__mobile");
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam;
-			_tnsparam.container = els[i];
-			_tnsparam.autoHeight = true;
-			_tnsparam.responsive = {
-				0: {
-					items: 1
-				},
-				600: {
-					items: 2
-				},
-				1200: {
-					items: 3
+			// Scroll animate the wording float
+			anim = gsap.fromTo(".work__list .block__left > *", {
+				transformOrigin: "center",
+				y: 125
+			}, {
+				y: 1,
+				ease: "expo.out",
+				stagger: {
+					from: 0,
+					amount: .128
 				}
-			};
-			tinysliders.push(new tns(_tnsparam));
-		}
+			})
+			new ScrollMagic
+				.Scene({triggerElement: ".work__list .block__left", offset: 20})
+				.setTween(anim)
+				.addTo(controller);
 
-		// Scroll animate staggering from right of child
-		els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p");
-		for (var j = els.length - 1; j >= 0; j--) {
-			if (els[j].children.length > 0) {
-				anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
+			// Scroll animate the work list
+			anim = gsap.fromTo(".work__list ul > li:not(last-child) a", {
+				x: 150,
+				opacity: 0
+			}, {
+				x: 0,
+				opacity: 1,
+				duration: .768,
+				ease: "expo",
+				stagger: {
+					from: 0,
+					amount: .368
+				}
+			});
+			new ScrollMagic
+				.Scene({triggerElement: ".work__list ul", offset: 20})
+				.setTween(anim)
+				.addTo(controller);
+
+			// First time need to be delayed a bit
+			new animateYear("#year__living", 1984);
+			new animateYear("#year__designer", 2008);
+			new animateYear("#year__managerial", 2011);
+		},
+		onImageLoadComplete: function () {
+			// Animate the appearing
+			anim = gsap.timeline({
+				defaults: {
+					duration: .768,
+					ease: "expo.out"
+				}
+			});
+			anim.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", {
+				transformOrigin: "0 0",
+				y: -100
+			}, {
+				y: 0,
+				stagger: {
+					from: "end",
+					amount: .256
+				}
+			}, 0).fromTo(".hero__image, .work_float", {
+				transformOrigin: "0 0",
+				y: 100
+			}, {
+				y: 0,
+				stagger: {
 					from: 0,
 					amount: .256
-				}});
-				new ScrollMagic
-					.Scene({ triggerElement: els[j] })
-					.setTween(anim)
-					.addTo(controller);
-			}
-		}
-		// Scroll animate staggering from right
-		els = _qAll(".work__list__detail > hr, .work__list__detail > h5, .work__detail .work__spec > *");
-		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j], { opacity: 0, x: 100 }, { opacity: 1, x: 0, ease: "expo.out", duration: 1.024, stagger: {
-				from: 0,
-				amount: .256
-			}});
-			new ScrollMagic
-				.Scene({ triggerElement: els[j] })
-				.setTween(anim)
-				.addTo(controller);
-		}
-		// Scroll animate immidiete from bottom
-		els = _qAll(".work__list__detail > blockquote");
-		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j], { x: 100 }, { x: 0, ease: "expo.out", duration: 1.024});
-			new ScrollMagic
-				.Scene({ triggerElement: els[j] })
-				.setTween(anim)
-				.addTo(controller);
-		}
-		// Scroll animate from bottom
-		els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .work__timeline");
-		for (var j = els.length - 1; j >= 0; j--) {
-			for (var i = 0; i < els[j].children.length; i++) {
-				anim = gsap.fromTo(els[j].children[i], { y: 100 + (i * 50) }, { y: 0, ease: "expo.out", duration: 1.024 });
-				new ScrollMagic
-					.Scene({ triggerElement: els[j] })
-					.setTween(anim)
-					.addTo(controller);
-			}
-		}
-
-		new animateNumber(".work__list__detail .stats__content p:first-child b");
-		new animateNumber(".work__list__detail .stats__content p:last-child b");
-
-
-		// Gallery
-		var initPhotoSwipeFromDOM = function(gallerySelector) {
-			// parse slide data (url, title, size ...) from DOM elements
-			// (children of gallerySelector)
-			var parseThumbnailElements = function(el) {
-				var thumbElements = el.childNodes,
-					numNodes = thumbElements.length,
-					items = [],
-					figureEl,
-					linkEl,
-					size,
-					item;
-
-				for(var i = 0; i < numNodes; i++) {
-
-					figureEl = thumbElements[i]; // <figure> element
-
-					// include only element nodes
-					if(figureEl.nodeType !== 1) {
-						continue;
-					}
-
-					// linkEl = figureEl.children[0]; // <a> element
-					linkEl = figureEl; // <a> element
-
-					size = linkEl.getAttribute('data-size').split('x');
-
-					// create slide object
-					item = {
-						src: linkEl.getAttribute('href'),
-						w: parseInt(size[0], 10),
-						h: parseInt(size[1], 10)
-					};
-
-					if(figureEl.children.length > 1) {
-						// <figcaption> content
-						item.title = figureEl.children[1].innerHTML;
-					}
-
-					if(linkEl.children.length > 0) {
-						// <img> thumbnail element, retrieving thumbnail url
-						item.msrc = linkEl.children[0].getAttribute('src');
-					}
-
-					item.el = figureEl; // save link to element for getThumbBoundsFn
-					items.push(item);
 				}
+			}, 0).fromTo(".hero .stats p", {
+				transformOrigin: "center",
+				scale: 1.25,
+				opacity: 0
+			}, {
+				scale: 1,
+				opacity: 1,
+				ease: "elastic.out",
+				stagger: {
+					from: "end",
+					amount: .512
+				}
+			}, "-=1.024");
 
-				return items;
-			};
-
-			// find nearest parent element
-			var closest = function closest(el, fn) {
-				return el && ( fn(el) ? el : closest(el.parentNode, fn) );
-			};
-
-			// triggers when user clicks on thumbnail
-			var onThumbnailsClick = function(e) {
-				e = e || window.event;
-				e.preventDefault ? e.preventDefault() : e.returnValue = false;
-
-				var eTarget = e.target || e.srcElement;
-
-				// find root element of slide
-				var clickedListItem = closest(eTarget, function(el) {
-					return (el.tagName && el.tagName.toUpperCase() === 'A');
+			// Some breathe in and breathe out animation for hero image
+			var loop = gsap.timeline({repeat: -1, ease: "expo"});
+			loop
+				.to(".hero .box", {
+				transformOrigin: "50% 75%",
+				scale: 1,
+				duration: .9
+			})
+				.to(".hero .box", {
+					scale: 1.015,
+					duration: 1.7
+				})
+				.to(".hero .box", {
+					scale: 1.015,
+					duration: .6
+				})
+				.to(".hero .box", {
+					scale: 1,
+					duration: 1.7
 				});
+		}
+	});
 
-				if(!clickedListItem) {
-					return;
+var Work = Barba
+	.BaseView
+	.extend({
+		namespace: 'work',
+		onEnter: function () {
+			current_barba = this;
+		},
+		onEnterCompleted: function () {
+			worklist.hover(".work__list a img");
+
+			controller.destroy();
+			controller = new ScrollMagic.Controller({
+				globalSceneOptions: {
+					triggerHook: .95
 				}
+			});
+			els = null;
+			anim = null;
 
-				// find index of clicked item by looping through all child nodes
-				// alternatively, you may define index via data- attribute
-				var clickedGallery = clickedListItem.parentNode,
-					childNodes = clickedListItem.parentNode.childNodes,
-					numChildNodes = childNodes.length,
-					nodeIndex = 0,
-					index;
+			// Scroll animate the works
+			els = _qAll(".works");
+			for (var j = els.length - 1; j >= 0; j--) {
+				for (var i = 0; i < els[j].children.length; i++) {
+					anim = gsap.fromTo(els[j].children[i].children, {
+						y: 100 + (i * 100),
+						opacity: 0
+					}, {
+						y: 0,
+						opacity: 1,
+						duration: 1.024,
+						ease: "expo.out"
+					});
+					new ScrollMagic
+						.Scene({triggerElement: els[j].children[i]})
+						.setTween(anim)
+						.addTo(controller);
+				}
+			}
 
-				for (var i = 0; i < numChildNodes; i++) {
-					if(childNodes[i].nodeType !== 1) {
-						continue;
+			// Scroll animate the words
+			els = _qAll(".words");
+			for (var i = 0; i < els.length; i++) {
+				anim = gsap.fromTo(els[i].children, {
+					y: 100 + (i * 100),
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1,
+					duration: 1.024,
+					ease: "expo.out"
+				});
+				new ScrollMagic
+					.Scene({triggerElement: els[i]})
+					.setTween(anim)
+					.addTo(controller);
+			}
+		},
+		onImageLoadComplete: function () {
+			new animateNumber(".work__list .stats__content p:first-child b");
+			new animateNumber(".work__list .stats__content p:last-child b");
+		}
+	});
+
+var WorkDetail = Barba
+	.BaseView
+	.extend({
+		namespace: 'work-detail',
+		onEnter: function () {
+			current_barba = this;
+		},
+		onEnterCompleted: function () {
+			worklist.hover("a img");
+		},
+		onImageLoadComplete: function () {
+			controller.destroy();
+			controller = new ScrollMagic.Controller({
+				globalSceneOptions: {
+					triggerHook: .95
+				}
+			});
+			els = null;
+			anim = null;
+
+			var tnsparam = {
+				mouseDrag: true,
+				swipeAngle: false,
+				speed: 400,
+				loop: false,
+				navPosition: "bottom",
+				controlsPosition: "bottom",
+				responsive: {
+					0: {
+						items: 1
+					},
+					600: {
+						items: 2
 					}
-
-					if(childNodes[i] === clickedListItem) {
-						index = nodeIndex;
-						break;
-					}
-					nodeIndex++;
 				}
-
-				if(index >= 0) {
-					// open PhotoSwipe if valid index found
-					openPhotoSwipe( index, clickedGallery );
-				}
-				return false;
 			};
+			tinysliders = [];
 
-			// parse picture index and gallery index from URL (#&pid=1&gid=2)
-			var photoswipeParseHash = function() {
-				var hash = window.location.hash.substring(1),
-				params = {};
+			els = _qAll(".gallery-normal");
+			for (var i = els.length - 1; i >= 0; i--) {
+				var _tnsparam = tnsparam;
+				_tnsparam.container = els[i];
+				tinysliders.push(new tns(_tnsparam));
+			}
 
-				if(hash.length < 5) {
-					return params;
-				}
+			els = _qAll(".gallery-auto-height");
+			for (var i = els.length - 1; i >= 0; i--) {
+				var _tnsparam = tnsparam;
+				_tnsparam.container = els[i];
+				_tnsparam.autoHeight = true;
+				tinysliders.push(new tns(_tnsparam));
+			}
 
-				var vars = hash.split('&');
-				for (var i = 0; i < vars.length; i++) {
-					if(!vars[i]) {
-						continue;
+			els = _qAll(".work__timeline .wheel");
+			for (var i = els.length - 1; i >= 0; i--) {
+				var _tnsparam = tnsparam;
+				_tnsparam.container = els[i];
+				_tnsparam.autoHeight = true;
+				_tnsparam.responsive = {
+					0: {
+						items: 2
+					},
+					600: {
+						items: 3
 					}
-					var pair = vars[i].split('=');
-					if(pair.length < 2) {
-						continue;
+				};
+				tinysliders.push(new tns(_tnsparam));
+			}
+
+			els = _qAll(".gallery__mobile");
+			for (var i = els.length - 1; i >= 0; i--) {
+				var _tnsparam = tnsparam;
+				_tnsparam.container = els[i];
+				_tnsparam.autoHeight = true;
+				_tnsparam.responsive = {
+					0: {
+						items: 1
+					},
+					600: {
+						items: 2
+					},
+					1200: {
+						items: 3
 					}
-					params[pair[0]] = pair[1];
+				};
+				tinysliders.push(new tns(_tnsparam));
+			}
+
+			// Scroll animate staggering from right of child
+			els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p");
+			for (var j = els.length - 1; j >= 0; j--) {
+				if (els[j].children.length > 0) {
+					anim = gsap.fromTo(els[j].children, {
+						opacity: 0,
+						xPercent: 100
+					}, {
+						opacity: 1,
+						xPercent: 0,
+						ease: "expo.out",
+						duration: 1.024,
+						stagger: {
+							from: 0,
+							amount: .256
+						}
+					});
+					new ScrollMagic
+						.Scene({triggerElement: els[j]})
+						.setTween(anim)
+						.addTo(controller);
 				}
-
-				if(params.gid) {
-					params.gid = parseInt(params.gid, 10);
+			}
+			// Scroll animate staggering from right
+			els = _qAll(".work__list__detail > hr, .work__list__detail > h5, .work__detail .work__spec > " +
+					"*");
+			for (var j = els.length - 1; j >= 0; j--) {
+				anim = gsap.fromTo(els[j], {
+					opacity: 0,
+					x: 100
+				}, {
+					opacity: 1,
+					x: 0,
+					ease: "expo.out",
+					duration: 1.024,
+					stagger: {
+						from: 0,
+						amount: .256
+					}
+				});
+				new ScrollMagic
+					.Scene({triggerElement: els[j]})
+					.setTween(anim)
+					.addTo(controller);
+			}
+			// Scroll animate immidiete from bottom
+			els = _qAll(".work__list__detail > blockquote");
+			for (var j = els.length - 1; j >= 0; j--) {
+				anim = gsap.fromTo(els[j], {
+					x: 100
+				}, {
+					x: 0,
+					ease: "expo.out",
+					duration: 1.024
+				});
+				new ScrollMagic
+					.Scene({triggerElement: els[j]})
+					.setTween(anim)
+					.addTo(controller);
+			}
+			// Scroll animate from bottom
+			els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .work__ti" +
+					"meline");
+			for (var j = els.length - 1; j >= 0; j--) {
+				for (var i = 0; i < els[j].children.length; i++) {
+					anim = gsap.fromTo(els[j].children[i], {
+						y: 100 + (i * 50)
+					}, {
+						y: 0,
+						ease: "expo.out",
+						duration: 1.024
+					});
+					new ScrollMagic
+						.Scene({triggerElement: els[j]})
+						.setTween(anim)
+						.addTo(controller);
 				}
+			}
 
-				return params;
-			};
+			new animateNumber(".work__list__detail .stats__content p:first-child b");
+			new animateNumber(".work__list__detail .stats__content p:last-child b");
 
-			var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
-				var pswpElement = _qAll('.pswp')[0],
-					gallery,
-					options,
-					items;
+			// Gallery
+			var initPhotoSwipeFromDOM = function (gallerySelector) {
+				// parse slide data (url, title, size ...) from DOM elements (children of
+				// gallerySelector)
+				var parseThumbnailElements = function (el) {
+					var thumbElements = el.childNodes,
+						numNodes = thumbElements.length,
+						items = [],
+						figureEl,
+						linkEl,
+						size,
+						item;
 
-				items = parseThumbnailElements(galleryElement);
+					for (var i = 0; i < numNodes; i++) {
 
-				// define options (if needed)
-				options = {
+						figureEl = thumbElements[i]; // <figure> element
 
-					// define gallery index (for URL)
-					galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-					bgOpacity: 1,
-					preload: [1,3],
+						// include only element nodes
+						if (figureEl.nodeType !== 1) {
+							continue;
+						}
 
-					getThumbBoundsFn: function(index) {
-						// See Options -> getThumbBoundsFn section of documentation for more info
-						var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
-							pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-							rect = thumbnail.getBoundingClientRect();
+						// linkEl = figureEl.children[0]; // <a> element
+						linkEl = figureEl; // <a> element
 
-						return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+						size = linkEl
+							.getAttribute('data-size')
+							.split('x');
+
+						// create slide object
+						item = {
+							src: linkEl.getAttribute('href'),
+							w: parseInt(size[0], 10),
+							h: parseInt(size[1], 10)
+						};
+
+						if (figureEl.children.length > 1) {
+							// <figcaption> content
+							item.title = figureEl.children[1].innerHTML;
+						}
+
+						if (linkEl.children.length > 0) {
+							// <img> thumbnail element, retrieving thumbnail url
+							item.msrc = linkEl
+								.children[0]
+								.getAttribute('src');
+						}
+
+						item.el = figureEl; // save link to element for getThumbBoundsFn
+						items.push(item);
 					}
 
+					return items;
 				};
 
-				// PhotoSwipe opened from URL
-				if(fromURL) {
-					if(options.galleryPIDs) {
-						// parse real index when custom PIDs are used
-						// http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-						for(var j = 0; j < items.length; j++) {
-							if(items[j].pid == index) {
-								options.index = j;
-								break;
+				// find nearest parent element
+				var closest = function closest(el, fn) {
+					return el && (fn(el)
+						? el
+						: closest(el.parentNode, fn));
+				};
+
+				// triggers when user clicks on thumbnail
+				var onThumbnailsClick = function (e) {
+					e = e || window.event;
+					e.preventDefault
+						? e.preventDefault()
+						: e.returnValue = false;
+
+					var eTarget = e.target || e.srcElement;
+
+					// find root element of slide
+					var clickedListItem = closest(eTarget, function (el) {
+						return (el.tagName && el.tagName.toUpperCase() === 'A');
+					});
+
+					if (!clickedListItem) {
+						return;
+					}
+
+					// find index of clicked item by looping through all child nodes alternatively,
+					// you may define index via data- attribute
+					var clickedGallery = clickedListItem.parentNode,
+						childNodes = clickedListItem.parentNode.childNodes,
+						numChildNodes = childNodes.length,
+						nodeIndex = 0,
+						index;
+
+					for (var i = 0; i < numChildNodes; i++) {
+						if (childNodes[i].nodeType !== 1) {
+							continue;
+						}
+
+						if (childNodes[i] === clickedListItem) {
+							index = nodeIndex;
+							break;
+						}
+						nodeIndex++;
+					}
+
+					if (index >= 0) {
+						// open PhotoSwipe if valid index found
+						openPhotoSwipe(index, clickedGallery);
+					}
+					return false;
+				};
+
+				// parse picture index and gallery index from URL (#&pid=1&gid=2)
+				var photoswipeParseHash = function () {
+					var hash = window
+							.location
+							.hash
+							.substring(1),
+						params = {};
+
+					if (hash.length < 5) {
+						return params;
+					}
+
+					var vars = hash.split('&');
+					for (var i = 0; i < vars.length; i++) {
+						if (!vars[i]) {
+							continue;
+						}
+						var pair = vars[i].split('=');
+						if (pair.length < 2) {
+							continue;
+						}
+						params[pair[0]] = pair[1];
+					}
+
+					if (params.gid) {
+						params.gid = parseInt(params.gid, 10);
+					}
+
+					return params;
+				};
+
+				var openPhotoSwipe = function (index, galleryElement, disableAnimation, fromURL) {
+					var pswpElement = _qAll('.pswp')[0],
+						gallery,
+						options,
+						items;
+
+					items = parseThumbnailElements(galleryElement);
+
+					// define options (if needed)
+					options = {
+
+						// define gallery index (for URL)
+						galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+						bgOpacity: 1,
+						preload: [
+							1, 3
+						],
+
+						getThumbBoundsFn: function (index) {
+							// See Options -> getThumbBoundsFn section of documentation for more info
+							var thumbnail = items[index]
+									.el
+									.getElementsByTagName('img')[0], // find thumbnail
+								pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+								rect = thumbnail.getBoundingClientRect();
+
+							return {
+								x: rect.left,
+								y: rect.top + pageYScroll,
+								w: rect.width
+							};
+						}
+
+					};
+
+					// PhotoSwipe opened from URL
+					if (fromURL) {
+						if (options.galleryPIDs) {
+							// parse real index when custom PIDs are used
+							// http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+							for (var j = 0; j < items.length; j++) {
+								if (items[j].pid == index) {
+									options.index = j;
+									break;
+								}
 							}
+						} else {
+							// in URL indexes start from 1
+							options.index = parseInt(index, 10) - 1;
 						}
 					} else {
-						// in URL indexes start from 1
-						options.index = parseInt(index, 10) - 1;
+						options.index = parseInt(index, 10);
 					}
-				} else {
-					options.index = parseInt(index, 10);
+
+					// exit if index not found
+					if (isNaN(options.index)) {
+						return;
+					}
+
+					if (disableAnimation) {
+						options.showAnimationDuration = 0;
+					}
+
+					// Pass data to PhotoSwipe and initialize it
+					gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+					gallery.init();
+				};
+
+				// loop through all gallery elements and bind events
+				var galleryElements = _qAll(gallerySelector);
+
+				for (var i = 0, l = galleryElements.length; i < l; i++) {
+					galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+					galleryElements[i].onclick = onThumbnailsClick;
 				}
 
-				// exit if index not found
-				if( isNaN(options.index) ) {
-					return;
+				// Parse URL and open gallery if it contains #&pid=3&gid=1
+				var hashData = photoswipeParseHash();
+				if (hashData.pid && hashData.gid) {
+					openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
 				}
-
-				if(disableAnimation) {
-					options.showAnimationDuration = 0;
-				}
-
-				// Pass data to PhotoSwipe and initialize it
-				gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-				gallery.init();
 			};
-
-			// loop through all gallery elements and bind events
-			var galleryElements = _qAll( gallerySelector );
-
-			for(var i = 0, l = galleryElements.length; i < l; i++) {
-				galleryElements[i].setAttribute('data-pswp-uid', i+1);
-				galleryElements[i].onclick = onThumbnailsClick;
+			// execute above function
+			initPhotoSwipeFromDOM('.gallery');
+		},
+		onLeaveCompleted: function () {
+			// Destroying tinyslider to prevent error
+			for (var i = tinysliders.length - 1; i >= 0; i--) {
+				tinysliders[i].destroy();
 			}
-
-			// Parse URL and open gallery if it contains #&pid=3&gid=1
-			var hashData = photoswipeParseHash();
-			if(hashData.pid && hashData.gid) {
-				openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
-			}
-		};
-		// execute above function
-		initPhotoSwipeFromDOM('.gallery');
-	},
-	onLeave: function () {
-		// Destroying tinyslider to prevent error
-		for (var i = tinysliders.length - 1; i >= 0; i--) {
-			tinysliders[i].destroy();
+			tinysliders = [];
 		}
-		tinysliders = [];
-	}
-});
+	});
 
-var Call = Barba.BaseView.extend({
-	namespace: 'call',
-	onEnter: function () {
-		current_barba = this;
-	},
-	onEnterCompleted: function() {
-		// Scroll animate the works
-		gsap.fromTo(".call > *", 1.024, { y: 250 }, { y: 0, ease: "expo", stagger: {
-			from: 0,
-			amount: .256
-		}});
+var Call = Barba
+	.BaseView
+	.extend({
+		namespace: 'call',
+		onEnter: function () {
+			current_barba = this;
+		},
+		onEnterCompleted: function () {
+			// Scroll animate the works
+			gsap.fromTo(".call > *", 1.024, {
+				y: 250
+			}, {
+				y: 0,
+				ease: "expo",
+				stagger: {
+					from: 0,
+					amount: .256
+				}
+			});
 
-		// The menu item animation
-		var border = ".bigtext",
-			borderRadius
+			// The menu item animation
+			var border = ".bigtext",
+				borderRadius
 			_hugeText = new hugeText(border + " > div ");
 
-		elem = _q('.call .email');
-		elem.onmouseenter = function () {
-			gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
-			_hugeText.show("email me");
-		};
-		elem.onmouseleave = function () {
-			gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
-			_hugeText.hide();
-		};
+			elem = _q('.call .email');
+			elem.onmouseenter = function () {
+				gsap.to(border, {
+					duration: .386,
+					ease: "expo",
+					borderRadius: this.borderRadius
+				});
+				_hugeText.show("email me");
+			};
+			elem.onmouseleave = function () {
+				gsap.to(border, {
+					duration: .386,
+					ease: "expo",
+					borderRadius: "2% 2% 2% 2%"
+				});
+				_hugeText.hide();
+			};
 
-		elem = _q('.call .search');
-		elem.onmouseenter = function () {
-			gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
-			_hugeText.show("search me");
-		};
-		elem.onmouseleave = function () {
-			gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
-			_hugeText.hide();
-		};
-	},
-	onImageLoadAnimateComplete: function () {
-		loading.breath.play();
-	},
-	onLeave: function () {
-		loading.breath.pause(0);
-	}
-});
-
-var Lost = Barba.BaseView.extend({
-	namespace: '404',
-	onEnter: function () {
-		current_barba = this;
-	},
-	onEnterCompleted: function() {
-		var speed = 10,
-			tween = [];
-
-		for (var i = 0; i < 5; i++) {
-			if (i % 2 == 0) {
-				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", { xPercent: -50 }, 	{ duration: speed + (i * 2), repeat: -1, ease: "linear", xPercent: 0 })
-			} else {
-				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", { xPercent: 0 }, 	{ duration: speed + (i * 2), repeat: -1, ease: "linear", xPercent: -50 })
-			}
+			elem = _q('.call .search');
+			elem.onmouseenter = function () {
+				gsap.to(border, {
+					duration: .386,
+					ease: "expo",
+					borderRadius: this.borderRadius
+				});
+				_hugeText.show("search me");
+			};
+			elem.onmouseleave = function () {
+				gsap.to(border, {
+					duration: .386,
+					ease: "expo",
+					borderRadius: "2% 2% 2% 2%"
+				});
+				_hugeText.hide();
+			};
+		},
+		onImageLoadAnimateComplete: function () {
+			loading
+				.breath
+				.play();
+		},
+		onLeave: function () {
+			loading
+				.breath
+				.pause(0);
 		}
+	});
 
-		_q("#nomokeybusiness a").onmouseover = function() {
+var Lost = Barba
+	.BaseView
+	.extend({
+		namespace: '404',
+		onEnter: function () {
+			current_barba = this;
+		},
+		onEnterCompleted: function () {
+			var speed = 10,
+				tween = [];
+
 			for (var i = 0; i < 5; i++) {
-				tween[i].timeScale(4);
-				_q("#nomokeybusiness a").className = "hover";
+				if (i % 2 == 0) {
+					tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
+						xPercent: -50
+					}, {
+						duration: speed + (i * 2),
+						repeat: -1,
+						ease: "linear",
+						xPercent: 0
+					})
+				} else {
+					tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
+						xPercent: 0
+					}, {
+						duration: speed + (i * 2),
+						repeat: -1,
+						ease: "linear",
+						xPercent: -50
+					})
+				}
 			}
 
-			gsap.to("#nomokeybusiness p", { duration: .256, ease: "expo.inOut", rotation: 0 })
-			gsap.to("#nomokeybusiness a", { duration: .386, ease: "expo.inOut", opacity: 1 })
-		};
-		_q("#nomokeybusiness a").onmouseout = function() {
-			for (var i = 0; i < 5; i++) {
-				tween[i].timeScale(1);
-				_q("#nomokeybusiness a").className = "";
-			}
+			_q("#nomokeybusiness a").onmouseover = function () {
+				for (var i = 0; i < 5; i++) {
+					tween[i].timeScale(4);
+					_q("#nomokeybusiness a").className = "hover";
+				}
 
-			gsap.to("#nomokeybusiness p", { duration: .256, ease: "expo.inOut", rotation: 180 })
-			gsap.to("#nomokeybusiness a", { duration: .386, ease: "expo.inOut", opacity: .8 })
-		};
-	}
-});
+				gsap.to("#nomokeybusiness p", {
+					duration: .256,
+					ease: "expo.inOut",
+					rotation: 0
+				})
+				gsap.to("#nomokeybusiness a", {
+					duration: .386,
+					ease: "expo.inOut",
+					opacity: 1
+				})
+			};
+			_q("#nomokeybusiness a").onmouseout = function () {
+				for (var i = 0; i < 5; i++) {
+					tween[i].timeScale(1);
+					_q("#nomokeybusiness a").className = "";
+				}
 
-var Me = Barba.BaseView.extend({
-	namespace: 'me',
-	onEnter: function () {
-		current_barba = this;
-	},
-	onEnterCompleted: function () {
-		worklist.hover ("#ig .item a");
-		worklist.hover (".work__list img");
+				gsap.to("#nomokeybusiness p", {
+					duration: .256,
+					ease: "expo.inOut",
+					rotation: 180
+				})
+				gsap.to("#nomokeybusiness a", {
+					duration: .386,
+					ease: "expo.inOut",
+					opacity: .8
+				})
+			};
+		}
+	});
 
-		controller.destroy();
-		controller = new ScrollMagic.Controller();
-		els =  null;
-		anim = null;
+var Me = Barba
+	.BaseView
+	.extend({
+		namespace: 'me',
+		onEnter: function () {
+			current_barba = this;
+		},
+		onEnterCompleted: function () {
+			worklist.hover("#ig .item a");
+			worklist.hover(".work__list img");
 
-		gsap.set(".us h2, .us p", { opacity: 0 });
-		gsap.set(".us img", { display: "none" });
+			controller.destroy();
+			controller = new ScrollMagic.Controller();
+			els = null;
+			anim = null;
 
-		// First text animation
-		tl = gsap.timeline({ defaults: { duration: 1, ease: "linear"}});
-		tl.fromTo(".imuiux h1", { y: 0, opacity: 1 }, { y: -125, opacity: 0 }, 0)
-			.fromTo(".imuiux p", { y: 0, opacity: 1 }, { y: -100, opacity: 0 }, 0)
-			.fromTo(".imuiux img", { transformOrigin: "50% 0", yPercent: 0, scale: 1 }, { yPercent: -5, scale: .95 }, 0)
-				.to(".imuiux img", { duration: .5 }, 1.5)
-				.to(".imuiux img", { yPercent: 5, opacity: 0 }, 2)
-			.set(".us h2", { y: 120, opacity: 0 }, 0)
-				.to(".us h2", { y: 0, opacity: 1 }, .5)
-				.to(".us h2", { duration: .5 }, 1.5)
-				.to(".us h2", { y: -120, opacity: 0 }, 2)
-			.set(".us p", { y: 100, opacity: 0 }, 0)
-				.to(".us p", { y: 0, opacity: 1 }, .5)
-				.to(".us p", { duration: .5 }, 1.5)
-				.to(".us p", { y: -100, opacity: 0 }, 2)
-		;
-		new ScrollMagic.Scene({ triggerElement: "#firstscene", triggerHook: 0, duration: window.innerHeight })
-			.setPin("#firstscene", { pushFollowers: false })
-			.setTween(tl)
-			.addTo(controller);
+			gsap.set(".us h2, .us p", {opacity: 0});
+			gsap.set(".us img", {display: "none"});
 
-		// Scroll Mr. Goat 360 deg animation
-		var obj = {
-			curImg: 1,
-			length: _qAll(".mrgoat .img > img").length
-		};
-		tl = gsap.timeline({ defaults: { duration: .25, ease: "linear"}});
-		tl.fromTo(".mrgoat", { y: 0, opacity: 0 }, { y: 0, opacity: 1 }, 0)
-			.to(obj, {
+			// First text animation
+			tl = gsap.timeline({
+				defaults: {
+					duration: 1,
+					ease: "linear"
+				}
+			});
+			tl.fromTo(".imuiux h1", {
+				y: 0,
+				opacity: 1
+			}, {
+				y: -125,
+				opacity: 0
+			}, 0).fromTo(".imuiux p", {
+				y: 0,
+				opacity: 1
+			}, {
+				y: -100,
+				opacity: 0
+			}, 0).fromTo(".imuiux img", {
+				transformOrigin: "50% 0",
+				yPercent: 0,
+				scale: 1
+			}, {
+				yPercent: -5,
+				scale: .95
+			}, 0).to(".imuiux img", {
+				duration: .5
+			}, 1.5).to(".imuiux img", {
+				yPercent: 5,
+				opacity: 0
+			}, 2).set(".us h2", {
+				y: 120,
+				opacity: 0
+			}, 0).to(".us h2", {
+				y: 0,
+				opacity: 1
+			}, .5).to(".us h2", {
+				duration: .5
+			}, 1.5).to(".us h2", {
+				y: -120,
+				opacity: 0
+			}, 2).set(".us p", {
+				y: 100,
+				opacity: 0
+			}, 0).to(".us p", {
+				y: 0,
+				opacity: 1
+			}, .5).to(".us p", {
+				duration: .5
+			}, 1.5).to(".us p", {
+				y: -100,
+				opacity: 0
+			}, 2);
+			new ScrollMagic
+				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: window.innerHeight})
+				.setPin("#firstscene", {pushFollowers: false})
+				.setTween(tl)
+				.addTo(controller);
+
+			// Scroll Mr. Goat 360 deg animation
+			var obj = {
+				curImg: 1,
+				length: _qAll(".mrgoat .img > img").length
+			};
+			tl = gsap.timeline({
+				defaults: {
+					duration: .25,
+					ease: "linear"
+				}
+			});
+			tl.fromTo(".mrgoat", {
+				y: 0,
+				opacity: 0
+			}, {
+				y: 0,
+				opacity: 1
+			}, 0).to(obj, {
 				curImg: obj.length,
 				roundProps: "curImg",
 				repeat: 1,
@@ -1391,97 +1880,152 @@ var Me = Barba.BaseView.extend({
 				ease: Linear.easeNone,
 				duration: .75,
 				onUpdate: function () {
-					gsap.set(".mrgoat .img > img", { opacity: 0 });
-					gsap.set(".mrgoat" + obj.curImg, { opacity: 1 });
+					gsap.set(".mrgoat .img > img", {opacity: 0});
+					gsap.set(".mrgoat" + obj.curImg, {opacity: 1});
 				}
-			}, 0)
-			.fromTo(".mrgoat .h21", { y: 0 }, { y: -20 }, .25)
-				.to(".mrgoat .h21", { y: -60, opacity: 0 }, .5)
-			.fromTo(".mrgoat .h22", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, .5)
-				.to(".mrgoat .h22", { y: -20 }, .75)
-				.to(".mrgoat .h22", { y: -60, opacity: 0 }, 1)
-			.fromTo(".mrgoat .h23", { y: 50, opacity: 0}, { y: 0, opacity: 1 }, 1)
-				.to(".mrgoat .h23", { y: 0 }, 1.25)
-		;
-		new ScrollMagic.Scene({ triggerElement: ".mrgoat", triggerHook: 0, duration: window.innerHeight })
-			.setPin(".mrgoat")
-			.setTween(tl)
-			.addTo(controller);
-
-		// Scroll IG items
-		els = _qAll("#ig .item");
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.fromTo(els[i].children, 1.024, { y: 75 + (i * 75), opacity: 0 }, { y: 0, opacity: 1, ease: "expo.out" });
+			}, 0).fromTo(".mrgoat .h21", {
+				y: 0
+			}, {
+				y: -20
+			}, .25).to(".mrgoat .h21", {
+				y: -60,
+				opacity: 0
+			}, .5).fromTo(".mrgoat .h22", {
+				y: 50,
+				opacity: 0
+			}, {
+				y: 0,
+				opacity: 1
+			}, .5).to(".mrgoat .h22", {
+				y: -20
+			}, .75).to(".mrgoat .h22", {
+				y: -60,
+				opacity: 0
+			}, 1).fromTo(".mrgoat .h23", {
+				y: 50,
+				opacity: 0
+			}, {
+				y: 0,
+				opacity: 1
+			}, 1).to(".mrgoat .h23", {
+				y: 0
+			}, 1.25);
 			new ScrollMagic
-				.Scene({ triggerElement: els[i],  triggerHook: .75 })
-				.setTween(anim)
+				.Scene({triggerElement: ".mrgoat", triggerHook: 0, duration: window.innerHeight})
+				.setPin(".mrgoat")
+				.setTween(tl)
 				.addTo(controller);
-		}
 
-		// Scroll capabilities item
-		els = _qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li");
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.fromTo(els[i], { x: 75 + (i * 75), opacity: 0 }, { x: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-			new ScrollMagic
-				.Scene({ triggerElement: els[i],  triggerHook: .75 })
-				.setTween(anim)
-				.addTo(controller);
-		}
+			// Scroll IG items
+			els = _qAll("#ig .item");
+			for (var i = 0; i < els.length; i++) {
+				anim = gsap.fromTo(els[i].children, 1.024, {
+					y: 75 + (i * 75),
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1,
+					ease: "expo.out"
+				});
+				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75})
+					.setTween(anim)
+					.addTo(controller);
+			}
 
-		// Scroll latest works
-		els = _qAll(".work__list, .work__list ul li");
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.fromTo(els[i].children, { y: 75 + (i * 75), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-			new ScrollMagic
-				.Scene({ triggerElement: els[i],  triggerHook: .75 })
-				.setTween(anim)
-				.addTo(controller);
-		}
+			// Scroll capabilities item
+			els = _qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li");
+			for (var i = 0; i < els.length; i++) {
+				anim = gsap.fromTo(els[i], {
+					x: 75 + (i * 75),
+					opacity: 0
+				}, {
+					x: 0,
+					opacity: 1,
+					duration: 1.024,
+					ease: "expo.out"
+				});
+				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75})
+					.setTween(anim)
+					.addTo(controller);
+			}
 
-		// Scroll cofound
-		anim = gsap.fromTo(".cofound > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out", stagger: {
+			// Scroll latest works
+			els = _qAll(".work__list, .work__list ul li");
+			for (var i = 0; i < els.length; i++) {
+				anim = gsap.fromTo(els[i].children, {
+					y: 75 + (i * 75),
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1,
+					duration: 1.024,
+					ease: "expo.out"
+				});
+				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75})
+					.setTween(anim)
+					.addTo(controller);
+			}
+
+			// Scroll cofound
+			anim = gsap.fromTo(".cofound > div > *", {
+				y: 200,
+				opacity: 0
+			}, {
+				y: 0,
+				opacity: 1,
+				duration: 1.024,
+				ease: "expo.out",
+				stagger: {
 					from: 0,
 					amount: .512
-				}});
-		new ScrollMagic
-			.Scene({ triggerElement: ".cofound > div",  triggerHook: .5 })
-			.setTween(anim)
-			.addTo(controller);
-	},
-	onImageLoadComplete: function () {
-		gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: {
-			from: 0,
-			amount: .128
-		}});
+				}
+			});
+			new ScrollMagic
+				.Scene({triggerElement: ".cofound > div", triggerHook: .5})
+				.setTween(anim)
+				.addTo(controller);
+		},
+		onImageLoadComplete: function () {
+			gsap.fromTo(".imuiux > div > *", {
+				y: 200,
+				opacity: 0
+			}, {
+				y: 0,
+				opacity: 1,
+				delay: .256,
+				duration: 1.024,
+				ease: "expo.out",
+				stagger: {
+					from: 0,
+					amount: .128
+				}
+			});
 
-		var els = _qAll("#ig img");
-		for (var i = els.length - 1; i >= 0; i--) {
-			if(els[i].offsetWidth > els[i].offsetHeight) {
-				addClass(els[i], "hor");
-			} else if(els[i].offsetWidth < els[i].offsetHeight) {
-				addClass(els[i], "ver");
-			} else {
-				addClass(els[i], "squ");
+			var els = _qAll("#ig img");
+			for (var i = els.length - 1; i >= 0; i--) {
+				if (els[i].offsetWidth > els[i].offsetHeight) {
+					addClass(els[i], "hor");
+				} else if (els[i].offsetWidth < els[i].offsetHeight) {
+					addClass(els[i], "ver");
+				} else {
+					addClass(els[i], "squ");
+				}
 			}
 		}
-	}
-});
+	});
 
-var Menu = Barba.BaseView.extend({
-	namespace: 'menu',
-	onEnter: function () {
-		current_barba = this;
-	},
-});
+var Menu = Barba
+	.BaseView
+	.extend({
+		namespace: 'menu',
+		onEnter: function () {
+			current_barba = this;
+		}
+	});
 
+////////// Initial
 
-
-
-
-//////////
-// Initial
-
-document.addEventListener( 'DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 	// Initialize script
 	Home.init();
 	Work.init();
@@ -1492,45 +2036,88 @@ document.addEventListener( 'DOMContentLoaded', function () {
 	Menu.init();
 
 	// Run Barbara
-	Barba.Pjax.start();
+	Barba
+		.Pjax
+		.start();
 
 	// Initialize loading
 	loading.init();
 
 	// Wait for all images to be loaded
-	imageloading.init(document, function() {
+	imageloading.init(document, function () {
 		// Check if it's first time or 404 to do some text animation
-		loading.animate((_q(".barba-container").getAttribute("data-namespace") == "404" ? "404": "first-time"), function() {
-			imageloading.first_animation_done = true;
-			imageloading.done();
+		loading
+			.animate((_q(".barba-container").getAttribute("data-namespace") == "404"
+				? "404"
+				: "first-time"), function () {
+				imageloading.first_animation_done = true;
+				imageloading.done();
 
-			// Animate header
-			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { marginTop: -50 }, { marginTop: 0, delay: .768, duration: .768, ease: "expo.out", stagger: {
-				from: 0,
-				amount: .386
-			}});
-		});
+				// Animate header
+				gsap.fromTo(".logo, #mode, .lang > li, .menu > a", {
+					marginTop: -50
+				}, {
+					marginTop: 0,
+					delay: .768,
+					duration: .768,
+					ease: "expo.out",
+					stagger: {
+						from: 0,
+						amount: .386
+					}
+				});
+			});
 	});
 
 	removeClass(_q('.menu__pop'), "active");
 
 	// Adding logo to loading and do some hover event
 	var el = _q("#loading-cover .loading");
-	el.querySelector(".light").innerHTML = logo_svg;
-	el.querySelector(".light").style.height = 0;
-	el.querySelector(".dark").innerHTML = logo_svg;
+	el
+		.querySelector(".light")
+		.innerHTML = logo_svg;
+	el
+		.querySelector(".light")
+		.style
+		.height = 0;
+	el
+		.querySelector(".dark")
+		.innerHTML = logo_svg;
 
 	// Logo waving animation
-	var logo_wave = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .256, ease: "linear", yPercent: 20 }});
+	var logo_wave = gsap.timeline({
+		repeat: -1,
+		defaults: {
+			transformOrigin: "99% 0",
+			duration: .256,
+			ease: "linear",
+			yPercent: 20
+		}
+	});
 	logo_wave
-		.from(".logo .left-hand", { yPercent: 0, rotation: 0, duration: 10 } )
-		.to(".logo .left-hand", { duration: .256, rotation: 70 } )
-		.fromTo(".logo .left-hand", { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
-		.to(".logo .left-hand", { duration: .256, yPercent: 0, rotation: 0 } )
-	;
+		.from(".logo .left-hand", {
+		yPercent: 0,
+		rotation: 0,
+		duration: 10
+	})
+		.to(".logo .left-hand", {
+			duration: .256,
+			rotation: 70
+		})
+		.fromTo(".logo .left-hand", {
+			rotation: 70
+		}, {
+			rotation: 60,
+			repeat: 2,
+			yoyo: true
+		})
+		.to(".logo .left-hand", {
+			duration: .256,
+			yPercent: 0,
+			rotation: 0
+		});
 
-	// Safari Mobile: 177
-	// Safari: 38/63 - Firefox: 74 - Chrome: 79
+	// Safari Mobile: 177 Safari: 38/63 - Firefox: 74 - Chrome: 79
 	if (window.outerHeight - window.innerHeight < 80) {
 		addClass(_q("html"), "desktop");
 	}

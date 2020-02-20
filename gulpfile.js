@@ -16,6 +16,7 @@ function javascript() {
 			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.helper.ie8.js',
+			'js/helper.js',
 			'js/main.js'
 		])
 		.pipe(sourcemaps.init())
