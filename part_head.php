@@ -26,11 +26,11 @@
 		<ul class="lang flat block__right">
 			<li>
 				<a href="#en" class="active">en</a>
-				<div class="chat__bubble">Yes, I can speak English.</div>
+				<div class="chat__bubble">Yes, I can speak English</div>
 			</li>
 			<li>
 				<a href="#ina">ina</a>
-				<div class="chat__bubble">Tentu saja, saya bisa berbicara bahasa Indonesia.</div>
+				<div class="chat__bubble">Tentu saja, saya bisa<br/>berbicara bahasa Indonesia</div>
 			</li>
 		</ul>
 	</header>

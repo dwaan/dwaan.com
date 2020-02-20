@@ -9,13 +9,164 @@
 // getRandomInt(min, max)
 // roundToPrecision(x, precision)
 // parseStrToFloat(string_to_convert)
-var _q=function(argument){return document.querySelector(argument)};var _qAll=function(argument){return document.querySelectorAll(argument)};function removeClass(el,className){if(el.classList){el.classList.remove(className)}else{el.className=el.className.replace(new RegExp('(^|\\b)'+className.split(' ').join('|')+'(\\b|$)','gi'),' ')}}function addClass(el,className){if(el.classList){el.classList.add(className)}else{var current=el.className,found=false;var all=current.split(' ');for(var i=0;i<all.length,!found;i+=1){found=all[i]===className}if(!found){if(current===''){el.className=className}else{el.className+=' '+className}}}}function nextElementSibling(el){do{el=el.nextSibling}while(el&&el.nodeType!==1);return el}function getRandomInt(min,max){var temp;if(min>max){temp=min;min=max;max=temp}temp=(max+1)-min;return Math.floor(Math.random()*Math.floor(temp))+min}function roundToPrecision(x,precision){var y= +x+(precision===undefined?0.5:precision/2);return y-(y%(precision===undefined?1: +precision))}function parseStrToFloat(string_to_convert){if(typeof string_to_convert==='string'||string_to_convert instanceof String){string_to_convert=string_to_convert.trim()}return parseFloat(string_to_convert)}(function(){var method;var noop=function(){};var methods=['assert','clear','count','debug','dir','dirxml','error','exception','group','groupCollapsed','groupEnd','info','log','markTimeline','profile','profileEnd','table','time','timeEnd','timeline','timelineEnd','timeStamp','trace','warn'];var length=methods.length;var console=(window.console=window.console||{});while(length--){method=methods[length];if(!console[method]){console[method]=noop}}}());
+var _q = function (argument) {
+    return document.querySelector(argument)
+};
+var _qAll = function (argument) {
+    return document.querySelectorAll(argument)
+};
+function removeClass(el, className) {
+    if (el.classList) {
+        el
+            .classList
+            .remove(className)
+    } else {
+        el.className = el
+            .className
+            .replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ')
+    }
+}
+function addClass(el, className) {
+    if (el.classList) {
+        el
+            .classList
+            .add(className)
+    } else {
+        var current = el.className,
+            found = false;
+        var all = current.split(' ');
+        for (var i = 0; i < all.length, !found; i += 1) {
+            found = all[i] === className
+        }
+        if (!found) {
+            if (current === '') {
+                el.className = className
+            } else {
+                el.className += ' ' + className
+            }
+        }
+    }
+}
+function nextElementSibling(el) {
+    do {
+        el = el.nextSibling
+    } while (el && el.nodeType !== 1);
+    return el
+}
+function getRandomInt(min, max) {
+    var temp;
+    if (min > max) {
+        temp = min;
+        min = max;
+        max = temp
+    }
+    temp = (max + 1) - min;
+    return Math.floor(Math.random() * Math.floor(temp)) + min
+}
+function roundToPrecision(x, precision) {
+    var y = +x + (precision === undefined
+        ? 0.5
+        : precision / 2);
+    return y - (y % (precision === undefined
+        ? 1
+        : + precision))
+}
+function parseStrToFloat(string_to_convert) {
+    if (typeof string_to_convert === 'string' || string_to_convert instanceof String) {
+        string_to_convert = string_to_convert.trim()
+    }
+    return parseFloat(string_to_convert)
+}
+(function () {
+    var method;
+    var noop = function () {};
+    var methods = [
+        'assert',
+        'clear',
+        'count',
+        'debug',
+        'dir',
+        'dirxml',
+        'error',
+        'exception',
+        'group',
+        'groupCollapsed',
+        'groupEnd',
+        'info',
+        'log',
+        'markTimeline',
+        'profile',
+        'profileEnd',
+        'table',
+        'time',
+        'timeEnd',
+        'timeline',
+        'timelineEnd',
+        'timeStamp',
+        'trace',
+        'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+    while (length--) {
+        method = methods[length];
+        if (!console[method]) {
+            console[method] = noop
+        }
+    }
+}());
 // Add new function for image
-Image.prototype.load=function(index,url,callback,bytes){var thisImg=this;var xmlHTTP=new XMLHttpRequest();thisImg.src="";xmlHTTP.open('GET',url,true);xmlHTTP.responseType='arraybuffer';xmlHTTP.onload=function(e){var blob=new Blob([this.response]);thisImg.src=window.URL.createObjectURL(blob)};xmlHTTP.onprogress=function(e){thisImg.completedPercentage=parseInt((e.loaded/e.total)*100);if(thisImg.completedPercentage>=100){thisImg.src=url}callback(index,url,thisImg.completedPercentage,e.total)};xmlHTTP.onloadstart=function(){thisImg.completedPercentage=0};xmlHTTP.send()};Image.prototype.completedPercentage=0;
-//////////////
-// Konami Code
-var konami="38,38,40,40,37,39,37,39,66,65".split(","),keyIndex=0;document.onkeydown=function(t){konami[keyIndex]==t.keyCode?keyIndex++ :keyIndex=0,keyIndex==konami.length&&(0===_qAll("#konamicode").length&&(_q("body").innerHTML+='<div id="konamicode"><iframe title="YouTube video player" class="youtube-player" type="text/html" width="905" height="510" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0&autoplay=1" frameborder="0"></iframe></div>'),keyIndex=0);if(_q('#konamicode')!=undefined){elem=_q('#konamicode');elem.onclick=function(e){gsap.to('#konamicode',{duration:1.024,ease:"expo.in",opacity:0,onComplete:function(){elem.parentNode.removeChild(elem)}})}}};
-
+Image.prototype.load = function (index, url, callback, bytes) {
+    var thisImg = this;
+    var xmlHTTP = new XMLHttpRequest();
+    thisImg.src = "";
+    xmlHTTP.open('GET', url, true);
+    xmlHTTP.responseType = 'arraybuffer';
+    xmlHTTP.onload = function (e) {
+        var blob = new Blob([this.response]);
+        thisImg.src = window
+            .URL
+            .createObjectURL(blob)
+    };
+    xmlHTTP.onprogress = function (e) {
+        thisImg.completedPercentage = parseInt((e.loaded / e.total) * 100);
+        if (thisImg.completedPercentage >= 100) {
+            thisImg.src = url
+        }
+        callback(index, url, thisImg.completedPercentage, e.total)
+    };
+    xmlHTTP.onloadstart = function () {
+        thisImg.completedPercentage = 0
+    };
+    xmlHTTP.send()
+};
+Image.prototype.completedPercentage = 0;
+////////////// Konami Code
+var konami = "38,38,40,40,37,39,37,39,66,65".split(","),
+    keyIndex = 0;
+document.onkeydown = function (t) {
+    konami[keyIndex] == t.keyCode
+        ? keyIndex++
+        : keyIndex = 0,
+    keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe title="YouTube video player" class="youtube-player"' +
+            ' type="text/html" width="905" height="510" src="https://www.youtube.com/embed/tg' +
+            'bNymZ7vqY?rel=0&autoplay=1" frameborder="0"></iframe></div>'), keyIndex = 0);
+    if (_q('#konamicode') != undefined) {
+        elem = _q('#konamicode');
+        elem.onclick = function (e) {
+            gsap.to('#konamicode', {
+                duration: 1.024,
+                ease: "expo.in",
+                opacity: 0,
+                onComplete: function () {
+                    elem
+                        .parentNode
+                        .removeChild(elem)
+                }
+            })
+        }
+    }
+};
 
 
 
@@ -147,17 +298,13 @@ var menu = {
 			gsap.to(this.querySelector("#menu-short"), { duration: .512, ease: "expo", x: -7.5 });
 		}
 
-		// The main menu events
+		// The logo events
 		this.el = _q('.logo');
 		this.el.onmouseenter = function () {
-			var logo_hat = gsap.timeline({ defaults: { transformOrigin: "50% 75%", duration: .128 }});
-			logo_hat
-				.from(".logo .hat", { yPercent: 0, rotation: 0 })
-				.to(".logo .hat", { yPercent: -4, rotation: 3 })
-				.to(".logo .hat", { yPercent: 0, rotation: 2,  duration: .256 })
-				.to(".logo .hat", { yPercent: -2, rotation: 3 })
-				.to(".logo .hat", { yPercent: 0, rotation: 0 })
-			;
+			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: -5, xPercent: -1, rotation: 4, duration: 1.024, ease: "elastic.out" })
+		}
+		this.el.onmouseleave = function () {
+			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: 0, xPercent: 0, rotation: 0, duration: 1.024, ease: "elastic.out" });
 		}
 
 		// The main menu hover item animation
@@ -210,7 +357,7 @@ var menu = {
 		for (var i = this.el.length - 1; i >= 0; i--) {
 			gsap.set(this.el[i].nextElementSibling || nextElementSibling(this.el[i]), {
 				opacity: 0,
-				yPercent: 50
+				marginTop: 50
 			});
 
 			this.el[i].onclick = function (e) {
@@ -218,18 +365,18 @@ var menu = {
 			}
 			this.el[i].onmouseenter = function () {
 				gsap.to(this.nextElementSibling || nextElementSibling(this), {
-					duration: .385,
-					ease: "expo.out",
+					duration: .512,
+					ease: "elastic.out",
 					opacity: 1,
-					yPercent: 0
+					marginTop: 10
 				});
 			}
 			this.el[i].onmouseleave = function () {
 				gsap.to(this.nextElementSibling || nextElementSibling(this), {
-					duration: .385,
-					ease: "expo.out",
+					duration: .128,
+					ease: "ease.out",
 					opacity: 0,
-					yPercent: 50
+					marginTop: 50
 				});
 			}
 		}
@@ -791,72 +938,108 @@ var WorkDetail = Barba.BaseView.extend({
 
 		var responsive = {
 			0 : {
-				items: 1,
-				nav: true,
-				dots: false
+				items: 1
 			},
 			600 : {
-				items: 2,
-				nav: false,
-				dots: true
+				items: 2
 			}
 		};
 
-		$(".gallery-normal").owlCarousel({
-			responsiveClass: true,
-			responsive : responsive
-		});
+		els = _qAll(".gallery-normal");
+		for (var i = els.length - 1; i >= 0; i--) {
+			new tns({
+				container: els[i],
+				mouseDrag: true,
+				swipeAngle: false,
+				speed: 400,
+				loop: false,
+				navPosition: "bottom",
+				controlsPosition: "bottom",
+				responsive: responsive
+			});
+		}
 
-		$(".gallery-auto-height").owlCarousel({
-			responsiveClass: true,
-			autoHeight:true,
-			responsive : responsive
-		});
+		els = _qAll(".gallery-auto-height");
+		for (var i = els.length - 1; i >= 0; i--) {
+			new tns({
+				container: els[i],
+				mouseDrag: true,
+				swipeAngle: false,
+				speed: 400,
+				loop: false,
+				autoHeight: true,
+				navPosition: "bottom",
+				controlsPosition: "bottom",
+				responsive: responsive
+			});
+		}
 
-		$(".gallery__mobile").owlCarousel({
-			responsiveClass: true,
-			autoHeight:true,
-			responsive : {
-				0 : {
-					items: 1,
-					nav: true,
-					dots: false
-				},
-				600 : {
-					items: 2,
-					nav: false,
-					dots: true
-				},
-				1200 : {
-					items: 3,
-					nav: false,
-					dots: true
+		els = _qAll(".work__timeline .wheel");
+		for (var i = els.length - 1; i >= 0; i--) {
+			new tns({
+				container: els[i],
+				mouseDrag: true,
+				swipeAngle: false,
+				speed: 400,
+				loop: false,
+				autoHeight: true,
+				navPosition: "bottom",
+				controlsPosition: "bottom",
+				responsive: {
+					0: {
+						items: 2
+					},
+					600: {
+						items: 3
+					}
 				}
-			}
-		});
+			});
+		}
 
-		$(".work__timeline .wheel").owlCarousel({
-			responsiveClass: true,
-			autoHeight:true,
-			responsive : {
-				0 : {
-					items: 2,
-					nav: true,
-					dots: false
-				},
-				600 : {
-					items: 3,
-					nav: false,
-					dots: true
+		els = _qAll(".gallery__mobile");
+		for (var i = els.length - 1; i >= 0; i--) {
+			new tns({
+				container: els[i],
+				controls: false,
+				mouseDrag: true,
+				swipeAngle: false,
+				speed: 400,
+				loop: false,
+				autoHeight: true,
+				navPosition: "bottom",
+				controlsPosition: "bottom",
+				responsive: {
+					0: {
+						items: 1
+					},
+					600: {
+						items: 2
+					},
+					1200: {
+						items: 3
+					}
 				}
-			}
-		});
+			});
+		}
 
-		// Scroll animate the works
-		els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .owl-stage, .work__spec, .work__timeline, .work__spec > p, .owl-nav, .owl-dots");
+		// Scroll animate the work
+		els = _qAll(".gallery, .wheel");
+		for (var j = els.length - 1; j >= 0; j--) {
+			anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
+				from: 0,
+				amount: .256
+			}});
+			scene.push(
+				new ScrollMagic
+					.Scene({ triggerElement: els[j] })
+					.setTween(anim)
+			);
+		}
+		// Scroll animate the text
+		els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .work__spec, .work__spec > p, .work__timeline");
 		for (var j = els.length - 1; j >= 0; j--) {
 			for (var i = 0; i < els[j].children.length; i++) {
-				anim = gsap.fromTo(els[j].children[i], 1.024, { y: 100 + (i * 50) }, { y: 0, ease: "expo.out" });
+				anim = gsap.fromTo(els[j].children[i], { y: 100 + (i * 50) }, { y: 0, ease: "expo.out", duration: 1.024 });
 				scene.push(
 					new ScrollMagic
 						.Scene({ triggerElement: els[j] })
@@ -864,23 +1047,13 @@ var WorkDetail = Barba.BaseView.extend({
 				);
 			}
 		}
-		els = _qAll(".work__list__detail > h5, .work__list__detail > blockquote, .work__list__detail > hr");
+		// Scroll animate the other text
+		els = _qAll(".work__list__detail > h5, .work__list__detail > blockquote, .work__list__detail > hr, .tns-nav, .tns-controls");
 		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j], 1.024, { y: 100 + (i * 100) }, { y: 0, ease: "expo.out" });
+			anim = gsap.fromTo(els[j], { y: 100 + (i * 100) }, { y: 0, ease: "expo.out", duration: 1.024 });
 			scene.push(
 				new ScrollMagic
 					.Scene({ triggerElement: els[j].parentNode })
-					.setTween(anim)
-			);
-		}
-
-		// Scroll animate the words
-		els = _qAll(".words");
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.fromTo(els[i].children, 1.024, { y: 75 + (i * 75) }, { y: 0, ease: "expo.out" });
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[i] })
 					.setTween(anim)
 			);
 		}
@@ -913,7 +1086,7 @@ var WorkDetail = Barba.BaseView.extend({
 					}
 
 					// linkEl = figureEl.children[0]; // <a> element
-					linkEl = figureEl.children[0]; // <a> element
+					linkEl = figureEl; // <a> element
 
 					size = linkEl.getAttribute('data-size').split('x');
 
@@ -955,7 +1128,7 @@ var WorkDetail = Barba.BaseView.extend({
 
 				// find root element of slide
 				var clickedListItem = closest(eTarget, function(el) {
-					return (el.tagName && el.tagName.toUpperCase() === 'DIV');
+					return (el.tagName && el.tagName.toUpperCase() === 'A');
 				});
 
 				if(!clickedListItem) {
@@ -1092,7 +1265,7 @@ var WorkDetail = Barba.BaseView.extend({
 			}
 		};
 		// execute above function
-		initPhotoSwipeFromDOM('.gallery .owl-stage');
+		initPhotoSwipeFromDOM('.gallery');
 	}
 });
 
@@ -1358,9 +1531,9 @@ document.addEventListener( 'DOMContentLoaded', function () {
 			imageloading.done();
 
 			// Animate header
-			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { y: -125 }, { y: 0, delay: .768, duration: .768, ease: "expo.out", stagger: {
+			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { marginTop: -50 }, { marginTop: 0, delay: .768, duration: .768, ease: "expo.out", stagger: {
 				from: 0,
-				amount: .256
+				amount: .386
 			}});
 		});
 	});

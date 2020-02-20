@@ -3,10 +3,19 @@ const uglify = require('gulp-uglify');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
+const livereload = require('gulp-livereload');
 
 function javascript() {
 	return gulp.src([
-			'js/plugins.js',
+			'node_modules/barba.js/dist/barba.min.js',
+			'node_modules/gsap/dist/gsap.min.js',
+			'node_modules/gsap/dist/ScrollToPlugin.min.js',
+			'node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
+			'node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
+			'node_modules/photoswipe/dist/photoswipe.min.js',
+			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
+			'node_modules/tiny-slider/dist/min/tiny-slider.js',
+			'node_modules/tiny-slider/dist/min/tiny-slider.helper.ie8.js',
 			'js/main.js'
 		])
 		.pipe(sourcemaps.init())
@@ -14,12 +23,16 @@ function javascript() {
 		.pipe(uglify())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
+	    .pipe(livereload())
 	;
 }
 
 function css() {
 	return gulp.src([
-			'css/normalize.css',
+			'node_modules/normalize.css/normalize.css',
+			'node_modules/photoswipe/dist/photoswipe.css',
+			'node_modules/photoswipe/dist/default-skin/default-skin.css',
+			'node_modules/tiny-slider/dist/tiny-slider.css',
 			'css/main.css'
 		])
 		.pipe(sourcemaps.init())
@@ -27,10 +40,18 @@ function css() {
 		.pipe(cleanCSS())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
+	    .pipe(livereload())
 	;
 }
 
+function php() {
+	return gulp.src('*.php')
+	    .pipe(livereload())
+}
+
 exports.default = function() {
+	livereload.listen({ port: 35729 });
+	gulp.watch('*.php', { ignoreInitial: false }, php);
 	gulp.watch('css/main.css', { ignoreInitial: false }, css);
 	gulp.watch('js/main.js', { ignoreInitial: false }, javascript);
 };

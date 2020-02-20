@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 <head>
 	<?php
@@ -84,7 +84,7 @@
 								<div>
 									<div class="wheel">
 										<p>
-											<strong>Oktober 2018</strong>
+											<strong>October 2018</strong>
 											<span>Initial talk and brainstorming with the head of division.</span>
 										</p>
 										<p>
