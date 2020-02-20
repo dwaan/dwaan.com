@@ -42,7 +42,7 @@
 							</div>
 
 							<h5>Final Design</h5>
-							<div class="gallery gallery-auto-height transition">
+							<div class="gallery gallery-auto-height">
 								<a href="/dwaan/img/ss-bsn/homepage.jpg" itemprop="contentUrl" data-size="1620x2733" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-bsn/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
@@ -68,14 +68,14 @@
 								</div>
 								<div class="work__spec">
 									<h4>Demo</h4>
-									<p class="transition">
+									<p>
 										<a href="https://www.bsn.go.id" target="_blank" rel="noopener noreferrer">Live website</a>
 									</p>
 								</div>
 							</div>
 
 							<h5>Proposed Design</h5>
-							<div class="gallery gallery-auto-height transition">
+							<div class="gallery gallery-auto-height">
 								<a href="/dwaan/img/ss-bsn/homepage2.jpg" itemprop="contentUrl" data-size="1620x2632" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-bsn/homepage2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>

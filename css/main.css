@@ -2458,6 +2458,7 @@ main {
 	padding: 3vw 0 4vw;
 	height: auto;
 	overflow: initial;
+	white-space: nowrap;
 }
 .work__list__detail .tns-outer,
 .work__list__detail .gallery__mobile,
@@ -2484,14 +2485,16 @@ main {
 
 .work__list__detail .gallery__mobile .gallery__item,
 .work__list__detail .gallery .gallery__item {
-	display: block;
-	float: left;
+	vertical-align: top;
+	display: inline-block;
 	width: 25vw;
-}
-.work__list__detail .gallery__mobile .gallery__item,
-.work__list__detail .gallery .gallery__item {
 	padding: 0 1vw;
 	margin: 0;
+}
+.work__list__detail .tns-outer .gallery__mobile .gallery__item,
+.work__list__detail .tns-outer .gallery .gallery__item {
+	display: block;
+	float: left;
 }
 @media (max-aspect-ratio: 3/2) {
 	.work__list__detail .tns-outer,
@@ -2832,6 +2835,10 @@ main {
 	position: relative;
 	display: block;
 	margin: 0 -2vw;
+	white-space: nowrap;
+}
+.work__timeline .tns-outer .wheel {
+	margin: 0;
 }
 .work__timeline .wheel:before,
 .work__timeline .wheel:after {
@@ -2841,13 +2848,22 @@ main {
 	clear: both;
 }
 .work__timeline .wheel p {
-	display: block;
-	padding: 3vh 2vw;
-	float: left;
+	display: inline-block;
+	padding: 3vh 1vw;
 	width: 25%;
 	pointer-events: auto;
+	white-space: normal;
+	vertical-align: top;
 }
-
+@media (max-aspect-ratio: 3/2) {
+	.work__timeline .wheel p {
+		padding: 2vh 2vw;
+	}
+}
+.work__timeline .tns-auter .wheel p {
+	display: block;
+	float: left;
+}
 .work__timeline .wheel .tns-item {
 	position: relative;
 }
@@ -2869,7 +2885,7 @@ main {
 	content: "";
 	position: absolute;
 	top: .5vw;
-	left: 2vw;
+	left: 1vw;
 	z-index: 2;
 	display: block;
 	height: .75vw;
@@ -2878,6 +2894,13 @@ main {
 	border: 1px solid #000;
 	border-radius: 100%;
 	transform: translate3d(0,-50%,0);
+}
+
+@media (max-aspect-ratio: 3/2) {
+	.work__timeline .wheel .tns-item:after,
+	.work__timeline .wheel .tns-item:before {
+		left: 2vw;
+	}
 }
 .work__timeline .wheel .tns-item:first-child:before,
 .work__timeline .wheel .tns-item:last-child:before {
@@ -2920,12 +2943,12 @@ main {
 .work__timeline .wheel strong,
 .work__timeline .wheel span {
 	display: block;
-	font-size: 1em;
+	font-size: 1.2rem;
 	line-height: 150%;
 }
 .work__timeline .wheel strong {
 	font-weight: 500;
-	font-size: 1.25em;
+	font-size: 1.35rem;
 	letter-spacing: -.015em;
 	color: #000;
 	margin: 1vh 0 1.25vh;
@@ -2934,20 +2957,8 @@ main {
 	color: #A4CDD6;
 }
 @media (max-aspect-ratio: 1/1) {
-	.work__timeline .wheel span {
-		font-size: .85em;
-	}
 	.work__timeline .wheel strong {
-		font-size: 1.15em;
 		margin-bottom: .75vh;
-	}
-}
-@media (max-aspect-ratio: 2/3) {
-	.work__timeline .wheel span {
-		font-size: .95em;
-	}
-	.work__timeline .wheel strong {
-		font-size: 1.2em;
 	}
 }
 

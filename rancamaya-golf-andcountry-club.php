@@ -41,7 +41,7 @@
 								</div>
 							</div>
 
-							<div class="gallery gallery-normal transition">
+							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-rancamaya/desktop-hd.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-rancamaya/desktop-hd.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
 								</a>

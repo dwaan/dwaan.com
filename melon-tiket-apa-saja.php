@@ -42,7 +42,7 @@
 							</div>
 
 							<h5>Final Design</h5>
-							<div class="gallery gallery-auto-height transition">
+							<div class="gallery gallery-auto-height">
 								<a href="/dwaan/img/ss-tiketapasaja/large/homepage.jpg" itemprop="contentUrl" data-size="1728x1846" class="gallery__item no-barba owl-lazy">
 									<img src="/dwaan/img/ss-tiketapasaja/large/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
@@ -81,7 +81,7 @@
 								</div>
 								<div class="work__spec">
 									<h4>Prototype</h4>
-									<p class="transition">
+									<p>
 										<a href="https://www.figma.com/proto/5xbwlrcQoSTBnJxSiwfHdW/Tiket-Apa-Saja-v.2.2?node-id=251%3A0&viewport=63%2C318%2C0.046983785927295685&scaling=scale-down" target="_blank" rel="noopener noreferrer">Large screen</a>
 										<a href="https://www.figma.com/proto/5xbwlrcQoSTBnJxSiwfHdW/Tiket-Apa-Saja-v.2.2?node-id=3076%3A113&viewport=111%2C25%2C0.0642765462398529&scaling=scale-down" target="_blank" rel="noopener noreferrer">Medium screen</a>
 										<a href="https://www.figma.com/proto/5xbwlrcQoSTBnJxSiwfHdW/Tiket-Apa-Saja-v.2.2?node-id=138%3A1939&viewport=40%2C98%2C0.07508441805839539&scaling=scale-down" target="_blank" rel="noopener noreferrer">Small screen</a>
@@ -90,7 +90,7 @@
 							</div>
 
 							<h5>Proposed Design</h5>
-							<div class="gallery gallery-normal transition">
+							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-tiketapasaja/idea1-desktop-1.jpg" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba owl-lazy">
 									<img src="/dwaan/img/ss-tiketapasaja/idea1-desktop-1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>

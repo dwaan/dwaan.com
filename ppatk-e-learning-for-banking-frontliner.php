@@ -42,7 +42,7 @@
 							</div>
 
 							<h5>Final Design</h5>
-							<div class="gallery gallery-auto-height transition">
+							<div class="gallery gallery-auto-height">
 								<a href="/dwaan/img/ss-simantap/v2/desktop/dashboard-1.1.jpg" itemprop="contentUrl" data-size="1920x1200" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-simantap/v2/desktop/dashboard-1.1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="PPATK - E-Learning for Banking Frontliner by Dwan" />
 								</a>
@@ -81,7 +81,7 @@
 							</div>
 
 							<h5>Proposed Design</h5>
-							<div class="gallery gallery-auto-height transition">
+							<div class="gallery gallery-auto-height">
 								<a href="/dwaan/img/ss-simantap/v1/desktop/splash.jpg" itemprop="contentUrl" data-size="1920x1170" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-simantap/v1/desktop/splash.thumb.jpg" itemprop="thumbnail" width="" height="" alt="PPATK - E-Learning for Banking Frontliner by Dwan" />
 								</a>

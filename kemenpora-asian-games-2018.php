@@ -41,7 +41,7 @@
 								</div>
 							</div>
 
-							<div class="gallery gallery__mobile gallery__mobile__noborder transition">
+							<div class="gallery gallery__mobile gallery__mobile__noborder">
 								<a href="/dwaan/img/ss-asiangames/splash-screen.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-asiangames/splash-screen.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>

@@ -777,7 +777,6 @@ var Home = Barba.BaseView.extend({
 		});
 		els =  null;
 		anim = null;
-		scene = [];
 
 		// Scroll animate the hero wording
 		anim = gsap.timeline({ defaults: { duration: 1.024, ease: "linear" }});
@@ -785,21 +784,19 @@ var Home = Barba.BaseView.extend({
 			.fromTo(".hero__text p",{ y: 0 }, { y: -25 }, 0)
 			.fromTo(".hero .stats",{ y: 0 }, { y: -30 }, 0)
 			.fromTo(".hero img",{ y: 0 }, { y: 10 }, 0);
-		scene.push(
-			new ScrollMagic
-				.Scene({ triggerElement: ".work_float", duration: _q(".work_float").offsetHeight })
-				.setTween(anim)
-		);
+		new ScrollMagic
+			.Scene({ triggerElement: ".work_float", duration: _q(".work_float").offsetHeight })
+			.setTween(anim)
+			.addTo(controller);
 
 		// Scroll animate the scroll
 		anim = gsap.timeline({ defaults: { duration: .128, ease: "expo" }});
 		anim.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0)
 			.fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
-		scene.push(
-			new ScrollMagic
-				.Scene({ triggerElement: "#trigger", offset: 10 })
-				.setTween(anim)
-		);
+		new ScrollMagic
+			.Scene({ triggerElement: "#trigger", offset: 10 })
+			.setTween(anim)
+			.addTo(controller);
 
 		// Scroll animate the stats
 		gsap.set(".work__list .stats p", { transformOrigin: "center", scale: 1.5, opacity: 0 });
@@ -807,35 +804,30 @@ var Home = Barba.BaseView.extend({
 			from: "end",
 			amount: .256
 		}});
-		scene.push(
-			new ScrollMagic
-				.Scene({ triggerElement: ".work__list .stats__content", offset: 20 })
-				.setTween(anim)
-		);
+		new ScrollMagic
+			.Scene({ triggerElement: ".work__list .stats__content", offset: 20 })
+			.setTween(anim)
+			.addTo(controller);
 
 		// Scroll animate the wording float
 		anim = gsap.fromTo(".work__list .block__left > *", { transformOrigin: "center", y: 125 }, { y: 1, ease: "expo.out", stagger: {
 			from: 0,
 			amount: .128
 		}})
-		scene.push(
-			new ScrollMagic
-				.Scene({ triggerElement: ".work__list .block__left", offset: 20 })
-				.setTween(anim)
-		);
+		new ScrollMagic
+			.Scene({ triggerElement: ".work__list .block__left", offset: 20 })
+			.setTween(anim)
+			.addTo(controller);
 
 		// Scroll animate the work list
 		anim = gsap.fromTo(".work__list ul > li:not(last-child) a", { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: .768, ease: "expo", stagger: {
 			from: 0,
 			amount: .368
 		}});
-		scene.push(
-			new ScrollMagic
-				.Scene({ triggerElement: ".work__list ul", offset: 20 })
-				.setTween(anim)
-		);
-
-		controller.addScene(scene);
+		new ScrollMagic
+			.Scene({ triggerElement: ".work__list ul", offset: 20 })
+			.setTween(anim)
+			.addTo(controller);
 
 		// First time need to be delayed a bit
 		new animateYear("#year__living", 1984);
@@ -883,18 +875,16 @@ var Work = Barba.BaseView.extend({
 		});
 		els =  null;
 		anim = null;
-		scene = [];
 
 		// Scroll animate the works
 		els = _qAll(".works");
 		for (var j = els.length - 1; j >= 0; j--) {
 			for (var i = 0; i < els[j].children.length; i++) {
 				anim = gsap.fromTo(els[j].children[i].children, { y: 100 + (i * 100), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-				scene.push(
-					new ScrollMagic
-						.Scene({ triggerElement: els[j].children[i] })
-						.setTween(anim)
-				);
+				new ScrollMagic
+					.Scene({ triggerElement: els[j].children[i] })
+					.setTween(anim)
+					.addTo(controller);
 			}
 		}
 
@@ -902,14 +892,11 @@ var Work = Barba.BaseView.extend({
 		els = _qAll(".words");
 		for (var i = 0; i < els.length; i++) {
 			anim = gsap.fromTo(els[i].children, { y: 100 + (i * 100), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[i] })
-					.setTween(anim)
-			);
+			new ScrollMagic
+				.Scene({ triggerElement: els[i] })
+				.setTween(anim)
+				.addTo(controller);
 		}
-
-		controller.addScene(scene);
 	},
 	onImageLoadComplete: function() {
 		new animateNumber(".work__list .stats__content p:first-child b");
@@ -934,134 +921,122 @@ var WorkDetail = Barba.BaseView.extend({
 		});
 		els =  null;
 		anim = null;
-		scene = [];
 
-		var responsive = {
-			0 : {
-				items: 1
-			},
-			600 : {
-				items: 2
+		var tnsparam = {
+			mouseDrag: true,
+			swipeAngle: false,
+			speed: 400,
+			loop: false,
+			navPosition: "bottom",
+			controlsPosition: "bottom",
+			responsive: {
+				0 : {
+					items: 1
+				},
+				600 : {
+					items: 2
+				}
 			}
 		};
 
 		els = _qAll(".gallery-normal");
 		for (var i = els.length - 1; i >= 0; i--) {
-			new tns({
-				container: els[i],
-				mouseDrag: true,
-				swipeAngle: false,
-				speed: 400,
-				loop: false,
-				navPosition: "bottom",
-				controlsPosition: "bottom",
-				responsive: responsive
-			});
+			var _tnsparam = tnsparam;
+			_tnsparam.container = els[i];
+			new tns(_tnsparam);
 		}
 
 		els = _qAll(".gallery-auto-height");
 		for (var i = els.length - 1; i >= 0; i--) {
-			new tns({
-				container: els[i],
-				mouseDrag: true,
-				swipeAngle: false,
-				speed: 400,
-				loop: false,
-				autoHeight: true,
-				navPosition: "bottom",
-				controlsPosition: "bottom",
-				responsive: responsive
-			});
+			var _tnsparam = tnsparam;
+			_tnsparam.container = els[i];
+			_tnsparam.autoHeight = true;
+			new tns(_tnsparam);
 		}
 
 		els = _qAll(".work__timeline .wheel");
 		for (var i = els.length - 1; i >= 0; i--) {
-			new tns({
-				container: els[i],
-				mouseDrag: true,
-				swipeAngle: false,
-				speed: 400,
-				loop: false,
-				autoHeight: true,
-				navPosition: "bottom",
-				controlsPosition: "bottom",
-				responsive: {
-					0: {
-						items: 2
-					},
-					600: {
-						items: 3
-					}
+			var _tnsparam = tnsparam;
+			_tnsparam.container = els[i];
+			_tnsparam.autoHeight = true;
+			_tnsparam.responsive = {
+				0: {
+					items: 2
+				},
+				600: {
+					items: 3
 				}
-			});
+			};
+			new tns(_tnsparam);
 		}
 
 		els = _qAll(".gallery__mobile");
 		for (var i = els.length - 1; i >= 0; i--) {
-			new tns({
-				container: els[i],
-				controls: false,
-				mouseDrag: true,
-				swipeAngle: false,
-				speed: 400,
-				loop: false,
-				autoHeight: true,
-				navPosition: "bottom",
-				controlsPosition: "bottom",
-				responsive: {
-					0: {
-						items: 1
-					},
-					600: {
-						items: 2
-					},
-					1200: {
-						items: 3
-					}
+			var _tnsparam = tnsparam;
+			_tnsparam.container = els[i];
+			_tnsparam.autoHeight = true;
+			_tnsparam.responsive = {
+				0: {
+					items: 1
+				},
+				600: {
+					items: 2
+				},
+				1200: {
+					items: 3
 				}
-			});
+			};
+			new tns(_tnsparam);
 		}
 
-		// Scroll animate the work
-		els = _qAll(".gallery, .wheel");
+		// Scroll animate staggering from right of child
+		els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p");
 		for (var j = els.length - 1; j >= 0; j--) {
 			anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
 				from: 0,
 				amount: .256
 			}});
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[j] })
-					.setTween(anim)
-			);
+			new ScrollMagic
+				.Scene({ triggerElement: els[j] })
+				.setTween(anim)
+				.addTo(controller);
 		}
-		// Scroll animate the text
-		els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .work__spec, .work__spec > p, .work__timeline");
+		// Scroll animate staggering from right
+		els = _qAll(".work__list__detail > hr, .work__list__detail > h5, .work__detail .work__spec > *");
+		for (var j = els.length - 1; j >= 0; j--) {
+			anim = gsap.fromTo(els[j], { opacity: 0, x: 100 }, { opacity: 1, x: 0, ease: "expo.out", duration: 1.024, stagger: {
+				from: 0,
+				amount: .256
+			}});
+			new ScrollMagic
+				.Scene({ triggerElement: els[j] })
+				.setTween(anim)
+				.addTo(controller);
+		}
+		// Scroll animate immidiete from bottom
+		els = _qAll(".work__list__detail > blockquote");
+		for (var j = els.length - 1; j >= 0; j--) {
+			anim = gsap.fromTo(els[j], { x: 100 }, { x: 0, ease: "expo.out", duration: 1.024});
+			new ScrollMagic
+				.Scene({ triggerElement: els[j] })
+				.setTween(anim)
+				.addTo(controller);
+		}
+		// Scroll animate from bottom
+		els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .work__timeline");
 		for (var j = els.length - 1; j >= 0; j--) {
 			for (var i = 0; i < els[j].children.length; i++) {
 				anim = gsap.fromTo(els[j].children[i], { y: 100 + (i * 50) }, { y: 0, ease: "expo.out", duration: 1.024 });
-				scene.push(
-					new ScrollMagic
-						.Scene({ triggerElement: els[j] })
-						.setTween(anim)
-				);
+				new ScrollMagic
+					.Scene({ triggerElement: els[j] })
+					.setTween(anim)
+					.addTo(controller);
 			}
 		}
-		// Scroll animate the other text
-		els = _qAll(".work__list__detail > h5, .work__list__detail > blockquote, .work__list__detail > hr, .tns-nav, .tns-controls");
-		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j], { y: 100 + (i * 100) }, { y: 0, ease: "expo.out", duration: 1.024 });
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[j].parentNode })
-					.setTween(anim)
-			);
-		}
-
-		controller.addScene(scene);
 
 		new animateNumber(".work__list__detail .stats__content p:first-child b");
 		new animateNumber(".work__list__detail .stats__content p:last-child b");
+
 
 		// Gallery
 		var initPhotoSwipeFromDOM = function(gallerySelector) {
@@ -1266,6 +1241,7 @@ var WorkDetail = Barba.BaseView.extend({
 		};
 		// execute above function
 		initPhotoSwipeFromDOM('.gallery');
+
 	}
 });
 
@@ -1365,7 +1341,6 @@ var Me = Barba.BaseView.extend({
 		controller = new ScrollMagic.Controller();
 		els =  null;
 		anim = null;
-		scene = [];
 
 		gsap.set(".us h2, .us p", { opacity: 0 });
 		gsap.set(".us img", { display: "none" });
@@ -1386,11 +1361,10 @@ var Me = Barba.BaseView.extend({
 				.to(".us p", { duration: .5 }, 1.5)
 				.to(".us p", { y: -100, opacity: 0 }, 2)
 		;
-		scene.push(
-			new ScrollMagic.Scene({ triggerElement: "#firstscene", triggerHook: 0, duration: window.innerHeight })
-				.setPin("#firstscene", { pushFollowers: false })
-				.setTween(tl)
-		);
+		new ScrollMagic.Scene({ triggerElement: "#firstscene", triggerHook: 0, duration: window.innerHeight })
+			.setPin("#firstscene", { pushFollowers: false })
+			.setTween(tl)
+			.addTo(controller);
 
 		// Scroll Mr. Goat 360 deg animation
 		var obj = {
@@ -1419,46 +1393,39 @@ var Me = Barba.BaseView.extend({
 			.fromTo(".mrgoat .h23", { y: 50, opacity: 0}, { y: 0, opacity: 1 }, 1)
 				.to(".mrgoat .h23", { y: 0 }, 1.25)
 		;
-		scene.push(
-			new ScrollMagic.Scene({ triggerElement: ".mrgoat", triggerHook: 0, duration: window.innerHeight })
-				.setPin(".mrgoat")
-				.setTween(tl)
-		);
+		new ScrollMagic.Scene({ triggerElement: ".mrgoat", triggerHook: 0, duration: window.innerHeight })
+			.setPin(".mrgoat")
+			.setTween(tl)
+			.addTo(controller);
 
 		// Scroll IG items
 		els = _qAll("#ig .item");
 		for (var i = 0; i < els.length; i++) {
 			anim = gsap.fromTo(els[i].children, 1.024, { y: 75 + (i * 75), opacity: 0 }, { y: 0, opacity: 1, ease: "expo.out" });
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[i],  triggerHook: .75 })
-					.setTween(anim)
-					.addTo(controller)
-			);
+			new ScrollMagic
+				.Scene({ triggerElement: els[i],  triggerHook: .75 })
+				.setTween(anim)
+				.addTo(controller);
 		}
 
 		// Scroll capabilities item
 		els = _qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li");
 		for (var i = 0; i < els.length; i++) {
 			anim = gsap.fromTo(els[i], { x: 75 + (i * 75), opacity: 0 }, { x: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[i],  triggerHook: .75 })
-					.setTween(anim)
-					.addTo(controller)
-			);
+			new ScrollMagic
+				.Scene({ triggerElement: els[i],  triggerHook: .75 })
+				.setTween(anim)
+				.addTo(controller);
 		}
 
 		// Scroll latest works
 		els = _qAll(".work__list, .work__list ul li");
 		for (var i = 0; i < els.length; i++) {
 			anim = gsap.fromTo(els[i].children, { y: 75 + (i * 75), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
-			scene.push(
-				new ScrollMagic
-					.Scene({ triggerElement: els[i],  triggerHook: .75 })
-					.setTween(anim)
-					.addTo(controller)
-			);
+			new ScrollMagic
+				.Scene({ triggerElement: els[i],  triggerHook: .75 })
+				.setTween(anim)
+				.addTo(controller);
 		}
 
 		// Scroll cofound
@@ -1466,13 +1433,10 @@ var Me = Barba.BaseView.extend({
 					from: 0,
 					amount: .512
 				}});
-		scene.push(
-			new ScrollMagic
-				.Scene({ triggerElement: ".cofound > div",  triggerHook: .5 })
-				.setTween(anim)
-		);
-
-		controller.addScene(scene);
+		new ScrollMagic
+			.Scene({ triggerElement: ".cofound > div",  triggerHook: .5 })
+			.setTween(anim)
+			.addTo(controller);
 	},
 	onImageLoadComplete: function () {
 		gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: {

@@ -41,7 +41,7 @@
 								</div>
 							</div>
 
-							<div class="gallery gallery-normal transition">
+							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-im2/login.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-im2/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>

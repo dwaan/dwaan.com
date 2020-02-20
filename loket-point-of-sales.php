@@ -41,7 +41,7 @@
 								</div>
 							</div>
 
-							<div class="gallery gallery-normal transition">
+							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-loket/login.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-loket/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>

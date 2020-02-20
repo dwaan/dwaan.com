@@ -41,7 +41,7 @@
 								</div>
 							</div>
 
-							<div class="gallery gallery-normal transition">
+							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-ap1dashboard/login.jpg" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
 									<img src="/dwaan/img/ss-ap1dashboard/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
 								</a>
@@ -72,7 +72,7 @@
 								</div>
 								<div class="work__spec">
 									<h4>Prototype</h4>
-									<p class="transition">
+									<p>
 										<a href="http://demo.dwaan.com/ap1dashboard/" target="_blank" rel="noopener noreferrer">Large screen</a>
 									</p>
 								</div>
