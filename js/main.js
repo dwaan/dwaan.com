@@ -904,6 +904,7 @@ var Work = Barba.BaseView.extend({
 	}
 });
 
+var tinysliders = [];
 var WorkDetail = Barba.BaseView.extend({
 	namespace: 'work-detail',
 	onEnter: function () {
@@ -938,12 +939,13 @@ var WorkDetail = Barba.BaseView.extend({
 				}
 			}
 		};
+		tinysliders = [];
 
 		els = _qAll(".gallery-normal");
 		for (var i = els.length - 1; i >= 0; i--) {
 			var _tnsparam = tnsparam;
 			_tnsparam.container = els[i];
-			new tns(_tnsparam);
+			tinysliders.push(new tns(_tnsparam));
 		}
 
 		els = _qAll(".gallery-auto-height");
@@ -951,7 +953,7 @@ var WorkDetail = Barba.BaseView.extend({
 			var _tnsparam = tnsparam;
 			_tnsparam.container = els[i];
 			_tnsparam.autoHeight = true;
-			new tns(_tnsparam);
+			tinysliders.push(new tns(_tnsparam));
 		}
 
 		els = _qAll(".work__timeline .wheel");
@@ -967,7 +969,7 @@ var WorkDetail = Barba.BaseView.extend({
 					items: 3
 				}
 			};
-			new tns(_tnsparam);
+			tinysliders.push(new tns(_tnsparam));
 		}
 
 		els = _qAll(".gallery__mobile");
@@ -986,20 +988,22 @@ var WorkDetail = Barba.BaseView.extend({
 					items: 3
 				}
 			};
-			new tns(_tnsparam);
+			tinysliders.push(new tns(_tnsparam));
 		}
 
 		// Scroll animate staggering from right of child
 		els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p");
 		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
-				from: 0,
-				amount: .256
-			}});
-			new ScrollMagic
-				.Scene({ triggerElement: els[j] })
-				.setTween(anim)
-				.addTo(controller);
+			if (els[j].children.length > 0) {
+				anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
+					from: 0,
+					amount: .256
+				}});
+				new ScrollMagic
+					.Scene({ triggerElement: els[j] })
+					.setTween(anim)
+					.addTo(controller);
+			}
 		}
 		// Scroll animate staggering from right
 		els = _qAll(".work__list__detail > hr, .work__list__detail > h5, .work__detail .work__spec > *");
@@ -1241,7 +1245,13 @@ var WorkDetail = Barba.BaseView.extend({
 		};
 		// execute above function
 		initPhotoSwipeFromDOM('.gallery');
-
+	},
+	onLeave: function () {
+		// Destroying tinyslider to prevent error
+		for (var i = tinysliders.length - 1; i >= 0; i--) {
+			tinysliders[i].destroy();
+		}
+		tinysliders = [];
 	}
 });
 
