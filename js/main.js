@@ -301,7 +301,7 @@ var menu = {
 		// The logo events
 		this.el = _q('.logo');
 		this.el.onmouseenter = function () {
-			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: -5, xPercent: -1, rotation: 4, duration: 1.024, ease: "elastic.out" })
+			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: -3, xPercent: -1, rotation: 4, duration: 1.024, ease: "elastic.out" })
 		}
 		this.el.onmouseleave = function () {
 			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: 0, xPercent: 0, rotation: 0, duration: 1.024, ease: "elastic.out" });
@@ -365,7 +365,7 @@ var menu = {
 			}
 			this.el[i].onmouseenter = function () {
 				gsap.to(this.nextElementSibling || nextElementSibling(this), {
-					duration: .512,
+					duration: .386,
 					ease: "elastic.out",
 					opacity: 1,
 					marginTop: 10

@@ -1082,7 +1082,7 @@ header {
 	position: absolute;
 	display: table;
 	top: 50%;
-	right: 7.5%;
+	left: 67.5%;
 	width: 25%;
 	transform: translate3d(0,-50%,0);
 }
