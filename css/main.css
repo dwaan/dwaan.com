@@ -1302,10 +1302,16 @@ main {
 .hero .hero__meta {
 	position: absolute;
 	z-index: 1;
-	top: 51%;
+	top: 12vh;
 	left: 10.1vw;
 	right: 57.5vw;
-	transform: translate3d(0, -48.5%, 0);
+}
+.hero .hero__meta > div {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	transform: translate3d(0, -50%, 0);
 }
 .hero .stats {
 	overflow: hidden;
@@ -1341,29 +1347,20 @@ main {
 }
 @media (max-aspect-ratio: 3/2) {
 	.hero .hero__meta {
-		top: 52%;
 		right: 55.5vw;
-	}
-}
-@media (max-aspect-ratio: 4/3) {
-	.hero .hero__meta {
-		transform: translate3d(0, -49%, 0);
 	}
 }
 @media (max-aspect-ratio: 1/1) {
 	.hero .hero__meta {
-		top: 51.75%;
+		top: 9vh;
 		right: 52.5vw;
 	}
 }
 @media (max-aspect-ratio: 2/3) {
 	.hero .hero__meta {
-		top: 44%;
+		top: 8vh;
 		left: 8vw;
 		right: 40vw;
-	}
-	.desktop .hero .hero__meta {
-		top: 51%;
 	}
 }
 
@@ -1429,22 +1426,21 @@ main {
 }
 @media (max-aspect-ratio: 1/1) {
 	.hero .img {
+		left: 75%;
 	}
 }
 @media (max-aspect-ratio: 3/4) {
 	.hero .img {
 		top: 10vh;
 		bottom: initial;
-		left: 40vw;
+		left: 50%;
 		width: 54.6vh;
 		height: 73.2vh;
 	}
 }
 @media (max-aspect-ratio: 2/3) {
 	.hero .img {
-		left: 45vw;
-	}
-	.desktop .hero .img {
+		left: 95%;
 	}
 	.hero .hero__text h1 {
 		padding-bottom: 3vh;
@@ -1452,10 +1448,6 @@ main {
 	.hero .hero__text p {
 		margin-bottom: 3.5vh;
 		padding-right: 10vw;
-	}
-}
-@media (max-aspect-ratio: 1/2) {
-	.hero .img {
 	}
 }
 
@@ -2118,6 +2110,7 @@ main {
 .work_float .gallery,
 .work_float .scroller {
 	width: 89.84375vw;
+	overflow: hidden;
 }
 .work_float .scroller {
 	margin: 3.5555555556vh 0 0 -2.34375vw;
@@ -2160,12 +2153,12 @@ main {
 	right: 0;
 	margin: 0;
 	background: url(../img/icons-arrow.svg) center no-repeat;
-	background-color: rgb(59,68,70);
+	background-color: rgb(84, 95, 98, .25);
 	background-size: 2.1875vw auto;
 	text-indent: -666em;
 }
 .work_float .gallery a:last-child:hover {
-	background-color: rgba(255,255,255,.025);
+	background-color: rgba(255,255,255,.1);
 }
 .work_float .gallery img {
 	border-radius: 1vw;
@@ -2207,12 +2200,13 @@ main {
 	}
 	.work_float .scroller {
 		position: relative;
-		margin: 2vh 0 0 -4vw;
+		width: auto;
+		margin: 2vh -4vw 0;
 		border-radius: 6px;
 	}
 	.work_float .gallery {
 		display: block;
-		padding: 2vh 0;
+		padding: .5vh 0;
 		width: 130vw;
 	}
 	.work_float .gallery a {
@@ -2781,9 +2775,10 @@ main {
 	color: #333;
 }
 .work__spec p a {
-	display: inline-block;
+	display: block;
+	float: left;
 	padding: 0 2vw;
-	margin: .25vh 0;
+	margin: -.65vw 2vw 2.65vw 0;
 	background-color: #202526;
 	color: #C3DEE4;
 	font-weight: 400;
@@ -2819,6 +2814,7 @@ main {
 	.work__spec p a {
 		line-height: 3vh;
 		border-radius: .5vh;
+		margin: 0 2vw 2vw 0;
 	}
 }
 
@@ -2952,12 +2948,12 @@ main {
 .work__timeline .wheel strong,
 .work__timeline .wheel span {
 	display: block;
-	font-size: 1.2rem;
+	font-size: 1em;
 	line-height: 150%;
 }
 .work__timeline .wheel strong {
 	font-weight: 500;
-	font-size: 1.35rem;
+	font-size: 1.1em;
 	letter-spacing: -.015em;
 	color: #000;
 	margin: 1vh 0 1.25vh;
@@ -3202,7 +3198,7 @@ main {
 	top: 0;
 }
 #firstscene {
-	height: 100vh;
+	height: 200vh;
 	padding: 0;
 }
 .no-js #firstscene {
@@ -4036,4 +4032,11 @@ main {
 .dark .pswp__ui--fit .pswp__caption,
 .dark .pswp__ui--fit .pswp__top-bar {
     background-color: rgba(32, 37, 38, .5);
+}
+
+#conlog {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translate3d(-50%,0,0);
 }

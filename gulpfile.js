@@ -10,8 +10,10 @@ function javascript() {
 			'node_modules/barba.js/dist/barba.min.js',
 			'node_modules/gsap/dist/gsap.min.js',
 			'node_modules/gsap/dist/ScrollToPlugin.min.js',
+			'js/gsap-member/minified/CustomEase.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
+			'node_modules/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
 			'node_modules/photoswipe/dist/photoswipe.min.js',
 			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.js',
@@ -20,8 +22,8 @@ function javascript() {
 			'js/main.js'
 		])
 		.pipe(sourcemaps.init())
+		.pipe(uglify())
 		.pipe(concat("bundle.js"))
-		// .pipe(uglify())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
 	    .pipe(livereload())
@@ -41,7 +43,7 @@ function css() {
 		])
 		.pipe(sourcemaps.init())
 		.pipe(concat("bundle.css"))
-		// .pipe(cleanCSS())
+		.pipe(cleanCSS())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
 	    .pipe(livereload())

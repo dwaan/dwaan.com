@@ -107,7 +107,6 @@
 						<div class="igstage">
 							<div id="ig">
 								<?php
-									// $length = count($obj->data);
 									$length = 12;
 									for ($i = 0; $i < $length; $i++) {
 										$data = $obj->data[$i];

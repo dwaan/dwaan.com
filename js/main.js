@@ -10,26 +10,10 @@ var dark_mode = false,
 	tinysliders = [];
 
 // Put mandatory html stuff
-_q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div class="cm__table"><div cla' +
-		'ss="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h' +
-		'3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me ' +
-		'to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if po' +
-		'sible for better layout.</p></div></div></div></div><div class="pswp" tabindex="' +
-		'-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="psw' +
-		'p__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div ' +
-		'class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__u' +
-		'i pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div>' +
-		' <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> ' +
-		'<button class="pswp__button pswp__button--share" title="Share"></button> <button' +
-		' class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <butt' +
-		'on class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div cla' +
-		'ss="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preload' +
-		'er__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div ' +
-		'class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=' +
-		'"pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arro' +
-		'w--left" title="Previous (arrow left)"> </button><button class="pswp__button psw' +
-		'p__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__' +
-		'caption"><div class="pswp__caption__center"></div></div></div></div></div>';
+_q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div class="cm__table"><div class="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if posible for better layout.</p></div></div></div></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><div id="conlog"></div>';
+function htmllog(param) {
+	_q("#conlog").innerHTML += (param + "<br/>");
+}
 
 // Snoop which text or url that are currently clicked
 var clicked_target = null,
@@ -360,20 +344,12 @@ var menu = {
 				e.preventDefault();
 			}
 			this.el[i].onmouseenter = function () {
-				gsap.to(this.nextElementSibling || nextElementSibling(this), {
-					duration: .386,
-					ease: "elastic.out",
-					opacity: 1,
-					marginTop: 10
-				});
+				gsap.to(this.nextElementSibling || nextElementSibling(this), { duration: .386, ease: "elastic.out", opacity: 1, marginTop: 10, onComplete: function() {
+					gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50, delay: 1.024 });
+				}});
 			}
 			this.el[i].onmouseleave = function () {
-				gsap.to(this.nextElementSibling || nextElementSibling(this), {
-					duration: .128,
-					ease: "ease.out",
-					opacity: 0,
-					marginTop: 50
-				});
+				gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50 });
 			}
 		}
 	}
@@ -619,7 +595,7 @@ var loading = {
 			}
 		else {
 			gsap.fromTo(that.selector, var_from, var_to);
-			gsap.fromTo(that.selector, { scale: 1 }, { scale: 1, duration: var_to.duration / 3, onComplete() {
+			gsap.fromTo(that.selector, { scale: 1 }, { scale: 1, duration: var_to.duration / 3, onComplete: function() {
 				if (callback__half != undefined)
 					callback__half();
 			}});
@@ -1002,17 +978,13 @@ var Home = Barba
 
 			if (fruit[index] == undefined) index = 0;
 
-			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index])
+			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
 		},
-		onEnterCompleted: function () {
+		onImageLoadComplete: function () {
 			worklist.hover(".work__list a img");
 
 			controller.destroy();
-			controller = new ScrollMagic.Controller({
-				globalSceneOptions: {
-					triggerHook: 1
-				}
-			});
+			controller = new ScrollMagic.Controller();
 			els = null;
 			anim = null;
 
@@ -1023,28 +995,13 @@ var Home = Barba
 					ease: "linear"
 				}
 			});
-			anim.fromTo(".hero__text h1", {
-				y: 0
-			}, {
-				y: -20
-			}, 0).fromTo(".hero__text p", {
-				y: 0
-			}, {
-				y: -25
-			}, 0).fromTo(".hero .stats", {
-				y: 0
-			}, {
-				y: -30
-			}, 0).fromTo(".hero img", {
-				y: 0
-			}, {
-				y: 10
-			}, 0);
+			anim
+				.fromTo(".hero__text h1", { y: 0 }, { y: -20 }, 0)
+				.fromTo(".hero__text p", { y: 0 }, { y: -25 }, 0)
+				.fromTo(".hero .stats", { y: 0 }, { y: -30 }, 0)
+				.fromTo(".hero img", { y: 0 }, { y: 10 }, 0);
 			new ScrollMagic
-				.Scene({
-				triggerElement: ".work_float",
-				duration: _q(".work_float").offsetHeight
-			})
+				.Scene({triggerElement: "main", duration: "100%", triggerHook: 0})
 				.setTween(anim)
 				.addTo(controller);
 
@@ -1055,17 +1012,9 @@ var Home = Barba
 					ease: "expo"
 				}
 			});
-			anim.fromTo(".scroll__up", {
-				opacity: 1
-			}, {
-				opacity: 0
-			}, 0).fromTo(".scroll__down", {
-				opacity: 0
-			}, {
-				opacity: 1
-			}, 0)
+			anim.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0).fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
 			new ScrollMagic
-				.Scene({triggerElement: "#trigger", offset: 10})
+				.Scene({triggerElement: ".work_float", offset: 10, triggerHook: 1})
 				.setTween(anim)
 				.addTo(controller);
 
@@ -1075,149 +1024,145 @@ var Home = Barba
 				scale: 1.5,
 				opacity: 0
 			});
-			anim = gsap.fromTo(".work__list .stats__content p", {
-				scale: 1.5,
-				opacity: 0
-			}, {
-				scale: 1,
-				opacity: 1,
-				duration: .768,
-				ease: "elastic.out",
-				stagger: {
+			anim = gsap.fromTo(".work__list .stats__content p", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .768, ease: "elastic.out", stagger: {
 					from: "end",
 					amount: .256
-				}
-			});
+				}});
 			new ScrollMagic
-				.Scene({triggerElement: ".work__list .stats__content", offset: 20})
+				.Scene({triggerElement: ".work__list .stats__content", triggerHook: .9})
 				.setTween(anim)
 				.addTo(controller);
 
 			// Scroll animate the wording float
-			anim = gsap.fromTo(".work__list .block__left > *", {
-				transformOrigin: "center",
-				y: 125
-			}, {
-				y: 1,
-				ease: "expo.out",
-				stagger: {
+			anim = gsap.fromTo(".work__list .block__left > *", { transformOrigin: "center", y: 125 }, { y: 1, ease: "expo.out", stagger: {
 					from: 0,
 					amount: .128
-				}
-			})
+				}})
 			new ScrollMagic
-				.Scene({triggerElement: ".work__list .block__left", offset: 20})
+				.Scene({triggerElement: ".work__list .block__left", triggerHook: .9})
 				.setTween(anim)
 				.addTo(controller);
 
 			// Scroll animate the work list
-			anim = gsap.fromTo(".gallery a:not(:last-child)", {
-				x: 150,
-				opacity: 0
-			}, {
-				x: 0,
-				opacity: 1,
-				duration: .768,
-				ease: "expo",
-				stagger: {
+			anim = gsap.fromTo(".gallery a:not(:last-child)", { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: .768, ease: "expo", stagger: {
 					from: 0,
 					amount: .368
-				}
-			});
+				}});
 			new ScrollMagic
-				.Scene({triggerElement: ".work__list ul", offset: 20})
+				.Scene({triggerElement: ".work__list", triggerHook: .9})
 				.setTween(anim)
 				.addTo(controller);
+
+			// Fixing size
+			function resizeHeroMeta() {
+				_q("#trigger__padder").style.paddingTop = (_q("body").offsetHeight - _q(".work__list").offsetHeight) + "px";
+				_q("#trigger__mover").style.height = (_q(".work__list").offsetHeight) + "px";
+				_q(".hero__meta").style.height = (_q("body").offsetHeight - _q(".hero__meta").offsetTop - _q(".scroll").offsetHeight) + "px";
+			}
+			resizeHeroMeta();
+			window.onresize = function() {
+				resizeHeroMeta();
+			}
+
+			// Swipe event for gallery
+			function detectswipe(el,func) {
+				swipe_det = new Object();
+				swipe_det.sX = 0;
+				swipe_det.pX = 0;
+				swipe_det.sY = 0;
+				swipe_det.pY = 0;
+				swipe_det.eX = 0;
+				swipe_det.eY = 0;
+				var min_x = 20;  //min x swipe for horizontal swipe
+				var max_x = 40;  //max x difference for vertical swipe
+				var min_y = 40;  //min y swipe for vertical swipe
+				var max_y = 50;  //max y difference for horizontal swipe
+				var direc = "";
+				ele = _q(el);
+				ele.addEventListener('touchstart',function(e){
+					var t = e.touches[0];
+					swipe_det.sX = t.screenX;
+					swipe_det.sY = t.screenY;
+					swipe_det.pX = t.screenX;
+					swipe_det.pY = t.screenY;
+					if(ele.x == undefined) ele.x = 0;
+				},false);
+				ele.addEventListener('touchmove',function(e){
+					e.preventDefault();
+					var t = e.touches[0];
+
+					swipe_det.eX = t.screenX;
+					swipe_det.eY = t.screenY;
+
+					ele.x -= (swipe_det.pX - swipe_det.eX);
+
+					gsap.set(el, {x: ele.x});
+
+					swipe_det.pX = t.screenX;
+					swipe_det.pY = t.screenY;
+				},false);
+				ele.addEventListener('touchend',function(e){
+					//horizontal detection
+					if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y)))) {
+						if(swipe_det.eX > swipe_det.sX) direc = "r";
+						else direc = "l";
+					}
+					//vertical detection
+					if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x)))) {
+						if(swipe_det.eY > swipe_det.sY) direc = "d";
+						else direc = "u";
+					}
+
+					var delta_x = ele.offsetWidth - ele.parentNode.offsetWidth,
+						ease = "expo.out";
+
+					if(ele.x > 0 || direc == "r") ele.x = 0;
+					else if(ele.x < -delta_x || direc == "l") ele.x = -delta_x;
+
+					gsap.to(ele, { x: ele.x, duration: .768, ease: ease });
+
+					if (direc != "") {
+						if(typeof func == 'function') func(el,direc);
+					}
+					direc = "";
+				},false);
+			}
+			detectswipe('.gallery');
 
 			// First time need to be delayed a bit
 			new animateYear("#year__living", 1984);
 			new animateYear("#year__designer", 2008);
 			new animateYear("#year__managerial", 2011);
 		},
-		onImageLoadComplete: function () {
-			tinysliders = [];
-
-			els = _qAll(".gallery");
-			for (var i = els.length - 1; i >= 0; i--) {
-				tinysliders.push(new tns({
-					mouseDrag: true,
-					loop: false,
-					// nav: false,
-					// controls: false,
-					autoWidth: true,
-					swipeAngle: false,
-					container: els[i],
-					speed: 400
-				}));
-			}
-
+		onImageLoadAnimateHalfComplete: function () {
 			// Animate the appearing
 			anim = gsap.timeline({
 				defaults: {
-					duration: .768,
-					ease: "expo.out"
+					duration: 1.024,
+					ease: "expo"
 				}
 			});
-			anim.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", {
-				transformOrigin: "0 0",
-				y: -100
-			}, {
-				y: 0,
-				stagger: {
-					from: "end",
-					amount: .256
-				}
-			}, 0).fromTo(".hero__image, .work_float", {
-				transformOrigin: "0 0",
-				y: 100
-			}, {
-				y: 0,
-				stagger: {
-					from: 0,
-					amount: .256
-				}
-			}, 0).fromTo(".hero .stats p", {
-				transformOrigin: "center",
-				scale: 1.25,
-				opacity: 0
-			}, {
-				scale: 1,
-				opacity: 1,
-				ease: "elastic.out",
-				stagger: {
-					from: "end",
-					amount: .512
-				}
-			}, "-=1.024");
+			anim
+				.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", { transformOrigin: "0 0", y: -100 }, { y: 0, stagger: {
+						from: "end",
+						amount: .256
+					}}, 0)
+				.fromTo(".hero__image, .work_float", { transformOrigin: "0 0", yPercent: 25 }, { yPercent: 0, stagger: {
+						from: 0,
+						amount: .256
+					}}, 0)
+				.fromTo(".hero .stats p", { transformOrigin: "center", scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: .512, ease: "elastic.out", stagger: {
+						from: "end",
+						amount: .256
+					}}, .256);
 
 			// Some breathe in and breathe out animation for hero image
 			var loop = gsap.timeline({repeat: -1, ease: "expo"});
 			loop
-				.to(".hero .box", {
-				transformOrigin: "50% 75%",
-				scale: 1,
-				duration: .9
-			})
-				.to(".hero .box", {
-					scale: 1.015,
-					duration: 1.7
-				})
-				.to(".hero .box", {
-					scale: 1.015,
-					duration: .6
-				})
-				.to(".hero .box", {
-					scale: 1,
-					duration: 1.7
-				});
-		},
-		onLeaveCompleted: function () {
-			// Destroying tinyslider to prevent error
-			for (var i = tinysliders.length - 1; i >= 0; i--) {
-				console.log(i);
-				tinysliders[i].destroy();
-			}
-			tinysliders = [];
+				.to(".hero .box", { transformOrigin: "50% 75%", scale: 1, duration: .9 })
+				.to(".hero .box", { scale: 1.015, duration: 1.7 })
+				.to(".hero .box", { scale: 1.015, duration: .6 })
+				.to(".hero .box", { scale: 1, duration: 1.7 });
 		}
 	});
 
@@ -1236,37 +1181,42 @@ var Work = Barba
 			controller.destroy();
 			controller = new ScrollMagic.Controller({
 				globalSceneOptions: {
-					triggerHook: .9,
+					triggerHook: .95,
 				}
 			});
 			els = null;
 			anim = null;
 
 			// Scroll animate the works
+			var delay = 0,
+				_y = 0,
+				_p_y = 0;
 			els = _qAll(".works");
 			for (var j = els.length - 1; j >= 0; j--) {
-				for (var i = 0; i < els[j].children.length; i++) {
+				var _el = els[j].children;
+				for (var i = 0; i < _el.length; i++) {
+					var _height = _el[i].offsetHeight,
+						_c_el = _el[i].children;
+
+					_y =_el[i].offsetTop;
+					if (_y != _p_y) {
+						_p_y = _y;
+						delay = 0;
+					} else {
+						delay += .128;
+					}
+
 					tl = gsap.timeline({
 						defaults: {
 							duration: 1.024,
-							ease: "expo"
+							ease: "expo.out"
 						}
 					});
 					tl
-						.fromTo(els[j].children[i].children, {
-							y: window.innerHeight / 5,
-							opacity: 0
-						}, {
-							y: 0,
-							opacity: 1
-						})
-						.fromTo(els[j].children[i].children[0].children[1], {
-							y: 25
-						}, {
-							y: 0
-						}, "-=.768");
+						.fromTo(_c_el, { y: _height/5, opacity: 0 }, { y: 0, opacity: 1, delay: delay })
+						.fromTo(_c_el[0].children[1], { y: 25, opacity: 0 }, { y: 0, opacity: 1 }, "-=.768");
 					new ScrollMagic
-						.Scene({duration: "30%", offset: 30*i, triggerElement: els[j].children[i]})
+						.Scene({ triggerElement: _el[i] })
 						.setTween(tl)
 						.addTo(controller);
 				}
@@ -1275,21 +1225,12 @@ var Work = Barba
 			// Scroll animate the words
 			els = _qAll(".words");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i].children, {
-					y: 50,
-					opacity: 0
-				}, {
-					y: 0,
-					opacity: 1,
-					duration: 1.024,
-					ease: "expo",
-					stagger: {
+				anim = gsap.fromTo(els[i].children, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo", stagger: {
 						from: 0,
 						amount: .256
-					}
-				});
+					}});
 				new ScrollMagic
-					.Scene({duration: "30%", triggerElement: els[i]})
+					.Scene({ triggerElement: els[i] })
 					.setTween(anim)
 					.addTo(controller);
 			}
@@ -1867,61 +1808,23 @@ var Me = Barba
 			gsap.set(".us img", {display: "none"});
 
 			// First text animation
-			tl = gsap.timeline({
-				defaults: {
-					duration: 1,
-					ease: "linear"
-				}
-			});
-			tl.fromTo(".imuiux h1", {
-				y: 0,
-				opacity: 1
-			}, {
-				y: -125,
-				opacity: 0
-			}, 0).fromTo(".imuiux p", {
-				y: 0,
-				opacity: 1
-			}, {
-				y: -100,
-				opacity: 0
-			}, 0).fromTo(".imuiux img", {
-				transformOrigin: "50% 0",
-				yPercent: 0,
-				scale: 1
-			}, {
-				yPercent: -5,
-				scale: .95
-			}, 0).to(".imuiux img", {
-				duration: .5
-			}, 1.5).to(".imuiux img", {
-				yPercent: 5,
-				opacity: 0
-			}, 2).set(".us h2", {
-				y: 120,
-				opacity: 0
-			}, 0).to(".us h2", {
-				y: 0,
-				opacity: 1
-			}, .5).to(".us h2", {
-				duration: .5
-			}, 1.5).to(".us h2", {
-				y: -120,
-				opacity: 0
-			}, 2).set(".us p", {
-				y: 100,
-				opacity: 0
-			}, 0).to(".us p", {
-				y: 0,
-				opacity: 1
-			}, .5).to(".us p", {
-				duration: .5
-			}, 1.5).to(".us p", {
-				y: -100,
-				opacity: 0
-			}, 2);
+			tl = gsap.timeline({ defaults: { duration: 2.048, ease: "linear" }});
+			tl
+				.fromTo(".imuiux h1", { y: 0, opacity: 1 }, { y: -125, opacity: 0 }, 0)
+				.fromTo(".imuiux p", { y: 0, opacity: 1 }, { y: -100, opacity: 0 }, 0)
+				.fromTo(".imuiux img", { transformOrigin: "50% 0", yPercent: 0, scale: 1 }, { yPercent: -5, scale: .95 }, 0)
+					.to(".imuiux img", { duration: .5 }, 1.5)
+					.to(".imuiux img", { yPercent: 5, opacity: 0 }, 2)
+				.set(".us h2", { y: 120, opacity: 0 }, 0)
+					.to(".us h2", { y: 0, opacity: 1 }, .5)
+					.to(".us h2", { duration: .5 }, 1.5)
+					.to(".us h2", { y: -120, opacity: 0 }, 2)
+				.set(".us p", { y: 100, opacity: 0 }, 0)
+					.to(".us p", { y: 0, opacity: 1 }, .5)
+					.to(".us p", { duration: .5 }, 1.5)
+					.to(".us p", { y: -100, opacity: 0 }, 2);
 			new ScrollMagic
-				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: window.innerHeight})
+				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight*2})
 				.setPin("#firstscene", {pushFollowers: false})
 				.setTween(tl)
 				.addTo(controller);
@@ -1931,58 +1834,29 @@ var Me = Barba
 				curImg: 1,
 				length: _qAll(".mrgoat .img > img").length
 			};
-			tl = gsap.timeline({
-				defaults: {
-					duration: .25,
-					ease: "linear"
-				}
-			});
-			tl.fromTo(".mrgoat", {
-				y: 0,
-				opacity: 0
-			}, {
-				y: 0,
-				opacity: 1
-			}, 0).to(obj, {
-				curImg: obj.length,
-				roundProps: "curImg",
-				repeat: 1,
-				immediateRender: true,
-				ease: Linear.easeNone,
-				duration: .75,
-				onUpdate: function () {
-					gsap.set(".mrgoat .img > img", {opacity: 0});
-					gsap.set(".mrgoat" + obj.curImg, {opacity: 1});
-				}
-			}, 0).fromTo(".mrgoat .h21", {
-				y: 0
-			}, {
-				y: -20
-			}, .25).to(".mrgoat .h21", {
-				y: -60,
-				opacity: 0
-			}, .5).fromTo(".mrgoat .h22", {
-				y: 50,
-				opacity: 0
-			}, {
-				y: 0,
-				opacity: 1
-			}, .5).to(".mrgoat .h22", {
-				y: -20
-			}, .75).to(".mrgoat .h22", {
-				y: -60,
-				opacity: 0
-			}, 1).fromTo(".mrgoat .h23", {
-				y: 50,
-				opacity: 0
-			}, {
-				y: 0,
-				opacity: 1
-			}, 1).to(".mrgoat .h23", {
-				y: 0
-			}, 1.25);
+			tl = gsap.timeline({ defaults: { duration: .25, ease: "linear" }});
+			tl
+				.fromTo(".mrgoat", { y: 0, opacity: 0 }, { y: 0, opacity: 1 }, 0)
+				.to(obj, {
+					curImg: obj.length,
+					roundProps: "curImg",
+					repeat: 1,
+					immediateRender: true,
+					ease: "linear",
+					duration: .75,
+					onUpdate: function () {
+						gsap.set(".mrgoat .img > img", { opacity: 0 });
+						gsap.set(".mrgoat" + obj.curImg, {opacity: 1});
+					}}, 0)
+				.fromTo(".mrgoat .h21", { y: 0 }, { y: -20 }, .25)
+					.to(".mrgoat .h21", { y: -60, opacity: 0 }, .5)
+				.fromTo(".mrgoat .h22", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, .5)
+					.to(".mrgoat .h22", { y: -20 }, .75)
+					.to(".mrgoat .h22", { y: -60, opacity: 0 }, 1)
+				.fromTo(".mrgoat .h23", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1)
+					.to(".mrgoat .h23", { y: 0 }, 1.25);
 			new ScrollMagic
-				.Scene({triggerElement: ".mrgoat", triggerHook: 0, duration: window.innerHeight})
+				.Scene({triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight*2})
 				.setPin(".mrgoat")
 				.setTween(tl)
 				.addTo(controller);
@@ -1990,15 +1864,8 @@ var Me = Barba
 			// Scroll IG items
 			els = _qAll("#ig .item");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i].children, 1.024, {
-					y: 75 + (i * 75),
-					opacity: 0
-				}, {
-					y: 0,
-					opacity: 1,
-					ease: "expo.out"
-				});
-				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75})
+				anim = gsap.fromTo(els[i].children, 1.024, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, ease: "expo" });
+				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75 })
 					.setTween(anim)
 					.addTo(controller);
 			}
@@ -2006,16 +1873,8 @@ var Me = Barba
 			// Scroll capabilities item
 			els = _qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i], {
-					x: 75 + (i * 75),
-					opacity: 0
-				}, {
-					x: 0,
-					opacity: 1,
-					duration: 1.024,
-					ease: "expo.out"
-				});
-				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75})
+				anim = gsap.fromTo(els[i], { x: 25 + (i * 25), opacity: 0 }, { x: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
+				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .85 })
 					.setTween(anim)
 					.addTo(controller);
 			}
@@ -2023,54 +1882,21 @@ var Me = Barba
 			// Scroll latest works
 			els = _qAll(".work__list, .work__list ul li");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i].children, {
-					y: 75 + (i * 75),
-					opacity: 0
-				}, {
-					y: 0,
-					opacity: 1,
-					duration: 1.024,
-					ease: "expo.out"
-				});
-				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75})
+				anim = gsap.fromTo(els[i].children, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo" });
+				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .85 })
 					.setTween(anim)
 					.addTo(controller);
 			}
 
 			// Scroll cofound
-			anim = gsap.fromTo(".cofound > div > *", {
-				y: 200,
-				opacity: 0
-			}, {
-				y: 0,
-				opacity: 1,
-				duration: 1.024,
-				ease: "expo.out",
-				stagger: {
-					from: 0,
-					amount: .512
-				}
-			});
+			anim = gsap.fromTo(".cofound > div > *", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo", stagger: { from: 0, amount: .512 }});
 			new ScrollMagic
-				.Scene({triggerElement: ".cofound > div", triggerHook: .5})
+				.Scene({triggerElement: ".cofound > div", triggerHook: .5 })
 				.setTween(anim)
 				.addTo(controller);
 		},
 		onImageLoadComplete: function () {
-			gsap.fromTo(".imuiux > div > *", {
-				y: 200,
-				opacity: 0
-			}, {
-				y: 0,
-				opacity: 1,
-				delay: .256,
-				duration: 1.024,
-				ease: "expo.out",
-				stagger: {
-					from: 0,
-					amount: .128
-				}
-			});
+			gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: { from: 0, amount: .128 }});
 
 			var els = _qAll("#ig img");
 			for (var i = els.length - 1; i >= 0; i--) {
@@ -2190,7 +2016,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			rotation: 0
 		});
 
-	// Safari Mobile: 177 Safari: 38/63 - Firefox: 74 - Chrome: 79
+	// Safari Mobile: 177
+	// Safari: 38/63
+	// Firefox: 74
+	// Chrome: 79
+	// Safari Tablet: 107
+	// Chrome Tablet: 113
 	if (window.outerHeight - window.innerHeight < 80) {
 		addClass(_q("html"), "desktop");
 	}

@@ -55,51 +55,50 @@
 					</div>
 				</div>
 
-				<div id="trigger__padder"></div>
+				<div id="trigger__mover"></div>
 				<div id="trigger"></div>
+				<div id="trigger__padder">
+					<div class="work work_float">
+						<div class="work__container">
+							<div class="scroll">
+								<div class="scroll__up"><i class="icn icn_scroll"></i> <span>Scroll up to see some of my work</span></div>
+								<div class="scroll__down hide"><i class="icn icn_scroll"></i> <span>Scroll down to hide my work</span></div>
+							</div>
 
-				<div class="work work_float">
-					<div class="work__container">
-						<div class="scroll">
-							<div class="scroll__up"><i class="icn icn_scroll"></i> <span>Scroll up to see some of my work</span></div>
-							<div class="scroll__down hide"><i class="icn icn_scroll"></i> <span>Scroll down to hide my work</span></div>
-						</div>
-
-						<div class="work__list">
-							<div class="block block__clear">
-								<div class="block__left">
-									<h2>my latest works</h2>
-									<p>tap or click on one of the thumbnail to learn more about the work</p>
-								</div>
-								<div class="block__right">
-									<div class="stats block">
-										<div class="stats__content">
-											<p>
-												<b>35+</b>
-												<small>design concepts that I’ve created</small>
-											</p>
-											<p>
-												<b>50+</b>
-												<small>designs that I’ve converted to web pages</small>
-											</p>
+							<div class="work__list">
+								<div class="block block__clear">
+									<div class="block__left">
+										<h2>my latest works</h2>
+										<p>tap or click on one of the thumbnail to learn more about the work</p>
+									</div>
+									<div class="block__right">
+										<div class="stats block">
+											<div class="stats__content">
+												<p>
+													<b>35+</b>
+													<small>design concepts that I’ve created</small>
+												</p>
+												<p>
+													<b>50+</b>
+													<small>designs that I’ve converted to web pages</small>
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="block scroller">
-								<div class="block gallery block__clear">
-									<a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a>
-									<a href="./ppatk-e-learning-for-banking-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>PPATK - E-Learning for Banking Frontliner</span></a>
-									<a href="./angkasa-pura-1-performace-dashboard"><span><img src="/dwaan/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
-									<a href="./work">See All</a>
+								<div class="block scroller">
+									<div class="block gallery block__clear">
+										<a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a>
+										<a href="./ppatk-e-learning-for-banking-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>PPATK - E-Learning for Banking Frontliner</span></a>
+										<a href="./angkasa-pura-1-performace-dashboard"><span><img src="/dwaan/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
+										<a href="./work">See All</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="trigger trigger3"></div>
 			</main>
 		</div>
 	</div>
