@@ -21,7 +21,7 @@ function javascript() {
 		])
 		.pipe(sourcemaps.init())
 		.pipe(concat("bundle.js"))
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
 	    .pipe(livereload())
@@ -34,11 +34,14 @@ function css() {
 			'node_modules/photoswipe/dist/photoswipe.css',
 			'node_modules/photoswipe/dist/default-skin/default-skin.css',
 			'node_modules/tiny-slider/dist/tiny-slider.css',
-			'css/main.css'
+			'css/main.css',
+			'css/404.css',
+			'css/nojs.css',
+			'css/print.css'
 		])
 		.pipe(sourcemaps.init())
 		.pipe(concat("bundle.css"))
-		.pipe(cleanCSS())
+		// .pipe(cleanCSS())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
 	    .pipe(livereload())

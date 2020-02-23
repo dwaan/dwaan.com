@@ -545,7 +545,7 @@ var loading = {
 			gsap.fromTo(this.selector, var_from, var_to);
 		}
 	},
-	hide: function (callback) {
+	hide: function (callback, callback__half) {
 		var that = this,
 			var_from = {
 				xPercent: 0,
@@ -619,6 +619,10 @@ var loading = {
 			}
 		else {
 			gsap.fromTo(that.selector, var_from, var_to);
+			gsap.fromTo(that.selector, { scale: 1 }, { scale: 1, duration: var_to.duration / 3, onComplete() {
+				if (callback__half != undefined)
+					callback__half();
+			}});
 		}
 
 		_q("#click-cover").style.display = "none";
@@ -766,7 +770,8 @@ var imageloading = {
 			// No image, just unhide the loading
 			loading.update({duration: .256, height: "100%"});
 			that.loaded = true;
-			that.done(callback);
+			if(that.callback) that.callback(that);
+			else that.done();
 		} else {
 			// Found image, load them with ajax
 			var progress = function(index, url, percent, bytes) {
@@ -781,7 +786,9 @@ var imageloading = {
 					that.loaded = true;
 					if(callback_called == 0) {
 						callback_called++;
-						that.done(that.callback);
+
+						if(that.callback) that.callback(that);
+						else that.done();
 					}
 				}
 			}
@@ -835,9 +842,12 @@ var imageloading = {
 										if (current_barba.onImageLoadAnimateComplete != undefined)
 											current_barba.onImageLoadAnimateComplete();
 										if (callback != undefined)
-											callback();
-										}
-									);
+											callback(that);
+									},
+									function () {
+										if (current_barba.onImageLoadAnimateHalfComplete != undefined)
+											current_barba.onImageLoadAnimateHalfComplete();
+									});
 							}
 						});
 
@@ -848,7 +858,7 @@ var imageloading = {
 			});
 		} else {
 			if (callback != undefined)
-				callback();
+				callback(that);
 		}
 	}
 }
@@ -984,7 +994,7 @@ var Home = Barba
 			current_barba = this;
 
 			index = getRandomInt(1, 10);
-			if (index == 10) {
+			if (index > 5) {
 				index = getRandomInt(1, fruit.length);
 			} else {
 				index = 0;
@@ -1101,7 +1111,7 @@ var Home = Barba
 				.addTo(controller);
 
 			// Scroll animate the work list
-			anim = gsap.fromTo(".work__list ul > li:not(last-child) a", {
+			anim = gsap.fromTo(".gallery a:not(:last-child)", {
 				x: 150,
 				opacity: 0
 			}, {
@@ -1125,6 +1135,22 @@ var Home = Barba
 			new animateYear("#year__managerial", 2011);
 		},
 		onImageLoadComplete: function () {
+			tinysliders = [];
+
+			els = _qAll(".gallery");
+			for (var i = els.length - 1; i >= 0; i--) {
+				tinysliders.push(new tns({
+					mouseDrag: true,
+					loop: false,
+					// nav: false,
+					// controls: false,
+					autoWidth: true,
+					swipeAngle: false,
+					container: els[i],
+					speed: 400
+				}));
+			}
+
 			// Animate the appearing
 			anim = gsap.timeline({
 				defaults: {
@@ -1184,6 +1210,14 @@ var Home = Barba
 					scale: 1,
 					duration: 1.7
 				});
+		},
+		onLeaveCompleted: function () {
+			// Destroying tinyslider to prevent error
+			for (var i = tinysliders.length - 1; i >= 0; i--) {
+				console.log(i);
+				tinysliders[i].destroy();
+			}
+			tinysliders = [];
 		}
 	});
 
@@ -1193,14 +1227,16 @@ var Work = Barba
 		namespace: 'work',
 		onEnter: function () {
 			current_barba = this;
+
+			gsap.set(".work__list__page", { y: window.innerHeight });
 		},
-		onEnterCompleted: function () {
+		onImageLoadComplete: function () {
 			worklist.hover(".work__list a img");
 
 			controller.destroy();
 			controller = new ScrollMagic.Controller({
 				globalSceneOptions: {
-					triggerHook: .95
+					triggerHook: .9,
 				}
 			});
 			els = null;
@@ -1210,18 +1246,28 @@ var Work = Barba
 			els = _qAll(".works");
 			for (var j = els.length - 1; j >= 0; j--) {
 				for (var i = 0; i < els[j].children.length; i++) {
-					anim = gsap.fromTo(els[j].children[i].children, {
-						y: 100 + (i * 100),
-						opacity: 0
-					}, {
-						y: 0,
-						opacity: 1,
-						duration: 1.024,
-						ease: "expo.out"
+					tl = gsap.timeline({
+						defaults: {
+							duration: 1.024,
+							ease: "expo"
+						}
 					});
+					tl
+						.fromTo(els[j].children[i].children, {
+							y: window.innerHeight / 5,
+							opacity: 0
+						}, {
+							y: 0,
+							opacity: 1
+						})
+						.fromTo(els[j].children[i].children[0].children[1], {
+							y: 25
+						}, {
+							y: 0
+						}, "-=.768");
 					new ScrollMagic
-						.Scene({triggerElement: els[j].children[i]})
-						.setTween(anim)
+						.Scene({duration: "30%", offset: 30*i, triggerElement: els[j].children[i]})
+						.setTween(tl)
 						.addTo(controller);
 				}
 			}
@@ -1230,23 +1276,29 @@ var Work = Barba
 			els = _qAll(".words");
 			for (var i = 0; i < els.length; i++) {
 				anim = gsap.fromTo(els[i].children, {
-					y: 100 + (i * 100),
+					y: 50,
 					opacity: 0
 				}, {
 					y: 0,
 					opacity: 1,
 					duration: 1.024,
-					ease: "expo.out"
+					ease: "expo",
+					stagger: {
+						from: 0,
+						amount: .256
+					}
 				});
 				new ScrollMagic
-					.Scene({triggerElement: els[i]})
+					.Scene({duration: "30%", triggerElement: els[i]})
 					.setTween(anim)
 					.addTo(controller);
 			}
-		},
-		onImageLoadComplete: function () {
+
 			new animateNumber(".work__list .stats__content p:first-child b");
 			new animateNumber(".work__list .stats__content p:last-child b");
+		},
+		onImageLoadAnimateHalfComplete: function () {
+			gsap.to(".work__list__page", { y: 0, ease: "expo.out", duration: 2.048 })
 		}
 	});
 
@@ -1362,7 +1414,7 @@ var WorkDetail = Barba
 				}
 			}
 			// Scroll animate staggering from right
-			els = _qAll(".work__list__detail > hr, .work__list__detail > h5, .work__detail .work__spec > " +
+			els = _qAll(".work__detail > hr, .work__detail > h5, .work__detail .work__spec > " +
 					"*");
 			for (var j = els.length - 1; j >= 0; j--) {
 				anim = gsap.fromTo(els[j], {
@@ -1384,7 +1436,7 @@ var WorkDetail = Barba
 					.addTo(controller);
 			}
 			// Scroll animate immidiete from bottom
-			els = _qAll(".work__list__detail > blockquote");
+			els = _qAll(".work__detail > blockquote");
 			for (var j = els.length - 1; j >= 0; j--) {
 				anim = gsap.fromTo(els[j], {
 					x: 100
@@ -1399,7 +1451,7 @@ var WorkDetail = Barba
 					.addTo(controller);
 			}
 			// Scroll animate from bottom
-			els = _qAll(".work__list__detail .block__left, .work__list__detail .stats__content, .work__ti" +
+			els = _qAll(".work__detail .block__left, .work__detail .stats__content, .work__ti" +
 					"meline");
 			for (var j = els.length - 1; j >= 0; j--) {
 				for (var i = 0; i < els[j].children.length; i++) {
@@ -1417,8 +1469,8 @@ var WorkDetail = Barba
 				}
 			}
 
-			new animateNumber(".work__list__detail .stats__content p:first-child b");
-			new animateNumber(".work__list__detail .stats__content p:last-child b");
+			new animateNumber(".work__detail .stats__content p:first-child b");
+			new animateNumber(".work__detail .stats__content p:last-child b");
 
 			// Gallery
 			var initPhotoSwipeFromDOM = function (gallerySelector) {
@@ -2063,14 +2115,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	loading.init();
 
 	// Wait for all images to be loaded
-	imageloading.init(document, function () {
+	imageloading.init(document, function (imgload) {
 		// Check if it's first time or 404 to do some text animation
 		loading
 			.animate((_q(".barba-container").getAttribute("data-namespace") == "404"
 				? "404"
 				: "first-time"), function () {
-				imageloading.first_animation_done = true;
-				imageloading.done();
+				if (imgload != undefined) {
+					imgload.first_animation_done = true;
+					imgload.done()
+				}
 
 				// Animate header
 				gsap.fromTo(".logo, #mode, .lang > li, .menu > a", {

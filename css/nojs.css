@@ -1,0 +1,37 @@
+/* For those who disable js */
+.no-js .work__detail .gallery__mobile,
+.no-js .work__detail .gallery,
+.no-js .work__timeline .wheel {
+	overflow: auto;
+	height: auto;
+	white-space: nowrap;
+	padding-left: 2vw;
+	padding-right: 2vw;
+	margin: 0 -22.64375vw 0 -12.34375vw;
+}
+@media (max-aspect-ratio: 3/2) {
+	.no-js .work__detail .gallery__mobile,
+	.no-js .work__detail .gallery,
+	.no-js .work__timeline .wheel {
+		margin: 0 -12.5vw;
+	}
+}
+.no-js .work__timeline .wheel p {
+	white-space: normal;
+}
+.no-js .work__detail .gallery__mobile a,
+.no-js .work__detail .gallery a,
+.no-js .work__timeline .wheel p {
+	vertical-align: text-top;
+	display: inline-block;
+	float: initial;
+}
+.no-js .work__timeline .wheel p {
+	padding-right: 2vw;
+}
+.no-js .work__detail .gallery__mobile:before,
+.no-js .work__detail .gallery__mobile:after,
+.no-js .work__detail .gallery:before,
+.no-js .work__detail .gallery:after {
+	clear: both;
+}

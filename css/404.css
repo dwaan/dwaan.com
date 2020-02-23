@@ -1,0 +1,319 @@
+.fof {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+#mrmonkey {
+	position: absolute;
+	height: 67.5vh;
+	width: auto;
+	top: 0;
+	left: 47.5vw;
+	transform: translate3d(-50%,0,0);
+}
+#lost {
+	position: absolute;
+	z-index: -1;
+	top: initial;
+	bottom: -20vh;
+	left: 50%;
+	pointer-events: none;
+	transform: translate3d(-50%,0,0);
+}
+#lost h2 {
+	position: static;
+	z-index: 1;
+	width: 100vw;
+	height: 38vh;
+	line-height: 38vh;
+	margin: 0;
+	padding: 0;
+	color: #BECCD0;
+	font-size: 60vh;
+	font-weight: 800;
+	letter-spacing: -1rem;
+	white-space: nowrap;
+	transform-origin: center;
+	transform: rotate(-195deg);
+}
+#lost h2:nth-child(even) {
+	transform: rotate(-193deg);
+}
+#lost h2:nth-child(2) {
+	z-index: 2;
+	bottom: 25vh;
+	color: #AFC0C5;
+}
+#lost h2:nth-child(3) {
+	z-index: 3;
+	bottom: 40vh;
+	color: #A0B5BB;
+}
+#lost h2:nth-child(4) {
+	z-index: 4;
+	bottom: 55vh;
+	color: #91A9B0;
+}
+#lost h2:nth-child(5) {
+	z-index: 5;
+	bottom: 70vh;
+	color: #839DA5;
+}
+#lost h2 span {
+	position: absolute;
+}
+#lost h2 span i {
+	font-style: normal;
+	font-weight: 900;
+	padding: 0 2vw;
+}
+.dark #lost h2 {
+	color: #243238;
+}
+.dark #lost h2:nth-child(2) {
+	color: #32454d;
+}
+.dark #lost h2:nth-child(3) {
+	color: #425b65;
+}
+.dark #lost h2:nth-child(4) {
+	color: #4e6b77;
+}
+.dark #lost h2:nth-child(5) {
+	color: #5c7e8c;
+}
+#nomokeybusiness {
+	position: absolute;
+	bottom: 14vh;
+	left: initial;
+	right: 0;
+	transform-origin: center right;
+	transform: rotate(-15deg);
+}
+#nomokeybusiness h3,
+#nomokeybusiness h4 {
+	position: relative;
+	display: table;
+	margin: 0;
+	padding: 0;
+}
+#nomokeybusiness h3 {
+	font-size: 3.5rem;
+}
+#nomokeybusiness h4 {
+	top: initial;
+	bottom: 0;
+}
+#nomokeybusiness h3:after {
+	content: "";
+	position: absolute;
+	display: block;
+	z-index: -1;
+	left: -1vw;
+	right: -1vw;
+	top: initial;
+	bottom: 0;
+	height: 1.5vh;
+	background-color: #F3F72C;
+}
+#nomokeybusiness h4 {
+	font-size: 1.5rem;
+	font-weight: 300;
+	letter-spacing: .025rem;
+	margin-top: 1.5vh;
+}
+#nomokeybusiness .text {
+	float: left;
+	padding: 0 4vw 0 0;
+}
+#nomokeybusiness p {
+	float: right;
+	width: 50vh;
+	font-size: 1.25rem;
+	font-weight: 300;
+	text-align: right;
+	line-height: 155%;
+	padding: 1vh 0 1vh 1vh;
+	margin: 0;
+	transform: rotate(180deg);
+}
+#nomokeybusiness .clear {
+	display: block;
+	clear: both;
+}
+#nomokeybusiness a {
+	position: relative;
+	display: block;
+	background-color: #000;
+	opacity: .8;
+	color: #A4CDD6;
+	font-size: 1.6rem;
+	height: 13vh;
+	line-height: 13vh;
+	margin: 2vh -5vw 0 -100vw;
+	padding: 0;
+	text-decoration: none;
+	transform: rotate(180deg);
+}
+#nomokeybusiness a span {
+	position: absolute;
+	top: 50%;
+	display: block;
+	padding: 0 0 .65vh 19vh;
+	white-space: nowrap;
+	transform: translate3d(0,-50%,0);
+}
+#nomokeybusiness a:before {
+	content: "";
+	position: absolute;
+	left: 13vh;
+	top: 50%;
+	display: block;
+	border-top: 2vh solid transparent;
+	border-bottom: 2vh solid transparent;
+	border-right: 2.5vh solid #A4CDD6;
+	transform: translate3d(0,-50%,0);
+}
+.dark #nomokeybusiness a {
+	background-color: #2f4148;
+	color: #fff;
+}
+.dark #nomokeybusiness a:before {
+	border-right-color: #fff;
+}
+.dark #nomokeybusiness h3:after {
+	background-color: #5c5e04;
+}
+@media (max-aspect-ratio: 4/1) {
+	#lost {
+		bottom: 0;
+	}
+	#lost h2 {
+		height: 30vh;
+		line-height: 30vh;
+		font-size: 50vh;
+	}
+}
+@media (max-aspect-ratio: 3/1) {
+	#lost {
+		bottom: 18vh;
+	}
+	#lost h2 {
+		height: 22vh;
+		line-height: 22vh;
+		font-size: 44vh;
+	}
+}
+@media (max-aspect-ratio: 2/1) {
+	#lost {
+		bottom: 20vh;
+	}
+	#nomokeybusiness {
+		bottom: 12vh;
+	}
+}
+@media (max-aspect-ratio: 3/2) {
+	#lost {
+		bottom: 20vh;
+	}
+	#lost h2 {
+		height: 20vh;
+		line-height: 20vh;
+		font-size: 40vh;
+	}
+}
+@media (max-aspect-ratio: 4/3) {
+	#lost {
+		bottom: 24vh;
+	}
+	#lost h2 {
+		height: 18vh;
+		line-height: 18vh;
+		font-size: 38vh;
+	}
+	#nomokeybusiness p {
+		width: 35vh;
+	}
+}
+@media (max-aspect-ratio: 1/1) {
+	#lost h2 {
+		height: 20vw;
+		line-height: 20vw;
+		font-size: 38vw;
+	}
+	#nomokeybusiness {
+		bottom: 7vh;
+	}
+	#nomokeybusiness p {
+		width: 32vh;
+	}
+}
+@media (max-aspect-ratio: 3/4) {
+	#lost h2 {
+		height: 25vw;
+		line-height: 25vw;
+		font-size: 45vw;
+	}
+	#nomokeybusiness a {
+		height: 10vh;
+		line-height: 10vh;
+		margin-right: -10vw;
+	}
+	#nomokeybusiness a span {
+		padding-left: 17vh;
+	}
+	#nomokeybusiness a:before {
+		border-top: 1vh solid transparent;
+		border-bottom: 1vh solid transparent;
+		border-right: 1.5vh solid #A4CDD6;
+		transform: translate3d(0,-50%,0);
+	}
+	#nomokeybusiness p {
+		width: 28vh;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	#mrmonkey {
+		height: 55vh;
+	}
+	#lost {
+		bottom: 22vh;
+	}
+	#lost h2 {
+		height: 30vw;
+		line-height: 30vw;
+		font-size: 52vw;
+	}
+	#nomokeybusiness {
+		right: 10vw;
+		padding-left: 7vw;
+	}
+	#nomokeybusiness .text {
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: 0 4vw 0 0;
+		transform-origin: left bottom;
+		transform: rotate(-90deg);
+	}
+}
+@media (max-aspect-ratio: 1/2) {
+	#mrmonkey {
+		height: 50vh;
+	}
+	#lost h2 {
+		height: 40vw;
+		line-height: 40vw;
+		font-size: 68vw;
+	}
+	#nomokeybusiness {
+		bottom: 15vw;
+		right: -3vw;
+	}
+	#nomokeybusiness a:before {
+		left: 10vh;
+	}
+	#nomokeybusiness a span {
+		padding-left: 14vh;
+	}
+}

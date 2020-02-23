@@ -3,7 +3,7 @@
 
 <head>
 	<?php
-		$title = "My latest Works";
+		$title = "My Latest Works";
 		include_once "part_metacss.php";
 	?>
 </head>
@@ -16,7 +16,7 @@
 			<main class="block__clear">
 				<div class="work">
 					<div class="work__container">
-						<div class="work__list">
+						<div class="work__list work__list__page">
 							<div class="block block__clear">
 								<div class="words block__left">
 									<h2>my latest works</h2>
@@ -48,8 +48,8 @@
 							</ul>
 
 							<div class="words">
-								<h3>and canceled work</h3>
-								<p>I've created some design mockups, concepts and prototypes mostly for pitching purpose, but some are already implemented, but due to some unfortunate circumstances they are canceled</p>
+								<h3>and canceled works</h3>
+								<p>Other design mockups, concepts and or prototypes mostly for pitching purpose, but some are implemented but due to some unfortunate circumstances, they are canceled</p>
 							</div>
 							<ul class="works block block__clear flat">
 								<li><a href="./angkasa-pura-services"><span><img src="/dwaan/img/ss3.jpg" width="" height="" alt="Angkasa Pura 1 - Airports of Indonesia" /></span><span>Angkasa Pura 1 - Airports of Indonesia</span></a></li>
