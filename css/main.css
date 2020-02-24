@@ -128,12 +128,12 @@
     font-weight: 600;
     font-size: 6.75rem;
 }
-#loading-cover .dwan h1 {
+#loading-cover .dwan h2 {
     font-weight: 400;
     font-size: 3rem;
     letter-spacing: 0.025rem;
 }
-#loading-cover .dwan h1,
+#loading-cover .dwan h2,
 #loading-cover .hi h1 {
     padding: 1vh 0;
 }
@@ -3428,7 +3428,7 @@ main {
 	top: 85%;
 }
 .mrgoat h4 {
-	width: 40vw;
+	width: 50vw;
 	font-size: 1.4rem;
 	font-weight: 400;
 	line-height: 110%;
@@ -3464,7 +3464,7 @@ main {
 		font-size: 9rem;
 	}
 	.mrgoat h4 {
-		width: 50vw;
+		width: 55vw;
 	}
 }
 @media (max-aspect-ratio: 1/1) {
@@ -3755,12 +3755,12 @@ main {
 
 /* Call Me */
 .call {
-	position: absolute;
+	position: fixed;
 	top: 55%;
 	left: 50%;
 	margin: 0;
 	padding: 0;
-	width: 75vw;
+	width: 75%;
 	height: auto;
 	transform: translate3d(-50%,-50%,0);
 }
@@ -3832,10 +3832,10 @@ main {
 .bigtext {
 	position: fixed;
 	display: block;
-	left: 0;
 	top: 0;
-	width: 100vw;
-	height: 100vh;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	overflow: hidden;
 }
 .bigtext i {

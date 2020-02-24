@@ -364,85 +364,31 @@ var loading = {
 	init: function () {
 		var el = "";
 
-		gsap.set(this.selector, {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0
-		});
+		gsap.set(this.selector, { top: 0, bottom: 0, left: 0, right: 0 });
 
 		// Some floating animation for loading-cover
 		el = "#loading-cover";
-		this
-			.breath
-			.to(el, {
-				transformOrigin: "50%",
-				scale: 1,
-				duration: .9
-			})
-			.to(el, {
-				scale: 1.15,
-				duration: 1.7
-			})
-			.to(el, {
-				scale: 1.15,
-				duration: .6
-			})
-			.to(el, {
-				scale: 1,
-				duration: 1.7
-			});
-		this
-			.breath
-			.pause();
+		this.breath
+			.to(el, {transformOrigin: "50%",scale: 1,duration: .9})
+			.to(el, {scale: 1.15,duration: 1.7})
+			.to(el, {scale: 1.15,duration: .6})
+			.to(el, {scale: 1,duration: 1.7});
+		this.breath.pause();
 
 		// Some floating animation for hero image
 		el = ".loading > div";
-		this
-			.float
-			.fromTo(el, {
-				yPercent: -10
-			}, {
-				yPercent: 10,
-				duration: 1.024
-			})
-			.fromTo(el, {
-				yPercent: 10
-			}, {
-				yPercent: -10,
-				duration: 1.024
-			})
-			.fromTo(el, {
-				yPercent: -10
-			}, {yPercent: 5})
-			.fromTo(el, {
-				yPercent: 5
-			}, {yPercent: -5})
-			.fromTo(el, {
-				yPercent: -5
-			}, {
-				yPercent: 10,
-				duration: .768
-			})
-			.fromTo(el, {
-				yPercent: 10
-			}, {
-				yPercent: -10,
-				duration: 1.024
-			});
+		this.float
+			.fromTo(el, { yPercent: -10 }, { yPercent: 10, duration: 1.024 })
+			.fromTo(el, { yPercent: 10 }, { yPercent: -10, duration: 1.024 })
+			.fromTo(el, { yPercent: -10 }, {yPercent: 5})
+			.fromTo(el, { yPercent: 5 }, {yPercent: -5})
+			.fromTo(el, { yPercent: -5 }, { yPercent: 10, duration: .768 })
+			.fromTo(el, { yPercent: 10 }, { yPercent: -10, duration: 1.024 });
 	},
 	show: function (callback) {
 		var that = this,
-			var_from = {
-				xPercent: 0,
-				yPercent: 100
-			},
-			var_to = {
-				xPercent: 0,
-				yPercent: 0,
-				duration: .768,
-				ease: "expo.inOut",
-				onComplete: function () {
+			var_from = { xPercent: 0, yPercent: 100 },
+			var_to = { xPercent: 0, yPercent: 0, duration: .768, ease: "expo.inOut", onComplete: function () {
 					if (callback != undefined)
 						callback();
 					}
@@ -475,64 +421,27 @@ var loading = {
 		}
 
 		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
-			var tl = gsap.timeline({
-					defaults: {
-						duration: .386,
-						ease: "expo"
-					}
-				}),
+			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo" }}),
 				sl = that.selector;
 
 			removeClass(sl, "bubble");
 			tl
 				.set(sl, {zIndex: 666})
-				.to(sl.querySelector(".text"), {opacity: 0})
-				.to(sl.querySelector(".light"), {height: 0})
-				.fromTo(sl.querySelector(".loading"), {
-					opacity: 0,
-					yPercent: 100
-				}, {
-					opacity: 1,
-					yPercent: -50
-				}, 0)
-				.to(sl, {
-					position: "fixed",
-					top: 0,
-					right: 0,
-					width: window.innerWidth,
-					height: window.innerHeight,
-					borderRadius: 0,
-					duration: .768,
-					ease: "expo.inOut",
-					onComplete: function () {
-						gsap.set(sl, {
-							top: 0,
-							bottom: 0,
-							left: 0,
-							right: 0,
-							width: "auto",
-							height: "auto"
-						});
-						if (callback != undefined)
-							callback();
-						}
-					});
+				.to(sl.querySelector(".text"), { opacity: 0 })
+				.to(sl.querySelector(".light"), { height: 0 })
+				// .fromTo(sl.querySelector(".loading"), { opacity: 0, yPercent: 100 }, { opacity: 1, yPercent: -50 }, 0)
+				.to(sl, { position: "fixed", top: 0, right: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: .768, ease: "expo.inOut", onComplete: function () {
+					gsap.set(sl, { top: 0, bottom: 0, left: 0, right: 0, width: "auto", height: "auto" });
+					if (callback != undefined) callback();
+				}});
 		} else {
 			gsap.fromTo(this.selector, var_from, var_to);
 		}
 	},
 	hide: function (callback, callback__half) {
 		var that = this,
-			var_from = {
-				xPercent: 0,
-				yPercent: 0
-			},
-			var_to = {
-				duration: .768,
-				ease: "expo.inOut",
-				xPercent: 0,
-				yPercent: -100,
-				onComplete: function () {
+			var_from = { xPercent: 0, yPercent: 0 },
+			var_to = { duration: .768, ease: "expo.inOut", xPercent: 0, yPercent: -100, onComplete: function () {
 					// Move loading
 					gsap.set(that.selector, {yPercent: -200});
 					// Set progress bar back to zero
@@ -555,49 +464,25 @@ var loading = {
 		}
 
 		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
-			var tl = gsap.timeline({
-					defaults: {
-						duration: .386,
-						ease: "expo.inOut"
-					}
-				}),
+			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo.inOut" }}),
 				sl = that.selector,
-				size = sl
-					.querySelector(".loading")
-					.offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
+				size = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
 
-			tl.to(sl.querySelector(".loading"), {
-				opacity: 0
-			}, 0).to(sl.querySelector(".text"), {
-				margin: 0,
-				onComplete: function () {
-					sl
-						.querySelector(".text")
-						.innerHTML = "<p class='hi'>hi!</p>";
-					addClass(sl, "bubble");
-					gsap.set(sl.querySelector(".text"), {opacity: 1})
-				}
-			}, 0).to(sl, {
-				width: size,
-				height: size,
-				top: "17.5vh",
-				left: "initial",
-				right: "11.5vw",
-				borderRadius: "1000px",
-				duration: .768
-			}, 0).set(sl, {
-				position: "absolute",
-				zIndex: 1
-			});
+			tl
+				.to(sl.querySelector(".loading"), { opacity: 0 }, 0)
+				.to(sl.querySelector(".text"), { margin: 0, onComplete: function () {
+						addClass(sl, "bubble");
+						gsap.set(sl.querySelector(".text"), { opacity: 1 })
+						sl.querySelector(".text").innerHTML = "<p class='hi'>hi!</p>";
+					}}, 0)
+				.to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
+				.set(sl, { zIndex: 1 });
 
-			if (callback != undefined)
-				callback();
-			}
-		else {
+			if (callback != undefined) callback();
+		} else {
 			gsap.fromTo(that.selector, var_from, var_to);
 			gsap.fromTo(that.selector, { scale: 1 }, { scale: 1, duration: var_to.duration / 3, onComplete: function() {
-				if (callback__half != undefined)
-					callback__half();
+				if (callback__half != undefined) callback__half();
 			}});
 		}
 
@@ -611,19 +496,11 @@ var loading = {
 
 		switch (view) {
 			case "first-time":
-				this
-					.selector
-					.querySelector(".text")
-					.innerHTML = "<div class='hi'><h1>hello!</h1></div><div class='dwan'><h1>this is dwan</h1></di" +
-						"v>";
+				this.selector.querySelector(".text").innerHTML = "<div class='hi'><h1>hello!</h1></div><div class='dwan'><h2>this is dwan</h2></div>";
 				animate = true;
 				break;
 			case "404":
-				this
-					.selector
-					.querySelector(".text")
-					.innerHTML = "<div class='hi'><h1>oh 🦀,</h1></div><div class='dwan'><h2>you lost! 😢</h2></di" +
-						"v>";
+				this.selector.querySelector(".text").innerHTML = "<div class='hi'><h1>oh 🦀,</h1></div><div class='dwan'><h2>you lost! 😢</h2></div>";
 				animate = true;
 				break;
 			default:
@@ -644,45 +521,13 @@ var loading = {
 				});
 			tl
 				.set(lv + " .text", {opacity: 1})
-				.to(lv + " .left-hand", {
-					transformOrigin: "99% 0",
-					duration: .256,
-					ease: "expo",
-					yPercent: 35,
-					rotation: 65
-				})
-				.to(lv + " .right-hand", {
-					transformOrigin: "1% 0",
-					duration: .256,
-					ease: "expo",
-					yPercent: 35,
-					rotation: -65
-				}, "-=.256")
-				.fromTo(lv + " .loading", {
-					opacity: 1
-				}, {
-					opacity: 0
-				}, "+=.512")
-				.fromTo(lv + " .hi h1", {
-					yPercent: 120
-				}, {
-					yPercent: 0
-				}, "-=.512")
-				.fromTo(lv + " .dwan h1", {
-					yPercent: 120
-				}, {
-					yPercent: 0
-				}, "-=.512")
-				.set(lv + " .left-hand", {
-					transformOrigin: "99% 0",
-					yPercent: 0,
-					rotation: 0
-				})
-				.set(lv + " .right-hand", {
-					transformOrigin: "1% 0",
-					yPercent: 0,
-					rotation: 0
-				})
+				.to(lv + " .left-hand", { transformOrigin: "99% 0", duration: .256, ease: "expo", yPercent: 35, rotation: 65 })
+				.to(lv + " .right-hand", { transformOrigin: "1% 0", duration: .256, ease: "expo", yPercent: 35, rotation: -65 }, "-=.256")
+				.fromTo(lv + " .loading", { opacity: 1 }, { opacity: 0 }, "+=.512")
+				.fromTo(lv + " .hi h1", { yPercent: 120 }, { yPercent: 0 }, "-=.512")
+				.fromTo(lv + " .dwan h2", { yPercent: 120 }, { yPercent: 0 }, "-=.512")
+				.set(lv + " .left-hand", { transformOrigin: "99% 0", yPercent: 0, rotation: 0 })
+				.set(lv + " .right-hand", { transformOrigin: "1% 0", yPercent: 0, rotation: 0 })
 				.call(callback);
 		}
 	},
@@ -1019,11 +864,7 @@ var Home = Barba
 				.addTo(controller);
 
 			// Scroll animate the stats
-			gsap.set(".work__list .stats p", {
-				transformOrigin: "center",
-				scale: 1.5,
-				opacity: 0
-			});
+			gsap.set(".work__list .stats p", { transformOrigin: "center", scale: 1.5, opacity: 0 });
 			anim = gsap.fromTo(".work__list .stats__content p", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .768, ease: "elastic.out", stagger: {
 					from: "end",
 					amount: .256
@@ -1121,9 +962,7 @@ var Home = Barba
 
 					gsap.to(ele, { x: ele.x, duration: .768, ease: ease });
 
-					if (direc != "") {
-						if(typeof func == 'function') func(el,direc);
-					}
+					if (direc != "") if(typeof func == 'function') func(el,direc);
 					direc = "";
 				},false);
 			}
@@ -1136,25 +975,11 @@ var Home = Barba
 		},
 		onImageLoadAnimateHalfComplete: function () {
 			// Animate the appearing
-			anim = gsap.timeline({
-				defaults: {
-					duration: 1.024,
-					ease: "expo"
-				}
-			});
+			anim = gsap.timeline({ defaults: { duration: 1.024, ease: "expo" }});
 			anim
-				.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", { transformOrigin: "0 0", y: -100 }, { y: 0, stagger: {
-						from: "end",
-						amount: .256
-					}}, 0)
-				.fromTo(".hero__image, .work_float", { transformOrigin: "0 0", yPercent: 25 }, { yPercent: 0, stagger: {
-						from: 0,
-						amount: .256
-					}}, 0)
-				.fromTo(".hero .stats p", { transformOrigin: "center", scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: .512, ease: "elastic.out", stagger: {
-						from: "end",
-						amount: .256
-					}}, .256);
+				.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", { transformOrigin: "0 0", y: -100 }, { y: 0, stagger: { from: "end", amount: .256 }}, 0)
+				.fromTo(".hero__image, .work_float", { transformOrigin: "0 0", yPercent: 25 }, { yPercent: 0, stagger: { from: 0, amount: .256 }}, 0)
+				.fromTo(".hero .stats p", { transformOrigin: "center", scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: .512, ease: "elastic.out", stagger: { from: "end", amount: .256 }}, .256);
 
 			// Some breathe in and breathe out animation for hero image
 			var loop = gsap.timeline({repeat: -1, ease: "expo"});
@@ -1606,13 +1431,9 @@ var WorkDetail = Barba
 					}
 
 					// exit if index not found
-					if (isNaN(options.index)) {
-						return;
-					}
+					if (isNaN(options.index)) return;
 
-					if (disableAnimation) {
-						options.showAnimationDuration = 0;
-					}
+					if (disableAnimation) options.showAnimationDuration = 0;
 
 					// Pass data to PhotoSwipe and initialize it
 					gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
@@ -1804,50 +1625,36 @@ var Me = Barba
 			els = null;
 			anim = null;
 
-			gsap.set(".us h2, .us p", {opacity: 0});
-			gsap.set(".us img", {display: "none"});
-
 			// First text animation
-			tl = gsap.timeline({ defaults: { duration: 2.048, ease: "linear" }});
+			tl = gsap.timeline({ defaults: { duration: .5, ease: "linear" }});
 			tl
-				.fromTo(".imuiux h1", { y: 0, opacity: 1 }, { y: -125, opacity: 0 }, 0)
-				.fromTo(".imuiux p", { y: 0, opacity: 1 }, { y: -100, opacity: 0 }, 0)
-				.fromTo(".imuiux img", { transformOrigin: "50% 0", yPercent: 0, scale: 1 }, { yPercent: -5, scale: .95 }, 0)
-					.to(".imuiux img", { duration: .5 }, 1.5)
-					.to(".imuiux img", { yPercent: 5, opacity: 0 }, 2)
-				.set(".us h2", { y: 120, opacity: 0 }, 0)
-					.to(".us h2", { y: 0, opacity: 1 }, .5)
-					.to(".us h2", { duration: .5 }, 1.5)
-					.to(".us h2", { y: -120, opacity: 0 }, 2)
-				.set(".us p", { y: 100, opacity: 0 }, 0)
-					.to(".us p", { y: 0, opacity: 1 }, .5)
-					.to(".us p", { duration: .5 }, 1.5)
-					.to(".us p", { y: -100, opacity: 0 }, 2);
+				.fromTo(".imuiux h1", { y: 0 }, { y: -60, duration: .75 }, 0)
+					.fromTo(".imuiux h1", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
+				.fromTo(".imuiux p", { y: 0 }, { y: -50, duration: .75 }, 0)
+					.fromTo(".imuiux p", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
+				.fromTo(".imuiux img", { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
+					.fromTo(".imuiux img", { scale: 1 }, { scale: .95, duration: 1 }, 0)
+					.to(".imuiux img", { yPercent: 5, ease: "expo.in", duration: 1.5 }, 1)
+					.to(".imuiux img", { opacity: 0, duration: .25 }, 2.25)
+				.fromTo(".us h2", { y: 60 }, { y: -60, duration: 2 }, .5)
+					.fromTo(".us h2", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
+					.fromTo(".us h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+				.fromTo(".us p", { y: 50 }, { y: -50, duration: 2 }, .5)
+					.fromTo(".us p", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
+					.fromTo(".us p", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+			;
 			new ScrollMagic
 				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight*2})
-				.setPin("#firstscene", {pushFollowers: false})
+				.setPin("#firstscene", { pushFollowers: false })
 				.setTween(tl)
 				.addTo(controller);
+			gsap.set(".us h2, .us p, .us img", { opacity: 0 });
+			gsap.set(".imuiux img", { transformOrigin: "50% 0" });
 
-			// Scroll Mr. Goat 360 deg animation
-			var obj = {
-				curImg: 1,
-				length: _qAll(".mrgoat .img > img").length
-			};
+			// Scroll animate Mr. Goat text
 			tl = gsap.timeline({ defaults: { duration: .25, ease: "linear" }});
 			tl
-				.fromTo(".mrgoat", { y: 0, opacity: 0 }, { y: 0, opacity: 1 }, 0)
-				.to(obj, {
-					curImg: obj.length,
-					roundProps: "curImg",
-					repeat: 1,
-					immediateRender: true,
-					ease: "linear",
-					duration: .75,
-					onUpdate: function () {
-						gsap.set(".mrgoat .img > img", { opacity: 0 });
-						gsap.set(".mrgoat" + obj.curImg, {opacity: 1});
-					}}, 0)
+				.to(".mrgoat", { y: 0, opacity: 1 }, 0)
 				.fromTo(".mrgoat .h21", { y: 0 }, { y: -20 }, .25)
 					.to(".mrgoat .h21", { y: -60, opacity: 0 }, .5)
 				.fromTo(".mrgoat .h22", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, .5)
@@ -1860,6 +1667,31 @@ var Me = Barba
 				.setPin(".mrgoat")
 				.setTween(tl)
 				.addTo(controller);
+
+			// Make Mr. Goat spinning
+			var obj = {
+					curImg: 1,
+					length: _qAll(".mrgoat .img > img").length
+				},
+				rotatinggoat = {
+					curImg: obj.length,
+					roundProps: "curImg",
+					repeat: 5,
+					immediateRender: true,
+					ease: "linear",
+					duration: .75,
+					onUpdate: function () {
+						gsap.set(".mrgoat .img > img", { opacity: 0 });
+						gsap.set(".mrgoat" + obj.curImg, {opacity: 1});
+					}
+				};
+			anim = gsap.to(obj, rotatinggoat)
+			new ScrollMagic
+				.Scene({triggerElement: ".me", triggerHook: 1, duration: _q(".me").offsetHeight})
+				.setTween(anim)
+				.addTo(controller);
+
+			gsap.set(".mrgoat", { y: 0, opacity: 0 });
 
 			// Scroll IG items
 			els = _qAll("#ig .item");
@@ -1933,9 +1765,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	Menu.init();
 
 	// Run Barbara
-	Barba
-		.Pjax
-		.start();
+	Barba.Pjax.start();
 
 	// Initialize loading
 	loading.init();
@@ -1943,78 +1773,35 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Wait for all images to be loaded
 	imageloading.init(document, function (imgload) {
 		// Check if it's first time or 404 to do some text animation
-		loading
-			.animate((_q(".barba-container").getAttribute("data-namespace") == "404"
-				? "404"
-				: "first-time"), function () {
-				if (imgload != undefined) {
-					imgload.first_animation_done = true;
-					imgload.done()
-				}
+		loading.animate((_q(".barba-container").getAttribute("data-namespace") == "404" ? "404" : "first-time"), function () {
+			if (imgload != undefined) {
+				imgload.first_animation_done = true;
+				imgload.done()
+			}
 
-				// Animate header
-				gsap.fromTo(".logo, #mode, .lang > li, .menu > a", {
-					marginTop: -50
-				}, {
-					marginTop: 0,
-					delay: .768,
-					duration: .768,
-					ease: "expo.out",
-					stagger: {
-						from: 0,
-						amount: .386
-					}
-				});
-			});
+			// Animate header
+			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { marginTop: -50 }, { marginTop: 0, delay: .768, duration: .768, ease: "expo.out", stagger: {
+				from: 0,
+				amount: .386
+			}});
+		});
 	});
 
 	removeClass(_q('.menu__pop'), "active");
 
 	// Adding logo to loading and do some hover event
 	var el = _q("#loading-cover .loading");
-	el
-		.querySelector(".light")
-		.innerHTML = logo_svg;
-	el
-		.querySelector(".light")
-		.style
-		.height = 0;
-	el
-		.querySelector(".dark")
-		.innerHTML = logo_svg;
+	el.querySelector(".light").innerHTML = logo_svg;
+	el.querySelector(".light").style.height = 0;
+	el.querySelector(".dark").innerHTML = logo_svg;
 
 	// Logo waving animation
-	var logo_wave = gsap.timeline({
-		repeat: -1,
-		defaults: {
-			transformOrigin: "99% 0",
-			duration: .256,
-			ease: "linear",
-			yPercent: 20
-		}
-	});
+	var logo_wave = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .256, ease: "linear", yPercent: 20 }});
 	logo_wave
-		.from(".logo .left-hand", {
-		yPercent: 0,
-		rotation: 0,
-		duration: 10
-	})
-		.to(".logo .left-hand", {
-			duration: .256,
-			rotation: 70
-		})
-		.fromTo(".logo .left-hand", {
-			rotation: 70
-		}, {
-			rotation: 60,
-			repeat: 2,
-			yoyo: true
-		})
-		.to(".logo .left-hand", {
-			duration: .256,
-			yPercent: 0,
-			rotation: 0
-		});
+		.from(".logo .left-hand", { yPercent: 0, rotation: 0, duration: 10 })
+		.to(".logo .left-hand", { duration: .256, rotation: 70 })
+		.fromTo(".logo .left-hand", { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
+		.to(".logo .left-hand", { duration: .256, yPercent: 0, rotation: 0 });
 
 	// Safari Mobile: 177
 	// Safari: 38/63

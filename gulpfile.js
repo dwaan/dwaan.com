@@ -22,7 +22,7 @@ function javascript() {
 			'js/main.js'
 		])
 		.pipe(sourcemaps.init())
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(concat("bundle.js"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
@@ -42,8 +42,8 @@ function css() {
 			'css/print.css'
 		])
 		.pipe(sourcemaps.init())
+		// .pipe(cleanCSS())
 		.pipe(concat("bundle.css"))
-		.pipe(cleanCSS())
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
 	    .pipe(livereload())
