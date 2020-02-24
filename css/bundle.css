@@ -1079,8 +1079,8 @@ a.pswp__share--download:hover {
     display: block;
     left: 50%;
     top: 50%;
-    width: 7.5vw;
-    height: 7.5vw;
+    width: 15vh;
+    height: 15vh;
     transform: translate3d(-50%,-50%,0);
 }
 #loading-cover .loading div {
@@ -1099,7 +1099,7 @@ a.pswp__share--download:hover {
 }
 #loading-cover .loading div svg {
     position: absolute;
-    height: 7.5vw;
+    height: 15vh;
     bottom: 0;
     left: 50%;
     transform: translate3d(-50%,0,0);
@@ -1165,24 +1165,20 @@ a.pswp__share--download:hover {
 }
 @media (max-aspect-ratio: 1/1) {
     #loading-cover .loading {
-        width: 10vh;
-        height: 10vh;
-    }
-    #loading-cover .loading,
-    #loading-cover .loading div {
-        background-size: auto 10vh;
+        width: 12vh;
+        height: 12vh;
     }
     #loading-cover .loading div svg {
-        height: 10vh;
+        height: 12vh;
     }
 }
 @media (max-aspect-ratio: 3/4) {
     #loading-cover .loading {
-        width: 8vh;
-        height: 8vh;
+        width: 10vh;
+        height: 10vh;
     }
     #loading-cover .loading div svg {
-        height: 8vh;
+        height: 10vh;
     }
 }
 #konamicode {
@@ -3370,9 +3366,9 @@ main {
 	}
 }
 
-.work__detail .back,
-.work__detail .back:before,
-.work__detail .back:after {
+.work .back,
+.work .back:before,
+.work .back:after {
 	top: 0;
 	z-index: 665;
 	position: absolute;
@@ -3380,62 +3376,63 @@ main {
 	width: 3vw;
 	transition: width ease .128s
 }
-.work__detail .back {
+.work .back {
 	position: fixed;
 	top: 0;
-	margin-left: 4vw;
+	margin-left: 14vw;
 	display: block;
 	text-indent: -9999em;
+	pointer-events: auto;
 }
-.work__detail .back:before,
-.work__detail .back:after {
+.work .back:before,
+.work .back:after {
 	content: "";
 	top: 50%;
 	left: 0;
 	border-top: .4vh solid #000;
 	transform: translate3d(0,-50%,0);
 }
-.work__detail .back:before {
+.work .back:before {
 	width: 100%;
 }
-.work__detail .back:after {
+.work .back:after {
 	width: 2vh;
 	height: 2vh;
 	border-left: .4vh solid #000;
 	transform-origin: 50% 0;
 	transform: rotate(-45deg) translate3d(0,-50%,0);
 }
-.work__detail .back:hover {
+.work .back:hover {
 	width: 3.5vw;
 }
-.dark .work__detail .back:before,
-.dark .work__detail .back:after {
+.dark .work .back:before,
+.dark .work .back:after {
 	border-color: #d4e7ec;
 }
 @media (max-aspect-ratio: 4/3) {
-	.work__detail .back {
-		width: 4vw;
+	.work .back {
+		width: 11vw;
 	}
-	.work__detail .back:hover {
+	.work .back:hover {
 		width: 4.5vw;
 	}
 }
 @media (max-aspect-ratio: 1/1) {
-	.work__detail .back,
-	.work__detail .back:before,
-	.work__detail .back:after {
+	.work .back,
+	.work .back:before,
+	.work .back:after {
 		width: 5vw;
 	}
-	.work__detail .back {
-		margin-left: 10vw;
+	.work .back {
+		margin-left: 19vw;
 	}
-	.work__detail .back:hover {
+	.work .back:hover {
 		width: 5.5vw;
 	}
-	.work__detail .back:before {
+	.work .back:before {
 		border-top-width: .4vw;
 	}
-	.work__detail .back:after {
+	.work .back:after {
 		width: 1.5vh;
 		height: 1.5vh;
 		border-top-width: .4vw;
@@ -3443,21 +3440,21 @@ main {
 	}
 }
 @media (max-aspect-ratio: 3/4) {
-	.work__detail .back,
-	.work__detail .back:before,
-	.work__detail .back:after {
+	.work .back,
+	.work .back:before,
+	.work .back:after {
 		width: 6vw;
 	}
-	.work__detail .back:hover {
+	.work .back:hover {
 		width: 7.5vw;
 	}
-	.work__detail .back {
-		margin-left: 15.5vw;
+	.work .back {
+		margin-left: 22.5vw;
 	}
-	.work__detail .back:before {
+	.work .back:before {
 		border-top-width: .5vw;
 	}
-	.work__detail .back:after {
+	.work .back:after {
 		width: 1.25vh;
 		height: 1.25vh;
 		border-top-width: .5vw;
@@ -3465,13 +3462,16 @@ main {
 	}
 }
 @media (max-aspect-ratio: 2/3) {
-	.work__detail .back {
-		margin-left: 19.5vw;
+	.work .back {
+		margin-left: 26.5vw;
 	}
 }
 
 .work__detail .tns-ovh {
 	overflow: initial;
+}
+.work__detail .work__detail {
+	margin: 0;
 }
 
 .work__detail .gallery__mobile,
@@ -3797,7 +3797,7 @@ main {
 	display: block;
 	float: left;
 	padding: 0 2vw;
-	margin: -.65vw 2vw 2.65vw 0;
+	margin: -.25vw 2vw 2.65vw 0;
 	background-color: #202526;
 	color: #C3DEE4;
 	font-weight: 400;

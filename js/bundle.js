@@ -654,13 +654,13 @@ var loading = {
 			removeClass(sl, "bubble");
 			tl
 				.set(sl, {zIndex: 666})
+				.set(sl.querySelector(".light"), { height: 0 })
 				.to(sl.querySelector(".text"), { opacity: 0 })
-				.to(sl.querySelector(".light"), { height: 0 })
-				// .fromTo(sl.querySelector(".loading"), { opacity: 0, yPercent: 100 }, { opacity: 1, yPercent: -50 }, 0)
+				.fromTo(sl.querySelector(".loading"), { opacity: 0, yPercent: 100 }, { opacity: 1, y: 0, yPercent: -50 }, 0)
 				.to(sl, { position: "fixed", top: 0, right: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: .768, ease: "expo.inOut", onComplete: function () {
 					gsap.set(sl, { top: 0, bottom: 0, left: 0, right: 0, width: "auto", height: "auto" });
 					if (callback != undefined) callback();
-				}});
+				}}, "-=.512");
 		} else {
 			gsap.fromTo(this.selector, var_from, var_to);
 		}
@@ -668,9 +668,9 @@ var loading = {
 	hide: function (callback, callback__half) {
 		var that = this,
 			var_from = { xPercent: 0, yPercent: 0 },
-			var_to = { duration: .768, ease: "expo.inOut", xPercent: 0, yPercent: -100, onComplete: function () {
+			var_to = { xPercent: 0, yPercent: -100, duration: 1.024, ease: "expo.inOut", onComplete: function () {
 					// Move loading
-					gsap.set(that.selector, {yPercent: -200});
+					gsap.set(that.selector, { yPercent: -200 });
 					// Set progress bar back to zero
 					that.update({duration: 0, height: 0});
 					// Unhide loading
@@ -1291,7 +1291,7 @@ var Work = Barba
 			new animateNumber(".work__list .stats__content p:last-child b");
 		},
 		onImageLoadAnimateHalfComplete: function () {
-			gsap.to(".work__list__page", { y: 0, ease: "expo.out", duration: 2.048 })
+			gsap.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 })
 		}
 	});
 
@@ -1301,6 +1301,8 @@ var WorkDetail = Barba
 		namespace: 'work-detail',
 		onEnter: function () {
 			current_barba = this;
+
+			gsap.set(".work__list.work__detail", { y: window.innerHeight });
 		},
 		onEnterCompleted: function () {
 			worklist.hover("a img");
@@ -1684,6 +1686,10 @@ var WorkDetail = Barba
 			// execute above function
 			initPhotoSwipeFromDOM('.gallery');
 		},
+		onImageLoadAnimateHalfComplete: function () {
+			gsap.fromTo(".work .back", { transformOrigin: "0 0", y: -100 }, { y: 0, delay: .256 });
+			gsap.to(".work__list.work__detail", { y: 0, ease: "expo.out", duration: 2.048 })
+		},
 		onLeaveCompleted: function () {
 			// Destroying tinyslider to prevent error
 			for (var i = tinysliders.length - 1; i >= 0; i--) {
@@ -2008,7 +2014,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			// Animate header
-			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { marginTop: -50 }, { marginTop: 0, delay: .768, duration: .768, ease: "expo.out", stagger: {
+			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { marginTop: -50, opacity: 0 }, { marginTop: 0, opacity: 1, delay: .768, duration: .768, ease: "expo.out", stagger: {
 				from: 0,
 				amount: .386
 			}});
