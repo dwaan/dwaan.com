@@ -1648,6 +1648,7 @@ var Me = Barba
 				.setPin("#firstscene", { pushFollowers: false })
 				.setTween(tl)
 				.addTo(controller);
+			gsap.set("#firstscene", { height: _q("body").offsetHeight*2 });
 			gsap.set(".us h2, .us p, .us img", { opacity: 0 });
 			gsap.set(".imuiux img", { transformOrigin: "50% 0" });
 

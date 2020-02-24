@@ -2263,9 +2263,11 @@ header {
 
 
 .menu__page {
+	position: fixed;
 	top: 12%;
 	bottom: 4%;
 	z-index: 1;
+	height: auto;
 	background-color: transparent;
 	opacity: 1;
 	pointer-events: auto;
@@ -2322,6 +2324,7 @@ main {
 	top: 12vh;
 	left: 10.1vw;
 	right: 57.5vw;
+	bottom: 5.55555555556vh;
 }
 .hero .hero__meta > div {
 	position: absolute;
@@ -2984,18 +2987,17 @@ main {
 
 
 
-
 #trigger,
 .work_float {
 	clear: both;
 	width: 100%;
 }
-#trigger {
-	height: 0;
-}
-#trigger__padder {
+#trigger__mover {
 	width: 100%;
 	height: 100%;
+}
+#trigger {
+	height: 0;
 }
 .work_float {
 	padding: 0 2.34375vw;
@@ -4228,6 +4230,7 @@ main {
 .no-js .follow,
 .no-js .us,
 .no-js .cofound {
+	position: relative;
 	border-bottom: 1px dotted rgba(0,0,0,.25)
 }
 .no-js .cofound {
@@ -4258,6 +4261,16 @@ main {
 }
 .us .block__middle {
 	height: 95vh;
+}
+.us h2,
+.us p,
+.us img {
+	opacity: 0;
+}
+.no-js .us h2,
+.no-js .us p,
+.no-js .us img {
+	opacity: 1;
 }
 .us img {
 	transform: translate3d(-50%,-20%,0) scale(.8);
@@ -4594,6 +4607,7 @@ main {
 	padding: 2vw;
 }
 #ig .item a {
+	position: relative;
 	display: block;
 	width: 100%;
 	height: 100%;

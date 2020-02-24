@@ -138,8 +138,10 @@
 										<li><span>user experience design</span></li>
 										<li><span>user interface design</span></li>
 										<li><span>art directing</span></li>
-										<li><span>web development</span></li>
+										<li><span>interface development</span></li>
 										<li><span>design system</span></li>
+										<li><span>project management</span></li>
+										<li><span>business strategy</span></li>
 									</ul>
 								</div>
 							</div>
