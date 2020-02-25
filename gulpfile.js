@@ -4,6 +4,7 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const livereload = require('gulp-livereload');
+const connect = require('gulp-connect-php');
 
 function javascript() {
 	return gulp.src([
@@ -21,10 +22,10 @@ function javascript() {
 			'js/helper.js',
 			'js/main.js'
 		])
-		// .pipe(sourcemaps.init())
-		.pipe(uglify())
+		.pipe(sourcemaps.init())
+		// .pipe(uglify())
 		.pipe(concat("bundle.js"))
-		// .pipe(sourcemaps.write("."))
+		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
 	    .pipe(livereload())
 	;
@@ -41,10 +42,10 @@ function css() {
 			'css/nojs.css',
 			'css/print.css'
 		])
-		// .pipe(sourcemaps.init())
-		.pipe(cleanCSS())
+		.pipe(sourcemaps.init())
+		// .pipe(cleanCSS())
 		.pipe(concat("bundle.css"))
-		// .pipe(sourcemaps.write("."))
+		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
 	    .pipe(livereload())
 	;
@@ -56,8 +57,14 @@ function php() {
 }
 
 exports.default = function() {
+	connect.server({
+		hostname: "themilkyway.local",
+		port: 8080,
+		base: "../",
+		router: "./router.php"
+	});
 	livereload.listen({ port: 35729 });
-	gulp.watch('*.php', { ignoreInitial: false }, php);
+	gulp.watch('**/*.php', { ignoreInitial: false }, php);
 	gulp.watch('css/main.css', { ignoreInitial: false }, css);
 	gulp.watch('js/main.js', { ignoreInitial: false }, javascript);
 };
