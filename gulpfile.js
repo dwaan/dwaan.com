@@ -1,10 +1,12 @@
-const gulp = require('gulp');
-const uglify = require('gulp-uglify');
-const cleanCSS = require('gulp-clean-css');
-const sourcemaps = require('gulp-sourcemaps');
-const concat = require('gulp-concat');
-const livereload = require('gulp-livereload');
-const connect = require('gulp-connect-php');
+const
+	gulp = require('gulp'),
+	uglify = require('gulp-uglify'),
+	cleanCSS = require('gulp-clean-css'),
+	sourcemaps = require('gulp-sourcemaps'),
+	concat = require('gulp-concat'),
+	connect = require('gulp-connect-php'),
+	browserSync = require('browser-sync')
+;
 
 function javascript() {
 	return gulp.src([
@@ -23,11 +25,11 @@ function javascript() {
 			'js/main.js'
 		])
 		.pipe(sourcemaps.init())
-		// .pipe(uglify())
+		.pipe(uglify())
 		.pipe(concat("bundle.js"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
-	    .pipe(livereload())
+		.pipe(browserSync.stream())
 	;
 }
 
@@ -43,17 +45,17 @@ function css() {
 			'css/print.css'
 		])
 		.pipe(sourcemaps.init())
-		// .pipe(cleanCSS())
+		.pipe(cleanCSS())
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
-	    .pipe(livereload())
+		.pipe(browserSync.stream())
 	;
 }
 
 function php() {
-	return gulp.src('*.php')
-	    .pipe(livereload())
+	return gulp.src('**/*.php')
+		.pipe(browserSync.stream())
 }
 
 exports.default = function() {
@@ -61,9 +63,15 @@ exports.default = function() {
 		hostname: "themilkyway.local",
 		port: 8080,
 		base: "../",
-		router: "./router.php"
+		router: "./router.php",
+		keepalive: true
+	}, function () {
+		browserSync.init({
+			server: false,
+			open: false,
+			proxy: "themilkyway.local:8080/dwaan/"
+		});
 	});
-	livereload.listen({ port: 35729 });
 	gulp.watch('**/*.php', { ignoreInitial: false }, php);
 	gulp.watch('css/main.css', { ignoreInitial: false }, css);
 	gulp.watch('js/main.js', { ignoreInitial: false }, javascript);

@@ -369,7 +369,7 @@ var loading = {
 		// Some floating animation for loading-cover
 		el = "#loading-cover";
 		this.breath
-			.to(el, {transformOrigin: "50%",scale: 1,duration: .9})
+			.to(el, {transformOrigin: "50%",scale: 1, duration: .9})
 			.to(el, {scale: 1.15,duration: 1.7})
 			.to(el, {scale: 1.15,duration: .6})
 			.to(el, {scale: 1,duration: 1.7});
@@ -475,7 +475,8 @@ var loading = {
 						gsap.set(sl.querySelector(".text"), { opacity: 1 })
 						sl.querySelector(".text").innerHTML = "<p class='hi'>hi!</p>";
 					}}, 0)
-				.to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
+				.to(sl, { width: "15vw", height: "15vw", top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
+				// .to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
 				.set(sl, { zIndex: 1 });
 
 			if (callback != undefined) callback();
@@ -1478,20 +1479,10 @@ var Call = Barba
 		namespace: 'call',
 		onEnter: function () {
 			current_barba = this;
+
+			gsap.set(".call", { y: window.innerHeight });
 		},
 		onEnterCompleted: function () {
-			// Scroll animate the works
-			gsap.fromTo(".call > *", 1.024, {
-				y: 250
-			}, {
-				y: 0,
-				ease: "expo",
-				stagger: {
-					from: 0,
-					amount: .256
-				}
-			});
-
 			// The menu item animation
 			var border = ".bigtext",
 				borderRadius
@@ -1534,14 +1525,24 @@ var Call = Barba
 			};
 		},
 		onImageLoadAnimateComplete: function () {
-			loading
-				.breath
-				.play();
+			loading.breath.play();
+
+			// Scroll animate the works
+			gsap.fromTo(".call > div > *", 1.024, {
+				y: 250
+			}, {
+				y: 0,
+				ease: "expo",
+				stagger: {
+					from: 0,
+					amount: .386
+				}
+			});
+
+			gsap.to(".call", { y: 0, ease: "expo.out", duration: 2.048 });
 		},
 		onLeave: function () {
-			loading
-				.breath
-				.pause(0);
+			loading.breath.pause(0);
 		}
 	});
 
@@ -1621,6 +1622,8 @@ var Me = Barba
 		namespace: 'me',
 		onEnter: function () {
 			current_barba = this;
+
+			gsap.set(".imuiux", { y: window.innerHeight });
 		},
 		onEnterCompleted: function () {
 			worklist.hover("#ig .item a");
@@ -1747,6 +1750,13 @@ var Me = Barba
 					addClass(els[i], "squ");
 				}
 			}
+		},
+		onImageLoadAnimateHalfComplete: function () {
+			gsap.to(".imuiux", { y: 0, ease: "expo.out", duration: 2.048 });
+			gsap.fromTo(".imuiux h1, .imuiux p, .imuiux img", { y: 200 }, { y: 0, duration: 2.048, ease: "expo.out", stagger: {
+				from: 0,
+				amount: .386
+			}});
 		}
 	});
 
