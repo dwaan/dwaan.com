@@ -11,12 +11,15 @@ const
 function javascript() {
 	return gulp.src([
 			'node_modules/barba.js/dist/barba.min.js',
-			'node_modules/gsap/dist/gsap.min.js',
-			'node_modules/gsap/dist/ScrollToPlugin.min.js',
+			// 'node_modules/gsap/dist/gsap.min.js',
+			// 'node_modules/gsap/dist/ScrollToPlugin.min.js',
+			'js/gsap-member/minified/gsap.min.js',
+			'js/gsap-member/minified/ScrollToPlugin.min.js',
 			'js/gsap-member/minified/CustomEase.min.js',
+			// 'js/gsap-member/minified/TextPlugin.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
-			'node_modules/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
+			// 'node_modules/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
 			'node_modules/photoswipe/dist/photoswipe.min.js',
 			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.js',
@@ -25,7 +28,7 @@ function javascript() {
 			'js/main.js'
 		])
 		.pipe(sourcemaps.init())
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(concat("bundle.js"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
@@ -45,7 +48,7 @@ function css() {
 			'css/print.css'
 		])
 		.pipe(sourcemaps.init())
-		.pipe(cleanCSS())
+		// .pipe(cleanCSS())
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))

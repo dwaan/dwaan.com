@@ -15,6 +15,18 @@ function htmllog(param) {
 	_q("#conlog").innerHTML += (param + "<br/>");
 }
 
+// Splitting text
+
+var splitText = function (el) {
+	var split;
+	split = el.innerText.split(" ");
+	el.innerHTML = "";
+	for (var i = 0; i < split.length; i++) {
+		split[i] = "<div class='text" + i + "'>" + split[i] + "</div> ";
+		el.innerHTML += split[i];
+	}
+}
+
 // Snoop which text or url that are currently clicked
 var clicked_target = null,
 	clicked_text = "";
@@ -424,6 +436,8 @@ var loading = {
 			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo" }}),
 				sl = that.selector;
 
+			window.aspectRatio.onchange = null;
+
 			removeClass(sl, "bubble");
 			tl
 				.set(sl, {zIndex: 666})
@@ -466,7 +480,19 @@ var loading = {
 		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
 			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo.inOut" }}),
 				sl = that.selector,
-				size = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
+				size = 0;
+
+			window.aspectRatio = window.matchMedia("(max-aspect-ratio: 1/1)");
+			window.aspectRatio.size = function(set) {
+				var size = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
+				if (this.matches) size = sl.querySelector(".loading").offsetHeight + (sl.querySelector(".loading").offsetHeight / 2);
+				if (set) gsap.to(sl, { width: size, height: size, duration: .512 });
+				return size;
+			}
+			size = window.aspectRatio.size();
+			window.aspectRatio.onchange = function() {
+				size = window.aspectRatio.size(true);
+			}
 
 			tl
 				.to(sl.querySelector(".loading"), { opacity: 0 }, 0)
@@ -475,8 +501,7 @@ var loading = {
 						gsap.set(sl.querySelector(".text"), { opacity: 1 })
 						sl.querySelector(".text").innerHTML = "<p class='hi'>hi!</p>";
 					}}, 0)
-				.to(sl, { width: "15vw", height: "15vw", top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
-				// .to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
+				.to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
 				.set(sl, { zIndex: 1 });
 
 			if (callback != undefined) callback();
@@ -825,8 +850,22 @@ var Home = Barba
 			if (fruit[index] == undefined) index = 0;
 
 			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
+
+			gsap.set(".hero", { y: window.innerHeight });
+			gsap.set(".work_float", { y: 500 });
 		},
 		onImageLoadComplete: function () {
+			// Fixing size
+			function resizeHeroMeta() {
+				_q("#trigger__padder").style.paddingTop = (_q("body").offsetHeight - _q(".work__list").offsetHeight) + "px";
+				_q("#trigger__mover").style.height = (_q(".work__list").offsetHeight) + "px";
+				_q(".hero__meta").style.height = (_q("body").offsetHeight - _q(".hero__meta").offsetTop - _q(".scroll").offsetHeight) + "px";
+			}
+			resizeHeroMeta();
+			window.onresize = function() {
+				resizeHeroMeta();
+			}
+
 			worklist.hover(".work__list a img");
 
 			controller.destroy();
@@ -895,16 +934,13 @@ var Home = Barba
 				.setTween(anim)
 				.addTo(controller);
 
-			// Fixing size
-			function resizeHeroMeta() {
-				_q("#trigger__padder").style.paddingTop = (_q("body").offsetHeight - _q(".work__list").offsetHeight) + "px";
-				_q("#trigger__mover").style.height = (_q(".work__list").offsetHeight) + "px";
-				_q(".hero__meta").style.height = (_q("body").offsetHeight - _q(".hero__meta").offsetTop - _q(".scroll").offsetHeight) + "px";
-			}
-			resizeHeroMeta();
-			window.onresize = function() {
-				resizeHeroMeta();
-			}
+			// Some breathe in and breathe out animation for hero image
+			var loop = gsap.timeline({repeat: -1, ease: "expo"});
+			loop
+				.to(".hero .box", { transformOrigin: "50% 75%", scale: 1, duration: .9 })
+				.to(".hero .box", { scale: 1.015, duration: 1.7 })
+				.to(".hero .box", { scale: 1.015, duration: .6 })
+				.to(".hero .box", { scale: 1, duration: 1.7 });
 
 			// Swipe event for gallery
 			function detectswipe(el,func) {
@@ -968,27 +1004,37 @@ var Home = Barba
 				},false);
 			}
 			detectswipe('.gallery');
+		},
+		onImageLoadAnimateHalfComplete: function () {
+			// Animate the appearing
+			splitText(_q(".hero__text h1"));
+			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
+			anim
+				.to(".hero", { y: 0 })
+				// .fromTo(".hero", { opacity: 0 }, { opacity: 1 }, 0)
+				.fromTo(".hero__image", { transformOrigin: "0 0", y: 500 }, { y: 0 }, 0)
+				.fromTo(".hero__text h1 div", { y: 500 }, { y: -0, stagger: {
+					from: 0,
+					amount: .064
+				}}, .128)
+				.fromTo(".hero__text p, .hero .stats", { transformOrigin: "0 0", y: 500 }, { y: 0, stagger: {
+					from: 0,
+					amount: .256
+				}}, .256)
+				.fromTo(".hero .stats p", { y: 500 }, { y: 0, stagger: {
+					from: "end",
+					amount: .386
+				}}, .368)
+				.to(".work_float", { y: 0 }, .512)
+			;
 
 			// First time need to be delayed a bit
 			new animateYear("#year__living", 1984);
 			new animateYear("#year__designer", 2008);
 			new animateYear("#year__managerial", 2011);
 		},
-		onImageLoadAnimateHalfComplete: function () {
-			// Animate the appearing
-			anim = gsap.timeline({ defaults: { duration: 1.024, ease: "expo" }});
-			anim
-				.fromTo(".hero .hero__text h1, .hero .hero__text p, .hero .stats", { transformOrigin: "0 0", y: -100 }, { y: 0, stagger: { from: "end", amount: .256 }}, 0)
-				.fromTo(".hero__image, .work_float", { transformOrigin: "0 0", yPercent: 25 }, { yPercent: 0, stagger: { from: 0, amount: .256 }}, 0)
-				.fromTo(".hero .stats p", { transformOrigin: "center", scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: .512, ease: "elastic.out", stagger: { from: "end", amount: .256 }}, .256);
-
-			// Some breathe in and breathe out animation for hero image
-			var loop = gsap.timeline({repeat: -1, ease: "expo"});
-			loop
-				.to(".hero .box", { transformOrigin: "50% 75%", scale: 1, duration: .9 })
-				.to(".hero .box", { scale: 1.015, duration: 1.7 })
-				.to(".hero .box", { scale: 1.015, duration: .6 })
-				.to(".hero .box", { scale: 1, duration: 1.7 });
+		onLeave: function () {
+			window.onresize = null;
 		}
 	});
 

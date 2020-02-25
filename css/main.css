@@ -1371,6 +1371,9 @@ main {
 	margin: 0;
 	padding: 0;
 }
+.hero h1 div {
+	display: inline-block;
+}
 .hero .hero__image {
 	position: absolute;
 	display: block;
@@ -3916,7 +3919,7 @@ main {
 	}
 }
 @media (max-aspect-ratio: 2/3) {
-	.call {
+	.call > div {
 		top: 57.5%;
 	}
 }
