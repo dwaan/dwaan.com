@@ -66,6 +66,7 @@
 							</div>
 
 							<div class="work__list">
+								<div class="wording__trigger"></div>
 								<div class="block block__clear">
 									<div class="block__left">
 										<h2>my latest works</h2>
@@ -87,6 +88,7 @@
 									</div>
 								</div>
 
+								<div class="scroller__trigger"></div>
 								<div class="block scroller">
 									<div class="block gallery block__clear">
 										<a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a>

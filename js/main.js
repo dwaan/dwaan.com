@@ -866,6 +866,36 @@ var Home = Barba
 				resizeHeroMeta();
 			}
 
+			// Make it scroll automatic
+			window.__scroll_o = "set";
+			window.onscroll = function(e) {
+				var __scroll = document.body.scrollTop || document.documentElement.scrollTop;
+
+				if (window.__scroll_o == "set") window.__scroll_o = __scroll;
+
+				if (e.autoscroll) {
+					gsap.killTweensOf(window);
+					window.__scroll_o = __scroll;
+				}
+
+				if (window.__scroll_f) clearTimeout(window.__scroll_f);
+				window.__scroll_f = setTimeout(function(){
+					if (window.__scroll_o - __scroll < -1) {
+						e.autoscroll = true;
+						window.__anim = gsap.to(window, { duration: 1.024, scrollTo: "#trigger", ease: "expo.inOut", onComplete: function (){
+							window.__scroll_o = "set";
+						}});
+						e.preventDefault();
+					} else if (window.__scroll_o - __scroll > 1) {
+						e.autoscroll = true;
+						window.__anim = gsap.to(window, { duration: 1.024, scrollTo: 0, ease: "expo.inOut", onComplete: function (){
+							window.__scroll_o = "set";
+						}});
+						e.preventDefault();
+					}
+				}, 64);
+			}
+
 			worklist.hover(".work__list a img");
 
 			controller.destroy();
@@ -890,47 +920,51 @@ var Home = Barba
 				.setTween(anim)
 				.addTo(controller);
 
-			// Scroll animate the scroll
+			// Scroll animate the scroll sign
 			anim = gsap.timeline({
 				defaults: {
 					duration: .128,
 					ease: "expo"
 				}
 			});
-			anim.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0).fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
+			anim
+				.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0)
+				.fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
+			;
 			new ScrollMagic
 				.Scene({triggerElement: ".work_float", offset: 10, triggerHook: 1})
 				.setTween(anim)
 				.addTo(controller);
 
-			// Scroll animate the stats
-			gsap.set(".work__list .stats p", { transformOrigin: "center", scale: 1.5, opacity: 0 });
-			anim = gsap.fromTo(".work__list .stats__content p", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .768, ease: "elastic.out", stagger: {
-					from: "end",
-					amount: .256
-				}});
-			new ScrollMagic
-				.Scene({triggerElement: ".work__list .stats__content", triggerHook: .9})
-				.setTween(anim)
-				.addTo(controller);
-
-			// Scroll animate the wording float
-			anim = gsap.fromTo(".work__list .block__left > *", { transformOrigin: "center", y: 125 }, { y: 1, ease: "expo.out", stagger: {
+			// Scroll animate stuff in floating box
+			// Wording and stats
+			anim = gsap.timeline({
+				defaults: {
+					duration: .768,
+					ease: "expo.out"
+				}
+			});
+			anim
+				.fromTo(".work__list > .block", { y: 200 }, { y: 0, stagger: {
 					from: 0,
 					amount: .128
-				}})
+				}}, 0)
+				.fromTo(".work__list .stats__content p", { y: 200 }, { y: 0, stagger: {
+					from: "end",
+					amount: .128
+				}}, 0)
+			;
 			new ScrollMagic
-				.Scene({triggerElement: ".work__list .block__left", triggerHook: .9})
+				.Scene({triggerElement: ".wording__trigger", triggerHook: 1})
 				.setTween(anim)
 				.addTo(controller);
-
-			// Scroll animate the work list
-			anim = gsap.fromTo(".gallery a:not(:last-child)", { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: .768, ease: "expo", stagger: {
-					from: 0,
-					amount: .368
-				}});
+			// Work list
+			anim = gsap.fromTo(".work__list .scroller, .gallery a:not(:last-child)", { y: 200 }, { y: 0, duration: .768, ease: "expo.out", stagger: {
+				from: 0,
+				amount: .128
+			}});
 			new ScrollMagic
-				.Scene({triggerElement: ".work__list", triggerHook: .9})
+				.Scene({triggerElement: ".scroller__trigger", triggerHook: 1})
 				.setTween(anim)
 				.addTo(controller);
 
@@ -1011,7 +1045,6 @@ var Home = Barba
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
 				.to(".hero", { y: 0 })
-				// .fromTo(".hero", { opacity: 0 }, { opacity: 1 }, 0)
 				.fromTo(".hero__image", { transformOrigin: "0 0", y: 500 }, { y: 0 }, 0)
 				.fromTo(".hero__text h1 div", { y: 500 }, { y: -0, stagger: {
 					from: 0,
@@ -1035,6 +1068,7 @@ var Home = Barba
 		},
 		onLeave: function () {
 			window.onresize = null;
+			window.onscroll = null;
 		}
 	});
 
