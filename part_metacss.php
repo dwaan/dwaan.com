@@ -16,8 +16,23 @@
 		else $url = $protocol . '://' . $host . $uri . '?' . $params;
 	?>
 
-	<link rel="manifest" href="site.webmanifest">
-	<link rel="apple-touch-icon" href="icon.png">
+	<link rel="apple-touch-icon" sizes="57x57" href="/dwaan/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/dwaan/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/dwaan/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/dwaan/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/dwaan/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/dwaan/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/dwaan/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/dwaan/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/dwaan/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/dwaan/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/dwaan/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/dwaan/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/dwaan/favicon-16x16.png">
+	<link rel="manifest" href="/dwaan/manifest.json">
+	<meta name="msapplication-TileColor" content="#A4CDD6">
+	<meta name="msapplication-TileImage" content="/dwaan/ms-icon-144x144.png">
+	<meta name="theme-color" content="#A4CDD6">
 
 	<!-- Primary Meta Tags -->
 	<title><?php echo $title; ?> - This is me @dwaan .com</title>

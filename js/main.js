@@ -14,19 +14,6 @@ _q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div c
 function htmllog(param) {
 	_q("#conlog").innerHTML += (param + "<br/>");
 }
-
-// Splitting text
-
-var splitText = function (el) {
-	var split;
-	split = el.innerText.split(" ");
-	el.innerHTML = "";
-	for (var i = 0; i < split.length; i++) {
-		split[i] = "<div class='text" + i + "'>" + split[i] + "</div> ";
-		el.innerHTML += split[i];
-	}
-}
-
 // Snoop which text or url that are currently clicked
 var clicked_target = null,
 	clicked_text = "";
@@ -35,115 +22,6 @@ document.addEventListener('click', function (e) {
 	clicked_target = e.target || e.srcElement;
 	clicked_text = clicked_target.textContent || clicked_target.innerText;
 }, false);
-
-////////////////////// Huge text animation
-
-var hugeText = function (el) {
-	this.element = _q(el);
-	this.element.innerHTML = "<span></span>";
-	this.cancelhide = false;
-	this.onshow = false;
-	this.tween = null;
-
-	gsap.set(this.element.children, {yPercent: 100});
-	gsap.fromTo(this.element.children, {
-		xPercent: -25
-	}, {
-		duration: 10,
-		repeat: -1,
-		ease: "linear",
-		xPercent: -75
-	});
-
-	this.show = function (text) {
-		this.cancelhide = true;
-		this
-			.element
-			.querySelector("span")
-			.innerHTML = "<i>" + text + "</i><i>" + text + "</i><i>" + text + "</i><i>" + text + "</i>";
-		if (this.tween != null)
-			this.tween.kill();
-		this.tween = gsap.to(this.element.children, {
-			duration: .512,
-			ease: "expo",
-			yPercent: 0
-		});
-	}
-
-	this.hide = function () {
-		var that = this;
-		this.tween = gsap.to(this.element.children, {
-			duration: .512,
-			ease: "expo",
-			yPercent: 100,
-			onComplete: function () {
-				if (that.cancelhide) {
-					that.cancelhide = false;
-				} else {
-					that
-						.element
-						.querySelector("span")
-						.innerHTML = "";
-				}
-			}
-		});
-	}
-
-	return this;
-}
-
-///////////////// Animate Number
-
-function animateNumber(selector) {
-	var that = this;
-	this.game = {
-		score: 0
-	};
-	this.selector = _q(selector);
-	this.value = this.selector.textContent || this.selector.innerText;
-	this.plus = "+";
-	this.value = this
-		.value
-		.split("+");
-	if (this.value.length <= 1) {
-		this.plus = ""
-	}
-	this.value = this.value[0];
-	this.selector.innerHTML = "0" + this.plus;
-	this.animate = function () {
-		gsap.to(that.game, 5, {
-			score: "+=" + that.value,
-			roundProps: "score",
-			onUpdate: that.updateHandler,
-			ease: "expo.out"
-		})
-	};
-	this.updateHandler = function () {
-		that.selector.innerHTML = that.game.score + that.plus
-	};
-	this.animate()
-}
-function animateYear(selector, year) {
-	var that = this;
-	this.game = {
-		score: 0
-	};
-	this.selector = _q(selector);
-	this.year__now = (new Date()).getFullYear(),
-	this.year__animate = (this.year__now - year);
-	this.animate = function () {
-		gsap.to(that.game, 5, {
-			score: "+=" + that.year__animate,
-			roundProps: "score",
-			onUpdate: that.updateHandler,
-			ease: "expo.out"
-		})
-	};
-	this.updateHandler = function () {
-		that.selector.innerHTML = that.game.score + "+"
-	};
-	this.animate()
-}
 
 ///////////////////// Menu Functionality
 
@@ -1202,6 +1080,13 @@ var WorkDetail = Barba
 				_tnsparam.container = els[i];
 				_tnsparam.autoHeight = true;
 				tinysliders.push(new tns(_tnsparam));
+
+				var snoop = function (info, eventName) {
+					console.log(info.index, info.items, info.slideCount, info);
+				}
+				tinysliders[tinysliders.length - 1].events.on('touchMove', snoop);
+				tinysliders[tinysliders.length - 1].events.on('dragMove', snoop);
+				tinysliders[tinysliders.length - 1].events.on('indexChanged', snoop);
 			}
 
 			els = _qAll(".work__timeline .wheel");
@@ -1210,12 +1095,8 @@ var WorkDetail = Barba
 				_tnsparam.container = els[i];
 				_tnsparam.autoHeight = true;
 				_tnsparam.responsive = {
-					0: {
-						items: 2
-					},
-					600: {
-						items: 3
-					}
+					0: { items: 2 },
+					600: { items: 3 }
 				};
 				tinysliders.push(new tns(_tnsparam));
 			}
@@ -1226,15 +1107,9 @@ var WorkDetail = Barba
 				_tnsparam.container = els[i];
 				_tnsparam.autoHeight = true;
 				_tnsparam.responsive = {
-					0: {
-						items: 1
-					},
-					600: {
-						items: 2
-					},
-					1200: {
-						items: 3
-					}
+					0: { items: 1 },
+					600: { items: 2 },
+					1200: { items: 3 }
 				};
 				tinysliders.push(new tns(_tnsparam));
 			}
@@ -1243,19 +1118,10 @@ var WorkDetail = Barba
 			els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p");
 			for (var j = els.length - 1; j >= 0; j--) {
 				if (els[j].children.length > 0) {
-					anim = gsap.fromTo(els[j].children, {
-						opacity: 0,
-						xPercent: 100
-					}, {
-						opacity: 1,
-						xPercent: 0,
-						ease: "expo.out",
-						duration: 1.024,
-						stagger: {
-							from: 0,
-							amount: .256
-						}
-					});
+					anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
+						from: 0,
+						amount: .256
+					}});
 					new ScrollMagic
 						.Scene({triggerElement: els[j]})
 						.setTween(anim)
@@ -1263,22 +1129,12 @@ var WorkDetail = Barba
 				}
 			}
 			// Scroll animate staggering from right
-			els = _qAll(".work__detail > hr, .work__detail > h5, .work__detail .work__spec > " +
-					"*");
+			els = _qAll(".work__detail > hr, .work__detail > h5, .work__detail .work__spec > *");
 			for (var j = els.length - 1; j >= 0; j--) {
-				anim = gsap.fromTo(els[j], {
-					opacity: 0,
-					x: 100
-				}, {
-					opacity: 1,
-					x: 0,
-					ease: "expo.out",
-					duration: 1.024,
-					stagger: {
-						from: 0,
-						amount: .256
-					}
-				});
+				anim = gsap.fromTo(els[j], { opacity: 0, x: 100 }, { opacity: 1, x: 0, ease: "expo.out", duration: 1.024, stagger: {
+					from: 0,
+					amount: .256
+				}});
 				new ScrollMagic
 					.Scene({triggerElement: els[j]})
 					.setTween(anim)
@@ -1287,30 +1143,17 @@ var WorkDetail = Barba
 			// Scroll animate immidiete from bottom
 			els = _qAll(".work__detail > blockquote");
 			for (var j = els.length - 1; j >= 0; j--) {
-				anim = gsap.fromTo(els[j], {
-					x: 100
-				}, {
-					x: 0,
-					ease: "expo.out",
-					duration: 1.024
-				});
+				anim = gsap.fromTo(els[j], { x: 100 }, { x: 0, ease: "expo.out", duration: 1.024 });
 				new ScrollMagic
 					.Scene({triggerElement: els[j]})
 					.setTween(anim)
 					.addTo(controller);
 			}
 			// Scroll animate from bottom
-			els = _qAll(".work__detail .block__left, .work__detail .stats__content, .work__ti" +
-					"meline");
+			els = _qAll(".work__detail .block__left, .work__detail .stats__content, .work__timeline");
 			for (var j = els.length - 1; j >= 0; j--) {
 				for (var i = 0; i < els[j].children.length; i++) {
-					anim = gsap.fromTo(els[j].children[i], {
-						y: 100 + (i * 50)
-					}, {
-						y: 0,
-						ease: "expo.out",
-						duration: 1.024
-					});
+					anim = gsap.fromTo(els[j].children[i], { y: 100 + (i * 50) }, { y: 0, ease: "expo.out", duration: 1.024 });
 					new ScrollMagic
 						.Scene({triggerElement: els[j]})
 						.setTween(anim)
@@ -1321,222 +1164,6 @@ var WorkDetail = Barba
 			new animateNumber(".work__detail .stats__content p:first-child b");
 			new animateNumber(".work__detail .stats__content p:last-child b");
 
-			// Gallery
-			var initPhotoSwipeFromDOM = function (gallerySelector) {
-				// parse slide data (url, title, size ...) from DOM elements (children of
-				// gallerySelector)
-				var parseThumbnailElements = function (el) {
-					var thumbElements = el.childNodes,
-						numNodes = thumbElements.length,
-						items = [],
-						figureEl,
-						linkEl,
-						size,
-						item;
-
-					for (var i = 0; i < numNodes; i++) {
-
-						figureEl = thumbElements[i]; // <figure> element
-
-						// include only element nodes
-						if (figureEl.nodeType !== 1) {
-							continue;
-						}
-
-						// linkEl = figureEl.children[0]; // <a> element
-						linkEl = figureEl; // <a> element
-
-						size = linkEl
-							.getAttribute('data-size')
-							.split('x');
-
-						// create slide object
-						item = {
-							src: linkEl.getAttribute('href'),
-							w: parseInt(size[0], 10),
-							h: parseInt(size[1], 10)
-						};
-
-						if (figureEl.children.length > 1) {
-							// <figcaption> content
-							item.title = figureEl.children[1].innerHTML;
-						}
-
-						if (linkEl.children.length > 0) {
-							// <img> thumbnail element, retrieving thumbnail url
-							item.msrc = linkEl
-								.children[0]
-								.getAttribute('src');
-						}
-
-						item.el = figureEl; // save link to element for getThumbBoundsFn
-						items.push(item);
-					}
-
-					return items;
-				};
-
-				// find nearest parent element
-				var closest = function closest(el, fn) {
-					return el && (fn(el)
-						? el
-						: closest(el.parentNode, fn));
-				};
-
-				// triggers when user clicks on thumbnail
-				var onThumbnailsClick = function (e) {
-					e = e || window.event;
-					e.preventDefault
-						? e.preventDefault()
-						: e.returnValue = false;
-
-					var eTarget = e.target || e.srcElement;
-
-					// find root element of slide
-					var clickedListItem = closest(eTarget, function (el) {
-						return (el.tagName && el.tagName.toUpperCase() === 'A');
-					});
-
-					if (!clickedListItem) {
-						return;
-					}
-
-					// find index of clicked item by looping through all child nodes alternatively,
-					// you may define index via data- attribute
-					var clickedGallery = clickedListItem.parentNode,
-						childNodes = clickedListItem.parentNode.childNodes,
-						numChildNodes = childNodes.length,
-						nodeIndex = 0,
-						index;
-
-					for (var i = 0; i < numChildNodes; i++) {
-						if (childNodes[i].nodeType !== 1) {
-							continue;
-						}
-
-						if (childNodes[i] === clickedListItem) {
-							index = nodeIndex;
-							break;
-						}
-						nodeIndex++;
-					}
-
-					if (index >= 0) {
-						// open PhotoSwipe if valid index found
-						openPhotoSwipe(index, clickedGallery);
-					}
-					return false;
-				};
-
-				// parse picture index and gallery index from URL (#&pid=1&gid=2)
-				var photoswipeParseHash = function () {
-					var hash = window
-							.location
-							.hash
-							.substring(1),
-						params = {};
-
-					if (hash.length < 5) {
-						return params;
-					}
-
-					var vars = hash.split('&');
-					for (var i = 0; i < vars.length; i++) {
-						if (!vars[i]) {
-							continue;
-						}
-						var pair = vars[i].split('=');
-						if (pair.length < 2) {
-							continue;
-						}
-						params[pair[0]] = pair[1];
-					}
-
-					if (params.gid) {
-						params.gid = parseInt(params.gid, 10);
-					}
-
-					return params;
-				};
-
-				var openPhotoSwipe = function (index, galleryElement, disableAnimation, fromURL) {
-					var pswpElement = _qAll('.pswp')[0],
-						gallery,
-						options,
-						items;
-
-					items = parseThumbnailElements(galleryElement);
-
-					// define options (if needed)
-					options = {
-
-						// define gallery index (for URL)
-						galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-						bgOpacity: 1,
-						preload: [
-							1, 3
-						],
-
-						getThumbBoundsFn: function (index) {
-							// See Options -> getThumbBoundsFn section of documentation for more info
-							var thumbnail = items[index]
-									.el
-									.getElementsByTagName('img')[0], // find thumbnail
-								pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-								rect = thumbnail.getBoundingClientRect();
-
-							return {
-								x: rect.left,
-								y: rect.top + pageYScroll,
-								w: rect.width
-							};
-						}
-
-					};
-
-					// PhotoSwipe opened from URL
-					if (fromURL) {
-						if (options.galleryPIDs) {
-							// parse real index when custom PIDs are used
-							// http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-							for (var j = 0; j < items.length; j++) {
-								if (items[j].pid == index) {
-									options.index = j;
-									break;
-								}
-							}
-						} else {
-							// in URL indexes start from 1
-							options.index = parseInt(index, 10) - 1;
-						}
-					} else {
-						options.index = parseInt(index, 10);
-					}
-
-					// exit if index not found
-					if (isNaN(options.index)) return;
-
-					if (disableAnimation) options.showAnimationDuration = 0;
-
-					// Pass data to PhotoSwipe and initialize it
-					gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-					gallery.init();
-				};
-
-				// loop through all gallery elements and bind events
-				var galleryElements = _qAll(gallerySelector);
-
-				for (var i = 0, l = galleryElements.length; i < l; i++) {
-					galleryElements[i].setAttribute('data-pswp-uid', i + 1);
-					galleryElements[i].onclick = onThumbnailsClick;
-				}
-
-				// Parse URL and open gallery if it contains #&pid=3&gid=1
-				var hashData = photoswipeParseHash();
-				if (hashData.pid && hashData.gid) {
-					openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
-				}
-			};
 			// execute above function
 			initPhotoSwipeFromDOM('.gallery');
 		},
@@ -1786,7 +1413,7 @@ var Me = Barba
 			// Scroll IG items
 			els = _qAll("#ig .item");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i].children, 1.024, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, ease: "expo" });
+				anim = gsap.fromTo(els[i].children, 1.024, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, ease: "expo.out" });
 				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .75 })
 					.setTween(anim)
 					.addTo(controller);
@@ -1811,7 +1438,7 @@ var Me = Barba
 			}
 
 			// Scroll cofound
-			anim = gsap.fromTo(".cofound > div > *", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo", stagger: { from: 0, amount: .512 }});
+			anim = gsap.fromTo(".cofound > div > *", { y: 500, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo", stagger: { from: 0, amount: .512 }});
 			new ScrollMagic
 				.Scene({triggerElement: ".cofound > div", triggerHook: .5 })
 				.setTween(anim)

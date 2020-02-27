@@ -70,12 +70,11 @@ exports.default = function() {
 		keepalive: true
 	}, function () {
 		browserSync.init({
-			server: false,
 			open: false,
 			proxy: "themilkyway.local:8080/dwaan/"
 		});
 	});
 	gulp.watch('**/*.php', { ignoreInitial: false }, php);
-	gulp.watch('css/main.css', { ignoreInitial: false }, css);
-	gulp.watch('js/main.js', { ignoreInitial: false }, javascript);
+	gulp.watch(['css/main.css', 'css/nojs.css', 'css/404.css'], { ignoreInitial: false }, css);
+	gulp.watch(['js/main.js', 'js/helper.js'], { ignoreInitial: false }, javascript);
 };
