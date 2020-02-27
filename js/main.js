@@ -751,27 +751,24 @@ var Home = Barba
 
 				if (window.__scroll_o == "set") window.__scroll_o = __scroll;
 
-				if (e.autoscroll) {
-					gsap.killTweensOf(window);
-					window.__scroll_o = __scroll;
+				if (gsap.isTweening(window)) {
+					e.preventDefault();
+				} else {
+					if (window.__scroll_f) clearTimeout(window.__scroll_f);
+					window.__scroll_f = setTimeout(function(){
+						if (window.__scroll_o - __scroll < -1) {
+							window.__anim = gsap.to(window, { duration: 1.024, scrollTo: "#trigger", ease: "expo.inOut", onComplete: function (){
+								window.__scroll_o = "set";
+							}});
+							e.preventDefault();
+						} else if (window.__scroll_o - __scroll > 1) {
+							window.__anim = gsap.to(window, { duration: 1.024, scrollTo: 0, ease: "expo.inOut", onComplete: function (){
+								window.__scroll_o = "set";
+							}});
+							e.preventDefault();
+						}
+					}, 64);
 				}
-
-				if (window.__scroll_f) clearTimeout(window.__scroll_f);
-				window.__scroll_f = setTimeout(function(){
-					if (window.__scroll_o - __scroll < -1) {
-						e.autoscroll = true;
-						window.__anim = gsap.to(window, { duration: 1.024, scrollTo: "#trigger", ease: "expo.inOut", onComplete: function (){
-							window.__scroll_o = "set";
-						}});
-						e.preventDefault();
-					} else if (window.__scroll_o - __scroll > 1) {
-						e.autoscroll = true;
-						window.__anim = gsap.to(window, { duration: 1.024, scrollTo: 0, ease: "expo.inOut", onComplete: function (){
-							window.__scroll_o = "set";
-						}});
-						e.preventDefault();
-					}
-				}, 64);
 			}
 
 			worklist.hover(".work__list a img");
