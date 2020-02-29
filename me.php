@@ -97,7 +97,7 @@
 							<div class="h2"><h2 class="h21">this is <b>mr. goat</b></h2></div>
 							<div class="h2"><h3 class="h22">he's a vietnamese</h3></div>
 							<div class="h2"><h3 class="h23">he likes to travel</h3></div>
-							<div class="h4"><h4>and he have his own instagram account, scroll more to check out his latest instagram posts</h4></div>
+							<div class="h4"><h4>and he has his own instagram account, scroll more to check out his latest instagram posts</h4></div>
 							<div class="img">
 								<?php for ($x = 1; $x <= 26; $x++) { ?>
 								<img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.png" width="" height="" alt="Mr. Goat" />
@@ -162,8 +162,8 @@
 						<div class="block__middle">
 							<h3>I’m also the owner of <a href="http://sagara.id" class="no-barba" target="_blank" rel="noopener noreferrer">Sagara</a>, an IT Solutions company based in Jakarta, Indonesia.</h3>
 							<hr />
-							<h4>but I didn't work there anymore 😬</h4>
-							<p>as I resign from my positions few years ago to persue my other personal life goals</p>
+							<h4>but I don't work there anymore 😬</h4>
+							<p>as I resigned from my positions few years ago to persue my other personal life goals</p>
 						</div>
 					</div>
 				</div>

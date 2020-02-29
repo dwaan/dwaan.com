@@ -559,6 +559,18 @@ p a {
 	font-weight: 600;
 }
 
+.splord,
+.splext {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	color: inherit;
+}
+.splord {
+	white-space: nowrap;
+}
+
 .table {
 	display: table;
 }
@@ -1374,9 +1386,6 @@ main {
 	margin: 0;
 	padding: 0;
 }
-.hero h1 div {
-	display: inline-block;
-}
 .hero .hero__image {
 	position: absolute;
 	display: block;
@@ -1418,6 +1427,17 @@ main {
 }
 .hero .hero__text p {
 	margin: 0 0 4vh;
+}
+.hero .shade {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+	background: #1A1D1E;
+	z-index: 3;
+	pointer-events: none;
 }
 @media (max-aspect-ratio: 2/1) {
 	.hero .img {
@@ -1878,8 +1898,8 @@ main {
 	}
 	.work__list .stats__content small {
 		position: absolute;
-		left: 13vw;
-		right: 4vw;
+		left: 7.75vh;
+		right: 1vw;
 		top: 50%;
 		transform: translate3d(0,-50%,0);
 	}
@@ -2115,6 +2135,9 @@ main {
 	.work_float .block__right {
 		width: auto;
 	}
+	.work_float .stats .stats__content {
+		padding: 2.5vh 0 3.5vh;
+	}
 }
 @media (max-aspect-ratio: 1/2) {
 	.work_float .stats__content  {
@@ -2145,7 +2168,7 @@ main {
 	background: rgb(42, 50, 51);
 }
 .work_float .stats small {
-	color: #C3DEE4;
+	color: #A4CDD6;
 }
 .dark .work_float .work__container {
 	background-color: #2f4148;

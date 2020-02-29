@@ -150,13 +150,57 @@ var ajaxImage = Image.prototype.load = function (index, url, callback, bytes) {
 };
 Image.prototype.completedPercentage = 0;
 // Splitting text
-var splitText = function (el) {
-	var split;
-	split = el.innerText.split(" ");
-	el.innerHTML = "";
-	for (var i = 0; i < split.length; i++) {
-		split[i] = "<div class='text" + i + "'>" + split[i] + "</div> ";
-		el.innerHTML += split[i];
+var splitText = function (els) {
+	var addTags = function (el, idx) {
+		var splord, splext;
+		var split = "";
+
+		splord = el.textContent.split(" ");
+		for (var i = 0; i < splord.length; i++) {
+			splext = splord[i].split("");
+			splord[i] = "<dl class='splord wrd" + idx + i + "'>";
+			for (var j = 0; j < splext.length; j++) {
+				if (splext[j] == " ") splext[j] = "&nbsp;";
+				splord[i] += "<dt class='splext txt" + idx + i + j + "'>" + splext[j] + "</dt>";
+			}
+			splord[i] += "</dl> ";
+			split += splord[i];
+		}
+
+		return split;
+	}
+
+	var travelTags = function(nodes, idx) {
+		var split = [],
+			childNodes = nodes.childNodes;
+
+		for (var i = 0; i < childNodes.length; i++) {
+			if (childNodes[i].childNodes.length == 0) {
+				// The child that doesn't have child
+				if (childNodes[i].textContent.trim() == "") {
+					split.push([" ", " "]);
+				} else {
+					split.push([childNodes[i].textContent, addTags(childNodes[i], idx + "" + i)]);
+				}
+			} else {
+				// Replace the inner text with split text
+				var str = childNodes[i].outerHTML,
+					tags = travelTags(childNodes[i], idx + "" +i);
+				str = str.replace(tags[0][0], tags[0][1]);
+				split.push([childNodes[i].textContent, str]);
+			}
+		}
+
+		return split;
+	}
+
+	var els = _qAll(els);
+	for (var i = 0; i < els.length; i++) {
+		var result = travelTags(els[i], i);
+		els[i].innerHTML = "";
+		for (var j = 0; j < result.length; j++) {
+			els[i].innerHTML += result[j][1];
+		}
 	}
 }
 ////////////////////// Huge text animation

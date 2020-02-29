@@ -63,10 +63,10 @@ function php() {
 
 exports.default = function() {
 	connect.server({
-		hostname: "themilkyway.local",
+		hostname: "0.0.0.0",
 		port: 8080,
 		base: "../",
-		router: "./router.php",
+		router: "../router.php",
 		keepalive: true
 	}, function () {
 		browserSync.init({

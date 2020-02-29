@@ -21,7 +21,7 @@
 						<div>
 							<div class="hero__text">
 								<h1>hello! my name is dwan</h1>
-								<p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="./me">read more</a></p>
+								<p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="./me" class="more">read more</a></p>
 							</div>
 
 							<div class="stats block">
@@ -53,6 +53,8 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="shade"></div>
 				</div>
 
 				<div id="trigger__mover"></div>

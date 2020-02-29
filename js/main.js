@@ -708,9 +708,7 @@ var Home = Barba
 	.extend({
 		namespace: 'home',
 		onEnter: function () {
-			var fruit = [
-					"empty.png", "apple.png", "orange.png", "phone.png"
-				],
+			var fruit = ["empty.png", "apple.png", "orange.png", "phone.png"],
 				index = 0;
 
 			current_barba = this;
@@ -728,6 +726,9 @@ var Home = Barba
 
 			gsap.set(".hero", { y: window.innerHeight });
 			gsap.set(".work_float", { y: 500 });
+		},
+		onEnterCompleted: function () {
+			splitText(".hero__text h1, .hero__text p");
 		},
 		onImageLoadComplete: function () {
 			// Fixing size
@@ -748,24 +749,19 @@ var Home = Barba
 
 				if (window.__scroll_o == "set") window.__scroll_o = __scroll;
 
-				if (gsap.isTweening(window)) {
-					e.preventDefault();
-				} else {
-					if (window.__scroll_f) clearTimeout(window.__scroll_f);
-					window.__scroll_f = setTimeout(function(){
-						if (window.__scroll_o - __scroll < -1) {
-							window.__anim = gsap.to(window, { duration: 1.024, scrollTo: "#trigger", ease: "expo.inOut", onComplete: function (){
-								window.__scroll_o = "set";
-							}});
-							e.preventDefault();
-						} else if (window.__scroll_o - __scroll > 1) {
-							window.__anim = gsap.to(window, { duration: 1.024, scrollTo: 0, ease: "expo.inOut", onComplete: function (){
-								window.__scroll_o = "set";
-							}});
-							e.preventDefault();
-						}
-					}, 64);
-				}
+				if (window.__scroll_f) clearTimeout(window.__scroll_f);
+
+				window.__scroll_f = setTimeout(function(){
+					if (window.__scroll_o - __scroll < 0) {
+						window.__anim = gsap.to(window, { duration: .512, scrollTo: "#trigger", ease: "power3.inOut", onComplete: function (){
+							window.__scroll_o = "set";
+						}});
+					} else if (window.__scroll_o - __scroll > 0) {
+						window.__anim = gsap.to(window, { duration: .512, scrollTo: 0, ease: "power3.inOut", onComplete: function (){
+							window.__scroll_o = "set";
+						}});
+					}
+				}, 64);
 			}
 
 			worklist.hover(".work__list a img");
@@ -786,7 +782,8 @@ var Home = Barba
 				.fromTo(".hero__text h1", { y: 0 }, { y: -20 }, 0)
 				.fromTo(".hero__text p", { y: 0 }, { y: -25 }, 0)
 				.fromTo(".hero .stats", { y: 0 }, { y: -30 }, 0)
-				.fromTo(".hero img", { y: 0 }, { y: 10 }, 0);
+				.fromTo(".hero img", { y: 0 }, { y: 10 }, 0)
+				.fromTo(".hero .shade", { opacity: 0 }, { opacity: .75 }, 0);
 			new ScrollMagic
 				.Scene({triggerElement: "main", duration: "100%", triggerHook: 0})
 				.setTween(anim)
@@ -850,40 +847,26 @@ var Home = Barba
 
 			// Swipe event for gallery
 			function detectswipe(el,func) {
-				swipe_det = new Object();
-				swipe_det.sX = 0;
-				swipe_det.pX = 0;
-				swipe_det.sY = 0;
-				swipe_det.pY = 0;
-				swipe_det.eX = 0;
-				swipe_det.eY = 0;
-				var min_x = 20;  //min x swipe for horizontal swipe
-				var max_x = 40;  //max x difference for vertical swipe
-				var min_y = 40;  //min y swipe for vertical swipe
-				var max_y = 50;  //max y difference for horizontal swipe
-				var direc = "";
+				swipe_det = new Object(); swipe_det.sX = 0; swipe_det.pX = 0; swipe_det.sY = 0; swipe_det.pY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
+				var min_x = 20, max_x = 40, min_y = 40, max_y = 50, direc = "";
 				ele = _q(el);
 				ele.addEventListener('touchstart',function(e){
 					var t = e.touches[0];
-					swipe_det.sX = t.screenX;
-					swipe_det.sY = t.screenY;
-					swipe_det.pX = t.screenX;
-					swipe_det.pY = t.screenY;
+					swipe_det.sX = t.screenX; swipe_det.sY = t.screenY;
+					swipe_det.pX = t.screenX; swipe_det.pY = t.screenY;
 					if(ele.x == undefined) ele.x = 0;
 				},false);
 				ele.addEventListener('touchmove',function(e){
 					e.preventDefault();
 					var t = e.touches[0];
 
-					swipe_det.eX = t.screenX;
-					swipe_det.eY = t.screenY;
+					swipe_det.eX = t.screenX; swipe_det.eY = t.screenY;
 
 					ele.x -= (swipe_det.pX - swipe_det.eX);
 
 					gsap.set(el, {x: ele.x});
 
-					swipe_det.pX = t.screenX;
-					swipe_det.pY = t.screenY;
+					swipe_det.pX = t.screenX; swipe_det.pY = t.screenY;
 				},false);
 				ele.addEventListener('touchend',function(e){
 					//horizontal detection
@@ -913,14 +896,18 @@ var Home = Barba
 		},
 		onImageLoadAnimateHalfComplete: function () {
 			// Animate the appearing
-			splitText(_q(".hero__text h1"));
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
 				.to(".hero", { y: 0 })
 				.fromTo(".hero__image", { transformOrigin: "0 0", y: 500 }, { y: 0 }, 0)
-				.fromTo(".hero__text h1 div", { y: 500 }, { y: -0, stagger: {
+				.fromTo(".hero__text h1 .splext", { y: 500 }, { y: 0, stagger: {
 					from: 0,
 					amount: .064
+				}}, .128)
+				.to(".hero__text .txt0000", { yPercent: -20 }, .512)
+				.fromTo(".hero__text p .splext", { y: 500 }, { y: 0, stagger: {
+					from: 0,
+					amount: .128
 				}}, .128)
 				.fromTo(".hero__text p, .hero .stats", { transformOrigin: "0 0", y: 500 }, { y: 0, stagger: {
 					from: 0,
@@ -952,6 +939,9 @@ var Work = Barba
 			current_barba = this;
 
 			gsap.set(".work__list__page", { y: window.innerHeight });
+		},
+		onEnterCompleted: function () {
+			splitText(".work__list h2");
 		},
 		onImageLoadComplete: function () {
 			worklist.hover(".work__list a img");
@@ -1017,7 +1007,11 @@ var Work = Barba
 			new animateNumber(".work__list .stats__content p:last-child b");
 		},
 		onImageLoadAnimateHalfComplete: function () {
-			gsap.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 })
+			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
+			anim
+				.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 }, 0)
+				.to(".work__list .txt0000", { yPercent: -20 }, .512)
+			;
 		}
 	});
 
@@ -1028,10 +1022,11 @@ var WorkDetail = Barba
 		onEnter: function () {
 			current_barba = this;
 
-			gsap.set(".work__list.work__detail", { y: window.innerHeight });
+			gsap.set(".work__detail", { y: window.innerHeight });
 		},
 		onEnterCompleted: function () {
 			worklist.hover("a img");
+			splitText(".work__list h1");
 		},
 		onImageLoadComplete: function () {
 			controller.destroy();
@@ -1162,8 +1157,12 @@ var WorkDetail = Barba
 			initPhotoSwipeFromDOM('.gallery');
 		},
 		onImageLoadAnimateHalfComplete: function () {
-			gsap.fromTo(".work .back", { transformOrigin: "0 0", y: -100 }, { y: 0, delay: .256 });
-			gsap.to(".work__list.work__detail", { y: 0, ease: "expo.out", duration: 2.048 })
+			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
+			anim
+				.to(".work__detail", { y: 0 })
+				.fromTo(".work .back", { transformOrigin: "0 0", y: -100 }, { y: 0, delay: .256 }, 0)
+				.to(".work__detail .txt0000", { yPercent: -20 }, .512)
+			;
 		},
 		onLeaveCompleted: function () {
 			// Destroying tinyslider to prevent error
@@ -1327,9 +1326,12 @@ var Me = Barba
 			gsap.set(".imuiux", { y: window.innerHeight });
 		},
 		onEnterCompleted: function () {
+			splitText(".imuiux h1, .imuiux p");
+
 			worklist.hover("#ig .item a");
 			worklist.hover(".work__list img");
-
+		},
+		onImageLoadComplete: function () {
 			controller.destroy();
 			controller = new ScrollMagic.Controller();
 			els = null;
@@ -1387,7 +1389,7 @@ var Me = Barba
 				rotatinggoat = {
 					curImg: obj.length,
 					roundProps: "curImg",
-					repeat: 5,
+					repeat: 10,
 					immediateRender: true,
 					ease: "linear",
 					duration: .75,
@@ -1437,8 +1439,7 @@ var Me = Barba
 				.Scene({triggerElement: ".cofound > div", triggerHook: .5 })
 				.setTween(anim)
 				.addTo(controller);
-		},
-		onImageLoadComplete: function () {
+
 			gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: { from: 0, amount: .128 }});
 
 			var els = _qAll("#ig img");
@@ -1453,8 +1454,21 @@ var Me = Barba
 			}
 		},
 		onImageLoadAnimateHalfComplete: function () {
+			// Animate the appearing
+			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
+			anim
+				.fromTo(".imuiux h1 .splext", { y: 150 }, { y: 0, stagger: {
+					from: 0,
+					amount: .256
+				}}, 0)
+				.fromTo(".imuiux p .splord", { y: 200 }, { y: 0, stagger: {
+					from: 0,
+					amount: .256
+				}}, 0)
+			;
+
 			gsap.to(".imuiux", { y: 0, ease: "expo.out", duration: 2.048 });
-			gsap.fromTo(".imuiux h1, .imuiux p, .imuiux img", { y: 200 }, { y: 0, duration: 2.048, ease: "expo.out", stagger: {
+			gsap.fromTo(".imuiux img", { y: 200 }, { y: 0, duration: 2.048, ease: "expo.out", stagger: {
 				from: 0,
 				amount: .386
 			}});
