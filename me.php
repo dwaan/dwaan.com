@@ -160,9 +160,9 @@
 
 					<div class="cofound block__full">
 						<div class="block__middle">
-							<h3>I’m also the owner of <a href="http://sagara.id" class="no-barba" target="_blank" rel="noopener noreferrer">Sagara</a>, an IT Solutions company based in Jakarta, Indonesia.</h3>
+							<h3>I’m also one of the owner and cofounder of <a href="http://sagara.id" class="no-barba" target="_blank" rel="noopener noreferrer">Sagara</a> - an IT Solutions company based in Jakarta, Indonesia.</h3>
 							<hr />
-							<h4>but I don't work there anymore 😬</h4>
+							<h4>but I don't work there anymore</h4>
 							<p>as I resigned from my positions few years ago to persue my other personal life goals</p>
 						</div>
 					</div>

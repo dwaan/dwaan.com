@@ -1332,32 +1332,17 @@ main {
 	margin-top: 0;
 }
 .hero a {
+	display: block;
+	text-decoration: none;
+	font-size: 1em;
+	white-space: normal;
+}
+.hero__text a {
 	font-weight: 500;
 	text-decoration: none;
 	display: inline-block;
 	position: relative;
 	white-space: nowrap;
-}
-.hero a:after {
-	content: "";
-	position: absolute;
-	z-index: -1;
-	display: block;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	height: 1.5vh;
-	background-color: rgba(0,0,0,.1);
-	border-radius: .25vh;
-}
-.hero a:hover:after {
-	background-color: rgba(255,255,255,.45);
-}
-.dark .hero a:after {
-	background-color: rgba(212,231,236,.15);
-}
-.dark .hero a:hover:after {
-	background-color: rgba(243,247,44,.2);
 }
 @media (max-aspect-ratio: 3/2) {
 	.hero .hero__meta {
@@ -1420,10 +1405,13 @@ main {
 }
 .hero .fruit {
 	position: absolute;
-	left: 5.219%;
+	left: 5%;
 	top: 18.306%;
-	width: 40.293%;
+	width: 38.5964912281%;
 	height: 30.054%;
+}
+.hero .fruit.poof {
+	opacity: 0;
 }
 .hero .hero__text p {
 	margin: 0 0 4vh;
@@ -1815,10 +1803,15 @@ main {
 }
 @media (max-aspect-ratio: 1/1) {
 	.work__list {
-		padding: 0 2.8125vw;
+		padding: 0 6.8125vw;
 	}
 	.work__list .block__left {
 		width: 40vw;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.work__list {
+		padding: 0 8vw;
 	}
 }
 
@@ -1871,7 +1864,7 @@ main {
 		text-shadow: 15vw 3vw 23vw rgba(0, 0, 0, 0.2);
 	}
 	.work__list .block__right {
-		margin-right: -3vw;
+		margin-right: 0;
 	}
 }
 @media (max-aspect-ratio: 2/3) {
@@ -1891,7 +1884,7 @@ main {
 		width: auto;
 	}
 	.work__list .stats__content p {
-		width: 43vw;
+		width: 36vw;
 	}
 	.work__list .stats__content b {
 		margin-bottom: 0;
@@ -1935,7 +1928,7 @@ main {
 @media (max-aspect-ratio: 1/1) {
 	.work__list ul.flat {
 		width: 100vw;
-		margin: 0 0 0 -4.3125vw;
+		margin: 0 0 0 -8.8125vw;
 		padding: 2.5vh 2.15625vw;
 		border-radius: 6px;
 		overflow: auto;
@@ -1943,6 +1936,11 @@ main {
 	.work__list ul.flat li {
 		width: 50%;
 		padding: 2.5vh 2.15625vw;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.work__list ul.flat {
+		margin: 0 0 0 -9.8125vw;
 	}
 }
 
@@ -2125,11 +2123,15 @@ main {
 	}
 }
 @media (max-aspect-ratio: 2/3) {
+	.work_float .block__right {
+		display: block;
+	}
 	.work_float .stats__content {
+		display: block;
 		padding-top: 1.5vh;
 	}
 	.work_float .stats__content p {
-		width: 39vw;
+		width: 38vw;
 	}
 	.work_float .block__left,
 	.work_float .block__right {
@@ -2144,14 +2146,8 @@ main {
 		padding: 0;
 	}
 	.work_float .stats__content p {
-		width: 16vw;
+		width: 38vw;
 		margin: 0 0 2vh 2vw;
-	}
-	.work_float .block__left {
-		width: 45vw;
-	}
-	.work_float .block__right {
-		width: 35vw;
 	}
 }
 

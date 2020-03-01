@@ -29,16 +29,22 @@
 
 								<div class="stats__content">
 									<p>
-										<b id="year__living">36+</b>
-										<small>years of experience living on earth</small>
+										<a href="./say-hi">
+											<b id="year__living">36+</b>
+											<small>years of experience living on earth</small>
+										</a>
 									</p>
 									<p>
-										<b id="year__designer">12+</b>
-										<small>years of working as a UX/UI designer</small>
+										<a href="./work">
+											<b id="year__designer">12+</b>
+											<small>years of working as a UX/UI designer</small>
+										</a>
 									</p>
 									<p>
-										<b id="year__managerial">9+</b>
-										<small>years of working in managerial stuff</small>
+										<a href="./me">
+											<b id="year__managerial">9+</b>
+											<small>years of working in managerial position</small>
+										</a>
 									</p>
 								</div>
 							</div>
@@ -50,6 +56,7 @@
 							<div class="box">
 								<img class="dwan" src="/dwaan/img/dwan.png" width="" height="" alt="Dwan" />
 								<img class="fruit" src="/dwaan/img/empty.png" width="" height="" alt="Fruit" />
+								<img class="fruit poof" src="/dwaan/img/poof.png" width="" height="" alt="Fruit" />
 							</div>
 						</div>
 					</div>

@@ -707,15 +707,15 @@ var Home = Barba
 	.BaseView
 	.extend({
 		namespace: 'home',
-		onEnter: function () {
-			var fruit = ["empty.png", "apple.png", "orange.png", "phone.png"],
+		onEnterCompleted: function () {
+			var fruit = ["empty.png", "apple.png", "orange.png", "phone.png", "joycon.png"],
 				index = 0;
 
 			current_barba = this;
 
 			index = getRandomInt(1, 10);
 			if (index > 5) {
-				index = getRandomInt(1, fruit.length);
+				index = getRandomInt(1, fruit.length - 1);
 			} else {
 				index = 0;
 			}
@@ -723,11 +723,25 @@ var Home = Barba
 			if (fruit[index] == undefined) index = 0;
 
 			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
+			_q(".img").onclick = function(e) {
+				index = getRandomInt(1, fruit.length - 1);
+				if (fruit[index] == undefined) index = fruit.length - 1;
+				if (window.__scroll_f) clearTimeout(window.__scroll_f);
+
+				anim = gsap.timeline({ defaults: { duration: .512, ease: "elastic.out" }});
+				anim
+					.fromTo(".poof", { opacity: 1, scale: 1 }, { opacity: 1, scale: 1.75, onComplete: function() {
+						_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
+					}})
+					.to(".poof", { opacity: 0, scale: 1, ease: "expo" })
+				;
+
+				e.preventDefault();
+			}
 
 			gsap.set(".hero", { y: window.innerHeight });
 			gsap.set(".work_float", { y: 500 });
-		},
-		onEnterCompleted: function () {
+
 			splitText(".hero__text h1, .hero__text p");
 		},
 		onImageLoadComplete: function () {
@@ -967,22 +981,14 @@ var Work = Barba
 						_c_el = _el[i].children;
 
 					_y =_el[i].offsetTop;
-					if (_y != _p_y) {
-						_p_y = _y;
-						delay = 0;
-					} else {
-						delay += .128;
-					}
+					if (_y != _p_y) { _p_y = _y; delay = 0; } else { delay += .064; }
 
 					tl = gsap.timeline({
-						defaults: {
-							duration: 1.024,
-							ease: "expo.out"
-						}
-					});
+						defaults: { duration: 1.024, ease: "expo.out" }});
 					tl
-						.fromTo(_c_el, { y: _height/5, opacity: 0 }, { y: 0, opacity: 1, delay: delay })
-						.fromTo(_c_el[0].children[1], { y: 25, opacity: 0 }, { y: 0, opacity: 1 }, "-=.768");
+						.fromTo(_c_el, { y: _height/2 }, { y: 0, delay: delay }, 0)
+						.fromTo(_c_el[0].children[0], { y: 25 }, { y: 0 }, .128)
+						.fromTo(_c_el[0].children[1], { y: 25 }, { y: 0 }, .256);
 					new ScrollMagic
 						.Scene({ triggerElement: _el[i] })
 						.setTween(tl)
@@ -993,13 +999,15 @@ var Work = Barba
 			// Scroll animate the words
 			els = _qAll(".words");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i].children, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo", stagger: {
+				tl = gsap.timeline({
+					defaults: { duration: 1.024, ease: "expo.out" }});
+				tl.fromTo(els[i].children, { y: 25 }, { y: 0, stagger: {
 						from: 0,
 						amount: .256
 					}});
 				new ScrollMagic
 					.Scene({ triggerElement: els[i] })
-					.setTween(anim)
+					.setTween(tl)
 					.addTo(controller);
 			}
 
@@ -1326,7 +1334,7 @@ var Me = Barba
 			gsap.set(".imuiux", { y: window.innerHeight });
 		},
 		onEnterCompleted: function () {
-			splitText(".imuiux h1, .imuiux p");
+			splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h4, .cofound p");
 
 			worklist.hover("#ig .item a");
 			worklist.hover(".work__list img");
@@ -1425,23 +1433,37 @@ var Me = Barba
 			}
 
 			// Scroll latest works
-			els = _qAll(".work__list, .work__list ul li");
-			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i].children, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo" });
-				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .85 })
+			anim = gsap.fromTo(".work__list, .work__list ul li", { y: 250 }, { y: 0, duration: 1.024, ease: "expo", stagger: {
+				from: 0, amount: .256
+			}});
+			new ScrollMagic.Scene({triggerElement: ".work__list, .work__list ul", triggerHook: .85 })
+				.setTween(anim)
+				.addTo(controller);
+
+			// Scroll cofound
+			el = _qAll(".cofound > div > *");
+			for (var i = 0; i < el.length; i++) {
+				console.log(el[i]);
+				anim = gsap.timeline({ defaults: { duration: 1.024, ease: "power4.out" }});
+				anim
+					.fromTo(el[i].querySelectorAll(".splext"), { y: 200, }, { y: 0, stagger: {
+						from: 0, amount: .128
+					}}, 0)
+				;
+				new ScrollMagic
+					.Scene({triggerElement: el[i].querySelectorAll(".splord"), triggerHook: .9 })
 					.setTween(anim)
 					.addTo(controller);
 			}
 
-			// Scroll cofound
-			anim = gsap.fromTo(".cofound > div > *", { y: 500, opacity: 0 }, { y: 0, opacity: 1, duration: 1.024, ease: "expo", stagger: { from: 0, amount: .512 }});
-			new ScrollMagic
-				.Scene({triggerElement: ".cofound > div", triggerHook: .5 })
-				.setTween(anim)
-				.addTo(controller);
 
-			gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: { from: 0, amount: .128 }});
+			// Animate the beginning
+			gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: {
+				from: 0, amount: .128
+			}});
 
+
+			// Adding class to ig images
 			var els = _qAll("#ig img");
 			for (var i = els.length - 1; i >= 0; i--) {
 				if (els[i].offsetWidth > els[i].offsetHeight) {
