@@ -716,9 +716,11 @@ var Home = Barba
 
 			gsap.set(".hero", { y: window.innerHeight });
 			gsap.set(".work_float", { y: 500 });
+
+			splitText(".hero__text h1, .hero__text p");
 		},
 		onEnterCompleted: function () {
-			var fruit = ["empty.png", "apple.png", "orange.png", "phone.png", "joycon.png"],
+			var fruit = ["empty.png", "apple.png", "avocado.png", "phone.png", "joycon.png"],
 				index = 0;
 
 			index = getRandomInt(1, 10);
@@ -736,18 +738,19 @@ var Home = Barba
 					index = getRandomInt(1, fruit.length - 1);
 				} while(_q(".fruit").getAttribute("src") == ("/dwaan/img/" + fruit[index]));
 
-				anim = gsap.timeline({ defaults: { duration: .512, ease: "elastic.out" }});
-				anim
-					.fromTo(".poof", { opacity: 1, scale: 1 }, { opacity: 1, scale: 1.75, onComplete: function() {
-						_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
-					}})
-					.to(".poof", { opacity: 0, scale: 1, ease: "expo" })
-				;
+				if(!anim.isActive()) {
+					anim = gsap.timeline({ defaults: { duration: .512, ease: "elastic" }});
+					anim
+						.fromTo(".poof", { transformOrigin: "40%", opacity: 1, rotation: 15, scale: 1, xPercent: -50, yPercent: 50 }, { rotation: 0, scale: 1.75, xPercent: 0, yPercent: 0, onComplete: function() {
+							_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
+						}})
+						.to(".poof", { duration: .512 })
+						.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" })
+					;
+				}
 
 				e.preventDefault();
 			}
-
-			splitText(".hero__text h1, .hero__text p");
 		},
 		onImageLoadComplete: function () {
 			// Fixing size
@@ -918,13 +921,13 @@ var Home = Barba
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
 				.to(".hero", { y: 0 })
-				.fromTo(".hero__image", { transformOrigin: "0 0", y: 500 }, { y: 0 }, 0)
-				.fromTo(".hero__text h1 .splext", { y: 500 }, { y: 0, stagger: {
+				.fromTo(".hero__image", { transformOrigin: "0 0", y: 500 }, { y: 0 }, .256)
+				.fromTo(".hero__text h1 .splext", { y: 300 }, { y: 0, stagger: {
 					from: 0,
 					amount: .064
 				}}, .128)
 				.to(".hero__text .txt0000", { yPercent: -20 }, .512)
-				.fromTo(".hero__text p .splext", { y: 500 }, { y: 0, stagger: {
+				.fromTo(".hero__text p .splext", { y: 300 }, { y: 0, stagger: {
 					from: 0,
 					amount: .128
 				}}, .128)
@@ -932,11 +935,11 @@ var Home = Barba
 					from: 0,
 					amount: .256
 				}}, .256)
-				.fromTo(".hero .stats p", { y: 500 }, { y: 0, stagger: {
+				.fromTo(".hero .stats p", { y: 250 }, { y: 0, stagger: {
 					from: "end",
-					amount: .386
+					amount: .256
 				}}, .368)
-				.to(".work_float", { y: 0 }, .512)
+				.to(".work_float", { y: 0 }, 1.024)
 			;
 
 			// First time need to be delayed a bit
@@ -958,8 +961,7 @@ var Work = Barba
 			current_barba = this;
 
 			gsap.set(".work__list__page", { y: window.innerHeight });
-		},
-		onEnterCompleted: function () {
+
 			splitText(".work__list h2");
 		},
 		onImageLoadComplete: function () {
@@ -1036,10 +1038,11 @@ var WorkDetail = Barba
 			current_barba = this;
 
 			gsap.set(".work__detail", { y: window.innerHeight });
+
+			splitText(".work__list h1");
 		},
 		onEnterCompleted: function () {
 			worklist.hover("a img");
-			splitText(".work__list h1");
 		},
 		onImageLoadComplete: function () {
 			controller.destroy();
@@ -1330,10 +1333,10 @@ var Me = Barba
 			current_barba = this;
 
 			gsap.set(".imuiux", { y: window.innerHeight });
+
+			splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h4, .cofound p");
 		},
 		onEnterCompleted: function () {
-			splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h4, .cofound p");
-
 			worklist.hover("#ig .item a");
 			worklist.hover(".work__list img");
 		},

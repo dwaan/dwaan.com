@@ -1373,6 +1373,7 @@ main {
 }
 .hero .hero__image {
 	position: absolute;
+	z-index: 0;
 	display: block;
 	top: 0;
 	height: 100vh;
