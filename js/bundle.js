@@ -609,7 +609,11 @@ document.onkeydown = function (t) {
 var dark_mode = false,
 	logo_svg = _q(".logo").innerHTML,
 	// Variables for barba views
-	current_barba = null,
+	current_barba = {
+		onImageLoadComplete: function() {},
+		onImageLoadAnimateComplete: function() {},
+		onImageLoadAnimateHalfComplete: function() {}
+	},
 	controller = new ScrollMagic.Controller(),
 	els = null,
 	anim = null,
@@ -1314,11 +1318,15 @@ var Home = Barba
 	.BaseView
 	.extend({
 		namespace: 'home',
+		onEnter: function () {
+			current_barba = this;
+
+			gsap.set(".hero", { y: window.innerHeight });
+			gsap.set(".work_float", { y: 500 });
+		},
 		onEnterCompleted: function () {
 			var fruit = ["empty.png", "apple.png", "orange.png", "phone.png", "joycon.png"],
 				index = 0;
-
-			current_barba = this;
 
 			index = getRandomInt(1, 10);
 			if (index > 5) {
@@ -1330,10 +1338,10 @@ var Home = Barba
 			if (fruit[index] == undefined) index = 0;
 
 			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
-			_q(".img").onclick = function(e) {
-				index = getRandomInt(1, fruit.length - 1);
-				if (fruit[index] == undefined) index = fruit.length - 1;
-				if (window.__scroll_f) clearTimeout(window.__scroll_f);
+			_q(".img").onmousedown = function(e) {
+				do {
+					index = getRandomInt(1, fruit.length - 1);
+				} while(_q(".fruit").getAttribute("src") == ("/dwaan/img/" + fruit[index]));
 
 				anim = gsap.timeline({ defaults: { duration: .512, ease: "elastic.out" }});
 				anim
@@ -1345,9 +1353,6 @@ var Home = Barba
 
 				e.preventDefault();
 			}
-
-			gsap.set(".hero", { y: window.innerHeight });
-			gsap.set(".work_float", { y: 500 });
 
 			splitText(".hero__text h1, .hero__text p");
 		},
@@ -1684,13 +1689,6 @@ var WorkDetail = Barba
 				_tnsparam.container = els[i];
 				_tnsparam.autoHeight = true;
 				tinysliders.push(new tns(_tnsparam));
-
-				var snoop = function (info, eventName) {
-					console.log(info.index, info.items, info.slideCount, info);
-				}
-				tinysliders[tinysliders.length - 1].events.on('touchMove', snoop);
-				tinysliders[tinysliders.length - 1].events.on('dragMove', snoop);
-				tinysliders[tinysliders.length - 1].events.on('indexChanged', snoop);
 			}
 
 			els = _qAll(".work__timeline .wheel");
@@ -1868,7 +1866,7 @@ var Lost = Barba
 		onEnter: function () {
 			current_barba = this;
 		},
-		onEnterCompleted: function () {
+		onImageLoadComplete: function () {
 			var speed = 10,
 				tween = [];
 
@@ -2050,17 +2048,18 @@ var Me = Barba
 			// Scroll cofound
 			el = _qAll(".cofound > div > *");
 			for (var i = 0; i < el.length; i++) {
-				console.log(el[i]);
-				anim = gsap.timeline({ defaults: { duration: 1.024, ease: "power4.out" }});
-				anim
-					.fromTo(el[i].querySelectorAll(".splext"), { y: 200, }, { y: 0, stagger: {
-						from: 0, amount: .128
-					}}, 0)
-				;
-				new ScrollMagic
-					.Scene({triggerElement: el[i].querySelectorAll(".splord"), triggerHook: .9 })
-					.setTween(anim)
-					.addTo(controller);
+				if(el[i].children.length > 0) {
+					anim = gsap.timeline({ defaults: { duration: 1.024, ease: "power4.out" }});
+					anim
+						.fromTo(el[i].querySelectorAll(".splext"), { y: 200, }, { y: 0, stagger: {
+							from: 0, amount: .128
+						}}, 0)
+					;
+					new ScrollMagic
+						.Scene({triggerElement: el[i], triggerHook: .9 })
+						.setTween(anim)
+						.addTo(controller);
+				}
 			}
 
 
