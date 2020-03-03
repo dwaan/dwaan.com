@@ -37,7 +37,7 @@ var menu = {
 		// The bright/dark mode switcher
 		this.el = _q('#mode');
 		gsap.set(this.el.querySelector("#ray"), {transformOrigin: "center center"})
-		this.el.onclick = function (e) {
+		this.el.onmousedown = function (e) {
 			if (!dark_mode) {
 				dark_mode = true;
 				addClass(_q("html"), "dark");
@@ -68,7 +68,7 @@ var menu = {
 		// The main menu events
 		this.el = _q('.menu__pop > a');
 		gsap.set(this.el.querySelector("#menu-short"), {x: -7.5});
-		this.el.onclick = function (e) {
+		this.el.onmousedown = function (e) {
 			var tl = gsap.timeline({
 				defaults: {
 					duration: .768,
@@ -179,7 +179,7 @@ var menu = {
 
 		// The main menu close events
 		this.el = _q('.menu__item .close span');
-		this.el.onclick = function (e) {
+		this.el.onmousedown = function (e) {
 			var tl = gsap.timeline({
 				defaults: {
 					duration: .512,
@@ -231,7 +231,7 @@ var menu = {
 				marginTop: 50
 			});
 
-			this.el[i].onclick = function (e) {
+			this.el[i].onmousedown = function (e) {
 				e.preventDefault();
 			}
 			this.el[i].onmouseenter = function () {
@@ -595,43 +595,22 @@ var worklist = {
 	hover: function (el) {
 		el = _qAll(el);
 		for (var i = el.length - 1; i >= 0; i--) {
+			var scale = 1.05
+			if(el[i].offsetWidth < 100) scale = 1.15;
+
 			el[i].gsap = gsap.timeline({repeat: -1, ease: "expo"});
-			el[i]
-				.gsap
-				.to(el[i], {
-					transformOrigin: "50%",
-					scale: 1.05,
-					duration: 1.7
-				})
-				.to(el[i], {
-					scale: 1.05,
-					duration: .6
-				})
-				.to(el[i], {
-					scale: 1,
-					duration: 1.7
-				})
-				.to(el[i], {
-					scale: 1,
-					duration: .9
-				});
-			el[i]
-				.gsap
-				.pause();
+			el[i].gsap
+				.to(el[i], { transformOrigin: "50%", scale: scale, duration: 1.7 })
+				.to(el[i], { scale: scale, duration: .6 })
+				.to(el[i], { scale: 1, duration: 1.7 })
+				.to(el[i], { scale: 1, duration: .9 });
+			el[i].gsap.pause();
 			el[i].onmouseenter = function () {
-				this
-					.gsap
-					.restart();
+				this.gsap.restart();
 			}
 			el[i].onmouseleave = function () {
-				this
-					.gsap
-					.pause();
-				gsap.to(this, {
-					transformOrigin: "50%",
-					scale: 1,
-					duration: .512
-				})
+				this.gsap.pause();
+				gsap.to(this, { transformOrigin: "50%", scale: 1, duration: .512 })
 			}
 		}
 	}
@@ -751,6 +730,9 @@ var Home = Barba
 
 				e.preventDefault();
 			}
+
+
+			worklist.hover(".work__list a img, .hero__meta .stats b");
 		},
 		onImageLoadComplete: function () {
 			// Fixing size
@@ -785,8 +767,6 @@ var Home = Barba
 					}
 				}, 64);
 			}
-
-			worklist.hover(".work__list a img");
 
 			controller.destroy();
 			controller = new ScrollMagic.Controller();
@@ -1536,9 +1516,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			// Animate header
-			gsap.fromTo(".logo, #mode, .lang > li, .menu > a", { marginTop: -50, opacity: 0 }, { marginTop: 0, opacity: 1, delay: .768, duration: .768, ease: "expo.out", stagger: {
+			gsap.fromTo(".logo, .menu > a, #mode, .lang > li", { marginTop: -250 }, { marginTop: 0, delay: .512, duration: 2.048, ease: "expo.out", stagger: {
 				from: 0,
-				amount: .386
+				amount: 1.024
 			}});
 		});
 	});

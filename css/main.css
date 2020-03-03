@@ -950,6 +950,9 @@ header {
 .lang li {
 	position: relative;
 }
+.lang li:last-child {
+	float: right;
+}
 .lang .chat__bubble {
 	opacity: 0;
 	pointer-events: none;
@@ -1526,7 +1529,6 @@ main {
 	font-size: 2.3rem;
 	text-align: center;
 	border: .5vh solid #A7BDC1;
-	pointer-events: none;
 	text-shadow: 20px 5px 30px rgba(0, 0, 0, 0.2);
 	border-radius: 100%;
 }
