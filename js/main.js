@@ -77,7 +77,7 @@ var menu = {
 			that.active = true;
 
 			tl
-				.to('.menu__pop .menu__item', { y: 0, opacity: 1, scale: 1, duration: .256, ease: "power2" })
+				.fromTo('.menu__pop .menu__item', { yPercent: 0, xPercent: 0, opacity: 0, scale: 1 }, { yPercent: 0, opacity: 1, scale: 1, duration: .256, ease: "power2" })
 				.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { transformOrigin: "0 0", xPercent: 200, opacity: 0 }, { xPercent: 0, opacity: 1, duration: .768, ease: "expo.out", stagger: {
 					from: 0,
 					amount: .128
