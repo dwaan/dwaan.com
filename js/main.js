@@ -77,7 +77,7 @@ var menu = {
 			that.active = true;
 
 			tl
-				.to('.menu__pop .menu__item', { y: 0, opacity: 1, scale: 1, duration: .256, ease: "power2" })
+				.fromTo('.menu__pop .menu__item', { yPercent: 0, xPercent: 0, opacity: 0, scale: 1 }, { yPercent: 0, opacity: 1, scale: 1, duration: .256, ease: "power2" })
 				.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { transformOrigin: "0 0", xPercent: 200, opacity: 0 }, { xPercent: 0, opacity: 1, duration: .768, ease: "expo.out", stagger: {
 					from: 0,
 					amount: .128
@@ -106,6 +106,7 @@ var menu = {
 		var border = ".menu__item .border",
 			borderRadius,
 			_hugeText = new hugeText(border + " > div ");
+
 		for (var i = 2; i <= 6; i++) {
 			if (i == 5)
 				i = 6;
@@ -122,19 +123,11 @@ var menu = {
 				this.el.borderRadius = "2% 2% 2% 25%";
 
 			this.el.onmouseenter = function () {
-				gsap.to(border, {
-					duration: .386,
-					ease: "expo",
-					borderRadius: this.borderRadius
-				});
+				gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
 				_hugeText.show(this.innerHTML);
 			}
 			this.el.onmouseleave = function () {
-				gsap.to(border, {
-					duration: .386,
-					ease: "expo",
-					borderRadius: "2% 2% 2% 2%"
-				});
+				gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
 				_hugeText.hide();
 			}
 		}
