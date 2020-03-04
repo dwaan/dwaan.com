@@ -27,11 +27,11 @@
 										<div class="words stats__content">
 											<p>
 												<b>35+</b>
-												<small>design concepts that I’ve created</small>
+												<small>design concepts created</small>
 											</p>
 											<p>
 												<b>50+</b>
-												<small>designs that I’ve converted to web pages</small>
+												<small>designs created and sliced</small>
 											</p>
 										</div>
 									</div>

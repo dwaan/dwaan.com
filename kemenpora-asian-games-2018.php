@@ -29,11 +29,11 @@
 										<div class="stats__content">
 											<p>
 												<b>1</b>
-												<small>One concept for pitching purpose</small>
+												<small>one concept for pitching purpose</small>
 											</p>
 											<p>
 												<b>2</b>
-												<small>2 pages of designs were made</small>
+												<small>two pages of design were made</small>
 											</p>
 										</div>
 									</div>

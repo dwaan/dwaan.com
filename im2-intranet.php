@@ -29,11 +29,11 @@
 										<div class="stats__content">
 											<p>
 												<b>1</b>
-												<small>Two working concepts before it get approved</small>
+												<small>one working concept for approva;</small>
 											</p>
 											<p>
 												<b>7+</b>
-												<small>More than seven pages to design</small>
+												<small>more than seven pages to design</small>
 											</p>
 										</div>
 									</div>

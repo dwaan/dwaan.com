@@ -685,25 +685,6 @@ p a {
 	left: 50%;
 	transform: translate3d(-50%,-50%,0);
 }
-/* Dwan Icon Scroll */
-.icn_scroll:before {
-	width: 50%;
-	height: 100%;
-	border: 2px solid #C3DEE4;
-	border-radius: 100px;
-}
-.icn_scroll:after {
-	top: 30%;
-	width: 10%;
-	height: 30%;
-	background-color: #C3DEE4;
-	border-radius: 666px;
-}
-@media (max-aspect-ratio: 1/1) {
-	.icn_scroll:before {
-		border-width: 1px;
-	}
-}
 /* Draw Icon Close */
 .icn_close:before,
 .icn_close:after {
@@ -1723,11 +1704,11 @@ main {
 .dark .scroll {
 	background-color: #2f4148;
 }
-.scroll .show {
-	opacity: 1;
-}
-.scroll .hide {
-	opacity: 0;
+.scroll > div {
+	position: absolute;
+	display: table;
+	left: 50%;
+	transform: translate3d(-50%,0,0);
 }
 .scroll .icn {
 	float: left;
@@ -1736,27 +1717,29 @@ main {
 	height: 2.7777777778vh;
 	margin: 1.275vh 1vw 0 0;
 }
+.scroll .icn > svg {
+	width: 100%;
+	height: 100%;
+}
 .scroll .scroll__up,
 .scroll .scroll__down {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	display: table;
-	width: 100%;
-	margin: 0 auto;
-	width: initial;
+	float: left;
+	display: block;
+	margin: 0;
+	padding: 0;
 	height: 5.5555555556vh;
+	line-height: 5.5555555556vh;
 	text-align: center;
 	font-weight: 500;
-	line-height: 100%;
 	font-size: .9rem;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
 	color: #C3DEE4;
-	line-height: 5.8vh;
-	overflow: hidden;
 	white-space: nowrap;
-	transform: translate3d(-50%, 0, 0);
+	overflow: hidden;
+}
+.scroll .scroll__down {
+	width: 0;
 }
 @media (max-aspect-ratio: 3/2) {
 	.scroll .scroll__up,
@@ -2475,10 +2458,10 @@ main {
 }
 @media (max-aspect-ratio: 4/3) {
 	.work .back {
-		width: 11vw;
+		width: 4vw;
 	}
 	.work .back:hover {
-		width: 4.5vw;
+		width: 5vw;
 	}
 }
 @media (max-aspect-ratio: 1/1) {
@@ -2491,7 +2474,7 @@ main {
 		margin-left: 19vw;
 	}
 	.work .back:hover {
-		width: 5.5vw;
+		width: 6vw;
 	}
 	.work .back:before {
 		border-top-width: .4vw;
@@ -2873,7 +2856,7 @@ main {
 }
 .work__spec p a:hover {
 	color: #202526;
-	background-color: #C3DEE4;
+	background-color: transparent;
 }
 .dark .work__spec p a {
 	background-color: #C3DEE4;
@@ -2882,7 +2865,7 @@ main {
 }
 .dark .work__spec p a:hover {
 	color: #C3DEE4;
-	background-color: #202526;
+	background-color: transparent;
 }
 @media (max-aspect-ratio: 1/1) {
 	.work__spec h4,
@@ -3069,8 +3052,9 @@ main {
 .me-inner {
 	position: relative;
 }
-.me a {
-	color: #008;
+.me a,
+.me strong {
+	color: #276173;
 	text-decoration: none;
 }
 .me hr {
@@ -3266,6 +3250,7 @@ main {
 .imuiux,
 .follow,
 .us,
+.know,
 .cofound,
 #firstscene {
 	display: block;
@@ -3275,13 +3260,20 @@ main {
 	padding: 0 10vw;
 	overflow: hidden;
 }
+.us {
+	position: absolute;
+	pointer-events: none;
+}
+.no-js .us {
+	position: relative;
+}
 .imuiux,
 .follow {
 	position: absolute;
 	top: 0;
 }
 #firstscene {
-	height: 200vh;
+	height: 300vh;
 	padding: 0;
 }
 .no-js #firstscene {
@@ -3343,14 +3335,17 @@ main {
 	margin-top: -30vh;
 	padding: 0 10vw;
 }
-.us strong {
-	color: #276173;
-}
 .dark .us strong {
 	color: #F3F72C;
 }
 .us p {
 	padding-top: 4vh;
+}
+.know h2 {
+	margin-top: -25vh;
+}
+.know p {
+	width: 50vw;
 }
 .cofound p {
 	font-size: 1.6rem;
@@ -3494,10 +3489,14 @@ main {
 	transform: translate3d(-50%,-50%,0);
 }
 .mrgoat .mrgate .h2 h3 {
+	display: table;
 	opacity: 0;
+	text-align: center;
+	left: 50%;
+	transform: translateX(-50%);
 }
 .mrgoat .h2:nth-child(1) h3  {
-	opacity: 1
+	opacity: 1;
 }
 .mrgoat h2,
 .mrgoat h3,
@@ -3569,7 +3568,7 @@ main {
 		font-size: 12rem;
 	}
 	.mrgoat h3 {
-		font-size: 11rem;
+		font-size: 9rem;
 	}
 }
 @media (max-aspect-ratio: 3/4) {
@@ -3596,22 +3595,6 @@ main {
 	.mrgoat h4 {
 		line-height: 130%;
 		width: 60vw;
-	}
-	.mrgoat .item:nth-child(13),
-	.mrgoat .item:nth-child(14),
-	.mrgoat .item:nth-child(15),
-	.mrgoat .item:nth-child(16),
-	.mrgoat .item:nth-child(17),
-	.mrgoat .item:nth-child(18),
-	.mrgoat .item:nth-child(19),
-	.mrgoat .item:nth-child(20),
-	.mrgoat .item:nth-child(21),
-	.mrgoat .item:nth-child(22),
-	.mrgoat .item:nth-child(23),
-	.mrgoat .item:nth-child(24),
-	.mrgoat .item:nth-child(25),
-	.mrgoat .item:nth-child(26) {
-		display: none;
 	}
 }
 @media (max-aspect-ratio: 2/3) {
@@ -3987,7 +3970,7 @@ main {
 }
 @media (max-aspect-ratio: 2/3) {
 	.call > div {
-		top: 57.5%;
+		top: 60%;
 	}
 }
 

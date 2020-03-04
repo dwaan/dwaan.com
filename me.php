@@ -83,10 +83,18 @@
 							</div>
 						</div>
 
-						<div class="us block__full">
+						<div class="about us block__full">
 							<div class="block__middle">
 								<h2>me, my partner and <strong>mr. goat</strong> live in tel aviv-yafo</h2>
 								<p>I'm one of the few Indonesian who live in Israel, it's very rare indeed. I haven't seen any Indonesian who live in here, yet. So hit me up if you know anyone.</p>
+								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
+							</div>
+						</div>
+
+						<div class="know us block__full">
+							<div class="block__middle">
+								<h2><a href="/say-hi">so send me a message</a></h2>
+								<p>if you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to asked something to me.</p>
 								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
 							</div>
 						</div>

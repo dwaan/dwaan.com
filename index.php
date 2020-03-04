@@ -70,8 +70,11 @@
 					<div class="work work_float">
 						<div class="work__container">
 							<div class="scroll">
-								<div class="scroll__up"><i class="icn icn_scroll"></i> <span>Scroll up to see some of my work</span></div>
-								<div class="scroll__down hide"><i class="icn icn_scroll"></i> <span>Scroll down to hide my work</span></div>
+								<div>
+									<div class="icn"><svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="12" height="18" rx="5" stroke="#C3DEE4" stroke-width="2"/><rect x="6" y="4" width="2" height="7" rx="1" fill="#C3DEE4"/></svg></div>
+									<p class="scroll__up">Scroll up to see some of my work</p>
+									<p class="scroll__down">Scroll down to hide my work</p>
+								</div>
 							</div>
 
 							<div class="work__list">

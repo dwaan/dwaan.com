@@ -15,6 +15,19 @@ var dark_mode = false,
 
 // Put mandatory html stuff
 _q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div class="cm__table"><div class="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if posible for better layout.</p></div></div></div></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>';
+_q("header .menu__item").innerHTML = '\
+	<div class="border"><div></div></div>\
+	<div class="menu__pos">\
+		<ul class="plain">\
+			<li class="close"><span>close <i class="icn icn_close"></i></span></li>\
+			<li><a href="./">home</a></li>\
+			<li><a href="./me">me</a></li>\
+			<li><a href="./work">work</a></li>\
+			<li><hr /></li>\
+			<li><a href="./say-hi">say, hi!</a></li>\
+			<li><p>As you can see, I didn’t use cookies or local storage in my website, I don’t need to know where did you coming from, what pages that you read, or anything about you.</p></li>\
+		</ul>\
+	</div>';
 // Snoop which text or url that are currently clicked
 var clicked_target = null,
 	clicked_text = "";
@@ -37,7 +50,7 @@ var menu = {
 		// The bright/dark mode switcher
 		this.el = _q('#mode');
 		gsap.set(this.el.querySelector("#ray"), {transformOrigin: "center center"})
-		this.el.onmousedown = function (e) {
+		this.el.onclick = function (e) {
 			if (!dark_mode) {
 				dark_mode = true;
 				addClass(_q("html"), "dark");
@@ -49,95 +62,44 @@ var menu = {
 			e.preventDefault();
 		}
 		this.el.onmouseenter = function () {
-			gsap.to(this.querySelector("#ray"), {
-				duration: .512,
-				ease: "expo",
-				rotation: 180,
-				scale: 1.1
-			});
+			gsap.to(this.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: .768, ease: "elastic.out" });
 		}
 		this.el.onmouseleave = function () {
-			gsap.to(this.querySelector("#ray"), {
-				duration: .512,
-				ease: "expo",
-				rotation: 0,
-				scale: 1
-			});
+			gsap.to(this.querySelector("#ray"), { rotation: 0, scale: 1, duration: .768, ease: "elastic.out" });
 		}
 
 		// The main menu events
 		this.el = _q('.menu__pop > a');
-		gsap.set(this.el.querySelector("#menu-short"), {x: -7.5});
-		this.el.onmousedown = function (e) {
-			var tl = gsap.timeline({
-				defaults: {
-					duration: .768,
-					ease: "expo.out"
-				}
-			});
+		this.el.onclick = function (e) {
+			var tl = gsap.timeline();
 
 			addClass(this.parentNode, "active");
 			that.active = true;
 
-			tl.fromTo('.menu__pop .menu__item', {
-				yPercent: 0,
-				xPercent: 0,
-				opacity: 0
-			}, {
-				yPercent: 0,
-				opacity: 1,
-				scaleY: 1
-			}).fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
-				transformOrigin: "0 0",
-				xPercent: 200,
-				opacity: 0
-			}, {
-				xPercent: 0,
-				opacity: 1,
-				stagger: {
+			tl
+				.to('.menu__pop .menu__item', { y: 0, opacity: 1, scale: 1, duration: .256, ease: "power2" })
+				.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { transformOrigin: "0 0", xPercent: 200, opacity: 0 }, { xPercent: 0, opacity: 1, duration: .768, ease: "expo.out", stagger: {
 					from: 0,
 					amount: .128
-				}
-			}, .128);
+				}})
+			;
 
 			e.preventDefault();
 		}
 		this.el.onmouseenter = function () {
-			gsap.to(this.querySelector("#menu-short"), {
-				duration: .512,
-				ease: "expo",
-				x: 0
-			});
+			gsap.to(this.querySelector("#menu-short"), { attr: { x1: 22 }, duration: .768, ease: "elastic.out" });
 		}
 		this.el.onmouseleave = function () {
-			gsap.to(this.querySelector("#menu-short"), {
-				duration: .512,
-				ease: "expo",
-				x: -7.5
-			});
+			gsap.to(this.querySelector("#menu-short"), { attr: { x1: 16 }, duration: .768, ease: "elastic.out" });
 		}
 
 		// The logo events
 		this.el = _q('.logo');
 		this.el.onmouseenter = function () {
-			gsap.to(".logo .hat", {
-				transformOrigin: "50% 75%",
-				yPercent: -3,
-				xPercent: -1,
-				rotation: 4,
-				duration: 1.024,
-				ease: "elastic.out"
-			})
+			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: -3, xPercent: -1, rotation: 4, duration: 1.024, ease: "elastic.out" })
 		}
 		this.el.onmouseleave = function () {
-			gsap.to(".logo .hat", {
-				transformOrigin: "50% 75%",
-				yPercent: 0,
-				xPercent: 0,
-				rotation: 0,
-				duration: 1.024,
-				ease: "elastic.out"
-			});
+			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: 0, xPercent: 0, rotation: 0, duration: 1.024, ease: "elastic.out" });
 		}
 
 		// The main menu hover item animation
@@ -179,30 +141,15 @@ var menu = {
 
 		// The main menu close events
 		this.el = _q('.menu__item .close span');
-		this.el.onmousedown = function (e) {
-			var tl = gsap.timeline({
-				defaults: {
-					duration: .512,
-					ease: "expo.in"
-				}
-			});
-			tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
-				xPercent: 0,
-				opacity: 1
-			}, {
-				xPercent: -200,
-				opacity: 0,
-				stagger: {
+		this.el.onclick = function (e) {
+			var tl = gsap.timeline();
+			tl
+				.to('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { xPercent: -200, opacity: 0, duration: .512, ease: "expo.in", stagger: {
 					from: 0,
 					amount: .128
-				}
-			}).fromTo('.menu__pop .menu__item', {
-				yPercent: 0,
-				xPercent: 0,
-				opacity: 1
-			}, {
-				opacity: 0
-			}, .128);
+				}})
+				.to('.menu__pop .menu__item', { opacity: 0, duration: .256, ease: "power2" })
+			;
 			removeClass(this.parentNode.parentNode.parentNode.parentNode.parentNode, "active");
 			that.active = false;
 
@@ -231,7 +178,7 @@ var menu = {
 				marginTop: 50
 			});
 
-			this.el[i].onmousedown = function (e) {
+			this.el[i].onclick = function (e) {
 				e.preventDefault();
 			}
 			this.el[i].onmouseenter = function () {
@@ -359,13 +306,21 @@ var loading = {
 		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
 			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo.inOut" }}),
 				sl = that.selector,
-				size = 0;
+				size = [];
 
 			window.aspectRatio = window.matchMedia("(max-aspect-ratio: 1/1)");
 			window.aspectRatio.size = function(set) {
-				var size = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
-				if (this.matches) size = sl.querySelector(".loading").offsetHeight + (sl.querySelector(".loading").offsetHeight / 2);
-				if (set) gsap.to(sl, { width: size, height: size, duration: .512 });
+				var size = [];
+				size[0] = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
+				size[1] = "17.5vh";
+
+				if (this.matches) {
+					size[0] = sl.querySelector(".loading").offsetHeight + (sl.querySelector(".loading").offsetHeight / 2);
+					size[1] = "15vh";
+				}
+
+				if (set) gsap.to(sl, { width: size[0], height: size[0], duration: .512 });
+
 				return size;
 			}
 			size = window.aspectRatio.size();
@@ -380,7 +335,7 @@ var loading = {
 						gsap.set(sl.querySelector(".text"), { opacity: 1 })
 						sl.querySelector(".text").innerHTML = "<p class='hi'>hi!</p>";
 					}}, 0)
-				.to(sl, { width: size, height: size, top: "17.5vh", left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
+				.to(sl, { width: size[0], height: size[0], top: size[1], left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
 				.set(sl, { zIndex: 1 });
 
 			if (callback != undefined) callback();
@@ -712,7 +667,7 @@ var Home = Barba
 			if (fruit[index] == undefined) index = 0;
 
 			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
-			_q(".img").onmousedown = function(e) {
+			_q(".img").onclick = function(e) {
 				do {
 					index = getRandomInt(1, fruit.length - 1);
 				} while(_q(".fruit").getAttribute("src") == ("/dwaan/img/" + fruit[index]));
@@ -792,15 +747,10 @@ var Home = Barba
 				.addTo(controller);
 
 			// Scroll animate the scroll sign
-			anim = gsap.timeline({
-				defaults: {
-					duration: .128,
-					ease: "expo"
-				}
-			});
+			anim = gsap.timeline({ defaults: { duration: .256, ease: "power2.inOut" }});
 			anim
-				.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0)
-				.fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
+				.fromTo(".scroll__up", { width: "auto" }, { width: 0 }, 0)
+				.fromTo(".scroll__down", { width: 0 }, { width: "auto" }, 0)
 			;
 			new ScrollMagic
 				.Scene({triggerElement: ".work_float", offset: 10, triggerHook: 1})
@@ -988,9 +938,9 @@ var Work = Barba
 			for (var i = 0; i < els.length; i++) {
 				tl = gsap.timeline({
 					defaults: { duration: 1.024, ease: "expo.out" }});
-				tl.fromTo(els[i].children, { y: 25 }, { y: 0, stagger: {
+				tl.fromTo(els[i].children, { y: 100 }, { y: 0, stagger: {
 						from: 0,
-						amount: .256
+						amount: .064
 					}});
 				new ScrollMagic
 					.Scene({ triggerElement: els[i] })
@@ -1329,27 +1279,40 @@ var Me = Barba
 			// First text animation
 			tl = gsap.timeline({ defaults: { duration: .5, ease: "linear" }});
 			tl
+				.set(".imuiux", { pointerEvents: "none" }, .5)
 				.fromTo(".imuiux h1", { y: 0 }, { y: -60, duration: .75 }, 0)
 					.fromTo(".imuiux h1", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
 				.fromTo(".imuiux p", { y: 0 }, { y: -50, duration: .75 }, 0)
 					.fromTo(".imuiux p", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
+
+				.set(".about", { pointerEvents: "auto" }, .5)
+					.set(".about", { pointerEvents: "none" }, 2.25)
+				.fromTo(".about h2", { y: 60 }, { y: -60, duration: 2 }, .5)
+					.fromTo(".about h2", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
+					.fromTo(".about h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+				.fromTo(".about p", { y: 50 }, { y: -50, duration: 2 }, .5)
+					.fromTo(".about p", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
+					.fromTo(".about p", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+
+				.set(".know", { pointerEvents: "auto" }, 2.25)
+				.fromTo(".know h2", { y: 60 }, { y: -60, duration: 2 }, 2.25)
+					.fromTo(".know h2", { opacity: 0 },  { opacity: 1, duration: .25 }, 2.25)
+					.fromTo(".know h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 3.9)
+				.fromTo(".know p", { y: 50 }, { y: -50, duration: 2 }, 2.25)
+					.fromTo(".know p", { opacity: 0 },  { opacity: 1, duration: .25 }, 2.25)
+					.fromTo(".know p", { opacity: 1 },  { opacity: 0, duration: .25 }, 4.1)
+
 				.fromTo(".imuiux img", { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
 					.fromTo(".imuiux img", { scale: 1 }, { scale: .95, duration: 1 }, 0)
-					.to(".imuiux img", { yPercent: 5, ease: "expo.in", duration: 1.5 }, 1)
-					.to(".imuiux img", { opacity: 0, duration: .25 }, 2.25)
-				.fromTo(".us h2", { y: 60 }, { y: -60, duration: 2 }, .5)
-					.fromTo(".us h2", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
-					.fromTo(".us h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
-				.fromTo(".us p", { y: 50 }, { y: -50, duration: 2 }, .5)
-					.fromTo(".us p", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
-					.fromTo(".us p", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+					.to(".imuiux img", { yPercent: 10, ease: "expo.in", duration: 3.25 }, 1)
+					.to(".imuiux img", { opacity: 0, duration: .25 }, 3.75)
 			;
 			new ScrollMagic
-				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight*2})
+				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight*3})
 				.setPin("#firstscene", { pushFollowers: false })
 				.setTween(tl)
 				.addTo(controller);
-			gsap.set("#firstscene", { height: _q("body").offsetHeight*2 });
+			gsap.set("#firstscene", { height: _q("body").offsetHeight*3 });
 			gsap.set(".us h2, .us p, .us img", { opacity: 0 });
 			gsap.set(".imuiux img", { transformOrigin: "50% 0" });
 
@@ -1363,7 +1326,9 @@ var Me = Barba
 					.to(".mrgoat .h22", { y: -20 }, .75)
 					.to(".mrgoat .h22", { y: -60, opacity: 0 }, 1)
 				.fromTo(".mrgoat .h23", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1)
-					.to(".mrgoat .h23", { y: 0 }, 1.25);
+					.to(".mrgoat .h23", { y: 0 }, 1.25)
+					.to(".mrgoat .h23", { y: -50, opacity: 0 }, 1.5)
+				;
 			new ScrollMagic
 				.Scene({triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight*2})
 				.setPin(".mrgoat")
@@ -1407,16 +1372,24 @@ var Me = Barba
 			// Scroll capabilities item
 			els = _qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li");
 			for (var i = 0; i < els.length; i++) {
-				anim = gsap.fromTo(els[i], { x: 25 + (i * 25), opacity: 0 }, { x: 0, opacity: 1, duration: 1.024, ease: "expo.out" });
+				anim = gsap.timeline({ defaults: { duration: 1.024, ease: "expo.out" }});
+				anim
+					.fromTo(els[i], { x: 25 + (i * 25) }, { x: 0 }, 0)
+					.fromTo(els[i], { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
+				;
 				new ScrollMagic.Scene({triggerElement: els[i], triggerHook: .85 })
 					.setTween(anim)
 					.addTo(controller);
 			}
 
 			// Scroll latest works
-			anim = gsap.fromTo(".work__list, .work__list ul li", { y: 250 }, { y: 0, duration: 1.024, ease: "expo", stagger: {
-				from: 0, amount: .256
-			}});
+			anim = gsap.timeline({ defaults: { duration: 1.024, ease: "expo", stagger: {
+					from: 0, amount: .256
+				}}});
+			anim
+				.fromTo(".work__list, .work__list ul li", { y: 250 }, { y: 0 }, 0)
+				.fromTo(".work__list, .work__list ul li", { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
+			;
 			new ScrollMagic.Scene({triggerElement: ".work__list, .work__list ul", triggerHook: .85 })
 				.setTween(anim)
 				.addTo(controller);
@@ -1437,13 +1410,6 @@ var Me = Barba
 						.addTo(controller);
 				}
 			}
-
-
-			// Animate the beginning
-			gsap.fromTo(".imuiux > div > *", { y: 200, opacity: 0 }, { y: 0, opacity: 1, delay: .256, duration: 1.024, ease: "expo.out", stagger: {
-				from: 0, amount: .128
-			}});
-
 
 			// Adding class to ig images
 			var els = _qAll("#ig img");

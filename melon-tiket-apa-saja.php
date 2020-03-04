@@ -28,12 +28,12 @@
 									<div class="stats block">
 										<div class="stats__content">
 											<p>
-												<b>3</b>
-												<small>3 working prototypes before it get approved</small>
+												<b>2</b>
+												<small>two concept concepts for approval</small>
 											</p>
 											<p>
 												<b>50+</b>
-												<small>More than fifty pages to design</small>
+												<small>more than fifty pages to design</small>
 											</p>
 										</div>
 									</div>
