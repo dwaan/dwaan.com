@@ -948,7 +948,7 @@ var WorkDetail = Barba
 			controller.destroy();
 			controller = new ScrollMagic.Controller({
 				globalSceneOptions: {
-					triggerHook: .95
+					triggerHook: 1
 				}
 			});
 			els = null;
@@ -1029,7 +1029,7 @@ var WorkDetail = Barba
 			// Scroll animate staggering from right
 			els = _qAll(".work__detail > hr, .work__detail > h5, .work__detail .work__spec > *");
 			for (var j = els.length - 1; j >= 0; j--) {
-				anim = gsap.fromTo(els[j], { opacity: 0, x: 100 }, { opacity: 1, x: 0, ease: "expo.out", duration: 1.024, stagger: {
+				anim = gsap.fromTo(els[j], { opacity: 0, x: 250 }, { opacity: 1, x: 0, ease: "expo.out", duration: 1.024, stagger: {
 					from: 0,
 					amount: .256
 				}});
@@ -1041,7 +1041,7 @@ var WorkDetail = Barba
 			// Scroll animate immidiete from bottom
 			els = _qAll(".work__detail > blockquote");
 			for (var j = els.length - 1; j >= 0; j--) {
-				anim = gsap.fromTo(els[j], { x: 100 }, { x: 0, ease: "expo.out", duration: 1.024 });
+				anim = gsap.fromTo(els[j], { x: 250 }, { x: 0, ease: "expo.out", duration: 1.024 });
 				new ScrollMagic
 					.Scene({triggerElement: els[j]})
 					.setTween(anim)
@@ -1050,13 +1050,14 @@ var WorkDetail = Barba
 			// Scroll animate from bottom
 			els = _qAll(".work__detail .block__left, .work__detail .stats__content, .work__timeline");
 			for (var j = els.length - 1; j >= 0; j--) {
-				for (var i = 0; i < els[j].children.length; i++) {
-					anim = gsap.fromTo(els[j].children[i], { y: 100 + (i * 50) }, { y: 0, ease: "expo.out", duration: 1.024 });
-					new ScrollMagic
-						.Scene({triggerElement: els[j]})
-						.setTween(anim)
-						.addTo(controller);
-				}
+				anim = gsap.fromTo(els[j].children, { y: 250 }, { y: 0, ease: "expo.out", duration: 1.024, stagger: {
+					from: 0,
+					amount: .128
+				}});
+				new ScrollMagic
+					.Scene({triggerElement: els[j]})
+					.setTween(anim)
+					.addTo(controller);
 			}
 
 			new animateNumber(".work__detail .stats__content p:first-child b");

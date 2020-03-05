@@ -21,7 +21,7 @@
 							<div class="block block__clear">
 								<div class="block__left">
 									<h4>Melon Indonesia</h4>
-									<h1>Tiket Apa Saja</h1>
+									<h1>Tiket Apa Saja - Online Ticketing System</h1>
 									<p>Tiket Apa Saja or Any Ticket is an online ticketing company that manages online ticket sales of music events such as concerts or music festivals. Based in Yogyakarta, it grows into a national size company.</p>
 								</div>
 								<div class="block__right">

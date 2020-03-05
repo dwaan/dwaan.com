@@ -20,7 +20,7 @@
 						<div class="work__list work__detail">
 							<div class="block block__clear">
 								<div class="block__left">
-									<h4>Kemenpora</h4>
+									<h4>Ministry of Youth and Sports</h4>
 									<h1>Asian Games 2018 Apps</h1>
 									<p>Kementrian Pemuda and Olahraga (Kemenpora) or Ministry of Youth and Sport of Indonesia was the host for Asian Games 2018. They wanted to make mobile apps that make it easy for officials to check all the schedule management.</p>
 								</div>

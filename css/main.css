@@ -2363,6 +2363,9 @@ main {
 	padding: 0;
 	width: 65vw;
 }
+.work__detail > div {
+	position: relative;
+}
 .work__detail h1 {
 	font-size: 4.75rem;
 	margin-top: 3vh;
@@ -2419,10 +2422,19 @@ main {
 		width: 55vw;
 	}
 	.work__detail .block__right {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		display: block;
 		width: 14vw;
 	}
 	.work__detail .stats {
-		margin-top: 7vh;
+		position: absolute;
+		margin: 0;
+		top: 50%;
+		right: 0;
+		transform: translate3d(0,-50%,0);
 	}
 	.work__detail .stats p {
 		margin: 0 0 3vh;
@@ -2438,10 +2450,13 @@ main {
 	}
 	.work__detail .block__left,
 	.work__detail .block__right {
+		position: relative;
 		width: 100%;
 		float: none;
+		transform: initial;
 	}
 	.work__detail .stats {
+		position: relative;
 		margin-top: 3vh;
 		transform: initial;
 	}
@@ -2882,7 +2897,7 @@ main {
 
 .work__spec {
 	display: block;
-	padding: 0 0 3vh;
+	padding: 0;
 }
 .work__spec:before,
 .work__spec:after {
@@ -2990,11 +3005,17 @@ main {
 	pointer-events: auto;
 	white-space: normal;
 	vertical-align: top;
-	font-size: initial;
+	font-size: 1.3rem!important;
 }
+
 @media (max-aspect-ratio: 3/2) {
 	.work__timeline .wheel p {
 		padding: 2vh 2vw;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.work__timeline .wheel p {
+		font-size: 1.7rem!important;
 	}
 }
 .work__timeline .tns-auter .wheel p {

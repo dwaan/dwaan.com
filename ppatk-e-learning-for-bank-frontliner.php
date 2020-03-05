@@ -21,7 +21,7 @@
 							<div class="block block__clear">
 								<div class="block__left">
 									<h4>Confidential Foreign Aid Program</h4>
-									<h1>PPATK: E-Learning for Banking Frontliner</h1>
+									<h1>PPATK: E-Learning for Bank Frontliner</h1>
 									<p>I've been working with PPATK (Indonesian Financial Transaction Reports and Analysis Center) for several projects. But for this project, I team up with Foreign Aid Programs that don't want to be named.</p>
 								</div>
 								<div class="block__right">

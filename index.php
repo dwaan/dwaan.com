@@ -109,8 +109,8 @@
 								<div class="scroller__trigger"></div>
 								<div class="block scroller">
 									<div class="block gallery block__clear">
-										<a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a>
-										<a href="./ppatk-e-learning-for-banking-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>PPATK - E-Learning for Banking Frontliner</span></a>
+										<a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
+										<a href="./ppatk-e-learning-for-bank-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a>
 										<a href="./angkasa-pura-1-performace-dashboard"><span><img src="/dwaan/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
 										<a href="./work">See All</a>
 									</div>
