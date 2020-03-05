@@ -3368,22 +3368,17 @@ main {
 	position: absolute;
 	pointer-events: none;
 }
-.no-js .us,
-.no-js .know,
-.no-js .who {
-	position: relative;
-}
 .imuiux,
 .follow {
 	position: absolute;
 	top: 0;
 }
 #firstscene {
-	height: 400vh;
+	height: 100vh;
 	padding: 0;
 }
 .no-js #firstscene {
-	height: 200vh;
+	height: 400vh;
 }
 .me .block__middle {
 	height: 100vh;
@@ -3391,9 +3386,13 @@ main {
 .no-js .imuiux,
 .no-js .follow,
 .no-js .us,
+.no-js .know,
+.no-js .mrgoat,
+.no-js .who,
 .no-js .cofound {
 	position: relative;
-	border-bottom: 1px dotted rgba(0,0,0,.25)
+	border-bottom: 1px dotted rgba(0,0,0,.25);
+	pointer-events: auto;
 }
 .no-js .cofound {
 	border-top: 1px dotted rgba(0,0,0,.25);
@@ -3747,6 +3746,9 @@ main {
 	z-index: 1;
 	padding: 0;
 	transform: initial;
+}
+.no-js .igstage {
+	margin-bottom: 5vh;
 }
 #ig {
 	padding: 2vw;
