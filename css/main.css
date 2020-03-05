@@ -1194,7 +1194,7 @@ header {
 }
 @media (max-aspect-ratio: 1/1) {
 	.menu__item .menu__pos {
-		width: 70%;
+		width: 40%;
 		left: 50%;
 		right: initial;
 		transform: translate3d(-50%,-50%,0);
@@ -3144,6 +3144,16 @@ main {
 	color: #276173;
 	text-decoration: none;
 }
+.me a {
+	text-decoration: underline;
+}
+.me a * {
+	text-decoration: underline;
+}
+.dark .me a,
+.dark .me strong {
+	color: #F3F72C;
+}
 .me hr {
 	display: block;
 	margin: 0 auto;
@@ -3198,11 +3208,14 @@ main {
 	line-height: 110%;
 	padding: 5vh 0 0;
 }
+.me strike {
+	opacity: .5;
+}
+.me strike * {
+	text-decoration: line-through;
+}
 .me .block__middle hr {
 	margin: 10vh auto 0;
-}
-.dark .me a {
-	color: #fff;
 }
 .dark .me hr {
 	border-color: #86a4b0;
@@ -3338,6 +3351,7 @@ main {
 .follow,
 .us,
 .know,
+.who,
 .cofound,
 #firstscene {
 	display: block;
@@ -3347,11 +3361,16 @@ main {
 	padding: 0 10vw;
 	overflow: hidden;
 }
-.us {
+.us,
+.know
+.who {
+	z-index: 1;
 	position: absolute;
 	pointer-events: none;
 }
-.no-js .us {
+.no-js .us,
+.no-js .know,
+.no-js .who {
 	position: relative;
 }
 .imuiux,
@@ -3360,7 +3379,7 @@ main {
 	top: 0;
 }
 #firstscene {
-	height: 300vh;
+	height: 400vh;
 	padding: 0;
 }
 .no-js #firstscene {
@@ -3393,7 +3412,9 @@ main {
 	padding: 3vh 5vw 0;
 }
 .imuiux img,
-.us img {
+.us img,
+.know img
+.who img {
 	position: absolute;
 	z-index: 2;
 	left: 50%;
@@ -3422,13 +3443,11 @@ main {
 	margin-top: -30vh;
 	padding: 0 10vw;
 }
-.dark .us strong {
-	color: #F3F72C;
-}
 .us p {
 	padding-top: 4vh;
 }
-.know h2 {
+.know h2,
+.who h2 {
 	margin-top: -25vh;
 }
 .know p {

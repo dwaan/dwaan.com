@@ -1249,41 +1249,64 @@ var Me = Barba
 
 			// First text animation
 			tl = gsap.timeline({ defaults: { duration: .5, ease: "linear" }});
+
+			el = ".imuiux";
 			tl
-				.set(".imuiux", { pointerEvents: "none" }, .5)
-				.fromTo(".imuiux h1", { y: 0 }, { y: -60, duration: .75 }, 0)
-					.fromTo(".imuiux h1", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
-				.fromTo(".imuiux p", { y: 0 }, { y: -50, duration: .75 }, 0)
-					.fromTo(".imuiux p", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
-
-				.set(".about", { pointerEvents: "auto" }, .5)
-					.set(".about", { pointerEvents: "none" }, 2.25)
-				.fromTo(".about h2", { y: 60 }, { y: -60, duration: 2 }, .5)
-					.fromTo(".about h2", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
-					.fromTo(".about h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
-				.fromTo(".about p", { y: 50 }, { y: -50, duration: 2 }, .5)
-					.fromTo(".about p", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
-					.fromTo(".about p", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
-
-				.set(".know", { pointerEvents: "auto" }, 2.25)
-				.fromTo(".know h2", { y: 60 }, { y: -60, duration: 2 }, 2.25)
-					.fromTo(".know h2", { opacity: 0 },  { opacity: 1, duration: .25 }, 2.25)
-					.fromTo(".know h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 3.9)
-				.fromTo(".know p", { y: 50 }, { y: -50, duration: 2 }, 2.25)
-					.fromTo(".know p", { opacity: 0 },  { opacity: 1, duration: .25 }, 2.25)
-					.fromTo(".know p", { opacity: 1 },  { opacity: 0, duration: .25 }, 4.1)
-
-				.fromTo(".imuiux img", { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
-					.fromTo(".imuiux img", { scale: 1 }, { scale: .95, duration: 1 }, 0)
-					.to(".imuiux img", { yPercent: 10, ease: "expo.in", duration: 3.25 }, 1)
-					.to(".imuiux img", { opacity: 0, duration: .25 }, 3.75)
+				.set(el, { pointerEvents: "none" }, .5)
+				.fromTo(el + " h1", { y: 0 }, { y: -60, duration: .75 }, 0)
+					.fromTo(el + " h1", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
+				.fromTo(el + " p", { y: 0 }, { y: -50, duration: .75 }, 0)
+					.fromTo(el + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
 			;
+
+			el = ".about";
+			tl
+				.set(el, { pointerEvents: "auto" }, .5)
+					.set(el, { pointerEvents: "none" }, 2.25)
+				.fromTo(el + " h2", { y: 60 }, { y: -60, duration: 2 }, .5)
+					.fromTo(el + " h2", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
+					.fromTo(el + " h2", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+				.fromTo(el + " p", { y: 50 }, { y: -50, duration: 2 }, .5)
+					.fromTo(el + " p", { opacity: 0 },  { opacity: 1, duration: .25 }, .5)
+					.fromTo(el + " p", { opacity: 1 },  { opacity: 0, duration: .25 }, 2.25)
+			;
+
+			el = ".know";
+			tl
+				.set(el, { pointerEvents: "auto" }, 2.25)
+					.set(el, { pointerEvents: "none" }, 2.25)
+				.fromTo(el + " h2", { y: 60 }, { y: -60, duration: 2 }, 2.25)
+					.fromTo(el + " h2", { opacity: 0 },  { opacity: 1, duration: .25 }, 2.25)
+					.fromTo(el + " h2", { opacity: 1 },  { opacity: 0, duration: .5 }, 3.75)
+				.fromTo(el + " p", { y: 50 }, { y: -50, duration: 2 }, 2.25)
+					.fromTo(el + " p", { opacity: 0 },  { opacity: 1, duration: .25 }, 2.25)
+					.fromTo(el + " p", { opacity: 1 },  { opacity: 0, duration: .25 }, 4)
+			;
+
+			el = ".who";
+			tl
+				.set(el, { pointerEvents: "auto" }, 4)
+				.fromTo(el + " h2", { y: 40 }, { y: -40, duration: 2 }, 4)
+					.fromTo(el + " h2", { opacity: 0 },  { opacity: 1, duration: .25 }, 4)
+					.fromTo(el + " h2", { opacity: 1 },  { opacity: 0, duration: .5 }, 5.75)
+			;
+
+			el = ".imuiux img";
+			tl
+				.fromTo(el, { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
+					.to(el, { scale: .95, duration: 1 }, 0)
+					.to(el, { yPercent: 0, duration: 1.25 }, 1)
+					.to(el, { yPercent: -15, duration: 4 }, 2.25)
+					.to(el, { scale: .65, duration: 2 }, 4.25)
+					.to(el, { opacity: 0, duration: .5 }, 5.75)
+			;
+
 			new ScrollMagic
-				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight*3})
+				.Scene({triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight*4})
 				.setPin("#firstscene", { pushFollowers: false })
 				.setTween(tl)
 				.addTo(controller);
-			gsap.set("#firstscene", { height: _q("body").offsetHeight*3 });
+			gsap.set("#firstscene", { height: _q("body").offsetHeight*4 });
 			gsap.set(".us h2, .us p, .us img", { opacity: 0 });
 			gsap.set(".imuiux img", { transformOrigin: "50% 0" });
 

@@ -98,6 +98,13 @@
 								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
 							</div>
 						</div>
+
+						<div class="who us block__full">
+							<div class="block__middle">
+								<h2>and who is this Mr. Goat you asked?</h2>
+								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
+							</div>
+						</div>
 					</div>
 
 					<div class="mrgoat block__full">

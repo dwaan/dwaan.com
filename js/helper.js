@@ -139,7 +139,8 @@ var splitText = function (els) {
 				if (splext[j] == " ") splext[j] = "&nbsp;";
 				splord[i] += "<dt class='splext txt" + idx + i + j + "'>" + splext[j] + "</dt>";
 			}
-			splord[i] += "</dl> ";
+			splord[i] += "</dl>";
+			if (i < splord.length - 1) splord[i] += " ";
 			split += splord[i];
 		}
 
