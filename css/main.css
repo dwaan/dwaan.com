@@ -3491,6 +3491,9 @@ main {
 	.us img {
 		width: 90vw;
 	}
+	.know p {
+		width: 65vw;
+	}
 }
 @media (max-aspect-ratio: 3/4) {
 	.imuiux {
@@ -3518,6 +3521,9 @@ main {
 	}
 	.us p {
 		padding: 2vh 10vw 0;
+	}
+	.know p {
+		width: 100vw;
 	}
 	.cofound h3,
 	.cofound h4,

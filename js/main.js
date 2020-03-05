@@ -1286,7 +1286,7 @@ var Me = Barba
 			el = ".who";
 			tl
 				.set(el, { pointerEvents: "auto" }, 4)
-				.fromTo(el + " h2", { y: 40 }, { y: -40, duration: 2 }, 4)
+				.fromTo(el + " h2", { y: 40 }, { y: -70, duration: 2.25 }, 4)
 					.fromTo(el + " h2", { opacity: 0 },  { opacity: 1, duration: .25 }, 4)
 					.fromTo(el + " h2", { opacity: 1 },  { opacity: 0, duration: .5 }, 5.75)
 			;
@@ -1296,8 +1296,8 @@ var Me = Barba
 				.fromTo(el, { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
 					.to(el, { scale: .95, duration: 1 }, 0)
 					.to(el, { yPercent: 0, duration: 1.25 }, 1)
-					.to(el, { yPercent: -15, duration: 4 }, 2.25)
-					.to(el, { scale: .65, duration: 2 }, 4.25)
+					.to(el, { yPercent: -12.5, duration: 4 }, 2.25)
+					.to(el, { scale: .75, duration: 2 }, 4.25)
 					.to(el, { opacity: 0, duration: .5 }, 5.75)
 			;
 
