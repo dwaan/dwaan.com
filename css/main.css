@@ -513,7 +513,7 @@ p {
 	font-size: 1.3rem;
 	line-height: 160%;
 	letter-spacing: 0.005em;
-	color: #333;
+	color: #222;
 }
 html.dark p {
 	color: #86a4b0;
@@ -544,7 +544,6 @@ p small {
 @media (max-aspect-ratio: 2/3) {
 	p {
 		font-size: 1.7rem;
-		line-height: 140%;
 		padding: 1.5vh 0;
 	}
 	p small {
@@ -1892,9 +1891,9 @@ main {
 }
 .work__list .stats b {
 	margin-top: 0;
-	background: #2f4148;
+	background: #222;
 	color: #A4CDD6;
-	border-color: #2f4148;
+	border-color: #222;
 	font-size: 1.95rem;
 }
 .dark .work__list .stats p small {
@@ -1912,7 +1911,6 @@ main {
 	}
 	.work__list .stats b {
 		margin-bottom: 1.25vh;
-		text-shadow: 15vw 3vw 23vw rgba(0, 0, 0, 0.2);
 	}
 	.work__list .block__right {
 		margin-right: 0;
@@ -1923,10 +1921,7 @@ main {
 		width: 16vw;
 		margin-top: 0;
 	}
-	.work__list .stats .stats__content {
-		padding: 3vh 0 2vh;
-	}
-	.work__list .stats b {
+.work__list .stats b {
 		font-size: 1.8rem;
 	}
 	.work__list .block__left,
@@ -2108,9 +2103,6 @@ main {
 	padding: 2vh 0 2.5vh;
 	transform: initial;
 }
-.work_float .stats__content p b {
-	border-color: #1A1D1E.work__list .stats b;
-}
 .work_float p,
 .work_float p small {
 	color: #86a4b0;
@@ -2119,9 +2111,6 @@ main {
 	padding-top: 1vh;
 }
 @media (max-aspect-ratio: 1/1) {
-	.work {
-		padding: 15vh 2vw 2vw;
-	}
 	.work_float {
 		padding: 0 2.34375vw;
 	}
@@ -2388,7 +2377,7 @@ main {
 	margin-top: 8vh;
 }
 .work__detail .block__left {
-	width: 45vw;
+	width: 40vw;
 }
 .work__detail .block__right {
 	width: 19vw;
@@ -2408,8 +2397,6 @@ main {
 	.work__detail .block__left {
 		width: 47.5vw;
 	}
-}
-@media (max-aspect-ratio: 3/2) {
 	.work__detail .stats {
 		margin-top: 7vh;
 	}
@@ -2426,22 +2413,23 @@ main {
 		width: 80vw;
 	}
 	.work__detail h1 {
-		margin-top: 1vh;
-	}
-	.work__detail .stats p {
-		margin: 0 0 0 2vh;
-	}
-	.work__detail .stats p:last-child {
-		margin-left: 0;
+		margin-top: 3vh;
 	}
 	.work__detail .block__left {
-		width: 52.5vw;
+		width: 55vw;
 	}
 	.work__detail .block__right {
-		width: 28vw;
+		width: 14vw;
 	}
 	.work__detail .stats {
-		margin-top: 6vh;
+		margin-top: 7vh;
+	}
+	.work__detail .stats p {
+		margin: 0 0 3vh;
+		width: 14vw;
+	}
+	.work__detail .stats p:last-child {
+		margin-bottom: 0;
 	}
 }
 @media (max-aspect-ratio: 2/3) {
@@ -2450,7 +2438,7 @@ main {
 	}
 	.work__detail .block__left,
 	.work__detail .block__right {
-		width: auto;
+		width: 100%;
 		float: none;
 	}
 	.work__detail .stats {
@@ -2459,16 +2447,21 @@ main {
 	}
 	.work__detail .stats__content {
 		top: initial;
-		padding: 0;
+		padding: 0 0 2vh;
 	}
-	.work__detail .stats p,
-	.work__detail .stats p:last-child {
+	.work__detail .stats {
+		display: block;
+		width: 100%;
+	}
+	.work__detail .stats p {
+		display: block;
+		float: left;
 		position: relative;
-		margin: 0 4vw 1vh 0;
-		width: 38vw;
+		margin: 0;
+		width: 37vw;
 	}
 	.work__detail .stats p:first-child {
-		margin-right: 0;
+		float: right;
 	}
 	.work__detail .stats p b {
 		float: left;
@@ -2906,14 +2899,11 @@ main {
 	float: left;
 	width: 12vw;
 	font-weight: 500;
-	margin: 1vh 0 0;
+	margin: 3vh 0 0;
 }
 .work__spec p {
-	margin-top: 1vh;
-	padding: 0;
 	float: right;
 	width: 52vw;
-	color: #333;
 }
 .work__spec p a {
 	display: block;
@@ -3000,6 +2990,7 @@ main {
 	pointer-events: auto;
 	white-space: normal;
 	vertical-align: top;
+	font-size: initial;
 }
 @media (max-aspect-ratio: 3/2) {
 	.work__timeline .wheel p {

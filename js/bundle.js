@@ -1253,7 +1253,7 @@ var Home = Barba
 							gsap.set(fruit, { opacity: 0 });
 
 							// Ajax load the image
-							var progress = (index, url, percent, bytes) => {
+							var progress = function (index, url, percent, bytes) {
 								if (percent >= 100) {
 									gsap.set(fruit, { opacity: 1 });
 									anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
@@ -1351,7 +1351,7 @@ var Home = Barba
 				.to(".hero .box", { scale: 1, duration: 1.7 });
 
 			// Swipe event for gallery
-			var detectswipe = (el, func) => {
+			var detectswipe = function (el, func) {
 				swipe_det = new Object(); swipe_det.sX = 0; swipe_det.pX = 0; swipe_det.sY = 0; swipe_det.pY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
 				var min_x = 20, max_x = 40, min_y = 40, max_y = 50, direc = "";
 				ele = _q(el);
