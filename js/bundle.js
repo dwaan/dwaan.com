@@ -625,7 +625,7 @@ document.addEventListener('click', function (e) {
 var menu = {
 	active: false,
 	el: null,
-	init: function () {
+	init: function() {
 		var that = this;
 
 		gsap.set('.menu__pop .menu__item', {opacity: 0});
@@ -644,10 +644,10 @@ var menu = {
 
 			e.preventDefault();
 		}
-		this.el.onmouseenter = function () {
+		this.el.onmouseenter = function() {
 			gsap.to(this.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: .768, ease: "elastic.out" });
 		}
-		this.el.onmouseleave = function () {
+		this.el.onmouseleave = function() {
 			gsap.to(this.querySelector("#ray"), { rotation: 0, scale: 1, duration: .768, ease: "elastic.out" });
 		}
 
@@ -669,19 +669,19 @@ var menu = {
 
 			e.preventDefault();
 		}
-		this.el.onmouseenter = function () {
+		this.el.onmouseenter = function() {
 			gsap.to(this.querySelector("#menu-short"), { attr: { x1: 22 }, duration: .768, ease: "elastic.out" });
 		}
-		this.el.onmouseleave = function () {
+		this.el.onmouseleave = function() {
 			gsap.to(this.querySelector("#menu-short"), { attr: { x1: 16 }, duration: .768, ease: "elastic.out" });
 		}
 
 		// The logo events
 		this.el = _q('.logo');
-		this.el.onmouseenter = function () {
+		this.el.onmouseenter = function() {
 			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: -3, xPercent: -1, rotation: 4, duration: 1.024, ease: "elastic.out" })
 		}
-		this.el.onmouseleave = function () {
+		this.el.onmouseleave = function() {
 			gsap.to(".logo .hat", { transformOrigin: "50% 75%", yPercent: 0, xPercent: 0, rotation: 0, duration: 1.024, ease: "elastic.out" });
 		}
 
@@ -705,11 +705,11 @@ var menu = {
 			else
 				this.el.borderRadius = "2% 2% 2% 25%";
 
-			this.el.onmouseenter = function () {
+			this.el.onmouseenter = function() {
 				gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
 				_hugeText.show(this.innerHTML);
 			}
-			this.el.onmouseleave = function () {
+			this.el.onmouseleave = function() {
 				gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
 				_hugeText.hide();
 			}
@@ -731,14 +731,14 @@ var menu = {
 
 			e.preventDefault();
 		}
-		this.el.onmouseover = function () {
+		this.el.onmouseover = function() {
 			gsap.to(this.querySelector(".icn_close"), {
 				duration: .512,
 				ease: "expo.out",
 				rotation: 90
 			});
 		}
-		this.el.onmouseout = function () {
+		this.el.onmouseout = function() {
 			gsap.to(this.querySelector(".icn_close"), {
 				duration: .512,
 				ease: "expo.in",
@@ -757,12 +757,12 @@ var menu = {
 			this.el[i].onclick = function (e) {
 				e.preventDefault();
 			}
-			this.el[i].onmouseenter = function () {
+			this.el[i].onmouseenter = function() {
 				gsap.to(this.nextElementSibling || nextElementSibling(this), { duration: .386, ease: "elastic.out", opacity: 1, marginTop: 10, onComplete: function() {
 					gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50, delay: 1.024 });
 				}});
 			}
-			this.el[i].onmouseleave = function () {
+			this.el[i].onmouseleave = function() {
 				gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50 });
 			}
 		}
@@ -775,7 +775,7 @@ var loading = {
 	selector: _q("#loading-cover"),
 	breath: gsap.timeline({repeat: -1, ease: "linear"}),
 	float: gsap.timeline({repeat: -1, ease: "ease", duration: .512}),
-	init: function () {
+	init: function() {
 		var el = "";
 
 		gsap.set(this.selector, { top: 0, bottom: 0, left: 0, right: 0 });
@@ -802,7 +802,7 @@ var loading = {
 	show: function (callback) {
 		var that = this,
 			var_from = { xPercent: 0, yPercent: 100 },
-			var_to = { xPercent: 0, yPercent: 0, duration: .768, ease: "expo.inOut", onComplete: function () {
+			var_to = { xPercent: 0, yPercent: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
 					if (callback != undefined)
 						callback();
 					}
@@ -846,7 +846,7 @@ var loading = {
 				.set(sl.querySelector(".light"), { height: 0 })
 				.to(sl.querySelector(".text"), { opacity: 0 })
 				.fromTo(sl.querySelector(".loading"), { opacity: 0, yPercent: 100 }, { opacity: 1, y: 0, yPercent: -50 }, 0)
-				.to(sl, { position: "fixed", top: 0, right: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: .768, ease: "expo.inOut", onComplete: function () {
+				.to(sl, { position: "fixed", top: 0, right: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
 					gsap.set(sl, { top: 0, bottom: 0, left: 0, right: 0, width: "auto", height: "auto" });
 					if (callback != undefined) callback();
 				}}, "-=.512");
@@ -857,7 +857,7 @@ var loading = {
 	hide: function (callback, callback__half) {
 		var that = this,
 			var_from = { xPercent: 0, yPercent: 0 },
-			var_to = { xPercent: 0, yPercent: -100, duration: 1.024, ease: "expo.inOut", onComplete: function () {
+			var_to = { xPercent: 0, yPercent: -100, duration: 1.024, ease: "expo.inOut", onComplete: function() {
 					// Move loading
 					gsap.set(that.selector, { yPercent: -200 });
 					// Set progress bar back to zero
@@ -906,7 +906,7 @@ var loading = {
 
 			tl
 				.to(sl.querySelector(".loading"), { opacity: 0 }, 0)
-				.to(sl.querySelector(".text"), { margin: 0, onComplete: function () {
+				.to(sl.querySelector(".text"), { margin: 0, onComplete: function() {
 						addClass(sl, "bubble");
 						gsap.set(sl.querySelector(".text"), { opacity: 1 })
 						sl.querySelector(".text").innerHTML = "<p class='hi'>hi!</p>";
@@ -946,7 +946,7 @@ var loading = {
 
 		if (animate) {
 			if (callback == undefined) {
-				callback = function () {}
+				callback = function() {}
 			}
 			var lv = "#loading-cover",
 				tl = gsap.timeline({
@@ -967,7 +967,7 @@ var loading = {
 				.call(callback);
 		}
 	},
-	clear: function () {
+	clear: function() {
 		this
 			.selector
 			.querySelector(".text")
@@ -1067,7 +1067,7 @@ var imageloading = {
 			// Add delay before hiding loading
 			gsap.to(window, {
 				duration: .256,
-				onComplete: function () {
+				onComplete: function() {
 					if (that.barba_object != null) {
 						that.elem.style.visibility = "visible";
 						that
@@ -1084,10 +1084,10 @@ var imageloading = {
 						gsap.to(window, {
 							duration: 0,
 							scrollTo: 0,
-							onComplete: function () {
+							onComplete: function() {
 								// Hide loading
 								loading
-									.hide(function () {
+									.hide(function() {
 										if (that.first_loading) {
 											that.first_loading = false;
 											loading.clear();
@@ -1101,7 +1101,7 @@ var imageloading = {
 										if (callback != undefined)
 											callback(that);
 									},
-									function () {
+									function() {
 										if (current_barba.onImageLoadAnimateHalfComplete != undefined)
 											current_barba.onImageLoadAnimateHalfComplete();
 									});
@@ -1136,10 +1136,10 @@ var worklist = {
 				.to(el[i], { scale: 1, duration: 1.7 })
 				.to(el[i], { scale: 1, duration: .9 });
 			el[i].gsap.pause();
-			el[i].onmouseenter = function () {
+			el[i].onmouseenter = function() {
 				this.gsap.restart();
 			}
-			el[i].onmouseleave = function () {
+			el[i].onmouseleave = function() {
 				this.gsap.pause();
 				gsap.to(this, { transformOrigin: "50%", scale: 1, duration: .512 })
 			}
@@ -1152,7 +1152,7 @@ var worklist = {
 var FadeTransition = Barba
 	.BaseTransition
 	.extend({
-		start: function () {
+		start: function() {
 			var that = this;
 
 			function animate() {
@@ -1160,7 +1160,7 @@ var FadeTransition = Barba
 				_q("#barba-wrapper").style.height = _q("#barba-wrapper").offsetHeight + "px";
 
 				// Show loading then load the new container
-				loading.show(function () {
+				loading.show(function() {
 					gsap.set('.menu__pop .menu__item', {
 						opacity: 0,
 						yPercent: 100
@@ -1197,7 +1197,7 @@ var FadeTransition = Barba
 				animate();
 			}
 		},
-		finish: function () {
+		finish: function() {
 			var that = this;
 
 			// Hide newContainer for a bit
@@ -1211,7 +1211,7 @@ var FadeTransition = Barba
 			imageloading.init(that);
 		}
 	});
-Barba.Pjax.getTransition = function () {
+Barba.Pjax.getTransition = function() {
 	return FadeTransition;
 };
 
@@ -1221,7 +1221,7 @@ var Home = Barba
 	.BaseView
 	.extend({
 		namespace: 'home',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 
 			gsap.set(".hero", { y: window.innerHeight });
@@ -1229,7 +1229,7 @@ var Home = Barba
 
 			splitText(".hero__text h1, .hero__text p");
 		},
-		onEnterCompleted: function () {
+		onEnterCompleted: function() {
 			var fruits = ["empty.png", "apple.png", "avocado.png", "phone.png", "joycon.png"],
 				fruit = _q(".fruit"),
 				index = 0,
@@ -1272,7 +1272,7 @@ var Home = Barba
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
 		},
-		onImageLoadComplete: function () {
+		onImageLoadComplete: function() {
 			// Fixing size
 			function resizeHeroMeta() {
 				_q("#trigger__padder").style.paddingTop = (_q("body").offsetHeight - _q(".work__list").offsetHeight) + "px";
@@ -1284,40 +1284,13 @@ var Home = Barba
 				resizeHeroMeta();
 			}
 
-			// Make it scroll automatic
-			window.__scroll_o = "set";
-			window.onscroll = function(e) {
-				var __scroll = document.body.scrollTop || document.documentElement.scrollTop;
-
-				if (window.__scroll_o == "set") window.__scroll_o = __scroll;
-
-				if (window.__scroll_f) clearTimeout(window.__scroll_f);
-
-				window.__scroll_f = setTimeout(function(){
-					if (window.__scroll_o - __scroll < 0) {
-						window.__anim = gsap.to(window, { duration: .512, scrollTo: "#trigger", ease: "power3.inOut", onComplete: function (){
-							window.__scroll_o = "set";
-						}});
-					} else if (window.__scroll_o - __scroll > 0) {
-						window.__anim = gsap.to(window, { duration: .512, scrollTo: 0, ease: "power3.inOut", onComplete: function (){
-							window.__scroll_o = "set";
-						}});
-					}
-				}, 64);
-			}
-
 			controller.destroy();
 			controller = new ScrollMagic.Controller();
 			els = null;
 			anim = null;
 
 			// Scroll animate the hero wording
-			anim = gsap.timeline({
-				defaults: {
-					duration: 1.024,
-					ease: "linear"
-				}
-			});
+			anim = gsap.timeline({ defaults: { duration: 1.024, ease: "linear" }});
 			anim
 				.fromTo(".hero__text h1", { y: 0 }, { y: -20 }, 0)
 				.fromTo(".hero__text p", { y: 0 }, { y: -25 }, 0)
@@ -1342,12 +1315,7 @@ var Home = Barba
 
 			// Scroll animate stuff in floating box
 			// Wording and stats
-			anim = gsap.timeline({
-				defaults: {
-					duration: .768,
-					ease: "expo.out"
-				}
-			});
+			anim = gsap.timeline({ defaults: { duration: .768, ease: "expo.out" }});
 			anim
 				.fromTo(".work__list > .block", { y: 200 }, { y: 0, stagger: {
 					from: 0,
@@ -1381,7 +1349,7 @@ var Home = Barba
 				.to(".hero .box", { scale: 1, duration: 1.7 });
 
 			// Swipe event for gallery
-			function detectswipe(el,func) {
+			var detectswipe = (el, func) => {
 				swipe_det = new Object(); swipe_det.sX = 0; swipe_det.pX = 0; swipe_det.sY = 0; swipe_det.pY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
 				var min_x = 20, max_x = 40, min_y = 40, max_y = 50, direc = "";
 				ele = _q(el);
@@ -1429,7 +1397,7 @@ var Home = Barba
 			}
 			detectswipe('.gallery');
 		},
-		onImageLoadAnimateHalfComplete: function () {
+		onImageLoadAnimateHalfComplete: function() {
 			// Animate the appearing
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
@@ -1460,7 +1428,7 @@ var Home = Barba
 			new animateYear("#year__designer", 2008);
 			new animateYear("#year__managerial", 2011);
 		},
-		onLeave: function () {
+		onLeave: function() {
 			window.onresize = null;
 			window.onscroll = null;
 		}
@@ -1470,14 +1438,14 @@ var Work = Barba
 	.BaseView
 	.extend({
 		namespace: 'work',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 
 			gsap.set(".work__list__page", { y: window.innerHeight });
 
 			splitText(".work__list h2");
 		},
-		onImageLoadComplete: function () {
+		onImageLoadComplete: function() {
 			worklist.hover(".work__list a img");
 
 			controller.destroy();
@@ -1534,7 +1502,7 @@ var Work = Barba
 			new animateNumber(".work__list .stats__content p:first-child b");
 			new animateNumber(".work__list .stats__content p:last-child b");
 		},
-		onImageLoadAnimateHalfComplete: function () {
+		onImageLoadAnimateHalfComplete: function() {
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
 				.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 }, 0)
@@ -1547,17 +1515,17 @@ var WorkDetail = Barba
 	.BaseView
 	.extend({
 		namespace: 'work-detail',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 
 			gsap.set(".work__detail", { y: window.innerHeight });
 
 			splitText(".work__list h1");
 		},
-		onEnterCompleted: function () {
+		onEnterCompleted: function() {
 			worklist.hover("a img");
 		},
-		onImageLoadComplete: function () {
+		onImageLoadComplete: function() {
 			controller.destroy();
 			controller = new ScrollMagic.Controller({
 				globalSceneOptions: {
@@ -1678,7 +1646,7 @@ var WorkDetail = Barba
 			// execute above function
 			initPhotoSwipeFromDOM('.gallery');
 		},
-		onImageLoadAnimateHalfComplete: function () {
+		onImageLoadAnimateHalfComplete: function() {
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
 				.to(".work__detail", { y: 0 })
@@ -1686,7 +1654,7 @@ var WorkDetail = Barba
 				.to(".work__detail .txt0000", { yPercent: -20 }, .512)
 			;
 		},
-		onLeaveCompleted: function () {
+		onLeaveCompleted: function() {
 			// Destroying tinyslider to prevent error
 			for (var i = tinysliders.length - 1; i >= 0; i--) {
 				tinysliders[i].destroy();
@@ -1699,19 +1667,19 @@ var Call = Barba
 	.BaseView
 	.extend({
 		namespace: 'call',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 
 			gsap.set(".call", { y: window.innerHeight });
 		},
-		onEnterCompleted: function () {
+		onEnterCompleted: function() {
 			// The menu item animation
 			var border = ".bigtext",
 				borderRadius
 			_hugeText = new hugeText(border + " > div ");
 
 			elem = _q('.call .email');
-			elem.onmouseenter = function () {
+			elem.onmouseenter = function() {
 				gsap.to(border, {
 					duration: .386,
 					ease: "expo",
@@ -1719,7 +1687,7 @@ var Call = Barba
 				});
 				_hugeText.show("email me");
 			};
-			elem.onmouseleave = function () {
+			elem.onmouseleave = function() {
 				gsap.to(border, {
 					duration: .386,
 					ease: "expo",
@@ -1729,7 +1697,7 @@ var Call = Barba
 			};
 
 			elem = _q('.call .search');
-			elem.onmouseenter = function () {
+			elem.onmouseenter = function() {
 				gsap.to(border, {
 					duration: .386,
 					ease: "expo",
@@ -1737,7 +1705,7 @@ var Call = Barba
 				});
 				_hugeText.show("search me");
 			};
-			elem.onmouseleave = function () {
+			elem.onmouseleave = function() {
 				gsap.to(border, {
 					duration: .386,
 					ease: "expo",
@@ -1746,7 +1714,7 @@ var Call = Barba
 				_hugeText.hide();
 			};
 		},
-		onImageLoadAnimateComplete: function () {
+		onImageLoadAnimateComplete: function() {
 			loading.breath.play();
 
 			// Scroll animate the works
@@ -1763,7 +1731,7 @@ var Call = Barba
 
 			gsap.to(".call", { y: 0, ease: "expo.out", duration: 2.048 });
 		},
-		onLeave: function () {
+		onLeave: function() {
 			loading.breath.pause(0);
 		}
 	});
@@ -1772,10 +1740,10 @@ var Lost = Barba
 	.BaseView
 	.extend({
 		namespace: '404',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 		},
-		onImageLoadComplete: function () {
+		onImageLoadComplete: function() {
 			var speed = 10,
 				tween = [];
 
@@ -1801,7 +1769,7 @@ var Lost = Barba
 				}
 			}
 
-			_q("#nomokeybusiness a").onmouseover = function () {
+			_q("#nomokeybusiness a").onmouseover = function() {
 				for (var i = 0; i < 5; i++) {
 					tween[i].timeScale(4);
 					_q("#nomokeybusiness a").className = "hover";
@@ -1818,7 +1786,7 @@ var Lost = Barba
 					opacity: 1
 				})
 			};
-			_q("#nomokeybusiness a").onmouseout = function () {
+			_q("#nomokeybusiness a").onmouseout = function() {
 				for (var i = 0; i < 5; i++) {
 					tween[i].timeScale(1);
 					_q("#nomokeybusiness a").className = "";
@@ -1842,18 +1810,18 @@ var Me = Barba
 	.BaseView
 	.extend({
 		namespace: 'me',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 
 			gsap.set(".imuiux", { y: window.innerHeight });
 
 			splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h4, .cofound p");
 		},
-		onEnterCompleted: function () {
+		onEnterCompleted: function() {
 			worklist.hover("#ig .item a");
 			worklist.hover(".work__list img");
 		},
-		onImageLoadComplete: function () {
+		onImageLoadComplete: function() {
 			controller.destroy();
 			controller = new ScrollMagic.Controller();
 			els = null;
@@ -1930,7 +1898,7 @@ var Me = Barba
 					immediateRender: true,
 					ease: "linear",
 					duration: .75,
-					onUpdate: function () {
+					onUpdate: function() {
 						gsap.set(".mrgoat .img > img", { opacity: 0 });
 						gsap.set(".mrgoat" + obj.curImg, {opacity: 1});
 					}
@@ -2006,7 +1974,7 @@ var Me = Barba
 				}
 			}
 		},
-		onImageLoadAnimateHalfComplete: function () {
+		onImageLoadAnimateHalfComplete: function() {
 			// Animate the appearing
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
@@ -2032,14 +2000,14 @@ var Menu = Barba
 	.BaseView
 	.extend({
 		namespace: 'menu',
-		onEnter: function () {
+		onEnter: function() {
 			current_barba = this;
 		}
 	});
 
 ////////// Initial
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 	// Initialize script
 	Home.init();
 	Work.init();
@@ -2058,7 +2026,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Wait for all images to be loaded
 	imageloading.init(document, function (imgload) {
 		// Check if it's first time or 404 to do some text animation
-		loading.animate((_q(".barba-container").getAttribute("data-namespace") == "404" ? "404" : "first-time"), function () {
+		loading.animate((_q(".barba-container").getAttribute("data-namespace") == "404" ? "404" : "first-time"), function() {
 			if (imgload != undefined) {
 				imgload.first_animation_done = true;
 				imgload.done()
