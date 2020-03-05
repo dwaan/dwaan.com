@@ -647,38 +647,45 @@ var Home = Barba
 			splitText(".hero__text h1, .hero__text p");
 		},
 		onEnterCompleted: function () {
-			var fruit = ["empty.png", "apple.png", "avocado.png", "phone.png", "joycon.png"],
-				index = 0;
+			var fruits = ["empty.png", "apple.png", "avocado.png", "phone.png", "joycon.png"],
+				fruit = _q(".fruit"),
+				index = 0,
+				path = "/dwaan/img/";
 
-			index = getRandomInt(1, 10);
-			if (index > 5) {
-				index = getRandomInt(1, fruit.length - 1);
-			} else {
-				index = 0;
-			}
-
-			if (fruit[index] == undefined) index = 0;
-
-			_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
-			_q(".img").onclick = function(e) {
+			// Randomize the fruits
+			if (gsap.utils.random(0, 10) > 5) gsap.utils.shuffle(fruits);
+			fruit.setAttribute("src", path + fruits[0]);
+			// Change fruit when clicked
+			_q(".img").onmousedown = function(e) {
 				do {
-					index = getRandomInt(1, fruit.length - 1);
-				} while(_q(".fruit").getAttribute("src") == ("/dwaan/img/" + fruit[index]));
+					index++;
+					if(index >= fruits.length) index = 0;
+				} while(fruits[index] == "empty.png");
 
 				if(!anim.isActive()) {
 					anim = gsap.timeline({ defaults: { duration: .512, ease: "elastic" }});
 					anim
 						.fromTo(".poof", { transformOrigin: "40%", opacity: 1, rotation: 15, scale: 1, xPercent: -50, yPercent: 50 }, { rotation: 0, scale: 1.75, xPercent: 0, yPercent: 0, onComplete: function() {
-							_q(".fruit").setAttribute("src", "/dwaan/img/" + fruit[index]);
+							fruit.setAttribute("src", path + fruits[index]);
+
+							// Ajax load the image
+							var progress = function(index, url, percent, bytes) {
+								if (percent >= 100) {
+									anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
+								}
+							}
+							if (fruit.load != undefined) {
+								fruit.load(0, fruit.getAttribute('src'), progress);
+							} else {
+								fruit.ajaxImageIndex = 0;
+								ajaxImage(fruit, fruit.getAttribute('src'), progress);
+							}
 						}})
-						.to(".poof", { duration: .512 })
-						.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" })
 					;
 				}
 
 				e.preventDefault();
 			}
-
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
 		},

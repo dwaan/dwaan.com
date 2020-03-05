@@ -53,30 +53,6 @@ function nextElementSibling(el) {
 	} while (el && el.nodeType !== 1);
 	return el
 }
-function getRandomInt(min, max) {
-	var temp;
-	if (min > max) {
-		temp = min;
-		min = max;
-		max = temp
-	}
-	temp = (max + 1) - min;
-	return Math.floor(Math.random() * Math.floor(temp)) + min
-}
-function roundToPrecision(x, precision) {
-	var y = +x + (precision === undefined
-		? 0.5
-		: precision / 2);
-	return y - (y % (precision === undefined
-		? 1
-		: + precision))
-}
-function parseStrToFloat(string_to_convert) {
-	if (typeof string_to_convert === 'string' || string_to_convert instanceof String) {
-		string_to_convert = string_to_convert.trim()
-	}
-	return parseFloat(string_to_convert)
-}
 // Prevent error in older browser for console
 (function () {
 	var method;

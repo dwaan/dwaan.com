@@ -56,6 +56,13 @@
 							<div class="box">
 								<img class="dwan" src="/dwaan/img/dwan.png" width="" height="" alt="Dwan" />
 								<img class="fruit" src="/dwaan/img/empty.png" width="" height="" alt="Fruit" />
+							</div>
+						</div>
+					</div>
+
+					<div class="hero__image hero__image_poof">
+						<div class="img">
+							<div class="box">
 								<img class="fruit poof" src="/dwaan/img/poof.png" width="" height="" alt="Fruit" />
 							</div>
 						</div>
