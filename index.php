@@ -78,9 +78,8 @@
 						<div class="work__container">
 							<div class="scroll">
 								<div>
-									<div class="icn"><svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="12" height="18" rx="5" stroke="#C3DEE4" stroke-width="2"/><rect x="6" y="4" width="2" height="7" rx="1" fill="#C3DEE4"/></svg></div>
-									<p class="scroll__up">Scroll up to see some of my work</p>
-									<p class="scroll__down">Scroll down to hide my work</p>
+									<p class="scroll__up"><i class="icn"></i>Scroll up to see some of my work</p>
+									<p class="scroll__down"><i class="icn"></i>Scroll down to hide my work</p>
 								</div>
 							</div>
 

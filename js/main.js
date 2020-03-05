@@ -25,7 +25,7 @@ _q("header .menu__item").innerHTML = '\
 			<li><a href="./work">work</a></li>\
 			<li><hr /></li>\
 			<li><a href="./say-hi">say, hi!</a></li>\
-			<li><p>As you can see, I didn’t use cookies or local storage in my website, I don’t need to know where did you coming from, what pages that you read, or anything about you.</p></li>\
+			<li><p>I decide not to use any trackig cookies, local storage and analytics scripts in my website. You`re free from tracking.</p></li>\
 		</ul>\
 	</div>';
 // Snoop which text or url that are currently clicked
@@ -667,10 +667,12 @@ var Home = Barba
 					anim
 						.fromTo(".poof", { transformOrigin: "40%", opacity: 1, rotation: 15, scale: 1, xPercent: -50, yPercent: 50 }, { rotation: 0, scale: 1.75, xPercent: 0, yPercent: 0, onComplete: function() {
 							fruit.setAttribute("src", path + fruits[index]);
+							gsap.set(fruit, { opacity: 0 });
 
 							// Ajax load the image
-							var progress = function(index, url, percent, bytes) {
+							var progress = (index, url, percent, bytes) => {
 								if (percent >= 100) {
+									gsap.set(fruit, { opacity: 1 });
 									anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
 								}
 							}
@@ -722,8 +724,8 @@ var Home = Barba
 			// Scroll animate the scroll sign
 			anim = gsap.timeline({ defaults: { duration: .256, ease: "power2.inOut" }});
 			anim
-				.fromTo(".scroll__up", { width: "auto" }, { width: 0 }, 0)
-				.fromTo(".scroll__down", { width: 0 }, { width: "auto" }, 0)
+				.fromTo(".scroll__up", { opacity: 1 }, { opacity: 0 }, 0)
+				.fromTo(".scroll__down", { opacity: 0 }, { opacity: 1 }, 0)
 			;
 			new ScrollMagic
 				.Scene({triggerElement: ".work_float", offset: 10, triggerHook: 1})
