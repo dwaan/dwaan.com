@@ -1,4 +1,85 @@
 /* For those who disable js */
+@media (max-aspect-ratio: 3/2) {
+	.no-js .logo:before,
+	.no-js .logo:after {
+		width: 4.44vw;
+	}
+}
+@media (max-aspect-ratio: 1/1) {
+	.no-js .logo:before,
+	.no-js .logo:after {
+		width: 5.44vw;
+		height: 6vh;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.no-js .logo:before,
+	.no-js .logo:after {
+		width: 7.44vw;
+	}
+	.no-js .logo:before,
+	.no-js .logo:after {
+		height: 8vh;
+	}
+	.no-js .logo:after {
+		top: 1vh;
+		left: 1.5vw;
+	}
+}
+
+.no-js .me {
+	height: auto;
+}
+.no-js #firstscene {
+	height: 400vh;
+}
+.no-js .imuiux,
+.no-js .follow,
+.no-js .us,
+.no-js .know,
+.no-js .mrgoat,
+.no-js .who,
+.no-js .cofound {
+	position: relative;
+	border-bottom: 1px dotted rgba(0,0,0,.25);
+	pointer-events: auto;
+}
+.no-js .cofound {
+	border-top: 1px dotted rgba(0,0,0,.25);
+	border-bottom: none;
+}
+.no-js .us h2,
+.no-js .us p,
+.no-js .us img {
+	opacity: 1;
+}
+.no-js .mrgoat {
+	margin-top: 0;
+	height: auto;
+}
+.no-js .igstage {
+	margin-bottom: 5vh;
+}
+
+.no-js .work .back {
+	margin-left: 8vw;
+}
+@media (max-aspect-ratio: 1/1) {
+	.no-js .work .back {
+		margin-left: 11vw;
+	}
+}
+
+@media (max-aspect-ratio: 3/4) {
+	.no-js .work .back {
+		margin-left: 12.5vw;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.no-js .work .back {
+		margin-left: 14.5vw;
+	}
+}
 .no-js .work__detail .gallery__mobile,
 .no-js .work__detail .gallery,
 .no-js .work__timeline .wheel {
@@ -16,6 +97,7 @@
 		margin: 0 -12.5vw;
 	}
 }
+
 .no-js .work__timeline .wheel p {
 	white-space: normal;
 }
@@ -26,12 +108,105 @@
 	display: inline-block;
 	float: initial;
 }
+.no-js .work__detail .gallery__mobile a:first-child,
+.no-js .work__detail .gallery a:first-child,
+.no-js .work__timeline .wheel p:first-child  {
+	margin-left: 9vw;
+}
+.no-js .work__detail .gallery__mobile a:last-child,
+.no-js .work__detail .gallery a:last-child,
+.no-js .work__timeline .wheel p:last-child  {
+	margin-right: 22vw;
+}
 .no-js .work__timeline .wheel p {
+	position: relative;
 	padding-right: 2vw;
+}
+.no-js .work__timeline .wheel p:before,
+.no-js .work__timeline .wheel p:after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: .5vh;
+	left: 1vw;
+	right: -2vw;
+	border-top: 1px solid #000;
+	display: block;
+}
+.no-js .work__timeline .wheel p:before {
+	z-index: 2;
+	top: 0;
+	width: 1vh;
+	height: 1vh;
+	border: 1px solid #000;
+	background-color: #a4cdd6;
+	border-radius: 100%;
+}
+.no-js .work__timeline .wheel p:first-child:before {
+	background-color: #000;
+}
+.no-js .work__timeline .wheel p:last-child:after {
+	border-top: none;
 }
 .no-js .work__detail .gallery__mobile:before,
 .no-js .work__detail .gallery__mobile:after,
 .no-js .work__detail .gallery:before,
 .no-js .work__detail .gallery:after {
 	clear: both;
+}
+@media (max-aspect-ratio: 3/2) {
+	.no-js .work__detail .gallery__mobile a,
+	.no-js .work__detail .gallery a {
+		width: 40%;
+	}
+	.no-js .work__detail .gallery__mobile a:first-child,
+	.no-js .work__detail .gallery a:first-child,
+	.no-js .work__timeline .wheel p:first-child {
+		margin-left: 8.5vw;
+	}
+	.no-js .work__detail .gallery__mobile a:last-child,
+	.no-js .work__detail .gallery a:last-child,
+	.no-js .work__timeline .wheel p:last-child {
+		margin-right: 10.5vw;
+	}
+}
+@media (max-aspect-ratio: 1/1) {
+	.no-js .work__timeline .wheel {
+		padding: 0;
+	}
+	.no-js .work__detail .gallery__mobile a,
+	.no-js .work__detail .gallery a,
+	.no-js .work__timeline .wheel p {
+		width: 50%;
+	}
+	.no-js .work__timeline .wheel p {
+		width: 35%;
+	}
+	.no-js .work__timeline .wheel p:before,
+	.no-js .work__timeline .wheel p:after {
+		left: 2vw;
+		right: -3vw;
+	}
+	.no-js .work__detail .gallery__mobile a:first-child,
+	.no-js .work__detail .gallery a:first-child {
+		margin-left: 8vw;
+	}
+	.no-js .work__timeline .wheel p:first-child {
+		margin-left: 10vw;
+	}
+	.no-js .work__detail .gallery__mobile a:last-child,
+	.no-js .work__detail .gallery a:last-child {
+		margin-right: 8vw;
+	}
+	.no-js .work__timeline .wheel p:last-child {
+		margin-right: 10vw;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.no-js .work__timeline .wheel {
+		margin-top: 2vh;
+	}
+	.no-js .work__timeline .wheel p {
+		width: 50%;
+	}
 }

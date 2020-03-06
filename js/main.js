@@ -1235,7 +1235,7 @@ var Me = Barba
 
 			gsap.set(".imuiux", { y: window.innerHeight });
 
-			splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h4, .cofound p");
+			splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h5, .cofound h4, .cofound p");
 		},
 		onEnterCompleted: function() {
 			worklist.hover("#ig .item a");

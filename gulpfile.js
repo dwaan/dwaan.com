@@ -27,10 +27,10 @@ function javascript() {
 			'js/helper.js',
 			'js/main.js'
 		])
-		// .pipe(sourcemaps.init())
+		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(concat("bundle.js"))
-		// .pipe(sourcemaps.write("."))
+		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
 		.pipe(browserSync.stream())
 	;
@@ -47,10 +47,10 @@ function css() {
 			'css/nojs.css',
 			'css/print.css'
 		])
-		// .pipe(sourcemaps.init())
+		.pipe(sourcemaps.init())
 		.pipe(cleanCSS())
 		.pipe(concat("bundle.css"))
-		// .pipe(sourcemaps.write("."))
+		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
 		.pipe(browserSync.stream())
 	;
