@@ -1,11 +1,13 @@
 const
 	gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
-	cleanCSS = require('gulp-clean-css'),
 	sourcemaps = require('gulp-sourcemaps'),
 	concat = require('gulp-concat'),
 	connect = require('gulp-connect-php'),
-	browserSync = require('browser-sync')
+	browserSync = require('browser-sync'),
+	autoprefixer = require('autoprefixer'),
+	postcss = require('gulp-postcss'),
+	cssnano = require('cssnano')
 ;
 
 function javascript() {
@@ -13,10 +15,10 @@ function javascript() {
 			'node_modules/barba.js/dist/barba.min.js',
 			// 'node_modules/gsap/dist/gsap.min.js',
 			// 'node_modules/gsap/dist/ScrollToPlugin.min.js',
-			'js/gsap-member/minified/gsap.min.js',
-			'js/gsap-member/minified/ScrollToPlugin.min.js',
-			'js/gsap-member/minified/CustomEase.min.js',
-			// 'js/gsap-member/minified/TextPlugin.min.js',
+			'js/src/gsap-member/minified/gsap.min.js',
+			'js/src/gsap-member/minified/ScrollToPlugin.min.js',
+			'js/src/gsap-member/minified/CustomEase.min.js',
+			// 'js/src/gsap-member/minified/TextPlugin.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
 			// 'node_modules/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
@@ -24,10 +26,13 @@ function javascript() {
 			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.helper.ie8.js',
-			'js/helper.js',
-			'js/main.js'
+			'js/src/helper.js',
+			'js/src/main.js'
 		])
-		.pipe(sourcemaps.init())
+		.pipe(sourcemaps.init({
+			largeFile: true,
+			loadMaps: true
+		}))
 		.pipe(uglify())
 		.pipe(concat("bundle.js"))
 		.pipe(sourcemaps.write("."))
@@ -42,13 +47,18 @@ function css() {
 			'node_modules/photoswipe/dist/photoswipe.css',
 			'node_modules/photoswipe/dist/default-skin/default-skin.css',
 			'node_modules/tiny-slider/dist/tiny-slider.css',
-			'css/main.css',
-			'css/404.css',
-			'css/nojs.css',
-			'css/print.css'
+			'css/src/main.css',
+			'css/src/404.css',
+			'css/src/nojs.css',
+			'css/src/print.css'
 		])
-		.pipe(sourcemaps.init())
-		.pipe(cleanCSS())
+		.pipe(sourcemaps.init({
+			loadMaps: true
+		}))
+        .pipe(postcss([
+			autoprefixer(),
+			cssnano()
+		]))
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
@@ -71,7 +81,7 @@ exports.default = function() {
 	}, function () {
 		browserSync.init({
 			open: false,
-			proxy: "themilkyway.local:8080/dwaan/"
+			proxy: "localhost:8080/dwaan/"
 		});
 	});
 	gulp.watch('**/*.php', { ignoreInitial: false }, php);
