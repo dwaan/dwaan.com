@@ -696,9 +696,9 @@ var Home = Barba
 			var cur_top = 0,
 				runanimation = function(delta) {
 					var _gsap = function(y) {
-							gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: .512, ease: "power2", onComplete: function() {
-								window._top_b = window.pageYOffset || document.documentElement.scrollTop;
-							}});
+							gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: .512, ease: "power2" });
+							if (y == 0) window._top_b = 0;
+							else window._top_b = _q(".work_float").offsetHeight;
 						};
 
 					if(delta > 0) {
@@ -708,33 +708,13 @@ var Home = Barba
 						if(delta < -50) _gsap(0);
 						else _gsap("max");
 					}
-				};
-
-			window._top_b = 0;
-			window._run_gsap = true;
-
-			if (isTouchSupported()) {
-				window.ontouchstart = function() {
-					clearTimeout(window._timeout);
-					window._top_b = window.pageYOffset || document.documentElement.scrollTop;
-				}
-				window.ontouchend = function() {
-					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
-
-					clearTimeout(window._timeout);
-					window._timeout = setTimeout(function () {
-						cur_top = window.pageYOffset || document.documentElement.scrollTop;
-
-						console.log(cur_top - window._top_b, cur_top, window._top_b, _q(".work_float").offsetHeight);
-						runanimation(cur_top - window._top_b);
-					}, Math.abs(cur_top - window._top_b));
-				}
-			} else {
-				window.onscroll = function(e){
+				},
+				onScroll = function(e){
 					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
 
 					clearTimeout(window._timeout);
 					if (window._run_gsap) {
+						console.log("Run GSAP");
 						window._timeout = setTimeout(function () {
 							clearTimeout(window._timeout);
 							gsap.killTweensOf(window);
@@ -748,7 +728,22 @@ var Home = Barba
 							}, 512 + 32); // Following gsap duration
 						}, 128);
 					}
+				};
+
+			window._top_b = 0;
+			window._run_gsap = true;
+			if (isTouchSupported()) {
+				window.ontouchstart = function() {
+					clearTimeout(window._timeout);
+					window._top_b = window.pageYOffset || document.documentElement.scrollTop;
+					window.onscroll = null;
 				}
+				window.ontouchend = function() {
+					// window.onscroll = onScroll;
+					// onScroll();
+				}
+			} else {
+				window.onscroll = onScroll;
 			}
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
