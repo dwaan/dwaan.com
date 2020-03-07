@@ -1,3 +1,5 @@
+'use strict';
+
 // General variables
 var dark_mode = false,
 	logo_svg = _q(".logo").innerHTML,
@@ -689,6 +691,66 @@ var Home = Barba
 				e.preventDefault();
 			}
 
+
+			// Auto scroll
+			var cur_top = 0,
+				runanimation = function(delta) {
+					var _gsap = function(y) {
+							gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: .512, ease: "power2", onComplete: function() {
+								window._top_b = window.pageYOffset || document.documentElement.scrollTop;
+							}});
+						};
+
+					if(delta > 0) {
+						if(delta > 50) _gsap("max");
+						else _gsap(0);
+					} else {
+						if(delta < -50) _gsap(0);
+						else _gsap("max");
+					}
+				};
+
+			window._top_b = 0;
+			window._run_gsap = true;
+
+			if (isTouchSupported()) {
+				window.ontouchstart = function() {
+					clearTimeout(window._timeout);
+					window._top_b = window.pageYOffset || document.documentElement.scrollTop;
+				}
+				window.ontouchend = function() {
+					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
+
+					clearTimeout(window._timeout);
+					window._timeout = setTimeout(function () {
+						cur_top = window.pageYOffset || document.documentElement.scrollTop;
+
+						console.log(cur_top - window._top_b, cur_top, window._top_b, _q(".work_float").offsetHeight);
+						runanimation(cur_top - window._top_b);
+					}, Math.abs(cur_top - window._top_b));
+				}
+			} else {
+				window.onscroll = function(e){
+					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
+
+					clearTimeout(window._timeout);
+					if (window._run_gsap) {
+						window._timeout = setTimeout(function () {
+							clearTimeout(window._timeout);
+							gsap.killTweensOf(window);
+							runanimation(cur_top - window._top_b);
+							window._run_gsap = false;
+
+							// Wait for another gsap to run
+							clearTimeout(window.__timeout);
+							window.__timeout = setTimeout(function () {
+								window._run_gsap = true;
+							}, 512 + 32); // Following gsap duration
+						}, 128);
+					}
+				}
+			}
+
 			worklist.hover(".work__list a img, .hero__meta .stats b");
 		},
 		onImageLoadComplete: function() {
@@ -698,10 +760,8 @@ var Home = Barba
 				_q("#trigger__mover").style.height = (_q(".work__list").offsetHeight) + "px";
 				_q(".hero__meta").style.height = (_q("body").offsetHeight - _q(".hero__meta").offsetTop - _q(".scroll").offsetHeight) + "px";
 			}
+			window.onresize = resizeHeroMeta;
 			resizeHeroMeta();
-			window.onresize = function() {
-				resizeHeroMeta();
-			}
 
 			controller.destroy();
 			controller = new ScrollMagic.Controller();
@@ -850,6 +910,8 @@ var Home = Barba
 		onLeave: function() {
 			window.onresize = null;
 			window.onscroll = null;
+			window.ontouchstart = null;
+			window.ontouchend = null;
 		}
 	});
 

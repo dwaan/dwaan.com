@@ -285,6 +285,16 @@ function animateYear(selector, year) {
 	};
 	this.animate()
 }
+// Check touchevents
+function isTouchSupported() {
+    var msTouchEnabled = window.navigator.msMaxTouchPoints;
+    var generalTouchEnabled = "ontouchstart" in document.createElement("div");
+
+    if (msTouchEnabled || generalTouchEnabled) {
+        return true;
+    }
+    return false;
+}
 // Photoswipe helper
 var initPhotoSwipeFromDOM = function (gallerySelector) {
 	// parse slide data (url, title, size ...) from DOM elements (children of
