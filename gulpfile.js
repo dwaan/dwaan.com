@@ -7,21 +7,18 @@ const
 	browserSync = require('browser-sync'),
 	autoprefixer = require('autoprefixer'),
 	postcss = require('gulp-postcss'),
-	cssnano = require('cssnano')
+	cssnano = require('cssnano'),
+	htmlmin = require('gulp-htmlmin')
 ;
 
 function javascript() {
 	return gulp.src([
 			'node_modules/barba.js/dist/barba.min.js',
-			// 'node_modules/gsap/dist/gsap.min.js',
-			// 'node_modules/gsap/dist/ScrollToPlugin.min.js',
 			'js/src/gsap-member/minified/gsap.min.js',
 			'js/src/gsap-member/minified/ScrollToPlugin.min.js',
 			'js/src/gsap-member/minified/CustomEase.min.js',
-			// 'js/src/gsap-member/minified/TextPlugin.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
 			'node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
-			// 'node_modules/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
 			'node_modules/photoswipe/dist/photoswipe.min.js',
 			'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 			'node_modules/tiny-slider/dist/min/tiny-slider.js',
@@ -67,7 +64,11 @@ function css() {
 }
 
 function php() {
-	return gulp.src('**/*.php')
+	return gulp.src(['src/*.php'])
+		.pipe(htmlmin({
+			collapseWhitespace: true
+		}))
+		.pipe(gulp.dest('./'))
 		.pipe(browserSync.stream())
 }
 
@@ -84,7 +85,7 @@ exports.default = function() {
 			proxy: "localhost:8080/dwaan/"
 		});
 	});
-	gulp.watch('**/*.php', { ignoreInitial: false }, php);
-	gulp.watch(['css/main.css', 'css/nojs.css', 'css/404.css'], { ignoreInitial: false }, css);
-	gulp.watch(['js/main.js', 'js/helper.js'], { ignoreInitial: false }, javascript);
+	gulp.watch('js/src/*.js', { ignoreInitial: false }, javascript);
+	gulp.watch('css/src/*.css', { ignoreInitial: false }, css);
+	gulp.watch('src/*.php', { ignoreInitial: false }, php);
 };

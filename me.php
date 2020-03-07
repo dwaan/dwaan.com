@@ -56,72 +56,10 @@
 		fwrite($igFile, $encrypted_string);
 		fclose($igFile);
 	}
-?>
-<!doctype html>
-<html class="no-js" lang="en">
-
-<head>
-	<?php
+?> <!doctype html><html class="no-js" lang="en"><head> <?php
 		$title = "Yes";
 		include_once "part_metacss.php";
-	?>
-</head>
-
-<body>
-	<?php include_once "part_head.php" ?>
-
-	<div id="barba-wrapper">
-		<div class="barba-container" data-namespace="me">
-			<main class="block__clear">
-				<div class="me">
-					<div id="firstscene">
-						<div class="imuiux block__full">
-							<div class="block__middle">
-								<h1>I'm a UI/UX Designer and Strategist</h1>
-								<p>...mostly for website and mobile application. But I like to call myself a web designer. I studied in computer science but decide to follow my dream and becoming <strike>fabulous</strike> web designer.</p>
-								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
-							</div>
-						</div>
-
-						<div class="about us block__full">
-							<div class="block__middle">
-								<h2>me, my partner and <strong>mr. goat</strong> live in tel aviv-yafo</h2>
-								<p>I'm one of the few Indonesian who live in Israel, it's very rare indeed. I haven't seen any Indonesian who live in here, yet. So hit me up if you know anyone.</p>
-								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
-							</div>
-						</div>
-
-						<div class="know us block__full">
-							<div class="block__middle">
-								<h2><a href="/say-hi">so send me a message</a></h2>
-								<p>if you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to asked something to me.</p>
-								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
-							</div>
-						</div>
-
-						<div class="who us block__full">
-							<div class="block__middle">
-								<h2>and who is this Mr. Goat you asked?</h2>
-								<img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up" />
-							</div>
-						</div>
-					</div>
-
-					<div class="mrgoat block__full">
-						<div class="mrgate block__full">
-							<div class="h2"><h2 class="h21">this is <b>mr. goat</b></h2></div>
-							<div class="h2"><h3 class="h22">he's a vietnamese</h3></div>
-							<div class="h2"><h3 class="h23">he likes to travel</h3></div>
-							<div class="h4"><h4>and he has his own instagram account, scroll more to check out his latest instagram posts</h4></div>
-							<div class="img">
-								<?php for ($x = 1; $x <= 26; $x++) { ?>
-								<img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.png" width="" height="" alt="Mr. Goat" />
-								<?php } ?>
-							</div>
-						</div>
-						<div class="igstage">
-							<div id="ig">
-								<?php
+	?> </head><body> <?php include_once "part_head.php" ?> <div id="barba-wrapper"><div class="barba-container" data-namespace="me"><main class="block__clear"><div class="me"><div id="firstscene"><div class="imuiux block__full"><div class="block__middle"><h1>I'm a UI/UX Designer and Strategist</h1><p>...mostly for website and mobile application. But I like to call myself a web designer. I studied in computer science but decide to follow my dream and becoming <strike>fabulous</strike> web designer.</p><img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up"></div></div><div class="about us block__full"><div class="block__middle"><h2>me, my partner and <strong>mr. goat</strong> live in tel aviv-yafo</h2><p>I'm one of the few Indonesian who live in Israel, it's very rare indeed. I haven't seen any Indonesian who live in here, yet. So hit me up if you know anyone.</p><img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up"></div></div><div class="know us block__full"><div class="block__middle"><h2><a href="/say-hi">so send me a message</a></h2><p>if you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to asked something to me.</p><img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up"></div></div><div class="who us block__full"><div class="block__middle"><h2>and who is this Mr. Goat you asked?</h2><img src="/dwaan/img/roll-eyes-up.png" width="" height="" alt="Dwan rolling his eyes up"></div></div></div><div class="mrgoat block__full"><div class="mrgate block__full"><div class="h2"><h2 class="h21">this is <b>mr. goat</b></h2></div><div class="h2"><h3 class="h22">he's a vietnamese</h3></div><div class="h2"><h3 class="h23">he likes to travel</h3></div><div class="h4"><h4>and he has his own instagram account, scroll more to check out his latest instagram posts</h4></div><div class="img"> <?php for ($x = 1; $x <= 26; $x++) { ?> <img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.png" width="" height="" alt="Mr. Goat"> <?php } ?> </div></div><div class="igstage"><div id="ig"> <?php
 									$length = 12;
 									for ($i = 0; $i < $length; $i++) {
 										$data = $obj->data[$i];
@@ -134,59 +72,4 @@
 										}
 										echo "</div>";
 									}
-								?>
-							</div>
-						</div>
-					</div>
-
-					<div class="capabilities block__full">
-						<div class="anyway">
-							<div class="block block__clear">
-								<div class="block__left">
-									<h3>anyway...</h3>
-									<p>I like to call myself a web designer not UI/UX bla bla... I do lots of things in the past, like becoming Flash <strike>R.I.P</strike> Designer and Programmer, Database Programmer, Creative Director, and CIO. Anyway, as a web designer my design philosophy has always been bringing the most important information front and foremost, creating simplicity while incorporating user-centric design and keeping the brand identity prominent.</p>
-								</div>
-								<div class="block__right">
-									<h4>my capabilities</h4>
-									<ul class="plain">
-										<li><span>concepting</span></li>
-										<li><span>user experience design</span></li>
-										<li><span>user interface design</span></li>
-										<li><span>art directing</span></li>
-										<li><span>interface development</span></li>
-										<li><span>design system</span></li>
-										<li><span>project management</span></li>
-										<li><span>business strategy</span></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-						<div class="work__list">
-							<h5><small>if you haven’t seen</small> my latest works</h5>
-							<ul class="block block__clear flat">
-								<li><a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a></li>
-								<li><a href="./ppatk-e-learning-for-bank-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>PPATK - E-Learning for Banking Frontliner</span></a></li>
-								<li><a href="./angkasa-pura-services"><span><img src="/dwaan/img/ss3.jpg" width="" height="" alt="Angkasa Pura 1 - Airports of Indonesia" /></span><span>Angkasa Pura 1 - Airports of Indonesia</span></a></li>
-								<li><a href="./loket-point-of-sales"><span><img src="/dwaan/img/ss4.jpg" width="" height="" alt="Loket - Point of Sales System" /></span><span>Loket - Point of Sales System</span></a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="cofound block__full">
-						<div class="block__middle">
-							<h3>I’m also one of the owner and cofounder of <a href="http://sagara.id" class="no-barba" target="_blank" rel="noopener noreferrer">Sagara</a></h3>
-							<h5>an IT Solutions company based in Jakarta, Indonesia.</h5>
-							<hr />
-							<h4>but I don't work there anymore</h4>
-							<p>as I resigned from my positions few years ago to persue my other personal life goals</p>
-						</div>
-					</div>
-				</div>
-			</main>
-		</div>
-	</div>
-
-<?php include_once "part_script.php"; ?>
-</body>
-</html>
+								?> </div></div></div><div class="capabilities block__full"><div class="anyway"><div class="block block__clear"><div class="block__left"><h3>anyway...</h3><p>I like to call myself a web designer not UI/UX bla bla... I do lots of things in the past, like becoming Flash <strike>R.I.P</strike> Designer and Programmer, Database Programmer, Creative Director, and CIO. Anyway, as a web designer my design philosophy has always been bringing the most important information front and foremost, creating simplicity while incorporating user-centric design and keeping the brand identity prominent.</p></div><div class="block__right"><h4>my capabilities</h4><ul class="plain"><li><span>concepting</span></li><li><span>user experience design</span></li><li><span>user interface design</span></li><li><span>art directing</span></li><li><span>interface development</span></li><li><span>design system</span></li><li><span>project management</span></li><li><span>business strategy</span></li></ul></div></div></div><div class="work__list"><h5><small>if you haven’t seen</small> my latest works</h5><ul class="block block__clear flat"><li><a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner"></span><span>Melon - Tiket Apa Saja</span></a></li><li><a href="./ppatk-e-learning-for-bank-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Banking Frontliner"></span><span>PPATK - E-Learning for Banking Frontliner</span></a></li><li><a href="./angkasa-pura-services"><span><img src="/dwaan/img/ss3.jpg" width="" height="" alt="Angkasa Pura 1 - Airports of Indonesia"></span><span>Angkasa Pura 1 - Airports of Indonesia</span></a></li><li><a href="./loket-point-of-sales"><span><img src="/dwaan/img/ss4.jpg" width="" height="" alt="Loket - Point of Sales System"></span><span>Loket - Point of Sales System</span></a></li></ul></div></div><div class="cofound block__full"><div class="block__middle"><h3>I’m also one of the owner and cofounder of <a href="http://sagara.id" class="no-barba" target="_blank" rel="noopener noreferrer">Sagara</a></h3><h5>an IT Solutions company based in Jakarta, Indonesia.</h5><hr><h4>but I don't work there anymore</h4><p>as I resigned from my positions few years ago to persue my other personal life goals</p></div></div></div></main></div></div> <?php include_once "part_script.php"; ?> </body></html>
