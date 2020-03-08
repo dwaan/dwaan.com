@@ -694,29 +694,45 @@ var Home = Barba
 
 			// Auto scroll
 			var cur_top = 0,
-				runanimation = function(delta) {
-					var _gsap = function(y) {
-							gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: .512, ease: "power2" });
-							if (y == 0) window._top_b = 0;
-							else window._top_b = _q(".work_float").offsetHeight;
-						};
+				duration = 512,
+				delay = 128,
+				run_gsap = function(y) {
+					speed = duration / 1000;
 
-					if(delta > 0) {
-						if(delta > 50) _gsap("max");
-						else _gsap(0);
+					gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: speed, ease: "power2", onComplete: function() {
+						window._run_gsap = true;
+					}});
+
+					if (y == 0) window._top_b = 0;
+					else window._top_b = _q(".work_float").offsetHeight;
+				},
+				final_check = function() {
+					// If the delta is zero, check if it's really on top or bottom
+					if(window._top_b > _q(".work_float").offsetHeight / 2) {
+						if (window._top_b != _q(".work_float").offsetHeight) run_gsap("max");
 					} else {
-						if(delta < -50) _gsap(0);
-						else _gsap("max");
+						if (window._top_b != 0) run_gsap(0);
+					}
+				},
+				runanimation = function(delta) {
+					if(delta > 0) {
+						if(delta > 50) run_gsap("max");
+						else run_gsap(0);
+					} else if(delta < 0) {
+						if(delta < -50) run_gsap(0);
+						else run_gsap("max");
+					} else {
+						final_check();
 					}
 				},
 				onScroll = function(e){
-					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
-
 					clearTimeout(window._timeout);
 					if (window._run_gsap) {
-						console.log("Run GSAP");
 						window._timeout = setTimeout(function () {
+							var cur_top = window.pageYOffset || document.documentElement.scrollTop;
+
 							clearTimeout(window._timeout);
+
 							gsap.killTweensOf(window);
 							runanimation(cur_top - window._top_b);
 							window._run_gsap = false;
@@ -724,9 +740,9 @@ var Home = Barba
 							// Wait for another gsap to run
 							clearTimeout(window.__timeout);
 							window.__timeout = setTimeout(function () {
-								window._run_gsap = true;
-							}, 512 + 32); // Following gsap duration
-						}, 128);
+								final_check();
+							}, duration + delay); // Following gsap duration
+						}, delay);
 					}
 				};
 
@@ -739,8 +755,14 @@ var Home = Barba
 					window.onscroll = null;
 				}
 				window.ontouchend = function() {
-					// window.onscroll = onScroll;
-					// onScroll();
+					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
+
+					window.onscroll = onScroll;
+
+					window._timeout = setTimeout(function () {
+						window.onscroll = null;
+						runanimation(cur_top - window._top_b);
+					}, delay);
 				}
 			} else {
 				window.onscroll = onScroll;
