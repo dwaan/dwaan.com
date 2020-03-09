@@ -749,12 +749,12 @@ var Home = Barba
 			window._top_b = 0;
 			window._run_gsap = true;
 			if (isTouchSupported()) {
-				window.ontouchstart = function() {
+				window.ontouchstart = function(e) {
 					clearTimeout(window._timeout);
 					window._top_b = window.pageYOffset || document.documentElement.scrollTop;
 					window.onscroll = null;
 				}
-				window.ontouchend = function() {
+				window.ontouchend = function(e) {
 					var cur_top = window.pageYOffset || document.documentElement.scrollTop;
 
 					window.onscroll = onScroll;
