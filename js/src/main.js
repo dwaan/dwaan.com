@@ -1,5 +1,3 @@
-'use strict';
-
 // General variables
 var dark_mode = false,
 	logo_svg = _q(".logo").innerHTML,
