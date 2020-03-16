@@ -1,3 +1,5 @@
+'use strict';
+
 // General variables
 var dark_mode = false,
 	logo_svg = _q(".logo").innerHTML,
@@ -14,7 +16,7 @@ var dark_mode = false,
 	tinysliders = [];
 
 // Put mandatory html stuff
-_q("body").innerHTML += '<div id="click-cover"></div><div class="support"><div class="cm__table"><div class="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if posible for better layout.</p></div></div></div></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>';
+_q("body").innerHTML += '<div id="sky"></div><div id="click-cover"></div><div class="support"><div class="cm__table"><div class="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if posible for better layout.</p></div></div></div></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>';
 _q("header .menu__item").innerHTML = '\
 	<div class="border"><div></div></div>\
 	<div class="menu__pos">\
@@ -51,12 +53,37 @@ var menu = {
 		this.el = _q('#mode');
 		gsap.set(this.el.querySelector("#ray"), {transformOrigin: "center center"})
 		this.el.onclick = function (e) {
-			if (!dark_mode) {
-				dark_mode = true;
-				addClass(_q("html"), "dark");
-			} else {
-				dark_mode = false;
-				removeClass(_q("html"), "dark");
+			var size = (window.innerHeight > window.innerWidth) ? window.innerHeight : window.innerWidth,
+				tl;
+
+			if(!window.dark_mode_animate) {
+				window.dark_mode_animate = true;
+				if(!dark_mode) {
+					dark_mode = true;
+					tl = gsap.timeline({ defaults: { ease: "expo.in" }})
+					tl
+						.fromTo("#sky", { top: "100%", left: "50%", right: "50%", backgroundColor: "#202526" }, { top: -size, left: -size, right: -size, duration: 1.024, onComplete: function() {
+							window.dark_mode_animate = false;
+						}}, 0)
+						.fromTo("#sky", { opacity: 0 }, { opacity: 1, duration: .896 }, 0)
+						.to("html", { duration: .768, onComplete: function() {
+							addClass(_q("html"), "dark");
+						}}, 0)
+					;
+				} else {
+					dark_mode = false;
+					tl = gsap.timeline({ defaults: { ease: "expo.out" }})
+					tl
+						.fromTo("#sky", { top: -size, left: -size, right: -size, backgroundColor: "#202526" }, { top: "100%", left: "50%", right: "50%", duration: 1.024, onComplete: function() {
+							window.dark_mode_animate = false;
+						}}, 0)
+						.fromTo("#sky", { opacity: 1 }, { opacity: 0, duration: .768 }, .256)
+						.set("html", { backgroundColor: "#A4CDD6" }, 0)
+						.to("html", { duration: .256, onComplete: function() {
+							removeClass(_q("html"), "dark");
+						}}, 0)
+					;
+				}
 			}
 
 			e.preventDefault();
@@ -366,12 +393,7 @@ var loading = {
 				callback = function() {}
 			}
 			var lv = "#loading-cover",
-				tl = gsap.timeline({
-					defaults: {
-						duration: .768,
-						ease: "expo.out"
-					}
-				});
+				tl = gsap.timeline({ defaults: { duration: .768, ease: "expo.out" }});
 			tl
 				.set(lv + " .text", {opacity: 1})
 				.to(lv + " .left-hand", { transformOrigin: "99% 0", duration: .256, ease: "expo", yPercent: 35, rotation: 65 })
@@ -697,12 +719,9 @@ var Home = Barba
 				run_gsap = function(y) {
 					speed = duration / 1000;
 
-					gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: speed, ease: "power2", onComplete: function() {
-						window._run_gsap = true;
-					}});
+					gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: speed, ease: "power2" });
 
-					if (y == 0) window._top_b = 0;
-					else window._top_b = _q(".work_float").offsetHeight;
+					window._top_b = (y == 0) ? 0 : _q(".work_float").offsetHeight;
 				},
 				final_check = function() {
 					// If the delta is zero, check if it's really on top or bottom
@@ -713,39 +732,25 @@ var Home = Barba
 					}
 				},
 				runanimation = function(delta) {
-					if(delta > 0) {
-						if(delta > 50) run_gsap("max");
-						else run_gsap(0);
-					} else if(delta < 0) {
-						if(delta < -50) run_gsap(0);
-						else run_gsap("max");
-					} else {
-						final_check();
-					}
+					if(delta > 0) run_gsap((delta > 50) ? "max" : 0);
+					else if(delta < 0) run_gsap((delta < -50) ? 0 : "max");
+					else final_check();
 				},
 				onScroll = function(e){
 					clearTimeout(window._timeout);
-					if (window._run_gsap) {
-						window._timeout = setTimeout(function () {
-							var cur_top = window.pageYOffset || document.documentElement.scrollTop;
+					window._timeout = setTimeout(function () {
+						var cur_top = window.pageYOffset || document.documentElement.scrollTop;
 
-							clearTimeout(window._timeout);
+						gsap.killTweensOf(window);
+						runanimation(cur_top - window._top_b);
 
-							gsap.killTweensOf(window);
-							runanimation(cur_top - window._top_b);
-							window._run_gsap = false;
-
-							// Wait for another gsap to run
-							clearTimeout(window.__timeout);
-							window.__timeout = setTimeout(function () {
-								final_check();
-							}, duration + delay); // Following gsap duration
-						}, delay);
-					}
+						// Wait for another gsap to run final check
+						clearTimeout(window.__timeout);
+						window.__timeout = setTimeout(final_check, duration + delay); // Following gsap duration
+					}, delay);
 				};
 
 			window._top_b = 0;
-			window._run_gsap = true;
 			if (isTouchSupported()) {
 				window.ontouchstart = function(e) {
 					clearTimeout(window._timeout);
@@ -764,6 +769,39 @@ var Home = Barba
 				}
 			} else {
 				window.onscroll = onScroll;
+			}
+
+			// Skew effect
+			window.onmousemove = function(event) {
+				var eventDoc, doc, body;
+
+				event = event || window.event; // IE-ism
+
+				// If pageX/Y aren't available and clientX/Y are,
+				// calculate pageX/Y - logic taken from jQuery.
+				// (This is to support old IE)
+				if (event.pageX == null && event.clientX != null) {
+					eventDoc = (event.target && event.target.ownerDocument) || document;
+					doc = eventDoc.documentElement;
+					body = eventDoc.body;
+
+					event.pageX = event.clientX +
+					  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+					  (doc && doc.clientLeft || body && body.clientLeft || 0);
+					event.pageY = event.clientY +
+					  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+					  (doc && doc.clientTop  || body && body.clientTop  || 0 );
+				}
+
+				if (event.screenX != null) {
+					var x = (event.screenX - (window.innerWidth / 2)) / (window.innerWidth / 2) / 10,
+						y = (event.screenY - (window.innerHeight / 2)) / (window.innerHeight / 2) / 10;
+					gsap.to(".threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
+					gsap.to(".par_h1", { x: x*100, y: y*100 });
+					gsap.to(".par_p", { x: x*75, y: y*75 });
+					gsap.to(".hero__meta, .hero__image", { x: x*50, y: y*50 });
+					gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
+				}
 			}
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
@@ -790,7 +828,7 @@ var Home = Barba
 				.fromTo(".hero__text p", { y: 0 }, { y: -25 }, 0)
 				.fromTo(".hero .stats", { y: 0 }, { y: -30 }, 0)
 				.fromTo(".hero img", { y: 0 }, { y: 10 }, 0)
-				.fromTo(".hero .shade", { opacity: 0 }, { opacity: .75 }, 0);
+				.fromTo(".shade", { opacity: 0 }, { opacity: .75 }, 0);
 			new ScrollMagic
 				.Scene({triggerElement: "main", duration: "100%", triggerHook: 0})
 				.setTween(anim)

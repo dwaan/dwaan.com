@@ -1,4 +1,9 @@
-<meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><script type="text/javascript">/* See if it's in dark mode */if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)document.querySelector("html").setAttribute('class','dark');</script> <?php
+<meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><script type="text/javascript">/* See if it's in dark mode */
+		if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
+			h=document.querySelector("html");
+			h.setAttribute('class','dark');
+			h.style.backgroundColor='#202526';
+		}</script> <?php
 		$protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']),'https') === FALSE ? 'http' : 'https';
 
 		$host = $_SERVER['HTTP_HOST'];

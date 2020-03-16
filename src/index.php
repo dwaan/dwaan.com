@@ -16,60 +16,64 @@
 			<main class="block__clear">
 				<div class="stage"></div>
 
-				<div class="hero block">
-					<div class="hero__meta">
-						<div>
-							<div class="hero__text">
-								<h1>hello! my name is dwan</h1>
-								<p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="./me" class="more">read more</a></p>
-							</div>
+				<data id="stage">
+					<div class="threed block">
+						<div class="hero block">
+							<div class="hero__meta">
+								<div>
+									<div class="hero__text">
+										<div class="par_h1"><h1>hello! my name is dwan</h1></div>
+										<div class="par_p"><p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="./me" class="more">read more</a></p></div>
+									</div>
 
-							<div class="stats block">
-								<span>Some awesome stats</span>
+									<div class="stats block">
+										<span>Some awesome stats</span>
 
-								<div class="stats__content">
-									<p>
-										<a href="./say-hi">
-											<b id="year__living">36+</b>
-											<small>years of experience living on earth</small>
-										</a>
-									</p>
-									<p>
-										<a href="./work">
-											<b id="year__designer">12+</b>
-											<small>years of working as a UX/UI designer</small>
-										</a>
-									</p>
-									<p>
-										<a href="./me">
-											<b id="year__managerial">9+</b>
-											<small>years of working in managerial position</small>
-										</a>
-									</p>
+										<div class="stats__content">
+											<p>
+												<a href="./say-hi">
+													<b id="year__living">36+</b>
+													<small>years of experience living on earth</small>
+												</a>
+											</p>
+											<p>
+												<a href="./work">
+													<b id="year__designer">12+</b>
+													<small>years of working as a UX/UI designer</small>
+												</a>
+											</p>
+											<p>
+												<a href="./me">
+													<b id="year__managerial">9+</b>
+													<small>years of working in managerial position</small>
+												</a>
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
 
-					<div class="hero__image">
-						<div class="img">
-							<div class="box">
-								<img class="dwan" src="/dwaan/img/dwan.png" width="" height="" alt="Dwan" />
-								<img class="fruit" src="/dwaan/img/empty.png" width="" height="" alt="Fruit" />
+							<div class="hero__image">
+								<div class="img">
+									<div class="box">
+										<img class="dwan" src="/dwaan/img/dwan.png" width="" height="" alt="Dwan" />
+										<img class="fruit" src="/dwaan/img/empty.png" width="" height="" alt="Fruit" />
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<div class="hero__image hero__image_poof">
-						<div class="img">
-							<div class="box">
-								<img class="fruit poof" src="/dwaan/img/poof.png" width="" height="" alt="Fruit" />
+							<div class="hero__image hero__image_poof">
+								<div class="img">
+									<div class="box">
+										<img class="fruit poof" src="/dwaan/img/poof.png" width="" height="" alt="Fruit" />
+									</div>
+								</div>
 							</div>
+
 						</div>
 					</div>
-
-					<div class="shade"></div>
-				</div>
+				</data>
+				<div class="shade"></div>
 
 				<div id="trigger__mover"></div>
 				<div id="trigger"></div>
@@ -95,11 +99,11 @@
 											<div class="stats__content">
 												<p>
 													<b>35+</b>
-													<small>design concepts that I’ve created</small>
+													<small>designs created and sliced</small>
 												</p>
 												<p>
 													<b>50+</b>
-													<small>designs that I’ve converted to web pages</small>
+													<small>design concepts created</small>
 												</p>
 											</div>
 										</div>

@@ -58,10 +58,10 @@
 	background-color: #111;
 }
 #loading-cover .loading {
-	position: absolute;
+	position: fixed;
 	display: block;
-	left: 50%;
-	top: 50%;
+	left: 50vw;
+	top: 50vh;
 	width: 15vh;
 	height: 15vh;
 	transform: translate3d(-50%,-50%,0);
@@ -205,6 +205,7 @@ html {
 	color: #222;
 	font-size: 2.1vh;
 	line-height: 1.4rem;
+	background-color: #A4CDD6;
 }
 html.dark {
 	color: #d4e7ec;
@@ -324,11 +325,16 @@ html {
 	min-height: 100%;
 	font-family: "Rubik", sans-serif;
 	letter-spacing: .065rem;
-	background-color: #A4CDD6;
 }
-.dark body,
-html.dark {
+#sky {
+	position: fixed;
+	z-index: 0;
+	top: 100vh;
+	bottom: 0;
+	left: 50vw;
+	right: 50vw;
 	background-color: #202526;
+	border-radius: 10000px 10000px 0 0;
 }
 
 
@@ -1278,8 +1284,21 @@ main {
 
 
 /* Hero */
+#stage,
+#stage .threed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	transform-origin: center;
+}
+#stage {
+	overflow: hidden;
+}
 .hero {
 	position: fixed;
+	z-index: 1;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -1405,8 +1424,8 @@ main {
 .hero .hero__text p {
 	margin: 0 0 4vh;
 }
-.hero .shade {
-	position: absolute;
+.shade {
+	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
