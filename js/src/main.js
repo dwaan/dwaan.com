@@ -218,7 +218,7 @@ var menu = {
 var loading = {
 	selector: _q("#loading-cover"),
 	breath: gsap.timeline({repeat: -1, ease: "linear"}),
-	float: gsap.timeline({repeat: -1, repeatRefresh: true, yoyo: true, ease: "expo", duration: .768}),
+	// float: gsap.timeline({repeat: -1, repeatRefresh: true, yoyo: true, ease: "expo", duration: .768}),
 	init: function() {
 		var el = "";
 
@@ -234,11 +234,12 @@ var loading = {
 		this.breath.pause();
 
 		// Some floating animation for hero image
-		el = ".loading > div";
-		this.float
-			.to(el, { yPercent: "random(5, 10)" })
-			.to(el, { yPercent: "random(-10, -5)" })
-		;
+		// Disable, too exessive
+		// el = ".loading > div";
+		// this.float
+		// 	.to(el, { yPercent: "random(5, 10)" })
+		// 	.to(el, { yPercent: "random(-10, -5)" })
+		// ;
 	},
 	show: function (callback) {
 		var that = this,

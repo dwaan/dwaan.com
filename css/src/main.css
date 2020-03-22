@@ -60,8 +60,8 @@
 #loading-cover .loading {
 	position: fixed;
 	display: block;
-	left: 50vw;
-	top: 50vh;
+	left: 50%;
+	top: 50%;
 	width: 15vh;
 	height: 15vh;
 	transform: translate3d(-50%,-50%,0);
