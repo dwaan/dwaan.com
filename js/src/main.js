@@ -58,21 +58,20 @@ var menu = {
 
 			if(!window.dark_mode_animate) {
 				window.dark_mode_animate = true;
+				tl = gsap.timeline({ defaults: { ease: "expo" }})
 				if(!dark_mode) {
 					dark_mode = true;
-					tl = gsap.timeline({ defaults: { ease: "expo.in" }})
 					tl
 						.fromTo("#sky", { top: "100%", left: "50%", right: "50%", backgroundColor: "#202526" }, { top: -size, left: -size, right: -size, duration: 1.024, onComplete: function() {
 							window.dark_mode_animate = false;
 						}}, 0)
 						.fromTo("#sky", { opacity: 0 }, { opacity: 1, duration: .896 }, 0)
-						.to("html", { duration: .768, onComplete: function() {
+						.to("html", { duration: .128, onComplete: function() {
 							addClass(_q("html"), "dark");
 						}}, 0)
 					;
 				} else {
 					dark_mode = false;
-					tl = gsap.timeline({ defaults: { ease: "expo.out" }})
 					tl
 						.fromTo("#sky", { top: -size, left: -size, right: -size, backgroundColor: "#202526" }, { top: "100%", left: "50%", right: "50%", duration: 1.024, onComplete: function() {
 							window.dark_mode_animate = false;
@@ -200,14 +199,10 @@ var menu = {
 
 			this.el[i].onclick = function (e) {
 				e.preventDefault();
-			}
-			this.el[i].onmouseenter = function() {
+				gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50 });
 				gsap.to(this.nextElementSibling || nextElementSibling(this), { duration: .386, ease: "elastic.out", opacity: 1, marginTop: 10, onComplete: function() {
 					gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50, delay: 1.024 });
 				}});
-			}
-			this.el[i].onmouseleave = function() {
-				gsap.to(".lang .chat__bubble", { duration: .128, ease: "ease.out", opacity: 0, marginTop: 50 });
 			}
 		}
 	}
@@ -711,7 +706,6 @@ var Home = Barba
 
 
 			// Auto scroll
-			/* Still not properly working
 			var cur_top = 0,
 				duration = 512,
 				delay = 128,
@@ -751,6 +745,7 @@ var Home = Barba
 
 			window._top_b = 0;
 			if(isTouchSupported()) {
+				/* Still not properly working
 				window.ontouchstart = function(e) {
 					clearTimeout(window._timeout);
 					window._top_b = window.pageYOffset || document.documentElement.scrollTop;
@@ -766,10 +761,10 @@ var Home = Barba
 						runanimation(cur_top - window._top_b);
 					}, delay);
 				}
+				*/
 			} else {
 				window.onscroll = onScroll;
 			}
-			*/
 
 			// Skew effect
 			if(isTouchSupported()) {
@@ -801,8 +796,8 @@ var Home = Barba
 							y = (event.screenY - (window.innerHeight / 2)) / (window.innerHeight / 2) / 10;
 						gsap.to(".threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
 						gsap.to(".par_h1", { x: x*100, y: y*100 });
-						gsap.to(".par_p", { x: x*75, y: y*75 });
-						gsap.to(".hero__meta, .hero__image", { x: x*50, y: y*50 });
+						gsap.to(".par_p, .hero__image", { x: x*75, y: y*75 });
+						gsap.to(".hero__meta", { x: x*50, y: y*50 });
 						gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
 					}
 				}
