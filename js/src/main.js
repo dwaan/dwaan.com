@@ -218,7 +218,7 @@ var menu = {
 var loading = {
 	selector: _q("#loading-cover"),
 	breath: gsap.timeline({repeat: -1, ease: "linear"}),
-	float: gsap.timeline({repeat: -1, ease: "ease", duration: .512}),
+	float: gsap.timeline({repeat: -1, repeatRefresh: true, yoyo: true, ease: "expo", duration: .768}),
 	init: function() {
 		var el = "";
 
@@ -227,21 +227,18 @@ var loading = {
 		// Some floating animation for loading-cover
 		el = "#loading-cover";
 		this.breath
-			.to(el, {transformOrigin: "50%",scale: 1, duration: .9})
-			.to(el, {scale: 1.15,duration: 1.7})
-			.to(el, {scale: 1.15,duration: .6})
-			.to(el, {scale: 1,duration: 1.7});
+			.to(el, {transformOrigin: "50%", scale: 1, duration: .9})
+			.to(el, {scale: 1.15, duration: 1.7})
+			.to(el, {scale: 1.15, duration: .6})
+			.to(el, {scale: 1, duration: 1.7});
 		this.breath.pause();
 
 		// Some floating animation for hero image
 		el = ".loading > div";
 		this.float
-			.fromTo(el, { yPercent: -10 }, { yPercent: 10, duration: 1.024 })
-			.fromTo(el, { yPercent: 10 }, { yPercent: -10, duration: 1.024 })
-			.fromTo(el, { yPercent: -10 }, {yPercent: 5})
-			.fromTo(el, { yPercent: 5 }, {yPercent: -5})
-			.fromTo(el, { yPercent: -5 }, { yPercent: 10, duration: .768 })
-			.fromTo(el, { yPercent: 10 }, { yPercent: -10, duration: 1.024 });
+			.to(el, { yPercent: "random(5, 10)" })
+			.to(el, { yPercent: "random(-10, -5)" })
+		;
 	},
 	show: function (callback) {
 		var that = this,
@@ -713,6 +710,7 @@ var Home = Barba
 
 
 			// Auto scroll
+			/* Still not properly working
 			var cur_top = 0,
 				duration = 512,
 				delay = 128,
@@ -751,7 +749,7 @@ var Home = Barba
 				};
 
 			window._top_b = 0;
-			if (isTouchSupported()) {
+			if(isTouchSupported()) {
 				window.ontouchstart = function(e) {
 					clearTimeout(window._timeout);
 					window._top_b = window.pageYOffset || document.documentElement.scrollTop;
@@ -770,37 +768,42 @@ var Home = Barba
 			} else {
 				window.onscroll = onScroll;
 			}
+			*/
 
 			// Skew effect
-			window.onmousemove = function(event) {
-				var eventDoc, doc, body;
+			if(isTouchSupported()) {
+				// Do something with gyroscpe
+			} else {
+				window.onmousemove = function(event) {
+					var eventDoc, doc, body;
 
-				event = event || window.event; // IE-ism
+					event = event || window.event; // IE-ism
 
-				// If pageX/Y aren't available and clientX/Y are,
-				// calculate pageX/Y - logic taken from jQuery.
-				// (This is to support old IE)
-				if (event.pageX == null && event.clientX != null) {
-					eventDoc = (event.target && event.target.ownerDocument) || document;
-					doc = eventDoc.documentElement;
-					body = eventDoc.body;
+					// If pageX/Y aren't available and clientX/Y are,
+					// calculate pageX/Y - logic taken from jQuery.
+					// (This is to support old IE)
+					if (event.pageX == null && event.clientX != null) {
+						eventDoc = (event.target && event.target.ownerDocument) || document;
+						doc = eventDoc.documentElement;
+						body = eventDoc.body;
 
-					event.pageX = event.clientX +
-					  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-					  (doc && doc.clientLeft || body && body.clientLeft || 0);
-					event.pageY = event.clientY +
-					  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-					  (doc && doc.clientTop  || body && body.clientTop  || 0 );
-				}
+						event.pageX = event.clientX +
+						  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+						  (doc && doc.clientLeft || body && body.clientLeft || 0);
+						event.pageY = event.clientY +
+						  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+						  (doc && doc.clientTop  || body && body.clientTop  || 0 );
+					}
 
-				if (event.screenX != null) {
-					var x = (event.screenX - (window.innerWidth / 2)) / (window.innerWidth / 2) / 10,
-						y = (event.screenY - (window.innerHeight / 2)) / (window.innerHeight / 2) / 10;
-					gsap.to(".threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
-					gsap.to(".par_h1", { x: x*100, y: y*100 });
-					gsap.to(".par_p", { x: x*75, y: y*75 });
-					gsap.to(".hero__meta, .hero__image", { x: x*50, y: y*50 });
-					gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
+					if (event.screenX != null) {
+						var x = (event.screenX - (window.innerWidth / 2)) / (window.innerWidth / 2) / 10,
+							y = (event.screenY - (window.innerHeight / 2)) / (window.innerHeight / 2) / 10;
+						gsap.to(".threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
+						gsap.to(".par_h1", { x: x*100, y: y*100 });
+						gsap.to(".par_p", { x: x*75, y: y*75 });
+						gsap.to(".hero__meta, .hero__image", { x: x*50, y: y*50 });
+						gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
+					}
 				}
 			}
 
