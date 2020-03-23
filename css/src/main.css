@@ -3968,6 +3968,10 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
+	overflow: hidden;
+}
+.call .threed {
+	transform-origin: 75% 25%;
 }
 .call > div {
 	position: absolute;

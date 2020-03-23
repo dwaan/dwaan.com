@@ -301,6 +301,41 @@ function isTouchSupported() {
     }
     return false;
 }
+// Parallax on mouse move
+function parallax(callback) {
+	if(isTouchSupported()) {
+		// Do something with gyroscpe
+	} else {
+		window.onmousemove = function(event) {
+			var eventDoc, doc, body;
+
+			event = event || window.event; // IE-ism
+
+			// If pageX/Y aren't available and clientX/Y are,
+			// calculate pageX/Y - logic taken from jQuery.
+			// (This is to support old IE)
+			if (event.pageX == null && event.clientX != null) {
+				eventDoc = (event.target && event.target.ownerDocument) || document;
+				doc = eventDoc.documentElement;
+				body = eventDoc.body;
+
+				event.pageX = event.clientX +
+				  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+				  (doc && doc.clientLeft || body && body.clientLeft || 0);
+				event.pageY = event.clientY +
+				  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+				  (doc && doc.clientTop  || body && body.clientTop  || 0 );
+			}
+
+			if (event.screenX != null) {
+				var x = (event.screenX - (window.innerWidth / 2)) / (window.innerWidth / 2) / 10,
+					y = (event.screenY - (window.innerHeight / 2)) / (window.innerHeight / 2) / 10;
+
+				callback(x, y);
+			}
+		}
+	}
+}
 // Photoswipe helper
 var initPhotoSwipeFromDOM = function (gallerySelector) {
 	// parse slide data (url, title, size ...) from DOM elements (children of

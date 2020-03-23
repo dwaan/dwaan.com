@@ -704,7 +704,6 @@ var Home = Barba
 				e.preventDefault();
 			}
 
-
 			// Auto scroll
 			var cur_top = 0,
 				duration = 512,
@@ -766,42 +765,15 @@ var Home = Barba
 				window.onscroll = onScroll;
 			}
 
-			// Skew effect
-			if(isTouchSupported()) {
-				// Do something with gyroscpe
-			} else {
-				window.onmousemove = function(event) {
-					var eventDoc, doc, body;
-
-					event = event || window.event; // IE-ism
-
-					// If pageX/Y aren't available and clientX/Y are,
-					// calculate pageX/Y - logic taken from jQuery.
-					// (This is to support old IE)
-					if (event.pageX == null && event.clientX != null) {
-						eventDoc = (event.target && event.target.ownerDocument) || document;
-						doc = eventDoc.documentElement;
-						body = eventDoc.body;
-
-						event.pageX = event.clientX +
-						  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-						  (doc && doc.clientLeft || body && body.clientLeft || 0);
-						event.pageY = event.clientY +
-						  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-						  (doc && doc.clientTop  || body && body.clientTop  || 0 );
-					}
-
-					if (event.screenX != null) {
-						var x = (event.screenX - (window.innerWidth / 2)) / (window.innerWidth / 2) / 10,
-							y = (event.screenY - (window.innerHeight / 2)) / (window.innerHeight / 2) / 10;
-						gsap.to(".threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
-						gsap.to(".par_h1", { x: x*100, y: y*100 });
-						gsap.to(".par_p, .hero__image", { x: x*75, y: y*75 });
-						gsap.to(".hero__meta", { x: x*50, y: y*50 });
-						gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
-					}
-				}
-			}
+			// 3D effect
+			parallax(function(x, y){
+				gsap.to(".threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
+				gsap.to(".par_h1", { x: x*100, y: y*100 });
+				gsap.to(".par_p", { x: x*75, y: y*75 });
+				gsap.to(".hero__meta", { x: x*50, y: y*50 });
+				gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
+				gsap.to(".hero__image", { x: x*-25, y: y*-25 });
+			});
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
 		},
@@ -1247,12 +1219,20 @@ var Call = Barba
 				});
 				_hugeText.hide();
 			};
+
+			// 3D effect
+			parallax(function(x, y){
+				gsap.to(".call .threed", { transform: "perspective(50px) rotate3d(" + -y + ", " + x + ", 0, .1deg)" });
+				gsap.to(".call h1", { x: x*300, y: y*300 });
+				gsap.to(".call h2", { x: x*200, y: y*200 });
+				gsap.to(".call a:nth-child(2)", { x: x*100, y: y*100 });
+			});
 		},
 		onImageLoadAnimateComplete: function() {
 			loading.breath.play();
 
 			// Scroll animate the works
-			gsap.fromTo(".call > div > *", 1.024, {
+			gsap.fromTo(".call > div > div > *", 1.024, {
 				y: 250
 			}, {
 				y: 0,
