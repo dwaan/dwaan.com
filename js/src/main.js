@@ -39,6 +39,56 @@ document.addEventListener('click', function (e) {
 	clicked_text = clicked_target.textContent || clicked_target.innerText;
 }, false);
 
+
+// Dark Mode
+function toggleDarkMode() {
+	var size = (window.innerHeight > window.innerWidth) ? window.innerHeight : window.innerWidth,
+		pos = _q('#mode').getBoundingClientRect(),
+		tl;
+
+	gsap.set("#sky", { x: pos.x, y: pos.y, width: pos.width, height: pos.width });
+
+	tl = gsap.timeline({ defaults: { ease: "expo", duration: 1.024 }})
+	if(!dark_mode) {
+		gsap.set("#sky", { x: pos.x, y: pos.y, width: pos.width, height: pos.width, opacity: 0 });
+		dark_mode = true;
+		tl
+			.fromTo("#mode svg #moon", { opacity: 0 }, { opacity: 1, ease: "expo.out" }, 0)
+			.fromTo("#mode svg #sun", { opacity: 1 }, { opacity: 0, ease: "expo.out" }, 0)
+			.fromTo("#sky", { scale: 1 }, { scale: 100, onComplete: function() {
+				window.dark_mode_animate = false;
+			}}, 0)
+			.fromTo("#sky", { opacity: 0 }, { opacity: 1, duration: .896 }, 0)
+			.to("html", { duration: .128, onComplete: function() {
+				addClass(_q("html"), "dark");
+			}}, 0)
+		;
+	} else {
+		dark_mode = false;
+		tl
+			.fromTo("#mode svg #moon", { opacity: 1 }, { opacity: 0, ease: "expo.out" }, 0)
+			.fromTo("#mode svg #sun", { opacity: 0 }, { opacity: 1, ease: "expo.out" }, 0)
+			.fromTo("#sky", { scale: 100 }, { scale: 1, onComplete: function() {
+				window.dark_mode_animate = false;
+			}}, 0)
+			.fromTo("#sky", { opacity: 1 }, { opacity: 0, duration: .768 }, .256)
+			.set("html", { backgroundColor: "#A4CDD6" }, 0)
+			.to("html", { duration: .256, onComplete: function() {
+				removeClass(_q("html"), "dark");
+			}}, 0)
+		;
+	}
+}
+if(window.matchMedia){
+	var darkmode = window.matchMedia('(prefers-color-scheme: dark)');
+	darkmode.addListener(function(e){
+		h = _q("html");
+		if(e.matches) dark_mode = false;
+		else dark_mode = true;
+		toggleDarkMode();
+	});
+}
+
 ///////////////////// Menu Functionality
 
 var menu = {
@@ -53,46 +103,7 @@ var menu = {
 		this.el = _q('#mode');
 		gsap.set(this.el.querySelector("#ray"), {transformOrigin: "center center"})
 		this.el.onmousedown = function (e) {
-			var size = (window.innerHeight > window.innerWidth) ? window.innerHeight : window.innerWidth,
-				pos = this.getBoundingClientRect(),
-				tl;
-
-			if(!window.dark_mode_animate) {
-				window.dark_mode_animate = true;
-				gsap.set("#sky", { x: pos.x, y: pos.y, width: pos.width, height: pos.width });
-
-				tl = gsap.timeline({ defaults: { ease: "expo", duration: 1.024 }})
-				if(!dark_mode) {
-					gsap.set("#sky", { x: pos.x, y: pos.y, width: pos.width, height: pos.width, opacity: 0 });
-					dark_mode = true;
-					tl
-						.fromTo("#mode svg #moon", { opacity: 0 }, { opacity: 1, ease: "expo.out" }, 0)
-						.fromTo("#mode svg #sun", { opacity: 1 }, { opacity: 0, ease: "expo.out" }, 0)
-						.fromTo("#sky", { scale: 1 }, { scale: 100, onComplete: function() {
-							window.dark_mode_animate = false;
-						}}, 0)
-						.fromTo("#sky", { opacity: 0 }, { opacity: 1, duration: .896 }, 0)
-						.to("html", { duration: .128, onComplete: function() {
-							addClass(_q("html"), "dark");
-						}}, 0)
-					;
-				} else {
-					dark_mode = false;
-					tl
-						.fromTo("#mode svg #moon", { opacity: 1 }, { opacity: 0, ease: "expo.out" }, 0)
-						.fromTo("#mode svg #sun", { opacity: 0 }, { opacity: 1, ease: "expo.out" }, 0)
-						.fromTo("#sky", { scale: 100 }, { scale: 1, onComplete: function() {
-							window.dark_mode_animate = false;
-						}}, 0)
-						.fromTo("#sky", { opacity: 1 }, { opacity: 0, duration: .768 }, .256)
-						.set("html", { backgroundColor: "#A4CDD6" }, 0)
-						.to("html", { duration: .256, onComplete: function() {
-							removeClass(_q("html"), "dark");
-						}}, 0)
-					;
-				}
-			}
-
+			toggleDarkMode();
 			e.preventDefault();
 		}
 		this.el.onmouseenter = function() {
