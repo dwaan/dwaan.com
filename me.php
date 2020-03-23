@@ -66,9 +66,9 @@
 										echo "<div class='item'>";
 
 										if($data->media_type == "IMAGE" || $data->media_type == "CAROUSEL_ALBUM") {
-											echo "<a href='" . $data->permalink . "' class='img-ig no-barba' target='_blank' rel='noopener noreferrer'><img src='" . $data->media_url . "' width='200' height='auto' alt='" . $data->caption . "' /></a>";
+											echo "<a href='" . $data->permalink . "' class='img-ig no-barba' target='_blank' rel='noopener noreferrer'><span style='background:#222 url(" . $data->media_url . ") center no-repeat; background-size:cover' title='" . $data->caption . "'></span></a>";
 										} elseif($data->media_type == "VIDEO") {
-											echo "<a href='" . $data->permalink . "' class='img-ig no-barba' target='_blank' rel='noopener noreferrer'><img src='" . $data->thumbnail_url . "' width='200' height='auto' alt='" . $data->caption . "' /></a>";
+											echo "<a href='" . $data->permalink . "' class='img-ig no-barba' target='_blank' rel='noopener noreferrer'><span style='background:#222 url(" . $data->thumbnail_url . ") center no-repeat; background-size:cover' title='" . $data->caption . "'></span></a>";
 										}
 										echo "</div>";
 									}
