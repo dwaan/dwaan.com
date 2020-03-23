@@ -52,17 +52,23 @@ var menu = {
 		// The bright/dark mode switcher
 		this.el = _q('#mode');
 		gsap.set(this.el.querySelector("#ray"), {transformOrigin: "center center"})
-		this.el.onclick = function (e) {
+		this.el.onmousedown = function (e) {
 			var size = (window.innerHeight > window.innerWidth) ? window.innerHeight : window.innerWidth,
+				pos = this.getBoundingClientRect(),
 				tl;
 
 			if(!window.dark_mode_animate) {
 				window.dark_mode_animate = true;
-				tl = gsap.timeline({ defaults: { ease: "expo" }})
+				gsap.set("#sky", { x: pos.x, y: pos.y, width: pos.width, height: pos.width });
+
+				tl = gsap.timeline({ defaults: { ease: "expo", duration: 1.024 }})
 				if(!dark_mode) {
+					gsap.set("#sky", { x: pos.x, y: pos.y, width: pos.width, height: pos.width, opacity: 0 });
 					dark_mode = true;
 					tl
-						.fromTo("#sky", { top: "100%", left: "50%", right: "50%", backgroundColor: "#202526" }, { top: -size, left: -size, right: -size, duration: 1.024, onComplete: function() {
+						.fromTo("#mode svg #moon", { opacity: 0 }, { opacity: 1, ease: "expo.out" }, 0)
+						.fromTo("#mode svg #sun", { opacity: 1 }, { opacity: 0, ease: "expo.out" }, 0)
+						.fromTo("#sky", { scale: 1 }, { scale: 100, onComplete: function() {
 							window.dark_mode_animate = false;
 						}}, 0)
 						.fromTo("#sky", { opacity: 0 }, { opacity: 1, duration: .896 }, 0)
@@ -73,7 +79,9 @@ var menu = {
 				} else {
 					dark_mode = false;
 					tl
-						.fromTo("#sky", { top: -size, left: -size, right: -size, backgroundColor: "#202526" }, { top: "100%", left: "50%", right: "50%", duration: 1.024, onComplete: function() {
+						.fromTo("#mode svg #moon", { opacity: 1 }, { opacity: 0, ease: "expo.out" }, 0)
+						.fromTo("#mode svg #sun", { opacity: 0 }, { opacity: 1, ease: "expo.out" }, 0)
+						.fromTo("#sky", { scale: 100 }, { scale: 1, onComplete: function() {
 							window.dark_mode_animate = false;
 						}}, 0)
 						.fromTo("#sky", { opacity: 1 }, { opacity: 0, duration: .768 }, .256)

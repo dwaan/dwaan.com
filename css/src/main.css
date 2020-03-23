@@ -329,12 +329,15 @@ html {
 #sky {
 	position: fixed;
 	z-index: 0;
-	top: 100vh;
-	bottom: 0;
-	left: 50vw;
-	right: 50vw;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	opacity: 0;
 	background-color: #202526;
-	border-radius: 10000px 10000px 0 0;
+	transform-origin: center;
+	border-radius: 10000px;
+	pointer-events: none;
 }
 
 
