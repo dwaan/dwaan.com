@@ -153,16 +153,15 @@ var menu = {
 			_hugeText = new hugeText(border + " > div ");
 
 		for (var i = 2; i <= 6; i++) {
-			if (i == 5)
-				i = 6;
+			if(i == 5) i = 6;
 
 			this.el = _q('.menu__pop .menu__item li:nth-child(' + i + ') a');
 
-			if (i == 2)
+			if(i == 2)
 				this.el.borderRadius = "25% 2% 2% 2%";
-			else if (i == 3)
+			else if(i == 3)
 				this.el.borderRadius = "2% 25% 2% 2%";
-			else if (i == 4)
+			else if(i == 4)
 				this.el.borderRadius = "2% 2% 25% 2%";
 			else
 				this.el.borderRadius = "2% 2% 2% 25%";
@@ -259,14 +258,14 @@ var loading = {
 		var that = this,
 			var_from = { xPercent: 0, yPercent: 100 },
 			var_to = { xPercent: 0, yPercent: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
-					if (callback != undefined)
+					if(callback != undefined)
 						callback();
 					}
 				};
 
 		_q("#click-cover").style.display = "block";
 
-		if (menu.active) {
+		if(menu.active) {
 			var_from.xPercent = 100;
 			var_from.yPercent = 0;
 			var_to.xPercent = 0;
@@ -278,19 +277,19 @@ var loading = {
 		menu.active = false;
 
 		// Hide loading
-		if (clicked_text == "See All") {
+		if(clicked_text == "See All") {
 			var_from = {
 				xPercent: -100,
 				yPercent: 0
 			};
-		} else if (clicked_text == "Back") {
+		} else if(clicked_text == "Back") {
 			var_from = {
 				xPercent: 100,
 				yPercent: 0
 			};
 		}
 
-		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
+		if(_q("[data-namespace]").getAttribute("data-namespace") == "call") {
 			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo" }}),
 				sl = that.selector;
 
@@ -304,7 +303,7 @@ var loading = {
 				.fromTo(sl.querySelector(".loading"), { opacity: 0, yPercent: 100 }, { opacity: 1, y: 0, yPercent: -50 }, 0)
 				.to(sl, { position: "fixed", top: 0, right: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
 					gsap.set(sl, { top: 0, bottom: 0, left: 0, right: 0, width: "auto", height: "auto" });
-					if (callback != undefined) callback();
+					if(callback != undefined) callback();
 				}}, "-=.512");
 		} else {
 			gsap.fromTo(this.selector, var_from, var_to);
@@ -321,21 +320,21 @@ var loading = {
 					// Unhide loading
 					gsap.set(that.selector.querySelector(".loading"), {opacity: 1});
 					// Run callback
-					if (callback != undefined)
+					if(callback != undefined)
 						callback();
 					}
 				};
 
 		// Hide loading
-		if (clicked_text == "See All") {
+		if(clicked_text == "See All") {
 			var_to.xPercent = -100;
 			var_to.yPercent = 0;
-		} else if (clicked_text == "Back") {
+		} else if(clicked_text == "Back") {
 			var_to.xPercent = 100;
 			var_to.yPercent = 0;
 		}
 
-		if (_q("[data-namespace]").getAttribute("data-namespace") == "call") {
+		if(_q("[data-namespace]").getAttribute("data-namespace") == "call") {
 			var tl = gsap.timeline({ defaults: { duration: .386, ease: "expo.inOut" }}),
 				sl = that.selector,
 				size = [];
@@ -346,12 +345,12 @@ var loading = {
 				size[0] = sl.querySelector(".loading").offsetWidth + (sl.querySelector(".loading").offsetWidth / 2);
 				size[1] = "17.5vh";
 
-				if (this.matches) {
+				if(this.matches) {
 					size[0] = sl.querySelector(".loading").offsetHeight + (sl.querySelector(".loading").offsetHeight / 2);
 					size[1] = "15vh";
 				}
 
-				if (set) gsap.to(sl, { width: size[0], height: size[0], duration: .512 });
+				if(set) gsap.to(sl, { width: size[0], height: size[0], duration: .512 });
 
 				return size;
 			}
@@ -370,11 +369,11 @@ var loading = {
 				.to(sl, { width: size[0], height: size[0], top: size[1], left: "initial", right: "11.5vw", borderRadius: "1000px", duration: .768 }, 0)
 				.set(sl, { zIndex: 1 });
 
-			if (callback != undefined) callback();
+			if(callback != undefined) callback();
 		} else {
 			gsap.fromTo(that.selector, var_from, var_to);
 			gsap.fromTo(that.selector, { scale: 1 }, { scale: 1, duration: var_to.duration / 3, onComplete: function() {
-				if (callback__half != undefined) callback__half();
+				if(callback__half != undefined) callback__half();
 			}});
 		}
 
@@ -400,8 +399,8 @@ var loading = {
 				break;
 		}
 
-		if (animate) {
-			if (callback == undefined) {
+		if(animate) {
+			if(callback == undefined) {
 				callback = function() {}
 			}
 			var lv = "#loading-cover",
@@ -419,10 +418,7 @@ var loading = {
 		}
 	},
 	clear: function() {
-		this
-			.selector
-			.querySelector(".text")
-			.innerHTML = "";
+		this.selector.querySelector(".text").innerHTML = "";
 	}
 }
 
@@ -444,37 +440,18 @@ var imageloading = {
 
 		that.callback = callback;
 
-		if (elem.newContainer != undefined) {
+		if(elem.newContainer) {
 			this.elem = elem.newContainer;
 			this.barba_object = elem;
 		} else {
 			this.elem = elem;
 			this.barba_object = null;
 		}
-		imgs = this
-			.elem
-			.querySelectorAll("img");
-		imgs_count = imgs.length * 100;
-
-
-		function checkProgress(index, percent) {
-			function totalValue(array_item) {
-				var total = 0;
-				for (var i = 0; i < array_item.length; i++) {
-					total += array_item[i];
-				}
-				return total;
-			}
-
-			if(isNaN(index))
-				imgs_loaded[index.ajaxImageIndex] = percent;
-			else
-				imgs_loaded[index] = percent;
-			return Math.ceil(totalValue(imgs_loaded) / imgs_count * 100);
-		}
+		imgs = this.elem.querySelectorAll("img");
+		imgs_count = imgs.length;
 
 		this.loaded = false;
-		if (imgs.length <= 0) {
+		if(imgs.length <= 0) {
 			// No image, just unhide the loading
 			loading.update({duration: .256, height: "100%"});
 			that.loaded = true;
@@ -483,30 +460,33 @@ var imageloading = {
 		} else {
 			// Found image, load them with ajax
 			var progress = function(index, percent) {
-				var loaded = checkProgress(index, percent);
-
 				loading.update({
 					duration: .256,
-					height: loaded + "%"
+					height: percent + "%"
 				});
 
-				if (loaded >= 100 && !that.loaded) {
+				if(percent >= 100 && !that.loaded) {
 					that.loaded = true;
 					if(callback_called == 0) {
 						callback_called++;
 
 						if(that.callback) that.callback(that);
 						else that.done();
+					} else {
+						that.done();
 					}
 				}
 			}
+
 			for (var i = 0; i < imgs.length; i++) {
 				imgs_loaded[i] = 0;
-				if (imgs[i].load != undefined) {
-					imgs[i].load(i, progress);
+				// When loaded report it as a progress
+				if(imgs[i].complete) {
+					progress(imgs_count--, 100-(imgs_count/imgs.length*100));
 				} else {
-					imgs[i].ajaxImageIndex = i;
-					ajaxImage(imgs[i], progress);
+					imgs[i].addEventListener("load", function(e) {
+						progress(imgs_count--, 100-(imgs_count/imgs.length*100));
+					});
 				}
 			}
 		}
@@ -514,50 +494,41 @@ var imageloading = {
 	done: function (callback) {
 		var that = this;
 
-		if (that.first_animation_done) {
+		if(that.first_animation_done) {
 			// Add delay before hiding loading
 			gsap.to(window, {
 				duration: .256,
 				onComplete: function() {
-					if (that.barba_object != null) {
+					if(that.barba_object != null) {
 						that.elem.style.visibility = "visible";
-						that
-							.barba_object
-							.done();
+						that.barba_object.done();
 					}
 
-					if (that.loaded) {
+					if(that.loaded) {
 						// Run custom onLoadedComplete method in barba
-						if (current_barba.onImageLoadComplete != undefined)
-							current_barba.onImageLoadComplete();
+						if(current_barba.onImageLoadComplete) current_barba.onImageLoadComplete();
 
 						// Scroll up instantly
-						gsap.to(window, {
-							duration: 0,
-							scrollTo: 0,
-							onComplete: function() {
-								// Hide loading
-								loading
-									.hide(function() {
-										if (that.first_loading) {
-											that.first_loading = false;
-											loading.clear();
-										}
+						gsap.to(window, { duration: 0, scrollTo: 0, onComplete: function() {
+							// Hide loading
+							loading.hide(
+								function() {
+									if(that.first_loading) {
+										that.first_loading = false;
+										loading.clear();
+									}
 
-										that.loaded = false;
+									that.loaded = false;
 
-										// Run custom onLoadedComplete method in barba
-										if (current_barba.onImageLoadAnimateComplete != undefined)
-											current_barba.onImageLoadAnimateComplete();
-										if (callback != undefined)
-											callback(that);
-									},
-									function() {
-										if (current_barba.onImageLoadAnimateHalfComplete != undefined)
-											current_barba.onImageLoadAnimateHalfComplete();
-									});
-							}
-						});
+									// Run custom onLoadedComplete method in barba
+									if(current_barba.onImageLoadAnimateComplete) current_barba.onImageLoadAnimateComplete();
+									if(callback) callback(that);
+								},
+								function() {
+									if(current_barba.onImageLoadAnimateHalfComplete) current_barba.onImageLoadAnimateHalfComplete();
+								}
+							);
+						}});
 
 						that.elem = null;
 						that.barba_object = null;
@@ -565,8 +536,7 @@ var imageloading = {
 				}
 			});
 		} else {
-			if (callback != undefined)
-				callback(that);
+			if(callback) callback(that);
 		}
 	}
 }
@@ -603,7 +573,7 @@ var worklist = {
 var FadeTransition = Barba
 	.BaseTransition
 	.extend({
-		start: function() {
+		start: function () {
 			var that = this;
 
 			function animate() {
@@ -611,39 +581,22 @@ var FadeTransition = Barba
 				_q("#barba-wrapper").style.height = _q("#barba-wrapper").offsetHeight + "px";
 
 				// Show loading then load the new container
-				loading.show(function() {
-					gsap.set('.menu__pop .menu__item', {
-						opacity: 0,
-						yPercent: 100
-					}, .768)
-					that
-						.newContainerLoading
-						.then(that.finish.bind(that));
+				loading.show (function() {
+					gsap.set('.menu__pop .menu__item', { opacity: 0, yPercent: 100 }, .768);
+					that.newContainerLoading.then(that.finish.bind(that));
 				});
 			}
 
-			if (menu.active) {
-				var tl = gsap.timeline({
-					defaults: {
-						duration: 1.024,
-						ease: "expo.out"
-					}
-				});
+			if(menu.active) {
+				var tl = gsap.timeline({ defaults: { duration: 1.024, ease: "expo.out" }});
 
 				removeClass(_q('.menu__pop'), "active");
 
 				animate();
-				tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
-					xPercent: 0,
-					opacity: 1
-				}, {
-					xPercent: -200,
-					opacity: 0,
-					stagger: {
-						from: 0,
-						amount: .128
-					}
-				});
+				tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { xPercent: 0, opacity: 1 }, { xPercent: -200, opacity: 0, stagger: {
+					from: 0,
+					amount: .128
+				}});
 			} else {
 				animate();
 			}
@@ -687,8 +640,8 @@ var Home = Barba
 				path = "/dwaan/img/";
 
 			// Randomize the fruits
-			if (gsap.utils.random(0, 10) > 5) gsap.utils.shuffle(fruits);
-			fruit.setAttribute("data-src", path + fruits[0]);
+			if(gsap.utils.random(0, 10) > 5) gsap.utils.shuffle(fruits);
+			fruit.setAttribute("src", path + fruits[0]);
 			// Change fruit when clicked
 			_q(".img").onmousedown = function(e) {
 				do {
@@ -705,16 +658,19 @@ var Home = Barba
 
 							// Ajax load the image
 							var progress = function (index, percent) {
-								if (percent >= 100) {
+								if(percent >= 100) {
 									gsap.set(fruit, { opacity: 1 });
 									anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
 								}
 							}
-							if (fruit.load != undefined) {
-								fruit.load(0, progress);
+
+							// When loaded report it as a progress
+							if(fruit.complete) {
+								progress(0, 100);
 							} else {
-								fruit.ajaxImageIndex = 0;
-								ajaxImage(fruit, progress);
+								fruit.addEventListener("load", function(e) {
+									progress(0, 100);
+								});
 							}
 						}})
 					;
@@ -737,9 +693,9 @@ var Home = Barba
 				final_check = function() {
 					// If the delta is zero, check if it's really on top or bottom
 					if(window._top_b > _q(".work_float").offsetHeight / 2) {
-						if (window._top_b != _q(".work_float").offsetHeight) run_gsap("max");
+						if(window._top_b != _q(".work_float").offsetHeight) run_gsap("max");
 					} else {
-						if (window._top_b != 0) run_gsap(0);
+						if(window._top_b != 0) run_gsap(0);
 					}
 				},
 				runanimation = function(delta) {
@@ -791,7 +747,7 @@ var Home = Barba
 				gsap.to(".par_p", { x: x*75, y: y*75 });
 				gsap.to(".hero__meta", { x: x*50, y: y*50 });
 				gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
-				gsap.to(".hero__image .img", { x: x*-25, y: y*-25 });
+				gsap.to(".hero__image .parallax", { x: x*-25, y: y*-25 });
 			});
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
@@ -895,12 +851,12 @@ var Home = Barba
 				},false);
 				ele.addEventListener('touchend',function(e){
 					//horizontal detection
-					if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y)))) {
+					if((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y)))) {
 						if(swipe_det.eX > swipe_det.sX) direc = "r";
 						else direc = "l";
 					}
 					//vertical detection
-					if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x)))) {
+					if((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x)))) {
 						if(swipe_det.eY > swipe_det.sY) direc = "d";
 						else direc = "u";
 					}
@@ -913,7 +869,7 @@ var Home = Barba
 
 					gsap.to(ele, { x: ele.x, duration: .768, ease: ease });
 
-					if (direc != "") if(typeof func == 'function') func(el,direc);
+					if(direc != "") if(typeof func == 'function') func(el,direc);
 					direc = "";
 				},false);
 			}
@@ -994,7 +950,7 @@ var Work = Barba
 						_c_el = _el[i].children;
 
 					_y =_el[i].offsetTop;
-					if (_y != _p_y) { _p_y = _y; delay = 0; } else { delay += .064; }
+					if(_y != _p_y) { _p_y = _y; delay = 0; } else { delay += .064; }
 
 					tl = gsap.timeline({
 						defaults: { duration: 1.024, ease: "expo.out" }});
@@ -1121,7 +1077,7 @@ var WorkDetail = Barba
 			// Scroll animate staggering from right of child
 			els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p");
 			for (var j = els.length - 1; j >= 0; j--) {
-				if (els[j].children.length > 0) {
+				if(els[j].children.length > 0) {
 					anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
 						from: 0,
 						amount: .256
@@ -1283,7 +1239,7 @@ var Lost = Barba
 				tween = [];
 
 			for (var i = 0; i < 5; i++) {
-				if (i % 2 == 0) {
+				if(i % 2 == 0) {
 					tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
 						xPercent: -50
 					}, {
@@ -1523,9 +1479,9 @@ var Me = Barba
 			// Adding class to ig images
 			var els = _qAll("#ig img");
 			for (var i = els.length - 1; i >= 0; i--) {
-				if (els[i].offsetWidth > els[i].offsetHeight) {
+				if(els[i].offsetWidth > els[i].offsetHeight) {
 					addClass(els[i], "hor");
-				} else if (els[i].offsetWidth < els[i].offsetHeight) {
+				} else if(els[i].offsetWidth < els[i].offsetHeight) {
 					addClass(els[i], "ver");
 				} else {
 					addClass(els[i], "squ");
@@ -1565,19 +1521,8 @@ var Menu = Barba
 
 ////////// Initial
 
-document.addEventListener('DOMContentLoaded', function() {
-	// Initialize script
-	Home.init();
-	Work.init();
-	WorkDetail.init();
-	Call.init();
-	Lost.init();
-	Me.init();
-	Menu.init();
-
-	// Run Barbara
-	Barba.Pjax.start();
-
+// When DOM is parsed
+document.addEventListener('DOMContentLoaded', function(e) {
 	// Initialize loading
 	loading.init();
 
@@ -1585,7 +1530,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	imageloading.init(document, function (imgload) {
 		// Check if it's first time or 404 to do some text animation
 		loading.animate((_q(".barba-container").getAttribute("data-namespace") == "404" ? "404" : "first-time"), function() {
-			if (imgload != undefined) {
+			if(imgload != undefined) {
 				imgload.first_animation_done = true;
 				imgload.done()
 			}
@@ -1620,10 +1565,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Chrome: 79
 	// Safari Tablet: 107
 	// Chrome Tablet: 113
-	if (window.outerHeight - window.innerHeight < 80) {
+	if(window.outerHeight - window.innerHeight < 80) {
 		addClass(_q("html"), "desktop");
 	}
 
 	// Run menu
 	menu.init();
+
+	// Initialize script
+	Home.init();
+	Work.init();
+	WorkDetail.init();
+	Call.init();
+	Lost.init();
+	Me.init();
+	Menu.init();
+
+	// Run Barbara
+	Barba.Pjax.start();
 });

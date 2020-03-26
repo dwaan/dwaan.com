@@ -42,25 +42,25 @@
 
 							<div class="gallery gallery__mobile gallery__mobile__noborder">
 								<a href="/dwaan/img/ss-asiangames/splash-screen.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/splash-screen.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/splash-screen.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-asiangames/introduction.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/introduction.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/introduction.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-asiangames/schedule.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/schedule.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/schedule.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-asiangames/schedule-empty.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/schedule-empty.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/schedule-empty.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-asiangames/annoucement.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/annoucement.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/annoucement.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-asiangames/annoucement-new.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/annoucement-new.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/annoucement-new.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-asiangames/annoucement-detail.png" itemprop="contentUrl" data-size="750x1624" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-asiangames/annoucement-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
+									<img src="/dwaan/img/ss-asiangames/annoucement-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Kemenpora - Asian Games 2018 by Dwan" />
 								</a>
 							</div>
 

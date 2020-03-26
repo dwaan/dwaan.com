@@ -42,13 +42,13 @@
 
 							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-wujil/homepage.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-wujil/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="The Wujil - Hotel and Resort by Dwan" />
+									<img src="/dwaan/img/ss-wujil/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="The Wujil - Hotel and Resort by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-wujil/menu.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-wujil/menu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="The Wujil - Hotel and Resort by Dwan" />
+									<img src="/dwaan/img/ss-wujil/menu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="The Wujil - Hotel and Resort by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-wujil/room.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="" data-src="/dwaan/img/ss-wujil/room.thumb.jpg" itemprop="thumbnail" width="" height="" alt="The Wujil - Hotel and Resort by Dwan" />
+									<img src="/dwaan/img/ss-wujil/room.thumb.jpg" itemprop="thumbnail" width="" height="" alt="The Wujil - Hotel and Resort by Dwan" />
 								</a>
 							</div>
 

@@ -98,62 +98,6 @@ function nextElementSibling(el) {
 		}
 	}
 }());
-// Add new function for image
-var storage = {
-	data: [],
-	get: function(url) {
-		var box = this.data[url];
-
-		return box ? window.URL.createObjectURL(box) : false;
-	},
-	set: function(url, blob) {
-		this.data[url] = blob;
-
-		return window.URL.createObjectURL(blob);
-	},
-	reset: function() {
-		this.data = [];
-	}
-}
-var ajaxImage = Image.prototype.load = function (index, callback, bytes) {
-	var thisImg = this;
-	var xmlHTTP = new XMLHttpRequest();
-	var url = thisImg.getAttribute('data-src');
-
-	if (!url) {
-		// No data-src just let it go
-		callback(index, 100);
-	} else {
-		// If index is img element
-		if(isNaN(index)) {
-			thisImg.completedPercentage = 0;
-			thisImg = index;
-		}
-
-		var box = storage.get(url);
-		if (box) {
-			thisImg.src = box;
-			callback(index, 100);
-		} else {
-			xmlHTTP.open('GET', url, true);
-			xmlHTTP.responseType = 'blob';
-			xmlHTTP.onload = function (e) {
-				var blob = new Blob([this.response]);
-				thisImg.src = storage.set(url, blob);
-				thisImg.removeAttribute('data-src');
-			};
-			xmlHTTP.onprogress = function (e) {
-				thisImg.completedPercentage = parseInt((e.loaded / e.total) * 100);
-				callback(index, thisImg.completedPercentage);
-			};
-			xmlHTTP.onloadstart = function () {
-				thisImg.completedPercentage = 0
-			};
-			xmlHTTP.send();
-		}
-	}
-};
-Image.prototype.completedPercentage = 0;
 // Splitting text
 var splitText = function (els) {
 	var addTags = function (el, idx) {

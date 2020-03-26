@@ -1390,6 +1390,13 @@ main {
 	pointer-events: none;
 	z-index: 3;
 }
+.hero .parallax {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
 .hero .img,
 .hero .box {
 	position: absolute;
