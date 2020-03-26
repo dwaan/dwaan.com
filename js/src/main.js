@@ -457,7 +457,7 @@ var imageloading = {
 		imgs_count = imgs.length * 100;
 
 
-		function checkProgress(index, url, percent) {
+		function checkProgress(index, percent) {
 			function totalValue(array_item) {
 				var total = 0;
 				for (var i = 0; i < array_item.length; i++) {
@@ -482,8 +482,8 @@ var imageloading = {
 			else that.done();
 		} else {
 			// Found image, load them with ajax
-			var progress = function(index, url, percent, bytes) {
-				var loaded = checkProgress(index, url, percent);
+			var progress = function(index, percent) {
+				var loaded = checkProgress(index, percent);
 
 				loading.update({
 					duration: .256,
@@ -503,10 +503,10 @@ var imageloading = {
 			for (var i = 0; i < imgs.length; i++) {
 				imgs_loaded[i] = 0;
 				if (imgs[i].load != undefined) {
-					imgs[i].load(i, imgs[i].getAttribute('src'), progress);
+					imgs[i].load(i, progress);
 				} else {
 					imgs[i].ajaxImageIndex = i;
-					ajaxImage(imgs[i], imgs[i].getAttribute('src'), progress);
+					ajaxImage(imgs[i], progress);
 				}
 			}
 		}
@@ -688,7 +688,7 @@ var Home = Barba
 
 			// Randomize the fruits
 			if (gsap.utils.random(0, 10) > 5) gsap.utils.shuffle(fruits);
-			fruit.setAttribute("src", path + fruits[0]);
+			fruit.setAttribute("data-src", path + fruits[0]);
 			// Change fruit when clicked
 			_q(".img").onmousedown = function(e) {
 				do {
@@ -704,17 +704,17 @@ var Home = Barba
 							gsap.set(fruit, { opacity: 0 });
 
 							// Ajax load the image
-							var progress = function (index, url, percent, bytes) {
+							var progress = function (index, percent) {
 								if (percent >= 100) {
 									gsap.set(fruit, { opacity: 1 });
 									anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
 								}
 							}
 							if (fruit.load != undefined) {
-								fruit.load(0, fruit.getAttribute('src'), progress);
+								fruit.load(0, progress);
 							} else {
 								fruit.ajaxImageIndex = 0;
-								ajaxImage(fruit, fruit.getAttribute('src'), progress);
+								ajaxImage(fruit, progress);
 							}
 						}})
 					;
@@ -791,7 +791,7 @@ var Home = Barba
 				gsap.to(".par_p", { x: x*75, y: y*75 });
 				gsap.to(".hero__meta", { x: x*50, y: y*50 });
 				gsap.to(".hero .stats p, .hero .stats b", { x: x*25, y: y*25 });
-				gsap.to(".hero__image", { x: x*-25, y: y*-25 });
+				gsap.to(".hero__image .img", { x: x*-25, y: y*-25 });
 			});
 
 			worklist.hover(".work__list a img, .hero__meta .stats b");
@@ -955,6 +955,7 @@ var Home = Barba
 			window.onscroll = null;
 			window.ontouchstart = null;
 			window.ontouchend = null;
+			window.onmousemove = null;
 		}
 	});
 
@@ -1266,6 +1267,7 @@ var Call = Barba
 		},
 		onLeave: function() {
 			loading.breath.pause(0);
+			window.onmousemove = null;
 		}
 	});
 

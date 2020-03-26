@@ -14,7 +14,7 @@
 	<div id="barba-wrapper">
 		<div class="barba-container" data-namespace="404">
 			<main class="fof block__clear">
-				<img id="mrmonkey" src="/dwaan/img/mr.monkey.png" width="" height="" alt="" />
+				<img id="mrmonkey" src="" data-src="/dwaan/img/mr.monkey.png" width="" height="" alt="" />
 				<div id="lost">
 					<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
 					<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
