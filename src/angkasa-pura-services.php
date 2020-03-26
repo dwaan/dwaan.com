@@ -42,28 +42,28 @@
 
 							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-apservices/ss1.1.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss1.1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss1.1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss1.2.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss1.2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss1.2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss1.3.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss1.3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss1.3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss1.4.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss1.4.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss1.4.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss2.1.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss2.1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss2.1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss2.2.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss2.2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss2.2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss3.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-apservices/ss4.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-apservices/ss4.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-apservices/ss4.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura Services - Airport Services Website by Dwan" />
 								</a>
 							</div>
 

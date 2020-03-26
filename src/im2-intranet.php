@@ -42,25 +42,25 @@
 
 							<div class="gallery gallery-normal">
 								<a href="/dwaan/img/ss-im2/login.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-im2/dashboard.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-im2/social.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/social.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/social.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-im2/gallery.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/gallery.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/gallery.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-im2/gallery-detail.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/gallery-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/gallery-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-im2/address.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/address.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/address.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 								<a href="/dwaan/img/ss-im2/dokumen.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-im2/dokumen.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+									<img src="" data-src="/dwaan/img/ss-im2/dokumen.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 							</div>
 
