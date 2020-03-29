@@ -3625,7 +3625,8 @@ main {
 .mrgoat .mrgate .h2 {
 	transform: translate3d(-50%,-50%,0);
 }
-.mrgoat .mrgate .h2 h3 {
+.mrgoat .mrgate .h2 h3,
+.mrgoat .mrgate .h2 h4 {
 	display: table;
 	opacity: 0;
 	text-align: center;
@@ -3643,7 +3644,8 @@ main {
 	white-space: nowrap;
 }
 .mrgoat h2,
-.mrgoat h3 {
+.mrgoat h3,
+.mrgoat .h2 h4 {
 	width: 100vw;
 	font-weight: 600;
 	font-size: 12rem;
@@ -3652,6 +3654,12 @@ main {
 }
 .mrgoat h3 {
 	font-size: 9rem;
+}
+.mrgoat .h2 h4 {
+	width: 80vw;
+	font-size: 7rem;
+	line-height: 90%;
+	letter-spacing: -.065em;
 }
 .mrgoat .mrgate .h4 {
 	position: absolute;
@@ -4013,6 +4021,9 @@ main {
 	width: 75%;
 	height: auto;
 	transform: translate3d(-50%,-50%,0);
+}
+.call .hi {
+	display: none;
 }
 .call h1 {
 	font-size: 7rem;

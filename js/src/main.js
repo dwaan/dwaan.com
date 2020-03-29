@@ -16,7 +16,7 @@ var dark_mode = false,
 	tinysliders = [];
 
 // Put mandatory html stuff
-_q("body").innerHTML += '<div id="sky"></div><div id="click-cover"></div><div class="support"><div class="cm__table"><div class="cm__cell"><div class="content"><h1>😭</h1><h3>Please don\'t squaze me 😱.</h3><h4>Have mercy on me 👦🏾.</h4><p>I think your screen is just to small for me to support it.</p><p>Please rotate your screen📱 or resize your browser 💻 if posible for better layout.</p></div></div></div></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>';
+_q("body").innerHTML += '<div id="sky"></div><div id="click-cover"></div><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>';
 _q("header .menu__item").innerHTML = '\
 	<div class="border"><div></div></div>\
 	<div class="menu__pos">\
@@ -879,7 +879,7 @@ var Home = Barba
 			// Animate the appearing
 			anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" }});
 			anim
-				.to(".hero", { y: 0 })
+				.to(".hero", { y: 0 }, 0)
 				.fromTo(".hero__image", { transformOrigin: "0 0", y: 500 }, { y: 0 }, .256)
 				.fromTo(".hero__text h1 .splext", { y: 300 }, { y: 0, stagger: {
 					from: 0,
@@ -898,7 +898,7 @@ var Home = Barba
 					from: "end",
 					amount: .256
 				}}, .368)
-				.to(".work_float", { y: 0 }, 1.024)
+				.to(".work_float", { y: 0 }, .768)
 			;
 
 			// First time need to be delayed a bit
@@ -1311,8 +1311,7 @@ var Me = Barba
 		onEnterCompleted: function() {
 			worklist.hover("#ig .item a");
 			worklist.hover(".work__list img");
-		},
-		onImageLoadComplete: function() {
+
 			controller.destroy();
 			controller = new ScrollMagic.Controller();
 			els = null;
@@ -1393,9 +1392,11 @@ var Me = Barba
 				.fromTo(".mrgoat .h23", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1)
 					.to(".mrgoat .h23", { y: 0 }, 1.25)
 					.to(".mrgoat .h23", { y: -50, opacity: 0 }, 1.5)
+				.fromTo(".mrgoat .h24", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1.75)
+					.to(".mrgoat .h24", { y: 0 }, 2)
 				;
 			new ScrollMagic
-				.Scene({triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight*2})
+				.Scene({triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight*4})
 				.setPin(".mrgoat")
 				.setTween(tl)
 				.addTo(controller);

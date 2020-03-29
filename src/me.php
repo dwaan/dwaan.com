@@ -112,7 +112,8 @@
 							<div class="h2"><h2 class="h21">this is <b>mr. goat</b></h2></div>
 							<div class="h2"><h3 class="h22">he's a vietnamese</h3></div>
 							<div class="h2"><h3 class="h23">he likes to travel</h3></div>
-							<div class="h4"><h4>and he has his own instagram account, scroll more to check out his latest instagram posts</h4></div>
+							<div class="h2"><h4 class="h24">and here's his instagram post to prove</h4></div>
+							<div class="h4"><h4>and he have his own instagram account, scroll more to check out his latest instagram posts</h4></div>
 							<div class="img">
 								<?php for ($x = 1; $x <= 26; $x++) { ?>
 								<img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.png" width="" height="" alt="Mr. Goat" />

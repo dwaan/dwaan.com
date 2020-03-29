@@ -1,18 +1,14 @@
 ////////////// Helper functions
 //
-// _q(element
-// _qAll(elements
-// removeClass(element, className
-// addClass(element,
-// className
-// nextElementSibling(element
-// getRandomInt(min, max)
-// roundToPrecision(x, precision
-// parseStrToFloat(string_to_convert)
-function _q (argument) {
+// _q(element)
+// _qAll(elements)
+// removeClass(element, className)
+// addClass(element, className)
+// nextElementSibling(element)
+function _q(argument) {
 	return document.querySelector(argument)
 }
-function _qAll (argument) {
+function _qAll(argument) {
 	return document.querySelectorAll(argument)
 }
 function removeClass(el, className) {
@@ -263,10 +259,7 @@ function isTouchSupported() {
     var msTouchEnabled = window.navigator.msMaxTouchPoints;
     var generalTouchEnabled = "ontouchstart" in document.createElement("div");
 
-    if (msTouchEnabled || generalTouchEnabled) {
-        return true;
-    }
-    return false;
+    return (msTouchEnabled || generalTouchEnabled) ? true : false;
 }
 // Parallax on mouse move
 function parallax(callback) {

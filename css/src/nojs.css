@@ -210,3 +210,58 @@
 		width: 50%;
 	}
 }
+
+
+.no-js .hi {
+	display: block;
+	position: fixed;
+	top: 12.5vh;
+	left: 70vw;
+	width: 12vw;
+	height: 12vw;
+	line-height: 12vw;
+	font-size: 5vw;
+	text-align: center;
+	color: #a4cdd6;
+	font-weight: 500;
+	background-color: #2f4148;
+	border-radius: 100%;
+	transform: initial;
+}
+@media (max-aspect-ratio: 3/2) {
+	.no-js .hi {
+		top: 15vh;
+		width: 15vw;
+		height: 15vw;
+		line-height: 15vw;
+		font-size: 6vw;
+	}
+}
+@media (max-aspect-ratio: 4/3) {
+	.no-js .hi {
+		top: 17.5vh;
+		width: 17.5vw;
+		height: 17.5vw;
+		line-height: 17.5vw;
+		font-size: 7vw;
+	}
+}
+@media (max-aspect-ratio: 1/1) {
+	.no-js .hi {
+		top: 17.5vh;
+		left: 65vw;
+		width: 17.5vh;
+		height: 17.5vh;
+		line-height: 17.5vh;
+		font-size: 7.5vh;
+	}
+}
+@media (max-aspect-ratio: 2/3) {
+	.no-js .hi {
+		left: 62.5vw;
+		width: 15vh;
+		height: 15vh;
+		line-height: 15vh;
+		font-size: 6vh;
+	}
+}
