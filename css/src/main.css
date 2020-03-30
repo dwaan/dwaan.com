@@ -3737,6 +3737,9 @@ main {
 		letter-spacing: -.4rem;
 		line-height: 90%;
 	}
+	.mrgoat .h2 h4 {
+		font-size: 5.5rem;
+	}
 	.mrgoat h4 {
 		line-height: 130%;
 		width: 60vw;
@@ -3755,6 +3758,9 @@ main {
 	.mrgoat h3 {
 		font-size: 6.5rem;
 	}
+	.mrgoat .h2 h4 {
+		font-size: 5rem;
+	}
 	.mrgoat h4 {
 		width: 70vw;
 	}
@@ -3772,6 +3778,9 @@ main {
 	}
 	.mrgoat h3 {
 		font-size: 6rem;
+	}
+	.mrgoat .h2 h4 {
+		font-size: 4.5rem;
 	}
 }
 
