@@ -56,6 +56,10 @@ function nextElementSibling(el) {
 	return el
 }
 // Wait for image to load
+// Parameter:
+// 1. IMG Elements Object or String
+// 2. On progress callback, or on done callback if there's only 2 parameter
+// 3. On done callback
 function waitForImg() {
 	var els,
 		progress,

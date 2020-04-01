@@ -625,15 +625,7 @@ var Home = Barba
 							fruit.setAttribute("src", path + fruits[index]);
 							gsap.set(fruit, { opacity: 0 });
 
-							// Ajax load the image
-							var progress = function (index, percent) {
-								if(percent >= 100) {
-									gsap.set(fruit, { opacity: 1 });
-									anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
-								}
-							}
-
-							// When loaded report it as a progress
+							// When fruit is loaded, show it
 							waitForImg(fruit, function() {
 								gsap.set(fruit, { opacity: 1 });
 								anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
