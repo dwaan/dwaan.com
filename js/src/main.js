@@ -433,9 +433,6 @@ var imageloading = {
 	callback: null,
 	init: function (elem, callback) {
 		var that = this,
-			imgs = null,
-			imgs_count = 0,
-			imgs_loaded = [],
 			callback_called = 0;
 
 		that.callback = callback;
@@ -447,49 +444,21 @@ var imageloading = {
 			this.elem = elem;
 			this.barba_object = null;
 		}
-		imgs = this.elem.querySelectorAll("img");
-		imgs_count = imgs.length;
 
 		this.loaded = false;
-		if(imgs.length <= 0) {
+		imgs = this.elem.querySelectorAll("img");
+		waitForImg(imgs, function(index, percent) {
+			loading.update({
+				duration: .256,
+				height: percent + "%"
+			});
+		}, function() {
 			// No image, just unhide the loading
 			loading.update({duration: .256, height: "100%"});
 			that.loaded = true;
 			if(that.callback) that.callback(that);
 			else that.done();
-		} else {
-			// Found image, load them with ajax
-			var progress = function(index, percent) {
-				loading.update({
-					duration: .256,
-					height: percent + "%"
-				});
-
-				if(percent >= 100 && !that.loaded) {
-					that.loaded = true;
-					if(callback_called == 0) {
-						callback_called++;
-
-						if(that.callback) that.callback(that);
-						else that.done();
-					} else {
-						that.done();
-					}
-				}
-			}
-
-			for (var i = 0; i < imgs.length; i++) {
-				imgs_loaded[i] = 0;
-				// When loaded report it as a progress
-				if(imgs[i].complete) {
-					progress(imgs_count--, 100-(imgs_count/imgs.length*100));
-				} else {
-					imgs[i].addEventListener("load", function(e) {
-						progress(imgs_count--, 100-(imgs_count/imgs.length*100));
-					});
-				}
-			}
-		}
+		});
 	},
 	done: function (callback) {
 		var that = this;
@@ -665,13 +634,10 @@ var Home = Barba
 							}
 
 							// When loaded report it as a progress
-							if(fruit.complete) {
-								progress(0, 100);
-							} else {
-								fruit.addEventListener("load", function(e) {
-									progress(0, 100);
-								});
-							}
+							waitForImg(fruit, function() {
+								gsap.set(fruit, { opacity: 1 });
+								anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" });
+							});
 						}})
 					;
 				}

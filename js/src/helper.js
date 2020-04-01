@@ -6,10 +6,10 @@
 // addClass(element, className)
 // nextElementSibling(element)
 function _q(argument) {
-	return document.querySelector(argument)
+	return document.querySelector(argument);
 }
 function _qAll(argument) {
-	return document.querySelectorAll(argument)
+	return document.querySelectorAll(argument);
 }
 function removeClass(el, className) {
 	if (el.classList) {
@@ -54,6 +54,56 @@ function nextElementSibling(el) {
 		el = el.nextSibling
 	} while (el && el.nodeType !== 1);
 	return el
+}
+// Wait for image to load
+function waitForImg() {
+	var els,
+		progress,
+		done,
+		els_count;
+
+	if(arguments.length <= 0) {
+		return false;
+	} else {
+		if(typeof arguments[0] != "object") els = document.querySelectorAll(els);
+		else els = arguments[0];
+		els_count = els.length + 1;
+
+		if (arguments[2]) {
+			progress = arguments[1];
+			done = arguments[2];
+		} else {
+			progress = false;
+			done = arguments[1];
+		}
+
+		// At the beginning animate the progress a bit
+		els_count--;
+		if(progress) progress(els_count, 100-(els_count/els.length*100));
+
+		if(els_count > 0) {
+			for (var i = 0; i < els.length; i++) {
+				// When loaded report it as a progress
+				if(els[i].complete) {
+					if(progress) progress(els_count--, 100-(els_count/els.length*100));
+
+					if(els_count == 0) done();
+				} else {
+					els[i].addEventListener("load", function(e) {
+						if(progress) progress(els_count--, 100-(els_count/els.length*100));
+
+						if(els_count == 0) done();
+					});
+				}
+
+			}
+		} else {
+			if(progress) progress(0, 100);
+			done();
+		}
+
+		return true;
+	}
 }
 // Prevent error in older browser for console
 (function () {
