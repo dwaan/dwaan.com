@@ -145,19 +145,18 @@
 							<div class="block block__clear">
 								<div class="block__left">
 									<h3>anyway...</h3>
-									<p>I like to call myself a web designer not UI/UX bla bla... I do lots of things in the past, like becoming Flash <strike>R.I.P</strike> Designer and Programmer, Database Programmer, Creative Director, and CIO. Anyway, as a web designer my design philosophy has always been bringing the most important information front and foremost, creating simplicity while incorporating user-centric design and keeping the brand identity prominent.</p>
+									<p>I like to call myself a web designer, UI/UX stuff sounds too sophisticated for some people. I do lots of things in the past, like becoming Flash <strike>R.I.P</strike> Designer and Programmer, Database Programmer, Creative Director, Chief Creative Officer, and Chief Information Officer.</p>
+									<p>But right now, I mostly do freelance web design.</p>
+									<p>My design philosophy has always been bringing the most important information front and foremost, it's based on a hierarchial concept, where important information needs to be more visible. I also incorporate user-centric design and strive for simplicity while keeping the brand identity prominent as the basis of my design.</p>
 								</div>
 								<div class="block__right">
-									<h4>my capabilities</h4>
+									<h4>my skills summary</h4>
 									<ul class="plain">
-										<li><span>concepting</span></li>
-										<li><span>user experience design</span></li>
-										<li><span>user interface design</span></li>
-										<li><span>art directing</span></li>
-										<li><span>interface development</span></li>
-										<li><span>design system</span></li>
-										<li><span>project management</span></li>
-										<li><span>business strategy</span></li>
+										<li><span>UI/UX Research, Design and Development</span></li>
+										<li><span>Concepting and Strategazing Design and Content</span></li>
+										<li><span>Directing Design Art Style and Creating Design System</span></li>
+										<li><span>Analyzing Business Processes as Part of UI/UX Research</span></li>
+										<li><span>Strategazing and Developing Business as Part of previous C-Position</span></li>
 									</ul>
 								</div>
 							</div>

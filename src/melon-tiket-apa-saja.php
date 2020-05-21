@@ -81,9 +81,9 @@
 								<div class="work__spec">
 									<h4>Prototype</h4>
 									<p>
-										<a href="https://www.figma.com/proto/5xbwlrcQoSTBnJxSiwfHdW/Tiket-Apa-Saja-v.2.2?node-id=251%3A0&viewport=63%2C318%2C0.046983785927295685&scaling=scale-down" target="_blank" rel="noopener noreferrer">Large screen</a>
-										<a href="https://www.figma.com/proto/5xbwlrcQoSTBnJxSiwfHdW/Tiket-Apa-Saja-v.2.2?node-id=3076%3A113&viewport=111%2C25%2C0.0642765462398529&scaling=scale-down" target="_blank" rel="noopener noreferrer">Medium screen</a>
-										<a href="https://www.figma.com/proto/5xbwlrcQoSTBnJxSiwfHdW/Tiket-Apa-Saja-v.2.2?node-id=138%3A1939&viewport=40%2C98%2C0.07508441805839539&scaling=scale-down" target="_blank" rel="noopener noreferrer">Small screen</a>
+										<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=251%3A0&viewport=25%2C338%2C0.05690853297710419&scaling=contain" target="_blank" rel="noopener noreferrer">Large screen</a>
+										<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3076%3A21&viewport=92%2C25%2C0.0707867220044136&scaling=contain" target="_blank" rel="noopener noreferrer">Medium screen</a>
+										<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A1939&viewport=62%2C147%2C0.07750021666288376&scaling=contain" target="_blank" rel="noopener noreferrer">Small screen</a>
 									</p>
 								</div>
 							</div>
