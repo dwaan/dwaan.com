@@ -3,12 +3,16 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
+	<link rel="stylesheet" media="screen and  (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
+	<link rel="stylesheet" media="screen and  (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
+
 	<script type="text/javascript">
 		/* See if it's in dark mode */
 		if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
 			h=document.querySelector("html");
 			h.setAttribute('class','dark');
-			h.style.backgroundColor='#202526';
+			h.style.backgroundColor='var(--black)';
 		}
 	</script>
 
@@ -42,9 +46,9 @@
 	<meta name="theme-color" content="#A4CDD6">
 
 	<!-- Primary Meta Tags -->
-	<title><?php echo $title; ?> - This is me @dwaan .com</title>
-	<meta name="title" content="<?php echo $title; ?> - This is me @dwaan .com">
-	<meta name="description" content="Hello! my Mame is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
+	<title><?php echo $title; ?></title>
+	<meta name="title" content="<?php echo $title; ?>">
+	<meta name="description" content="Hello! my name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
@@ -59,6 +63,3 @@
 	<meta property="twitter:title" content="<?php echo $title; ?> - This is me @dwaan .com">
 	<meta property="twitter:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 	<meta property="twitter:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
-
-	<link rel="stylesheet" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
-

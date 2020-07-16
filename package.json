@@ -1,57 +1,57 @@
 {
-  "name": "dwaan",
-  "version": "1.0.0",
-  "description": "dwaan.com source code",
-  "main": "js/main.js",
-  "directories": {
-    "doc": "doc"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dwaan/dwaan.git"
-  },
-  "author": "Dwan",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dwaan/dwaan/issues"
-  },
-  "homepage": "https://github.com/dwaan/dwaan#readme",
-  "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "browser-sync": "^2.26.7",
-    "cssnano": "^4.1.10",
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-connect-php": "^1.0.3",
-    "gulp-postcss": "^8.0.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-uglify": "^3.0.2"
-  },
-  "dependencies": {
-    "barba.js": "^1.0.0",
-    "gsap": "^3.2.2",
-    "gulp-htmlmin": "^5.0.1",
-    "normalize.css": "^8.0.1",
-    "photoswipe": "^4.1.3",
-    "scrollmagic": "^2.0.7",
-    "tiny-slider": "^2.9.2"
-  },
-  "browserslist": [
-    "last 100 version",
-    "> 100%",
-    "IE 7"
-  ],
-  "cssnano": {
-    "preset": [
-      "default",
-      {
-        "discardComments": {
-          "removeAll": true
-        }
-      }
-    ]
-  }
+	"name": "dwaan",
+	"version": "1.0.0",
+	"description": "dwaan.com source code",
+	"main": "js/main.js",
+	"directories": {
+		"doc": "doc"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dwaan/dwaan.git"
+	},
+	"author": "Dwan",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/dwaan/dwaan/issues"
+	},
+	"homepage": "https://github.com/dwaan/dwaan#readme",
+	"devDependencies": {
+		"autoprefixer": "^9.8.4",
+		"browser-sync": "^2.26.7",
+		"cssnano": "^4.1.10",
+		"gulp": "^4.0.2",
+		"gulp-concat": "^2.6.1",
+		"gulp-connect-php": "^1.0.3",
+		"gulp-postcss": "^8.0.0",
+		"gulp-sourcemaps": "^2.6.5",
+		"gulp-uglify": "^3.0.2"
+	},
+	"dependencies": {
+		"@barba/core": "^2.9.7",
+		"gsap": "^3.3.4",
+		"gulp-htmlmin": "^5.0.1",
+		"normalize.css": "^8.0.1",
+		"photoswipe": "^4.1.3",
+		"scrollmagic": "^2.0.7",
+		"tiny-slider": "^2.9.2"
+	},
+	"browserslist": [
+		"last 100 version",
+		"> 100%",
+		"IE 7"
+	],
+	"cssnano": {
+		"preset": [
+			"default",
+			{
+				"discardComments": {
+					"removeAll": true
+				}
+			}
+		]
+	}
 }

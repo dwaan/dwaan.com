@@ -1,4 +1,71 @@
-<!doctype html><html class="no-js" lang="en"><head> <?php
-		$title = "Hello!";
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+	<?php
+		$title = "Hello, my name is Dwan";
 		include_once "part_metacss.php";
-	?> </head><body> <?php include_once "part_head.php" ?> <div id="barba-wrapper"><div class="barba-container" data-namespace="home"><main class="block__clear"><div class="stage"></div><data id="stage"><div class="threed block"><div class="hero block"><div class="hero__meta"><div><div class="hero__text"><div class="par_h1"><h1>hello! my name is dwan</h1></div><div class="par_p"><p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="./me" class="more">read more</a></p></div></div><div class="stats block"><span>Some awesome stats</span><div class="stats__content"><p><a href="./say-hi"><b id="year__living">36+</b> <small>years of experience living on earth</small></a></p><p><a href="./work"><b id="year__designer">12+</b> <small>years of working as a UX/UI designer</small></a></p><p><a href="./me"><b id="year__managerial">9+</b> <small>years of working in managerial position</small></a></p></div></div></div></div><div class="hero__image"><div class="parallax"><div class="img"><div class="box"><img class="dwan" src="/dwaan/img/dwan.png" width="" height="" alt="Dwan"> <img class="fruit" src="/dwaan/img/empty.png" width="" height="" alt="Fruit"></div></div></div></div><div class="hero__image hero__image_poof"><div class="img"><div class="box"><img class="fruit poof" src="/dwaan/img/poof.png" width="" height="" alt="Fruit"></div></div></div></div></div></data><div class="shade"></div><div id="trigger__mover"></div><div id="trigger"></div><div id="trigger__padder"><div class="work work_float"><div class="work__container"><div class="scroll"><div><p class="scroll__up"><i class="icn"></i>Scroll up to see some of my work</p><p class="scroll__down"><i class="icn"></i>Scroll down to hide my work</p></div></div><div class="work__list"><div class="wording__trigger"></div><div class="block block__clear"><div class="block__left"><h2>my latest works</h2><p>tap or click on one of the thumbnail to learn more about the work</p></div><div class="block__right"><div class="stats block"><div class="stats__content"><p><b>35+</b> <small>designs created and sliced</small></p><p><b>50+</b> <small>design concepts created</small></p></div></div></div></div><div class="scroller__trigger"></div><div class="block scroller"><div class="block gallery block__clear"><a href="./melon-tiket-apa-saja"><span><img src="/dwaan/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System"></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a> <a href="./ppatk-e-learning-for-bank-frontliner"><span><img src="/dwaan/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Bank Frontliner"></span><span>PPATK - E-Learning for Bank Frontliner</span></a> <a href="./angkasa-pura-1-performace-dashboard"><span><img src="/dwaan/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard"></span><span>Angkasa Pura 1 - Performance Dashboard</span></a> <a href="./work">See All</a></div></div></div></div></div></div></main></div></div> <?php include_once "part_script.php"; ?> </body></html>
+	?>
+</head>
+
+<body data-barba="wrapper">
+	<?php include_once "part_head.php" ?>
+
+	<main data-barba="container" data-barba-namespace="home">
+		<section class="middle">
+			<div class="main-text">
+				<h1>Hello, my name is <a href="#dwan">Dwan</a></h1>
+			</div>
+			<div class="arrow">
+				<span>case studies</span>
+			</div>
+		</section>
+
+		<section class="middle">
+			<div class="padding">
+				<a href="./suzuki-website-redesign-pitching">
+					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
+				</a>
+			</div>
+			<div class="arrow-small">
+				<a href="./suzuki-website-redesign-pitching" class="arrow">
+					<span>Project Pitching</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="middle">
+			<div class="padding">
+				<a href="./melon-tiket-apa-saja">
+					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="logo" alt="Logo Tike Apa Saja" />
+				</a>
+			</div>
+			<div class="arrow-small">
+				<a href="./melon-tiket-apa-saja" class="arrow">
+					<span>Project Pitching</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="footer">
+			<a class="email">me@dwaan.com</a>
+			<div class="location">
+				<span>Jakarta</span>
+				<img src="img/icon-airplane.svg" width="16" height="16" alt="Airplane" />
+				<span>Tel Aviv-Yafo</span>
+			</div>
+			<div></div>
+		</section>
+
+		<section class="flares">
+			<img src="img/flares/flare1.png" width="" height="" alt="Flare" class="flare1" />
+			<img src="img/flares/flare2.png" width="" height="" alt="Flare" class="flare2" />
+			<img src="img/flares/flare3.png" width="" height="" alt="Flare" class="flare3" />
+			<img src="img/flares/flare4.png" width="" height="" alt="Flare" class="flare4" />
+			<img src="img/flares/flare5.png" width="" height="" alt="Flare" class="flare5" />
+		</section>
+	</main>
+
+	<?php include_once "part_script.php"; ?>
+</body>
+</html>

@@ -1,0 +1,19 @@
+Blue
+#A4CDD6
+Brigth
+#d4e7ec
+Dark
+#86a4b0
+Darker
+#2f4148
+
+Gray
+#202526
+Dark Gray
+#2D3537
+Darker Gray
+#1A1D1E
+
+Yellow
+#F3F72C
+

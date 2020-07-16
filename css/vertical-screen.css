@@ -1,0 +1,398 @@
+/* Defining the font size based on aspect ratio */
+html {
+	font-size: 14px;
+}
+
+/* Default style */
+h1 {
+	margin: 0 0 20px;
+	font-size: 64px;
+	line-height: 90%;
+	letter-spacing: -0.06em;
+}
+h2 {
+	margin: 0 0 40px;
+	font-size: 36px;
+	line-height: 100%;
+	letter-spacing: -0.02em;
+}
+h3 {
+	font-size: 24px;
+	margin: 0 0 20px;
+}
+h4 {
+	margin: 0 0 10px;
+	font-size: 18px;
+	line-height: 21px;
+}
+p {
+	font-size: 16px;
+	line-height: 140%;
+}
+
+
+/* Header style */
+header {
+	left: 30px;
+	right: 30px;
+	top: 20px;
+}
+.size,
+.lamp,
+.menu {
+	margin: 0 0 0 20px;
+}
+
+
+/* Common Content */
+
+
+/* Homepage content */
+.main-text {
+	margin: 0 0 45px;
+	padding: 0 60px;
+}
+.main-text h1 {
+	font-size: 64px;
+	line-height: 90%;
+	letter-spacing: -0.06em;
+	text-align: center;
+	margin: 0;
+}
+@media (max-width: 360px) {
+	.main-text {
+		padding: 0 30px;
+	}
+	.main-text h1 {
+		font-size: 56px;
+	}
+}
+
+
+/* Homepage footer */
+.footer {
+	padding: 30px;
+}
+
+
+/* Homepage listing item */
+.padding {
+	display: flex;
+	margin: 70px 0;
+	padding: 0 70px;
+	max-height: 15vh;
+	justify-content: center;
+}
+@media (max-width: 360px) {
+	.padding {
+		padding: 0 30px;
+	}
+}
+
+
+/* Homepage footer */
+.email {
+	display: none;
+}
+
+
+/* Arrow links */
+.arrow:after {
+	width: 44px;
+	height: 44px;
+	margin: 25px 0 0;
+	background: url(../img/arrow-mobile.svg) no-repeat 100% 50%;
+	transform: rotate(90deg);
+}
+.arrow-small span {
+	text-indent: -9999rem;
+	transform: none;
+}
+.arrow-small .arrow:before {
+	width: 10px;
+	height: 10px;
+	background-color: var(--black);
+	border-radius: 100%;
+}
+.arrow-small .arrow:after {
+	width: 100px;
+	height: 44px;
+	margin-left: 25px;
+	background: url(../img/arrow.svg) no-repeat 100% 50%;
+	transform: none;
+}
+
+
+/* Year information */
+.year {
+	right: 40px;
+	bottom: 30px;
+}
+
+
+/* Background flare */
+.flares {
+	top: 50%;
+	left: 50%;
+	width: 100vh;
+	height: 100vw;
+	transform-origin: center;
+	transform: translate3d(-50%,-50%,0) rotate(90deg);
+}
+.flares img {
+	width: 100vh;
+	height: 50vh;
+}
+
+
+/* Detail page common style */
+:root {
+	--pic-w: 181px;
+	--pic-h: 309px;
+	--pic-m: 10px;
+}
+.detail picture {
+	box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.25);
+	border-radius: 6px;
+}
+/* Style text on the left and image spread like fan */
+.style-spread {
+	flex-direction: column;
+	padding: 100px 30px;
+}
+.style-spread .text {
+	margin-bottom: 40px;
+	max-width: 400px;
+}
+.style-spread .thumbs {
+	width: 100%;
+}
+.style-spread picture {
+	top: 0;
+	width: 220px;
+	transform-origin: bottom center;
+}
+.style-spread picture:nth-child(1) {
+	left: 50%;
+	margin: 10px 0 0;
+	transform: translate3d(-35%,0,0) rotate(5deg);
+}
+.style-spread picture:nth-child(2) {
+	right: 50%;
+	margin: 40px 0 0;
+	transform: translate3d(35%,0,0) rotate(-5deg);
+}
+@media (min-width: 400px) {
+	.style-spread {
+		justify-content: center;
+		padding: 0 30px;
+		flex: 1;
+	}
+	.style-spread .thumbs {
+		flex: 350px 0 0;
+	}
+	.style-spread picture:nth-child(1) {
+		transform: translate3d(-20%,0,0) rotate(7.5deg);
+	}
+	.style-spread picture:nth-child(2) {
+		transform: translate3d(20%,0,0) rotate(-7.5deg);
+	}
+}
+/* Style text on the and Images in the bottom */
+.style-top {
+	padding: 100px 30px;
+	justify-content: flex-start;
+}
+.style-top .text {
+	justify-content: flex-end;
+	max-width: 400px;
+	margin-bottom: 60px;
+}
+.style-top h2 {
+	max-width: 315px;
+}
+.style-top picture {
+	width: var(--pic-w);
+	height: var(--pic-h);
+	margin: 0 var(--pic-m);
+}
+.style-top picture:nth-child(2n+1) {
+	margin-top: calc(var(--pic-m) * 3);
+}
+@media (min-height: 896px) {
+	.style-top {
+		justify-content: center;
+	}
+}
+/* Style with mansonry like layout with text on the right */
+.style-masonry {
+	align-items: center;
+}
+.style-masonry .thumbs {
+	flex-flow: row wrap;
+	width: calc((var(--pic-w) * 3) + (var(--pic-m) * 8));
+	padding: var(--pic-m);
+	transform: rotate(-5deg);
+}
+.style-masonry .pic-1 { order: 1; }
+.style-masonry .pic-2 { order: 2; }
+.style-masonry .pic-3 { order: 3; }
+.style-masonry .pic-4 { order: 4; }
+.style-masonry .text { order: 5; }
+.style-masonry .pic-5 { order: 6; }
+.style-masonry .pic-6 { order: 7; }
+.style-masonry .pic-7 { order: 8; }
+.style-masonry .pic-8 { order: 9; }
+.style-masonry .pic-9,
+.style-masonry .pic-10,
+.style-masonry .pic-11 { display: none; }
+.style-masonry picture,
+.style-masonry .text {
+	width: var(--pic-w);
+	height: var(--pic-h);
+	margin: var(--pic-m);
+}
+.style-masonry .text {
+	padding: var(--pic-m);
+}
+/* Style that look like table */
+.style-flex {
+	padding: 0 30px;
+}
+.style-column {
+	margin: 0 0 30px;
+	align-items: stretch;
+}
+.style-column:last-child {
+	margin-bottom: 0;
+}
+.style-column .meta {
+	width: 114px;
+	margin-right: 20px;
+}
+.style-column .text {
+	flex: 2;
+}
+.style-columns .text small {
+	font-size: 12px;
+}
+@media (min-width: 400px) {
+	.style-row {
+		width: 315px;
+	}
+	.style-column .meta {
+		width: unset;
+		flex: 1;
+	}
+}
+@media (min-width: 600px) {
+	.style-row {
+		width: 515px;
+	}
+}
+/* Style with angled photo on the bottom */
+.style-angled {
+	padding: 100px 30px;
+}
+.style-angled .text {
+	display: flex;
+	flex-flow: column nowrap;
+	flex: 1;
+	justify-content: flex-end;
+	margin-bottom: 60px;
+}
+.style-angled .thumbs {
+	flex: 2;
+	margin: 0 -var(--pic-m);
+}
+.style-angled picture {
+	width: var(--pic-w);
+	height: var(--pic-h);
+	margin: 0 var(--pic-m);
+	transform: rotate(-5deg);
+}
+@media (min-width: 400px) {
+	.style-angled .text {
+		width: 315px;
+	}
+}
+/* Footer links in every detail page */
+.links {
+	padding: 90px 30px 120px;
+}
+.links nav {
+	margin: -15px 0;
+}
+.links div {
+	margin: 15px 0;
+}
+.links a:before {
+	width: 20px;
+	height: 20px;
+	margin-right: 30px;
+}
+.links a:after {
+	width: 50px;
+}
+.links span {
+	margin-right: 20px;
+}
+.continue i {
+	display: none;
+}
+.continue strong {
+	font-weight: 400;
+}
+
+@media (min-width: 400px) {
+	.links {
+		justify-content: center;
+	}
+}
+/* List style with zero leading decimal */
+ol.zero {
+	flex-direction: column;
+}
+ol.zero li {
+	flex-direction: row;
+	margin: 0 0 15px 0;
+	font-size: 14px;
+}
+ol.zero li:last-child {
+	margin-bottom: 0;
+}
+ol.zero li:before {
+	margin-right: 20px;
+	font-size: 24px;
+}
+/* ol/ul for branding color for Suzuki */
+.detail .color {
+	margin: -10px 0;
+}
+.detail .color ul {
+	flex-flow: row wrap;
+	margin: 5px -5px;
+}
+.detail .color li {
+	width: 16px;
+	height: 16px;
+	margin: 5px;
+}
+.detail .color li:last-child {
+	flex: 100px;
+}
+.detail .bland {
+	margin: -5px 0;
+}
+.detail .bland li {
+	width: 56.5px;
+	height: 16px;
+	margin: 5px 0;
+	border-radius: 0 0 100px;
+}
+
+/* Menu page */
+.menu-page nav {
+	padding: 100px 30px;
+}
+/*# sourceMappingURL=vertical-screen.css.map */

@@ -1,0 +1,361 @@
+/* Defining the font size based on aspect ratio */
+html {
+	font-size: 18px;
+}
+
+
+/* Default style */
+h1 {
+	margin: 0 0 40px 0;
+	font-size: 96px;
+	line-height: 80%;
+	letter-spacing: -0.06em;
+}
+h2 {
+	margin: 0 0 60px;
+	font-size: 64px;
+	line-height: 90%;
+	letter-spacing: -0.02em;
+}
+h3 {
+	font-size: 36px;
+	margin: 0 0 20px;
+}
+h4 {
+	margin: 0 0 10px;
+	font-size: 24px;
+	line-height: 28px;
+}
+p {
+	font-size: 18px;
+	line-height: 150%;
+}
+
+
+/* Header style */
+header {
+	left: 40px;
+	right: 40px;
+	top: 30px;
+}
+.size,
+.lamp,
+.menu {
+	margin: 0 0 0 65px;
+}
+
+
+/* Common middle content */
+
+.middle {
+	padding: 35px 40px;
+}
+
+/* Homepage content */
+.main-text h1 {
+	font-size: 96px;
+	line-height: 80%;
+	letter-spacing: -0.06em;
+	white-space: nowrap;
+}
+@media (max-width: 1200px) {
+	.main-text h1 {
+		white-space: normal;
+	}
+}
+
+
+/* Homepage footer */
+.footer {
+	padding: 35px 40px;
+}
+
+
+/* Homepage listing item */
+.padding {
+	padding: 0;
+}
+
+
+/* Homepage footer */
+.email {
+	font-size: 13px;
+	line-height: 15px;
+	letter-spacing: 0.1em;
+	color: var(--black-gray-light);
+}
+
+
+/* Arrow links */
+.arrow {
+	flex-flow: row nowrap;
+	position: absolute;
+	bottom: 20px;
+	right: 40px;
+	transform-origin: right top;
+	transform: rotate(90deg);
+}
+.arrow:after {
+	background: url(../img/arrow.svg) no-repeat 100% 50%;
+	margin: 0 0 0 25px;
+	width: 100px;
+	height: 16px;
+}
+.arrow-small .arrow {
+	bottom: 35px;
+	right: 40px;
+	transform: none;
+}
+.arrow-small .arrow:after {
+	width: 100px;
+	height: 16px;
+	margin-left: 25px;
+	background: url(../img/arrow.svg) no-repeat 100% 50%;
+	transform: none;
+}
+
+
+/* Year information */
+.year {
+	right: 100px;
+	bottom: 35px;
+}
+
+
+/* Background flare */
+.flares {
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+}
+.flares img {
+	width: 100vw;
+	height: 50vw;
+}
+
+
+/* Detail page common style */
+:root {
+	--pic-w: 291px;
+	--pic-h: 497px;
+	--pic-m: 30px;
+}
+.detail picture {
+	box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+}
+/* Style text on the left and image spread like fan */
+.style-spread {
+	flex-direction: row;
+	padding: 0 100px;
+}
+.style-spread .text {
+	width: 465px;
+	flex: none;
+}
+.style-spread .thumbs {
+	height: 100%;
+}
+.style-spread picture {
+	width: 372px;
+	transform-origin: 0 0;
+	border-radius: 20px;
+}
+.style-spread picture:nth-child(1) {
+	top: 180px;
+	left: 200px;
+	transform: rotate(-10deg);
+}
+.style-spread picture:nth-child(2) {
+	top: 360px;
+	left: 20px;
+	transform: rotate(-30deg);
+}
+@media (min-width: 1194px) {
+	.style-spread {
+		padding: 0;
+		justify-content: center;
+	}
+	.style-spread .thumbs {
+		flex: none;
+		width: 465px;
+	}
+}
+/* Style text on top and Images in the bottom */
+.style-flex {
+	padding: 0 40px;
+}
+.style-top {
+	padding: 120px 40px;
+}
+.style-top h2 {
+	max-width: 468px;
+}
+.style-top .text {
+	width: 732px;
+	margin-bottom: 40px;
+}
+.style-top picture {
+	width: var(--pic-w);
+	height: var(--pic-h);
+	margin: 0 var(--pic-m);
+}
+.style-top picture:nth-child(2n) {
+	margin-top: calc(var(--pic-m) * 3);
+}
+@media (min-height: 760px) {
+	.style-top .text {
+		margin-bottom: 80px;
+	}
+}
+/* Style with mansonry like layout with text on the right */
+.style-masonry {
+	align-items: center;
+}
+.style-masonry .thumbs {
+	flex-flow: row wrap;
+	width: calc((var(--pic-w) * 4) + (var(--pic-m) * 10));
+	padding: var(--pic-m);
+}
+.style-masonry .thumbs > *:nth-child(2n) {
+	transform: translate3d(0,calc(var(--pic-m) * 3),0);
+}
+.style-masonry picture,
+.style-masonry .text {
+	width: var(--pic-w);
+	height: var(--pic-h);
+	margin: var(--pic-m);
+}
+.style-masonry .text {
+	padding: var(--pic-m);
+}
+/* Style that look like table */
+.style-row {
+	margin: -35px 0;
+}
+.style-column {
+	margin: 35px 0;
+}
+.style-column .meta {
+	width: 309px;
+	margin-right: 40px!important;
+}
+.style-column .text {
+	flex: 1;
+}
+.style-column .text small {
+	display: block;
+	font-size: 13px;
+	line-height: 150%;
+	letter-spacing: 0.05em;
+}
+@media (min-width: 897px) {
+	.style-row {
+		width: 817px;
+	}
+	.style-column .text {
+		flex: 1;
+	}
+	.style-column .text small {
+		width: 289px;
+	}
+}
+/* Style with angled photo on the bottom */
+.style-angled {
+	padding: 120px 0 0;
+}
+.style-angled .text {
+	width: 50%;
+	margin-bottom: 100px;
+}
+.style-angled .thumbs {
+	margin: 0 -var(--pic-m);
+	transform-origin: 50% 0;
+	transform: rotate(-5deg);
+}
+.style-angled picture {
+	margin: 0 var(--pic-m);
+	width: var(--pic-w);
+	height: var(--pic-h);
+}
+@media (min-height: 760px) {
+	.style-angled .text {
+		margin-bottom: 180px;
+	}
+}
+@media (min-width: 1194px) {
+	.style-angled {
+		padding: 120px 272px 0;
+	}
+	.style-angled .text {
+		align-self: flex-start;
+		width: 465px;
+	}
+}
+/* Footer links in every detail page */
+.links {
+	padding: 160px 0;
+	justify-content: center;
+}
+.links nav {
+	margin: -30px 0;
+}
+.links div {
+	margin: 30px 0;
+}
+.links a:before {
+	width: 40px;
+	height: 40px;
+	margin-right: 60px;
+}
+.links a:after {
+	width: 100px;
+}
+.links span {
+	margin-right: 25px;
+}
+/* List style with zero leading decimal */
+ol.zero {
+	flex-direction: row;
+}
+ol.zero li {
+	margin: 0 30px 0 0;
+	font-size: 18px;
+	flex-direction: column;
+}
+ol.zero li:last-child {
+	margin-right: 0;
+}
+ol.zero li:before {
+	margin-bottom: 20px;
+	content: "00";
+	font-size: 36px;
+}
+/* ol/ul for branding color for Suzuki */
+.detail .color {
+	margin: -15px 0;
+}
+.detail .color ul {
+	margin: 15px -15px;
+}
+.detail .color li {
+	width: 32px;
+	height: 32px;
+	margin: 0 15px;
+}
+.detail .bland {
+	margin: -10px 0;
+}
+.detail .bland li {
+	width: 113px;
+	height: 32px;
+	margin: 10px 0;
+	border-radius: 0 0 100px;
+}
+
+
+/* Menu page */
+.menu-page nav {
+	padding: 100px;
+}
