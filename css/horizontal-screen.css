@@ -146,11 +146,13 @@ header {
 	border-radius: 8px;
 }
 /* Style text on the left and image spread like fan */
-.style-spread {
+.style-spread,
+.style-spread-left {
 	flex-direction: row;
 	padding: 0 100px;
 }
-.style-spread .text {
+.style-spread .text,
+.style-spread-left .text {
 	width: 465px;
 	flex: none;
 }
@@ -182,10 +184,32 @@ header {
 		width: 465px;
 	}
 }
-/* Style text on top and Images in the bottom */
+.style-spread-left .text {
+	flex: none;
+	width: 380px;
+	margin-left: 50px;
+}
+.style-spread-left .thumbs {
+	display: flex;
+	flex: 0;
+	align-self: flex-start;
+	margin-top: 100px;
+}
+.style-spread-left picture {
+	width: 528px;
+	transform-origin: 0;
+	transform: rotate(-5deg);
+}
+@media (min-width: 1194px) {
+	.style-spread-left .text {
+		margin-left: 100px;
+	}
+}
+/* Style that look like table */
 .style-flex {
 	padding: 0 40px;
 }
+/* Style text on top and Images in the bottom */
 .style-top {
 	padding: 120px 40px;
 }
@@ -207,6 +231,20 @@ header {
 @media (min-height: 760px) {
 	.style-top .text {
 		margin-bottom: 80px;
+	}
+}
+/* Style text on top without image */
+.style-top-text .text {
+	width: 100%;
+	flex-flow: row nowrap;
+}
+.style-top-text h2 {
+	width: 380px;
+	margin-right: 60px;
+}
+@media (min-width: 910px) {
+	.style-top-text .text {
+		width: 910px;
 	}
 }
 /* Style with mansonry like layout with text on the right */

@@ -156,11 +156,13 @@ header {
 	border-radius: 6px;
 }
 /* Style text on the left and image spread like fan */
-.style-spread {
+.style-spread,
+.style-spread-left {
 	flex-direction: column;
 	padding: 100px 30px;
 }
-.style-spread .text {
+.style-spread .text,
+.style-spread-left .text {
 	margin-bottom: 40px;
 	max-width: 400px;
 }
@@ -222,6 +224,20 @@ header {
 @media (min-height: 896px) {
 	.style-top {
 		justify-content: center;
+	}
+}
+/* Style text on top without image */
+.style-top-text .text {
+	width: 100%;
+	padding: 0 30px;
+	flex-flow: column nowrap;
+}
+.style-top-text h2 {
+	margin-bottom: 30px
+}
+@media (min-width: 364px) {
+	.style-top-text .text {
+		width: 364px;
 	}
 }
 /* Style with mansonry like layout with text on the right */

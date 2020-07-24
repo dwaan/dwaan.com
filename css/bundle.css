@@ -973,9 +973,10 @@ main {
 	overflow: hidden;
 }
 /* Style text on the left and image spread like fan */
-.style-spread {
+.style-spread,
+.style-spread-left {
 	display: flex;
-	flex-direction: row;
+	flex: row nowrap;
 	align-items: center;
 }
 .style-spread .thumbs {
@@ -992,15 +993,17 @@ main {
 	z-index: 1;
 }
 /* Style text on top and Images in the bottom */
-.style-top {
+.style-top,
+.style-top-text {
 	display: flex;
-	flex-direction: column;
+	flex: column nowrap;
 	align-items: center;
 	justify-content: flex-start;
 }
-.style-top .text {
+.style-top .text,
+.style-top-text .text {
 	display: flex;
-	flex-direction: column;
+	flex: column nowrap;
 	flex: none;
 }
 .style-top .thumbs {
@@ -1013,6 +1016,10 @@ main {
 .style-top picture {
 	position: relative;
 	align-self: flex-start;
+}
+/* Style text on top without image */
+.style-top-text {
+	justify-content: center;
 }
 /* Style with mansonry like layout with text on the right */
 .style-masonry {
