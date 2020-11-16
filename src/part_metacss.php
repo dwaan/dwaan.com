@@ -4,15 +4,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
-	<link rel="stylesheet" media="screen and  (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
-	<link rel="stylesheet" media="screen and  (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
+	<link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
+	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 
 	<script type="text/javascript">
 		/* See if it's in dark mode */
 		if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
 			h=document.querySelector("html");
 			h.setAttribute('class','dark');
-			h.style.backgroundColor='var(--black)';
+			// h.style.backgroundColor='var(--black)';
 		}
 	</script>
 

@@ -33,16 +33,25 @@ p {
 
 /* Header style */
 header {
-	left: 30px;
-	right: 30px;
-	top: 20px;
+	left: var(--padx);
+	right: var(--padx);
+	top: var(--pady);
 }
 .size,
 .lamp,
 .menu {
-	margin: 0 0 0 20px;
+	margin: 0 0 0 var(--padm);
 }
 
+
+/* Common middle content */
+
+.middle {
+	padding: var(--pady) var(--padx);
+}
+.middle.auto {
+	padding: calc(2 * var(--padxl)) var(--padx);
+}
 
 /* Common Content */
 
@@ -71,15 +80,15 @@ header {
 
 /* Homepage footer */
 .footer {
-	padding: 30px;
+	padding: var(--pady) var(--padx);
 }
 
 
 /* Homepage listing item */
 .padding {
 	display: flex;
-	margin: 70px 0;
-	padding: 0 70px;
+	margin: 30px 0;
+	padding: 0 50px;
 	max-height: 15vh;
 	justify-content: center;
 }
@@ -91,22 +100,23 @@ header {
 
 
 /* Homepage footer */
-.email {
+.footer .email {
 	display: none;
 }
 
 
 /* Arrow links */
+.arrow {
+	height: 86px;
+}
 .arrow:after {
 	width: 44px;
 	height: 44px;
 	margin: 25px 0 0;
-	background: url(../img/arrow-mobile.svg) no-repeat 100% 50%;
 	transform: rotate(90deg);
 }
 .arrow-small span {
-	text-indent: -9999rem;
-	transform: none;
+	display: none;
 }
 .arrow-small .arrow:before {
 	width: 10px;
@@ -115,9 +125,9 @@ header {
 	border-radius: 100%;
 }
 .arrow-small .arrow:after {
-	width: 100px;
+	width: 50px;
 	height: 44px;
-	margin-left: 25px;
+	margin-left: 10px;
 	background: url(../img/arrow.svg) no-repeat 100% 50%;
 	transform: none;
 }
@@ -132,12 +142,12 @@ header {
 
 /* Background flare */
 .flares {
-	top: 50%;
-	left: 50%;
+	top: 0;
+	left: 0;
 	width: 100vh;
 	height: 100vw;
-	transform-origin: center;
-	transform: translate3d(-50%,-50%,0) rotate(90deg);
+	transform-origin: top left;
+	transform: translate3d(100vw,0,0) rotate(90deg);
 }
 .flares img {
 	width: 100vh;
@@ -146,20 +156,22 @@ header {
 
 
 /* Detail page common style */
-:root {
-	--pic-w: 181px;
-	--pic-h: 309px;
-	--pic-m: 10px;
-}
 .detail picture {
 	box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.25);
+}
+.detail picture,
+.detail picture img {
 	border-radius: 6px;
 }
 /* Style text on the left and image spread like fan */
+.style-spread {
+	padding: 0;
+	height: auto;
+}
 .style-spread,
 .style-spread-left {
 	flex-direction: column;
-	padding: 100px 30px;
+	padding: calc(2 * var(--padxl)) var(--padx);
 }
 .style-spread .text,
 .style-spread-left .text {
@@ -168,18 +180,19 @@ header {
 }
 .style-spread .thumbs {
 	width: 100%;
+	height: var(--pic-h);
 }
 .style-spread picture {
 	top: 0;
-	width: 220px;
+	width: var(--pic-w);
 	transform-origin: bottom center;
 }
-.style-spread picture:nth-child(1) {
+.style-spread picture.pic-4 {
 	left: 50%;
 	margin: 10px 0 0;
 	transform: translate3d(-35%,0,0) rotate(5deg);
 }
-.style-spread picture:nth-child(2) {
+.style-spread picture.pic-5 {
 	right: 50%;
 	margin: 40px 0 0;
 	transform: translate3d(35%,0,0) rotate(-5deg);
@@ -187,11 +200,12 @@ header {
 @media (min-width: 400px) {
 	.style-spread {
 		justify-content: center;
-		padding: 0 30px;
+		padding: 100px 30px;
 		flex: 1;
 	}
 	.style-spread .thumbs {
-		flex: 350px 0 0;
+		border: 1px solid red;
+		flex: calc(var(--pic-h) + 50px) 0 0;
 	}
 	.style-spread picture:nth-child(1) {
 		transform: translate3d(-20%,0,0) rotate(7.5deg);
@@ -199,6 +213,13 @@ header {
 	.style-spread picture:nth-child(2) {
 		transform: translate3d(20%,0,0) rotate(-7.5deg);
 	}
+}
+.style-spread-left {
+	flex-direction: column-reverse;
+}
+.style-spread-left .thumbs {
+	max-width: 400px;
+	align-self: center;
 }
 /* Style text on the and Images in the bottom */
 .style-top {
@@ -229,39 +250,43 @@ header {
 /* Style text on top without image */
 .style-top-text .text {
 	width: 100%;
-	padding: 0 30px;
+	max-width: 400px;
+	padding: 0;
 	flex-flow: column nowrap;
 }
 .style-top-text h2 {
 	margin-bottom: 30px
 }
-@media (min-width: 364px) {
-	.style-top-text .text {
-		width: 364px;
-	}
+/* Style text on top without image */
+.style-trunc {
+	padding: calc(2 * var(--padxl)) calc(2 * var(--padl)) 0;
+	margin-bottom: calc(-1 * var(--padxl));
+	min-height: auto;
+}
+.style-trunc .wrap {
+	flex-direction: column;
+	align-items: flex-start;
+}
+.style-top-text h2 {
+	width: auto;
+}
+.style-trunc .wrap > * {
+	margin: 0!important;
+}
+.style-trunc .wrap:before {
+	left: -20px;
+	width: 20px;
 }
 /* Style with mansonry like layout with text on the right */
 .style-masonry {
-	align-items: center;
+	padding: 100px 0;
 }
 .style-masonry .thumbs {
 	flex-flow: row wrap;
-	width: calc((var(--pic-w) * 3) + (var(--pic-m) * 8));
-	padding: var(--pic-m);
+	width: calc((var(--pic-w) * 4) + (var(--pic-m) * 8));
+	padding-bottom: calc(var(--pic-m) * 4);
 	transform: rotate(-5deg);
 }
-.style-masonry .pic-1 { order: 1; }
-.style-masonry .pic-2 { order: 2; }
-.style-masonry .pic-3 { order: 3; }
-.style-masonry .pic-4 { order: 4; }
-.style-masonry .text { order: 5; }
-.style-masonry .pic-5 { order: 6; }
-.style-masonry .pic-6 { order: 7; }
-.style-masonry .pic-7 { order: 8; }
-.style-masonry .pic-8 { order: 9; }
-.style-masonry .pic-9,
-.style-masonry .pic-10,
-.style-masonry .pic-11 { display: none; }
 .style-masonry picture,
 .style-masonry .text {
 	width: var(--pic-w);
@@ -273,7 +298,8 @@ header {
 }
 /* Style that look like table */
 .style-flex {
-	padding: 0 30px;
+	height: auto;
+	padding: 100px 30px;
 }
 .style-column {
 	margin: 0 0 30px;
@@ -308,6 +334,7 @@ header {
 }
 /* Style with angled photo on the bottom */
 .style-angled {
+	height: auto;
 	padding: 100px 30px;
 }
 .style-angled .text {
@@ -332,6 +359,156 @@ header {
 		width: 315px;
 	}
 }
+/* Style with logo on the bottom */
+.style-bottom-logo .text {
+	max-width: 400px;
+	margin-top: 0;
+	padding-right: 0;
+}
+.style-bottom-logo .thumbs ul {
+	margin: var(--padxxl) 0 0;
+	display: block;
+}
+.style-bottom-logo .thumbs li {
+	margin: 10px 0 0;
+	padding-bottom: 0;
+	width: 45%;
+}
+.style-bottom-logo .thumbs li:last-child {
+	margin: -160px 0 0;
+	padding-left: 12.5%;
+	width: 100%;
+}
+.style-bottom-logo .thumbs li picture {
+	width: 100%;
+}
+.style-bottom-logo .thumbs li:last-child picture {
+	width: 100%;
+}
+/* Style slideshow */
+.style-slideshow,
+.style-slideshow .thumbs,
+.style-slideshow ul li {
+	min-height: initial;
+	height: auto;
+}
+.style-slideshow ul {
+	height: 100%;
+}
+.style-slideshow .thumbs {
+	padding: calc(2 * var(--padxl)) 0 calc((2 * var(--padxxl)) + 50px);
+	margin-bottom: -50px;
+}
+.style-slideshow .before,
+.style-slideshow .after {
+	top: initial;
+	bottom: 0;
+}
+.style-slideshow .before {
+	left: var(--padx);
+}
+.style-slideshow .after {
+	left: initial;
+	right: var(--padx);
+}
+.style-slideshow ul li {
+	padding: 0 var(--padx);
+}
+.style-slideshow picture {
+	width: auto;
+}
+.style-slideshow-small picture {
+	width: calc((100vw - (3 * var(--padx))) / 2);
+	/*transform: none;*/
+}
+.style-slideshow-small ul li {
+	padding: 0 0 0 var(--padx);
+}
+.style-slideshow-small ul li:last-child {
+	padding-right: var(--padx);
+}
+
+
+/* Me page */
+
+.me h1 {
+	font-size: 4rem;
+}
+.me h2 {
+	font-size: 3rem;
+	padding: 0 0 var(--padl);
+}
+.me h3 {
+	font-size: 2rem;
+}
+
+
+/* Mr. Goat */
+
+.mrgoat {
+	display: flex;
+	flex-direction: column nowrap;
+}
+.mrgoat h2,
+.mrgoat h3,
+.mrgoat h4 {
+	line-height: 80%;
+}
+.mrgoat h2 {
+	font-size: 4.5rem;
+}
+.mrgoat h3 {
+	font-size: 3.5rem;
+}
+.mrgoat h4 {
+	font-size: 2.5rem;
+	line-height: 90%;
+	letter-spacing: 0rem;
+}
+.mrgoat .text,
+.mrgoat .thumbs {
+	width: 100%;
+}
+.mrgoat .thumbs {
+	order: 1;
+	flex: 2.5;
+	position: relative;
+	align-items: flex-end;
+}
+.mrgoat .text {
+	padding-top: var(--padxl);
+	align-items: flex-start;
+	order: 2;
+	flex: 1;
+}
+.mrgoat img {
+	width: 400px;
+	max-width: 65vw;
+	height: auto;
+}
+.mrgoat .ig:after {
+	width: 20px;
+}
+
+.igstage .arrow {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	height: 12px;
+	line-height: 12px;
+	top: initial;
+	left: initial;
+	bottom: var(--pady);
+	right: calc(var(--padx) + 12px);
+	transform-origin: right bottom;
+	transform: rotate(90deg);
+}
+.igstage .arrow:after {
+	margin: 0 0 0 10px;
+	height: 12px;
+	transform: initial;
+}
+
 /* Footer links in every detail page */
 .links {
 	padding: 90px 30px 120px;
@@ -383,7 +560,7 @@ ol.zero li:before {
 }
 /* ol/ul for branding color for Suzuki */
 .detail .color {
-	margin: -10px 0;
+	margin: -10px 20px -10px 0;
 }
 .detail .color ul {
 	flex-flow: row wrap;
@@ -405,9 +582,4 @@ ol.zero li:before {
 	height: 16px;
 	margin: 5px 0;
 	border-radius: 0 0 100px;
-}
-
-/* Menu page */
-.menu-page nav {
-	padding: 100px 30px;
 }

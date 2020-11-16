@@ -55,6 +55,16 @@ function nextElementSibling(el) {
 	} while (el && el.nodeType !== 1);
 	return el
 }
+function hoverEvents(els, over = function() {}, out = function() {}) {
+	els.forEach(function(el) {
+		el.addEventListener("mouseover", function(e) {
+			over(el, e);
+		});
+		el.addEventListener("mouseout", function(e){
+			out(el, e);
+		});
+	});
+}
 // Wait for image to load
 // Parameter:
 // 1. IMG Elements Object or String
@@ -194,7 +204,7 @@ var splitText = function (els) {
 		return split;
 	}
 
-	var els = _qAll(els);
+	if (typeof els == "string") els = _qAll(els);
 	for (var i = 0; i < els.length; i++) {
 		var result = travelTags(els[i], i);
 		els[i].innerHTML = "";
@@ -573,14 +583,12 @@ document.onkeydown = function (t) {
 	konami[keyIndex] == t.keyCode
 		? keyIndex++
 		: keyIndex = 0,
-	keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe title="YouTube video player" class="youtube-player"' +
-			' type="text/html" width="905" height="510" src="https://www.youtube.com/embed/tg' +
-			'bNymZ7vqY?rel=0&autoplay=1" frameborder="0"></iframe></div>'), keyIndex = 0);
+	keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe width="905" height="510" src="https://www.youtube-nocookie.com/embed/tgbNymZ7vqY?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'), keyIndex = 0);
 	if (_q('#konamicode') != undefined) {
 		elem = _q('#konamicode');
 		elem.onclick = function (e) {
 			gsap.to('#konamicode', {
-				duration: 1.024,
+				duration: 1,
 				ease: "expo.in",
 				opacity: 0,
 				onComplete: function () {

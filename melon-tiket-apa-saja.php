@@ -17,19 +17,12 @@
 				<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="logo" alt="Suzuki's Logo" />
 			</div>
 			<h4 class="year">/2019</h4>
-			<div class="arrow">
+			<a href="#more" class="arrow scrollto">
 				<span>read more</span>
-			</div>
+			</a>
 		</section>
 
-		<section class="middle style-spread-left">
-			<div class="thumbs">
-				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tiketapasaja/hero@3x.jpg">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tiketapasaja/hero@2x.jpg">
-					<img src="img/tiketapasaja/hero.jpg" width="" height="" alt="Tiket Apa Saja - Homepage" />
-				</picture>
-			</div>
+		<section id="more" class="middle style-spread-left">
 			<div class="text">
 				<div class="titles">
 					<h4>Concept and Design</h4>
@@ -37,11 +30,18 @@
 				</div>
 				<p>Tiket Apa Saja wanted to redesign their website, after recently got acquired by Melon, a subsidionary company of Telkom Indonesia. They wanted to reflect the changes into their core business.</p>
 			</div>
+			<div class="thumbs">
+				<picture>
+					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/hero@3x.jpg">
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/hero@2x.jpg">
+					<img src="img/tas/hero.jpg" width="" height="" alt="Tiket Apa Saja - Homepage" />
+				</picture>
+			</div>
 		</section>
 
-		<section class="middle style-top-text">
+		<section class="middle auto style-top-text">
 			<div class="text">
-				<h2>First Challanges</h2>
+				<h2>First Challenges</h2>
 				<ol class="zero">
 					<li>I felt that their old and new logo are too complex, but strongly felt that the old one is more distinctive.</li>
 					<li>I pitched a new redesign based on the idea that they need to get back to their old simplified logo.</li>
@@ -49,53 +49,100 @@
 			</div>
 		</section>
 
-		<section class="middle style-spread">
+		<section class="middle auto style-bottom-logo">
 			<div class="text">
-				<h3>My Solutions</h3>
+				<h3>The Solution</h3>
 				<p>The old and new logo contain too much information and it purely business decision. I suggested them to simplified their logo into something more memorable and with less distraction.</p>
+			</div>
+			<div class="thumbs">
+				<ul class="flat">
+					<li>
+						<picture>
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/oldlogo<?php echo $i ?>@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/oldlogo<?php echo $i ?>@2x.png">
+							<img src="img/tas/oldlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+						</picture>
+					</li>
+					<li>
+						<picture>
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/newlogo<?php echo $i ?>@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/newlogo<?php echo $i ?>@2x.png">
+							<img src="img/tas/newlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+						</picture>
+					</li>
+					<li>
+						<picture>
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/pitching-mobile<?php echo $i ?>@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/pitching-mobile<?php echo $i ?>@2x.png">
+							<img src="img/tas/pitching-mobile<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+						</picture>
+					</li>
+				</ul>
 			</div>
 		</section>
 
 		<section class="middle style-slideshow">
 			<div class="thumbs">
-				<?php for ($i=1; $i <= 11; $i++) { ?>
-					<picture class="pic-<?php echo $i ?>">
-						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
-						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
-					</picture>
-				<?php } ?>
+				<ul class="flat">
+					<?php for ($i=1; $i <= 3; $i++) { ?>
+						<li>
+							<picture class="pic-<?php echo $i ?>">
+								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/desktop-<?php echo $i ?>@3x.jpg">
+								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/desktop-<?php echo $i ?>@2x.jpg">
+								<img src="img/tas/desktop-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
+							</picture>
+						</li>
+					<?php } ?>
+				</ul>
 			</div>
 		</section>
 
-		<section class="middle style-spread">
-			<div class="text">
-				<h3>The New New Logo</h3>
-				<p>They finally agree that they need to simplified their logo resulting simplier logo. I adapted the new logo and color scheme into the new design.</p>
+		<section class="middle style-trunc">
+			<div class="wrap">
+				<div class="text">
+					<h3>The New New Logo</h3>
+					<p>They finally agree that they need to simplified their logo resulting simplier logo. I adapted the new logo and color scheme into the new design.</p>
+				</div>
+				<div class="meta color">
+					<ul class="flat">
+						<li style="background: #EE2F26"></li>
+						<li style="background: #fff"></li>
+						<li style="background: #000"></li>
+						<li>Primary</li>
+					</ul>
+				</div>
 			</div>
 		</section>
 
-		<section class="middle style-slideshow-mobile">
+		<section class="middle style-slideshow">
 			<div class="thumbs">
-				<?php for ($i=1; $i <= 11; $i++) { ?>
-					<picture class="pic-<?php echo $i ?>">
-						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
-						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
-					</picture>
-				<?php } ?>
+				<ul class="flat">
+					<?php for ($i=1; $i <= 6; $i++) { ?>
+						<li>
+							<picture class="pic-<?php echo $i ?>">
+								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/desktop-final-<?php echo $i ?>@3x.jpg">
+								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/desktop-final-<?php echo $i ?>@2x.jpg">
+								<img src="img/tas/desktop-final-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
+							</picture>
+						</li>
+					<?php } ?>
+				</ul>
 			</div>
 		</section>
 
-		<section class="middle style-slideshow-">
+		<section class="middle style-slideshow style-slideshow-small">
 			<div class="thumbs">
-				<?php for ($i=1; $i <= 11; $i++) { ?>
-					<picture class="pic-<?php echo $i ?>">
-						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
-						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
-					</picture>
-				<?php } ?>
+				<ul class="flat">
+					<?php for ($i=1; $i <= 6; $i++) { ?>
+						<li>
+							<picture class="pic-<?php echo $i ?>">
+								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/mobile-final-<?php echo $i ?>@3x.jpg">
+								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/mobile-final-<?php echo $i ?>@2x.jpg">
+								<img src="img/tas/mobile-final-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
+							</picture>
+						</li>
+					<?php } ?>
+				</ul>
 			</div>
 		</section>
 

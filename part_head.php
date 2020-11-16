@@ -14,7 +14,7 @@
 		<div class="left">
 			<a href="./" class="logo" title="Dwan">
 				<svg class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<g fill="black">
+					<g fill="white">
 						<g class="right-hand">
 							<rect x="25.4991" y="39.1853" width="16" height="3.35392" rx="1.67696" transform="rotate(-135 25.4991 39.1853)"/>
 						</g>
@@ -35,7 +35,7 @@
 			<a class="size" title="Text Size" href="#textsize">Aa</a>
 			<a class="lamp" title="Dark or light mode" href="#mode">
 				<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-					<g id="sun" stroke="#000" stroke-width="2">
+					<g id="sun" stroke="#fff" stroke-width="2">
 						<line x1="22" y1="31.2218" x2="22" y2="35.2218"/>
 						<line x1="14.5355" y1="28.9289" x2="11.707" y2="31.7574"/>
 						<line x1="32.1213" y1="31.7574" x2="29.2928" y2="28.9289"/>
@@ -44,7 +44,7 @@
 						<line x1="15.1213" y1="15.7574" x2="12.2928" y2="12.9289"/>
 						<line x1="13" y1="22.2218" x2="9" y2="22.2218"/>
 						<line x1="35" y1="22.2218" x2="31" y2="22.2218"/>
-						<circle cx="22" cy="22.2218" r="5.5" fill="#FFD700"/>
+						<circle cx="22" cy="22.2218" r="5.5" fill="blue"/>
 					</g>
 					<g id="moon">
 						<mask fill="black">
@@ -67,8 +67,8 @@
 			</a>
 
 			<nav class="menu">
-				<a class="switch" href="./menu"  title="Menu">
-					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+				<a class="switch" href="./menu" data-barba-prevent title="Menu">
+					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 						<line class="menu-1" x1="26" y1="8.25" x2="6" y2="8.25"/>
 						<line class="menu-2" x1="20" y1="16.25" x2="6" y2="16.25"/>
 						<line class="menu-3" x1="26" y1="24.25" x2="6" y2="24.25"/>
@@ -77,10 +77,13 @@
 				</a>
 				<div class="overlay">
 					<div class="items">
+						<a href="#" data-barba-prevent class="close spring"><span>x</span>close</a>
 						<ol>
-							<li><a href="./">Home</a></li>
-							<li><a href="./about">About</a></li>
-							<li><a href="./contact">Contact</a></li>
+							<li><a class="spring" href="./">Home</a></li>
+							<li><a class="spring" href="./me">About Me</a></li>
+							<li class="hr"></li>
+							<li><a class="spring" href="./say-hi">Say, Hi!</a></li>
+							<li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p></li>
 						</ol>
 					</div>
 				</div>

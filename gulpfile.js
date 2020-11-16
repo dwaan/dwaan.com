@@ -13,12 +13,11 @@ const
 
 function javascript() {
 	return gulp.src([
-			'js/src/gsap-member/minified/gsap.min.js',
-			// 'js/src/gsap-member/minified/ScrollToPlugin.min.js',
+			'node_modules/gsap/dist/gsap.min.js',
+			'node_modules/gsap/dist/ScrollTrigger.min.js',
+			'node_modules/gsap/dist/ScrollToPlugin.min.js',
 			// 'js/src/gsap-member/minified/CustomEase.min.js',
 			'node_modules/@barba/core/dist/barba.umd.js',
-			// 'node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
-			// 'node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
 			// 'node_modules/photoswipe/dist/photoswipe.min.js',
 			// 'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
 			// 'node_modules/tiny-slider/dist/min/tiny-slider.js',
@@ -52,10 +51,10 @@ function css() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		// .pipe(postcss([
-		// 	autoprefixer(),
-		// 	cssnano()
-		// ]))
+		.pipe(postcss([
+			autoprefixer(),
+			cssnano()
+		]))
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))

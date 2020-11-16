@@ -11,18 +11,18 @@
 <body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
-	<main data-barba="container" data-barba-namespace="detail" class="detail">
+	<main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
 		<section class="middle">
 			<div class="padding">
-				<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" />
+				<span><img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
 			</div>
 			<h4 class="year">/2020</h4>
-			<div class="arrow">
+			<a href="#more" class="arrow scrollto">
 				<span>read more</span>
-			</div>
+			</a>
 		</section>
 
-		<section class="middle style-spread">
+		<section id="more" class="middle style-spread">
 			<div class="text">
 				<div class="titles">
 					<h4>Project Pitching</h4>
@@ -31,16 +31,13 @@
 				<p>Suzuki Indonesia just recently redesign their website,  but they experience several issues and felt that their website needs more improvement.</p>
 			</div>
 			<div class="thumbs">
-				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-4@3x.jpg">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-4@2x.jpg">
-					<img src="img/suzuki/suzuki-4.jpg" width="" height="" alt="Suzuki Indonesia - Homepage" />
-				</picture>
-				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-5@3x.jpg">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-5@2x.jpg">
-					<img src="img/suzuki/suzuki-5.jpg" width="" height="" alt="Suzuki Indonesia - Product Detail Page" />
-				</picture>
+				<?php for ($i=4; $i <= 5; $i++) { ?>
+					<picture class="pic-<?php echo $i ?>">
+						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
+						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
+						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
+					</picture>
+				<?php } ?>
 			</div>
 		</section>
 
@@ -54,25 +51,7 @@
 				</ol>
 			</div>
 			<div class="thumbs">
-				<?php for ($i=1; $i <= 7; $i++) { ?>
-					<picture class="pic-<?php echo $i ?>">
-						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
-						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
-					</picture>
-				<?php } ?>
-			</div>
-		</section>
-
-		<section class="middle style-masonry">
-			<div class="thumbs">
-				<?php for ($i=1; $i <= 11; $i++) { ?>
-					<?php if($i == 7) { ?>
-						<div class="text">
-							<h3>Optimizing Layout</h3>
-							<p>Products page layout are more optimized for mobile visitor with clear separation between information.</p>
-						</div>
-					<?php } ?>
+				<?php for ($i = 2; $i <= 9; $i++) { ?>
 					<picture class="pic-<?php echo $i ?>">
 						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
 						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
@@ -125,13 +104,32 @@
 			</div>
 		</section>
 
+		<section class="middle style-masonry">
+			<div class="thumbs">
+				<?php for ($i=1; $i <= 11; $i++) { ?>
+					<?php if($i == 7) { ?>
+						<div class="text">
+							<h3>Optimizing Layout</h3>
+							<p>Products page layout are more optimized for mobile visitor with clear separation between information.</p>
+						</div>
+					<?php } ?>
+					<picture class="pic-<?php echo $i ?>">
+						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
+						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
+						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
+					</picture>
+				<?php } ?>
+			</div>
+			<div class="shade"></div>
+		</section>
+
 		<section class="middle style-angled">
 			<div class="text">
 				<h3>Navigation</h3>
 				<p>Further improvement in navigation means visitor can easily see their latest products with fewer taps.</p>
 			</div>
 			<div class="thumbs">
-				<?php for ($i=1; $i <= 10; $i++) { ?>
+				<?php for ($i=1; $i <= 11; $i++) { ?>
 					<picture class="pic-<?php echo $i ?>">
 						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
 						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">

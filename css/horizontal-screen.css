@@ -1,62 +1,108 @@
+@media screen and (min-width: 900px) {
+	:root {
+		--pic-w: 291px;
+		--pic-h: 497px;
+		--pic-m: 30px;
+	}
+}
+@media screen and (min-width: 1600px) {
+	:root {
+		--pic-w: 436.5px;
+		--pic-h: 745.5px;
+		--pic-m: 40px;
+	}
+}
+
+
 /* Defining the font size based on aspect ratio */
 html {
-	font-size: 18px;
+	font-size: 16px;
+}
+@media screen and (min-width: 900px) {
+	html {
+		font-size: 18px;
+	}
 }
 
 
 /* Default style */
 h1 {
-	margin: 0 0 40px 0;
-	font-size: 96px;
+	margin: 0 0 var(--padx) 0;
+	font-size: 64px;
 	line-height: 80%;
 	letter-spacing: -0.06em;
 }
 h2 {
-	margin: 0 0 60px;
-	font-size: 64px;
+	margin: 0 0 var(--padxl);
+	font-size: 56px;
 	line-height: 90%;
 	letter-spacing: -0.02em;
 }
 h3 {
-	font-size: 36px;
-	margin: 0 0 20px;
+	font-size: 32px;
+	margin: 0 0 var(--padm);
 }
 h4 {
-	margin: 0 0 10px;
-	font-size: 24px;
+	margin: 0 0 var(--pads);
+	font-size: 20px;
 	line-height: 28px;
 }
 p {
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 150%;
 }
-
+@media screen and (min-width: 900px) {
+	h1 {
+		font-size: 96px;
+	}
+	h2 {
+		font-size: 64px;
+	}
+	h3 {
+		font-size: 36px;
+	}
+	h4 {
+		font-size: 24px;
+	}
+	p {
+		font-size: 18px;
+	}
+}
 
 /* Header style */
 header {
-	left: 40px;
-	right: 40px;
-	top: 30px;
+	left: var(--padx);
+	right: var(--padx);
+	top: var(--pady);
 }
 .size,
 .lamp,
 .menu {
-	margin: 0 0 0 65px;
+	margin: 0 0 0 var(--padxl);
 }
 
 
 /* Common middle content */
 
 .middle {
-	padding: 35px 40px;
+	padding: var(--pady) var(--padx);
+}
+.middle.auto {
+	padding: calc(2 * var(--padxl)) var(--padx);
 }
 
 /* Homepage content */
 .main-text h1 {
-	font-size: 96px;
+	margin: 0 var(--padl) 0 0;
+	font-size: 64px;
 	line-height: 80%;
 	letter-spacing: -0.06em;
 	white-space: nowrap;
+}
+@media (min-width: 900px) {
+	.main-text h1 {
+		font-size: 96px;
+	}
 }
 @media (max-width: 1200px) {
 	.main-text h1 {
@@ -67,22 +113,32 @@ header {
 
 /* Homepage footer */
 .footer {
-	padding: 35px 40px;
+	padding: var(--pady) var(--padx);
 }
 
 
 /* Homepage listing item */
 .padding {
-	padding: 0;
+	padding: 0 60px;
+}
+.padding a,
+.padding span {
+	height: 120px;
+}
+@media (min-width: 900px) {
+	.padding a,
+	.padding span {
+		height: initial;
+	}
 }
 
 
 /* Homepage footer */
-.email {
+.footer .email {
 	font-size: 13px;
 	line-height: 15px;
 	letter-spacing: 0.1em;
-	color: var(--black-gray-light);
+	color: var(--gray);
 }
 
 
@@ -90,35 +146,53 @@ header {
 .arrow {
 	flex-flow: row nowrap;
 	position: absolute;
-	bottom: 20px;
-	right: 40px;
+	bottom: calc(var(--pady) - 10px);
+	right: var(--padx);
 	transform-origin: right top;
 	transform: rotate(90deg);
 }
 .arrow:after {
-	background: url(../img/arrow.svg) no-repeat 100% 50%;
 	margin: 0 0 0 25px;
 	width: 100px;
 	height: 16px;
 }
+.arrow span {
+	display: none;
+}
+.arrow-small {
+	position: absolute;
+	bottom: var(--pady);
+	right: var(--padx);
+}
 .arrow-small .arrow {
-	bottom: 35px;
-	right: 40px;
+	position: relative;
+	left: 0;
+	top: 0;
+	bottom: initial;
+	right: inherit;
 	transform: none;
 }
 .arrow-small .arrow:after {
-	width: 100px;
+	width: 50px;
 	height: 16px;
 	margin-left: 25px;
 	background: url(../img/arrow.svg) no-repeat 100% 50%;
 	transform: none;
 }
+@media screen and (min-width: 900px) {
+	.arrow span {
+		display: block;
+	}
+	.arrow-small .arrow:after {
+		width: 100px;
+	}
+}
 
 
 /* Year information */
 .year {
-	right: 100px;
-	bottom: 35px;
+	right: var(--padxxl);
+	bottom: var(--pady);
 }
 
 
@@ -136,42 +210,50 @@ header {
 
 
 /* Detail page common style */
-:root {
-	--pic-w: 291px;
-	--pic-h: 497px;
-	--pic-m: 30px;
-}
 .detail picture {
 	box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+}
+.detail picture,
+.detail picture img {
 	border-radius: 8px;
 }
 /* Style text on the left and image spread like fan */
 .style-spread,
 .style-spread-left {
 	flex-direction: row;
-	padding: 0 100px;
+	padding: 0 var(--padxl);
 }
 .style-spread .text,
 .style-spread-left .text {
-	width: 465px;
+	width: 360px;
 	flex: none;
 }
+@media (min-width: 900px) {
+	.style-spread .text,
+	.style-spread-left .text {
+		width: 465px;
+	}
+}
 .style-spread .thumbs {
-	height: 100%;
+	min-height: var(--pic-h);
+	height: 100vh;
 }
 .style-spread picture {
-	width: 372px;
+	width: calc(9/10 * var(--pic-w));
 	transform-origin: 0 0;
+}
+.style-spread picture,
+.style-spread picture img {
 	border-radius: 20px;
 }
-.style-spread picture:nth-child(1) {
-	top: 180px;
-	left: 200px;
+.style-spread picture.pic-4 {
+	top: 25%;
+	left: 50%;
 	transform: rotate(-10deg);
 }
-.style-spread picture:nth-child(2) {
-	top: 360px;
-	left: 20px;
+.style-spread picture.pic-5 {
+	top: 40%;
+	left: 10%;
 	transform: rotate(-30deg);
 }
 @media (min-width: 1194px) {
@@ -183,6 +265,10 @@ header {
 		flex: none;
 		width: 465px;
 	}
+}
+/* Style text on the left and image spread like fan */
+.style-spread-left {
+	padding-bottom: calc(2 * var(--padxl))
 }
 .style-spread-left .text {
 	flex: none;
@@ -196,9 +282,19 @@ header {
 	margin-top: 100px;
 }
 .style-spread-left picture {
-	width: 528px;
+	width: 300px;
 	transform-origin: 0;
 	transform: rotate(-5deg);
+}
+@media (min-width: 900px) {
+	.style-spread-left picture {
+		width: 400px;
+	}
+}
+@media (min-width: 1024px) {
+	.style-spread-left picture {
+		width: 528px;
+	}
 }
 @media (min-width: 1194px) {
 	.style-spread-left .text {
@@ -207,7 +303,7 @@ header {
 }
 /* Style that look like table */
 .style-flex {
-	padding: 0 40px;
+	padding: var(--padxl) var(--padl);
 }
 /* Style text on top and Images in the bottom */
 .style-top {
@@ -217,7 +313,7 @@ header {
 	max-width: 468px;
 }
 .style-top .text {
-	width: 732px;
+	max-width: 732px;
 	margin-bottom: 40px;
 }
 .style-top picture {
@@ -242,22 +338,25 @@ header {
 	width: 380px;
 	margin-right: 60px;
 }
-@media (min-width: 910px) {
+@media (min-width: 1000px) {
 	.style-top-text .text {
 		width: 910px;
 	}
 }
 /* Style with mansonry like layout with text on the right */
-.style-masonry {
-	align-items: center;
-}
 .style-masonry .thumbs {
 	flex-flow: row wrap;
 	width: calc((var(--pic-w) * 4) + (var(--pic-m) * 10));
 	padding: var(--pic-m);
+	padding-bottom: calc(var(--pic-m) * 8);
+}
+@media (min-width: 900px) {
+	.style-masonry .thumbs {
+		padding-bottom: calc(var(--pic-m) * 4);
+	}
 }
 .style-masonry .thumbs > *:nth-child(2n) {
-	transform: translate3d(0,calc(var(--pic-m) * 3),0);
+	transform: translate3d(0, calc(var(--pic-m) * 3), 0);
 }
 .style-masonry picture,
 .style-masonry .text {
@@ -270,14 +369,19 @@ header {
 }
 /* Style that look like table */
 .style-row {
-	margin: -35px 0;
+	margin: calc(-1 * var(--padl)) 0;
 }
 .style-column {
-	margin: 35px 0;
+	margin: var(--padl) 0;
 }
 .style-column .meta {
-	width: 309px;
+	width: 230px;
 	margin-right: 40px!important;
+}
+@media (min-width: 900px) {
+	.style-column .meta {
+		width: 309px;
+	}
 }
 .style-column .text {
 	flex: 1;
@@ -308,7 +412,7 @@ header {
 	margin-bottom: 100px;
 }
 .style-angled .thumbs {
-	margin: 0 -var(--pic-m);
+	margin: 0 -(var(--pic-m));
 	transform-origin: 50% 0;
 	transform: rotate(-5deg);
 }
@@ -331,27 +435,54 @@ header {
 		width: 465px;
 	}
 }
+/* Style with logo on the bottom */
+.style-bottom-logo {
+}
+/* Style truncate */
+.style-trunc {
+	padding: var(--padxxl) 0 0;
+}
+.style-trunc .wrap{
+	width: 55vw;
+}
+.style-trunc .color ul {
+	margin: 0!important;
+	width: 18vw;
+	flex-wrap: wrap;
+}
+.style-trunc .color li {
+	margin: 0 var(--padm) var(--padm) 0!important;
+}
+.style-trunc .color ul li:last-child {
+	width: auto;
+}
+@media (min-width: 1194px) {
+	.style-trunc .color ul  {
+		flex-wrap: nowrap;
+	}
+}
 /* Footer links in every detail page */
 .links {
-	padding: 160px 0;
-	justify-content: center;
+	padding: calc(2 * var(--padxl)) calc(2 * var(--padxl));
 }
 .links nav {
-	margin: -30px 0;
+	margin: calc(-1 * var(--padm)) 0;
 }
 .links div {
-	margin: 30px 0;
+	margin: var(--padm) 0;
 }
 .links a:before {
-	width: 40px;
-	height: 40px;
-	margin-right: 60px;
+	flex: none;
+	width: var(--padx);
+	height: var(--padx);
+	margin-right: var(--padxl);
 }
 .links a:after {
+	flex: none;
 	width: 100px;
 }
 .links span {
-	margin-right: 25px;
+	margin-right: var(--padl);
 }
 /* List style with zero leading decimal */
 ol.zero {
@@ -359,8 +490,13 @@ ol.zero {
 }
 ol.zero li {
 	margin: 0 30px 0 0;
-	font-size: 18px;
+	font-size: 16px;
 	flex-direction: column;
+}
+@media screen and (min-width: 900px) {
+	ol.zero li {
+		font-size: 18px;
+	}
 }
 ol.zero li:last-child {
 	margin-right: 0;
@@ -372,15 +508,15 @@ ol.zero li:before {
 }
 /* ol/ul for branding color for Suzuki */
 .detail .color {
-	margin: -15px 0;
+	margin: calc(-1 * var(--padm)) 0;
 }
 .detail .color ul {
-	margin: 15px -15px;
+	margin: var(--padm) calc(-1 * var(--padm));
 }
 .detail .color li {
 	width: 32px;
 	height: 32px;
-	margin: 0 15px;
+	margin: 0 var(--padm);
 }
 .detail .bland {
 	margin: -10px 0;
@@ -393,8 +529,52 @@ ol.zero li:before {
 }
 
 
-/* Menu page */
-.menu-page nav {
-	padding: 100px;
+/* Mr. Goat */
+
+.mrgoat h2 {
+	font-size: 7rem;
+}
+.mrgoat h3 {
+	font-size: 5rem;
+}
+.mrgoat h4 {
+	font-size: 3rem;
+	letter-spacing: -.05rem;
+}
+.mrgoat .text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	max-width: 100%;
+}
+.mrgoat .thumbs {
+	position: absolute;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.mrgoat img {
+	width: auto;
+	height: 400px;
+	max-height: 90vh;
+}
+.mrgoat .ig:after {
+	width: 100px;
+}
+.mrgoat .arrow {
+	position: relative;
+	bottom: 0;
+	right: 0;
+	transform: initial;
+}
+
+.igstage .arrow {
+	display: flex;
 }
 /*# sourceMappingURL=horizontal-screen.css.map */

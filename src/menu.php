@@ -12,13 +12,16 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="menu" class="menu-page">
-		<nav class="middle">
-			<ul class="bland zero">
-				<li><a href="./">Home</a></li>
-				<li class="hr"><a href="./me">About Me</a></li>
-				<li><a href="./say-hi">Say, Hi!</a></li>
-				<li><p>Thank you for visiting my website. For my appreciation for you, I decide not to use cookies nor local storage for tracking. Feel free to browse around my website and leave message in <a href="./say-hi">contact page</a> if you feel like</p></li>
-			</ul>
+		<nav class="menu middle">
+			<div class="items">
+				<ol>
+					<li><a class="spring" href="./">Home</a></li>
+					<li><a class="spring" href="./me">About Me</a></li>
+					<li class="hr"></li>
+					<li><a class="spring" href="./say-hi">Say, Hi!</a></li>
+					<li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p></li>
+				</ol>
+			</div>
 		</nav>
 	</main>
 

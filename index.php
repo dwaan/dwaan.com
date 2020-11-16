@@ -11,17 +11,17 @@
 <body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
-	<main data-barba="container" data-barba-namespace="home">
-		<section class="middle">
+	<main data-barba="container" data-barba-namespace="home" class="home">
+		<section id="scrollstart" class="middle">
 			<div class="main-text">
-				<h1>Hello, my name is <a href="#dwan">Dwan</a></h1>
+				<h1>Hello, my name is <a href="./me">Dwan</a></h1>
 			</div>
-			<div class="arrow">
+			<a href="#casestudy" class="arrow scrollto">
 				<span>case studies</span>
-			</div>
+			</a>
 		</section>
 
-		<section class="middle">
+		<section id="casestudy" class="middle">
 			<div class="padding">
 				<a href="./suzuki-website-redesign-pitching">
 					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
@@ -34,7 +34,7 @@
 			</div>
 		</section>
 
-		<section class="middle">
+		<section id="scrollend" class="middle">
 			<div class="padding">
 				<a href="./melon-tiket-apa-saja">
 					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="logo" alt="Logo Tike Apa Saja" />
@@ -48,21 +48,24 @@
 		</section>
 
 		<section class="footer">
-			<a class="email">me@dwaan.com</a>
+			<a href="./say-hi" class="email">me@dwaan.com</a>
 			<div class="location">
 				<span>Jakarta</span>
-				<img src="img/icon-airplane.svg" width="16" height="16" alt="Airplane" />
+				<svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+					<path d="M4.79998 1.59998L6.25415 6.93331H2.88019L1.59998 4.79998H1.06665V7.46664V9.06664V11.2H1.59998L2.88019 9.06664H6.25415L4.79998 14.4H5.86665L9.74582 9.06664H13.8666C14.456 9.06664 14.9333 8.58931 14.9333 7.99998C14.9333 7.41064 14.456 6.93331 13.8666 6.93331H9.74582L5.86665 1.59998H4.79998Z"/>
+				</svg>
 				<span>Tel Aviv-Yafo</span>
 			</div>
 			<div></div>
 		</section>
 
-		<section class="flares">
-			<img src="img/flares/flare1.png" width="" height="" alt="Flare" class="flare1" />
-			<img src="img/flares/flare2.png" width="" height="" alt="Flare" class="flare2" />
-			<img src="img/flares/flare3.png" width="" height="" alt="Flare" class="flare3" />
-			<img src="img/flares/flare4.png" width="" height="" alt="Flare" class="flare4" />
-			<img src="img/flares/flare5.png" width="" height="" alt="Flare" class="flare5" />
+		<section class="flares side">
+			<?php
+				for ($img = $i = 1; $i <= 7; $i++) {
+					echo '<img src="img/flares/flare' . $img. '.png" width="" height="" alt="" class="flare' . $i . '" />';
+					if(++$img > 5) $img = 1;
+				}
+			?>
 		</section>
 	</main>
 

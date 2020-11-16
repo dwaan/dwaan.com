@@ -8,30 +8,17 @@
 	?>
 </head>
 
-<body>
+<body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
-	<div id="barba-wrapper">
-		<div class="barba-container" data-namespace="call">
-			<main class="block__clear">
-				<div class="bigtext"><div></div></div>
-				<div class="call">
-					<div class="hi">hi!</div>
-					<div>
-						<div class="threed">
-							<div>
-								<h1>say,</h1>
-								<h2>to me in here</h2>
-							</div>
-							<a href="mailto:me@dwaan.com" class="email no-barba" target="_blank" rel="noopener noreferrer">send me an email or two <small>but please don't spam me</small></a>
-							<a href="https://duckduckgo.com/?q=%40dwaan" class="search no-barba" target="_blank" rel="noopener noreferrer">find me in search engine <small>like many people these day</small></a>
-						</div>
-					</div>
-				</div>
-			</main>
-		</div>
-	</div>
+	<main data-barba="container" data-barba-namespace="hi" class="hi">
+		<section class="middle">
+			<div class="main-text">
+				<h1><span class="email">me</span><span class="social">@dwaan</span><span class="website">.com</span></h1>
+			</div>
+		</section>
+	</main>
 
-<?php include_once "part_script.php"; ?>
+	<?php include_once "part_script.php"; ?>
 </body>
 </html>
