@@ -949,7 +949,7 @@ var animate = {
 		}});
 
 		// Scroll to top
-		if (!nonsticky) tl = this.top(tl);
+		tl = this.top(tl);
 
 		// Hide current view
 		tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer, .footer > *"), {
@@ -1409,17 +1409,15 @@ barba.init({
 			// Display loading
 			loader.init();
 
-			console.log(current.querySelector(".footer .email").style.fontSize);
 			var tl = gsap.timeline({ default: {
 				duration: .75,
-				stagger: .1
+				stagger: .1,
+				ease: "power3.out"
 			}});
 			tl.to(current.querySelectorAll(".middle > *, .footer .location"), {
-				y: "+=200",
 				opacity: 0
 			}, 0);
 			tl.to(current.querySelectorAll(".flares > img"), {
-				x: "-=300",
 				opacity: 0,
 			}, .25);
 			tl.fromTo(current.querySelector(".footer .email"), {
@@ -1444,7 +1442,7 @@ barba.init({
 				fontSize: "96px",
 				fontWeight: 500,
 				letterSpacing: "-0.06em",
-				duration: 1.5,
+				duration: 1,
 				ease: "power3.out",
 				onComplete: function() {
 					// Image loading logic
@@ -1461,15 +1459,10 @@ barba.init({
 		},
 		after(data) {
 			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
-			const elements = ".arrow-small a, .arrow";
 
 			// Animate current view
-			animate.show(next, function() {
-				loader.empty();
-				done();
-			}, next.querySelectorAll(elements));
+			loader.empty();
+			done();
 		},
 		from: {
 			namespace: ['home']
@@ -2736,6 +2729,71 @@ barba.init({
 
 			// Snap to element
 			snap(".igstage, .cofound, .links", .25);
+
+			done();
+		}
+	}, {
+		namespace: 'hi',
+		beforeEnter(data) {
+			const done = this.async();
+			var flare = {
+				elements: "",
+				show: function(elements, repeat = false) {
+					var that = this;
+
+					this.elements = elements;
+
+					gsap.killTweensOf(this.elements);
+					if (!repeat) gsap.to(this.elements, {
+						opacity: 1,
+						ease: "ease.out"
+					});
+					if (!repeat) gsap.to(this.elements, {
+						x: "random(-75,75,10)%",
+						y: "random(10,30,5)%",
+						ease: "ease.out"
+					});
+					gsap.to(this.elements, {
+						x: "random(-100,100,10)%",
+						y: "random(10,30,5)%",
+						rotation: "random(-5,5,1)deg",
+						scale: "random(1,2,1)",
+						duration: 5,
+						ease: "ease.inOut",
+						onComplete: function() {
+							that.show(that.elements, true);
+						}
+					});
+				},
+				hide: function() {
+					gsap.killTweensOf(this.elements);
+					gsap.to(this.elements, {
+						opacity: 0,
+						scale: 1,
+						x: "random(-75,75,10)%",
+						y: "random(0,20,5)%",
+						ease: "ease.in"
+					});
+				}
+			}
+
+			hoverEvents(_qAll(".hi .email"), function() {
+				flare.show(".hi .flares > img.yellow, .hi .flares > img.red");
+			}, function() {
+				flare.hide();
+			});
+
+			hoverEvents(_qAll(".hi .social"), function() {
+				flare.show(".hi .flares > img.red, .hi .flares > img.blue");
+			}, function() {
+				flare.hide();
+			});
+
+			hoverEvents(_qAll(".hi .website"), function() {
+				flare.show(".hi .flares > img.blue, .hi .flares > img.green");
+			}, function() {
+				flare.hide();
+			});
 
 			done();
 		}

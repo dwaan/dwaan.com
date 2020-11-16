@@ -1511,22 +1511,30 @@ header .right {
 }
 
 /* Say Hi page */
-.hi h1 {
-	font-size: var(--padxxl);
+.hi .main-text h1 {
+	margin: 0
 }
 .hi h1 > span {
 	cursor: pointer;
-	transition: color .75s ease;
+	transition: color .5s ease;
 	will-change: color, transform;
 }
-.hi .email:hover {
-	color: var(--red);
+.hi h1 > span:hover {
 }
-.hi .social:hover {
-	color: var(--yellow);
+.hi .flares {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.hi .website:hover {
-	color: var(--gray-light);
+.hi .flares img {
+	position: absolute;
+	top: initial;
+	left: initial;
+	opacity: 0;
+	width: auto;
+	height: 75vh;
+	transform: initial;
+	will-change: transform, opacity;
 }
 
 /* Konami code */
