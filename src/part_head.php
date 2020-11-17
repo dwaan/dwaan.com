@@ -1,3 +1,10 @@
+	<div id="corner">
+		<div class="tl"></div>
+		<div class="tr"></div>
+		<div class="br"></div>
+		<div class="bl"></div>
+	</div>
+
 	<div class="support">
 		<div class="content">
 			<h1>😭</h1>

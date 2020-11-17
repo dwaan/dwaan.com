@@ -28,45 +28,28 @@ html {
 /* Default style */
 h1 {
 	margin: 0 0 var(--padx) 0;
-	font-size: 64px;
+	font-size: 5rem;
 	line-height: 80%;
 	letter-spacing: -0.06em;
 }
 h2 {
 	margin: 0 0 var(--padxl);
-	font-size: 56px;
+	font-size: 3.2rem;
 	line-height: 90%;
 	letter-spacing: -0.02em;
 }
 h3 {
-	font-size: 32px;
+	font-size: 2.4rem;
 	margin: 0 0 var(--padm);
 }
 h4 {
 	margin: 0 0 var(--pads);
-	font-size: 20px;
+	font-size: 1.8rem;
 	line-height: 28px;
 }
 p {
-	font-size: 16px;
+	font-size: 1rem;
 	line-height: 150%;
-}
-@media screen and (min-width: 900px) {
-	h1 {
-		font-size: 96px;
-	}
-	h2 {
-		font-size: 64px;
-	}
-	h3 {
-		font-size: 36px;
-	}
-	h4 {
-		font-size: 24px;
-	}
-	p {
-		font-size: 18px;
-	}
 }
 
 /* Header style */
@@ -94,15 +77,9 @@ header {
 /* Homepage content */
 .main-text h1 {
 	margin: 0 var(--padl) 0 0;
-	font-size: 64px;
 	line-height: 80%;
 	letter-spacing: -0.06em;
 	white-space: nowrap;
-}
-@media (min-width: 900px) {
-	.main-text h1 {
-		font-size: 96px;
-	}
 }
 @media (max-width: 1200px) {
 	.main-text h1 {
@@ -135,7 +112,7 @@ header {
 
 /* Homepage footer */
 .footer .email {
-	font-size: 13px;
+	font-size: .8rem;
 	line-height: 15px;
 	letter-spacing: 0.1em;
 	color: var(--gray);
@@ -388,7 +365,7 @@ header {
 }
 .style-column .text small {
 	display: block;
-	font-size: 13px;
+	font-size: .8rem;
 	line-height: 150%;
 	letter-spacing: 0.05em;
 }
@@ -490,13 +467,8 @@ ol.zero {
 }
 ol.zero li {
 	margin: 0 30px 0 0;
-	font-size: 16px;
+	font-size: 1rem;
 	flex-direction: column;
-}
-@media screen and (min-width: 900px) {
-	ol.zero li {
-		font-size: 18px;
-	}
 }
 ol.zero li:last-child {
 	margin-right: 0;
@@ -504,7 +476,7 @@ ol.zero li:last-child {
 ol.zero li:before {
 	margin-bottom: 20px;
 	content: "00";
-	font-size: 36px;
+	font-size: 5rem;
 }
 /* ol/ul for branding color for Suzuki */
 .detail .color {

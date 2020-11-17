@@ -221,7 +221,7 @@ a.spring:hover:before {
 }
 small {
 	display: inline-block;
-	font-size: 10px;
+	font-size: .8rem;
 	line-height: 12px;
 	letter-spacing: 0.14em;
 }
@@ -350,10 +350,57 @@ picture img {
 
 
 /* Global costum Style */
-svg.diff {
-	/*mix-blend-mode: difference;*/
-}
 
+#corner,
+#back {
+	position: fixed;
+	display: none;
+	z-index: 999999;
+	pointer-events: none;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+body.rounded {
+	background-color: #000;
+}
+#back {
+	background-color: var(--white);
+	z-index: 0;
+}
+.rounded #corner,
+.rounded #back {
+	display: block;
+}
+#corner div {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: var(--padm);
+	height: var(--padm);
+	background-color: #000;
+	transform-origin: center;
+	transform: translate3d(0,0,0);
+	clip-path: polygon(100% 0, 75% 1%, 55% 4%, 33% 14%, 23% 23% , 14% 33%, 4% 55%, 1% 75%, 0 100%, 0 0);
+}
+#corner .tr {
+	left: initial;
+	right: 0;
+	transform: rotate(90deg);
+}
+#corner .br {
+	top: initial;
+	bottom: 0;
+	left: initial;
+	right: 0;
+	transform: rotate(180deg);
+}
+#corner .bl {
+	top: initial;
+	bottom: 0;
+	transform: rotate(270deg);
+}
 
 /* Loading style */
 #loader {
@@ -372,7 +419,7 @@ svg.diff {
 }
 #loader p {
 	text-align: center;
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 	color: inherit;
 }
@@ -422,7 +469,7 @@ svg.diff {
 	background: url(../img/arrow.svg) no-repeat 100% 50%;
 }
 .arrow span {
-	font-size: 14px;
+	font-size: .9rem;
 	line-height: 17px;
 	letter-spacing: 0.05em;
 	order: 0;
@@ -530,7 +577,7 @@ header .right {
 	display: block;
 	height: 44px;
 	line-height: 44px;
-	font-size: 14px;
+	font-size: .9rem;
 	letter-spacing: 0.05em;
 	color: var(--black);
 }
@@ -619,7 +666,7 @@ header .right {
 	margin: 0 0 var(--padl);
 	padding: 0;
 	list-style: none;
-	font-size: 24px;
+	font-size: 1.6rem;
 	letter-spacing: 0.025em;
 }
 .items li.hr {
@@ -672,7 +719,7 @@ header .right {
 /* Common middle content */
 .middle {
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 	display: flex;
 	overflow: hidden;
 	flex-flow: column nowrap;
@@ -715,7 +762,7 @@ header .right {
 /* Homepage footer */
 .footer {
 	position: fixed;
-	z-index: 2;
+	z-index: 3;
 	top: initial;
 	bottom: 0;
 	left: 0;
@@ -739,7 +786,7 @@ header .right {
 }
 .reading {
 	font-weight: 500;
-	font-size: 10px;
+	font-size: .6rem;
 	line-height: 12px;
 	display: flex;
 	align-items: flex-end;
@@ -759,12 +806,12 @@ header .right {
 	display: flex;
 	align-items: center;
 	align-self: center;
+	font-size: .9rem;
 	white-space: nowrap;
-	/*mix-blend-mode: difference;*/
 }
 #airplane {
 	fill: var(--black);
-	margin: 0 var(--padl);
+	margin: 0 var(--padm);
 }
 
 
@@ -779,7 +826,7 @@ header .right {
 /* Background flare */
 .flares {
 	position: fixed;
-	z-index: -1;
+	z-index: 1;
 	overflow: hidden;
 }
 .flares img {
@@ -1236,7 +1283,7 @@ header .right {
 	display: flex;
 	align-items: center;
 	border: 1px solid var(--black-50);
-	font-size: 13px;
+	font-size: 1rem;
 	line-height: 15px;
 	letter-spacing: 0.05em;
 	border-radius: 4px;
@@ -1511,15 +1558,54 @@ header .right {
 }
 
 /* Say Hi page */
+.hi h1,
+.hi h1 a,
+.hi h1 span,
+.hi h1 small {
+	display: flex;
+	flex-direction: row nowrap;
+}
 .hi .main-text h1 {
-	margin: 0
+	margin: 0;
 }
-.hi h1 > span {
+.hi h1 a {
 	cursor: pointer;
-	transition: color .5s ease;
-	will-change: color, transform;
 }
-.hi h1 > span:hover {
+.hi h1 span,
+.hi h1 small {
+	position: relative;
+	pointer-events: none;
+	transition: color .5s ease;
+	will-change: opacity, color, transform;
+}
+.hi h1 small {
+	position: absolute;
+	align-items: flex-end;
+	left: 0;
+	top: 100%;
+	font-size: .8rem;
+	font-weight: 400;
+	line-height: var(--padl);
+	padding-left: calc((2 * var(--padm)) + var(--pads));
+	height: var(--padxxl);
+	opacity: 0;
+	white-space: nowrap;
+}
+.hi h1 small:before,
+.hi h1 small:after {
+	position: absolute;
+	left: var(--pads);
+	top: 0;
+	bottom: calc(var(--padl) / 2);
+	content: "";
+	display: block;
+	border-left: 1px solid var(--black);
+}
+.hi h1 small:after {
+	top: initial;
+	padding-left: var(--padm);
+	border-left: 0;
+	border-top: 1px solid var(--black);
 }
 .hi .flares {
 	display: flex;

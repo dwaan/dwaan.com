@@ -62,7 +62,7 @@
 
 <head>
 	<?php
-		$title = "Yes, you're in dwaan.com";
+		$title = "About";
 		include_once "part_metacss.php";
 	?>
 </head>

@@ -678,6 +678,18 @@ if (REPORTSIZE) {
 	});
 }
 
+//
+// var displayRoundedCorner = function() {
+// 	if (window.innerWidth == screen.width && window.innerHeight == screen.height) {
+// 		addClass(_q("body"), "rounded");
+// 	} else {
+// 		removeClass(_q("body"), "rounded");
+// 	}
+// }
+// displayRoundedCorner();
+// window.addEventListener('resize', displayRoundedCorner);
+addClass(_q("body"), "rounded");
+
 
 ////////// Initial
 
@@ -802,7 +814,13 @@ var loader = {
 		var that = this;
 
 		document.body.style.cursor = "wait";
-		this.el.innerHTML = '<p style="opacity: 0;">Downloading <span><i class="loading" style="width:0%"></i></span></p>';
+		if (done === true) {
+			// Simple style
+			this.el.innerHTML = '<p style="opacity: 0"><span style="margin-top: 200px"><i class="loading" style="width:0%"></i></span></p>';
+		} else {
+			// Progress bar type
+			this.el.innerHTML = '<p style="opacity: 0;">Downloading <span><i class="loading" style="width:0%"></i></span></p>';
+		}
 		gsap.set(this.el, {
 			y: 0,
 			opacity: 1
@@ -823,7 +841,8 @@ var loader = {
 		}, {
 			opacity: 1,
 			ease: "expo",
-			duration: .5
+			delay: .25,
+			duration: .25
 		});
 
 		// Calling loading images function
@@ -852,7 +871,7 @@ var loader = {
 		gsap.to(that.el.children, {
 			opacity: 0,
 			ease: "expo.in",
-			duration: .5,
+			duration: .25,
 			onComplete: function() {
 				done();
 			}
@@ -885,7 +904,7 @@ var animate = {
 
 		return tl
 	},
-	show: function (next, done, nonsticky = false){
+	show: function (next, done, nonsticky = false, footer = true){
 		if (!next) return false;
 
 		// Default gsap timeline value
@@ -903,16 +922,11 @@ var animate = {
 		if (typeof done !== "function") return false;
 
 		// Show current view
-		// Animate text
+		var els = next.querySelectorAll(".bland > li, .flare:not(.side)")
+		if (footer) els = next.querySelectorAll(".bland > li, .flare:not(.side), .footer, .footer > *");
 		if (!nonsticky) nonsticky = next.querySelector(".middle").children;
-		tl.fromTo(nonsticky, {
-			y: "+=200px",
-			opacity: 0
-		}, {
-			y: "-=200px",
-			opacity: 1
-		}, 0);
-		tl.fromTo(next.querySelectorAll(".bland > li, .flare:not(.side), .footer, .footer > *"), {
+		// Animate text
+		tl.fromTo([nonsticky, els], {
 			y: "+=200px",
 			opacity: 0
 		}, {
@@ -1142,7 +1156,7 @@ barba.init({
 				stagger: .1
 			});
 
-			gToArray(".menu").forEach(function(element) {
+			gToArray("header .menu").forEach(function(element) {
 				var overlay = element.querySelector(".overlay");
 				var items = element.querySelector(".items");
 
@@ -1253,6 +1267,10 @@ barba.init({
 				});
 			});
 		},
+		leave(data) {
+			const done = this.async();
+			done();
+		},
 		before(data) {
 			const done = this.async();
 			const current = data.current.container;
@@ -1268,10 +1286,6 @@ barba.init({
 					done();
 				});
 			});
-		},
-		leave(data) {
-			const done = this.async();
-			done();
 		},
 		enter(data) {
 			const done = this.async();
@@ -1290,9 +1304,6 @@ barba.init({
 	}, {
 		name: 'home-to-detail',
 		leave(data) {
-			return true;
-		},
-		enter(data) {
 			return true;
 		},
 		before(data) {
@@ -1319,6 +1330,9 @@ barba.init({
 			animate.show(data.next.container);
 
 			return tl;
+		},
+		enter(data) {
+			return true;
 		},
 		after(data) {
 			var tl = gsap.timeline({ defaults: { duration: .5, ease: "expo.out" }});
@@ -1349,9 +1363,6 @@ barba.init({
 		leave(data) {
 			return true;
 		},
-		enter(data) {
-			return true;
-		},
 		before(data) {
 			const done = this.async();
 			const current = data.current.container;
@@ -1373,6 +1384,9 @@ barba.init({
 					done();
 				});
 			}, current.querySelectorAll(elements));
+		},
+		enter(data) {
+			return true;
 		},
 		after(data) {
 			const done = this.async();
@@ -1397,9 +1411,6 @@ barba.init({
 		leave(data) {
 			return true;
 		},
-		enter(data) {
-			return true;
-		},
 		before(data) {
 			const done = this.async();
 			const current = data.current.container;
@@ -1407,55 +1418,59 @@ barba.init({
 			const elements = ".arrow-small a, .arrow";
 
 			// Display loading
-			loader.init();
+			loader.init(true);
 
-			var tl = gsap.timeline({ default: {
-				duration: .75,
-				stagger: .1,
-				ease: "power3.out"
-			}});
-			tl.to(current.querySelectorAll(".middle > *, .footer .location"), {
-				opacity: 0
-			}, 0);
-			tl.to(current.querySelectorAll(".flares > img"), {
-				opacity: 0,
-			}, .25);
-			tl.fromTo(current.querySelector(".footer .email"), {
-				position: "fixed",
-				display: "block",
-				height: "auto",
-				top: "initial",
-				left: "var(--padx)",
-				bottom: "var(--pady)",
-				x: 0,
-				y: 0,
-				lineHeight: "15px",
-				fontSize: "13px",
-				fontWeight: 400,
-				letterSpacing: "0.1em"
-			}, {
-				left: window.innerWidth / 2,
-				bottom: window.innerHeight / 2,
-				x: "-50%",
-				y: "50%",
-				lineHeight: "80%",
-				fontSize: "96px",
-				fontWeight: 500,
-				letterSpacing: "-0.06em",
-				duration: 1,
-				ease: "power3.out",
-				onComplete: function() {
-					// Image loading logic
-					loader.show(next, function(){
+			// Image loading logic
+			loader.show(next, function(){
+				var tl = gsap.timeline({ default: {
+					duration: .75,
+					stagger: .1,
+					ease: "power3.out"
+				}});
+				tl.to(current.querySelectorAll(".flares > img"), {
+					x: "-=200",
+					opacity: 0
+				}, 0);
+				tl.to(current.querySelectorAll(".middle > *"), {
+					opacity: 0
+				}, .25);
+				tl.fromTo(current.querySelector(".footer .email"), {
+					position: "fixed",
+					display: "block",
+					height: "auto",
+					top: "initial",
+					left: window.getComputedStyle(current.querySelector(".footer"))['padding-left'],
+					bottom: window.getComputedStyle(current.querySelector(".footer"))['padding-bottom'],
+					x: "0%",
+					y: "0%",
+					lineHeight: "15px",
+					fontSize: "0.8rem",
+					fontWeight: 400,
+					letterSpacing: "0.1em"
+				}, {
+					left: window.innerWidth / 2,
+					bottom: window.innerHeight / 2,
+					x: "-50%",
+					y: "50%",
+					lineHeight: "80%",
+					fontSize: "5rem",
+					fontWeight: 500,
+					letterSpacing: "-0.06em",
+					duration: 1,
+					ease: "expo.inOut",
+					onComplete: function() {
 						// Show next container
 						gsap.set(next, { opacity: 1 });
-						// Hide next elements
-						gsap.set(next.querySelectorAll(elements), { opacity: 0 });
+						// Show next elements
+						gsap.set(next.querySelectorAll(".footer"), { opacity: 1 });
 
 						done();
-					});
-				}
-			}, 0);
+					}
+				}, 0);
+			});
+		},
+		enter(data) {
+			return true;
 		},
 		after(data) {
 			const done = this.async();
@@ -1469,6 +1484,101 @@ barba.init({
 		},
 		to: {
 			namespace: ['hi']
+		}
+	}, {
+		name: 'hi-to-home',
+		leave(data) {
+			return true;
+		},
+		before(data) {
+			const done = this.async();
+			const current = data.current.container;
+			const next = data.next.container;
+
+			// Display loading
+			loader.init();
+
+			var tl = gsap.timeline({ default: {
+				duration: .75,
+				stagger: .1,
+				ease: "power3.out"
+			}});
+
+			current.querySelector(".main-text").style = {};
+
+			tl.fromTo(current.querySelector(".main-text h1"), {
+				position: "fixed",
+				height: "auto",
+				top: "initial",
+				left: window.innerWidth / 2,
+				bottom: window.innerHeight / 2,
+				x: "-50%",
+				y: "50%",
+				lineHeight: "80%",
+				fontSize: "5rem",
+				fontWeight: 500,
+				letterSpacing: "-0.06em"
+			}, {
+				left: gsap.getProperty(current.querySelector(".footer"), "padding-left"),
+				bottom: gsap.getProperty(current.querySelector(".footer"), "padding-bottom"),
+				x: "0%",
+				y: "0%",
+				lineHeight: "15px",
+				fontSize: "0.8rem",
+				fontWeight: 400,
+				letterSpacing: "0.1em",
+				duration: 1,
+				ease: "expo.inOut",
+				onUpdate: function(el) {
+					console.log(el);
+				},
+				onComplete: function() {
+					// Selectively show next elements
+					gsap.set(next.querySelectorAll(".footer .email"), { opacity: 1 });
+				}
+			}, 0);
+			// Show next container
+			tl.set(current, {
+				position: "fixed",
+				top: 0,
+				left: 0,
+				zIndex: 2,
+			}, 0);
+			tl.set(next, {
+				zIndex: 1,
+				opacity: 1
+			}, 0);
+			tl.set(next.querySelectorAll(".footer"), { opacity: 1 }, 0);
+			tl.set(next.querySelectorAll(".footer .email"), { opacity: 0 }, 0);
+			tl.set(next, {
+				onComplete: function() {
+					// Image loading logic
+					loader.show(next, function(){
+						done();
+					});
+				}
+			}, .25);
+		},
+		enter(data) {
+			const done = this.async();
+			const current = data.current.container;
+			const next = data.next.container;
+			const elements = ".main-text, .arrow-small a, .arrow";
+
+			// Animate current view
+			animate.show(next, function() {
+				loader.empty();
+				done();
+			}, next.querySelectorAll(elements), false);
+		},
+		after(data) {
+			return true;
+		},
+		from: {
+			namespace: ['hi']
+		},
+		to: {
+			namespace: ['home']
 		}
 	}],
 	views: [{
@@ -1532,8 +1642,6 @@ barba.init({
 	}, {
 		namespace: 'detail',
 		beforeEnter(data) {
-			const done = this.async();
-
 			// Read more
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": function() {
@@ -2245,14 +2353,10 @@ barba.init({
 
 			// Snap to element
 			snap(".middle, .links", .15);
-
-			done();
 		}
 	}, {
 		namespace: 'me',
 		beforeEnter(data) {
-			const done = this.async();
-
 			// I'm UI/UX and us sections
 			// Snap to element
 			snap(".imuiux, .us", .5);
@@ -2729,13 +2833,10 @@ barba.init({
 
 			// Snap to element
 			snap(".igstage, .cofound, .links", .25);
-
-			done();
 		}
 	}, {
 		namespace: 'hi',
 		beforeEnter(data) {
-			const done = this.async();
 			var flare = {
 				elements: "",
 				show: function(elements, repeat = false) {
@@ -2746,18 +2847,24 @@ barba.init({
 					gsap.killTweensOf(this.elements);
 					if (!repeat) gsap.to(this.elements, {
 						opacity: 1,
-						ease: "ease.out"
+						ease: "ease.out",
+						duration: 1
 					});
-					if (!repeat) gsap.to(this.elements, {
-						x: "random(-75,75,10)%",
-						y: "random(10,30,5)%",
-						ease: "ease.out"
-					});
+					if (!repeat) {
+						gsap.to(this.elements, {
+							x: "random(-100,100,10)%",
+							y: "random(10,30,5)%",
+							rotation: "random(-5,5,1)deg",
+							scale: "random(1,2.5,.5)",
+							ease: "ease.out",
+							duration: .5
+						});
+					}
 					gsap.to(this.elements, {
 						x: "random(-100,100,10)%",
 						y: "random(10,30,5)%",
 						rotation: "random(-5,5,1)deg",
-						scale: "random(1,2,1)",
+						scale: "random(1,2.5,.5)",
 						duration: 5,
 						ease: "ease.inOut",
 						onComplete: function() {
@@ -2770,32 +2877,98 @@ barba.init({
 					gsap.to(this.elements, {
 						opacity: 0,
 						scale: 1,
-						x: "random(-75,75,10)%",
+						x: "random(-50,50,10)%",
 						y: "random(0,20,5)%",
+						scale: 1,
 						ease: "ease.in"
+					});
+				}
+			};
+
+			var textanim = {
+				el: "",
+				hint: "",
+				show: function(el, hint, positive = false) {
+					var split = -50;
+
+					this.el = el;
+					this.hint = hint;
+
+					if (positive) split = 50;
+
+					if (el.length == 2) {
+						gsap.killTweensOf(this.el.toString());
+						gsap.to(this.el[0], {
+							x: split * -1,
+							ease: "power3.out",
+							duration: .5
+						});
+						gsap.to(this.el[1], {
+							x: split,
+							ease: "power3.out",
+							duration: .5
+						});
+					} else {
+						gsap.killTweensOf(this.el);
+						gsap.to(this.el, {
+							x: split,
+							ease: "power3.out",
+							duration: .5
+						});
+					}
+
+					gsap.fromTo(this.hint, {
+						y: 50
+					}, {
+						y: 0,
+						opacity: 1,
+						ease: "power3.out",
+						duration: .5
+					});
+				}, hide() {
+					gsap.to(this.el, {
+						x: 0,
+						ease: "power3.out",
+						delay: .1,
+						duration: .5
+					});
+					gsap.to(this.hint, {
+						y: 50,
+						opacity: 0,
+						ease: "power3.out",
+						duration: .5
 					});
 				}
 			}
 
-			hoverEvents(_qAll(".hi .email"), function() {
-				flare.show(".hi .flares > img.yellow, .hi .flares > img.red");
-			}, function() {
-				flare.hide();
+			gsap.set(".hi img", {
+				x: "random(-100,100,10)%",
+				y: "random(10,30,5)%",
+				rotation: "random(-5,5,1)deg",
+				scale: "random(1,2,.5)"
 			});
 
-			hoverEvents(_qAll(".hi .social"), function() {
-				flare.show(".hi .flares > img.red, .hi .flares > img.blue");
-			}, function() {
+			hoverEvents(_qAll(".hi .email"), function(el) {
+				textanim.show(el.querySelector("span"), el.querySelector("small"));
+				flare.show(".hi img.yellow, .hi img.red");
+			}, function(el) {
+				textanim.hide();
 				flare.hide();
 			});
-
-			hoverEvents(_qAll(".hi .website"), function() {
-				flare.show(".hi .flares > img.blue, .hi .flares > img.green");
-			}, function() {
+			hoverEvents(_qAll(".hi .social"), function(el) {
+				textanim.show([".hi .website span", ".hi .email span"], ".hi .social span:first-child small");
+				flare.show(".hi img.blue, .hi img.red");
+			}, function(el) {
+				textanim.hide();
 				flare.hide();
 			});
-
-			done();
+			hoverEvents(_qAll(".hi .website"), function(el) {
+				textanim.show(".hi .social span:nth-child(2), .hi .website span", ".hi .social span:nth-child(2) small", true);
+				flare.show(".hi img.blue, .hi img.green");
+			}, function(el) {
+				textanim.hide();
+				flare.hide();
+			});
 		}
 	}]
 });

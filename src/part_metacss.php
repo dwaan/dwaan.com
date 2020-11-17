@@ -46,20 +46,20 @@
 	<meta name="theme-color" content="#A4CDD6">
 
 	<!-- Primary Meta Tags -->
-	<title><?php echo $title; ?></title>
+	<title><?php echo $title; ?> - Dwan</title>
 	<meta name="title" content="<?php echo $title; ?>">
 	<meta name="description" content="Hello! my name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="<?php echo $url; ?>">
-	<meta property="og:title" content="<?php echo $title; ?> - This is me @dwaan .com">
+	<meta property="og:title" content="<?php echo $title; ?> - Dwan">
 	<meta property="og:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 	<meta property="og:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:url" content="<?php echo $url; ?>">
-	<meta property="twitter:title" content="<?php echo $title; ?> - This is me @dwaan .com">
+	<meta property="twitter:title" content="<?php echo $title; ?> - Dwan">
 	<meta property="twitter:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 	<meta property="twitter:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
