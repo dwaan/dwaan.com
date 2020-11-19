@@ -14,7 +14,7 @@
 	<main data-barba="container" data-barba-namespace="detail" class="detail">
 		<section class="middle">
 			<div class="padding">
-				<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="logo" alt="Suzuki's Logo" />
+				<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
 			</div>
 			<h4 class="year">/2019</h4>
 			<a href="#more" class="arrow scrollto">

@@ -12,13 +12,15 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="home" class="home">
-		<section id="scrollstart" class="middle">
+		<section class="middle">
 			<div class="main-text">
 				<h1>Hello, my name is <a href="./me">Dwan</a></h1>
 			</div>
-			<a href="#casestudy" class="arrow scrollto">
-				<span>case studies</span>
-			</a>
+			<div class="arrow-big">
+				<a href="#casestudy" class="arrow scrollto">
+					<span>case studies</span>
+				</a>
+			</div>
 		</section>
 
 		<section id="casestudy" class="middle">
@@ -34,10 +36,10 @@
 			</div>
 		</section>
 
-		<section id="scrollend" class="middle">
+		<section class="middle">
 			<div class="padding">
 				<a href="./melon-tiket-apa-saja">
-					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="logo" alt="Logo Tike Apa Saja" />
+					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tike Apa Saja" />
 				</a>
 			</div>
 			<div class="arrow-small">

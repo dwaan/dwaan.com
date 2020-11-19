@@ -50,6 +50,7 @@ function _q(argument) {
 function _qAll(argument) {
 	return document.querySelectorAll(argument);
 }
+
 function removeClass(el, className) {
 	if (el.classList) {
 		el
@@ -662,11 +663,11 @@ if (window.matchMedia){
 }
 
 
+// HTML Log
 function log(params) {
 	console.log(params);
 	_q("#log").innerHTML = params;
 }
-
 
 // Report size of window
 if (REPORTSIZE) {
@@ -678,17 +679,27 @@ if (REPORTSIZE) {
 	});
 }
 
-//
-// var displayRoundedCorner = function() {
-// 	if (window.innerWidth == screen.width && window.innerHeight == screen.height) {
-// 		addClass(_q("body"), "rounded");
-// 	} else {
-// 		removeClass(_q("body"), "rounded");
-// 	}
-// }
-// displayRoundedCorner();
-// window.addEventListener('resize', displayRoundedCorner);
-addClass(_q("body"), "rounded");
+// Clear the style
+var removeStyle = function (el) {
+	if (el.style) {
+		el.style = {};
+	} else {
+		gToArray(el).forEach((el) => {
+			removeStyle(el);
+		});
+	}
+}
+
+// Displaying rounded corner only on fullscreen
+var displayRoundedCorner = function() {
+	if (window.innerWidth == screen.width && window.innerHeight == screen.height) {
+		addClass(_q("body"), "rounded");
+	} else {
+		removeClass(_q("body"), "rounded");
+	}
+}
+displayRoundedCorner();
+window.addEventListener('resize', displayRoundedCorner);
 
 
 ////////// Initial
@@ -816,10 +827,10 @@ var loader = {
 		document.body.style.cursor = "wait";
 		if (done === true) {
 			// Simple style
-			this.el.innerHTML = '<p style="opacity: 0"><span style="margin-top: 200px"><i class="loading" style="width:0%"></i></span></p>';
+			this.el.innerHTML = '<p class="simple" style="opacity: 0"><span style="margin-top: 200px"><i class="loading" style="width:0%"></i></span></p>';
 		} else {
 			// Progress bar type
-			this.el.innerHTML = '<p style="opacity: 0;">Downloading <span><i class="loading" style="width:0%"></i></span></p>';
+			this.el.innerHTML = '<p class="normal" style="opacity: 0;">Downloading <span><i class="loading" style="width:0%"></i></span></p>';
 		}
 		gsap.set(this.el, {
 			y: 0,
@@ -846,21 +857,28 @@ var loader = {
 		});
 
 		// Calling loading images function
-		waitForImg(els.querySelectorAll("img"), function(index, percent) {
-			gsap.to(_percent, {
-				score: percent,
-				roundProps: "score",
-				duration: .1,
-				onUpdate: function() {
-					that.update(_percent.score);
-				}
+		if (els) {
+			waitForImg(els.querySelectorAll("img"), function(index, percent) {
+				gsap.to(_percent, {
+					score: percent,
+					roundProps: "score",
+					duration: .1,
+					onUpdate: function() {
+						that.update(_percent.score);
+					}
+				});
+			}, function() {
+				that.hide(function() {
+					that.clean();
+					done();
+				});
 			});
-		}, function() {
+		} else {
 			that.hide(function() {
 				that.clean();
 				done();
 			});
-		});
+		}
 	},
 	hide: function(done) {
 		if (typeof done !== "function") return false;
@@ -922,8 +940,8 @@ var animate = {
 		if (typeof done !== "function") return false;
 
 		// Show current view
-		var els = next.querySelectorAll(".bland > li, .flare:not(.side)")
-		if (footer) els = next.querySelectorAll(".bland > li, .flare:not(.side), .footer, .footer > *");
+		var els = next.querySelectorAll(".bland > li, .flares:not(.side)")
+		if (footer) els = next.querySelectorAll(".bland > li, .flares:not(.side), .footer > *");
 		if (!nonsticky) nonsticky = next.querySelector(".middle").children;
 		// Animate text
 		tl.fromTo([nonsticky, els], {
@@ -931,7 +949,11 @@ var animate = {
 			opacity: 0
 		}, {
 			y: "-=200px",
-			opacity: 1
+			opacity: 1,
+			onCompleteParams: [[nonsticky, els]],
+			onComplete: function(els) {
+				removeStyle(els);
+			}
 		}, 0);
 		// Animate flare
 		tl.fromTo(next.querySelectorAll(".flares.side > img"), {
@@ -939,7 +961,7 @@ var animate = {
 			opacity: 0
 		}, {
 			x: "-=300px",
-			opacity: 4
+			opacity: 1
 		}, 0);
 		// Run done after all all animation complete
 		tl.set(next, {
@@ -966,12 +988,12 @@ var animate = {
 		tl = this.top(tl);
 
 		// Hide current view
-		tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer, .footer > *"), {
+		tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {
 			y: "+=200",
 			opacity: 0
 		}, ">");
-		tl.to(current.querySelectorAll(".flares.side > img"), {
-			x: "-=300",
+		tl.to(current.querySelectorAll(".flares.side img"), {
+			x: "+=300",
 			opacity: 0,
 			delay: .1
 		}, "<");
@@ -1050,12 +1072,11 @@ function distributeByPosition(vars) {
 	};
 }
 
-
-
 // Snap functions
 var snap = function(elements, snapPosition = 1, markers = false) {
+	if (typeof elements === "string") elements = gToArray(elements);
 	// Snap scroll to block
-	gToArray(elements).forEach((element, index) => {
+	elements.forEach((element, index) => {
 		scroll.push(function(tl) {
 			return tl;
 		}, function (tl) {
@@ -1337,7 +1358,7 @@ barba.init({
 		after(data) {
 			var tl = gsap.timeline({ defaults: { duration: .5, ease: "expo.out" }});
 
-			tl.fromTo(".detail .arrow, .detail .footer, .detail .year", {
+			tl.fromTo(".detail .arrow, .detail .footer > *, .detail .year", {
 				y: "+=100",
 				opacity: 0
 			}, {
@@ -1361,44 +1382,59 @@ barba.init({
 	}, {
 		name: 'home-to-me',
 		leave(data) {
+			// Display loading
+			loader.init(true);
+
 			return true;
 		},
 		before(data) {
 			const done = this.async();
 			const current = data.current.container;
 			const next = data.next.container;
-			const elements = ".arrow-small a, .arrow";
 
-			// Display loading
-			loader.init();
-
+			// Kill scrollbar
+			gsap.set(current, {
+				position: "fixed",
+				top: 0,
+				zIndex: 2
+			});
+			gsap.set(next, {
+				position: "fixed",
+				top: 0,
+				zIndex: 1
+			});
 			// Hide current view
 			animate.hide(current, function() {
 				// Image loading logic
 				loader.show(next, function(){
-					// Show next container
-					gsap.set(next, { opacity: 1 });
-					// Hide next elements
-					gsap.set(next.querySelectorAll(elements), { opacity: 0 });
-
 					done();
 				});
-			}, current.querySelectorAll(elements));
+			}, current.querySelectorAll(".arrow"));
 		},
 		enter(data) {
-			return true;
-		},
-		after(data) {
 			const done = this.async();
 			const current = data.current.container;
 			const next = data.next.container;
-			const elements = ".arrow-small a, .arrow";
 
-			// Animate current view
+			// Reset current element values
+			removeStyle(current.querySelectorAll(".main-text, .main-text > h1"));
+
+			// Animate Next view
 			animate.show(next, function() {
-				loader.empty();
 				done();
-			}, next.querySelectorAll(elements));
+			}, next.querySelectorAll(".arrow"));
+		},
+		after(data) {
+			const next = data.next.container;
+
+			// Reset current element values
+			removeStyle(next);
+			next.style.opacity = 1;
+
+			// Remove loading
+			loader.empty();
+
+			return true;
 		},
 		from: {
 			namespace: ['home', "me"]
@@ -1409,6 +1445,9 @@ barba.init({
 	}, {
 		name: 'home-to-hi',
 		leave(data) {
+			// Display loading
+			loader.init(true);
+
 			return true;
 		},
 		before(data) {
@@ -1417,9 +1456,6 @@ barba.init({
 			const next = data.next.container;
 			const elements = ".arrow-small a, .arrow";
 
-			// Display loading
-			loader.init(true);
-
 			// Image loading logic
 			loader.show(next, function(){
 				var tl = gsap.timeline({ default: {
@@ -1427,6 +1463,41 @@ barba.init({
 					stagger: .1,
 					ease: "power3.out"
 				}});
+				var from = {
+						position: "fixed",
+						display: "flex",
+						height: "auto",
+						top: "initial",
+						left: window.getComputedStyle(current.querySelector(".footer"))['padding-left'],
+						bottom: window.getComputedStyle(current.querySelector(".footer"))['padding-bottom'],
+						x: "0%",
+						y: "0%",
+						lineHeight: "15px",
+						fontSize: "0.8rem",
+						fontWeight: 400,
+						letterSpacing: "0.1em"
+					},
+					to = {
+						left: window.innerWidth / 2,
+						bottom: window.innerHeight / 2,
+						x: "-50%",
+						y: "50%",
+						lineHeight: "80%",
+						fontSize: "5rem",
+						fontWeight: 500,
+						letterSpacing: "-0.06em",
+						duration: 1,
+						ease: "expo.inOut",
+						onComplete: function() {
+							// Show next container
+							gsap.set(next, { opacity: 1 });
+							// Show next elements
+							gsap.set(next.querySelector(".footer"), { opacity: 1 });
+
+							done();
+						}
+					};
+
 				tl.to(current.querySelectorAll(".flares > img"), {
 					x: "-=200",
 					opacity: 0
@@ -1434,50 +1505,49 @@ barba.init({
 				tl.to(current.querySelectorAll(".middle > *"), {
 					opacity: 0
 				}, .25);
-				tl.fromTo(current.querySelector(".footer .email"), {
-					position: "fixed",
-					display: "block",
-					height: "auto",
-					top: "initial",
-					left: window.getComputedStyle(current.querySelector(".footer"))['padding-left'],
-					bottom: window.getComputedStyle(current.querySelector(".footer"))['padding-bottom'],
-					x: "0%",
-					y: "0%",
-					lineHeight: "15px",
-					fontSize: "0.8rem",
-					fontWeight: 400,
-					letterSpacing: "0.1em"
-				}, {
-					left: window.innerWidth / 2,
-					bottom: window.innerHeight / 2,
-					x: "-50%",
-					y: "50%",
-					lineHeight: "80%",
-					fontSize: "5rem",
-					fontWeight: 500,
-					letterSpacing: "-0.06em",
-					duration: 1,
-					ease: "expo.inOut",
-					onComplete: function() {
-						// Show next container
-						gsap.set(next, { opacity: 1 });
-						// Show next elements
-						gsap.set(next.querySelectorAll(".footer"), { opacity: 1 });
-
-						done();
-					}
-				}, 0);
+				if (window.matchMedia('(min-aspect-ratio: 1/1)').matches) {
+					tl.fromTo(current.querySelector(".footer .email"), from, to, 0);
+				} else {
+					tl.set(next, {
+						onComplete: function() {
+							done();
+						}
+					});
+				}
 			});
 		},
 		enter(data) {
-			return true;
+			const done = this.async();
+			const next = data.next.container;
+
+			// Animate current view if needed
+			if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
+				// Show next container
+				next.style.opacity = 1;
+
+				// Show next elements
+				next.querySelector(".footer").stlye.opacity = 1;
+				gsap.fromTo(next.querySelector(".main-text"), {
+					opacity: 0,
+					y: "100%"
+				}, {
+					opacity: 1,
+					y: "0%",
+					duration: .5,
+					ease: "expo.out",
+					onComplete: function() {
+						done();
+					}
+				});
+			} else {
+				done();
+			}
 		},
 		after(data) {
-			const done = this.async();
-
-			// Animate current view
+			// Remove loading
 			loader.empty();
-			done();
+
+			return true;
 		},
 		from: {
 			namespace: ['home']
@@ -1488,6 +1558,9 @@ barba.init({
 	}, {
 		name: 'hi-to-home',
 		leave(data) {
+			// Display loading
+			loader.init();
+
 			return true;
 		},
 		before(data) {
@@ -1495,48 +1568,59 @@ barba.init({
 			const current = data.current.container;
 			const next = data.next.container;
 
-			// Display loading
-			loader.init();
-
 			var tl = gsap.timeline({ default: {
 				duration: .75,
 				stagger: .1,
 				ease: "power3.out"
 			}});
 
+			var from = {
+					position: "fixed",
+					height: "auto",
+					top: "initial",
+					left: window.innerWidth / 2,
+					bottom: window.innerHeight / 2,
+					x: "-50%",
+					y: "50%",
+					lineHeight: "80%",
+					fontSize: "5rem",
+					fontWeight: 500,
+					letterSpacing: "-0.06em"
+				},
+				to = {
+					left: gsap.getProperty(current.querySelector(".footer"), "padding-left"),
+					bottom: gsap.getProperty(current.querySelector(".footer"), "padding-bottom"),
+					x: "0%",
+					y: "0%",
+					lineHeight: "15px",
+					fontSize: "0.8rem",
+					fontWeight: 400,
+					letterSpacing: "0.1em",
+					duration: 1,
+					ease: "expo.inOut",
+					onComplete: function() {
+						// Selectively show next elements
+						gsap.set(next.querySelectorAll(".footer .email"), { opacity: 1 });
+					}
+				};
+
 			current.querySelector(".main-text").style = {};
 
-			tl.fromTo(current.querySelector(".main-text h1"), {
-				position: "fixed",
-				height: "auto",
-				top: "initial",
-				left: window.innerWidth / 2,
-				bottom: window.innerHeight / 2,
-				x: "-50%",
-				y: "50%",
-				lineHeight: "80%",
-				fontSize: "5rem",
-				fontWeight: 500,
-				letterSpacing: "-0.06em"
-			}, {
-				left: gsap.getProperty(current.querySelector(".footer"), "padding-left"),
-				bottom: gsap.getProperty(current.querySelector(".footer"), "padding-bottom"),
-				x: "0%",
-				y: "0%",
-				lineHeight: "15px",
-				fontSize: "0.8rem",
-				fontWeight: 400,
-				letterSpacing: "0.1em",
-				duration: 1,
-				ease: "expo.inOut",
-				onUpdate: function(el) {
-					console.log(el);
-				},
-				onComplete: function() {
-					// Selectively show next elements
-					gsap.set(next.querySelectorAll(".footer .email"), { opacity: 1 });
-				}
-			}, 0);
+			// For vertical screen, just fade in.
+			if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
+				from.opacity = 1;
+				to.left = from.left;
+				to.bottom = from.bottom;
+				to.x = from.x;
+				to.y = from.y;
+				to.lineHeight = from.lineHeight = "90%";
+				to.fontSize = from.fontSize;
+				to.fontWeight = from.fontWeight;
+				to.letterSpacing = from.letterSpacing;
+				to.opacity = 0;
+			}
+
+			tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);
 			// Show next container
 			tl.set(current, {
 				position: "fixed",
@@ -1563,15 +1647,17 @@ barba.init({
 			const done = this.async();
 			const current = data.current.container;
 			const next = data.next.container;
-			const elements = ".main-text, .arrow-small a, .arrow";
+			const elements = ".main-text, .arrow";
 
 			// Animate current view
 			animate.show(next, function() {
-				loader.empty();
 				done();
 			}, next.querySelectorAll(elements), false);
 		},
 		after(data) {
+			// Remove loading
+			loader.empty();
+
 			return true;
 		},
 		from: {
@@ -1587,50 +1673,103 @@ barba.init({
 			const done = this.async();
 			const next = data.next.container;
 
-			// Get body size
-			const wh = _q("body").offsetHeight;
+			// Aggresive Snap
+			snap(next.querySelectorAll(".middle"), 2);
 
-			// Count how many blocks
-			const l = gToArray(".home > .middle").length - 1;
+			// Scroll animate arrow
+			var els = next.querySelectorAll(".middle");
+			els.forEach(function (el, idx) {
+				var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
+				var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
 
-			// gRandomize plus or minus
-			function plusminus() {
-				return (gRandom(1, 2, 1) == 1)? "+" : "-";
-			}
+				scroll.push(function(tl) {
+					tl.fromTo(arrow, {
+						y: 0,
+						opacity: 1
+					}, {
+						y: (idx < els.length - 1) ? window.innerHeight / 3 : 0,
+						opacity: 0,
+						ease: "linear",
+						duration: 3
+					}, 0);
 
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					// Scroll animate Main Text
-					gsap.set(".middle:first-child .arrow", {
-						rotation: 0
+					tl.fromTo(maintext, {
+						y: 0
+					}, {
+						y: (idx < els.length - 1) ? window.innerHeight / 8 : 0,
+						ease: "linear",
+						duration: 3
+					}, 0);
+
+					tl.fromTo(maintext, {
+						opacity: 1
+					}, {
+						opacity: 0,
+						ease: "power3.in",
+						duration: 2
+					}, 1);
+
+					return tl;
+				}, function (tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 0",
+						end: "50% 0",
+						scrub: true,
+						animation: tl
 					});
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					// Scroll animate Main Text
-					gsap.set(".middle:first-child .arrow", {
-						rotation: 90
+				});
+				scroll.push(function(tl) {
+					tl.fromTo(arrow, {
+						y: (idx > 0) ? window.innerHeight * -2/5 : 0,
+						opacity: 0
+					}, {
+						y: 0,
+						opacity: 1,
+						duration: 3,
+						ease: "linear"
+					}, 0);
+
+					tl.fromTo(maintext, {
+						y: (idx > 0) ? window.innerHeight / -8 : 0
+					}, {
+						y: 0,
+						ease: "linear",
+						duration: 3
+					}, 0);
+
+					tl.fromTo(maintext, {
+						opacity: 0
+					}, {
+						opacity: 1,
+						ease: "power3.out",
+						duration: 2
+					}, 0);
+
+					return tl;
+				}, function (tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "50% 100%",
+						end: "100% 100%",
+						scrub: true,
+						animation: tl
 					});
-				}
+				});
 			});
-
-			// Snap scroll to block
-			snap(".middle", 2);
 
 			// Scroll animate flares
 			scroll.push(function(tl) {
-				gToArray(".flares > img").forEach(flare => {
-					tl.to(flare, {
-						x: gRandom(40, 60, 5) + "%",
-						ease: "linear"
-					}, 0);
-				});
+				tl.to(next.querySelectorAll(".flares > img"), {
+					x: "random(10, 50, 5)%",
+					ease: "linear"
+				}, 0);
 
 				return tl;
 			}, function (tl) {
 				return ScrollTrigger.create({
-					trigger: "#scrollestart",
+					trigger: next,
 					start: "0 0",
-					endTrigger: "#scrollend",
 					end: "100% 100%",
 					scrub: true,
 					animation: tl
@@ -1642,6 +1781,13 @@ barba.init({
 	}, {
 		namespace: 'detail',
 		beforeEnter(data) {
+			const done = this.async();
+			const next = data.next.container;
+
+			next.querySelectorAll("picture").forEach(function(el) {
+				el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
+			});
+
 			// Read more
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": function() {
@@ -2353,15 +2499,19 @@ barba.init({
 
 			// Snap to element
 			snap(".middle, .links", .15);
+
+			done();
 		}
 	}, {
 		namespace: 'me',
 		beforeEnter(data) {
+			const done = this.async();
+			const next = data.next.container;
 			// I'm UI/UX and us sections
 			// Snap to element
-			snap(".imuiux, .us", .5);
+			snap(next.querySelectorAll(".imuiux, .us"), .5);
 			// Scroll events
-			gToArray(".imuiux, .us").forEach(function(element, index) {
+			next.querySelectorAll(".imuiux, .us").forEach(function(element, index) {
 				// Scroll and fade
 				scroll.push(function(tl) {
 					var el = element.querySelectorAll(".text > *");
@@ -2411,7 +2561,7 @@ barba.init({
 			// Spinning Mr. Goat and Pinning
 			function resizemrgoat() {
 				var size = window.innerWidth * 2/3;
-				var boxSet = gsap.quickSetter(".mrgoat img", "css");
+				var boxSet = gsap.quickSetter(next.querySelectorAll(".mrgoat img"), "css");
 
 				if (window.innerWidth > window.innerHeight) size = window.innerHeight * 2/3;
 
@@ -2422,7 +2572,7 @@ barba.init({
 			}
 			window.addEventListener("resize", resizemrgoat);
 			resizemrgoat();
-			gToArray(".mrgoat").forEach(function(element, index) {
+			next.querySelectorAll(".mrgoat").forEach(function(element, index) {
 				const imgs = gToArray(element.querySelectorAll(".thumbs > img"));
 				const h2s = gToArray(element.querySelectorAll(".h2"));
 				const ig = element.querySelectorAll(".ig");
@@ -2562,12 +2712,12 @@ barba.init({
 				var size = window.innerWidth * 2/3;
 				if (window.innerWidth > window.innerHeight) size = window.innerHeight * 1/2;
 
- 				gsap.set(".igstage .thumbs a", {
+ 				gsap.set(next.querySelectorAll(".igstage .thumbs a"), {
 					width: size,
 					height: size
 				});
 
-				gsap.set(".igstage", {
+				gsap.set(next.querySelectorAll(".igstage"), {
 					marginTop: -3 * window.innerHeight,
 					display: "block"
 				});
@@ -2575,7 +2725,7 @@ barba.init({
 			window.addEventListener("resize", resizeig);
 			resizeig();
 			//
-			gsap.set(".igstage .thumbs", {
+			gsap.set(next.querySelectorAll(".igstage .thumbs"), {
 				position: "relative",
 				width: "100%",
 				height: "100%",
@@ -2584,7 +2734,7 @@ barba.init({
 				justifyContent: "center",
 			})
 			//
-			gToArray(".igstage").forEach(function(element, index) {
+			next.querySelectorAll(".igstage").forEach(function(element, index) {
 				var a = element.querySelectorAll(".thumbs a");
 				var delta = 50;
 				// Set default values
@@ -2722,13 +2872,13 @@ barba.init({
 			// Animate cofounder
 			// Resize position
 			function resizecofound() {
-				gsap.set(".cofound", {
+				gsap.set(next.querySelectorAll(".cofound"), {
 					marginTop: -1 * window.innerHeight
 				});
 			}
 			window.addEventListener("resize", resizecofound);
 			resizecofound();
-			gToArray(".cofound").forEach(function(element, index) {
+			next.querySelectorAll(".cofound").forEach(function(element, index) {
 				var picture = element.querySelector("picture");
 				// Hover
 				hoverEvents(element.querySelectorAll("a"), function() {
@@ -2809,7 +2959,7 @@ barba.init({
 					}
 				});
 			}
-			gToArray(".flares").forEach(function(el1, idx1) {
+			next.querySelectorAll(".flares").forEach(function(el1, idx1) {
 				flare[idx1] = [];
 				gToArray(el1.children).forEach(function(el2, idx2) {
 					gsap.set(el2, {
@@ -2824,7 +2974,7 @@ barba.init({
 
 			// Links
 			// Move text
-			gToArray(".links").forEach(function(element) {
+			next.querySelectorAll(".links").forEach(function(element) {
 				scroll.moveText({
 					elements: element.querySelectorAll("nav > *"),
 					position: "100%"
@@ -2832,44 +2982,62 @@ barba.init({
 			});
 
 			// Snap to element
-			snap(".igstage, .cofound, .links", .25);
+			snap(next.querySelectorAll(".igstage, .cofound, .links"), .25);
+
+			done();
 		}
 	}, {
 		namespace: 'hi',
 		beforeEnter(data) {
+			const done = this.async();
+			const next = data.next.container;
+
+			var screenvertical = window.matchMedia('(max-aspect-ratio: 1/1)').matches;
+			var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
+
 			var flare = {
 				elements: "",
-				show: function(elements, repeat = false) {
+				show: function(elements = false) {
 					var that = this;
 
-					this.elements = elements;
+					if (elements) this.elements = next.querySelectorAll(elements);
+					console.log(elements, this.elements);
 
 					gsap.killTweensOf(this.elements);
-					if (!repeat) gsap.to(this.elements, {
-						opacity: 1,
-						ease: "ease.out",
-						duration: 1
-					});
-					if (!repeat) {
+					if (elements) {
+						gsap.to(this.elements, {
+							opacity: 1,
+							ease: "ease.out",
+							duration: 1
+						});
 						gsap.to(this.elements, {
 							x: "random(-100,100,10)%",
 							y: "random(10,30,5)%",
 							rotation: "random(-5,5,1)deg",
-							scale: "random(1,2.5,.5)",
+							scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
 							ease: "ease.out",
 							duration: .5
 						});
 					}
-					gsap.to(this.elements, {
-						x: "random(-100,100,10)%",
-						y: "random(10,30,5)%",
-						rotation: "random(-5,5,1)deg",
-						scale: "random(1,2.5,.5)",
-						duration: 5,
-						ease: "ease.inOut",
-						onComplete: function() {
-							that.show(that.elements, true);
-						}
+
+					var repeatanimation = function(element) {
+						gsap.to(element, {
+							x: "random(-100,100,10)%",
+							y: "random(10,30,5)%",
+							rotation: "random(-5,5,1)deg",
+							scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
+							opacity: gRandom(5,10,1) / 10,
+							duration: gRandom(5,10,1),
+							ease: "ease.inOut",
+							onComplete: function() {
+								repeatanimation(element);
+							}
+						});
+
+					}
+
+					this.elements.forEach(function(el) {
+						repeatanimation(el);
 					});
 				},
 				hide: function() {
@@ -2897,27 +3065,27 @@ barba.init({
 					if (positive) split = 50;
 
 					if (el.length == 2) {
-						gsap.killTweensOf(this.el.toString());
-						gsap.to(this.el[0], {
+						gsap.killTweensOf(next.querySelectorAll(this.el.toString()));
+						gsap.to(next.querySelectorAll(this.el[0]), {
 							x: split * -1,
 							ease: "power3.out",
 							duration: .5
 						});
-						gsap.to(this.el[1], {
+						gsap.to(next.querySelectorAll(this.el[1]), {
 							x: split,
 							ease: "power3.out",
 							duration: .5
 						});
 					} else {
-						gsap.killTweensOf(this.el);
-						gsap.to(this.el, {
+						gsap.killTweensOf(next.querySelectorAll(this.el));
+						gsap.to(next.querySelectorAll(this.el), {
 							x: split,
 							ease: "power3.out",
 							duration: .5
 						});
 					}
 
-					gsap.fromTo(this.hint, {
+					gsap.fromTo(next.querySelectorAll(this.hint), {
 						y: 50
 					}, {
 						y: 0,
@@ -2926,13 +3094,13 @@ barba.init({
 						duration: .5
 					});
 				}, hide() {
-					gsap.to(this.el, {
+					gsap.to(next.querySelectorAll(this.el), {
 						x: 0,
 						ease: "power3.out",
 						delay: .1,
 						duration: .5
 					});
-					gsap.to(this.hint, {
+					gsap.to(next.querySelectorAll(this.hint), {
 						y: 50,
 						opacity: 0,
 						ease: "power3.out",
@@ -2948,27 +3116,29 @@ barba.init({
 				scale: "random(1,2,.5)"
 			});
 
-			hoverEvents(_qAll(".hi .email"), function(el) {
-				textanim.show(el.querySelector("span"), el.querySelector("small"));
-				flare.show(".hi img.yellow, .hi img.red");
+			hoverEvents(next.querySelectorAll(".email"), function(el) {
+				if(screenhorizontal) textanim.show(".email span", ".email small");
+				flare.show("img.yellow, img.red");
 			}, function(el) {
-				textanim.hide();
+				if(screenhorizontal) textanim.hide();
 				flare.hide();
 			});
-			hoverEvents(_qAll(".hi .social"), function(el) {
-				textanim.show([".hi .website span", ".hi .email span"], ".hi .social span:first-child small");
-				flare.show(".hi img.blue, .hi img.red");
+			hoverEvents(next.querySelectorAll(".social"), function(el) {
+				if(screenhorizontal) textanim.show([".website span", ".email span"], ".social span:first-child small");
+				flare.show("img.blue, img.red");
 			}, function(el) {
-				textanim.hide();
+				if(screenhorizontal) textanim.hide();
 				flare.hide();
 			});
-			hoverEvents(_qAll(".hi .website"), function(el) {
-				textanim.show(".hi .social span:nth-child(2), .hi .website span", ".hi .social span:nth-child(2) small", true);
-				flare.show(".hi img.blue, .hi img.green");
+			hoverEvents(next.querySelectorAll(".website"), function(el) {
+				if(screenhorizontal) textanim.show(".social span:nth-child(2), .website span", ".social span:nth-child(2) small", true);
+				flare.show("img.blue, img.green");
 			}, function(el) {
-				textanim.hide();
+				if(screenhorizontal) textanim.hide();
 				flare.hide();
 			});
+
+			done();
 		}
 	}]
 });

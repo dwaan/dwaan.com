@@ -4,29 +4,7 @@ html {
 }
 
 /* Default style */
-h1 {
-	margin: 0 0 20px;
-	font-size: 64px;
-	line-height: 90%;
-	letter-spacing: -0.06em;
-}
-h2 {
-	margin: 0 0 40px;
-	font-size: 36px;
-	line-height: 100%;
-	letter-spacing: -0.02em;
-}
-h3 {
-	font-size: 24px;
-	margin: 0 0 20px;
-}
-h4 {
-	margin: 0 0 10px;
-	font-size: 18px;
-	line-height: 21px;
-}
 p {
-	font-size: 16px;
 	line-height: 140%;
 }
 
@@ -42,7 +20,15 @@ header {
 .menu {
 	margin: 0 0 0 var(--padm);
 }
-
+/* Menu item */
+.menu .items {
+	width: calc(1.5 * var(--pic-w));
+}
+@media (min-width: 600px) {
+	.menu .items {
+		width: calc(2 * var(--pic-w));
+	}
+}
 
 /* Common middle content */
 
@@ -58,13 +44,11 @@ header {
 
 /* Homepage content */
 .main-text {
-	margin: 0 0 45px;
-	padding: 0 60px;
+	margin: 0 0 var(--padxl);
+	padding: 0 var(--padl);
 }
 .main-text h1 {
-	font-size: 64px;
-	line-height: 90%;
-	letter-spacing: -0.06em;
+	font-size: 4rem;
 	text-align: center;
 	margin: 0;
 }
@@ -73,7 +57,7 @@ header {
 		padding: 0 30px;
 	}
 	.main-text h1 {
-		font-size: 56px;
+		font-size: 4rem;
 	}
 }
 
@@ -106,6 +90,7 @@ header {
 
 
 /* Arrow links */
+.arrow-big,
 .arrow {
 	height: 86px;
 }
@@ -128,15 +113,13 @@ header {
 	width: 50px;
 	height: 44px;
 	margin-left: 10px;
-	background: url(../img/arrow.svg) no-repeat 100% 50%;
-	transform: none;
 }
 
 
 /* Year information */
 .year {
-	right: 40px;
-	bottom: 30px;
+	right: var(--padx);
+	bottom: var(--pady);
 }
 
 
@@ -147,7 +130,7 @@ header {
 	width: 100vh;
 	height: 100vw;
 	transform-origin: top left;
-	transform: translate3d(100vw,0,0) rotate(90deg);
+	transform: translate3d(0,100vh,0) rotate(-90deg);
 }
 .flares img {
 	width: 100vh;
@@ -158,6 +141,9 @@ header {
 /* Detail page common style */
 .detail picture {
 	box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.25);
+}
+.dark .detail picture {
+	box-shadow: none;
 }
 .detail picture,
 .detail picture img {
@@ -441,6 +427,10 @@ header {
 .me h3 {
 	font-size: 2rem;
 }
+.me .flares {
+	transform: none;
+	width: 100vw;
+}
 
 
 /* Mr. Goat */
@@ -543,20 +533,21 @@ header {
 	}
 }
 /* List style with zero leading decimal */
-ol.zero {
+.zero {
 	flex-direction: column;
 }
-ol.zero li {
+.zero li {
 	flex-direction: row;
-	margin: 0 0 15px 0;
-	font-size: 14px;
+	margin: 0 0 var(--padm) 0;
 }
-ol.zero li:last-child {
+.zero li:last-child {
 	margin-bottom: 0;
 }
-ol.zero li:before {
-	margin-right: 20px;
-	font-size: 24px;
+.zero li:before {
+	margin: calc(var(--pads) / 2) var(--padm) 0 0 ;
+	min-width: var(--padxl);
+	font-size: 1.8rem;
+	font-weight: 300;
 }
 /* ol/ul for branding color for Suzuki */
 .detail .color {
@@ -582,4 +573,12 @@ ol.zero li:before {
 	height: 16px;
 	margin: 5px 0;
 	border-radius: 0 0 100px;
+}
+
+
+/* Say Hi page */
+
+.hi .main-text {
+	margin: 0;
+	padding: 0;
 }

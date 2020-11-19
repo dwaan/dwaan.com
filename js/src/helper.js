@@ -11,6 +11,7 @@ function _q(argument) {
 function _qAll(argument) {
 	return document.querySelectorAll(argument);
 }
+
 function removeClass(el, className) {
 	if (el.classList) {
 		el

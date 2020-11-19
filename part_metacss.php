@@ -1,4 +1,3 @@
-
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,12 +7,18 @@
 	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 
 	<script type="text/javascript">
+		var classcllection = "";
 		/* See if it's in dark mode */
-		if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){
-			h=document.querySelector("html");
-			h.setAttribute('class','dark');
-			// h.style.backgroundColor='var(--black)';
+		h = document.querySelector("html");
+		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+			classcllection = "dark";
 		}
+		// Displaying rounded corner only on fullscreen
+		if (window.innerWidth == screen.width && window.innerHeight == screen.height) {
+			classcllection += " rounded"
+		}
+		// Set the class
+		h.setAttribute('class', classcllection);
 	</script>
 
 	<?php
@@ -47,7 +52,7 @@
 
 	<!-- Primary Meta Tags -->
 	<title><?php echo $title; ?> - Dwan</title>
-	<meta name="title" content="<?php echo $title; ?>">
+	<meta name="title" content="<?php echo $title; ?> - Dwan">
 	<meta name="description" content="Hello! my name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 
 	<!-- Open Graph / Facebook -->
