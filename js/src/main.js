@@ -5,17 +5,25 @@ const gToArray = gsap.utils.toArray;
 const gRandom = gsap.utils.random;
 
 
+// Logo SVG
+const logosvg = _q(".logo").innerHTML;
+
+
 //////////////// Dark Mode
-var dark_mode = false;
+var darkmode = false;
 function toggleDarkMode() {
-	console.info("Toggle Dark Mode")
+	if (darkmode) addClass(_q("html"), "dark");
+	else removeClass(_q("html"), "dark");
 }
 if (window.matchMedia){
-	var darkmode = window.matchMedia('(prefers-color-scheme: dark)');
-	darkmode.addListener(function(e){
-		h = _q("html");
-		if(e.matches) dark_mode = false;
-		else dark_mode = true;
+	var darkmodemedia = window.matchMedia('(prefers-color-scheme: dark)');
+	var setdarkmode = function(e) {
+		if (e.matches) darkmode = true;
+		else darkmode = false;
+	}
+	setdarkmode(darkmodemedia);
+	darkmodemedia.addListener(function(e) {
+		setdarkmode(e);
 		toggleDarkMode();
 	});
 }
@@ -51,9 +59,9 @@ var removeStyle = function (el) {
 // Displaying rounded corner only on fullscreen
 var displayRoundedCorner = function() {
 	if (window.innerWidth == screen.width && window.innerHeight == screen.height) {
-		addClass(_q("body"), "rounded");
+		addClass(_q("html"), "rounded");
 	} else {
-		removeClass(_q("body"), "rounded");
+		removeClass(_q("html"), "rounded");
 	}
 }
 displayRoundedCorner();
@@ -519,7 +527,18 @@ barba.init({
 			const done = this.async();
 			const next = data.next.container;
 
-			// Animate header
+			// Display loading
+			loader.init();
+			// Loading logic
+			loader.show(next, function() {
+				// Animate current view and header
+				animate.show(next, function() {
+					loader.empty();
+					done();
+				});
+			});
+
+			// Animate header showing
 			gsap.set("header", {
 				opacity: 1
 			});
@@ -531,16 +550,86 @@ barba.init({
 				opacity: 1,
 				duration: 1,
 				ease: "expo.out",
-				delay: 1,
+				delay: .5,
 				stagger: .1
 			});
 
-			gToArray("header .menu").forEach(function(element) {
-				var overlay = element.querySelector(".overlay");
-				var items = element.querySelector(".items");
+			// Logo events
+			gToArray('header .logo').forEach(function(el, id) {
+				// Waving animation
+				var lefthand = el.querySelector(".left-hand");
+				var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 }});
+				waving
+					.set(lefthand, { yPercent: 0, rotation: 0 })
+					.to(lefthand, { duration: .25, rotation: 70 })
+					.fromTo(lefthand, { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
+					.to(lefthand, { duration: .25, yPercent: 0, rotation: 0 })
+					.to(lefthand, { yPercent: 0, duration: 10 });
+				// Hat move on hover
+				var hat = el.querySelector(".hat");
+				hoverEvents([el], function() {
+					gsap.to(hat, {
+						transformOrigin: "50% 75%",
+						yPercent: -3,
+						xPercent: -1,
+						rotation: 5,
+						duration: 1,
+						ease: "elastic.out"
+					});
+					waving.restart();
+				},
+				function() {
+					gsap.to(hat,{
+						transformOrigin: "50% 75%",
+						yPercent: 0,
+						xPercent: 0,
+						rotation: 0,
+						duration: 1,
+						ease: "elastic.out"
+					});
+				});
+			});
+
+			// Menu events
+			gToArray('header .switch').forEach(function(el, id) {
+				// Hat move on hover
+				var menu = el.querySelectorAll("svg line");
+				var tl = gsap.timeline();
+				tl.set(menu, {
+					x: 0
+				});
+				tl.to(menu, {
+					x: -32,
+					duration: .25,
+					ease: "expo.in",
+					stagger: .1
+				});
+				tl.fromTo(menu, {
+					x: 32
+				}, {
+					x: 0,
+					duration: .25,
+					ease: "expo.out",
+					stagger: .1
+				});
+				tl.to(menu, {
+					duration: 1
+				});
+				tl.pause(.1);
+				hoverEvents([el], function() {
+					tl.repeat(-1).restart();
+				}, function() {
+					tl.repeat(0);
+				});
+			});
+
+			// Main menu
+			gToArray("header .menu").forEach(function(el, id) {
+				var overlay = el.querySelector(".overlay");
+				var items = el.querySelector(".items");
 
 				// Show menu animation
-				element.querySelector(".switch").addEventListener("click", function(e) {
+				el.querySelector(".switch").addEventListener("click", function(e) {
 					e.preventDefault();
 
 					if (!gsap.isTweening(items)) {
@@ -599,7 +688,7 @@ barba.init({
 					}
 				});
 				// Hide menu animation
-				element.querySelectorAll(".overlay, li a, .close").forEach(function(link) {
+				el.querySelectorAll(".overlay, li a, .close").forEach(function(link) {
 					link.addEventListener("click", function(e) {
 						e.preventDefault();
 						if (this != e.target) return false;
@@ -635,14 +724,56 @@ barba.init({
 				});
 			});
 
-			// Display loading
-			loader.init();
-			// Loading logic
-			loader.show(next, function() {
-				// Animate current view and header
-				animate.show(next, function() {
-					loader.empty();
-					done();
+			// Dark mode switcher
+			gToArray("header .lamp").forEach(function(el, id) {
+				el.addEventListener("click", function(e) {
+					e.preventDefault();
+					darkmode = !darkmode;
+					toggleDarkMode();
+				});
+			});
+
+			// Text switcher
+			gToArray("header .size").forEach(function(el, id) {
+				var tl = gsap.timeline();
+				tl.to(el, {
+					scale: 1.25,
+					duration: .5,
+					ease: "elastic.out"
+				});
+				tl.to(el, {
+					scale: 1.5,
+					duration: .5,
+					ease: "elastic.out"
+				});
+				tl.to(el, {
+					scale: 1,
+					duration: 1
+				});
+				tl.to(el, {
+					duration: 5
+				});
+				tl.pause();
+				hoverEvents([el], function() {
+					tl.repeat(-1).restart();
+				},
+				function() {
+					tl.repeat(0);
+				});
+				window.addEventListener("resize", function() {
+					window.fontSize = false;
+					_q("html").style.fontSize = "";
+				});
+				el.addEventListener("click", function(e) {
+					var delta = 1;
+					var howmany = 3;
+					var fontSize = Number(window.getComputedStyle(_q("html"))['font-size'].replace('px',''))
+					if (!window.fontSize) window.fontSize = fontSize;
+
+					fontSize += delta;
+					if (fontSize - (delta * howmany) > window.fontSize) fontSize = window.fontSize;
+
+					_q("html").style.fontSize = fontSize + "px";
 				});
 			});
 		},
@@ -750,19 +881,20 @@ barba.init({
 			const current = data.current.container;
 			const next = data.next.container;
 
-			// Kill scrollbar
-			gsap.set(current, {
-				position: "fixed",
-				top: 0,
-				zIndex: 2
-			});
-			gsap.set(next, {
-				position: "fixed",
-				top: 0,
-				zIndex: 1
-			});
 			// Hide current view
 			animate.hide(current, function() {
+				// Kill scrollbar
+				gsap.set(current, {
+					position: "fixed",
+					top: 0,
+					zIndex: 2
+				});
+				gsap.set(next, {
+					position: "fixed",
+					top: 0,
+					zIndex: 1
+				});
+
 				// Image loading logic
 				loader.show(next, function(){
 					done();
@@ -816,7 +948,7 @@ barba.init({
 
 			// Image loading logic
 			loader.show(next, function(){
-				var tl = gsap.timeline({ default: {
+				var tl = gsap.timeline({ defaults: {
 					duration: .75,
 					stagger: .1,
 					ease: "power3.out"
@@ -926,7 +1058,7 @@ barba.init({
 			const current = data.current.container;
 			const next = data.next.container;
 
-			var tl = gsap.timeline({ default: {
+			var tl = gsap.timeline({ defaults: {
 				duration: .75,
 				stagger: .1,
 				ease: "power3.out"
@@ -1039,18 +1171,27 @@ barba.init({
 			els.forEach(function (el, idx) {
 				var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
 				var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
+				var bottomscroll = function(tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 0",
+						end: "50% 0",
+						scrub: true,
+						animation: tl
+					});
+				}
+				var topscroll = function(tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "50% 100%",
+						end: "100% 100%",
+						scrub: true,
+						animation: tl
+					});
+				}
 
+				// Animate text
 				scroll.push(function(tl) {
-					tl.fromTo(arrow, {
-						y: 0,
-						opacity: 1
-					}, {
-						y: (idx < els.length - 1) ? window.innerHeight / 3 : 0,
-						opacity: 0,
-						ease: "linear",
-						duration: 3
-					}, 0);
-
 					tl.fromTo(maintext, {
 						y: 0
 					}, {
@@ -1068,26 +1209,8 @@ barba.init({
 					}, 1);
 
 					return tl;
-				}, function (tl) {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "0 0",
-						end: "50% 0",
-						scrub: true,
-						animation: tl
-					});
-				});
+				}, bottomscroll);
 				scroll.push(function(tl) {
-					tl.fromTo(arrow, {
-						y: (idx > 0) ? window.innerHeight * -2/5 : 0,
-						opacity: 0
-					}, {
-						y: 0,
-						opacity: 1,
-						duration: 3,
-						ease: "linear"
-					}, 0);
-
 					tl.fromTo(maintext, {
 						y: (idx > 0) ? window.innerHeight / -8 : 0
 					}, {
@@ -1105,14 +1228,70 @@ barba.init({
 					}, 0);
 
 					return tl;
-				}, function (tl) {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "50% 100%",
-						end: "100% 100%",
-						scrub: true,
-						animation: tl
-					});
+				}, topscroll);
+				// Animate arrow
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							tl.fromTo(arrow, {
+								y: 0,
+								opacity: 1
+							}, {
+								y: (idx < els.length - 1) ? window.innerHeight / 3 : 0,
+								opacity: 0,
+								ease: "linear",
+								duration: 3
+							}, 0);
+
+							return tl;
+						}, bottomscroll);
+						scroll.push(function(tl) {
+							tl.fromTo(arrow, {
+								y: (idx > 0) ? window.innerHeight * -2/5 : 0
+							}, {
+								y: 0,
+								duration: 3,
+								ease: "linear"
+							}, 0);
+							tl.fromTo(arrow, {
+								opacity: 0
+							}, {
+								opacity: 1,
+								duration: 1,
+								ease: "linear"
+							}, 2);
+
+							return tl;
+						}, topscroll);
+					},
+					"(min-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							tl.fromTo(arrow, {
+								y: 0,
+								opacity: 1
+							}, {
+								y: (idx < els.length - 1) ? window.innerHeight / 3 : 0,
+								opacity: 0,
+								ease: "linear",
+								duration: 3
+							}, 0);
+
+							return tl;
+						}, bottomscroll);
+						scroll.push(function(tl) {
+							tl.fromTo(arrow, {
+								y: (idx > 0) ? window.innerHeight * -2/5 : 0,
+								opacity: 0
+							}, {
+								y: 0,
+								opacity: 1,
+								duration: 3,
+								ease: "linear"
+							}, 0);
+
+							return tl;
+						}, topscroll);
+					}
 				});
 			});
 
@@ -1142,9 +1321,10 @@ barba.init({
 			const done = this.async();
 			const next = data.next.container;
 
-			next.querySelectorAll("picture").forEach(function(el) {
-				el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
-			});
+			// Performace hog in firefox
+			// next.querySelectorAll("picture").forEach(function(el) {
+			// 	el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
+			// });
 
 			// Read more
 			ScrollTrigger.matchMedia({
@@ -1722,7 +1902,7 @@ barba.init({
 					});
 				}
 				that.before.addEventListener("click", function(e) {
-					gsap.timeline({ default: {
+					gsap.timeline({ defaults: {
 						ease: "expo"
 					}}).to(this, {
 						duration: .25,
@@ -1748,7 +1928,7 @@ barba.init({
 				});
 				//
 				that.after.addEventListener("click", function(e) {
-					gsap.timeline({ default: {
+					gsap.timeline({ defaults: {
 						ease: "expo"
 					}}).to(this, {
 						duration: .25,

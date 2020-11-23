@@ -12,7 +12,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
-		<section class="middle">
+		<section class="middle full clip">
 			<div class="padding">
 				<span><img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
 			</div>

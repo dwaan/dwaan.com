@@ -7,18 +7,18 @@
 	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 
 	<script type="text/javascript">
-		var classcllection = "";
+		var classcollection = "";
 		/* See if it's in dark mode */
 		h = document.querySelector("html");
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
-			classcllection = "dark";
+			classcollection = "dark";
 		}
 		// Displaying rounded corner only on fullscreen
 		if (window.innerWidth == screen.width && window.innerHeight == screen.height) {
-			classcllection += " rounded"
+			classcollection += " rounded"
 		}
 		// Set the class
-		h.setAttribute('class', classcllection);
+		h.setAttribute('class', classcollection);
 	</script>
 
 	<?php

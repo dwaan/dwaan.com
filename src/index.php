@@ -12,7 +12,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="home" class="home">
-		<section class="middle">
+		<section class="middle full">
 			<div class="main-text">
 				<h1>Hello, my name is <a href="./me">Dwan</a></h1>
 			</div>
@@ -23,7 +23,7 @@
 			</div>
 		</section>
 
-		<section id="casestudy" class="middle">
+		<section id="casestudy" class="middle full">
 			<div class="padding">
 				<a href="./suzuki-website-redesign-pitching">
 					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
@@ -36,7 +36,7 @@
 			</div>
 		</section>
 
-		<section class="middle">
+		<section class="middle full">
 			<div class="padding">
 				<a href="./melon-tiket-apa-saja">
 					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tike Apa Saja" />

@@ -12,7 +12,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail">
-		<section class="middle">
+		<section class="middle full">
 			<div class="padding">
 				<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
 			</div>

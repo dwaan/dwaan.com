@@ -23,6 +23,11 @@ html {
 		font-size: 18px;
 	}
 }
+@media screen and (min-width: 1900px) {
+	html {
+		font-size: 20px;
+	}
+}
 
 
 /* Default style */
@@ -53,9 +58,18 @@ header {
 }
 
 /* Homepage content */
+.main-text {
+	max-width: 800px;
+}
+@media (min-width: 1200px) {
+	.main-text {
+		max-width: initial;
+	}
+}
 .main-text h1 {
-	margin: 0 var(--padl) 0 0;
+	margin: 0 var(--padl) 0;
 	white-space: nowrap;
+	text-align: center;
 }
 @media (max-width: 1200px) {
 	.main-text h1 {
