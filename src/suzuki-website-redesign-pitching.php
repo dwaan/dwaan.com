@@ -12,7 +12,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
-		<section class="middle full clip">
+		<section class="middle full">
 			<div class="padding">
 				<span><img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
 			</div>
@@ -22,20 +22,20 @@
 			</a>
 		</section>
 
-		<section id="more" class="middle style-spread">
+		<section id="more" class="middle style-spread clip">
 			<div class="text">
 				<div class="titles">
 					<h4>Project Pitching</h4>
 					<h1>Suzuki Indonesia</h1>
 				</div>
-				<p>Suzuki Indonesia just recently redesign their website,  but they experience several issues and felt that their website needs more improvement.</p>
+				<p>Suzuki Indonesia just recently redesign their website, but they experience several issues and felt that their website needs more improvement.</p>
 			</div>
 			<div class="thumbs">
 				<?php for ($i=4; $i <= 5; $i++) { ?>
 					<picture class="pic-<?php echo $i ?>">
 						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
 						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
+						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
 					</picture>
 				<?php } ?>
 			</div>
@@ -55,7 +55,7 @@
 					<picture class="pic-<?php echo $i ?>">
 						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
 						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
+						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
 					</picture>
 				<?php } ?>
 			</div>
@@ -116,7 +116,7 @@
 					<picture class="pic-<?php echo $i ?>">
 						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
 						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
+						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
 					</picture>
 				<?php } ?>
 			</div>
@@ -133,7 +133,7 @@
 					<picture class="pic-<?php echo $i ?>">
 						<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@3x.jpg">
 						<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/suzuki/suzuki-<?php echo $i ?>@2x.jpg">
-						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia" />
+						<img src="img/suzuki/suzuki-<?php echo $i ?>.jpg" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
 					</picture>
 				<?php } ?>
 			</div>
@@ -142,10 +142,10 @@
 		<section class="links">
 			<nav>
 				<div class="prototype">
-					<a href="#prototype"><span>visit the prototype</span></a>
+					<a href="#prototype" aria-label="Figma Prototype - Melon - Tiket Apa Saja Website Redesign"><span>visit the prototype</span></a>
 				</div>
 				<div class="continue">
-					<a href="#next"><span><strong>next case study</strong>  <i>-  Tiket Apa Saja</i></span></a>
+					<a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign"><span><strong>next case study</strong>  <i>-  Tiket Apa Saja</i></span></a>
 				</div>
 			</nav>
 		</section>

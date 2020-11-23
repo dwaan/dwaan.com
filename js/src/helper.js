@@ -56,13 +56,13 @@ function nextElementSibling(el) {
 	} while (el && el.nodeType !== 1);
 	return el
 }
-function hoverEvents(els, over = function() {}, out = function() {}) {
+function hoverEvents(els, over, out) {
 	els.forEach(function(el) {
 		el.addEventListener("mouseover", function(e) {
-			over(el, e);
+			if (over) over(el, e);
 		});
 		el.addEventListener("mouseout", function(e){
-			out(el, e);
+			if (out) out(el, e);
 		});
 	});
 }

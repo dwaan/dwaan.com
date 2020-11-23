@@ -19,7 +19,7 @@
 
 	<header class="block__clear header__height">
 		<div class="left">
-			<a href="./" class="logo" title="Dwan">
+			<a href="./" class="logo" aria-label="Dwan">
 				<svg class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g fill="white">
 						<g class="right-hand">
@@ -39,8 +39,8 @@
 		</div>
 
 		<div class="right">
-			<a class="size" title="Text Size" href="#textsize">Aa</a>
-			<a class="lamp" title="Dark or light mode" href="#mode">
+			<a class="size" aria-label="Text Size" href="#textsize">Aa</a>
+			<a class="lamp" aria-label="Dark or light mode" href="#mode">
 				<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 					<g id="sun" stroke="#fff" stroke-width="2">
 						<line x1="22" y1="31.2218" x2="22" y2="35.2218"/>
@@ -74,7 +74,7 @@
 			</a>
 
 			<nav class="menu">
-				<a class="switch" href="./menu" data-barba-prevent title="Menu">
+				<a class="switch" href="./menu" data-barba-prevent aria-label="Menu">
 					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 						<line class="menu-1" x1="26" y1="8.25" x2="6" y2="8.25"/>
 						<line class="menu-2" x1="20" y1="16.25" x2="6" y2="16.25"/>

@@ -16,12 +16,7 @@ function javascript() {
 			'node_modules/gsap/dist/gsap.min.js',
 			'node_modules/gsap/dist/ScrollTrigger.min.js',
 			'node_modules/gsap/dist/ScrollToPlugin.min.js',
-			// 'js/src/gsap-member/minified/CustomEase.min.js',
 			'node_modules/@barba/core/dist/barba.umd.js',
-			// 'node_modules/photoswipe/dist/photoswipe.min.js',
-			// 'node_modules/photoswipe/dist/photoswipe-ui-default.min.js',
-			// 'node_modules/tiny-slider/dist/min/tiny-slider.js',
-			// 'node_modules/tiny-slider/dist/min/tiny-slider.helper.ie8.js',
 			'js/src/helper.js',
 			'js/src/main.js'
 		])
@@ -29,7 +24,7 @@ function javascript() {
 			largeFile: true,
 			loadMaps: true
 		}))
-		// .pipe(uglify())
+		.pipe(uglify())
 		.pipe(concat("bundle.js"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('js/'))
@@ -40,9 +35,6 @@ function javascript() {
 function css() {
 	return gulp.src([
 			'node_modules/normalize.css/normalize.css',
-			// 'node_modules/photoswipe/dist/photoswipe.css',
-			// 'node_modules/photoswipe/dist/default-skin/default-skin.css',
-			// 'node_modules/tiny-slider/dist/tiny-slider.css',
 			'css/src/main.css',
 			'css/src/404.css',
 			'css/src/nojs.css',
@@ -69,10 +61,10 @@ function css_vertical() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		// .pipe(postcss([
-		// 	autoprefixer(),
-		// 	cssnano()
-		// ]))
+		.pipe(postcss([
+			autoprefixer(),
+			cssnano()
+		]))
 		.pipe(concat("vertical-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
@@ -87,10 +79,10 @@ function css_horizontal() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		// .pipe(postcss([
-		// 	autoprefixer(),
-		// 	cssnano()
-		// ]))
+		.pipe(postcss([
+			autoprefixer(),
+			cssnano()
+		]))
 		.pipe(concat("horizontal-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
@@ -100,9 +92,9 @@ function css_horizontal() {
 
 function php() {
 	return gulp.src(['src/*.php'])
-		// .pipe(htmlmin({
-		// 	collapseWhitespace: true
-		// }))
+		.pipe(htmlmin({
+			collapseWhitespace: true
+		}))
 		.pipe(gulp.dest('./'))
 		.pipe(browserSync.stream())
 }

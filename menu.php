@@ -1,30 +1,4 @@
-<!doctype html>
-<html class="no-js" lang="en">
-
-<head>
-	<?php
+<!doctype html><html class="no-js" lang="en"><head> <?php
 		$title = "Hello, This Menu Page Fallback - P.S. You're in dwaan.com";
 		include_once "part_metacss.php";
-	?>
-</head>
-
-<body data-barba="wrapper">
-	<?php include_once "part_head.php" ?>
-
-	<main data-barba="container" data-barba-namespace="menu" class="menu-page">
-		<nav class="menu middle">
-			<div class="items">
-				<ol>
-					<li><a class="spring" href="./">Home</a></li>
-					<li><a class="spring" href="./me">About Me</a></li>
-					<li class="hr"></li>
-					<li><a class="spring" href="./say-hi">Say, Hi!</a></li>
-					<li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p></li>
-				</ol>
-			</div>
-		</nav>
-	</main>
-
-<?php include_once "part_script.php"; ?>
-</body>
-</html>
+	?> </head><body data-barba="wrapper"> <?php include_once "part_head.php" ?> <main data-barba="container" data-barba-namespace="menu" class="menu-page"><nav class="menu middle"><div class="items"><ol><li><a class="spring" href="./">Home</a></li><li><a class="spring" href="./me">About Me</a></li><li class="hr"></li><li><a class="spring" href="./say-hi">Say, Hi!</a></li><li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p></li></ol></div></nav></main> <?php include_once "part_script.php"; ?> </body></html>

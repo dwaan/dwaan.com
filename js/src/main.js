@@ -1,12 +1,12 @@
 'use strict';
-const REPORTSIZE = false;
+var REPORTSIZE = false;
 
-const gToArray = gsap.utils.toArray;
-const gRandom = gsap.utils.random;
+var gToArray = gsap.utils.toArray;
+var gRandom = gsap.utils.random;
 
 
 // Logo SVG
-const logosvg = _q(".logo").innerHTML;
+var logosvg = _q(".logo").innerHTML;
 
 
 //////////////// Dark Mode
@@ -46,11 +46,11 @@ if (REPORTSIZE) {
 }
 
 // Clear the style
-var removeStyle = function (el) {
+var removeStyle = function(el) {
 	if (el.style) {
 		el.style = {};
 	} else {
-		gToArray(el).forEach((el) => {
+		gToArray(el).forEach(function(el) {
 			removeStyle(el);
 		});
 	}
@@ -70,8 +70,9 @@ window.addEventListener('resize', displayRoundedCorner);
 
 ////////// Initial
 
-// Predefined scroll animation
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+// Predefined scroll animation
 var scroll = {
 	l: 0,
 	tl: [],
@@ -86,24 +87,26 @@ var scroll = {
 		var move = (params.move === undefined)? true: params.move;
 		var markers = (params.markers)? params.markers: false;
 		var horizontal = (params.horizontal)? params.horizontal: false;
+		var that = this;
 
-		gToArray(elements).forEach((element, index) => {
+		gToArray(elements).forEach(function(element, index) {
 			var y = delta + (15 * index);
 			var trigger = (params.trigger)? params.trigger: element.parentNode;
 			if (!move) y = 0;
 
-			this.l = this.tl.push(gsap.timeline()) - 1;
+			that.l = that.tl.push(gsap.timeline()) - 1;
+
 			if (horizontal) {
-					this.tl[this.l].fromTo(element, {
-						x: y,
-						opacity: 0,
-					}, {
-						x: 0,
-						opacity: 1,
-						ease: "ease.out"
-					}, 0);
+				that.tl[that.l].fromTo(element, {
+					x: y,
+					opacity: 0,
+				}, {
+					x: 0,
+					opacity: 1,
+					ease: "ease.out"
+				}, 0);
 			} else {
-				this.tl[this.l].fromTo(element, {
+				that.tl[that.l].fromTo(element, {
 					y: y,
 					opacity: 0,
 				}, {
@@ -113,35 +116,39 @@ var scroll = {
 				}, 0);
 			}
 
-			this.st.push(ScrollTrigger.create({
+
+			that.st.push(ScrollTrigger.create({
 				markers: markers,
 				trigger: trigger,
 				start: "0 " + position,
 				end:  "+=175 " + position,
 				scrub: 1,
-				animation: this.tl[this.l]
+				animation: that.tl[that.l]
 			}));
 		});
 	},
 	// Move elements up without scrub
-	moveThumbs: function(elements, position = "85%") {
-		gToArray(elements).forEach(element => {
+	moveThumbs: function(elements, position) {
+		var that = this;
+
+		if (!position) position = "85%";
+		gToArray(elements).forEach(function(element) {
 			var y = gRandom(250, 500, 5) + "px";
 
-			this.l = this.tl.push(gsap.timeline()) - 1;
-			this.tl[this.l].fromTo(element, {
+			that.l = that.tl.push(gsap.timeline()) - 1;
+			that.tl[that.l].fromTo(element, {
 				y: y
 			}, {
 				y: 0,
 				duration: .75,
 			}, 0);
 
-			this.st.push(ScrollTrigger.create({
+			that.st.push(ScrollTrigger.create({
 				trigger: element.parentNode,
 				start: "0 " + position,
 				end: "0 " + position,
 				toggleActions: "restart none none reverse",
-				animation: this.tl[this.l]
+				animation: that.tl[that.l]
 			}));
 		});
 	},
@@ -288,8 +295,10 @@ var animate = {
 
 		return tl
 	},
-	show: function (next, done, nonsticky = false, footer = true){
-		if (!next) return false;
+	show: function (next, done, nonsticky, footer){
+		if (next == undefined) return false;
+		if (nonsticky == undefined) nonsticky = false;
+		if (footer == undefined) footer = true;
 
 		// Default gsap timeline value
 		var tl = gsap.timeline({ defaults: {
@@ -306,8 +315,8 @@ var animate = {
 		if (typeof done !== "function") return false;
 
 		// Show current view
-		var els = next.querySelectorAll(".bland > li, .flares:not(.side)")
-		if (footer) els = next.querySelectorAll(".bland > li, .flares:not(.side), .footer > *");
+		var els = next.querySelectorAll(".flares:not(.side)")
+		if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
 		if (!nonsticky) nonsticky = next.querySelector(".middle").children;
 		// Animate text
 		tl.fromTo([nonsticky, els], {
@@ -336,9 +345,10 @@ var animate = {
 			}
 		});
 	},
-	hide: function (current, done, nonsticky = false) {
-		if (!current) return false;
+	hide: function (current, done, nonsticky) {
+		if (current == undefined) return false;
 		if (typeof done !== "function") return false;
+		if (nonsticky == undefined) nonsticky = false;
 
 		// Default gsap timeline value
 		var tl = gsap.timeline({ defaults: {
@@ -439,10 +449,12 @@ function distributeByPosition(vars) {
 }
 
 // Snap functions
-var snap = function(elements, snapPosition = 1, markers = false) {
+var snap = function(elements, snapPosition, markers) {
+	if (snapPosition == undefined) snapPosition = 1;
+	if (markers == undefined) markers = false;
 	if (typeof elements === "string") elements = gToArray(elements);
 	// Snap scroll to block
-	elements.forEach((element, index) => {
+	elements.forEach(function(element, index) {
 		scroll.push(function(tl) {
 			return tl;
 		}, function (tl) {
@@ -452,9 +464,9 @@ var snap = function(elements, snapPosition = 1, markers = false) {
 				trigger: element,
 				start: "0 0",
 				end: "100% 0",
-				onUpdate: function({progress, direction, isActive}){
-					this.progress = progress;
-					this.direction = direction;
+				onUpdate: function(value){
+					this.progress = value.progress;
+					this.direction = value.direction;
 				},
 				snap: {
 					snapTo: function(value) {
@@ -491,10 +503,10 @@ var snap = function(elements, snapPosition = 1, markers = false) {
 }
 
 // Default barba hooks
-barba.hooks.before((data) => {
+barba.hooks.before(function(data) {
 	return true;
 });
-barba.hooks.beforeEnter((data) => {
+barba.hooks.beforeEnter(function(data) {
 	// Destroy prev scroll
 	scroll.destroy();
 
@@ -502,7 +514,7 @@ barba.hooks.beforeEnter((data) => {
 
 	return true;
 });
-barba.hooks.afterEnter((data) => {
+barba.hooks.afterEnter(function(data) {
 	// Read more
 	gToArray("a.scrollto").forEach(function(a) {
 		a.addEventListener("click", function(e) {
@@ -522,10 +534,10 @@ barba.hooks.afterEnter((data) => {
 barba.init({
 	transitions: [{
 		name: 'default-transition',
-		once(data) {
+		once: function(data) {
 			// Define async and next container
-			const done = this.async();
-			const next = data.next.container;
+			var done = this.async();
+			var next = data.next.container;
 
 			// Display loading
 			loader.init();
@@ -777,14 +789,14 @@ barba.init({
 				});
 			});
 		},
-		leave(data) {
-			const done = this.async();
+		leave: function(data) {
+			var done = this.async();
 			done();
 		},
-		before(data) {
-			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
 
 			// Display loading
 			loader.init();
@@ -797,13 +809,13 @@ barba.init({
 				});
 			});
 		},
-		enter(data) {
-			const done = this.async();
+		enter: function(data) {
+			var done = this.async();
 			done();
 		},
-		after(data) {
-			const done = this.async();
-			const next = data.next.container;
+		after: function(data) {
+			var done = this.async();
+			var next = data.next.container;
 
 			// Animate current view
 			animate.show(next, function() {
@@ -813,10 +825,10 @@ barba.init({
 		},
 	}, {
 		name: 'home-to-detail',
-		leave(data) {
+		leave: function(data) {
 			return true;
 		},
-		before(data) {
+		before: function(data) {
 			var tl = gsap.timeline({ defaults: {
 				duration: .5,
 				ease: "expo.in"
@@ -841,10 +853,10 @@ barba.init({
 
 			return tl;
 		},
-		enter(data) {
+		enter: function(data) {
 			return true;
 		},
-		after(data) {
+		after: function(data) {
 			var tl = gsap.timeline({ defaults: { duration: .5, ease: "expo.out" }});
 
 			tl.fromTo(".detail .arrow, .detail .footer > *, .detail .year", {
@@ -870,16 +882,16 @@ barba.init({
 		}
 	}, {
 		name: 'home-to-me',
-		leave(data) {
+		leave: function(data) {
 			// Display loading
 			loader.init(true);
 
 			return true;
 		},
-		before(data) {
-			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
 
 			// Hide current view
 			animate.hide(current, function() {
@@ -901,10 +913,10 @@ barba.init({
 				});
 			}, current.querySelectorAll(".arrow"));
 		},
-		enter(data) {
-			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
+		enter: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
 
 			// Reset current element values
 			removeStyle(current.querySelectorAll(".main-text, .main-text > h1"));
@@ -914,8 +926,8 @@ barba.init({
 				done();
 			}, next.querySelectorAll(".arrow"));
 		},
-		after(data) {
-			const next = data.next.container;
+		after: function(data) {
+			var next = data.next.container;
 
 			// Reset current element values
 			removeStyle(next);
@@ -934,17 +946,17 @@ barba.init({
 		}
 	}, {
 		name: 'home-to-hi',
-		leave(data) {
+		leave: function(data) {
 			// Display loading
 			loader.init(true);
 
 			return true;
 		},
-		before(data) {
-			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
-			const elements = ".arrow-small a, .arrow";
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+			var elements = ".arrow-small a, .arrow";
 
 			// Image loading logic
 			loader.show(next, function(){
@@ -1006,9 +1018,9 @@ barba.init({
 				}
 			});
 		},
-		enter(data) {
-			const done = this.async();
-			const next = data.next.container;
+		enter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
 
 			// Animate current view if needed
 			if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
@@ -1033,7 +1045,7 @@ barba.init({
 				done();
 			}
 		},
-		after(data) {
+		after: function(data) {
 			// Remove loading
 			loader.empty();
 
@@ -1047,16 +1059,16 @@ barba.init({
 		}
 	}, {
 		name: 'hi-to-home',
-		leave(data) {
+		leave: function(data) {
 			// Display loading
 			loader.init();
 
 			return true;
 		},
-		before(data) {
-			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
 
 			var tl = gsap.timeline({ defaults: {
 				duration: .75,
@@ -1133,18 +1145,18 @@ barba.init({
 				}
 			}, .25);
 		},
-		enter(data) {
-			const done = this.async();
-			const current = data.current.container;
-			const next = data.next.container;
-			const elements = ".main-text, .arrow";
+		enter: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+			var elements = ".main-text, .arrow";
 
 			// Animate current view
 			animate.show(next, function() {
 				done();
 			}, next.querySelectorAll(elements), false);
 		},
-		after(data) {
+		after: function(data) {
 			// Remove loading
 			loader.empty();
 
@@ -1159,9 +1171,9 @@ barba.init({
 	}],
 	views: [{
 		namespace: 'home',
-		beforeEnter(data) {
-			const done = this.async();
-			const next = data.next.container;
+		beforeEnter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
 
 			// Aggresive Snap
 			snap(next.querySelectorAll(".middle"), 2);
@@ -1317,14 +1329,15 @@ barba.init({
 		}
 	}, {
 		namespace: 'detail',
-		beforeEnter(data) {
-			const done = this.async();
-			const next = data.next.container;
+		beforeEnter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
 
 			// Performace hog in firefox
-			// next.querySelectorAll("picture").forEach(function(el) {
-			// 	el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
-			// });
+			// Create shadow based on content
+			next.querySelectorAll("picture").forEach(function(el) {
+				// el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
+			});
 
 			// Read more
 			ScrollTrigger.matchMedia({
@@ -1733,7 +1746,7 @@ barba.init({
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": function() {
 					scroll.push(function(tl) {
-						gToArray(classAngledNamePicture).forEach(picture => {
+						gToArray(classAngledNamePicture).forEach(function(picture) {
 							tl.fromTo(picture, {
 								rotation: -5,
 								x: 650,
@@ -1757,7 +1770,7 @@ barba.init({
 				},
 				"(min-aspect-ratio: 1/1)": function() {
 					scroll.push(function(tl) {
-						gToArray(classAngledNamePicture).forEach(picture => {
+						gToArray(classAngledNamePicture).forEach(function(picture) {
 							tl.fromTo(picture, {
 								rotation: 0,
 								x: 500,
@@ -1860,9 +1873,9 @@ barba.init({
 							horizontal: true,
 							start: "0 0",
 							end: "100% 0",
-							onUpdate: function({progress, direction, isActive}){
-								this.progress = progress;
-								this.direction = direction;
+							onUpdate: function(value){
+								this.progress = value.progress;
+								this.direction = value.direction;
 								that.navigationHide();
 							},
 							snap: {
@@ -2042,9 +2055,9 @@ barba.init({
 		}
 	}, {
 		namespace: 'me',
-		beforeEnter(data) {
-			const done = this.async();
-			const next = data.next.container;
+		beforeEnter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
 			// I'm UI/UX and us sections
 			// Snap to element
 			snap(next.querySelectorAll(".imuiux, .us"), .5);
@@ -2111,11 +2124,11 @@ barba.init({
 			window.addEventListener("resize", resizemrgoat);
 			resizemrgoat();
 			next.querySelectorAll(".mrgoat").forEach(function(element, index) {
-				const imgs = gToArray(element.querySelectorAll(".thumbs > img"));
-				const h2s = gToArray(element.querySelectorAll(".h2"));
-				const ig = element.querySelectorAll(".ig");
-				const thumbs = element.querySelectorAll(".thumbs");
-				const mrgoat = {
+				var imgs = gToArray(element.querySelectorAll(".thumbs > img"));
+				var h2s = gToArray(element.querySelectorAll(".h2"));
+				var ig = element.querySelectorAll(".ig");
+				var thumbs = element.querySelectorAll(".thumbs");
+				var mrgoat = {
 					frame: 0
 				};
 				// Initial value
@@ -2526,20 +2539,19 @@ barba.init({
 		}
 	}, {
 		namespace: 'hi',
-		beforeEnter(data) {
-			const done = this.async();
-			const next = data.next.container;
+		beforeEnter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
 
 			var screenvertical = window.matchMedia('(max-aspect-ratio: 1/1)').matches;
 			var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
 
 			var flare = {
 				elements: "",
-				show: function(elements = false) {
+				show: function(elements) {
 					var that = this;
 
 					if (elements) this.elements = next.querySelectorAll(elements);
-					console.log(elements, this.elements);
 
 					gsap.killTweensOf(this.elements);
 					if (elements) {
@@ -2594,7 +2606,7 @@ barba.init({
 			var textanim = {
 				el: "",
 				hint: "",
-				show: function(el, hint, positive = false) {
+				show: function(el, hint, positive) {
 					var split = -50;
 
 					this.el = el;
@@ -2631,7 +2643,8 @@ barba.init({
 						ease: "power3.out",
 						duration: .5
 					});
-				}, hide() {
+				},
+				hide: function() {
 					gsap.to(next.querySelectorAll(this.el), {
 						x: 0,
 						ease: "power3.out",

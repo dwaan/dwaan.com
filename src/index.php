@@ -14,10 +14,10 @@
 	<main data-barba="container" data-barba-namespace="home" class="home">
 		<section class="middle full">
 			<div class="main-text">
-				<h1>Hello, my name is <a href="./me">Dwan</a></h1>
+				<h1>Hello, my name is <a href="./me" title="About Dwan">Dwan</a></h1>
 			</div>
 			<div class="arrow-big">
-				<a href="#casestudy" class="arrow scrollto">
+				<a href="#casestudy" title="Scroll Down" class="arrow scrollto">
 					<span>case studies</span>
 				</a>
 			</div>
@@ -25,12 +25,12 @@
 
 		<section id="casestudy" class="middle full">
 			<div class="padding">
-				<a href="./suzuki-website-redesign-pitching">
+				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
 					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
 				</a>
 			</div>
 			<div class="arrow-small">
-				<a href="./suzuki-website-redesign-pitching" class="arrow">
+				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign" class="arrow">
 					<span>Project Pitching</span>
 				</a>
 			</div>
@@ -38,19 +38,19 @@
 
 		<section class="middle full">
 			<div class="padding">
-				<a href="./melon-tiket-apa-saja">
+				<a href="./melon-tiket-apa-saja"title="" aria-label="Melon - Tiket Apa Saja Website Redesign">
 					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tike Apa Saja" />
 				</a>
 			</div>
 			<div class="arrow-small">
-				<a href="./melon-tiket-apa-saja" class="arrow">
+				<a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign" class="arrow">
 					<span>Project Pitching</span>
 				</a>
 			</div>
 		</section>
 
 		<section class="footer">
-			<a href="./say-hi" class="email">me@dwaan.com</a>
+			<a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
 			<div class="location">
 				<span>Jakarta</span>
 				<svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
