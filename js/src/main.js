@@ -345,6 +345,81 @@ var animate = {
 			}
 		});
 	},
+	show404: function (next, done){
+		if (next == undefined) return false;
+
+		// Default gsap timeline value
+		var tl = gsap.timeline({ defaults: {
+			duration: 1,
+			stagger: .1,
+			ease: "expo.out"
+		}});
+
+		// Unhide main element
+		tl.set(next, {
+			opacity: 1
+		}, 0);
+
+		if (typeof done !== "function") return false;
+
+		// Show current view
+		// Animate text
+		tl.fromTo(next.querySelectorAll(".text > *"), {
+			y: "+=200px",
+			opacity: 0
+		}, {
+			y: "-=200px",
+			opacity: 1,
+			onCompleteParams: [[next.querySelectorAll(".text > *")]],
+			onComplete: function(els) {
+				removeStyle(els);
+				done();
+			}
+		}, 0);
+		tl.fromTo(next.querySelectorAll("#lost h2"), {
+			x: "-=300",
+			opacity: 0
+		}, {
+			x: 0,
+			opacity: 1,
+			stagger: .1
+		}, 0);
+		// Animate Mr. Monkey
+		var mrmonkey = next.querySelectorAll("#mrmonkey");
+		tl.fromTo(mrmonkey, {
+			y: "-100%"
+		}, {
+			y: "-50%",
+			rotation: 5,
+			duration: 4,
+			ease: "elastic"
+		}, .5);
+		tl.to(mrmonkey, {
+			y: "-32.5%",
+			rotation: -2.5,
+			duration: 5,
+			ease: "expo"
+		});
+		tl.to(mrmonkey, {
+			y: "-10%",
+			rotation: 0,
+			duration: 5,
+			ease: "elastic.out"
+		});
+		tl.to(mrmonkey, {
+			y: "-5%",
+			rotation: 0,
+			duration: 5,
+			ease: "expo"
+		});
+		tl.to(mrmonkey, {
+			y: "0%",
+			duration: 5,
+			repeat: -1,
+			yoyo: true,
+			ease: "back.out"
+		});
+	},
 	hide: function (current, done, nonsticky) {
 		if (current == undefined) return false;
 		if (typeof done !== "function") return false;
@@ -386,7 +461,43 @@ var animate = {
 				done();
 			}
 		});
-	}
+	},
+	hide404: function (current, done){
+		if (current == undefined) return false;
+		if (typeof done !== "function") return false;
+
+		// Default gsap timeline value
+		var tl = gsap.timeline({ defaults: {
+			duration: .75,
+			ease: "power3.in",
+			stagger: {
+				from: "end",
+				amount: .1
+			}
+		}});
+
+		// Hide current view
+		tl.to(current.querySelectorAll(".thumbs"), {
+			y: "-80%",
+			opacity: 0
+		}, ">");
+		tl.to(current.querySelectorAll("#lost h2"), {
+			x: 0,
+			opacity: 0,
+			stagger: .1
+		}, "<");
+		tl.to(current.querySelectorAll(".text"), {
+			y: "+=300",
+			opacity: 0
+		}, "<");
+
+		// Run loading after all animation
+		tl.set(current, {
+			onComplete: function() {
+				done();
+			}
+		});
+	},
 }
 
 // Helper distributeByPosition
@@ -544,10 +655,17 @@ barba.init({
 			// Loading logic
 			loader.show(next, function() {
 				// Animate current view and header
-				animate.show(next, function() {
-					loader.empty();
-					done();
-				});
+				if (data.next.namespace == "lost") {
+					animate.show404(next, function() {
+						loader.empty();
+						done();
+					});
+				} else {
+					animate.show(next, function() {
+						loader.empty();
+						done();
+					});
+				}
 			});
 
 			// Animate header showing
@@ -1167,6 +1285,84 @@ barba.init({
 		},
 		to: {
 			namespace: ['home']
+		}
+	}, {
+		name: 'from-lost',
+		leave: function(data) {
+			// Display loading
+			loader.init();
+
+			return true;
+		},
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+
+			// Hide current view
+			animate.hide404(current, function() {
+				// Image loading logic
+				loader.show(next, function(){
+					done();
+				});
+			});
+		},
+		enter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
+
+			// Animate current view
+			animate.show(next, function() {
+				done();
+			});
+		},
+		after: function(data) {
+			// Remove loading
+			loader.empty();
+
+			return true;
+		},
+		from: {
+			namespace: ['lost']
+		}
+	}, {
+		name: 'to-lost',
+		leave: function(data) {
+			// Display loading
+			loader.init();
+
+			return true;
+		},
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+
+			// Hide current view
+			animate.hide(current, function() {
+				// Image loading logic
+				loader.show(next, function(){
+					done();
+				});
+			});
+		},
+		enter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
+
+			// Animate current view
+			animate.show404(next, function() {
+				done();
+			});
+		},
+		after: function(data) {
+			// Remove loading
+			loader.empty();
+
+			return true;
+		},
+		to: {
+			namespace: ['lost']
 		}
 	}],
 	views: [{
@@ -2690,6 +2886,93 @@ barba.init({
 			});
 
 			done();
+		}
+	}, {
+		namespace: 'lost',
+		beforeEnter: function(data) {
+			var speed = 10,
+				tween = [];
+
+			for (var i = 0; i < 5; i++) {
+				if(i % 2 == 0) {
+					tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
+						xPercent: -50
+					}, {
+						duration: speed + (i * 2),
+						repeat: -1,
+						ease: "linear",
+						xPercent: 0
+					})
+				} else {
+					tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
+						xPercent: 0
+					}, {
+						duration: speed + (i * 2),
+						repeat: -1,
+						ease: "linear",
+						xPercent: -50
+					})
+				}
+			}
+
+			_qAll("#nomokeybusiness p").forEach(function(el) {
+				splitText(el);
+				ScrollTrigger.matchMedia({
+					"(min-aspect-ratio: 1/1)": function() {
+						var text = {
+							speed: 1
+						};
+
+						gsap.set(el.querySelectorAll(".splext"), {
+							y: 0,
+							rotation: "random(-180,180,180)"
+						});
+
+						hoverEvents([el], function() {
+							gsap.to(text, {
+								speed: 5,
+								duration: 10,
+								ease: "power3.in",
+								onUpdate: function () {
+									for (var i = 0; i < 5; i++) {
+										tween[i].timeScale(text.speed);
+									}
+								}
+							});
+
+							gsap.to(el.querySelectorAll(".splext"), {
+								rotation: 0,
+								duration: .5,
+								ease: "expo",
+								stagger: .005
+							});
+						}, function() {
+							gsap.to(text, {
+								speed: 1,
+								duration: 2,
+								ease: "back.out",
+								onUpdate: function () {
+									for (var i = 0; i < 5; i++) {
+										tween[i].timeScale(text.speed);
+									}
+								}
+							});
+
+							gsap.to(el.querySelectorAll(".splext"), {
+								rotation: "random(-180,180,180)",
+								duration: .5,
+								ease: "expo",
+								stagger: .005
+							});
+						});
+					}, "(max-aspect-ratio: 1/1)": function() {
+						gsap.set(el.querySelectorAll(".splext"), {
+							y: "random(-1,1,1)",
+							rotation: "random(-5,5,1)"
+						});
+					}
+				});
+			});
 		}
 	}]
 });

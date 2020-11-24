@@ -206,13 +206,15 @@ var splitText = function (els) {
 	}
 
 	if (typeof els == "string") els = _qAll(els);
-	for (var i = 0; i < els.length; i++) {
-		var result = travelTags(els[i], i);
-		els[i].innerHTML = "";
+	if (els.length == undefined) els = [els];
+
+	els.forEach(function(el, i) {
+		var result = travelTags(el, i);
+		el.innerHTML = "";
 		for (var j = 0; j < result.length; j++) {
-			els[i].innerHTML += result[j][1];
+			el.innerHTML += result[j][1];
 		}
-	}
+	});
 }
 ////////////////////// Huge text animation
 var hugeText = function (el) {
