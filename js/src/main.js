@@ -324,11 +324,7 @@ var animate = {
 			opacity: 0
 		}, {
 			y: "-=200px",
-			opacity: 1,
-			// onCompleteParams: [[nonsticky, els]],
-			// onComplete: function(els) {
-			// 	removeStyle(els);
-			// }
+			opacity: 1
 		}, 0);
 		// Animate flare
 		tl.fromTo(next.querySelectorAll(".flares.side > img"), {
@@ -420,10 +416,11 @@ var animate = {
 			ease: "back.out"
 		});
 	},
-	hide: function (current, done, nonsticky) {
+	hide: function (current, done, nonsticky, scrolltop) {
 		if (current == undefined) return false;
 		if (typeof done !== "function") return false;
 		if (nonsticky == undefined) nonsticky = false;
+		if (scrolltop == undefined) scrolltop = true;
 
 		// Default gsap timeline value
 		var tl = gsap.timeline({ defaults: {
@@ -436,7 +433,7 @@ var animate = {
 		}});
 
 		// Scroll to top
-		tl = this.top(tl);
+		if (scrolltop) tl = this.top(tl);
 
 		// Hide current view
 		tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {
@@ -696,7 +693,7 @@ barba.hooks.beforeEnter(function(data) {
 						y: 0,
 						opacity: 1,
 						duration: 3,
-						ease: "expo.out"
+						ease: "power3.out"
 					});
 					// Delay
 					tl.to(arrow, {
@@ -712,7 +709,7 @@ barba.hooks.beforeEnter(function(data) {
 						x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
 						y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
 						opacity: (idx < middle.length - 1) ? 0 : 1,
-						ease: "expo.in",
+						ease: "power3.in",
 						duration: 3
 					});
 					tl.set(arrow, {
@@ -1019,8 +1016,7 @@ barba.init({
 			});
 		},
 		leave: function(data) {
-			var done = this.async();
-			done();
+			return true;
 		},
 		before: function(data) {
 			var done = this.async();
@@ -1040,17 +1036,25 @@ barba.init({
 		},
 		enter: function(data) {
 			var done = this.async();
-			done();
-		},
-		after: function(data) {
-			var done = this.async();
+			var current = data.current.container;
 			var next = data.next.container;
+
+			// Reset current element values
+			current.style.position = "fixed";
+			current.style.opacity = 0;
+			if (current.querySelector(".arrow-big")) current.querySelector(".arrow-big").style.opacity = 0;
 
 			// Animate current view
 			animate.show(next, function() {
-				loader.empty();
 				done();
 			});
+		},
+		after: function(data) {
+			var current = data.current.container;
+
+			loader.empty();
+
+			return true;
 		},
 	}, {
 		name: 'home-to-detail',
@@ -1058,50 +1062,48 @@ barba.init({
 			return true;
 		},
 		before: function(data) {
-			var tl = gsap.timeline({ defaults: {
-				duration: .5,
-				ease: "expo.in"
-			}});
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
 
-			tl.set(loader.el, { y: 0 });
+			// Display loading
+			loader.init(true);
 
-			tl.to(".home .flares > img", {
-				x: "-=random(100, 250, 10)",
-				opacity: 0,
-				duration: 1,
-				stagger: .1
-			}, 0);
-
-			tl.to(".home .arrow-small a, .home .footer", {
-				y: "+=100",
-				opacity: 0,
-				stagger: .1
-			}, 0);
-
-			animate.show(data.next.container);
-
-			return tl;
+			// Hide current view
+			animate.hide(current, function() {
+				// Image loading logic
+				loader.show(next, function(){
+					done();
+				});
+			}, current.querySelectorAll(".arrow"), false);
 		},
 		enter: function(data) {
-			return true;
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+
+			// Reset current element values
+			current.style.position = "fixed";
+			current.style.opacity = 0;
+			next.style.position = "fixed";
+			next.style.opacity = 1;
+
+			// Animate Next view
+			animate.show(next, function() {
+				done();
+			}, next.querySelectorAll(".arrow, .year"));
 		},
 		after: function(data) {
-			var tl = gsap.timeline({ defaults: { duration: .5, ease: "expo.out" }});
+			var next = data.next.container;
 
-			tl.fromTo(".detail .arrow, .detail .footer > *, .detail .year", {
-				y: "+=100",
-				opacity: 0
-			}, {
-				y: "-=100",
-				opacity: 1,
-				stagger: .1
-			}, 0);
+			// Reset current element values
+			removeStyle(next);
+			next.style.opacity = 1;
 
-			tl.set(loader.el, {
-				y: "-100%"
-			}, 0);
+			// Remove loading
+			loader.empty();
 
-			return tl;
+			return true;
 		},
 		from: {
 			namespace: ['home']
@@ -1176,9 +1178,6 @@ barba.init({
 	}, {
 		name: 'home-to-hi',
 		leave: function(data) {
-			// Display loading
-			loader.init(true);
-
 			return true;
 		},
 		before: function(data) {
@@ -1186,6 +1185,9 @@ barba.init({
 			var current = data.current.container;
 			var next = data.next.container;
 			var elements = ".arrow-small a, .arrow";
+
+			// Display loading
+			loader.init(true);
 
 			// Image loading logic
 			loader.show(next, function(){
@@ -1289,15 +1291,15 @@ barba.init({
 	}, {
 		name: 'hi-to-home',
 		leave: function(data) {
-			// Display loading
-			loader.init();
-
 			return true;
 		},
 		before: function(data) {
 			var done = this.async();
 			var current = data.current.container;
 			var next = data.next.container;
+
+			// Display loading
+			loader.init();
 
 			var tl = gsap.timeline({ defaults: {
 				duration: .75,
@@ -1400,15 +1402,15 @@ barba.init({
 	}, {
 		name: 'from-lost',
 		leave: function(data) {
-			// Display loading
-			loader.init();
-
 			return true;
 		},
 		before: function(data) {
 			var done = this.async();
 			var current = data.current.container;
 			var next = data.next.container;
+
+			// Display loading
+			loader.init();
 
 			// Hide current view
 			animate.hide404(current, function() {
@@ -1439,15 +1441,15 @@ barba.init({
 	}, {
 		name: 'to-lost',
 		leave: function(data) {
-			// Display loading
-			loader.init();
-
 			return true;
 		},
 		before: function(data) {
 			var done = this.async();
 			var current = data.current.container;
 			var next = data.next.container;
+
+			// Display loading
+			loader.init();
 
 			// Hide current view
 			animate.hide(current, function() {
@@ -1568,464 +1570,476 @@ barba.init({
 			});
 
 			// Style - Spread
-			var classSpreadName = ".style-spread";
-			// Move the text
-			scroll.moveText({
-				elements: classSpreadName + " .titles > *, " + classSpreadName + " p"
-			});
-			// Scroll animation
-			ScrollTrigger.defaults({
-				trigger: classSpreadName + " .thumbs",
-				toggleActions: "restart none none reverse"
-			});
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						tl.fromTo(".style-spread .pic-4", {
-							top: gRandom(250, 500, 5) + "px",
-							left: "50%",
-							x: "-20%",
-							rotation: 0
-						}, {
-							top: 0,
-							left: "50%",
-							rotation: 7.5,
-							ease: "expo.out"
-						}, 0);
+			next.querySelectorAll(".style-spread").forEach(function(el) {
+				// Move the text
+				scroll.moveText({
+					elements: el.querySelectorAll(".titles > *, p")
+				});
+				// Scroll animation
+				ScrollTrigger.defaults({
+					trigger: el.querySelectorAll(".thumbs"),
+					toggleActions: "restart none none reverse"
+				});
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll(".pic-4"), {
+								top: "random(250, 500, 5)px",
+								left: "50%",
+								x: "-20%",
+								rotation: 0
+							}, {
+								top: 0,
+								left: "50%",
+								rotation: 7.5,
+								ease: "expo.out"
+							}, 0);
 
-						tl.fromTo(".style-spread .pic-5", {
-							top: gRandom(250, 500, 5) + "px",
-							left: "initial",
-							right: "50%",
-							x: "20%",
-							rotation: 0
-						}, {
-							top: 0,
-							right: "50%",
-							rotation: -7.5,
-							ease: "expo.out"
-						}, 0);
+							tl.fromTo(el.querySelectorAll(".pic-5"), {
+								top: "random(250, 500, 5)px",
+								left: "initial",
+								right: "50%",
+								x: "20%",
+								rotation: 0
+							}, {
+								top: 0,
+								right: "50%",
+								rotation: -7.5,
+								ease: "expo.out"
+							}, 0);
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							start: "0 75%",
-							end: "100% 75%",
-							animation: tl,
-							scrub: 1
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								start: "0 75%",
+								end: "100% 75%",
+								animation: tl,
+								scrub: 1
+							});
 						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					// Move the pictures
-					scroll.push(function(tl) {
-						tl.fromTo(".style-spread .pic-4", {
-							top: gRandom(50, 100, 5) + "%",
-							left: 100 + gRandom(200, 300, 5) + "%",
-							x: 0,
-							y: 0,
-							rotation: gRandom(15, 25, 1)
-						}, {
-							top: "25%",
-							left: "50%",
-							rotation: -10,
-							duration: 1,
-							ease: "expo.out"
-						}, .1);
+					},
+					"(min-aspect-ratio: 1/1)": function() {
+						// Move the pictures
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll(".pic-4"), {
+								top: "random(50, 100, 5)%",
+								left: "random(300, 400, 5)%",
+								x: 0,
+								y: 0,
+								rotation: "random(15, 25, 1)"
+							}, {
+								top: "25%",
+								left: "50%",
+								rotation: -10,
+								duration: 1,
+								ease: "expo.out"
+							}, .1);
 
-						tl.fromTo(".style-spread .pic-5", {
-							top: gRandom(50, 100, 5) + "%",
-							left: 100 + gRandom(200, 300, 5) + "%",
-							x: 0,
-							y: 0,
-							rotation: 0
-						}, {
-							top: "40%",
-							left: "10%",
-							rotation: -30,
-							duration: 1,
-							ease: "expo.out"
-						}, 0);
+							tl.fromTo(el.querySelectorAll(".pic-5"), {
+								top: "random(50, 100, 5)%",
+								left: "random(300, 400, 5)%",
+								x: 0,
+								y: 0,
+								rotation: 0
+							}, {
+								top: "40%",
+								left: "10%",
+								rotation: -30,
+								duration: 1,
+								ease: "expo.out"
+							}, 0);
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							start: "-25% 50%",
-							end: "50% 50%",
-							scrub: 1,
-							animation: tl
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								start: "-25% 50%",
+								end: "50% 50%",
+								scrub: 1,
+								animation: tl
+							});
 						});
-					});
-				}
+					}
+				});
+				// Reset
+				ScrollTrigger.defaults({});
 			});
-			// Reset
-			ScrollTrigger.defaults({});
 
 			// Style - Spread Left
-			var classSpreadLeftName = ".style-spread-left";
-			// Move the text
-			scroll.moveText({
-				elements: classSpreadLeftName + " .titles > *, " + classSpreadLeftName + " p"
-			});
-			// Scroll animation
-			ScrollTrigger.defaults({
-				trigger: classSpreadLeftName + " .thumbs"
-			});
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						tl.fromTo(classSpreadLeftName + " .thumbs picture", {
-							opacity: 0,
-							y: gRandom(250, 500, 5) + "px",
-						}, {
-							opacity: 1,
-							y: 0,
-							ease: "expo.out"
-						}, 0);
+			next.querySelectorAll(".style-spread-left").forEach(function(el) {
+				// Move the text
+				scroll.moveText({
+					elements: el.querySelectorAll(".titles > *, p")
+				});
+				// Scroll animation
+				ScrollTrigger.defaults({
+					trigger: el.querySelectorAll(".thumbs")
+				});
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll(".thumbs picture"), {
+								opacity: 0,
+								y: "random(250, 500, 5)px",
+							}, {
+								opacity: 1,
+								y: 0,
+								ease: "expo.out"
+							}, 0);
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							start: "0 75%",
-							end: "100% 75%",
-							animation: tl,
-							scrub: 1
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								start: "0 75%",
+								end: "100% 75%",
+								animation: tl,
+								scrub: 1
+							});
 						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					// Move the pictures
-					scroll.push(function(tl) {
-						tl.fromTo(classSpreadLeftName + " .thumbs picture", {
-							x: -gRandom(250, 500, 5) + "px",
-							rotation: gRandom(5, 10, 1)
-						}, {
-							x: 0,
-							rotation: -5,
-							ease: "expo.out"
-						}, 0);
-
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							start: "-50% 50%",
-							end: "50% 50%",
-							scrub: 1,
-							animation: tl
-						});
-					});
-				}
-			});
-			// Reset
-			ScrollTrigger.defaults({});
-
-			// Style - Top
-			var classTopName = ".style-top";
-			// Move text
-			scroll.moveText({
-				elements: classTopName + " .text h2, " + classTopName + " .text li"
-			});
-			// Move thumbnails
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						tl.fromTo(classTopName + " .thumbs", {
-							x: 500
-						}, {
-							x: -500,
-							ease: "linear"
-						}, 0);
-
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classTopName,
-							start: "-50% 0",
-							end:  "100% 0",
-							scrub: .75,
-							animation: tl
-						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						tl.fromTo(classTopName + " .thumbs", {
-							x: 500
-						}, {
-							x: -500,
-							ease: "linear",
-							duration: 5,
-						}, 0);
-
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classTopName,
-							start: "-25% 0",
-							end:  "200% 0",
-							scrub: .75,
-							animation: tl
-						});
-					});
-				}
-			});
-			// Move thumbnail again
-			scroll.moveThumbs(classTopName + " .thumbs > picture");
-
-			// Style - Top
-			var classTopTextName = ".style-top-text";
-			// Move text
-			scroll.moveText({
-				elements: classTopTextName + " .text h2, " + classTopTextName + " .text li"
-			});
-
-			// Style - Top
-			var classBottomLogoName = ".style-bottom-logo";
-			// Move text
-			scroll.moveText({
-				elements: classBottomLogoName + " .text > *"
-			});
-			// Move logo
-			scroll.push(function(tl) {
-				tl.fromTo(classBottomLogoName + " .thumbs", {
-					x: -100,
-					y: 300,
-					rotation: 20,
-				}, {
-					x: 0,
-					y: 0,
-					rotation: 0,
-					duration: 1,
-					ease: "expo.out"
-				}, 0);
-
-				tl.fromTo(classBottomLogoName + " .thumbs li", {
-					y: 100
-				}, {
-					y: 0,
-					stagger: {
-						from: "start",
-						amount: .2
 					},
-					duration: .5,
-					ease: "expo.out"
-				}, 0);
+					"(min-aspect-ratio: 1/1)": function() {
+						// Move the pictures
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll(".thumbs picture"), {
+								x: "random(-250, -500, 5)px",
+								rotation: gRandom(5, 10, 1)
+							}, {
+								x: 0,
+								rotation: -5,
+								ease: "expo.out"
+							}, 0);
 
-				return tl;
-			}, function(tl) {
-				return ScrollTrigger.create({
-					trigger: classBottomLogoName,
-					start: (window.innerHeight * 1/4) + " " + (window.innerHeight * 3/4),
-					end: (window.innerHeight * 3/4) + " " + (window.innerHeight * 3/4),
-					scrub: 1,
-					animation: tl
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								start: "-50% 50%",
+								end: "50% 50%",
+								scrub: 1,
+								animation: tl
+							});
+						});
+					}
+				});
+				// Reset
+				ScrollTrigger.defaults({});
+			});
+
+			// Style - Top
+			next.querySelectorAll(".style-top").forEach(function(el) {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".text h2, .text li")
+				});
+				// Move thumbnails
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll(".thumbs"), {
+								x: 500
+							}, {
+								x: -500,
+								ease: "linear"
+							}, 0);
+
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "-50% 0",
+								end:  "100% 0",
+								scrub: .75,
+								animation: tl
+							});
+						});
+					},
+					"(min-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll(".thumbs"), {
+								x: 500
+							}, {
+								x: -500,
+								ease: "linear",
+								duration: 5,
+							}, 0);
+
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "-25% 0",
+								end:  "200% 0",
+								scrub: .75,
+								animation: tl
+							});
+						});
+					}
+				});
+				// Move thumbnail again
+				scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"));
+			});
+
+			// Style - Top
+			next.querySelectorAll(".style-top-text").forEach(function(el) {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".text h2, .text li")
+				});
+			});
+
+			// Style - Bottom
+			next.querySelectorAll(".style-bottom-logo").forEach(function(el) {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".text > *")
+				});
+				// Move logo
+				scroll.push(function(tl) {
+					tl.fromTo(el.querySelectorAll(".thumbs"), {
+						x: -100,
+						y: 300,
+						rotation: 20,
+					}, {
+						x: 0,
+						y: 0,
+						rotation: 0,
+						duration: 1,
+						ease: "expo.out"
+					}, 0);
+
+					tl.fromTo(el.querySelectorAll(".thumbs li"), {
+						y: 100
+					}, {
+						y: 0,
+						stagger: {
+							from: "start",
+							amount: .2
+						},
+						duration: .5,
+						ease: "expo.out"
+					}, 0);
+
+					return tl;
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: (window.innerHeight * 1/4) + " " + (window.innerHeight * 3/4),
+						end: (window.innerHeight * 3/4) + " " + (window.innerHeight * 3/4),
+						scrub: 1,
+						animation: tl
+					});
 				});
 			});
 
 			// Style - Flex
-			var classFlexName = ".style-flex";
-			// Move text
-			scroll.moveText({
-				elements: classFlexName + " .style-column > *",
-				position: "100%"
+			next.querySelectorAll(".style-flex").forEach(function(el) {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".style-column > *"),
+					position: "100%"
+				});
 			});
 
 			// Style - Trunc
-			var classTruncName = ".style-trunc";
-			// Move text
-			scroll.moveText({
-				elements: classTruncName + " .text > *, " + classTruncName + " .color ul > *",
-				position: "100%",
-				horizontal: true
+			next.querySelectorAll(".style-trunc").forEach(function(el) {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".text > *, .color ul > *"),
+					position: "100%",
+					horizontal: true
+				});
 			});
 
 			// Style - Masonry
-			var classMasonryName = ".style-masonry";
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					// Rotate masonry
-					gsap.set(classMasonryName + " .thumbs", {
-						opacity: 1,
-						rotation: -5
-					});
+			next.querySelectorAll(".style-masonry").forEach(function(el) {
+				var thumbs = el.querySelectorAll(".thumbs");
+				var alltext = el.querySelectorAll(".text > *");
 
-					// Scroll up
-					scroll.push(function(tl) {
-						for (var index = 1; index <= 4; index++) {
-							var yplus = gRandom(250, 750, 25),
-									y = 25;
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						// Rotate masonry
+						gsap.set(thumbs, {
+							opacity: 1,
+							rotation: -5
+						});
 
-							if (index == 3) yplus = 0;
-							if (index % 2 == 0) y = -25;
+						// Scroll up
+						scroll.push(function(tl) {
+							for (var index = 1; index <= 4; index++) {
+								var yplus = gRandom(250, 750, 25),
+										y = 25;
 
-							tl.fromTo(classMasonryName + " .thumbs > *:nth-child(4n+" + index + ")", {
-								y: y + yplus,
+								if (index == 3) yplus = 0;
+								if (index % 2 == 0) y = -25;
+
+								tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
+									y: y + yplus,
+								}, {
+									y: y,
+									ease: "ease"
+								}, 0);
+							}
+
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "-25% 100%",
+								end:  "100% 50%",
+								scrub: .75,
+								animation: tl
+							});
+						});
+
+						// Scroll left
+						scroll.push(function(tl) {
+							tl.fromTo(thumbs, {
+								x: 0,
 							}, {
-								y: y,
-								ease: "ease"
+								x: -50,
+								ease: "linear"
 							}, 0);
-						}
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classMasonryName,
-							start: "-25% 100%",
-							end:  "100% 50%",
-							scrub: .75,
-							animation: tl
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "-25% 100%",
+								end:  "100% 50%",
+								scrub: true,
+								animation: tl
+							});
 						});
-					});
 
-					// Scroll left
-					scroll.push(function(tl) {
-						tl.fromTo(classMasonryName + " .thumbs", {
-							x: 0,
-						}, {
-							x: -50,
-							ease: "linear"
-						}, 0);
-
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classMasonryName,
-							start: "-25% 100%",
-							end:  "100% 50%",
-							scrub: true,
-							animation: tl
+						// Move text
+						scroll.moveText({
+							delta: 25,
+							elements: alltext,
+							position: "75%"
 						});
-					});
 
-					// Move text
-					scroll.moveText({
-						delta: 25,
-						elements: classMasonryName + " .text > *",
-						position: "75%"
-					});
-
-					// Move masonry
-					scroll.moveText({
-						elements: classMasonryName + " .thumbs"
-					});
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					// Rotate masonry
-					gsap.set(classMasonryName + " .thumbs", {
-						rotation: 0
-					});
-
-					// Scroll
-					scroll.push(function(tl) {
-						for (var index = 1; index <= 4; index++) {
-							var yplus = gRandom(250, 1000, 25),
-									y = 50;
-
-							if (index == 3) yplus = 0;
-							if (index % 2 == 0) y = -50;
-
-							tl.fromTo(classMasonryName + " .thumbs > *:nth-child(4n+" + index + ")", {
-								y: y + yplus,
-							}, {
-								y: y,
-								ease: "ease"
-							}, 0);
-						}
-
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classMasonryName,
-							start: "-25% 100%",
-							end:  "100% 50%",
-							scrub: gRandom(75, 125, 5) / 100,
-							animation: tl
+						// Move masonry
+						scroll.moveText({
+							elements: thumbs
 						});
-					});
+					},
+					"(min-aspect-ratio: 1/1)": function() {
+						// Rotate masonry
+						gsap.set(thumbs, {
+							rotation: 0
+						});
 
-					// Move text
-					scroll.moveText({
-						elements: classMasonryName + " .text > *",
-						position: "75%"
-					});
+						// Scroll
+						scroll.push(function(tl) {
+							for (var index = 1; index <= 4; index++) {
+								var yplus = gRandom(250, 1000, 25),
+										y = 50;
 
-					// Move masonry
-					scroll.moveText({
-						elements: classMasonryName + " .thumbs"
-					});
-				}
+								if (index == 3) yplus = 0;
+								if (index % 2 == 0) y = -50;
+
+								tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
+									y: y + yplus,
+								}, {
+									y: y,
+									ease: "ease"
+								}, 0);
+							}
+
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "-25% 100%",
+								end:  "100% 50%",
+								scrub: gRandom(75, 125, 5) / 100,
+								animation: tl
+							});
+						});
+
+						// Move text
+						scroll.moveText({
+							elements: alltext,
+							position: "75%"
+						});
+
+						// Move masonry
+						scroll.moveText({
+							elements: thumbs
+						});
+					}
+				});
 			});
+
 
 			// Style - Angled
-			var classAngledName = ".style-angled",
-				classAngledNamePicture = classAngledName + " .thumbs > picture";
-			// Move pictures
-			scroll.moveThumbs(classAngledNamePicture, "75%");
-			// Scroll pictures
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						gToArray(classAngledNamePicture).forEach(function(picture) {
-							tl.fromTo(picture, {
-								rotation: -5,
-								x: 650,
-							}, {
-								rotation: -5,
-								x: -150
-							}, 0);
-						});
+			next.querySelectorAll(".style-angled").forEach(function(el) {
+				var elPicture = el.querySelectorAll(" .thumbs > picture");
+				// Move pictures
+				scroll.moveThumbs(elPicture, "75%");
+				// Scroll pictures
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							gToArray(elPicture).forEach(function(picture) {
+								tl.fromTo(picture, {
+									rotation: -5,
+									x: 650,
+								}, {
+									rotation: -5,
+									x: -150
+								}, 0);
+							});
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classAngledName,
-							endTrigger: ".links",
-							start: "0 100%",
-							end: "100% 100%",
-							scrub: .75,
-							animation: tl
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								endTrigger: ".links",
+								start: "0 100%",
+								end: "100% 100%",
+								scrub: .75,
+								animation: tl
+							});
 						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						gToArray(classAngledNamePicture).forEach(function(picture) {
-							tl.fromTo(picture, {
-								rotation: 0,
-								x: 500,
-							}, {
-								rotation: 0,
-								x: -500
-							}, 0);
-						});
+					},
+					"(min-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							elPicture.forEach(function(picture) {
+								tl.fromTo(picture, {
+									rotation: 0,
+									x: 500,
+								}, {
+									rotation: 0,
+									x: -500
+								}, 0);
+							});
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: classAngledName,
-							endTrigger: ".links",
-							start: "0 100%",
-							end: "100% 100%",
-							scrub: .75,
-							animation: tl
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								endTrigger: ".links",
+								start: "0 100%",
+								end: "100% 100%",
+								scrub: .75,
+								animation: tl
+							});
 						});
-					});
-				}
-			});
-			// Move text
-			scroll.moveText({
-				elements: classAngledName + " .text > *",
-				position: "85%"
+					}
+				});
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(" .text > *"),
+					position: "85%"
+				});
 			});
 
 			// Style - Slideshow
-			var classSlideshow = ".style-slideshow";
-			// All the functions
-			gToArray(classSlideshow).forEach(function(slideshow) {
+			// Full and big
+			next.querySelectorAll(".style-slideshow").forEach(function(el) {
 				// Add navigation
-				slideshow.innerHTML += "<div class='before'></div><div class='after'></div>";
+				el.innerHTML += "<div class='before'></div><div class='after'></div>";
 				// Variables
-				var that = slideshow;
+				var that = el;
 				that.slideshowScroll = that.children[0];
 				that.slideshowParent = that.querySelector("ul");
 				that.slideshowChild = that.slideshowScroll.querySelectorAll("li");
@@ -2235,11 +2249,10 @@ barba.init({
 					});
 				});
 			});
-			var classSlideshowSmall = ".style-slideshow-small";
-			// All the functions
-			gToArray(classSlideshowSmall).forEach(function(slideshow, index) {
+			// Smaller one
+			next.querySelectorAll(".style-slideshow-small").forEach(function(el) {
 				scroll.push(function(tl) {
-					tl.fromTo(slideshow.children[0].querySelectorAll("picture"), {
+					tl.fromTo(el.children[0].querySelectorAll("picture"), {
 						x: "200%"
 					}, {
 						x: 0,
@@ -2249,7 +2262,7 @@ barba.init({
 					return tl;
 				}, function(tl) {
 					return ScrollTrigger.create({
-						trigger: slideshow,
+						trigger: el,
 						start: "0 90%",
 						end: "50% 90%",
 						scrub: .75,
@@ -2258,17 +2271,18 @@ barba.init({
 				});
 				//
 			});
+
 			// Links
-			// Move text
-			gToArray(".links").forEach(function(element) {
+			next.querySelectorAll(".links").forEach(function(el) {
+				// Move text
 				scroll.moveText({
-					elements: element.querySelectorAll("nav > *"),
+					elements: el.querySelectorAll("nav > *"),
 					position: "100%"
 				});
 			});
 
 			// Snap to element
-			snap(".middle, .links", .15);
+			snap(next.querySelectorAll("section.middle, .links"), .15);
 
 			done();
 		},
