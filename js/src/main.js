@@ -1481,7 +1481,6 @@ barba.init({
 	views: [{
 		namespace: 'home',
 		beforeEnter: function(data) {
-			var done = this.async();
 			var next = data.next.container;
 
 			// Aggresive Snap
@@ -1554,13 +1553,10 @@ barba.init({
 					animation: tl
 				});
 			});
-
-			done();
 		}
 	}, {
 		namespace: 'detail',
 		beforeEnter: function(data) {
-			var done = this.async();
 			var next = data.next.container;
 
 			// Performace hog in firefox
@@ -2283,8 +2279,6 @@ barba.init({
 
 			// Snap to element
 			snap(next.querySelectorAll("section.middle, .links"), .15);
-
-			done();
 		},
 		beforeLeave: function(data) {
 			gToArray(".style-slideshow").forEach(function(slideshow) {
@@ -2294,7 +2288,6 @@ barba.init({
 	}, {
 		namespace: 'me',
 		beforeEnter: function(data) {
-			var done = this.async();
 			var next = data.next.container;
 
 			// I'm UI/UX and us sections
@@ -2806,8 +2799,6 @@ barba.init({
 
 			// Snap to element
 			snap(next.querySelectorAll(".igstage, .cofound, .links"), .25);
-
-			done();
 		},
 		beforeLeave: function(data) {
 			var current = data.current.container;
@@ -2818,7 +2809,6 @@ barba.init({
 	}, {
 		namespace: 'hi',
 		beforeEnter: function(data) {
-			var done = this.async();
 			var next = data.next.container;
 
 			var screenvertical = window.matchMedia('(max-aspect-ratio: 1/1)').matches;
@@ -2966,12 +2956,11 @@ barba.init({
 				if(screenhorizontal) textanim.hide();
 				flare.hide();
 			});
-
-			done();
 		}
 	}, {
 		namespace: 'lost',
 		beforeEnter: function(data) {
+			var next = data.next.container;
 			var speed = 10,
 				tween = [];
 
@@ -2997,7 +2986,7 @@ barba.init({
 				}
 			}
 
-			_qAll("#nomokeybusiness p").forEach(function(el) {
+			next.querySelectorAll("#nomokeybusiness p").forEach(function(el) {
 				splitText(el);
 				ScrollTrigger.matchMedia({
 					"(min-aspect-ratio: 1/1)": function() {
@@ -3015,7 +3004,7 @@ barba.init({
 							gsap.to(text, {
 								speed: 5,
 								duration: 10,
-								ease: "power3.in",
+								ease: "linear",
 								onUpdate: function () {
 									for (var i = 0; i < 5; i++) {
 										tween[i].timeScale(text.speed);
