@@ -200,10 +200,10 @@ var loader = {
 		document.body.style.cursor = "wait";
 		if (done === true) {
 			// Simple style
-			this.el.innerHTML = '<p class="simple" style="opacity: 0"><span style="margin-top: 200px"><i class="loading" style="width:0%"></i></span></p>';
+			this.el.innerHTML = '<p class="simple" style="opacity: 0;"><span><i class="loading" style="width:0%"></i></span></p>';
 		} else {
 			// Progress bar type
-			this.el.innerHTML = '<p class="normal" style="opacity: 0;">Downloading <span><i class="loading" style="width:0%"></i></span></p>';
+			this.el.innerHTML = '<p class="normal" style="opacity: 0;"><span>Downloading</span> <span><i class="loading" style="width:0%"></i></span></p>';
 		}
 		gsap.set(this.el, {
 			y: 0,
@@ -213,7 +213,7 @@ var loader = {
 		if (typeof done === "function") done();
 	},
 	show: function (els, done) {
-		if (typeof done !== "function") return false;
+		if (typeof done != "function") return false;
 
 		// Wait for all images to be loaded
 		var that = this;
@@ -226,7 +226,7 @@ var loader = {
 			opacity: 1,
 			ease: "expo",
 			delay: .25,
-			duration: .25
+			duration: .5
 		});
 
 		// Calling loading images function
@@ -325,10 +325,10 @@ var animate = {
 		}, {
 			y: "-=200px",
 			opacity: 1,
-			onCompleteParams: [[nonsticky, els]],
-			onComplete: function(els) {
-				removeStyle(els);
-			}
+			// onCompleteParams: [[nonsticky, els]],
+			// onComplete: function(els) {
+			// 	removeStyle(els);
+			// }
 		}, 0);
 		// Animate flare
 		tl.fromTo(next.querySelectorAll(".flares.side > img"), {
@@ -613,21 +613,129 @@ var snap = function(elements, snapPosition, markers) {
 	});
 }
 
+// Some browser have flexible toolbar size, like in safari mobile
+var deltatoolbar = (_q("#loader").offsetHeight - window.innerHeight) / 2;
+// Add padding to browser with variable toolbar size
+function addpadding() {
+	_qAll("section.middle").forEach(function (el, idx) {
+		el.style.paddingBottom = "";
+		gsap.set(el, {
+			paddingBottom: "+=" + deltatoolbar
+		});
+	});
+}
+addpadding();
+window.addEventListener("resize", addpadding);
+
 // Default barba hooks
 barba.hooks.before(function(data) {
 	return true;
 });
 barba.hooks.beforeEnter(function(data) {
+	var done = this.async();
+	var next = data.next.container;
+
 	// Destroy prev scroll
 	scroll.destroy();
 
 	window.scrollTo(0, 0);
 
-	return true;
+	var middle = next.querySelectorAll("section.middle");
+
+	// Scroll animate arrow
+	middle.forEach(function (el, idx) {
+		var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
+		var scrollfunc = function(tl) {
+			return ScrollTrigger.create({
+				trigger: el,
+				start: "0 50%",
+				end: "100% 50%",
+				scrub: true,
+				animation: tl
+			})
+		};
+
+		// Animate arrow
+		ScrollTrigger.matchMedia({
+			"(max-aspect-ratio: 1/1)": function() {
+				scroll.push(function(tl) {
+					// Show
+					tl.fromTo(arrow, {
+						position: "relative",
+						y: (idx > 0) ? "-100%" : 0,
+						opacity: 0
+					}, {
+						y: "0%",
+						opacity: 1,
+						ease: "linear"
+					});
+					// Hide
+					tl.fromTo(arrow, {
+						y: "0%",
+						opacity: 1
+					}, {
+						y: (idx < middle.length - 1) ? "100%" : 0,
+						opacity: 0,
+						ease: "linear"
+					});
+
+					return tl;
+				}, scrollfunc);
+			},
+			"(min-aspect-ratio: 1/1)": function() {
+				scroll.push(function(tl) {
+					// Show
+					tl.fromTo(arrow, {
+						position: "absolute",
+						x: (idx > 0) ? -50 : 0,
+						y: 0,
+						opacity: (idx > 0) ? 0 : 1
+					}, {
+						position: "fixed",
+						x: 0,
+						y: 0,
+						opacity: 1,
+						duration: 3,
+						ease: "expo.out"
+					});
+					// Delay
+					tl.to(arrow, {
+						duration: 2
+					});
+					// Hide
+					tl.fromTo(arrow, {
+						position: "fixed",
+						x: 0,
+						y: 0,
+						opacity: 1
+					}, {
+						x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
+						y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
+						opacity: (idx < middle.length - 1) ? 0 : 1,
+						ease: "expo.in",
+						duration: 3
+					});
+					tl.set(arrow, {
+						position: "absolute"
+					});
+
+					return tl;
+				}, scrollfunc);
+			}
+		});
+	});
+
+	// Add additional padding
+	addpadding();
+
+	done();
 });
 barba.hooks.afterEnter(function(data) {
+	var done = this.async();
+	var next = data.next.container;
+
 	// Read more
-	gToArray("a.scrollto").forEach(function(a) {
+	next.querySelectorAll("a.scrollto").forEach(function(a) {
 		a.addEventListener("click", function(e) {
 			gsap.to(window, {
 				duration: 1,
@@ -638,7 +746,7 @@ barba.hooks.afterEnter(function(data) {
 		});
 	});
 
-	return true;
+	done();
 });
 
 // Initialized barba.js
@@ -890,10 +998,13 @@ barba.init({
 				function() {
 					tl.repeat(0);
 				});
-				window.addEventListener("resize", function() {
-					window.fontSize = false;
-					_q("html").style.fontSize = "";
-				});
+				if (!window.resizefontevent) {
+					window.resizefontevent = true;
+					window.addEventListener("resize", function() {
+						window.fontSize = false;
+						_q("html").style.fontSize = "";
+					});
+				}
 				el.addEventListener("click", function(e) {
 					var delta = 1;
 					var howmany = 3;
@@ -1001,15 +1112,15 @@ barba.init({
 	}, {
 		name: 'home-to-me',
 		leave: function(data) {
-			// Display loading
-			loader.init(true);
-
 			return true;
 		},
 		before: function(data) {
 			var done = this.async();
 			var current = data.current.container;
 			var next = data.next.container;
+
+			// Display loading
+			loader.init(true);
 
 			// Hide current view
 			animate.hide(current, function() {
@@ -1377,48 +1488,11 @@ barba.init({
 			// Scroll animate arrow
 			var els = next.querySelectorAll(".middle");
 			els.forEach(function (el, idx) {
-				var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
 				var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
-				var bottomscroll = function(tl) {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "0 0",
-						end: "50% 0",
-						scrub: true,
-						animation: tl
-					});
-				}
-				var topscroll = function(tl) {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "50% 100%",
-						end: "100% 100%",
-						scrub: true,
-						animation: tl
-					});
-				}
 
 				// Animate text
 				scroll.push(function(tl) {
-					tl.fromTo(maintext, {
-						y: 0
-					}, {
-						y: (idx < els.length - 1) ? window.innerHeight / 8 : 0,
-						ease: "linear",
-						duration: 3
-					}, 0);
-
-					tl.fromTo(maintext, {
-						opacity: 1
-					}, {
-						opacity: 0,
-						ease: "power3.in",
-						duration: 2
-					}, 1);
-
-					return tl;
-				}, bottomscroll);
-				scroll.push(function(tl) {
+					//Show
 					tl.fromTo(maintext, {
 						y: (idx > 0) ? window.innerHeight / -8 : 0
 					}, {
@@ -1426,7 +1500,6 @@ barba.init({
 						ease: "linear",
 						duration: 3
 					}, 0);
-
 					tl.fromTo(maintext, {
 						opacity: 0
 					}, {
@@ -1434,72 +1507,31 @@ barba.init({
 						ease: "power3.out",
 						duration: 2
 					}, 0);
+					// Hide
+					tl.fromTo(maintext, {
+						y: 0
+					}, {
+						y: (idx < els.length - 1) ? window.innerHeight / 8 : 0,
+						ease: "linear",
+						duration: 3
+					}, 3);
+					tl.fromTo(maintext, {
+						opacity: 1
+					}, {
+						opacity: 0,
+						ease: "power3.in",
+						duration: 2
+					}, 4);
 
 					return tl;
-				}, topscroll);
-				// Animate arrow
-				ScrollTrigger.matchMedia({
-					"(max-aspect-ratio: 1/1)": function() {
-						scroll.push(function(tl) {
-							tl.fromTo(arrow, {
-								y: 0,
-								opacity: 1
-							}, {
-								y: (idx < els.length - 1) ? window.innerHeight / 3 : 0,
-								opacity: 0,
-								ease: "linear",
-								duration: 3
-							}, 0);
-
-							return tl;
-						}, bottomscroll);
-						scroll.push(function(tl) {
-							tl.fromTo(arrow, {
-								y: (idx > 0) ? window.innerHeight * -2/5 : 0
-							}, {
-								y: 0,
-								duration: 3,
-								ease: "linear"
-							}, 0);
-							tl.fromTo(arrow, {
-								opacity: 0
-							}, {
-								opacity: 1,
-								duration: 1,
-								ease: "linear"
-							}, 2);
-
-							return tl;
-						}, topscroll);
-					},
-					"(min-aspect-ratio: 1/1)": function() {
-						scroll.push(function(tl) {
-							tl.fromTo(arrow, {
-								y: 0,
-								opacity: 1
-							}, {
-								y: (idx < els.length - 1) ? window.innerHeight / 3 : 0,
-								opacity: 0,
-								ease: "linear",
-								duration: 3
-							}, 0);
-
-							return tl;
-						}, bottomscroll);
-						scroll.push(function(tl) {
-							tl.fromTo(arrow, {
-								y: (idx > 0) ? window.innerHeight * -2/5 : 0,
-								opacity: 0
-							}, {
-								y: 0,
-								opacity: 1,
-								duration: 3,
-								ease: "linear"
-							}, 0);
-
-							return tl;
-						}, topscroll);
-					}
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 50%",
+						end: "100% 50%",
+						scrub: true,
+						animation: tl
+					})
 				});
 			});
 
@@ -1533,15 +1565,6 @@ barba.init({
 			// Create shadow based on content
 			next.querySelectorAll("picture").forEach(function(el) {
 				// el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
-			});
-
-			// Read more
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					gsap.set("a.scrollto", { rotation: 0 });
-				}, "(min-aspect-ratio: 1/1)": function() {
-					gsap.set("a.scrollto", { rotation: 90 });
-				}
 			});
 
 			// Style - Spread
@@ -2248,14 +2271,53 @@ barba.init({
 			snap(".middle, .links", .15);
 
 			done();
+		},
+		beforeLeave: function(data) {
+			gToArray(".style-slideshow").forEach(function(slideshow) {
+				window.removeEventListener("resize", slideshow.fixedSize);
+			});
 		}
 	}, {
 		namespace: 'me',
 		beforeEnter: function(data) {
 			var done = this.async();
 			var next = data.next.container;
+
 			// I'm UI/UX and us sections
+
+			// Hide scrollto arrow
+			gToArray([next.querySelector(".middle")]).forEach(function(element, index) {
+				// Scroll and fade
+				scroll.push(function(tl) {
+					tl.fromTo(element.querySelectorAll(".arrow-big"), {
+						position: "fixed",
+						y: 0,
+						opacity: 1
+					}, {
+						position: "fixed",
+						y: window.innerHeight *  -1/5,
+						opacity: 0,
+						duration: 3,
+						ease: "linear"
+					});
+					tl.set(element.querySelectorAll(".arrow-big"), {
+						position: "absolute"
+					});
+
+					return tl;
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "50% 50%",
+						end: "100% 50%",
+						animation: tl,
+						scrub: true
+					});
+				});
+			});
+
 			// Snap to element
+			snap([next.querySelector(".middle")], 2);
 			snap(next.querySelectorAll(".imuiux, .us"), .5);
 			// Scroll events
 			next.querySelectorAll(".imuiux, .us").forEach(function(element, index) {
@@ -2306,7 +2368,7 @@ barba.init({
 			});
 
 			// Spinning Mr. Goat and Pinning
-			function resizemrgoat() {
+			next.resizemrgoat =  function() {
 				var size = window.innerWidth * 2/3;
 				var boxSet = gsap.quickSetter(next.querySelectorAll(".mrgoat img"), "css");
 
@@ -2317,8 +2379,8 @@ barba.init({
 					maxHeight: size
 				});
 			}
-			window.addEventListener("resize", resizemrgoat);
-			resizemrgoat();
+			window.addEventListener("resize", next.resizemrgoat);
+			next.resizemrgoat();
 			next.querySelectorAll(".mrgoat").forEach(function(element, index) {
 				var imgs = gToArray(element.querySelectorAll(".thumbs > img"));
 				var h2s = gToArray(element.querySelectorAll(".h2"));
@@ -2455,7 +2517,7 @@ barba.init({
 
 			// Animate IG posts and Pinning
 			// Resize picture
-			function resizeig() {
+			next.resizeig = function() {
 				var size = window.innerWidth * 2/3;
 				if (window.innerWidth > window.innerHeight) size = window.innerHeight * 1/2;
 
@@ -2469,8 +2531,8 @@ barba.init({
 					display: "block"
 				});
 			}
-			window.addEventListener("resize", resizeig);
-			resizeig();
+			window.addEventListener("resize", next.resizeig);
+			next.resizeig();
 			//
 			gsap.set(next.querySelectorAll(".igstage .thumbs"), {
 				position: "relative",
@@ -2618,13 +2680,13 @@ barba.init({
 
 			// Animate cofounder
 			// Resize position
-			function resizecofound() {
+			next.resizecofound = function() {
 				gsap.set(next.querySelectorAll(".cofound"), {
 					marginTop: -1 * window.innerHeight
 				});
 			}
-			window.addEventListener("resize", resizecofound);
-			resizecofound();
+			window.addEventListener("resize", next.resizecofound);
+			next.resizecofound();
 			next.querySelectorAll(".cofound").forEach(function(element, index) {
 				var picture = element.querySelector("picture");
 				// Hover
@@ -2732,6 +2794,12 @@ barba.init({
 			snap(next.querySelectorAll(".igstage, .cofound, .links"), .25);
 
 			done();
+		},
+		beforeLeave: function(data) {
+			var current = data.current.container;
+			window.removeEventListener("resize", current.resizeig);
+			window.removeEventListener("resize", current.resizecofound);
+			window.removeEventListener("resize", current.resizemrgoat);
 		}
 	}, {
 		namespace: 'hi',
@@ -2929,6 +2997,7 @@ barba.init({
 						});
 
 						hoverEvents([el], function() {
+							gsap.killTweensOf(text);
 							gsap.to(text, {
 								speed: 5,
 								duration: 10,
@@ -2947,6 +3016,7 @@ barba.init({
 								stagger: .005
 							});
 						}, function() {
+							gsap.killTweensOf(text);
 							gsap.to(text, {
 								speed: 1,
 								duration: 2,

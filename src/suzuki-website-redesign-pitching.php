@@ -17,9 +17,11 @@
 				<span><img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
 			</div>
 			<h4 class="year">/2020</h4>
-			<a href="#more" class="arrow scrollto">
-				<span>read more</span>
-			</a>
+			<div class="arrow-big">
+				<a href="#more" class="arrow scrollto">
+					<span>read more</span>
+				</a>
+			</div>
 		</section>
 
 		<section id="more" class="middle style-spread clip">

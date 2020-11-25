@@ -16,6 +16,7 @@
 	</div>
 
 	<div id="loader"></div>
+	<div id="log"></div>
 
 	<header class="block__clear header__height">
 		<div class="left">

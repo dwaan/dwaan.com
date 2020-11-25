@@ -67,7 +67,7 @@ header {
 	}
 }
 .main-text h1 {
-	margin: 0 var(--padl) 0;
+	margin: 0 var(--padl);
 	white-space: nowrap;
 	text-align: center;
 }
@@ -117,6 +117,9 @@ header {
 	bottom: calc(var(--pady) - 10px);
 	right: var(--padx);
 	transform-origin: right top;
+}
+.arrow-big {
+	position: fixed;
 }
 .arrow-big .arrow {
 	bottom: 0;

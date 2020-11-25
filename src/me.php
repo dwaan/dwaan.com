@@ -75,9 +75,11 @@
 			<div class="main-text">
 				<h1>Hello, my name is Dwan</h1>
 			</div>
-			<a href="#imuiux" class="arrow scrollto">
-				<span>scroll down</span>
-			</a>
+			<div class="arrow-big">
+				<a href="#imuiux" class="arrow scrollto">
+					<span>scroll down</span>
+				</a>
+			</div>
 		</section>
 
 		<section id="imuiux" class="imuiux middle">

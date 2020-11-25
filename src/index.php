@@ -14,7 +14,7 @@
 	<main data-barba="container" data-barba-namespace="home" class="home">
 		<section class="middle full">
 			<div class="main-text">
-				<h1>Hello, my name is <a href="./me" title="About Dwan">Dwan</a></h1>
+				<h1>Hello, my name is <a href="./me" arial-title="About Dwan">Dwan</a></h1>
 			</div>
 			<div class="arrow-big">
 				<a href="#casestudy" title="Scroll Down" class="arrow scrollto">
