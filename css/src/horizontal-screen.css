@@ -68,7 +68,6 @@ header {
 }
 .main-text h1 {
 	margin: 0 var(--padl);
-	white-space: nowrap;
 	text-align: center;
 }
 @media (max-width: 1200px) {
@@ -541,8 +540,8 @@ header {
 }
 .mrgoat .arrow {
 	position: relative;
-	bottom: 0;
-	right: 0;
+	top: 0;
+	left: 0;
 	transform: initial;
 }
 

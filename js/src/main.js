@@ -317,7 +317,7 @@ var animate = {
 		// Show current view
 		var els = next.querySelectorAll(".flares:not(.side)")
 		if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
-		if (!nonsticky) nonsticky = next.querySelector(".middle").children;
+		if (!nonsticky) nonsticky = next.querySelector("section.middle").children;
 		// Animate text
 		tl.fromTo([nonsticky, els], {
 			y: "+=200px",
@@ -445,7 +445,7 @@ var animate = {
 			opacity: 0,
 			delay: .1
 		}, "<");
-		if (!nonsticky) nonsticky = current.querySelector(".middle").children;
+		if (!nonsticky) nonsticky = current.querySelector("section.middle").children;
 		tl.to(nonsticky, {
 			y: "+=200",
 			opacity: 0,
@@ -637,89 +637,90 @@ barba.hooks.beforeEnter(function(data) {
 
 	window.scrollTo(0, 0);
 
-	var middle = next.querySelectorAll("section.middle");
-
 	// Scroll animate arrow
+	var middle = next.querySelectorAll("section.middle");
 	middle.forEach(function (el, idx) {
 		var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
-		var scrollfunc = function(tl) {
-			return ScrollTrigger.create({
-				trigger: el,
-				start: "0 50%",
-				end: "100% 50%",
-				scrub: true,
-				animation: tl
-			})
-		};
+		if (arrow.length > 0) {
+			var scrollfunc = function(tl) {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0 50%",
+					end: "100% 50%",
+					scrub: true,
+					animation: tl
+				})
+			};
 
-		// Animate arrow
-		ScrollTrigger.matchMedia({
-			"(max-aspect-ratio: 1/1)": function() {
-				scroll.push(function(tl) {
-					// Show
-					tl.fromTo(arrow, {
-						position: "relative",
-						y: (idx > 0) ? "-100%" : 0,
-						opacity: 0
-					}, {
-						y: "0%",
-						opacity: 1,
-						ease: "linear"
-					});
-					// Hide
-					tl.fromTo(arrow, {
-						y: "0%",
-						opacity: 1
-					}, {
-						y: (idx < middle.length - 1) ? "100%" : 0,
-						opacity: 0,
-						ease: "linear"
-					});
+			// Animate arrow
+			ScrollTrigger.matchMedia({
+				"(max-aspect-ratio: 1/1)": function() {
+					scroll.push(function(tl) {
+						// Show
+						tl.fromTo(arrow, {
+							position: "relative",
+							y: (idx > 0) ? "-100%" : 0,
+							opacity: 0
+						}, {
+							y: "0%",
+							opacity: 1,
+							ease: "linear"
+						});
+						// Hide
+						tl.fromTo(arrow, {
+							y: "0%",
+							opacity: 1
+						}, {
+							y: (idx < middle.length - 1) ? "100%" : 0,
+							opacity: 0,
+							ease: "linear"
+						});
 
-					return tl;
-				}, scrollfunc);
-			},
-			"(min-aspect-ratio: 1/1)": function() {
-				scroll.push(function(tl) {
-					// Show
-					tl.fromTo(arrow, {
-						position: "absolute",
-						x: (idx > 0) ? -50 : 0,
-						y: 0,
-						opacity: (idx > 0) ? 0 : 1
-					}, {
-						position: "fixed",
-						x: 0,
-						y: 0,
-						opacity: 1,
-						duration: 3,
-						ease: "power3.out"
-					});
-					// Delay
-					tl.to(arrow, {
-						duration: 2
-					});
-					// Hide
-					tl.fromTo(arrow, {
-						position: "fixed",
-						x: 0,
-						y: 0,
-						opacity: 1
-					}, {
-						x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
-						y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
-						opacity: (idx < middle.length - 1) ? 0 : 1,
-						ease: "power3.in",
-						duration: 3
-					});
-					tl.set(arrow, {
-						position: "absolute"
-					});
+						return tl;
+					}, scrollfunc);
+				},
+				"(min-aspect-ratio: 1/1)": function() {
+					scroll.push(function(tl) {
+						// Show
+						tl.fromTo(arrow, {
+							position: "absolute",
+							x: (idx > 0) ? -50 : 0,
+							y: 0,
+							opacity: (idx > 0) ? 0 : 1
+						}, {
+							position: "fixed",
+							x: 0,
+							y: 0,
+							opacity: 1,
+							duration: 3,
+							ease: "power3.out"
+						});
+						// Delay
+						tl.to(arrow, {
+							duration: 2
+						});
+						// Hide
+						tl.fromTo(arrow, {
+							position: "fixed",
+							x: 0,
+							y: 0,
+							opacity: 1
+						}, {
+							x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
+							y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
+							opacity: (idx < middle.length - 1) ? 0 : 1,
+							ease: "power3.in",
+							duration: 3
+						});
+						tl.set(arrow, {
+							position: "absolute"
+						});
 
-					return tl;
-				}, scrollfunc);
-			}
-		});
+						return tl;
+					}, scrollfunc);
+				}
+			});
+		}
 	});
 
 	// Add additional padding
@@ -870,22 +871,17 @@ barba.init({
 					if (!gsap.isTweening(items)) {
 						// Animate main element
 						gsap.to("main .middle", {
-							x: -100,
+							marginLeft: "-=100",
 							duration: .75,
 							ease:"power3.out"
 						});
 						gsap.to("main .middle > .text", {
-							x: -50,
+							marginLeft: "-=50",
 							duration: .75,
 							ease:"power3.out"
 						});
-						gsap.to("main .links", {
-							x: -25,
-							duration: .75,
-							ease:"power3.out"
-						});
-						gsap.to("main .flares", {
-							x: -25,
+						gsap.to("main .links, main .flares", {
+							marginLeft: "-=25",
 							duration: .75,
 							ease:"power3.out"
 						});
@@ -931,7 +927,7 @@ barba.init({
 						if (!gsap.isTweening(items)) {
 							// Animate main element
 							gsap.to("main .middle, main .middle > .text, main .links, main .flares", {
-								x: 0,
+								marginLeft: 0,
 								duration: .75,
 								ease:"power3.out"
 							});
@@ -1484,10 +1480,10 @@ barba.init({
 			var next = data.next.container;
 
 			// Aggresive Snap
-			snap(next.querySelectorAll(".middle"), 2);
+			snap(next.querySelectorAll("section.middle"), 2);
 
 			// Scroll animate arrow
-			var els = next.querySelectorAll(".middle");
+			var els = next.querySelectorAll("section.middle");
 			els.forEach(function (el, idx) {
 				var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
 
@@ -2292,221 +2288,226 @@ barba.init({
 
 			// I'm UI/UX and us sections
 
-			// Hide scrollto arrow
-			gToArray([next.querySelector(".middle")]).forEach(function(element, index) {
-				// Scroll and fade
-				scroll.push(function(tl) {
-					tl.fromTo(element.querySelectorAll(".arrow-big"), {
-						position: "fixed",
-						y: 0,
-						opacity: 1
-					}, {
-						position: "fixed",
-						y: window.innerHeight *  -1/5,
-						opacity: 0,
-						duration: 3,
-						ease: "linear"
-					});
-					tl.set(element.querySelectorAll(".arrow-big"), {
-						position: "absolute"
-					});
-
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "50% 50%",
-						end: "100% 50%",
-						animation: tl,
-						scrub: true
-					});
-				});
-			});
-
 			// Snap to element
-			snap([next.querySelector(".middle")], 2);
-			snap(next.querySelectorAll(".imuiux, .us"), .5);
-			// Scroll events
-			next.querySelectorAll(".imuiux, .us").forEach(function(element, index) {
-				// Scroll and fade
-				scroll.push(function(tl) {
-					var el = element.querySelectorAll(".text > *");
+			snap(next.querySelectorAll(".imuiux, .us"), 2);
 
-					if (index > 0) {
-						tl.fromTo(el, {
-							y: 50,
+			// Scroll events
+			var els = next.querySelectorAll(".imuiux, .us");
+			els.forEach(function(el, idx) {
+				// Scroll and fade
+				var height = window.innerHeight;
+				var txt = el.querySelectorAll(".main-text > *, .text > *");
+				var parttxt = el.querySelectorAll(".main-text, .text");
+				var paging = el.querySelectorAll(".paging");
+
+				if (txt.length > 0) {
+					scroll.push(function(tl) {
+						// Show paging
+						tl.fromTo(paging, {
+							position: "absolute",
+							opacity: (idx > 0)? 1 : 0
+						}, {
+							position: "fixed",
+							opacity: 1,
+							ease: "linear",
+							duration: 3
+						}, 0);
+						// Hide
+						tl.fromTo(paging, {
+							position: "fixed",
+							opacity: 1,
+						}, {
+							opacity: (idx < els.length - 1)? 1 : 0,
+							ease: "linear",
+							duration: 3
+						}, 3);
+						tl.set(paging, {
+							position: "absolute",
 							opacity: 0
+						});
+						// Animate text inside paging
+						paging.forEach(function(span) {
+							// Show
+							tl.fromTo(span.children[0], {
+								y: (idx > 0) ? "100%" : "0%",
+								opacity: (idx > 0) ? 1 : 0
+							}, {
+								y: "0%",
+								opacity: 1,
+								ease: "power3.out",
+								duration: 2
+							}, 0);
+							// Hide
+							tl.to(span.children[0], {
+								y: (idx < paging.length - 1) ? "-100%" : "0%",
+								opacity: (idx < paging.length - 1) ? 0 : 1,
+								ease: "power3.in",
+								duration: 2
+							}, 4);
+						});
+
+						// Show text
+						tl.fromTo(txt, {
+							y: height * 1/8
 						}, {
 							y: 0,
-							opacity: 1,
-							duration: 1,
-							ease: "power2.out"
+							ease: "power3.out",
+							duration: 3
 						}, 0);
-					}
+						tl.fromTo(txt, {
+							opacity: 0
+						}, {
+							opacity: 1,
+							ease: "power3.out",
+							duration: 2
+						}, 0);
+						// Hide text
+						tl.fromTo(txt, {
+							y: 0
+						}, {
+							y: (idx > 0) ? height * -1/8 : height * 3/8,
+							ease: "linear",
+							duration: 3
+						}, 3);
+						tl.fromTo(txt, {
+							opacity: 1
+						}, {
+							opacity: 0,
+							ease: "power3.in",
+							duration: 2
+						}, 4);
 
-					tl.fromTo(el, {
-						y: 0
-					}, {
-						y: -50,
-						duration: 2,
-						ease: "power2.inOut"
-					}, 1);
+						// Pinning
+						if (idx > 0) {
+							tl.fromTo(parttxt, {
+								position: "relative",
+								top: "50%",
+								left: "50%",
+								x: "-50%",
+								y: "-50%",
+								marginTop: -1 * deltatoolbar
+							}, {
+								position: "fixed",
+								duration: 6
+							}, 0);
+							tl.set(parttxt, {
+								position: "relative"
+							}, 6);
+						}
 
-					tl.fromTo(el, {
-						opacity: 1
-					}, {
-						opacity: 0,
-						duration: 1,
-						ease: "power2.out"
-					}, 2);
-
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						pin: true,
-						pinSpacing: false,
-						start: "0 0",
-						end: "100%+=50% 0",
-						animation: tl,
-						scrub: true
+						return tl;
+					}, function(tl) {
+						return ScrollTrigger.create({
+							id: "text" + idx,
+							trigger: el,
+							start: "0 50%",
+							end: "100% 50%",
+							scrub: true,
+							animation: tl
+						})
 					});
-				});
+				}
 			});
 
 			// Spinning Mr. Goat and Pinning
-			next.resizemrgoat =  function() {
-				var size = window.innerWidth * 2/3;
-				var boxSet = gsap.quickSetter(next.querySelectorAll(".mrgoat img"), "css");
-
-				if (window.innerWidth > window.innerHeight) size = window.innerHeight * 2/3;
-
-				boxSet({
-					width: "auto",
-					maxHeight: size
-				});
-			}
-			window.addEventListener("resize", next.resizemrgoat);
-			next.resizemrgoat();
 			next.querySelectorAll(".mrgoat").forEach(function(element, index) {
 				var imgs = gToArray(element.querySelectorAll(".thumbs > img"));
 				var h2s = gToArray(element.querySelectorAll(".h2"));
 				var ig = element.querySelectorAll(".ig");
 				var thumbs = element.querySelectorAll(".thumbs");
 				var mrgoat = {
-					frame: 0
+					frame: 1
 				};
-				// Initial value
-				gsap.set(thumbs, {
-					opacity: 0
-				});
-				gsap.set(ig, {
-					opacity: 0,
-					x: 100
-				});
-				gsap.set(element.querySelectorAll(".h2 > *"), {
-					opacity: 0,
-					y: 50
-				});
-				// Animate appearing
+				var duration = 1;
+				// Animate appearing and disapearing
 				scroll.push(function(tl) {
 					// Show Mr. Goat
-					tl.to(thumbs, {
-						opacity: 1,
-						duration: 3,
-						ease: "expo.out"
+					tl.fromTo(thumbs, {
+						y: "25vh"
+					}, {
+						y: "0vh",
+						duration: duration,
+						ease: "linear"
 					}, 0);
 					// Show IG link
-					tl.to(ig, {
+					tl.fromTo(ig, {
+						x: "100%",
+						y: "-100vh",
+						opacity: 0,
+					}, {
+						x: "0%",
+						y: "0vh",
 						opacity: 1,
-						x: 0,
-						duration: 1,
-						ease: "expo.out"
+						duration: duration,
+						ease: "linear"
 					}, 0);
 					// Animate H2
 					h2s.forEach(function(h2, index) {
 						// Show H2
-						tl.to(h2.children, {
-							y: 0,
+						tl.fromTo(h2.children, {
+							y: "12vh"
+						}, {
+							y: "0vh",
+							duration: duration,
+							ease: "power3.out"
+						}, index);
+						tl.fromTo(h2.children, {
+							opacity: 0
+						}, {
 							opacity: 1,
-							duration: 1,
-							ease: "power2.in"
-						}, (index * 2) + 1);
+							duration: duration * 1/2,
+							ease: "power3.out"
+						}, index + (duration * 1/2));
 						// Hide H2
 						tl.to(h2.children, {
-							y: -50,
+							y: (index < h2s.length) ? "-12vh" : "0vh",
+							duration: duration,
+							ease: "linear"
+						}, index + duration);
+						tl.to(h2.children, {
 							opacity: 0,
-							duration: 1,
-							ease: "power2.out"
-						}, (index * 2) + 2.5);
+							ease: "power3.in",
+							duration: duration * 1/2
+						}, index + duration);
 					});
-					// Show Mr. Goat before disapearing
-					tl.set(thumbs, {
-						opacity: 1
-					});
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: (h2s.length + 1) + "00% 0",
-						animation: tl,
-						scrub: true
-					});
-				});
-				// Animate Disappearing
-				scroll.push(function(tl) {
-					// Hide Mr. Goat
-					tl.to(thumbs, {
-						opacity: 0,
-						duration: 1,
-						ease: "expo.out"
-					}, .1);
 					// Hide IG link
 					tl.to(ig, {
+						y: "100vh",
+						x: "150%",
+						duration: duration,
+						ease: "linear"
+					}, "<");
+					tl.to(ig, {
 						opacity: 0,
-						x: 100,
-						duration: 1,
-						ease: "expo.in"
-					}, 3);
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: (h2s.length + 1) + "00% 0",
-						end: (h2s.length + 3) + "00% 0",
-						animation: tl,
-						scrub: true
-					});
-				});
-				// Pinning
-				scroll.push(function(tl) {
-					return tl
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: (h2s.length + 3) + "00% 0",
-						animation: tl,
-						pin: true,
-					});
-				});
-				// Spin Mr. Goat
-				var prev = null;
-				gsap.set(imgs, {
-					opacity: 0
-				});
-				scroll.push(function(tl) {
+						duration: duration,
+						ease: "power3.out"
+					}, "<");
+					// Hide Mr. Goat
+					tl.fromTo(thumbs, {
+						y: "0vh"
+					}, {
+						y: "25vh",
+						duration: duration,
+						ease: "linear"
+					}, "<");
+					// Spinning Mr. Goat
 					tl.to(mrgoat, {
-						frame: imgs.length - 1,
+						frame: imgs.length,
 						snap: "frame",
-						duration: 1,
-						repeat: 4,
+						repeat: h2s.length + 1,
 						ease: "linear",
+						duration: duration,
 						onUpdate: function () {
-							var el = element.querySelector(".mrgoat" + (mrgoat.frame + 1));
+							var frame = mrgoat.frame + 5;
+							var el;
+
+							if (frame > imgs.length) frame -= imgs.length;
+
+							el = element.querySelector(".mrgoat" + frame);
+
 							if (prev) prev.style.opacity = 0;
 							el.style.opacity = 1;
+
 							prev = el;
 						}
 					}, 0);
@@ -2515,189 +2516,207 @@ barba.init({
 					return ScrollTrigger.create({
 						trigger: element,
 						start: "-100% 0",
-						end: (h2s.length + 4) + "00% 0",
+						end: (h2s.length + 1) + "00% 0",
+						snap: 1 / (h2s.length + 2),
 						animation: tl,
 						scrub: true
+					});
+				});
+				// Spin Mr. Goat
+				var prev = null;
+				gsap.set(imgs, { opacity: 0 });
+				// Pinning and spinning
+				scroll.push(function(tl) {
+					return tl
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "0 0",
+						end: (h2s.length - 1) + "00% 0",
+						animation: tl,
+						scrub: 1,
+						pin: true
 					});
 				});
 			});
 
 			// Animate IG posts and Pinning
-			// Resize picture
-			next.resizeig = function() {
-				var size = window.innerWidth * 2/3;
-				if (window.innerWidth > window.innerHeight) size = window.innerHeight * 1/2;
+			// // Resize picture
+			// next.resizeig = function() {
+			// 	var size = window.innerWidth * 2/3;
+			// 	if (window.innerWidth > window.innerHeight) size = window.innerHeight * 1/2;
 
- 				gsap.set(next.querySelectorAll(".igstage .thumbs a"), {
-					width: size,
-					height: size
-				});
+			// gsap.set(next.querySelectorAll(".igstage .thumbs a"), {
+			// 	width: size,
+			// 	height: size
+			// });
 
-				gsap.set(next.querySelectorAll(".igstage"), {
-					marginTop: -3 * window.innerHeight,
-					display: "block"
-				});
-			}
-			window.addEventListener("resize", next.resizeig);
-			next.resizeig();
-			//
-			gsap.set(next.querySelectorAll(".igstage .thumbs"), {
-				position: "relative",
-				width: "100%",
-				height: "100%",
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-			})
-			//
-			next.querySelectorAll(".igstage").forEach(function(element, index) {
-				var a = element.querySelectorAll(".thumbs a");
-				var delta = 50;
-				// Set default values
-				gsap.set(a, {
-					position: "absolute",
-					zIndex: function(index) {
-						return a.length - index;
-					},
-					transformOrigin: "center",
-					opacity: 0,
-					scale: .8
-				});
-				// Animate Post
-				a.forEach(function(pic, index) {
-					// Show
-					scroll.push(function(tl) {
-						tl.to(pic, {
-							opacity: 1,
-							duration: .25,
-							ease: "power3.out"
-						}, 0);
+			// gsap.set(next.querySelectorAll(".igstage"), {
+			// 		marginTop: -3 * window.innerHeight,
+			// 		display: "block"
+			// 	});
+			// }
+			// window.addEventListener("resize", next.resizeig);
+			// next.resizeig();
+			// //
+			// gsap.set(next.querySelectorAll(".igstage .thumbs"), {
+			// 	position: "relative",
+			// 	width: "100%",
+			// 	height: "100%",
+			// 	display: "flex",
+			// 	alignItems: "center",
+			// 	justifyContent: "center",
+			// })
+			// //
+			// next.querySelectorAll(".igstage").forEach(function(element, index) {
+			// 	var a = element.querySelectorAll(".thumbs a");
+			// 	var delta = 50;
+			// 	// Set default values
+			// 	gsap.set(a, {
+			// 		position: "absolute",
+			// 		zIndex: function(index) {
+			// 			return a.length - index;
+			// 		},
+			// 		transformOrigin: "center",
+			// 		opacity: 0,
+			// 		scale: .8
+			// 	});
+			// 	// Animate Post
+			// 	a.forEach(function(pic, index) {
+			// 		// Show
+			// 		scroll.push(function(tl) {
+			// 			tl.to(pic, {
+			// 				opacity: 1,
+			// 				duration: .25,
+			// 				ease: "power3.out"
+			// 			}, 0);
 
-						tl.to(pic, {
-							scale: 1,
-							duration: 1,
-							ease: "power3.out"
-						}, 0);
+			// 			tl.to(pic, {
+			// 				scale: 1,
+			// 				duration: 1,
+			// 				ease: "power3.out"
+			// 			}, 0);
 
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: element,
-							start: (index * delta) + "% 0",
-							end: ((index + 1) * delta) + "% 0",
-							animation: tl,
-							toggleActions: "restart none none reverse"
-						});
-					});
-					// Swipe
-					if(index < (a.length - 1)) {
-						scroll.push(function(tl) {
-							var random = gRandom([true, false]);
-							var x = random ? (pic.offsetWidth * -3) : window.innerWidth + (pic.offsetWidth * 3);
-							var rotation = random ? -20 : 20;
+			// 			return tl;
+			// 		}, function(tl) {
+			// 			return ScrollTrigger.create({
+			// 				trigger: element,
+			// 				start: (index * delta) + "% 0",
+			// 				end: ((index + 1) * delta) + "% 0",
+			// 				animation: tl,
+			// 				toggleActions: "restart none none reverse"
+			// 			});
+			// 		});
+			// 		// Swipe
+			// 		if(index < (a.length - 1)) {
+			// 			scroll.push(function(tl) {
+			// 				var random = gRandom([true, false]);
+			// 				var x = random ? (pic.offsetWidth * -3) : window.innerWidth + (pic.offsetWidth * 3);
+			// 				var rotation = random ? -20 : 20;
 
-							tl.to(pic, {
-								x: x,
-								y: window.innerHeight * -2/3,
-								rotation: rotation + "deg",
-								duration: .75,
-								ease: "expo.in"
-							}, 0);
+			// 				tl.to(pic, {
+			// 					x: x,
+			// 					y: window.innerHeight * -2/3,
+			// 					rotation: rotation + "deg",
+			// 					duration: .75,
+			// 					ease: "expo.in"
+			// 				}, 0);
 
-							tl.to(pic, {
-								opacity: 0,
-								duration: .15,
-								ease: "expo.in"
-							}, .6);
+			// 				tl.to(pic, {
+			// 					opacity: 0,
+			// 					duration: .15,
+			// 					ease: "expo.in"
+			// 				}, .6);
 
-							return tl;
-						}, function(tl) {
-							return ScrollTrigger.create({
-								trigger: element,
-								start: ((index + 1) * delta) + "% 0",
-								end: ((index + 2) * delta) + "% 0",
-								animation: tl,
-								toggleActions: "restart none none reverse"
-							});
-						});
-					}
-				});
-				// Show igstage
-				scroll.push(function(tl) {
-					tl.fromTo(element.querySelector(".thumbs"), {
-						y: window.innerHeight/4,
-						opacity: 0
-					}, {
-						y: 0,
-						opacity: 1,
-						ease: "expo.out"
-					}, 0);
+			// 				return tl;
+			// 			}, function(tl) {
+			// 				return ScrollTrigger.create({
+			// 					trigger: element,
+			// 					start: ((index + 1) * delta) + "% 0",
+			// 					end: ((index + 2) * delta) + "% 0",
+			// 					animation: tl,
+			// 					toggleActions: "restart none none reverse"
+			// 				});
+			// 			});
+			// 		}
+			// 	});
+			// 	// Show igstage
+			// 	scroll.push(function(tl) {
+			// 		tl.fromTo(element.querySelector(".thumbs"), {
+			// 			y: window.innerHeight/4,
+			// 			opacity: 0
+			// 		}, {
+			// 			y: 0,
+			// 			opacity: 1,
+			// 			ease: "expo.out"
+			// 		}, 0);
 
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: "100% 0",
-						animation: tl,
-						scrub: true
-					});
-				});
-				// Show skip button
-				scroll.push(function(tl) {
-					tl.fromTo(element, {
-						backgroundColor: ""
-					}, {
-						backgroundColor: "var(--white)"
-					});
-					tl.fromTo(element.querySelector(".scrollto"), {
-						y: -100,
-						opacity: 0
-					}, {
-						y: 0,
-						opacity: 1,
-						ease: "expo.in",
-						duration: .5
-					});
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: ((a.length + 1) * delta * 1/3) + "% 0",
-						end: ((a.length + 1) * delta * 1/3) + "% 0",
-						animation: tl,
-						toggleActions: "restart none none reverse"
-					});
-				});
-				// Pinning
-				scroll.push(function(tl) {
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: ((a.length + 1) * delta) + "% 0",
-						animation: tl,
-						pin: true,
-						scrub: true,
-						anticipatePin: 2
-					});
-				});
-			});
+			// 		return tl;
+			// 	}, function(tl) {
+			// 		return ScrollTrigger.create({
+			// 			trigger: element,
+			// 			start: "0 0",
+			// 			end: "100% 0",
+			// 			animation: tl,
+			// 			scrub: true
+			// 		});
+			// 	});
+			// 	// Show skip button
+			// 	scroll.push(function(tl) {
+			// 		tl.fromTo(element, {
+			// 			backgroundColor: ""
+			// 		}, {
+			// 			backgroundColor: "var(--white)"
+			// 		});
+			// 		tl.fromTo(element.querySelector(".scrollto"), {
+			// 			y: -100,
+			// 			opacity: 0
+			// 		}, {
+			// 			y: 0,
+			// 			opacity: 1,
+			// 			ease: "expo.in",
+			// 			duration: .5
+			// 		});
+			// 		return tl;
+			// 	}, function(tl) {
+			// 		return ScrollTrigger.create({
+			// 			trigger: element,
+			// 			start: ((a.length + 1) * delta * 1/3) + "% 0",
+			// 			end: ((a.length + 1) * delta * 1/3) + "% 0",
+			// 			animation: tl,
+			// 			toggleActions: "restart none none reverse"
+			// 		});
+			// 	});
+			// 	// Pinning
+			// 	scroll.push(function(tl) {
+			// 		return tl;
+			// 	}, function(tl) {
+			// 		return ScrollTrigger.create({
+			// 			trigger: element,
+			// 			start: "0 0",
+			// 			end: ((a.length + 1) * delta) + "% 0",
+			// 			animation: tl,
+			// 			pin: true,
+			// 			scrub: true,
+			// 			anticipatePin: 2
+			// 		});
+			// 	});
+			// });
 
 			// Animate cofounder
-			// Resize position
-			next.resizecofound = function() {
-				gsap.set(next.querySelectorAll(".cofound"), {
-					marginTop: -1 * window.innerHeight
-				});
-			}
-			window.addEventListener("resize", next.resizecofound);
-			next.resizecofound();
-			next.querySelectorAll(".cofound").forEach(function(element, index) {
-				var picture = element.querySelector("picture");
+			// // Resize position
+			// next.resizecofound = function() {
+			// 	gsap.set(next.querySelectorAll(".cofound"), {
+			// 		marginTop: -1 * window.innerHeight
+			// 	});
+			// }
+			// next.resizecofound();
+			// window.addEventListener("resize", next.resizecofound);
+			// Animation
+			next.querySelectorAll(".cofound").forEach(function(el, index) {
 				// Hover
-				hoverEvents(element.querySelectorAll("a"), function() {
+				var picture = el.querySelector("picture");
+				hoverEvents(el.querySelectorAll("a"), function() {
 					gsap.killTweensOf(picture);
 					gsap.to(picture, {
 						scale: 2,
@@ -2711,80 +2730,48 @@ barba.init({
 						duration: 1,
 						ease: "expo.out"
 					});
-				})
-				// Pin
-				scroll.push(function(tl) {
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: "100% 0",
-						animation: tl,
-						scrub: true,
-						pin: true,
-						anticipatePin: 1
-					});
 				});
 				// Animate
+				var eltext = el.querySelectorAll(".text > *");
 				scroll.push(function(tl) {
-					tl.fromTo(element.querySelectorAll(".text > *"), {
-						y: window.innerHeight/10
+					tl.fromTo(eltext, {
+						y: window.innerHeight * 1/10
 					}, {
-						y: window.innerHeight/-10,
+						y: window.innerHeight * -1/10,
 						ease: "linear",
-						duration: 2
+						duration: 4
 					}, 0);
-					tl.fromTo(element.querySelectorAll(".thumbs"), {
-						y: 0
+					tl.fromTo(eltext, {
+						opacity: 0
 					}, {
-						y: window.innerHeight/5,
+						opacity: 1,
 						ease: "linear",
 						duration: 1
-					}, 1);
+					}, 0);
+					tl.fromTo(eltext, {
+						opacity: 1
+					}, {
+						opacity: 0,
+						ease: "linear",
+						duration: 1
+					}, 3);
+
+					tl.fromTo(el.querySelectorAll(".thumbs"), {
+						y: window.innerHeight * -1/4
+					}, {
+						y: window.innerHeight * 1/4,
+						ease: "linear",
+						duration: 4
+					}, 0);
 					return tl;
 				}, function(tl) {
 					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: "200% 0",
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
 						animation: tl,
 						scrub: true
 					});
-				});
-			});
-
-			// Move Flare
-			var flare = [];
-			var animation = function(el, idx) {
-				var y = ["150%", "-300%"];
-				if (gRandom(1, 2, 1) == 1) y = ["-300%", "200%"];
-
-				return gsap.fromTo(el, {
-					left: gRandom(20, 80, 10) + "%",
-					y: y[0],
-					rotation: gRandom(75, 135, 5)
-				}, {
-					y: y[1],
-					rotation: gRandom(75, 135, 5),
-					duration: gRandom(15, 30, 4),
-					ease: "linear",
-					onCompleteParams: [el, idx],
-					onComplete: function(el, idx) {
-						animation(el, idx);
-					}
-				});
-			}
-			next.querySelectorAll(".flares").forEach(function(el1, idx1) {
-				flare[idx1] = [];
-				gToArray(el1.children).forEach(function(el2, idx2) {
-					gsap.set(el2, {
-						height: "100vw",
-						width: "auto",
-						opacity: 1,
-						top: 0
-					});
-					// flare[idx1][idx2] = animation(el2, idx2);
 				});
 			});
 

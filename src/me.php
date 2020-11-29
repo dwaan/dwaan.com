@@ -71,7 +71,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
-		<section id="flarestart" class="middle">
+		<section class="imuiux middle">
 			<div class="main-text">
 				<h1>Hello, my name is Dwan</h1>
 			</div>
@@ -85,7 +85,10 @@
 		<section id="imuiux" class="imuiux middle">
 			<div class="text">
 				<h1>I'm a UI/UX Designer and Strategist</h1>
-				<p>a.k.a. Web Designer</p>
+				<p>a.k.a. Web Designer on Steroid</p>
+			</div>
+			<div class="paging">
+				<span>1</span> <hr> <span>4</span>
 			</div>
 		</section>
 
@@ -94,18 +97,27 @@
 				<h2>Other Then Web Designer</h2>
 				<p>I do lots of things in the past, like becoming Macromedia Flash Expert, Database Programmer, Creative Director, Chief Creative Officer, and CIO among others.</p>
 			</div>
+			<div class="paging">
+				<span>2</span> <hr> <span>4</span>
+			</div>
 		</section>
 
 		<section class="know us middle">
 			<div class="text">
-				<h2><a href="/say-hi">so send me a message</a></h2>
-				<p>if you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to asked something to me.</p>
+				<h2><a href="./say-hi" class="arrow spring superbig">Send Me a Hi!</a></h2>
+				<p>If you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to ask me something or if you want some project leads.</p>
+			</div>
+			<div class="paging">
+				<span>3</span> <hr> <span>4</span>
 			</div>
 		</section>
 
 		<section class="who us middle">
 			<div class="text">
 				<h2>and who is this Mr. Goat you asked?</h2>
+			</div>
+			<div class="paging">
+				<span>4</span> <hr> <span>4</span>
 			</div>
 		</section>
 
@@ -131,9 +143,9 @@
 					for ($i = 0; $i < $length; $i++) {
 						$data = $obj->data[$i];
 						if($data->media_type == "IMAGE" || $data->media_type == "CAROUSEL_ALBUM") {
-							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->media_url . ") center no-repeat; background-size:cover' title='" . $data->caption . "'></span></a>";
+							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->media_url . ") center no-repeat; background-size:cover' aria-label='" . $data->caption . "'></span></a>";
 						} elseif($data->media_type == "VIDEO") {
-							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->thumbnail_url . ") center no-repeat; background-size:cover' title='" . $data->caption . "'></span></a>";
+							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->thumbnail_url . ") center no-repeat; background-size:cover' aria-label='" . $data->caption . "'></span></a>";
 						}
 					}
 				?>
@@ -141,9 +153,7 @@
 			<a href="#cofound" class="arrow scrollto"><span>fast forward</span></a>
 		</section>
 
-		<div id="flareend"></div>
-
-		<div id="cofound" class="cofound middle">
+		<div class="cofound middle clip">
 			<div class="text">
 				<h2>and  10 Years Ago</h2>
 				<p>My friend and I decide to create Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner right now.</p>
@@ -170,15 +180,6 @@
 
 		<section class="footer">
 			<a class="reading">Reading time: 120 seconds</a>
-		</section>
-
-		<section class="flares">
-			<?php
-				for ($img = $i = 1; $i <= 5; $i++) {
-					echo '<img src="img/flares/flare' . $img. '.png" width="" height="" alt="Flare" class="flare' . $i . '" />';
-					if(++$img > 5) $img = 1;
-				}
-			?>
 		</section>
 	</main>
 

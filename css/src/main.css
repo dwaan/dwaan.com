@@ -844,13 +844,15 @@ header .right {
 
 /* Main text in Homepage and Me */
 .main-text h1 {
+	font-size: 6rem;
 	font-weight: 500;
 	padding: 0!important;
-	line-height: 80%;
+	line-height: 100%;
 	color: var(--black);
 }
 .main-text h1 a {
 	display: initial;
+	background: inherit;
 }
 .main-text h1 .splord,
 .main-text h1 .splext {
@@ -1458,10 +1460,21 @@ header .right {
 
 /* Me page */
 
+.me .middle {
+	position: relative;
+	z-index: 1;
+}
+.me .mrgoat,
+.me .pin-spacer {
+	position: relative;
+	z-index: 2;
+}
+
 .me .flares {
-	position: absolute;
+	position: fixed;
+	top: 0;
 	overflow: hidden;
-	height: 700vh;
+	height: 500vh;
 }
 .me .flares img {
 	width: 175vw;
@@ -1470,26 +1483,27 @@ header .right {
 	transform-origin: center left;
 	transform: rotate(90deg);
 	opacity: 1;
-	left: 50vw;
+	left: 50%;
 }
 .me .flares .flare1 {
-	left: 50vw;
-	top: 350vh;
+	top: 40%;
+	left: 40%;
 }
 .me .flares .flare2 {
-	left: 75vw;
-	top: 360vh;
+	top: 40%;
+	left: 85%;
 	transform: rotate(120deg);
 }
 .me .flares .flare3 {
-	top: 180vh;
+	top: 20%;
+	left: 45%;
 }
 .me .flares .flare4 {
-	top: -20vh;
+	top: -10%;
 }
 .me .flares .flare5 {
-	left: 50vw;
-	top: 80vh;
+	top: 0%;
+	left: 70%;
 	transform: rotate(100deg);
 }
 
@@ -1506,12 +1520,35 @@ header .right {
 	padding: 0 0 var(--padm);
 	margin: 0;
 }
-.splord,
-.splext {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
-	white-space: nowrap;
+.me .us .arrow {
+	display: inline-flex;
+	position: relative;
+	transform: none;
+	bottom: initial;
+	right: initial;
+}
+
+.me .paging {
+	position: absolute;
+	top: initial;
+	left: initial;
+	right: var(--padx);
+	bottom: var(--pady);
+}
+.paging {
+	display: flex;
+	flex: column nowrap;
+	align-items: center;
+	justify-content: center;
+	font-size: .8rem;
+	line-height: 100%;
+}
+.paging hr {
+	width: var(--padxl);
+	margin: 0 var(--padm);
+	border: none;
+	height: 1px;
+	background-color: var(--gray-light);
 }
 
 
@@ -1535,6 +1572,7 @@ header .right {
 	z-index: 1;
 }
 .mrgoat .thumbs {
+	z-index: 2;
 	display: flex;
 	justify-content: center;
 	transform: initial;
@@ -1578,7 +1616,7 @@ header .right {
 	letter-spacing: -.075em;
 }
 .mrgoat .ig {
-	position: fixed!important;
+	position: absolute;
 	top: initial;
 	left: initial;
 	right: var(--padx);
