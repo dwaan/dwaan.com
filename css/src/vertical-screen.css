@@ -1,15 +1,15 @@
 /* Defining the font size based on aspect ratio */
 html {
-	font-size: 14px;
+	font-size: 16px;
 }
 @media (min-width: 600px) {
 	html {
-		font-size: 16px;
+		font-size: 18px;
 	}
 }
 @media (min-width: 1000px) {
 	html {
-		font-size: 18px;
+		font-size: 20px;
 	}
 }
 
@@ -48,7 +48,6 @@ header {
 @media (min-height: 1024px) {
 	.middle {
 		padding: calc(3 * var(--pady)) var(--padx);
-		min-height: initial;
 	}
 	.middle.full {
 		min-height: 100%;
@@ -63,6 +62,7 @@ header {
 
 .main-text {
 	max-width: 450px;
+	align-items: flex-start;
 }
 @media (min-width: 600px) {
 	.main-text {
@@ -450,43 +450,37 @@ header {
 
 /* Me page */
 
+.imuiux {
+	padding: calc(5 * var(--pady)) var(--padx);
+}
 .me h1 {
 	font-size: 4rem;
 }
 .me h2 {
 	font-size: 3rem;
-	padding: 0 0 var(--padl);
 }
 .me h3 {
-	font-size: 2rem;
+	font-size: 1.8rem;
 }
-.me .flares {
-	transform: none;
-	width: 100vw;
+.me h4 {
+	font-size: 1.2rem;
+}
+.me .text {
+	text-align: left;
 }
 
 
 /* Mr. Goat */
 
-.mrgoat {
-	display: flex;
-	flex-direction: column nowrap;
+.mrgoat.spin {
+	height: 50vh;
 }
-.mrgoat h2,
-.mrgoat h3,
-.mrgoat h4 {
-	line-height: 80%;
+.mrgoat {
+	text-align: left;
 }
 .mrgoat h2 {
-	font-size: 4.5rem;
-}
-.mrgoat h3 {
-	font-size: 3.5rem;
-}
-.mrgoat h4 {
-	font-size: 2.5rem;
-	line-height: 90%;
-	letter-spacing: 0rem;
+	font-size: 4rem;
+	line-height: 80%;
 }
 .mrgoat .text,
 .mrgoat .thumbs {
@@ -494,7 +488,7 @@ header {
 }
 .mrgoat .thumbs {
 	order: 1;
-	flex: 2.5;
+	padding-bottom: var(--padxl);
 	position: relative;
 	align-items: flex-end;
 }
@@ -502,20 +496,36 @@ header {
 	padding-top: var(--padxl);
 	align-items: flex-start;
 	order: 2;
-	flex: 1;
+}
+.mrgoat .arrow {
+	order: 3;
+	flex: 0;
 }
 .mrgoat img {
 	width: 400px;
 	max-width: 65vw;
 	height: auto;
 }
-.mrgoat .ig:after {
-	width: 20px;
-}
 
+.igstage .thumbs {
+	grid-template-columns: auto auto;
+	grid-gap: var(--padx);
+}
+.igstage .thumbs a {
+	height: calc((100vw / 2) - (1.5 * var(--padx)));
+}
+@media (min-width: 600px) {
+	.igstage .thumbs {
+		padding: var(--padx);
+		grid-template-columns: auto auto auto;
+		grid-gap: calc(2 * var(--padx));
+	}
+	.igstage .thumbs a {
+		height: calc((100vw / 3) - (3 * var(--padx)));
+	}
+}
 .igstage .arrow {
 	position: absolute;
-	display: flex;
 	flex-direction: row;
 	height: 12px;
 	line-height: 12px;
@@ -530,6 +540,14 @@ header {
 	margin: 0 0 0 10px;
 	height: 12px;
 	transform: initial;
+}
+.igstage .thumbs a:after {
+}
+
+@media (min-height: 1024px) {
+	.cofound {
+		padding: 15vh var(--padx);
+	}
 }
 
 /* Footer links in every detail page */

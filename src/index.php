@@ -25,26 +25,37 @@
 
 		<section id="casestudy" class="middle full">
 			<div class="padding">
-				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
-					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
-				</a>
+				<a href="./plurk">Plurk &nbsp; <sup>20</sup><sub>20</sub></a>
 			</div>
 			<div class="arrow-small">
-				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign" class="arrow">
-					<span>Project Pitching</span>
+				<a href="./plurk" class="arrow">
+					<span>Weekend Project</span>
 				</a>
 			</div>
 		</section>
 
 		<section class="middle full">
 			<div class="padding">
-				<a href="./melon-tiket-apa-saja"title="" aria-label="Melon - Tiket Apa Saja Website Redesign">
+				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
+					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
+				</a>
+			</div>
+			<div class="arrow-small">
+				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign" class="arrow">
+					<span>Concept Pitching</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="middle full">
+			<div class="padding">
+				<a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
 					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tike Apa Saja" />
 				</a>
 			</div>
 			<div class="arrow-small">
-				<a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign" class="arrow">
-					<span>Project Pitching</span>
+				<a href="./melon-tiket-apa-saja" class="arrow">
+					<span>Design Solutions</span>
 				</a>
 			</div>
 		</section>

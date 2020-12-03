@@ -749,6 +749,7 @@ barba.hooks.afterEnter(function(data) {
 
 // Initialized barba.js
 barba.init({
+	debug: true,
 	transitions: [{
 		name: 'default-transition',
 		once: function(data) {
@@ -1212,7 +1213,7 @@ barba.init({
 						x: "-50%",
 						y: "50%",
 						lineHeight: "80%",
-						fontSize: "5rem",
+						fontSize: "6rem",
 						fontWeight: 500,
 						letterSpacing: "-0.06em",
 						duration: 1,
@@ -1312,7 +1313,7 @@ barba.init({
 					x: "-50%",
 					y: "50%",
 					lineHeight: "80%",
-					fontSize: "5rem",
+					fontSize: "6rem",
 					fontWeight: 500,
 					letterSpacing: "-0.06em"
 				},
@@ -2286,11 +2287,10 @@ barba.init({
 		beforeEnter: function(data) {
 			var next = data.next.container;
 
-			// I'm UI/UX and us sections
-
 			// Snap to element
 			snap(next.querySelectorAll(".imuiux, .us"), 2);
 
+			// I'm UI/UX and us sections
 			// Scroll events
 			var els = next.querySelectorAll(".imuiux, .us");
 			els.forEach(function(el, idx) {
@@ -2410,99 +2410,39 @@ barba.init({
 			});
 
 			// Spinning Mr. Goat and Pinning
-			next.querySelectorAll(".mrgoat").forEach(function(element, index) {
-				var imgs = gToArray(element.querySelectorAll(".thumbs > img"));
-				var h2s = gToArray(element.querySelectorAll(".h2"));
+			var h2s = next.querySelectorAll(".mrgoat:not(.spin)").length;
+			gsap.set(next.querySelectorAll(".mrgoat .thumbs"), { display: "none" });
+			next.querySelectorAll(".mrgoat.spin").forEach(function(element, index) {
+				var imgs = element.querySelectorAll(".thumbs > img");
 				var ig = element.querySelectorAll(".ig");
 				var thumbs = element.querySelectorAll(".thumbs");
 				var mrgoat = {
 					frame: 1
 				};
 				var duration = 1;
-				// Animate appearing and disapearing
+				// Spin Mr. Goat
+				var prev = null;
+				gsap.set(imgs, { opacity: 0 });
+				gsap.set(thumbs, { display: "" });
 				scroll.push(function(tl) {
-					// Show Mr. Goat
-					tl.fromTo(thumbs, {
-						y: "25vh"
+					tl.fromTo(element, {
+						opacity: 0
 					}, {
-						y: "0vh",
-						duration: duration,
-						ease: "linear"
-					}, 0);
-					// Show IG link
-					tl.fromTo(ig, {
-						x: "100%",
-						y: "-100vh",
-						opacity: 0,
-					}, {
-						x: "0%",
-						y: "0vh",
 						opacity: 1,
 						duration: duration,
-						ease: "linear"
+						ease: "power.in"
 					}, 0);
-					// Animate H2
-					h2s.forEach(function(h2, index) {
-						// Show H2
-						tl.fromTo(h2.children, {
-							y: "12vh"
-						}, {
-							y: "0vh",
-							duration: duration,
-							ease: "power3.out"
-						}, index);
-						tl.fromTo(h2.children, {
-							opacity: 0
-						}, {
-							opacity: 1,
-							duration: duration * 1/2,
-							ease: "power3.out"
-						}, index + (duration * 1/2));
-						// Hide H2
-						tl.to(h2.children, {
-							y: (index < h2s.length) ? "-12vh" : "0vh",
-							duration: duration,
-							ease: "linear"
-						}, index + duration);
-						tl.to(h2.children, {
-							opacity: 0,
-							ease: "power3.in",
-							duration: duration * 1/2
-						}, index + duration);
-					});
-					// Hide IG link
-					tl.to(ig, {
-						y: "100vh",
-						x: "150%",
-						duration: duration,
-						ease: "linear"
-					}, "<");
-					tl.to(ig, {
-						opacity: 0,
-						duration: duration,
-						ease: "power3.out"
-					}, "<");
-					// Hide Mr. Goat
-					tl.fromTo(thumbs, {
-						y: "0vh"
-					}, {
-						y: "25vh",
-						duration: duration,
-						ease: "linear"
-					}, "<");
-					// Spinning Mr. Goat
 					tl.to(mrgoat, {
 						frame: imgs.length,
 						snap: "frame",
-						repeat: h2s.length + 1,
+						repeat: h2s,
 						ease: "linear",
 						duration: duration,
 						onUpdate: function () {
-							var frame = mrgoat.frame + 5;
+							var frame = mrgoat.frame + 4;
 							var el;
 
 							if (frame > imgs.length) frame -= imgs.length;
-
 							el = element.querySelector(".mrgoat" + frame);
 
 							if (prev) prev.style.opacity = 0;
@@ -2511,31 +2451,20 @@ barba.init({
 							prev = el;
 						}
 					}, 0);
+					tl.to(element, {
+						opacity: 0,
+						duration: duration,
+						ease: "power.out"
+					}, ">-" + duration);
 					return tl;
 				}, function(tl) {
 					return ScrollTrigger.create({
-						trigger: element,
+						trigger: next.querySelectorAll("#startmrgoat"),
 						start: "-100% 0",
-						end: (h2s.length + 1) + "00% 0",
-						snap: 1 / (h2s.length + 2),
+						endTrigger: next.querySelectorAll("#stopmrgoat"),
+						end: "100% 0%",
 						animation: tl,
 						scrub: true
-					});
-				});
-				// Spin Mr. Goat
-				var prev = null;
-				gsap.set(imgs, { opacity: 0 });
-				// Pinning and spinning
-				scroll.push(function(tl) {
-					return tl
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: element,
-						start: "0 0",
-						end: (h2s.length - 1) + "00% 0",
-						animation: tl,
-						scrub: 1,
-						pin: true
 					});
 				});
 			});
@@ -2704,15 +2633,6 @@ barba.init({
 			// });
 
 			// Animate cofounder
-			// // Resize position
-			// next.resizecofound = function() {
-			// 	gsap.set(next.querySelectorAll(".cofound"), {
-			// 		marginTop: -1 * window.innerHeight
-			// 	});
-			// }
-			// next.resizecofound();
-			// window.addEventListener("resize", next.resizecofound);
-			// Animation
 			next.querySelectorAll(".cofound").forEach(function(el, index) {
 				// Hover
 				var picture = el.querySelector("picture");
@@ -2776,7 +2696,6 @@ barba.init({
 			});
 
 			// Links
-			// Move text
 			next.querySelectorAll(".links").forEach(function(element) {
 				scroll.moveText({
 					elements: element.querySelectorAll("nav > *"),
@@ -2786,12 +2705,6 @@ barba.init({
 
 			// Snap to element
 			snap(next.querySelectorAll(".igstage, .cofound, .links"), .25);
-		},
-		beforeLeave: function(data) {
-			var current = data.current.container;
-			window.removeEventListener("resize", current.resizeig);
-			window.removeEventListener("resize", current.resizecofound);
-			window.removeEventListener("resize", current.resizemrgoat);
 		}
 	}, {
 		namespace: 'hi',
@@ -3033,6 +2946,36 @@ barba.init({
 					}
 				});
 			});
+		}
+	}, {
+		namespace: 'plurk',
+		beforeEnter: function(data) {
+			var done = this.async();
+			var next = data.next.container;
+			var input = next.querySelector("#oauth_token");
+			var submit = next.querySelector("#submit");
+			var url = submit.getAttribute("href");
+			var createURl = function() {
+				return url + "?oauth_token=" + encodeURI(input.value);
+			}
+
+			input.onkeyup = function(event) {
+				if (input.value != "") addClass(submit, "validated");
+				else removeClass(submit, "validated");
+
+				submit.setAttribute("href", createURl());
+			}
+			submit.onclick = function(event) {
+				this.setAttribute("href", createURl());
+			};
+
+			snap(next.querySelectorAll(".middle"), .25);
+			done();
+		},
+		beforeLeave: function(data) {
+			var next = data.next.container;
+			next.querySelector("#submit").onkeyup = function() {};
+			next.querySelector("#submit").onclick = function() {};
 		}
 	}]
 });

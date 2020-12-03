@@ -1,4 +1,4 @@
-<meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>"><link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>"><link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>"><script type="text/javascript">var classcollection = "";
+<meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>"><link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>"><link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>"><script type="text/javascript">var classcollection = "no-js";
 		/* See if it's in dark mode */
 		h = document.querySelector("html");
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
@@ -14,7 +14,7 @@
 
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = $_SERVER['REQUEST_URI'];
-		$params= $_SERVER['QUERY_STRING'];
+		$params = @$_SERVER['QUERY_STRING'];
 
 		if ($params == "") $url = $protocol . '://' . $host . $uri;
 		else $url = $protocol . '://' . $host . $uri . '?' . $params;

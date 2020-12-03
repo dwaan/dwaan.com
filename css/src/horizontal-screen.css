@@ -60,6 +60,8 @@ header {
 /* Homepage content */
 .main-text {
 	max-width: 800px;
+	text-align: center;
+	align-items: center;
 }
 @media (min-width: 1200px) {
 	.main-text {
@@ -68,7 +70,6 @@ header {
 }
 .main-text h1 {
 	margin: 0 var(--padl);
-	text-align: center;
 }
 @media (max-width: 1200px) {
 	.main-text h1 {
@@ -119,6 +120,9 @@ header {
 }
 .arrow-big {
 	position: fixed;
+}
+.no-js .arrow-big {
+	position: absolute;
 }
 .arrow-big .arrow {
 	bottom: 0;
@@ -502,15 +506,17 @@ header {
 
 /* Mr. Goat */
 
+.mrgoat.spin {
+	height: 100vh;
+}
 .mrgoat h2 {
-	font-size: 7rem;
+	font-size: 6rem;
 }
-.mrgoat h3 {
-	font-size: 5rem;
-}
-.mrgoat h4 {
-	font-size: 3rem;
-	letter-spacing: -.05rem;
+.mrgoat p {
+	font-size: 2rem;
+	line-height: 120%;
+	max-width: 1000px;
+	padding: 0 var(--padx);
 }
 .mrgoat .text {
 	position: absolute;
@@ -535,9 +541,6 @@ header {
 	height: 400px;
 	max-height: 90vh;
 }
-.mrgoat .ig:after {
-	width: 100px;
-}
 .mrgoat .arrow {
 	position: relative;
 	top: 0;
@@ -545,6 +548,20 @@ header {
 	transform: initial;
 }
 
-.igstage .arrow {
-	display: flex;
+
+.igstage .thumbs {
+	padding: var(--padx);
+	grid-template-columns: auto auto;
+	grid-gap: calc(2 * var(--padx));
+}
+@media (min-width: 1200px) {
+	.igstage .thumbs {
+		grid-template-columns: auto auto auto;
+	}
+	.igstage .thumbs a {
+		height: calc((100vw / 3) - (3 * var(--padx)));
+	}
+}
+.igstage .thumbs a:after {
+	background-size: 100%;
 }

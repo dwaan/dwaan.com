@@ -7,7 +7,7 @@
 	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 
 	<script type="text/javascript">
-		var classcollection = "";
+		var classcollection = "no-js";
 		/* See if it's in dark mode */
 		h = document.querySelector("html");
 		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
@@ -26,7 +26,7 @@
 
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = $_SERVER['REQUEST_URI'];
-		$params= $_SERVER['QUERY_STRING'];
+		$params = @$_SERVER['QUERY_STRING'];
 
 		if ($params == "") $url = $protocol . '://' . $host . $uri;
 		else $url = $protocol . '://' . $host . $uri . '?' . $params;
