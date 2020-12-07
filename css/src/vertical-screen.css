@@ -633,3 +633,47 @@ header {
 	margin: 0;
 	padding: 0;
 }
+
+
+.plurk .bgtext {
+	display: flex;
+	flex-flow: column;
+	font-size: 70vh;
+	letter-spacing: -7.5vh;
+}
+.plurk .bgtext sup {
+	margin: 0 0 -10vh -30vh;
+}
+.plurk .bgtext sub {
+	margin: -10vh -30vh 0 0;
+}
+
+
+#hello {
+	justify-content: flex-end;
+}
+#hello img {
+	width: 128px;
+	height: 128px;
+	border-radius: 100%;
+}
+#hello h1 {
+	font-size: 4rem;
+}
+#hello .arrow-big {
+	margin: var(--padl) 0 var(--padm) 0;
+}
+#hello .arrow:after {
+	margin: var(--pads) 0 0;
+}
+
+.stats {
+	grid-template-columns: auto;
+}
+.stats p {
+	height: 60vh;
+}
+.stats p strong {
+	font-size: 40vw;
+	letter-spacing: -.75rem;
+}

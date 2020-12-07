@@ -188,7 +188,6 @@ h1, h2, h3, h4, p {
 	margin: 0;
 	padding: 0;
 	will-change: opacity, transform;
-	transition: color 1s ease;
 }
 h1, h2, h3, h4 {
 	font-weight: 500;
@@ -227,14 +226,16 @@ p {
 p a {
 	text-decoration: underline;
 }
-a {
+a,
+.spring {
 	position: relative;
 	display: inline-block;
 	text-decoration: none;
 	color: inherit;
 	transition: color .25s ease;
+	cursor: pointer;
 }
-a.spring:before {
+.spring:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -251,23 +252,23 @@ a.spring:before {
 	transition: opacity .2s ease, transform .3s cubic-bezier(.59,1.83,.81,1);
 	will-change: opacity, transform;
 }
-a.spring.big:before {
+.spring.big:before {
 	top: -4px;
 	bottom: -4px;
 	left: -12px;
 	right: -12px;
 }
-a.spring.superbig:before {
+.spring.superbig:before {
 	top: -8px;
 	bottom: -8px;
 	left: -20px;
 	right: -20px;
 }
-a.spring:hover:before {
+.spring:hover:before {
 	opacity: 1;
 	transform: scale(1);
 }
-.dark a.spring:hover {
+.dark .spring:hover {
 	color: var(--white);
 }
 small {
@@ -1853,8 +1854,11 @@ img.rounded {
 	line-height: 120%;
 	font-family: monospace;
 }
+
+/* First section */
 .plurk .first {
 	text-align: center;
+	transition: background .75s ease;
 }
 .plurk .first h1 {
 	margin: var(--padl) 0 var(--pads)  0;
@@ -1888,10 +1892,23 @@ img.rounded {
 	margin: 30vh 0 0 0;
 }
 
+.plurk ol,
+.plurk ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-gap: var(--padl);
+	grid-template-columns: 20vw 20vw 20vw;
+}
 .plurk .content {
+	display: flex;
+	flex-flow: column;
 	position: relative;
-	background-color: var(--dark-white);
-	padding: var(--padm);
+	color: var(--black);
+	padding: var(--padl);
+	border-radius: var(--padm);
+	height: 40vh;
 }
 .plurk .content a {
 	text-decoration: underline;
@@ -1899,26 +1916,27 @@ img.rounded {
 .plurk .presponse {
 	display: block;
 	position: absolute;
-	top: calc(-1 * var(--pads));
-	right: calc(-1 * var(--pads));
+	top: initial;
 	left: initial;
+	bottom: calc(1 * var(--pads));
+	right: calc(1 * var(--pads));
+	padding: 0;
 	background-color: var(--yellow);
-	font-size: .9rem;
+	min-width: 40px;
+	line-height: 40px;
+	height: 40px;
+	text-align: center;
+	vertical-align: middle;
 	color: var(--black);
-	line-height: 100%;
-	padding: var(--pads);
+	font-size: .9rem;
 	border-radius: 1000px;
 }
 .plurk .pcontent {
 	font-size: .9rem;
 	width: 100%;
-	height: 64px;
-	line-height: 32px;
+	margin-bottom: var(--padl);
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-.plurk .pcontent br {
-	display: none;
 }
 .plurk .pcontent img {
 	width: auto;
@@ -1926,20 +1944,37 @@ img.rounded {
 	margin-right: 4px;
 }
 .plurk .pdate {
-	margin-top: var(--pads);
+	position: absolute;
+	top: initial;
+	bottom: calc(1 * var(--padm));
+	left: calc(1 * var(--padm));
 	font-size: .6rem;
 	text-transform: uppercase;
 	letter-spacing: .1rem;
 	line-height: 100%;
 }
 
+.card h3 {
+	font-size: 2rem;
+	line-height: 80%;
+	margin-bottom: var(--padl);
+}
 
+.middle.grant {
+	position: relative;
+	z-index: 1;
+}
+
+#permission {
+	z-index: 2;
+}
 #permission form {
 	margin: 0;
 	padding: var(--padl);
 	max-width: 500px;
 	background-color: var(--white);
 	border-radius: var(--padm);
+	overflow: hidden;
 	box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
 }
 #permission h1 {
@@ -2011,101 +2046,225 @@ img.rounded {
 	border-radius: 4px;
 	margin-right: var(--pads);
 	text-align: center;
+	transition: box-shadow .5s ease;
 }
-#permission a {
+#permission input[type="text"]:focus {
+	box-shadow: 0 0 40px rgba(0,0,0,.15);
+}
+#permission a,
+#permission .submit {
 	flex: 1;
 	background-color: var(--red);
 	color: var(--white);
 	padding: var(--pads) var(--padl);
 	vertical-align: middle;
+	text-align: center;
 	text-decoration: none;
 	border-radius: 4px;
-	cursor: pointer;
 	transition: color .25s ease, background .25s ease;
 }
-#permission a.submit {
+#permission .submit {
 	color: var(--black);
 	background-color: var(--black-25);
+	cursor: default;
 }
-#permission a.submit.validated {
+#permission .submit.validated {
 	background-color: var(--yellow);
+	cursor: pointer;
 }
 #permission a:hover,
-#permission a.submit.validated:hover {
+#permission .submit.validated:hover {
 	color: var(--white);
 	background-color: var(--black);
 }
 
-.card .text {
-	max-width: 600px;
-}
-.card ol {
-	display: grid;
-	grid-template-columns: auto;
-	grid-gap: var(--padm);
-	padding: 0;
-	margin: 0;
-}
-.card .content {
-	position: relative;
-	z-index: 1;
-	display: flex;
-	flex: row nowrap;
-	padding: 0!important;
-	margin: 0;
-	list-style: none;
-	background-color: var(--black-25);
-}
-.card .content:first-child {
-	z-index: 2;
-	margin: var(--padm) 0;
-	background-color: var(--black);
-	color: var(--white);
-}
-.card .content:first-child:before {
-	content: "";
-	display: block;
-	position: absolute;
-	z-index: -1;
-	top: calc(-1 * var(--padm));
-	left: calc(-1 * var(--padm));
-	right: calc(-1 * var(--padm));
-	bottom: calc(-1 * var(--padm));
-	border: 5px dotted var(--black);
-}
-.card .presponse,
-.card .pdate {
-	padding: var(--padm);
-}
-.card .presponse {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 64px;
-	position: relative;
-	right: initial;
-	top: initial;
+#logout svg {
 	margin-right: var(--pads);
-	background-color: inherit;
+}
+#logout svg rect {
+	stroke: var(--black);
+	transition: stroke .5s ease;
+}
+#logout svg path {
+	fill: var(--black);
+	transition: fill .5s ease;
+}
+
+.plurk .card,
+.plurk .stats,
+.plurk .user {
+	padding: var(--padl) 0;
+	margin: 0;
+}
+
+.user ol,
+.user li {
+	display: flex;
+	list-style: none;
+	flex: 0;
+	margin: 0;
+	padding: 0;
+}
+.user ol {
+	flex-flow: row;
+}
+.user .content,
+.user .content a {
+	display: flex;
+	background-color: transparent;
+	padding: 0;
+	margin: 0 var(--padl) 0 0;
+	flex-flow: column;
+	align-items: center;
+	width: 100px;
+}
+.user .content a {
+	margin: 0;
+	text-decoration: none;
+}
+.user .pavatar {
+	order: 1;
+}
+.user .pavatar img {
+	width: 64px;
+	height: 64px;
+	border-radius: 100%;
+}
+.user .content:first-child .pavatar img {
+	width: 100px;
+	height: 100px;
+}
+.single .pavatar img {
+	width: auto;
+	height: 32px;
 	border-radius: 0;
 }
-.card .content:first-child .presponse {
+.single .content:first-child .pavatar img {
+	width: auto;
+	height: 48px;
+}
+.user .pplurker {
+	text-align: center;
+	order: 2;
+	margin: var(--pads) 0 0;
+}
+.user .presponse {
+	min-width: 32px;
+	height: 32px;
+	line-height: 32px;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0;
 	background-color: var(--red);
-	color: var(--white);
-}
-.card .pdate {
-	text-align: right;
-	line-height: 140%;
-	margin-right: var(--pads);
-}
-.card .pcontent {
-	margin: var(--padm);
+	color: var(--white)
 }
 
+.user .bgtext,
 .card .bgtext {
+	display: none;
+}
+
+.stats {
+	display: grid;
+	grid-gap: var(--padl);
+}
+.stats h3 {
+	position: relative;
+	font-size: 2rem;
+	margin: 0;
+	padding: var(--padxl) 0 0;
+}
+.stats h3:after {
+	content: "";
+	display: inline-block;
+	width: calc(15 * var(--padm));
+	height: 1px;
+	margin-left: var(--pads);
+	background-color: var(--black);
+}
+.stats div {
 	background-color: var(--yellow);
+	border-radius: var(--padm);
+	box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.stats p,
+.stats a {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-end;
+	padding: var(--padl);
+	color: var(--white);
+	opacity: 1;
+	height: 100%;
+}
+.stats p strong,
+.stats a strong {
+	font-weight: 500;
+	line-height: 100%;
 	color: var(--yellow);
-	font-size: 50vw;
-	letter-spacing: -4vw;
-	line-height: 50vh;
+	display: block;
+}
+.stats img {
+	display: inline-block;
+	width: auto;
+	height: auto;
+}
+.stats .graph {
+	position: absolute;
+	z-index: -1;
+	top: initial;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.stats .avatar img {
+	height: 48px;
+	border-radius: 10000px;
+}
+
+.stats .loading,
+.stats .loading strong {
+	color: var(--white);
+}
+.stats .loading strong {
+	font-size: 4.5rem;
+}
+.stats .title {
+	margin-top: var(--pads);
+	line-height: 140%;
+	font-size: .6rem;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+	opacity: .8;
+}
+
+.stats .style1 {
+	background: rgb(63,94,251);
+	background: linear-gradient(rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+}
+.stats .style2 {
+	background: rgb(34,193,195);
+	background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+}
+.stats .style3 {
+	background: rgb(195,34,190);
+	background: linear-gradient(0deg, rgba(195,34,190,1) 0%, rgba(253,184,45,1) 100%);
+}
+.stats .style4 {
+	background: rgb(219,158,0);
+	background: linear-gradient(0deg, rgba(219,158,0,1) 0%, rgba(75,231,152,1) 100%);
+}
+.stats .style5 {
+	background: rgb(195,34,103);
+	background: linear-gradient(0deg, rgba(195,34,103,1) 0%, rgba(45,182,253,1) 100%);
+}
+
+.stats .span2 {
+	grid-column: span 2;
+}
+
+#join,
+#statistics {
+	background-color: var(--dark-white);
 }

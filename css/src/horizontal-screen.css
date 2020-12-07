@@ -565,3 +565,39 @@ header {
 .igstage .thumbs a:after {
 	background-size: 100%;
 }
+
+
+/* Plurk */
+
+#hello img {
+	width: 160px;
+	height: 160px;
+	border-radius: 100%;
+}
+
+
+.stats {
+	grid-template-columns: repeat(3, 30vw);
+}
+.stats h3 {
+	grid-column: span 3;
+}
+.stats div {
+	height: 40vw;
+}
+.stats strong {
+	margin-bottom: auto;
+	font-size: 7vw;
+	letter-spacing: -.25rem;
+}
+@media (min-width: 1200px) {
+	.stats {
+		grid-template-columns: repeat(4, 20vw);
+	}
+	.stats h3 {
+		grid-column: span 4;
+	}
+	.stats div {
+		height: calc(4/3 * 20vw);
+	}
+}

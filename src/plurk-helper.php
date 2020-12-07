@@ -5,6 +5,20 @@
 		exit();
 	}
 
+	function error($message = "unauthorized") {
+		http_response_code(203);
+		header('Content-type:application/json;charset=utf-8');
+		echo '{"success": false, "error": true, "message": "'.$message.'"}';
+		exit();
+	}
+
+	function success($message = "success") {
+		http_response_code(200);
+		header('Content-type:application/json;charset=utf-8');
+		echo '{"success": true, "error":  false, "message": '.$message.'}';
+		exit();
+	}
+
 	function datediff($today, $date) {
 		$diffday = $today->diff($date)->format("%d");
 		$diffmonth = $today->diff($date)->format("%m");

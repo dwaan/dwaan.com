@@ -1,115 +1,3 @@
-<?php
-	include_once "plurk-config.php";
-	include_once "plurk-helper.php";
-
-	session_start();
-	$_SESSION['year'] = "2020";
-
-	// In state=1 the next request should include an oauth_token.
-	// If it doesn't go back to 0
-
-	if(!isset($_SESSION['state'])) $_SESSION['state'] = 0;
-
-	if(!isset($_GET['oauth_token'])) {
-		if (isset($_SESSION['state']))
-			if ($_SESSION['state'] == 1)
-				$_SESSION['state'] = 0;
-		else
-			$_SESSION['state'] = 0;
-	} else  {
-		if ($_GET['oauth_token'] != "") $_SESSION['oauth_token'] = $_GET['oauth_token'];
-		else unset($_GET['oauth_token']);
-	}
-
-	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') $url = "https://";
-    else $url = "http://";
-    $url.= $_SERVER['HTTP_HOST'];
-    $url.= $_SERVER['REQUEST_URI'];
-
-	try {
-		$oauth = new OAuth($conskey,$conssec,OAUTH_SIG_METHOD_HMACSHA1,OAUTH_AUTH_TYPE_URI);
-		if(!isset($_SESSION['oauth_token']) && !$_SESSION['state']) {
-			// Get first token
-			$request_token_info = $oauth->getRequestToken($req_url);
-			$_SESSION['token'] = $request_token_info['oauth_token'];
-			$_SESSION['secret'] = $request_token_info['oauth_token_secret'];
-			$_SESSION['state'] = 1;
-
-			// Start - Autorized page
-			include_once 'plurk-authorized.php';
-			// End - Autorized page
-
-			exit();
-		} else if($_SESSION['state']==1) {
-			// Get permanent token
-			$oauth->setToken($_SESSION['token'], $_SESSION['secret']);
-			$access_token_info = $oauth->getAccessToken($acc_url, $url, $_SESSION['oauth_token']);
-			$_SESSION['state'] = 2;
-			$_SESSION['token'] = $access_token_info['oauth_token'];
-			$_SESSION['secret'] = $access_token_info['oauth_token_secret'];
-		}
-		$oauth->setToken($_SESSION['token'],$_SESSION['secret']);
-
-		// Get User data
-		$oauth->fetch("$api_url/Users/me");
-		$me = json_decode($oauth->getLastResponse());
-
-		// Get Plurk
-		$content = [];
-		$parameters = array("filter" => "my");
-		$offset = 0;
-		$i = 0;
-		// echo "<pre>";
-		do {
-			if ($offset != 0) $parameters = array("offset" => $offset, "filter" => "my");
-
-			$oauth->fetch("$api_url/Timeline/getPlurks", $parameters);
-			$plurks = json_decode($oauth->getLastResponse());
-
-			// foreach ($plurks->plurks as $key => $value) {
-			// 	$oauth->fetch("$api_url/Responses/get", array('plurk_id' => $value->plurk_id));
-			// 	$responses = json_decode($oauth->getLastResponse());
-			// 	$plurks->plurks[$key]->responses = $responses;
-			// 	print_r($plurks->plurks[$key]);
-			// 	echo("<hr>");
-			// 	exit();
-			// }
-
-			// Get the last plurk date
-			$date = date_create($plurks->plurks[sizeof($plurks->plurks) - 1]->posted);
-			$offset = date_format($date,"Y-m-d\TH:i:s");
-			$year = date_format($date,"Y");
-
-			// Merge the plurk content with previous one
-			$content = array_merge($content, $plurks->plurks);
-			$i++;
-		// } while($year == "2020");
-		} while($i < 2);
-
-		// Most response
-		$mostfavorite = $content;
-		usort($mostfavorite, function($a, $b) {
-		    return $b->favorite_count - $a->favorite_count;
-		});
-		// Most response
-		$mostresponse = $content;
-		usort($mostresponse, function($a, $b) {
-		    return $b->response_count - $a->response_count;
-		});
-		// Most replurk
-		$mostreplurk = $content;
-		usort($mostreplurk, function($a, $b) {
-		    return $b->replurkers_count - $a->replurkers_count;
-		});
-
-		// debug($mostresponse);
-	} catch(OAuthException $E) {
-		$_POST['lastResponse'] = $E->lastResponse;
-		include_once 'plurk-error.php';
-    	exit();
-	}
-?>
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -124,127 +12,60 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="plurk" class="plurk">
-	    <section id="hello" class="middle first">
-	    	<div class="thumbs">
-		    	<img src="<?php echo $me->avatar_big; ?>" class="rounded" />
-		    </div>
+	    <section id="hello" class="grant middle first">
+	    	<div class="thumbs"></div>
 		    <div class="text">
-		    	<h1>Hello, <?php echo $me->display_name; ?>!</h1>
-		    	<p>This is your <?php echo $_SESSION['year']; ?> Plurks</p>
+		    	<p class="loading">Loading your plurk</p>
 		    </div>
 		    <div class="bgtext"><sup>20</sup><sub>20</sub></div>
 		    <div class="arrow-big">
-			    <a href="#latest-plurk" class="arrow scrollto">scroll</a>
+			    <a href="#statistics" class="arrow scrollto">scroll</a>
 			</div>
 	    </section>
-    	<section id="join" class="middle">
+
+    	<section id="statistics" class="grant middle">
     		<div class="text">
-		    	<p>You've join Plurk <?php echo $me->anniversary->years; ?> years and <?php echo $me->anniversary->days; ?> days.</p>
+		    	<p class="loading">Loading your plurk</p>
 		    </div>
 	    </section>
-    	<?php if ($mostfavorite[0]->favorite_count > 0) { ?>
-	    	<section id="most-response" class="card middle">
-	    		<div class="text">
-			    	<h3>Most<br />Favorite</h3>
+
+		<section class="grant footer">
+			<div id="logout" class="email spring big">
+				<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect x="5" y="4" width="14" height="24" rx="2" stroke="black" stroke-width="2"/>
+					<path d="M29.7071 16.7071C30.0976 16.3166 30.0976 15.6834 29.7071 15.2929L23.3431 8.92893C22.9526 8.53841 22.3195 8.53841 21.9289 8.92893C21.5384 9.31946 21.5384 9.95262 21.9289 10.3431L27.5858 16L21.9289 21.6569C21.5384 22.0474 21.5384 22.6805 21.9289 23.0711C22.3195 23.4616 22.9526 23.4616 23.3431 23.0711L29.7071 16.7071ZM10 17L29 17L29 15L10 15L10 17Z" fill="black"/>
+				</svg>
+				Logout
+			</div>
+		</section>
+
+		<!-- Login -->
+	    <section id="permission" class="middle first">
+		    <div class="text">
+			    <form action="" method="GET">
+			    	<h1>Plurk<br/><sup>20</sup><sub>20</sub></h1>
 			    	<ol>
-				    	<?php
-					    	for ($i = 0; $i < 5; $i++) {
-					    		if ($mostfavorite[$i]->favorite_count > 0) {
-		    			?>
-					    	<li class="content" data-pkey="<?php echo $i + 1; ?>">
-					    		<div class="presponse"><?php echo $mostfavorite[$i]->favorite_count; ?></div>
-					    		<div class="pcontent" data-pid="<?php echo $mostfavorite[$i]->plurk_id; ?>"><?php echo $mostfavorite[$i]->content; ?></div>
-					    		<div class="pdate"><?php
-						    		$today = new DateTime();
-						    		$today->setTimezone(new DateTimeZone($me->timezone));
-
-						    		$date = date_create($mostfavorite[$i]->posted);
-						    		$date->setTimezone(new DateTimeZone($me->timezone));
-
-									echo datediff($today, $date);
-					    		?></div>
-				    		</li>
-		    			<?php
-		    					}
-				    		}
-				    	?>
-				    </ol>
-		    	</div>
-			    <div class="bgtext">Most<br />Responses</div>
-	    	</section>
-    	<?php } ?>
-    	<?php if ($mostreplurk[0]->replurkers_count > 0) { ?>
-	    	<section id="most-replurk" class="card middle">
-	    		<div class="text">
-			    	<h3>Most<br />Replurk</h3>
-			    	<ol>
-				    	<?php
-					    	for ($i = 0; $i < 5; $i++) {
-					    		if ($mostreplurk[$i]->replurkers_count > 0) {
-		    			?>
-					    	<li class="content" data-pkey="<?php echo $i + 1; ?>">
-					    		<div class="presponse"><?php echo $mostreplurk[$i]->replurkers_count; ?></div>
-					    		<div class="pcontent" data-pid="<?php echo $mostreplurk[$i]->plurk_id; ?>"><?php echo $mostreplurk[$i]->content; ?></div>
-					    		<div class="pdate"><?php
-						    		$today = new DateTime();
-						    		$today->setTimezone(new DateTimeZone($me->timezone));
-
-						    		$date = date_create($mostreplurk[$i]->posted);
-						    		$date->setTimezone(new DateTimeZone($me->timezone));
-
-									echo datediff($today, $date);
-					    		?></div>
-				    		</li>
-		    			<?php
-					    		}
-				    		}
-				    	?>
-				    </ol>
-		    	</div>
-			    <div class="bgtext">Most<br />Replurk</div>
-	    	</section>
-    	<?php } ?>
-    	<?php if ($mostresponse[0]->response_count > 0) { ?>
-	    	<section id="most-response" class="card middle">
-	    		<div class="text">
-			    	<h3>Most<br />Responses</h3>
-			    	<ol>
-				    	<?php
-					    	for ($i = 0; $i < 5; $i++) {
-					    		if ($mostresponse[$i]->response_count > 0) {
-		    			?>
-					    	<li class="content" data-pkey="<?php echo $i + 1; ?>">
-					    		<div class="presponse"><?php echo $mostresponse[$i]->response_count; ?></div>
-					    		<div class="pcontent" data-pid="<?php echo $mostresponse[$i]->plurk_id; ?>"><?php echo $mostresponse[$i]->content; ?></div>
-					    		<div class="pdate"><?php
-						    		$today = new DateTime();
-						    		$today->setTimezone(new DateTimeZone($me->timezone));
-
-						    		$date = date_create($mostresponse[$i]->posted);
-						    		$date->setTimezone(new DateTimeZone($me->timezone));
-
-									echo datediff($today, $date);
-					    		?></div>
-				    		</li>
-		    			<?php
-		    					}
-				    		}
-				    	?>
-				    </ol>
-		    	</div>
-			    <div class="bgtext">Most<br />Responses</div>
-	    	</section>
-    	<?php } ?>
-    	<section class="debug">
-    		<p>Token: <?php print($_SESSION['token']); ?></p>
-    		<p>Secret: <?php print($_SESSION['secret']); ?></p>
+			    		<li><p>Get your Plurk verification code below <br/><a href="#" id="tokenurl" target="_BLANK">Get Verification Code</a></p></li>
+			    		<li>
+						    <p>Enter your verification code here:</p>
+						    <p class="cuddle">
+						    	<input type="text" name="oauth_token" id="oauth_token" placeholder="Verification code" />
+						    	<span id="submit" class="submit">Verify</span>
+						    </p>
+					    </li>
+					    <li>
+					    	<p id="login-message">Click the Verify button to verify continue.</p>
+					    </li>
+					    <li class="small">
+					    	<p><strong>IMPORTANT!</strong> Your data will be processed locally in your device. It can take normally up to 5 minutes to download all of your 2020 plurk, please be patient.<p>
+					    	<p>Other than session data from Plurk, this website didn't store any of your data in the server.</p>
+					    </li>
+				   </ol>
+			    </form>
+		    </div>
+		    <div class="bgtext"><sup>20</sup><sub>20</sub></div>
 	    </section>
 	</main>
-
-	<script type="text/javascript">
-		var result = <?php print($oauth->getLastResponse()); ?>;
-		console.log(result);
-	</script>
 
 	<?php include_once "part_script.php"; ?>
 </body>
