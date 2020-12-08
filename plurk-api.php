@@ -90,7 +90,7 @@
 					if ($loop == 0) {
 						break;
 					}
-				} while($postyear >= $year);
+				} while($postyear == $year);
 				success(json_encode($content));
 			} else if ($fetch == "response") {
 				// Get Response

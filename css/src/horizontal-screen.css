@@ -569,6 +569,15 @@ header {
 
 /* Plurk */
 
+
+#permission .cuddle {
+	flex-flow: row;
+}
+#permission input[type="text"] {
+	width: 200px;
+	margin-right: var(--pads);
+}
+
 #hello img {
 	width: 160px;
 	height: 160px;
@@ -577,18 +586,23 @@ header {
 
 
 .stats {
-	grid-template-columns: repeat(3, 30vw);
+	grid-template-columns: repeat(2, 40vw);
 }
 .stats h3 {
-	grid-column: span 3;
+	grid-column: span 2;
 }
-.stats div {
-	height: 40vw;
+.stats .wrap {
+	height: calc(4/3 * 40vw);
 }
-.stats strong {
-	margin-bottom: auto;
-	font-size: 7vw;
+.stats .big {
+	font-size: 10vw;
 	letter-spacing: -.25rem;
+}
+.stats .span2 {
+	grid-column: span 2;
+}
+.postcontent .post {
+	-webkit-line-clamp: 8;
 }
 @media (min-width: 1200px) {
 	.stats {
@@ -597,7 +611,21 @@ header {
 	.stats h3 {
 		grid-column: span 4;
 	}
-	.stats div {
+	.stats .big {
+		font-size: 5.5vw;
+	}
+	.stats .wrap {
 		height: calc(4/3 * 20vw);
 	}
+
+	.postcontent .post {
+		-webkit-line-clamp: 6;
+	}
+}
+
+#credits {
+	padding: calc(4 * var(--pady)) var(--padx)!important;
+}
+#credits .made {
+	font-size: 2rem;
 }

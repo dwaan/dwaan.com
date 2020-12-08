@@ -30,7 +30,7 @@
 	    </section>
 
 		<section class="grant footer">
-			<div id="logout" class="email spring big">
+			<div id="logout" class="logout spring big">
 				<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<rect x="5" y="4" width="14" height="24" rx="2" stroke="black" stroke-width="2"/>
 					<path d="M29.7071 16.7071C30.0976 16.3166 30.0976 15.6834 29.7071 15.2929L23.3431 8.92893C22.9526 8.53841 22.3195 8.53841 21.9289 8.92893C21.5384 9.31946 21.5384 9.95262 21.9289 10.3431L27.5858 16L21.9289 21.6569C21.5384 22.0474 21.5384 22.6805 21.9289 23.0711C22.3195 23.4616 22.9526 23.4616 23.3431 23.0711L29.7071 16.7071ZM10 17L29 17L29 15L10 15L10 17Z" fill="black"/>
@@ -64,6 +64,17 @@
 			    </form>
 		    </div>
 		    <div class="bgtext"><sup>20</sup><sub>20</sub></div>
+	    </section>
+
+	    <div id="scrollercredits"></div>
+
+	    <section id="credits" class="middle">
+	    	<div class="text">
+		    	<p class="loading">1 0f 3. Loading, please wait...</p>
+		    	<p class="made">Made with ❤️ in TLV</p>
+		    	<p class="like">If you like this web app, you can friend-ed or fan-ed me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> which ever you like. Or even better, send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some coins</a> if you will.</p>
+		    	<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. Please feel free to <a href="./say-hi">contact me</a> if there's some copyrighted materials that shouldn't be in this web app.</p>
+		    </div>
 	    </section>
 	</main>
 

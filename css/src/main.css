@@ -96,6 +96,7 @@
 * {
 	box-sizing: border-box;
 	outline: none;
+	transition: background-color .5s ease, color .25s ease;
 }
 
 /* Costumize selection color */
@@ -152,7 +153,7 @@ html {
 	letter-spacing: 0.02em;
 	color: var(--black);
 	background-color: var(--white);
-	transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04), background-color 1s ease, color 1s ease;
+	transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04);
 }
 /* Common styles */
 html,
@@ -425,7 +426,6 @@ picture img {
 #back {
 	background-color: var(--white);
 	z-index: 0;
-	transition: background-color 1s ease;
 }
 .rounded #corner,
 .rounded #back {
@@ -803,7 +803,6 @@ header .right {
 	left: 0;
 	pointer-events: none;
 	transform: translate3d(0,-50%,0);
-	transition: color .25s ease;
 }
 .dark .items li:hover:before,
 .dark .items li:hover:after {
@@ -1401,7 +1400,6 @@ header .right {
 	display: flex;
 	flex-flow : row nowrap;
 	align-items: center;
-	transition: color ease .256s;
 }
 .links a:hover {
 	color: var(--red);
@@ -1763,7 +1761,6 @@ header .right {
 .hi h1 small {
 	position: relative;
 	pointer-events: none;
-	transition: color .5s ease;
 	will-change: opacity, color, transform;
 }
 .hi h1 small {
@@ -1831,6 +1828,7 @@ img.rounded {
 }
 
 
+/* Plurk Statistics */
 .plurk sub,
 .plurk sup {
 	font-size: inherit;
@@ -1855,10 +1853,9 @@ img.rounded {
 	font-family: monospace;
 }
 
-/* First section */
+/*  Plurk - First section */
 .plurk .first {
 	text-align: center;
-	transition: background .75s ease;
 }
 .plurk .first h1 {
 	margin: var(--padl) 0 var(--pads)  0;
@@ -1883,7 +1880,6 @@ img.rounded {
 	letter-spacing: -10vw;
 	color: var(--yellow);
 	pointer-events: none;
-	transition: background-color .5s ease, color .5s ease;
 }
 .plurk .bgtext sup {
 	margin: -30vh 0 0 0;
@@ -1892,79 +1888,12 @@ img.rounded {
 	margin: 30vh 0 0 0;
 }
 
-.plurk ol,
-.plurk ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: grid;
-	grid-gap: var(--padl);
-	grid-template-columns: 20vw 20vw 20vw;
-}
-.plurk .content {
-	display: flex;
-	flex-flow: column;
-	position: relative;
-	color: var(--black);
-	padding: var(--padl);
-	border-radius: var(--padm);
-	height: 40vh;
-}
-.plurk .content a {
-	text-decoration: underline;
-}
-.plurk .presponse {
-	display: block;
-	position: absolute;
-	top: initial;
-	left: initial;
-	bottom: calc(1 * var(--pads));
-	right: calc(1 * var(--pads));
-	padding: 0;
-	background-color: var(--yellow);
-	min-width: 40px;
-	line-height: 40px;
-	height: 40px;
-	text-align: center;
-	vertical-align: middle;
-	color: var(--black);
-	font-size: .9rem;
-	border-radius: 1000px;
-}
-.plurk .pcontent {
-	font-size: .9rem;
-	width: 100%;
-	margin-bottom: var(--padl);
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.plurk .pcontent img {
-	width: auto;
-	height: 32px;
-	margin-right: 4px;
-}
-.plurk .pdate {
-	position: absolute;
-	top: initial;
-	bottom: calc(1 * var(--padm));
-	left: calc(1 * var(--padm));
-	font-size: .6rem;
-	text-transform: uppercase;
-	letter-spacing: .1rem;
-	line-height: 100%;
-}
-
-.card h3 {
-	font-size: 2rem;
-	line-height: 80%;
-	margin-bottom: var(--padl);
-}
-
 .middle.grant {
 	position: relative;
 	z-index: 1;
 }
 
+/*  Plurk - Login */
 #permission {
 	z-index: 2;
 }
@@ -1996,6 +1925,8 @@ img.rounded {
 	top: -1rem;
 }
 #permission ol {
+	display: flex;
+	flex-flow: column;
 	z-index: -1;
 	text-align: left;
 	margin: 0;
@@ -2036,15 +1967,11 @@ img.rounded {
 #permission .cuddle {
 	width: 100%;
 	display: flex;
-	flex-flow: row nowrap;
 }
 #permission input[type="text"] {
-	width: 175px;
-	flex: 175px;
 	padding: var(--pads) var(--padm);
 	border: 1px solid var(--gray-light);
 	border-radius: 4px;
-	margin-right: var(--pads);
 	text-align: center;
 	transition: box-shadow .5s ease;
 }
@@ -2061,7 +1988,6 @@ img.rounded {
 	text-align: center;
 	text-decoration: none;
 	border-radius: 4px;
-	transition: color .25s ease, background .25s ease;
 }
 #permission .submit {
 	color: var(--black);
@@ -2078,132 +2004,93 @@ img.rounded {
 	background-color: var(--black);
 }
 
+/* Plurk - Logout */
+#logout {
+	pointer-events: auto;
+}
 #logout svg {
 	margin-right: var(--pads);
 }
 #logout svg rect {
 	stroke: var(--black);
-	transition: stroke .5s ease;
+	transition: stroke .25s ease;
 }
 #logout svg path {
 	fill: var(--black);
-	transition: fill .5s ease;
+	transition: fill .25s ease;
+}
+.dark #logout:hover svg rect {
+	stroke: var(--white);
+}
+.dark #logout:hover svg path {
+	fill: var(--white);
 }
 
-.plurk .card,
-.plurk .stats,
-.plurk .user {
-	padding: var(--padl) 0;
-	margin: 0;
-}
-
-.user ol,
-.user li {
-	display: flex;
-	list-style: none;
-	flex: 0;
-	margin: 0;
-	padding: 0;
-}
-.user ol {
-	flex-flow: row;
-}
-.user .content,
-.user .content a {
-	display: flex;
-	background-color: transparent;
-	padding: 0;
-	margin: 0 var(--padl) 0 0;
-	flex-flow: column;
-	align-items: center;
-	width: 100px;
-}
-.user .content a {
-	margin: 0;
-	text-decoration: none;
-}
-.user .pavatar {
-	order: 1;
-}
-.user .pavatar img {
-	width: 64px;
-	height: 64px;
-	border-radius: 100%;
-}
-.user .content:first-child .pavatar img {
-	width: 100px;
-	height: 100px;
-}
-.single .pavatar img {
-	width: auto;
-	height: 32px;
-	border-radius: 0;
-}
-.single .content:first-child .pavatar img {
-	width: auto;
-	height: 48px;
-}
-.user .pplurker {
-	text-align: center;
-	order: 2;
-	margin: var(--pads) 0 0;
-}
-.user .presponse {
-	min-width: 32px;
-	height: 32px;
-	line-height: 32px;
-	vertical-align: middle;
-	text-align: center;
-	padding: 0;
-	background-color: var(--red);
-	color: var(--white)
-}
-
-.user .bgtext,
-.card .bgtext {
-	display: none;
-}
-
+/* Plurk - Statistics */
 .stats {
+	padding: var(--padl) 0 var(--padxl);
+	margin: 0;
 	display: grid;
 	grid-gap: var(--padl);
 }
 .stats h3 {
 	position: relative;
+	display: flex;
+	flex-flow: row;
+	align-items: baseline;
 	font-size: 2rem;
+	color: var(--black);
 	margin: 0;
 	padding: var(--padxl) 0 0;
 }
-.stats h3:after {
-	content: "";
-	display: inline-block;
-	width: calc(15 * var(--padm));
+.stats h3 span {
+	display: flex;
+	align-items: flex-start;
+}
+.stats h3 .line {
+	flex: 1;
 	height: 1px;
 	margin-left: var(--pads);
+	overflow: hidden;
+	background-color: transparent;
+	border-radius: 1px;
+}
+.stats h3 .line i {
+	opacity: .5;
+	display: flex;
+	width: 100%;
+	height: 100%;
 	background-color: var(--black);
+	border-radius: 1px;
 }
-.stats div {
+.stats .anim {
+	height: 100%;
 	background-color: var(--yellow);
-	border-radius: var(--padm);
-	box-shadow: 0 10px 30px rgba(0,0,0,.25);
+	border-radius: var(--pads);
 }
-.stats p,
-.stats a {
+.stats .anim p,
+.stats .anim a,
+.stats .anim span {
+	color: var(--white);
+	opacity: 1;
+}
+.stats .anim > p,
+.stats .anim > a,
+.stats .anim > div {
 	position: relative;
 	display: flex;
 	flex-flow: column;
 	justify-content: flex-end;
 	padding: var(--padl);
-	color: var(--white);
 	opacity: 1;
 	height: 100%;
 }
-.stats p strong,
-.stats a strong {
+.stats .anim .big {
 	font-weight: 500;
 	line-height: 100%;
 	color: var(--yellow);
 	display: block;
+	margin-bottom: auto;
 }
 .stats img {
 	display: inline-block;
@@ -2211,60 +2098,132 @@ img.rounded {
 	height: auto;
 }
 .stats .graph {
-	position: absolute;
-	z-index: -1;
-	top: initial;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	flex: 1;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-end;
+	background-color: var(--white);
+	margin-bottom: var(--padm);
+	border-radius: 10000px;
+	overflow: hidden;
+}
+.stats .graph i {
+	background-color: var(--yellow);
+	border-radius: 0;
 }
 .stats .avatar img {
 	height: 48px;
 	border-radius: 10000px;
 }
+.stats .center {
+	text-align: center;
+}
 
+/* Plurk - Statistics - Loading */
 .stats .loading,
-.stats .loading strong {
+.stats .loading .big {
 	color: var(--white);
 }
-.stats .loading strong {
+.stats .loading .big {
 	font-size: 4.5rem;
 }
 .stats .title {
-	margin-top: var(--pads);
+	display: flex;
+	margin-top: var(--padm);
 	line-height: 140%;
 	font-size: .6rem;
 	letter-spacing: .1rem;
 	text-transform: uppercase;
 	opacity: .8;
 }
-
-.stats .style1 {
-	background: rgb(63,94,251);
-	background: linear-gradient(rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+.stats .title i {
+	margin-right: auto;
 }
-.stats .style2 {
-	background: rgb(34,193,195);
-	background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
-}
-.stats .style3 {
-	background: rgb(195,34,190);
-	background: linear-gradient(0deg, rgba(195,34,190,1) 0%, rgba(253,184,45,1) 100%);
-}
-.stats .style4 {
-	background: rgb(219,158,0);
-	background: linear-gradient(0deg, rgba(219,158,0,1) 0%, rgba(75,231,152,1) 100%);
-}
-.stats .style5 {
-	background: rgb(195,34,103);
-	background: linear-gradient(0deg, rgba(195,34,103,1) 0%, rgba(45,182,253,1) 100%);
+.stats i {
+	display: inline-block;
+	padding: 0 8px;
+	font-style: normal;
+	color: var(--black);
+	background-color: var(--white);
+	border-radius: 4px;
 }
 
-.stats .span2 {
-	grid-column: span 2;
+/* Plurk - Statistics - Spesific Style */
+.postcontent img {
+	width: auto;
+	height: 24px;
+	margin-right: 4px;
+}
+.postcontent .post {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
-#join,
+.mostresponders .text {
+	position: relative;
+	display: flex;
+}
+.mostresponders .text a {
+	display: flex;
+	flex-flow: row;
+	margin: auto 0;
+}
+.mostresponders .text {
+	display: block;
+}
+.mostresponders .text .name {
+	margin-right: auto;
+	line-height: 24px;
+}
+.mostresponders .text .count {
+	color: var(--black);
+	background-color: var(--yellow);
+	line-height: 24px;
+	height: 24px;
+	min-width: 24px;
+	text-align: center;
+	border-radius: 24px;
+	font-size: .7rem;
+	font-weight: 500;
+}
+.mostresponders .text img {
+	height: 24px;
+	margin-right: var(--pads);
+}
+
+/* Plurk - Statistics - Costum Page Style */
+#hello,
 #statistics {
-	background-color: var(--dark-white);
+	z-index: 2;
+	overflow: hidden;
+}
+#statistics {
+	background-color: var(--white);
+}
+
+#credits {
+	background-color: var(--yellow);
+	opacity: 0;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	justify-content: flex-end;
+}
+#credits .text {
+	max-width: 600px;
+}
+#credits p {
+	margin: var(--pads) 0;
+	opacity: .5;
+}
+#credits .made {
+	font-weight: 500;
+	opacity: 1;
+}
+
+#permission,
+#statistics {
+	margin-bottom: 100vh;
 }

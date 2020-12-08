@@ -51,8 +51,6 @@ function datediff(date) {
 	var diffmonth = Math.round(diff / (30.5 * 1000 * 3600 * 24));
 	var diffyear = Math.round(diff / (12 * 30.5 * 1000 * 3600 * 24));
 
-	console.log(diffyear, diffmonth, diffday);
-
 	if (diffyear == 1) when = "A year ago";
 	else if (diffyear > 1) when = diffyear + " years ago";
 	else if (diffmonth > 1) when = diffmonth + " months ago";
@@ -212,6 +210,33 @@ var scroll = {
 		this.st = [];
 		//
 		this.l = 0;
+	}
+}
+
+// API call helper
+var api = {
+	url: "/dwaan/plurk-api",
+	request: [],
+	call: function(url, success, error, async) {
+		var request = this.request[this.request.push(new XMLHttpRequest()) - 1];
+
+		if (!async) async = true;
+		request.open('GET', this.url + url, async);
+		request.onload = function() {
+			if (this.status == 200) {
+				if(success) success(JSON.parse(this.response));
+			} else if (this.status != 0) {
+				if(error) error(this.response);
+			}
+		}
+		request.send();
+	},
+	abort: function() {
+		console.log("abort xhr")
+		for (var i = 0; i < this.request.length; i++) {
+			this.request[i].abort();
+		}
+		this.request = [];
 	}
 }
 
@@ -667,6 +692,7 @@ window.addEventListener("resize", addpadding);
 
 // Default barba hooks
 barba.hooks.before(function(data) {
+	api.abort();
 	return true;
 });
 barba.hooks.beforeEnter(function(data) {
@@ -678,91 +704,93 @@ barba.hooks.beforeEnter(function(data) {
 
 	window.scrollTo(0, 0);
 
-	// Scroll animate arrow
-	var middle = next.querySelectorAll("section.middle");
-	middle.forEach(function (el, idx) {
-		var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
-		if (arrow.length > 0) {
-			var scrollfunc = function(tl) {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "0 50%",
-					end: "100% 50%",
-					scrub: true,
-					animation: tl
-				})
-			};
+	if (data.next.namespace != "plurk") {
+		// Scroll animate arrow
+		var middle = next.querySelectorAll("section.middle");
+		middle.forEach(function (el, idx) {
+			var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
+			if (arrow.length > 0) {
+				var scrollfunc = function(tl) {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 50%",
+						end: "100% 50%",
+						scrub: true,
+						animation: tl
+					})
+				};
 
-			// Animate arrow
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						// Show
-						tl.fromTo(arrow, {
-							position: "relative",
-							y: (idx > 0) ? "-100%" : 0,
-							opacity: 0
-						}, {
-							y: "0%",
-							opacity: 1,
-							ease: "linear"
-						});
-						// Hide
-						tl.fromTo(arrow, {
-							y: "0%",
-							opacity: 1
-						}, {
-							y: (idx < middle.length - 1) ? "100%" : 0,
-							opacity: 0,
-							ease: "linear"
-						});
+				// Animate arrow
+				ScrollTrigger.matchMedia({
+					"(max-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							// Show
+							tl.fromTo(arrow, {
+								position: "relative",
+								y: (idx > 0) ? "-100%" : 0,
+								opacity: 0
+							}, {
+								y: "0%",
+								opacity: 1,
+								ease: "linear"
+							});
+							// Hide
+							tl.fromTo(arrow, {
+								y: "0%",
+								opacity: 1
+							}, {
+								y: (idx < middle.length - 1) ? "100%" : 0,
+								opacity: 0,
+								ease: "linear"
+							});
 
-						return tl;
-					}, scrollfunc);
-				},
-				"(min-aspect-ratio: 1/1)": function() {
-					scroll.push(function(tl) {
-						// Show
-						tl.fromTo(arrow, {
-							position: "absolute",
-							x: (idx > 0) ? -50 : 0,
-							y: 0,
-							opacity: (idx > 0) ? 0 : 1
-						}, {
-							position: "fixed",
-							x: 0,
-							y: 0,
-							opacity: 1,
-							duration: 3,
-							ease: "power3.out"
-						});
-						// Delay
-						tl.to(arrow, {
-							duration: 2
-						});
-						// Hide
-						tl.fromTo(arrow, {
-							position: "fixed",
-							x: 0,
-							y: 0,
-							opacity: 1
-						}, {
-							x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
-							y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
-							opacity: (idx < middle.length - 1) ? 0 : 1,
-							ease: "power3.in",
-							duration: 3
-						});
-						tl.set(arrow, {
-							position: "absolute"
-						});
+							return tl;
+						}, scrollfunc);
+					},
+					"(min-aspect-ratio: 1/1)": function() {
+						scroll.push(function(tl) {
+							// Show
+							tl.fromTo(arrow, {
+								position: "absolute",
+								x: (idx > 0) ? -50 : 0,
+								y: 0,
+								opacity: (idx > 0) ? 0 : 1
+							}, {
+								position: "fixed",
+								x: 0,
+								y: 0,
+								opacity: 1,
+								duration: 3,
+								ease: "power3.out"
+							});
+							// Delay
+							tl.to(arrow, {
+								duration: 2
+							});
+							// Hide
+							tl.fromTo(arrow, {
+								position: "fixed",
+								x: 0,
+								y: 0,
+								opacity: 1
+							}, {
+								x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
+								y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
+								opacity: (idx < middle.length - 1) ? 0 : 1,
+								ease: "power3.in",
+								duration: 3
+							});
+							tl.set(arrow, {
+								position: "absolute"
+							});
 
-						return tl;
-					}, scrollfunc);
-				}
-			});
-		}
-	});
+							return tl;
+						}, scrollfunc);
+					}
+				});
+			}
+		});
+	}
 
 	// Add additional padding
 	addpadding();
@@ -790,7 +818,7 @@ barba.hooks.afterEnter(function(data) {
 
 // Initialized barba.js
 barba.init({
-	debug: true,
+	debug: false,
 	transitions: [{
 		name: 'default-transition',
 		once: function(data) {
@@ -1093,8 +1121,6 @@ barba.init({
 			});
 		},
 		after: function(data) {
-			var current = data.current.container;
-
 			loader.empty();
 
 			return true;
@@ -1520,6 +1546,81 @@ barba.init({
 		to: {
 			namespace: ['lost']
 		}
+	}, {
+		name: 'from-plurk',
+		leave: function(data) {
+			return true;
+		},
+		before: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+			var tl = gsap.timeline();
+
+			// Display loading
+			loader.init();
+
+			// Hide current view
+			tl = animate.top(tl);
+			tl.set(current.querySelectorAll("#credits"),  {
+				opacity: 0
+			}, "hide");
+			tl.to(current.querySelectorAll("#hello .bgtext sub, #permission .bgtext sub"),  {
+				y: 100,
+				opacity: 0,
+				duration: 1,
+				ease: "power3.in"
+			}, "hide");
+			tl.to(current.querySelectorAll("#hello .bgtext sup, #permission .bgtext sup"),  {
+				y: -100,
+				opacity: 0,
+				duration: 1,
+				ease: "power3.in"
+			}, "hide");
+			tl.to(current.querySelectorAll("#hello .text, #hello .thumbs, #hello .arrow-big, .footer,  #permission form"),  {
+				y: 500,
+				opacity: 0,
+				duration: 1,
+				ease: "power3.in"
+			}, "hide+=.2");
+			tl.to(current.querySelectorAll("#hello, #permission"),  {
+				opacity: 0,
+				duration: 1,
+				ease: "power3.in"
+			}, "hide+=.4");
+			tl.set(current, {
+				onComplete: function() {
+					done();
+					gsap.set(current.querySelectorAll("#credits"),  {
+						opacity: 1
+					});
+				}
+			});
+		},
+		enter: function(data) {
+			var done = this.async();
+			var current = data.current.container;
+			var next = data.next.container;
+
+			// Reset current element values
+			current.style.position = "fixed";
+			current.style.opacity = 0;
+			if (current.querySelector(".arrow-big")) current.querySelector(".arrow-big").style.opacity = 0;
+
+			// Animate current view
+			animate.show(next, function() {
+				done();
+			});
+		},
+		after: function(data) {
+			// Remove loading
+			loader.empty();
+
+			return true;
+		},
+		from: {
+			namespace: ['plurk']
+		}
 	}],
 	views: [{
 		namespace: 'home',
@@ -1605,7 +1706,7 @@ barba.init({
 			// Performace hog in firefox
 			// Create shadow based on content
 			next.querySelectorAll("picture").forEach(function(el) {
-				// el.innerHTML += ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />");
+				// el.insertAdjacentHTML('beforeend', ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />"));
 			});
 
 			// Style - Spread
@@ -2076,7 +2177,7 @@ barba.init({
 			// Full and big
 			next.querySelectorAll(".style-slideshow").forEach(function(el) {
 				// Add navigation
-				el.innerHTML += "<div class='before'></div><div class='after'></div>";
+				el.insertAdjacentHTML('beforeend', "<div class='before'></div><div class='after'></div>");
 				// Variables
 				var that = el;
 				that.slideshowScroll = that.children[0];
@@ -3003,9 +3104,9 @@ barba.init({
 			});
 		},
 		afterEnter: function(data) {
-			var API = "/dwaan/plurk-api";
 			var done = this.async();
 			var next = data.next.container;
+			var observer;
 
 			// Me object
 			var me = {};
@@ -3051,7 +3152,21 @@ barba.init({
 				},
 			};
 			// Statistics objects
+			var colors = function() {
+				this.oldcolor = "";
+				this.randomcolors = [];
+				this.colors = ['rgb(63,94,251)', 'rgb(252,70,107)', 'rgb(34,193,195)', 'rgb(253,187,45)', 'rgb(195,34,190)', 'rgb(219,158,0)', 'rgb(75,231,152)','rgb(195,34,103)', 'rgb(45,182,253)'];
+				this.getRandomColor = function() {
+					var color;
+					do {
+						this.randomcolors = gsap.utils.shuffle(this.colors).slice();
+					} while(this.oldcolor == (color = this.randomcolors.pop()));
+					this.oldcolor = color;
+					return color;
+				}
+			}
 			var statistics = {
+				el: false,
 				whispers_count: 0,
 				has_gift_count: 0,
 				porn_count: 0,
@@ -3060,64 +3175,179 @@ barba.init({
 				response_count: 0,
 				post_count: 0,
 				plurk_count: 0,
+				delay: 0,
+				id: 0,
+				style: 0,
+				randomcolors: [],
 				init: function() {
+					var that = this;
 					next.querySelector("#statistics").innerHTML = '<div class="stats"></div>';
+					this.el = next.querySelector("#statistics .stats");
+
+					// Obverse when element is added to DOM
+					observer = new MutationObserver(function (mutationsList, observer) {
+					    mutationsList.forEach(function(mutation) {
+						    mutation.addedNodes.forEach(function(el) {
+						    	that.afterDraw(el);
+							});
+					    });
+					});
+					observer.observe(this.el, {
+						attributes: true,
+						childList: true,
+						subtree: false
+					});
 				},
 				title: function(text) {
-					if(!next.querySelector("#statistics .stats")) this.init();
+					this.el.insertAdjacentHTML('beforeend', '<h3><span>'+ text + '</span><span class="line"><i/></span</h3>');
+				},
+				afterDraw: function(el) {
+					var that = this;
 
-					next.querySelector("#statistics .stats").innerHTML += '<h3>'+ text + '</h3>';
+					if(hasClass(el, 'wrap')) {
+						var color = new colors();
+
+						gsap.set(el.children, {
+							background: 'linear-gradient(5deg, ' + color.getRandomColor() + ' 0%, ' + color.getRandomColor() + ' 100%)'
+						});
+
+						// Scroll animation wrap section
+						scroll.push(function(tl) {
+							tl.fromTo(el.children, {
+								x: -20,
+								y: "50%",
+								opacity: 0,
+								rotation: 5
+							}, {
+								x: 0,
+								y: "0%",
+								opacity: 1,
+								rotation: 0,
+								ease: "ease.out"
+							}, 0);
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "0 100%-=100px",
+								end: "100px 100%-=100px",
+								animation: tl,
+								scrub: .5
+							});
+						});
+					} else {
+						// Scroll animation title section
+						scroll.push(function(tl) {
+							tl.fromTo(el.children, {
+								y: 50,
+								opacity: 0
+							}, {
+								y: 0,
+								opacity: 1,
+								ease: "ease.out"
+							}, 0);
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "0 100%-=100px",
+								end: "100px 100%-=100px",
+								animation: tl,
+								scrub: .5
+							});
+						});
+						// Scroll animation line section
+						scroll.push(function(tl) {
+							tl.fromTo(el.querySelectorAll("i"), {
+								x: "-100%"
+							}, {
+								x: "0%",
+								ease: "ease.out"
+							}, 0);
+							return tl;
+						}, function(tl) {
+							return ScrollTrigger.create({
+								trigger: el,
+								start: "0 100%",
+								end: "0 0",
+								animation: tl,
+								scrub: .5
+							});
+						});
+					}
+				},
+				wrapper: function(style, text) {
+					return '<div class="wrap ' + style + '"><div class="anim">' + text + '</div></div>';
 				},
 				draw: function(style, number, text) {
-					if(!next.querySelector("#statistics .stats")) this.init();
-
 					if (typeof number == "string" || (typeof number == "number" && number > 0)) {
-						next.querySelector("#statistics .stats").innerHTML += '\
-							<div class="' + style + '">\
-								<p>\
-									<strong>' + number + '</strong>\
-									<span>' + text + '</span>\
-								</p>\
-							</div>\
-						';
+						this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+							<p>\
+								<span class="big">' + number + '</span>\
+								<span class="text">' + text + '</span>\
+							</p>\
+						'));
+					}
+				},
+				drawDiv: function(style, text) {
+					this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+						<div class="text">' + text + '</div>\
+					'));
+				},
+				updateDraw: function(style, text) {
+
+					if(!next.querySelector("." + style)) {
+						this.drawDiv(style, text)
+					} else {
+						next.querySelector('.' + style + ' .text').innerHTML = text;
+					}
+				},
+				drawGraph: function(style, number, text) {
+					if (typeof number == "string" || (typeof number == "number" && number > 0)) {
+						this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+							<p>\
+								<span class="graph"><i style="height:' + number + '%;"></i></span>\
+								<span>' + text + '</span>\
+							</p>\
+						'));
 					}
 				},
 				drawImage: function(style, image, link, title, text, badge) {
-					if(!next.querySelector("#statistics .stats")) this.init();
-
-					next.querySelector("#statistics .stats").innerHTML += '\
-						<div class="' + style + '">\
-							<a href="' + link + '" target="_BLANK">\
-								<strong>' + badge + '</strong>\
-								<span><img src="' + image + '" /></span>\
-								<span>' + text + '</span>\
-								<span class="title">' + title + '</span>\
-							</a>\
-						</div>\
-					';
+					this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+						<a href="' + link + '" target="_BLANK">\
+							<span class="big">' + badge + '</span>\
+							<span><img src="' + image + '" /></span>\
+							<span>' + text + '</span>\
+							<span class="title">' + title + '</span>\
+						</a>\
+					'));
 				},
 				drawLink: function(style, link, title, text, badge) {
-					if(!next.querySelector("#statistics .stats")) this.init();
-
-					next.querySelector("#statistics .stats").innerHTML += '\
-						<div class="' + style + '">\
-							<a href="' + link + '" target="_BLANK">\
-								<strong>' + badge + '</strong>\
-								<span>' + text + '</span>\
-								<span class="title">' + title + '</span>\
-							</a>\
+					this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+						<a href="' + link + '" target="_BLANK">\
+							<span class="big">' + badge + '</span>\
+							<span>' + text + '</span>\
+							<span class="title">' + title + '</span>\
+						</a>\
+					'));
+				},
+				drawPost: function(style, link, title, text, badge) {
+					this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+						<div>\
+							<span class="big">' + badge + '</span>\
+							<p class="post">' + text + '</p>\
+							<span class="title">' + title + '</span>\
 						</div>\
-					';
+					'));
 				},
 				drawAll: function() {
-					statistics.title('This Year');
-					this.draw('style1', this.has_gift_count, 'You recieved ' + plural(this.has_gift_count, 'gift') + ' this year');
-					this.draw('style2', this.whispers_count, 'You posted ' + plural(this.whispers_count, 'whisper') + ' this year');
-					this.draw('style3', this.porn_count, 'You posted ' + plural(this.porn_count, 'adult plurk') + ' this year');
-					this.draw('style4', this.plurk_count, 'You posted ' + plural(this.plurk_count, 'plurk') + ' this year');
-					this.draw('style5 span2', this.noresponse_count, 'From ' + plural(this.plurk_count, 'plurk') + ' you posted, ' + this.noresponse_count + ' of them have no responses <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />. That\'s around '+Math.round(this.noresponse_count/this.plurk_count*100)+'% of your plurk.');
-					this.draw('style1', this.response_count, 'You responded ' + this.response_count + ' times this year');
-					this.draw('style2', this.post_count, 'In total, you posted ' + this.post_count + ' times this year, that\'s quite a lot <img src="https://s.plurk.com/emoticons/platinum/8073c1716e75d32eb79f97a9f521fa01.gif" /></span');
+					this.draw('', this.plurk_count, 'You posted <i>' + plural(this.plurk_count, 'plurk') + '</i>');
+					this.drawGraph('center', Math.round(this.noresponse_count/this.plurk_count*100), this.noresponse_count + ' of ' + plural(this.plurk_count, 'plurk') + ' you posted have no response. That\'s around ' + Math.round(this.noresponse_count/this.plurk_count*100) + '% of your plurk <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
+					this.draw('', this.response_count, 'You <i>responded ' + this.response_count + ' times</i>');
+					this.draw('', this.post_count, 'In total, you posted <i>' + this.post_count + ' times</i>, that\'s quite a lot <img src="https://s.plurk.com/emoticons/platinum/8073c1716e75d32eb79f97a9f521fa01.gif" /></span>');
+					this.draw('', this.whispers_count, 'You posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
+					this.draw('', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
+					this.draw('', this.has_gift_count, 'You recieved <i>' + plural(this.has_gift_count, 'gift') + '</i>');
 				}
 			};
 			var most = {
@@ -3139,35 +3369,34 @@ barba.init({
 						} else {
 							this.data[index].count++;
 						}
+						this.data.sort(most.sort);
+
+						var index = 0;
+						var top = "";
+						var length = (this.data.length < 7)? this.data.length : 7;
+						for (var i = 0; i < length; i++) {
+							if(this.data[i].user_id != me.id && this.data[i].user_id != 99999) {
+								top += '\
+									<a id="mostresponders' + this.data[i].user.user_id + '" href="https://plurk.com/' + this.data[i].user.nick_name +'" target="_BLANK">\
+										<span class="avatar"><img src="' + friends.getAvatar(this.data[i].user_id) + '" /></span>\
+										<span class="name">' + this.data[i].user.nick_name + '</span>\
+										<span class="count">' + this.data[i].count + '</span>\
+									</a>\
+								';
+								 + ", ";
+								index++;
+								if(index >= 5) break;
+							}
+						}
+
+						statistics.updateDraw("mostresponders", top);
 					},
 					draw: function() {
-						var index = 0;
-						var text = '<h3>Most<br />Responders</h3><ol>';
-
 						this.data.sort(most.sort);
-						for (var i = 0; i < 5; i++) {
-							if(this.data[index]) {
-								while(this.data[index].user_id == me.id || this.data[index].user_id == 99999) index++;
-								text += '<li class="content"><a href="https://plurk.com/' + this.data[index].user.nick_name + '">';
-								text += ('<span class="presponse">' + this.data[index].count + '</span>');
-								text += ('<span class="pplurker">' + this.data[index].user.display_name + '</span>');
-								if(this.data[index].user.has_profile_image) {
-									var avatar = "";
-									if (this.data[index].user.avatar) avatar = this.data[index].user.avatar;
-									text += ('<span class="pavatar"><img src="https://avatars.plurk.com/' + this.data[index].user_id + '-big' + avatar + '.jpg" /></span>');
-								} else {
-									text += ('<span class="pavatar"><img src="https://avatars.plurk.com/default_big.jpg" /></span>');
-								}
-								text += '</a></li>';
-							}
-							index++;
-						}
-						text += '</ol>';
-
-						if(this.data) {
+						if(this.data[0]) {
 							index = 0;
 							while(this.data[index].user_id == me.id || this.data[index].user_id == 99999) index++;
-							statistics.drawImage("style1 avatar", friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, 'Your Most Responder', this.data[index].user.display_name, this.data[index].count)
+							statistics.drawImage("avatar", friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Your Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
 						}
 					}
 				},
@@ -3179,20 +3408,8 @@ barba.init({
 						}, content, this.data);
 					},
 					draw: function() {
-						var text = '<h3>Most Used<br />My Emoticons</h3><ol>';
-
 						this.data.sort(most.sort);
-						for (var i = 0; i < 5; i++) {
-							if(this.data[i]) {
-								text += '<li class="content">';
-								text += ('<span class="presponse">' + this.data[i].count + '</span>');
-								text += ('<span class="pavatar"><img src="' + this.data[i].id + '" /></span>');
-								text += '</li>';
-							}
-						}
-						text += '</ol>';
-
-						if(this.data) statistics.drawImage("style2 emoticons", this.data[0].id, '#', 'Most Used My Emoticons', '', this.data[0].count)
+						if(this.data[0]) statistics.drawImage("emoticons", this.data[0].id, '#', '<i>Most Used My Emoticon</i>', '', this.data[0].count);
 					}
 				},
 				mentions: {
@@ -3203,20 +3420,20 @@ barba.init({
 						}, content, this.data);
 					},
 					draw: function() {
-						var text = '<h3>Most<br />Mentioned by You</h3><ol>';
-
 						this.data.sort(most.sort);
-						for (var i = 0; i < 5; i++) {
-							if(this.data[i]) {
-								text += '<li class="content">';
-								text += ('<span class="presponse">' + this.data[i].count + '</span>');
-								text += ('<span class="pplurker"><a href="https://plurk.com/' + this.data[i].id + '" target="_BLANK">' + this.data[i].id + '</a></span>');
-								text += '</li>';
-							}
-						}
-						text += '</ol>';
-
-						if(this.data) statistics.drawImage("style3 avatar", friends.getAvatarByUsername(this.data[0].id), 'https://plurk.com/' + this.data[0].id, 'Most Mentioned by You', this.data[0].id, this.data[0].count)
+						if(this.data[0]) statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[0].id), 'https://plurk.com/' + this.data[0].id, '<i>Most Mentioned by You</i>', this.data[0].id, this.data[0].count);
+					}
+				},
+				mentionsby: {
+					data: [],
+					count: function(content) {
+						findandcountregex(/\@(.*?)[\ |\:]/g, function(value) {
+							return value.replace(/\@|\ |\:/g, '');
+						}, content, this.data);
+					},
+					draw: function() {
+						this.data.sort(most.sort);
+						if(this.data[0]) statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[0].id), 'https://plurk.com/' + this.data[0].id, '<i>Most Mentioned by You</i>', this.data[0].id, this.data[0].count);
 					}
 				},
 				hashtags: {
@@ -3227,52 +3444,124 @@ barba.init({
 						}, content, this.data);
 					},
 					draw: function() {
-						var text = '<h3>Most<br />Hashtags by Me</h3><ol>';
-
 						this.data.sort(most.sort);
-						for (var i = 0; i < 5; i++) {
-							if(this.data[i]) {
-								text += '<li class="content">';
-								text += ('<span class="presponse">' + this.data[i].count + '</span>');
-								text += ('<span class="pplurker"><a href="https://plurk.com/search?q=' + this.data[i].id + '" target="_BLANK">#' + this.data[i].id + '</a></span>');
-								text += '</li>';
-							}
-						}
-						text += '</ol>';
-
-						if(this.data) statistics.drawLink("style4", 'https://plurk.com/search?q=' + this.data[0].id, 'Most Hashtags by You', '#' + this.data[0].id, this.data[0].count)
+						if(this.data[0]) statistics.drawLink('', 'https://plurk.com/search?q=' + this.data[0].id, '<i>Most Hashtags by You</i>', '#' + this.data[0].id, this.data[0].count);
 					}
+				},
+				responses: {
+					sort: function(a, b) {
+						return b.response_count - a.response_count;
+					},
+					draw: function(data) {
+						data.sort(this.sort);
+						if(data) statistics.drawPost('postcontent span2', '', '<i>Most Responded</i> ' + datediff(data[0].posted), data[0].content, data[0].response_count);
+					}
+				},
+				replurk: {
+					sort: function(a, b) {
+						return b.replurkers_count - a.replurkers_count;
+					},
+					draw: function(data) {
+						data.sort(this.sort);
+						if(data) statistics.drawPost('postcontent span2', '', '<i>Most Replurked</i> ' + datediff(data[0].posted), data[0].content, data[0].replurkers_count);
+					}
+				},
+				favorite: {
+					sort: function(a, b) {
+						return b.favorite_count - a.favorite_count;
+					},
+					draw: function(data) {
+						data.sort(this.sort);
+						if(data) statistics.drawPost('postcontent span2', '', '<i>Most Favorited</i> ' + datediff(data[0].posted), data[0].content, data[0].favorite_count);
+					}
+				}
+			};
+			var inactive = {
+				year: 2020,
+				draw: function(data, year) {
+					this.year = year;
+					statistics.draw('inactive', year, 'You\'ve been inactive since ' + year + ' <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
+					statistics.drawPost('postcontent span2', '', '<i>Your last Plurk</i> ' + datediff(data[0].posted), data[0].content, data[0].response_count);
+				},
+				empty: function() {
+					statistics.draw('inactive', '-', 'You haven\t posted anything at all <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
 				}
 			}
 
 			// Loading
 			var loading = {
 				count: 0,
+				prev_count: 0,
 				counts: -1,
 				onDone: function(){},
+				clean: false,
 				init: function() {
-					console.log("Start tracking loading");
+					this.count = 0;
+					this.prev_count = 0;
+					this.counts = -1;
+					this.clean = false;
+					this.onDone = function(){};
 				},
 				draw: function(item) {
-					if(!next.querySelector("#statistics .loading")) {
-						statistics.draw("loading", Math.ceil(item) + "%", "Loading all responses");
-					}
-					next.querySelector("#statistics .loading strong").innerHTML = Math.ceil(item) + "%";
-					this.done();
+					var that = this;
+					var load = {
+						progress: this.prev_count
+					};
+					this.prev_count = item;
+
+					gsap.to(load, {
+						progress: Math.ceil(item),
+						snap: "progress",
+						ease: "linear",
+						duration: .5,
+						onUpdate: function () {
+							if(!next.querySelector("#statistics .loading")) {
+								statistics.draw("loading", load.progress + "%", "3 of 3. Loading all responses, it can take up to 10 minutes");
+							}
+							next.querySelector("#statistics .loading .big").innerHTML = load.progress + "%";
+						},
+						onComplete: function() {
+							if(that.clean) that.done();
+						}
+					});
 				},
 				loop: function(length) {
+					this.clean = true;
 					this.counts = length;
-					this.draw(10);
+					this.draw(0);
 				},
 				update: function() {
 					if (this.counts >= 0) {
 						this.count++;
-						this.draw(10 + (90 * (this.count / this.counts)));
+						this.draw(100 * (this.count / this.counts));
 					}
 				},
+				fakeupdate: function() {
+					if (this.counts >= 0) {
+						this.count++;
+						if (this.count >= (this.counts - 10)) this.count = (this.counts - 10);
+						this.draw(100 * (this.count / this.counts));
+					}
+				},
+				forcedone: function() {
+					this.count = this.counts;
+					this.draw(100);
+				},
 				done: function() {
+					var that = this;
+					var el = next.querySelector("#statistics .loading");
+
 					if (this.count == this.counts) {
-						this.onDone();
+						this.clean = false;
+						gsap.to(el, {
+							opacity: 0,
+							duration: .5,
+							ease: "expo.in",
+							onComplete: function() {
+								el.remove();
+								that.onDone();
+							}
+						})
 					}
 				}
 			}
@@ -3301,16 +3590,14 @@ barba.init({
 			// Show/hide Animations
 			// Login Pages
 			function showLoginPage(tl) {
-				tl.fromTo(next.querySelector("#permission"), {
+				tl.fromTo(next.querySelectorAll("#permission"), {
 					position: "fixed",
 					display: "",
 					opacity: 0,
 					top: 0
 				}, {
 					opacity: 1,
-					stagger: .2,
-					duration: 1,
-					ease: "power3.out"
+					duration: 1
 				});
 				tl.fromTo(next.querySelectorAll("#permission .bgtext *"), {
 					display: "",
@@ -3370,10 +3657,20 @@ barba.init({
 					opacity: 0
 				}, {
 					opacity: 1,
+					duration: 1
+				}, ">-.25");
+				tl.fromTo(next.querySelectorAll(".grant .bgtext > *"), {
+					display: "",
+					opacity: 0,
+					y: 200
+				}, {
+					opacity: 1,
+					y: 0,
 					duration: 1,
+					stagger: .2,
 					ease: "power3.out"
-				}, ">-.2");
-				tl.fromTo(next.querySelectorAll(".grant .bgtext > *, .grant .email, .grant .thumbs, .grant .text > *, .grant .arrow"), {
+				}, ">-.5");
+				tl.fromTo(next.querySelectorAll(".grant #logout, .grant .thumbs, .grant .text > *, .grant .arrow-big"), {
 					display: "",
 					opacity: 0,
 					y: 200
@@ -3388,7 +3685,7 @@ barba.init({
 				return tl;
 			}
 			function hideStatisticPages(tl) {
-				tl.fromTo(next.querySelectorAll(".grant .bgtext > *, .grant .email, .grant .thumbs, .grant .text > *, .grant .arrow"), {
+				tl.fromTo(next.querySelectorAll(".grant .bgtext > *, .grant .email, .grant .thumbs, .grant .text > *, .grant .arrow-big"), {
 					opacity: 1,
 					y: 0
 				}, {
@@ -3432,49 +3729,33 @@ barba.init({
 				}
 			}
 
-			// API Calling
-			// API call helper
-			function api(url, success, error, async) {
-				var request = new XMLHttpRequest();
-
-				if (!async) async = true;
-
-				request.open('GET', API + url, async);
-				request.onload = function() {
-					if (this.status == 200) {
-						loading.update();
-
-						if(success) success(JSON.parse(this.response));
-					} else {
-						if(error) error(JSON.parse(this.response));
-					}
-				};
-				request.send();
-			}
 			// Request permanent token
 			function requestPermanentToken(token) {
+				var input = next.querySelector("#oauth_token");
 				var submit = next.querySelector("#submit");
 
 				submit.innerHTML = "...";
 				message("Fetching your data, please wait.");
 
-				api("?request=permanenttoken&token=" + token, function(data) {
+				api.call("?request=permanenttoken&token=" + token, function(data) {
 					login();
 				}, function() {
-					submit.innerHTML = "Submit";
+					submit.innerHTML = "Verify";
+					input.value = "";
+					input.focus();
 					requestToken("Your verification code is invalid, please request the code again.");
 				});
 			}
 			// Request token
-			function requestToken(message) {
-				api("?request=token", function(data) {
+			function requestToken(text) {
+				api.call("?request=token", function(data) {
 					var input = next.querySelector("#oauth_token");
 					var submit = next.querySelector("#submit");
 
 					next.querySelector("#tokenurl").setAttribute("href", data.message.url);
 
-					if (message) {
-						message(message);
+					if(text) {
+						message(text);
 					} else  {
 						var tl = gsap.timeline();
 						tl.fromTo(next.querySelectorAll("#permission form"), {
@@ -3507,6 +3788,7 @@ barba.init({
 					submit.onclick = function(event) {
 						if(input.value == "") input.focus();
 						else {
+							input.onkeyup = function() {};
 							submit.onclick = function() {};
 							requestPermanentToken(encodeURI(input.value));
 						}
@@ -3515,25 +3797,29 @@ barba.init({
 					message("Error when requesting verification from Plurk, please reload your browser again.");
 				});
 
-				next.querySelector("#permission form").style.display = "none";
+				if(!text) next.querySelector("#permission form").style.display = "none";
 			}
 			// Logout
 			function requestLogout() {
-				api("?request=logout", function(data) {
-					var tl = gsap.timeline();
+				var tl = gsap.timeline();
 
-					next.querySelector("#oauth_token").value = "";
-					next.querySelector("#submit").innerHTML = "Verify";
-					message("Click the Verify button to continue.", true);
+				// Hide statistic pages
+				api.abort();
+				tl = animate.top(tl);
+				tl = hideStatisticPages(tl);
+				tl.to(next.querySelectorAll("#credits .loading"), {
+					opacity: 1,
+				});
+				tl.set(next, {
+					onComplete: function() {
+						api.call("?request=logout", function(data) {
+							next.querySelector("#oauth_token").value = "";
+							next.querySelector("#submit").innerHTML = "Verify";
+							message("Click the Verify button to continue.", true);
 
-					// Hide statistic pages
-					tl = hideStatisticPages(tl);
-
-					tl.set(next, {
-						onComplete: function() {
 							login();
-						}
-					})
+						});
+					}
 				});
 			}
 			// Get user avatar
@@ -3544,12 +3830,10 @@ barba.init({
 
 			// Check login status
 			function login(callback) {
-				api("", function(data) {
+				statistics.init();
+
+				api.call("", function(data) {
 					me = data.message;
-
-					loading.init();
-
-					displayStatistics();
 
 					displayPlurkerData(me, function() {
 						var tl = gsap.timeline();
@@ -3566,6 +3850,8 @@ barba.init({
 
 						if(callback) callback();
 					});
+
+					displayStatistics();
 				}, function() {
 					var tl = gsap.timeline();
 
@@ -3595,33 +3881,31 @@ barba.init({
 
 				// Draw statistic
 				statistics.title('All Time');
-				statistics.draw('style1', plurker.anniversary.years, "You joined Plurk " + plural(plurker.anniversary.years, "year") + " and " + plural(plurker.anniversary.days, "day") + " ago.");
-				statistics.draw('style2', plurker.badges.length, "You have " + plural(plurker.badges.length, "badge") + " right now.");
-				statistics.draw('style3', Math.round(plurker.plurks_count / days), "You posted around " + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day.");
-				if (responses <= 24) extra = "That's almost 1 response every " + plural(Math.round(24 / responses), "hour.");
-				else extra = "That's almost 1 response every " + plural(Math.round(24 * 60 / responses), "minute.");
-				statistics.draw('style4', responses, "You responded around " + plural(responses, "time") + " per day. " + extra);
+				if(plurker.anniversary.years && plurker.anniversary.days) {
+					statistics.draw('', plurker.anniversary.years, "You joined Plurk " + plural(plurker.anniversary.years, "year") + " and " + plural(plurker.anniversary.days, "day") + " ago");
+					statistics.draw('badges', plurker.badges.length, "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
+					statistics.draw('', Math.round(plurker.plurks_count / days), "You posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+					if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>';
+					else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>';
+					statistics.draw('', responses, "You responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
+				} else {
+					statistics.draw('', '-', "There is no data of you joining Plurk");
+					statistics.draw('', plurker.badges.length, "But at least you have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
+				}
 
 				// Scroll animation hello section
 				scroll.push(function(tl) {
-					tl.fromTo(next.querySelectorAll("#hello .text"), {
-						opacity: 1
-					}, {
-						opacity: 0,
-						duration: 1/3,
-						ease: "linear"
-					}, 0);
-					tl.fromTo(next.querySelectorAll("#hello .bgtext sup"), {
-						y: "0vh"
-					}, {
-						y: "25vh",
-						duration: 1,
-						ease: "linear"
-					}, 0);
-					tl.fromTo(next.querySelectorAll("#hello .bgtext sub"), {
+					tl.fromTo(next.querySelectorAll("#hello .text, #hello .thumbs, #hello .arrow-big"), {
 						y: "0vh"
 					}, {
 						y: "50vh",
+						duration: 1,
+						ease: "linear"
+					}, 0);
+					tl.fromTo(next.querySelectorAll("#hello .bgtext sup, #hello .bgtext sub"), {
+						y: "0vh"
+					}, {
+						y: "75vh",
 						duration: 1,
 						ease: "linear"
 					}, 0);
@@ -3638,120 +3922,162 @@ barba.init({
 
 				if(callback) callback();
 			}
-
 			// Display statistics
 			function displayStatistics() {
-				api("?fetch=plurks&filter=my&loop=1", function(data) {
-					var plurk = data.message;
+				var interval;
+				var plurk
 
-					// Load each post responses and calculate statistics
-					statistics.plurk_count = plurk.length;
-					plurk.forEach(function(value, index) {
-						// Calculate the statistics
-						if (value.anonymous) statistics.whispers_count++;
-						if (value.has_gift) statistics.has_gift_count++;
-						if (value.porn) statistics.porn_count++;
-						if (!value.response_count) statistics.noresponse_count++;
-						if (value.plurk_type == 3) statistics.private_count++;
-						statistics.response_count += value.response_count;
+				statistics.title('This Year');
+				statistics.draw("loading", "", "2 of 3. Loading your 2020 plurks. It can take up to 1 minutes.");
 
-						// Find and count all my emoticons from my post
-						most.myemoticons.count(value.content);
-						// Find and count all mentions from my post
-						most.mentions.count(value.content_raw);
-						// Find and count all hashtags from my post
-						most.hashtags.count(value.content_raw);
+				loading.init();
+				loading.loop(100);
+				interval = setInterval(function() {
+					loading.fakeupdate();
+				}, 500);
 
-						// Get the responses for each plurk
-						api("?fetch=response&plurk_id=" + value.plurk_id, function(data) {
-							// Attach responses to the post
-							var index = plurk.findIndex(function(el) {
-								return el.plurk_id == data.message.plurk_id;
-							});
-							if(index) plurk[index].response = data.message;
+				// Load 2020 Plurk
+				api.call("?fetch=plurks&filter=my&loop=5", function(data) {
+					plurk = data.message;
+					clearInterval(interval);
 
-							// Add friends from response lists
-							friends.add(data.message.friends);
-
-							// Count the rest of statistics
-							data.message.responses.forEach(function(value, index) {
-								if (value.user_id == me.id) {
-									// Find and count all my emoticons from responses
-									most.myemoticons.count(value.content);
-									// Find and count all my emoticons from responses
-									most.mentions.count(value.content_raw);
-									// Find and count all my hashtags from responses
-									most.hashtags.count(value.content_raw);
-								}
-								// Find and count all responders
-								most.responders.count(data.message, value);
-							});
-
-							// Check if no other data need to be loaded then draw
-							loading.onDone = function() {
-								// Display Most Mentioned by me
-								most.mentions.draw();
-								// Display Most hashtags by me
-								most.hashtags.draw();
-								// Display Most My Emoticons
-								most.myemoticons.draw();
-								// Display Most Responder
-								most.responders.draw();
-							}
-						}, function(data) {
-							console.log("Fail", data);
-						}, false);
-					});
-					statistics.post_count = statistics.plurk_count + statistics.response_count;
-
-					// Draw user statistics
-					statistics.drawAll();
-
-					// Deeper user statistics
-					statistics.title('Dig Deeper');
-					loading.loop(plurk.length);
-
-					// Draw post statistics
-					// next.querySelector("#most-responses .text").innerHTML = getSortedData(plurk, "Responses", "response_count");
-					// next.querySelector("#most-replurks .text").innerHTML = getSortedData(plurk, "Replurks", "replurkers_count");
-					// next.querySelector("#most-favorites .text").innerHTML = getSortedData(plurk, "Favorites", "favorite_count");
-				});
-			}
-			// Sort and return HTML
-			function getSortedData(data, title, indicator) {
-				var text = '';
-
-				data.sort(function(a, b) {
-				    return b[indicator] - a[indicator];
+					loading.forcedone();
 				});
 
-				if (data[0][indicator] > 0) {
-					text = '<h3>Most<br />' + title + '</h3><ol>';
-					for (var i = 0; i < 5; i++) {
-						if (data[i][indicator] > 0) {
-							text += '<li class="content">';
-							text += ('<span class="presponse">' + data[i][indicator] + '</span>');
-							text += ('<span class="pcontent">' + data[i].content + '</span>');
-							text += ('<span class="pdate">' + datediff(data[i].posted) + '</span>');
-							text += '</li>';
-						}
+				// When loading done
+				loading.onDone = function() {
+					var date = new Date(plurk[0].posted);
+
+					if (date.getFullYear() == 2020) {
+						most.responses.draw(plurk);
+						most.replurk.draw(plurk);
+						most.favorite.draw(plurk);
+
+						displayExtendedStatistics(plurk);
+					} else {
+						if(plurk[0]) inactive.draw(plurk, date.getFullYear());
+						else inactive.empty();
 					}
-					text += '</ol>';
-				} else {
-					console.log("Hide " + title);
 				}
+			}
+			// Display extended statistics
+			function displayExtendedStatistics(plurk) {
+				statistics.plurk_count = plurk.length;
+				plurk.forEach(function(value, index) {
+					// Calculate the statistics
+					if (value.anonymous) statistics.whispers_count++;
+					if (value.has_gift) statistics.has_gift_count++;
+					if (value.porn) statistics.porn_count++;
+					if (!value.response_count) statistics.noresponse_count++;
+					if (value.plurk_type == 3) statistics.private_count++;
+					statistics.response_count += value.response_count;
 
-				return text;
+					// Find and count all my emoticons from my post
+					most.myemoticons.count(value.content);
+					// Find and count all mentions from my post
+					most.mentions.count(value.content_raw);
+					// Find and count all hashtags from my post
+					most.hashtags.count(value.content_raw);
+
+					// Get the responses for each plurks
+					api.call("?fetch=response&plurk_id=" + value.plurk_id, function(data) {
+						loading.update();
+
+						// Attach responses to the post
+						var index = plurk.findIndex(function(el) {
+							return el.plurk_id == data.message.plurk_id;
+						});
+						if(index) plurk[index].response = data.message;
+
+						// Add friends from response lists
+						friends.add(data.message.friends);
+
+						// Count the rest of statistics
+						data.message.responses.forEach(function(value, index) {
+							if (value.user_id == me.id) {
+								// Find and count all my emoticons from responses
+								most.myemoticons.count(value.content);
+								// Find and count all my emoticons from responses
+								most.mentions.count(value.content_raw);
+								// Find and count all my hashtags from responses
+								most.hashtags.count(value.content_raw);
+							}
+							// Find and count all responders
+							most.responders.count(data.message, value);
+						});
+					}, function(data) {
+						console.log("Fail", data);
+					}, false);
+				});
+				statistics.post_count = statistics.plurk_count + statistics.response_count;
+
+				// Draw user statistics
+				statistics.drawAll();
+
+				// Deeper user statistics
+				statistics.title('Dig Deeper');
+				// Load each post responses and calculate statistics
+				loading.init();
+				// Start loading
+				loading.loop(plurk.length);
+				// When loading done
+				loading.onDone = function() {
+					// Display Most Responder
+					most.responders.draw();
+					// Display Most Mentioned by me
+					most.mentions.draw();
+					// Display Most hashtags by me
+					most.hashtags.draw();
+					// Display Most My Emoticons
+					most.myemoticons.draw();
+				}
 			}
 
 			// Run the login
-			login(function () {
-				done();
+			gsap.fromTo(next.querySelectorAll('#credits'), {
+				opacity: 0
+			}, {
+				opacity: 1,
+				onComplete: function() {
+					login(function () {
+						gsap.to(next.querySelectorAll('#credits .text .loading'), {
+							opacity: 0
+						});
+
+						// Scroll animation wrap section
+						// scroll.push(function(tl) {
+						// 	tl.fromTo(next.querySelectorAll("#credits .text"), {
+						// 		y: "50vh",
+						// 		opacity: 0
+						// 	}, {
+						// 		y: "0vh",
+						// 		opacity: 1,
+						// 		ease: "linear",
+						// 		stagger: {
+						// 			from: "end",
+						// 			amount: .2
+						// 		}
+						// 	}, 0);
+						// 	return tl;
+						// }, function(tl) {
+						// 	return ScrollTrigger.create({
+						// 		markers: true,
+						// 		trigger: next.querySelectorAll("#scrollercredits"),
+						// 		start: "0 100%",
+						// 		end: "0 0",
+						// 		animation: tl,
+						// 		scrub: true
+						// 	});
+						// });
+
+						done();
+					});
+				}
 			});
 		},
 		beforeLeave: function(data) {
 			var next = data.next.container;
-			next.querySelector("#submit").onkeyup = function() {};
+			next.querySelector("#oauth_token").onkeyup = function() {};
 			next.querySelector("#submit").onclick = function() {};
 		}
 	}]

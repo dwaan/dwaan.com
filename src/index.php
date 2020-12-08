@@ -25,7 +25,7 @@
 
 		<section id="casestudy" class="middle full">
 			<div class="padding">
-				<a href="./plurk">Plurk &nbsp; <sup>20</sup><sub>20</sub></a>
+				<a href="./plurk">Plurk 2020</a>
 			</div>
 			<div class="arrow-small">
 				<a href="./plurk" class="arrow">
