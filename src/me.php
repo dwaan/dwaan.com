@@ -153,9 +153,9 @@
 					for ($i = 0; $i < $length; $i++) {
 						$data = $obj->data[$i];
 						if($data->media_type == "IMAGE" || $data->media_type == "CAROUSEL_ALBUM") {
-							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->media_url . ") center no-repeat; background-size:cover' aria-label='" . $data->caption . "'></span></a>";
+							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><img src='" . $data->media_url . "' alt='" . $data->caption . "' /></a>";
 						} elseif($data->media_type == "VIDEO") {
-							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->thumbnail_url . ") center no-repeat; background-size:cover' aria-label='" . $data->caption . "'></span></a>";
+							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><img src='" . $data->thumbnail_url . "' alt='" . $data->caption . "' /></a>";
 						}
 					}
 				?>

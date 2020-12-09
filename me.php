@@ -64,9 +64,9 @@
 					for ($i = 0; $i < $length; $i++) {
 						$data = $obj->data[$i];
 						if($data->media_type == "IMAGE" || $data->media_type == "CAROUSEL_ALBUM") {
-							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->media_url . ") center no-repeat; background-size:cover' aria-label='" . $data->caption . "'></span></a>";
+							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><img src='" . $data->media_url . "' alt='" . $data->caption . "' /></a>";
 						} elseif($data->media_type == "VIDEO") {
-							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><span style='background:#ccc url(" . $data->thumbnail_url . ") center no-repeat; background-size:cover' aria-label='" . $data->caption . "'></span></a>";
+							echo "<a href='" . $data->permalink . "' data-barba-prevent target='BLANK' rel='noopener noreferrer'><img src='" . $data->thumbnail_url . "' alt='" . $data->caption . "' /></a>";
 						}
 					}
 				?> </div></section><div id="cofound" class="cofound middle clip"><div class="text"><h2>and  10 Years Ago</h2><p>My friend and I decide to create Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner right now.</p><a href="http://sagara.id" class="spring" data-barba-prevent target="BLANK" rel="noopener noreferrer">More about sagara.id</a></div><div class="thumbs"><picture><source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/sagara/sagara@2x.jpg"><img src="img/sagara/sagara.jpg" width="" height="" alt="Sagara"></picture></div></div><section class="links"><nav><div class="prototype"><a href="./say-hi"><span>say hi</span></a></div><div class="continue"><a href="./random-case-study"><span><strong>random case study</strong> <i>- Tiket Apa Saja</i></span></a></div></nav></section><section class="footer"><a class="reading">Reading time: 120 seconds</a></section></main> <?php include_once "part_script.php"; ?> </body></html>

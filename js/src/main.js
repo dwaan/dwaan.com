@@ -685,6 +685,9 @@ function addpadding() {
 			paddingBottom: "+=" + deltatoolbar
 		});
 	});
+
+	// Force refresh scrolltrigger
+	ScrollTrigger.refresh();
 }
 addpadding();
 window.addEventListener("resize", addpadding);
@@ -837,7 +840,7 @@ barba.hooks.afterEnter(function(data) {
 
 // Initialized barba.js
 barba.init({
-	debug: true,
+	debug: false,
 	transitions: [{
 		name: 'default-transition',
 		once: function(data) {
@@ -2634,6 +2637,29 @@ barba.init({
 				});
 			});
 
+			// IG Post scrolling, but it's not smooth
+			// addClass(next.querySelector(".igstage"), "scroll");
+			// next.querySelectorAll(".igstage.scroll").forEach(function(element, index) {
+			// 	scroll.push(function(tl) {
+			// 		tl.fromTo(element.querySelectorAll(".thumbs"), {
+			// 			x: "25%"
+			// 		}, {
+			// 			x: "-25%",
+			// 			ease: "linear"
+			// 		});
+
+			// 		return tl;
+			// 	}, function(tl) {
+			// 		return ScrollTrigger.create({
+			// 			trigger: element,
+			// 			start: "0 100%",
+			// 			end: "100% 0",
+			// 			animation: tl,
+			// 			scrub: .5
+			// 		});
+			// 	});
+			// });
+
 			// Animate cofounder
 			next.querySelectorAll(".cofound").forEach(function(el, index) {
 				// Hover
@@ -3797,7 +3823,8 @@ barba.init({
 				}, 500);
 
 				// Load 2020 Plurk
-				api.call("?fetch=plurks&filter=my&loop=5", function(data) {
+				api.call("?fetch=plurks&filter=my", function(data) {
+				// api.call("?fetch=plurks&filter=my&loop=5", function(data) {
 					plurk = data.message;
 					clearInterval(interval);
 

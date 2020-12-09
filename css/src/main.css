@@ -1844,14 +1844,35 @@ header .right {
 	background-size: 100% 100%;
 	transform: scale3d(1.5, 1.5, 1);
 	pointer-events: none;
+	display: none;
 }
-.igstage .thumbs span {
+.igstage .thumbs img {
 	position: relative;
 	z-index: 1;
 	display: block;
-	width: 100%;
-	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
 	border-radius: var(--pads);
+}
+.igstage.scroll {
+	min-height: auto;
+	height: auto;
+}
+.igstage.scroll .thumbs {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: nowrap;
+}
+.igstage.scroll .thumbs a {
+	width: 40vw;
+	height: 40vw;
+	margin: 0 var(--padm);
+}
+@media (min-width: 1200px) {
+	.igstage.scroll .thumbs a {
+		width: 30vw;
+		height: 30vw;
+	}
 }
 
 .cofound {
