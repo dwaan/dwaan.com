@@ -43,13 +43,13 @@
 	    <section id="permission" class="middle first">
 		    <div class="text">
 			    <form action="" method="GET">
-			    	<h1>Plurk<br/><sup>20</sup><sub>20</sub></h1>
+			    	<h1>Replurk<br/><sup>20</sup><sub>20</sub></h1>
 			    	<ol>
 			    		<li><p>Get your Plurk verification code below <br/><a href="#" id="tokenurl" target="_BLANK">Get Verification Code</a></p></li>
 			    		<li>
 						    <p>Enter your verification code here:</p>
 						    <p class="cuddle">
-						    	<input type="text" name="oauth_token" id="oauth_token" placeholder="Verification code" />
+						    	<input type="text" name="oauth_token" id="oauth_token" placeholder="Code" />
 						    	<span id="submit" class="submit">Verify</span>
 						    </p>
 					    </li>
@@ -74,6 +74,13 @@
 		    	<p class="made">Made with ❤️ in TLV</p>
 		    	<p class="like">If you like this web app, you can friend-ed or fan-ed me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> which ever you like. Or even better, send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some coins</a> if you will.</p>
 		    	<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. Please feel free to <a href="./say-hi">contact me</a> if there's some copyrighted materials that shouldn't be in this web app.</p>
+		    </div>
+	    </section>
+
+	    <section id="nojs" class="middle">
+	    	<div class="text">
+		    	<h3>Javascript</h3>
+		    	<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
 		    </div>
 	    </section>
 	</main>

@@ -79,19 +79,24 @@ header {
 /* Homepage content */
 .main-text {
 	margin: 0 0 var(--padxl);
-	padding: 0 var(--padl);
+	padding: 0 var(--padx);
 }
 .main-text h1 {
-	font-size: 4rem;
+	font-size: 3.5rem;
 	text-align: center;
 	margin: 0;
 }
-@media (max-width: 360px) {
+@media (min-width: 360px) {
 	.main-text {
-		padding: 0 30px;
+		padding: 0 var(--padl);
 	}
 	.main-text h1 {
 		font-size: 4rem;
+	}
+}
+@media (min-width: 760px) {
+	.main-text h1 {
+		font-size: 5rem;
 	}
 }
 
@@ -450,52 +455,64 @@ header {
 
 /* Me page */
 
-.imuiux {
-	padding: calc(5 * var(--pady)) var(--padx);
-}
-.me h1 {
-	font-size: 4rem;
-}
-.me h2 {
-	font-size: 3rem;
-}
+.me h2,
 .me h3 {
-	font-size: 1.8rem;
-}
-.me h4 {
-	font-size: 1.2rem;
+	font-size: 3rem;
+	letter-spacing: -.2rem;
+	padding: var(--padm) 0 var(--padl);
 }
 .me .text {
+	padding: 0 var(--padx);
 	text-align: left;
 }
+.me .textoverlay {
+	padding: 0!important;
+}
+@media (min-width: 375px) {
+	.me h2,
+	.me h3 {
+		font-size: 4rem;
+		letter-spacing: -.25rem;
+		padding: var(--padm) 0 var(--padl);
+	}
+	.me .text {
+		padding: 0 calc(2 * var(--padx));
+	}
+}
 
+.intro .text p {
+	font-size: 1rem;
+}
 
+.intro .arrow-big {
+	display: none;
+}
+
+#webdesigner p {
+	max-width: 400px;
+}
+
+#sayhi p {
+	max-width: 250px;
+}
+
+#post p {
+	max-width: 200px;
+}
 /* Mr. Goat */
 
-.mrgoat.spin {
-	height: 50vh;
-}
-.mrgoat {
-	text-align: left;
-}
 .mrgoat h2 {
 	font-size: 4rem;
 	line-height: 80%;
 }
-.mrgoat .text,
 .mrgoat .thumbs {
-	width: 100%;
-}
-.mrgoat .thumbs {
-	order: 1;
-	padding-bottom: var(--padxl);
-	position: relative;
-	align-items: flex-end;
+	padding-top: calc(4 * var(--pady));
+	padding-bottom: 35vh;
+	justify-content: flex-end;
 }
 .mrgoat .text {
-	padding-top: var(--padxl);
-	align-items: flex-start;
-	order: 2;
+	padding-top: 65vh;
+	padding-bottom: calc(4 * var(--pady));
 }
 .mrgoat .arrow {
 	order: 3;
@@ -506,22 +523,30 @@ header {
 	max-width: 65vw;
 	height: auto;
 }
+.mrgoat h2 {
+	font-size: 3.5rem;
+	margin: 0;
+	padding: 0;
+}
+@media (min-width: 600px) {
+	.mrgoat h2 {
+		font-size: 5rem;
+		max-width: 400px;
+	}
+}
 
 .igstage .thumbs {
-	grid-template-columns: auto auto;
-	grid-gap: var(--padx);
+	grid-template-columns: repeat(2, 40vw);
 }
 .igstage .thumbs a {
-	height: calc((100vw / 2) - (1.5 * var(--padx)));
+	height: 40vw;
 }
 @media (min-width: 600px) {
 	.igstage .thumbs {
-		padding: var(--padx);
-		grid-template-columns: auto auto auto;
-		grid-gap: calc(2 * var(--padx));
+		grid-template-columns: repeat(3, 25vw);
 	}
 	.igstage .thumbs a {
-		height: calc((100vw / 3) - (3 * var(--padx)));
+		height: 25vw;
 	}
 }
 .igstage .arrow {
@@ -635,6 +660,15 @@ header {
 }
 
 
+/* Plurk */
+
+.plurktitle {
+	font-size: 3.5rem;
+	letter-spacing: -.25rem;
+	line-height: 100%;
+	text-align: center;
+}
+
 .plurk .bgtext {
 	display: flex;
 	flex-flow: column;
@@ -671,14 +705,9 @@ header {
 #permission {
 	padding: calc(5 * var(--pady)) var(--padx) var(--pady);
 }
-#permission .cuddle {
-	flex-flow: column;
-}
-#permission input[type="text"] {
-	margin-bottom: var(--pads);
-}
 #permission h1 {
-	font-size: 5rem;
+	font-size: 4rem;
+	letter-spacing: -.35rem;
 }
 
 .stats {
