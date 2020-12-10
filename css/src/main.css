@@ -881,7 +881,7 @@ header .right {
 	color: var(--black);
 }
 .main-text h1 a {
-	display: initial;
+	display: inline-block;
 	background: inherit;
 }
 .main-text h1 .splord,
@@ -1519,7 +1519,7 @@ header .right {
 }
 .me h1 strong {
 	position: relative;
-	display: inline;
+	display: inline-block;
 	font-weight: inherit;
 }
 .me h1 strong:after {
@@ -1536,6 +1536,7 @@ header .right {
 }
 .me h1 strong.emphasis {
 	color: var(--red);
+	position: relative;
 }
 .me h1 strong.emphasis:after {
 	width: 100%;
@@ -2262,6 +2263,8 @@ img.rounded {
 	height: 100%;
 	background-color: var(--yellow);
 	border-radius: var(--pads);
+	padding: var(--padl);
+	overflow: hidden;
 }
 .stats .anim p,
 .stats .anim a,
@@ -2276,7 +2279,6 @@ img.rounded {
 	display: flex;
 	flex-flow: column;
 	justify-content: flex-end;
-	padding: var(--padl);
 	opacity: 1;
 	height: 100%;
 }
@@ -2334,6 +2336,9 @@ img.rounded {
 .stats .title i {
 	margin-right: auto;
 }
+.stats .chart {
+	flex: 1;
+}
 .stats i {
 	display: inline-block;
 	padding: 0 8px;
@@ -2355,23 +2360,29 @@ img.rounded {
 	overflow: hidden;
 }
 
-.mostresponders .text {
+.chart {
 	position: relative;
-	display: flex;
 }
-.mostresponders .text a {
+.chart a {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	margin: auto 0;
+	white-space: nowrap;
 	display: flex;
 	flex-flow: row;
-	margin: auto 0;
+	transform: translate(0, -50%);
 }
-.mostresponders .text {
-	display: block;
-}
-.mostresponders .text .name {
+
+.chart .plurkers .name {
 	margin-right: auto;
 	line-height: 24px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-.mostresponders .text .count {
+.chart .plurkers .count {
 	color: var(--black);
 	background-color: var(--yellow);
 	line-height: 24px;
@@ -2381,19 +2392,22 @@ img.rounded {
 	border-radius: 24px;
 	font-size: .7rem;
 	font-weight: 500;
+	padding: 0 var(--pads);
 }
-.mostresponders .text img {
+.chart .plurkers .avatar img {
 	height: 24px;
 	margin-right: var(--pads);
 }
 
 /* Plurk - Statistics - Costum Page Style */
 #hello,
-#statistics {
+#statistics,
+#statisticsthisyear {
 	z-index: 2;
 	overflow: hidden;
 }
-#statistics {
+#statistics,
+#statisticsthisyear {
 	background-color: var(--white);
 }
 
@@ -2419,6 +2433,7 @@ img.rounded {
 }
 
 #permission,
-#statistics {
+#statistics,
+#statisticsthisyear {
 	margin-bottom: 100vh;
 }

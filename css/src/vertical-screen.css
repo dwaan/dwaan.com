@@ -745,6 +745,11 @@ header {
 	}
 }
 
+.chart {
+	margin: var(--padl) 0;
+}
+
+
 #credits {
 	padding: calc(4 * var(--pady)) calc(2 * var(--padx))!important;
 }

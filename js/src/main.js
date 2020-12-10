@@ -55,7 +55,7 @@ function datediff(date) {
 	else if (diffyear > 1) when = diffyear + " years ago";
 	else if (diffmonth > 1) when = diffmonth + " months ago";
 	else if (diffmonth == 1) when = "A month ago";
-	else if (diffday >= 14) when = round(diffday / 7) + " weeks ago";
+	else if (diffday >= 14) when = Math.round(diffday / 7) + " weeks ago";
 	else if (diffday >= 7) when = "A week ago";
 	else if (diffday == 1) when = "Yesterday";
 	else if (diffday > 1) when = diffday + " days ago";
@@ -63,6 +63,21 @@ function datediff(date) {
 	else when = "Today";
 
 	return when;
+}
+function animateNumber(from, to, onUpdate, onComplete){
+	var load = { progress: from }
+	gsap.to(load, {
+		progress: to,
+		snap: "progress",
+		ease: "linear",
+		duration: .5,
+		onUpdate: function() {
+			if(onUpdate) onUpdate(load.progress);
+		},
+		onComplete: function() {
+			if(onComplete) onComplete(load.progress);
+		}
+	});
 }
 
 // Report size of window
@@ -3008,6 +3023,19 @@ barba.init({
 					}
 					return false;
 				},
+				findByUsername: function(nick_name) {
+					var user_id = false;
+
+					for(var items in this.data) {
+						if(this.data[items].nick_name.toLowerCase() == nick_name.toLowerCase()) {
+							user_id = items;
+							break;
+						}
+					}
+
+					if(user_id) return this.data[user_id];
+					return false;
+				},
 				getAvatar: function(user_id) {
 					if(user_id && this.data && this.data[user_id]) {
 						if(this.data[user_id].has_profile_image) {
@@ -3022,7 +3050,7 @@ barba.init({
 					var user_id = false;
 
 					for(var items in this.data) {
-						if(this.data[items].nick_name == user_name) {
+						if(this.data[items].nick_name.toLowerCase() == user_name.toLowerCase()) {
 							user_id = items;
 							break;
 						}
@@ -3038,6 +3066,59 @@ barba.init({
 				},
 			};
 			// Statistics objects
+			var span = function(classname, text) {
+				var that = this;
+
+				this.el = document.createElement('span');
+				this.el.setAttribute("class", classname);
+				this.el.innerHTML = text;
+				this.update = function(text) {
+					animateNumber(that.el.textContent, text, function(text) {
+						that.el.textContent = text;
+					});
+				}
+				this.updateHTML = function(text) {
+					that.el.innerHTML = text;
+				}
+			}
+			var plurkerelement = function(id, data, customcreate) {
+				var that = this;
+
+				this.id = id;
+				this.user = data;
+				this.user_id = data.id;
+				this.attached = false;
+				this.hidden = true;
+				this.count = 1;
+				this.position = 0;
+
+				this.create = function() {
+					that.el = document.createElement('a');
+					that.el.setAttribute("id", that.id + that.user_id);
+					that.el.setAttribute("class", 'plurkers');
+					that.el.setAttribute("href", 'https://plurk.com/' + that.user.nick_name);
+					that.el.setAttribute("target", '_BLANK');
+
+					if (!customcreate) {
+						that.avatar = new span('avatar', '<img src="' + friends.getAvatar(that.user_id) + '" />');
+						that.name = new span('name', that.user.display_name);
+						that.counts = new span('count', that.count);
+						that.el.appendChild(that.avatar.el);
+						that.el.appendChild(that.name.el);
+						that.el.appendChild(that.counts.el);
+					} else {
+						customcreate(that);
+					}
+				}
+				this.create();
+
+				this.update = function() {
+					that.counts.update(that.count);
+				}
+				this.destroy = function() {
+					that.el.remove();
+				}
+			}
 			var colors = function() {
 				this.oldcolor = "";
 				this.randomcolors = [];
@@ -3180,14 +3261,6 @@ barba.init({
 						<div class="text">' + text + '</div>\
 					'));
 				},
-				updateDraw: function(style, text) {
-
-					if(!next.querySelector("." + style)) {
-						this.drawDiv(style, text)
-					} else {
-						next.querySelector('.' + style + ' .text').innerHTML = text;
-					}
-				},
 				drawGraph: function(style, number, text) {
 					if (typeof number == "string" || (typeof number == "number" && number > 0)) {
 						this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
@@ -3226,6 +3299,87 @@ barba.init({
 						</div>\
 					'));
 				},
+				attach: function(charttitle, node, max) {
+					var id = node.id;
+					var chart;
+					var title;
+					var text;
+					var anim;
+					var wrapper;
+
+					var opacity = 0;
+					var position = max;
+					var zIndex = 0;
+					var hidden = true;
+
+					if(node.position <= max){
+						hidden = false;
+						zIndex = position = (node.position - 1);
+						opacity = 1
+					}
+
+					// Create the box
+					if(!next.querySelector("." + id)) {
+						chart = document.createElement('div');
+						chart.setAttribute('class', 'chart');
+
+						title = document.createElement('div');
+						title.setAttribute('class', 'title');
+						title.innerHTML = charttitle;
+
+						text = document.createElement('div');
+						text.setAttribute('class', 'text');
+						text.appendChild(chart);
+						text.appendChild(title);
+
+						anim = document.createElement('div');
+						anim.setAttribute('class', 'anim');
+						anim.appendChild(text);
+
+						wrapper = document.createElement('div');
+						wrapper.setAttribute('class', 'wrap ' + id);
+						wrapper.appendChild(anim);
+
+						this.el.insertAdjacentElement("beforeend", wrapper);
+					}
+
+					// var percentageNodeHeight = node.el.offsetHeight / this.el.querySelector('.' + id + ' .chart').offsetHeight * 100;
+					var percentageNodeHeight = 0;
+					var maxTop = max / (max - 1);
+					var currentTop = position / (max - 1);
+					maxTop = (maxTop * 100) - (maxTop * percentageNodeHeight);
+					currentTop = (currentTop * 100) - (currentTop * percentageNodeHeight);
+					// Add  element
+					if(!node.attached) {
+						this.el.querySelector("." + id + ' .chart').insertAdjacentElement("beforeend", node.el);
+						gsap.from(node.el, {
+							top: maxTop + "%",
+							opacity: 0,
+							zIndex: 0,
+						});
+						node.attached = true;
+					}
+					// Update position
+					if(!hidden || !node.el.hidden) {
+						gsap.to(node.el, {
+							display: "",
+							top: currentTop + "%",
+							opacity: opacity,
+							zIndex: zIndex,
+							duration: .5,
+							ease: "power3.out",
+							onComplete: function() {
+								if(hidden) {
+									gsap.set(node.el, {
+										display: "none"
+									});
+								}
+							}
+						});
+						node.el.hidden = hidden;
+					}
+					node.update();
+				},
 				drawAll: function() {
 					this.draw('', this.plurk_count, 'You posted <i>' + plural(this.plurk_count, 'plurk') + '</i>');
 					this.drawGraph('center', Math.round(this.noresponse_count/this.plurk_count*100), this.noresponse_count + ' of ' + plural(this.plurk_count, 'plurk') + ' you posted have no response. That\'s around ' + Math.round(this.noresponse_count/this.plurk_count*100) + '% of your plurk <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
@@ -3240,47 +3394,62 @@ barba.init({
 				sort: function(a, b) {
 					return b.count - a.count;
 				},
+				// Find and count all based on regex
+				findregex: function(regex, replace_function, content, thearray, custompush) {
+					var result = content.match(regex);
+					if(result) {
+						result.forEach(function(value, index) {
+							value = replace_function(value);
+							index = thearray.findIndex(function(el) {
+								return el.value == value;
+							});
+							if (index < 0) {
+								if (custompush) {
+									thearray.push(custompush(value, result));
+								} else {
+									thearray.push({
+										id: value,
+										value: value,
+										count: 1
+									});
+								}
+							} else {
+								thearray[index].count++;
+							}
+						});
+					}
+				},
 				responders: {
 					data: [],
+					elements: [],
 					count: function(content, value) {
 						var index = this.data.findIndex(function(el) {
 							return el.user_id == value.user_id;
 						});
 						if (index < 0) {
-							this.data.push({
-								user_id: value.user_id,
-								user: content.friends[value.user_id],
-								count: 1
-							});
+							this.data.push(new plurkerelement('mostresponders', content.friends[value.user_id]));
 						} else {
 							this.data[index].count++;
 						}
 						this.data.sort(most.sort);
 
-						var index = 0;
-						var top = "";
-						var length = (this.data.length < 7)? this.data.length : 7;
-						for (var i = 0; i < length; i++) {
-							if(this.data[i].user_id != me.id && this.data[i].user_id != 99999) {
-								top += '\
-									<a id="mostresponders' + this.data[i].user.user_id + '" href="https://plurk.com/' + this.data[i].user.nick_name +'" target="_BLANK">\
-										<span class="avatar"><img src="' + friends.getAvatar(this.data[i].user_id) + '" /></span>\
-										<span class="name">' + this.data[i].user.nick_name + '</span>\
-										<span class="count">' + this.data[i].count + '</span>\
-									</a>\
-								';
-								 + ", ";
-								index++;
-								if(index >= 5) break;
+						// Update top 5
+						var max = 5;
+						var index = 1;
+						for (var i = 0; i < this.data.length; i++) {
+							var user_id = this.data[i].user_id;
+
+							if(user_id != me.id && user_id != 99999) {
+								this.data[i].position = index++;
+								statistics.attach('<i>Top Responders</i>', this.data[i], max);
+							} {
+								this.data[i].position = this.data.length;
 							}
 						}
-
-						statistics.updateDraw("mostresponders", top);
 					},
-					draw: function() {
-						this.data.sort(most.sort);
+					draw: function() {;
+						var index = 0;
 						if(this.data[0]) {
-							index = 0;
 							while(this.data[index].user_id == me.id || this.data[index].user_id == 99999) index++;
 							statistics.drawImage("avatar", friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Your Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
 						}
@@ -3289,49 +3458,80 @@ barba.init({
 				myemoticons: {
 					data: [],
 					count: function(content) {
-						findandcountregex(/emoticon_my\" src=\"(.*?)\"/g, function(value) {
+						most.findregex(/emoticon_my\" src=\"(.*?)\"/g, function(value) {
 							return value.replace(/emoticon_my\" src=\"|\"/gi,'');
 						}, content, this.data);
 					},
 					draw: function() {
 						this.data.sort(most.sort);
-						if(this.data[0]) statistics.drawImage("emoticons", this.data[0].id, '#', '<i>Most Used My Emoticon</i>', '', this.data[0].count);
+						if(this.data[0]) statistics.drawImage("emoticons", this.data[0].value, '#', '<i>Most Used My Emoticon</i>', '', this.data[0].count);
 					}
 				},
 				mentions: {
 					data: [],
 					count: function(content) {
-						findandcountregex(/\@(.*?)[\ |\:]/g, function(value) {
+						most.findregex(/\@(\w{1,30})[\ |\:]/g, function(value) {
 							return value.replace(/\@|\ |\:/g, '');
-						}, content, this.data);
+						}, content, this.data, function(nick_name, result) {
+							plurker =  new plurkerelement('mostmentionedbyme', friends.findByUsername(nick_name), function(plurker) {
+								if(!plurker.user) {
+									console.warn("TODO: can't find " + nick_name + " in friend list");
+									api.call("?fetch=APP&url=/Profile/getPublicProfile&nick_name=" + nick_name, function(data) {
+										console.log(data.message);
+									}, function() {}, true);
+
+									plurker.user = {
+										nick_name: nick_name,
+										user_id: nick_name,
+										reloade: true
+									};
+								}
+								plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user_id) + '" />');
+								plurker.name = new span('name', "@" + plurker.user.nick_name);
+								plurker.counts = new span('count', plurker.count);
+								plurker.el.appendChild(plurker.avatar.el);
+								plurker.el.appendChild(plurker.name.el);
+								plurker.el.appendChild(plurker.counts.el);
+								plurker.el.setAttribute("href", 'https://plurk.com/' + plurker.user.nick_name);
+							});
+							if (!plurker) {
+								plurker.el = "";
+								plurker.id = nick_name;
+								plurker.count = 1;
+							}
+							plurker.value = nick_name;
+							return plurker;
+						});
+						this.data.sort(most.sort);
+
+						// Update top 5
+						var max = 5;
+						var index = 1;
+						for (var i = 0; i < this.data.length; i++) {
+							var user_id = this.data[i].user_id;
+
+							if(user_id != me.id && user_id != 99999) {
+								this.data[i].position = index++;
+								statistics.attach('<i>Top Mentioned by You</i>', this.data[i], max);
+							} {
+								this.data[i].position = this.data.length;
+							}
+						}
 					},
 					draw: function() {
-						this.data.sort(most.sort);
-						if(this.data[0]) statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[0].id), 'https://plurk.com/' + this.data[0].id, '<i>Most Mentioned by You</i>', this.data[0].id, this.data[0].count);
-					}
-				},
-				mentionsby: {
-					data: [],
-					count: function(content) {
-						findandcountregex(/\@(.*?)[\ |\:]/g, function(value) {
-							return value.replace(/\@|\ |\:/g, '');
-						}, content, this.data);
-					},
-					draw: function() {
-						this.data.sort(most.sort);
-						if(this.data[0]) statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[0].id), 'https://plurk.com/' + this.data[0].id, '<i>Most Mentioned by You</i>', this.data[0].id, this.data[0].count);
+						if(this.data[0]) statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[0].value), 'https://plurk.com/' + this.data[0].value, '<i>Most Mentioned by You</i>', "@" + this.data[0].value, this.data[0].count);
 					}
 				},
 				hashtags: {
 					data: [],
 					count: function(content) {
-						findandcountregex(/\#(.*?)\ /g, function(value) {
+						most.findregex(/\#(.*?)\ /g, function(value) {
 							return value.replace(/\#|\ |\:/g, '');
 						}, content, this.data);
 					},
 					draw: function() {
 						this.data.sort(most.sort);
-						if(this.data[0]) statistics.drawLink('', 'https://plurk.com/search?q=' + this.data[0].id, '<i>Most Hashtags by You</i>', '#' + this.data[0].id, this.data[0].count);
+						if(this.data[0]) statistics.drawLink('', 'https://plurk.com/search?q=' + this.data[0].value, '<i>Most Hashtags by You</i>', '#' + this.data[0].value, this.data[0].count);
 					}
 				},
 				responses: {
@@ -3395,15 +3595,16 @@ barba.init({
 					};
 					this.prev_count = item;
 
+					if(!next.querySelector("#statistics .loading")) {
+						statistics.draw("loading", item + "%", "3 of 3. Loading all responses, it can take up to 10 minutes");
+					}
+
 					gsap.to(load, {
-						progress: Math.ceil(item),
+						progress: Math.round(item),
 						snap: "progress",
 						ease: "linear",
 						duration: .5,
 						onUpdate: function () {
-							if(!next.querySelector("#statistics .loading")) {
-								statistics.draw("loading", load.progress + "%", "3 of 3. Loading all responses, it can take up to 10 minutes");
-							}
 							next.querySelector("#statistics .loading .big").innerHTML = load.progress + "%";
 						},
 						onComplete: function() {
@@ -3449,27 +3650,6 @@ barba.init({
 							}
 						})
 					}
-				}
-			}
-
-			// Find and count all based on regex
-			function findandcountregex(regex, replace_function, content, thearray) {
-				var result = content.match(regex);
-				if(result) {
-					result.forEach(function(value, index) {
-						value = replace_function(value);
-						index = thearray.findIndex(function(el) {
-							return el.id == value;
-						});
-						if (index < 0) {
-							thearray.push({
-								id: value,
-								count: 1
-							});
-						} else {
-							thearray[index].count++;
-						}
-					});
 				}
 			}
 
@@ -3720,6 +3900,7 @@ barba.init({
 
 				api.call("", function(data) {
 					me = data.message;
+					console.log("TODO", me.name_color);
 
 					displayPlurkerData(me, function() {
 						var tl = gsap.timeline();
@@ -3823,8 +4004,8 @@ barba.init({
 				}, 500);
 
 				// Load 2020 Plurk
-				api.call("?fetch=plurks&filter=my", function(data) {
-				// api.call("?fetch=plurks&filter=my&loop=5", function(data) {
+				// api.call("?fetch=plurks&filter=my", function(data) {
+				api.call("?fetch=plurks&filter=my&loop=5", function(data) {
 					plurk = data.message;
 					clearInterval(interval);
 
@@ -3840,6 +4021,21 @@ barba.init({
 						most.replurk.draw(plurk);
 						most.favorite.draw(plurk);
 
+						// Draw user statistics
+						statistics.plurk_count = plurk.length;
+						plurk.forEach(function(value, index) {
+							// Calculate the statistics
+							if (value.anonymous) statistics.whispers_count++;
+							if (value.has_gift) statistics.has_gift_count++;
+							if (value.porn) statistics.porn_count++;
+							if (!value.response_count) statistics.noresponse_count++;
+							if (value.plurk_type == 3) statistics.private_count++;
+							statistics.response_count += value.response_count;
+						});
+						statistics.post_count = statistics.plurk_count + statistics.response_count;
+						statistics.drawAll();
+
+						// Display extended statistics
 						displayExtendedStatistics(plurk);
 					} else {
 						if(plurk[0]) inactive.draw(plurk, date.getFullYear());
@@ -3849,16 +4045,26 @@ barba.init({
 			}
 			// Display extended statistics
 			function displayExtendedStatistics(plurk) {
-				statistics.plurk_count = plurk.length;
-				plurk.forEach(function(value, index) {
-					// Calculate the statistics
-					if (value.anonymous) statistics.whispers_count++;
-					if (value.has_gift) statistics.has_gift_count++;
-					if (value.porn) statistics.porn_count++;
-					if (!value.response_count) statistics.noresponse_count++;
-					if (value.plurk_type == 3) statistics.private_count++;
-					statistics.response_count += value.response_count;
+				// Deeper user statistics
+				statistics.title('Dig Deeper');
+				// Load each post responses and calculate statistics
+				loading.init();
+				// Start loading
+				loading.loop(plurk.length);
+				// When loading done
+				loading.onDone = function() {
+					// Display Most Responder
+					most.responders.draw();
+					// Display Most Mentioned by me
+					most.mentions.draw();
+					// Display Most hashtags by me
+					most.hashtags.draw();
+					// Display Most My Emoticons
+					most.myemoticons.draw();
+				}
 
+				// Get the data
+				plurk.forEach(function(value, index) {
 					// Find and count all my emoticons from my post
 					most.myemoticons.count(value.content);
 					// Find and count all mentions from my post
@@ -3881,43 +4087,23 @@ barba.init({
 
 						// Count the rest of statistics
 						data.message.responses.forEach(function(value, index) {
+							// Find and count all responders
+							most.responders.count(data.message, value);
+
 							if (value.user_id == me.id) {
 								// Find and count all my emoticons from responses
 								most.myemoticons.count(value.content);
-								// Find and count all my emoticons from responses
+								// Find and count all my mentions from responses
 								most.mentions.count(value.content_raw);
 								// Find and count all my hashtags from responses
 								most.hashtags.count(value.content_raw);
 							}
-							// Find and count all responders
-							most.responders.count(data.message, value);
 						});
 					}, function(data) {
 						console.log("Fail", data);
 					}, false);
 				});
-				statistics.post_count = statistics.plurk_count + statistics.response_count;
 
-				// Draw user statistics
-				statistics.drawAll();
-
-				// Deeper user statistics
-				statistics.title('Dig Deeper');
-				// Load each post responses and calculate statistics
-				loading.init();
-				// Start loading
-				loading.loop(plurk.length);
-				// When loading done
-				loading.onDone = function() {
-					// Display Most Responder
-					most.responders.draw();
-					// Display Most Mentioned by me
-					most.mentions.draw();
-					// Display Most hashtags by me
-					most.hashtags.draw();
-					// Display Most My Emoticons
-					most.myemoticons.draw();
-				}
 			}
 
 			// Run the login
@@ -3930,32 +4116,6 @@ barba.init({
 						gsap.to(next.querySelectorAll('#credits .text .loading'), {
 							opacity: 0
 						});
-
-						// Scroll animation wrap section
-						// scroll.push(function(tl) {
-						// 	tl.fromTo(next.querySelectorAll("#credits .text"), {
-						// 		y: "50vh",
-						// 		opacity: 0
-						// 	}, {
-						// 		y: "0vh",
-						// 		opacity: 1,
-						// 		ease: "linear",
-						// 		stagger: {
-						// 			from: "end",
-						// 			amount: .2
-						// 		}
-						// 	}, 0);
-						// 	return tl;
-						// }, function(tl) {
-						// 	return ScrollTrigger.create({
-						// 		markers: true,
-						// 		trigger: next.querySelectorAll("#scrollercredits"),
-						// 		start: "0 100%",
-						// 		end: "0 0",
-						// 		animation: tl,
-						// 		scrub: true
-						// 	});
-						// });
 
 						done();
 					});
