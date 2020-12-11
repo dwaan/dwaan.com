@@ -60,6 +60,17 @@
 			</div>
 		</section>
 
+		<section id="casestudy" class="middle full">
+			<div class="padding">
+				<a href="./v1/" class="dwantitle" data-barba-prevent>dwaan <br /> <small>v1</small></a>
+			</div>
+			<div class="arrow-small">
+				<a href="./v1/" class="arrow" data-barba-prevent>
+					<span>Previous version</span>
+				</a>
+			</div>
+		</section>
+
 		<section class="footer">
 			<a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
 			<div class="location">

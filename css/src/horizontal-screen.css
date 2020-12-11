@@ -76,6 +76,13 @@ header {
 		white-space: normal;
 	}
 }
+.dwantitle,
+.dwantitle small {
+	font-size: 8vw;
+	letter-spacing: -.3vw;
+	margin: 0;
+	line-height: 100%;
+}
 
 
 /* Homepage footer */

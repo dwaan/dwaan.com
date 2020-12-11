@@ -99,7 +99,14 @@ header {
 		font-size: 5rem;
 	}
 }
-
+.dwantitle,
+.dwantitle small {
+	font-size: 15vw;
+	line-height: 100%;
+	text-align: center;
+	margin: 0;
+	letter-spacing: -.2vw;
+}
 
 /* Homepage footer */
 .footer {
