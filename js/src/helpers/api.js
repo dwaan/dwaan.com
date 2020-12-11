@@ -1,6 +1,6 @@
 // API call helper
 var api = {
-	url: "/dwaan/plurk-api",
+	url: "/plurk-api",
 	request: [],
 	call: function(url, success, error) {
 		var request = this.request[this.request.push(new XMLHttpRequest()) - 1];
