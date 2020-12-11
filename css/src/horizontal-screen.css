@@ -641,37 +641,30 @@ header {
 	}
 }
 
-.stats {
-	grid-template-columns: repeat(2, 40vw);
-}
-.stats h3 {
-	grid-column: span 2;
-}
-.stats .wrap {
-	height: calc(4/3 * 40vw);
+:root {
+	--repeat: 2;
+	--box: 40vw;
 }
 .stats .big {
 	font-size: 10vw;
 	letter-spacing: -.25rem;
 }
-.stats .span2 {
-	grid-column: span 2;
-}
 .postcontent .post {
 	-webkit-line-clamp: 8;
 }
-@media (min-width: 1200px) {
-	.stats {
-		grid-template-columns: repeat(4, 20vw);
+@media (min-width: 1000px) {
+	:root {
+		--repeat: 3;
+		--box: 25vw;
 	}
-	.stats h3 {
-		grid-column: span 4;
+}
+@media (min-width: 1200px) {
+	:root {
+		--repeat: 4;
+		--box: 20vw;
 	}
 	.stats .big {
 		font-size: 5.5vw;
-	}
-	.stats .wrap {
-		height: calc(4/3 * 20vw);
 	}
 
 	.postcontent .post {

@@ -8,10 +8,9 @@
 	<div class="support">
 		<div class="content">
 			<h1>😭</h1>
-			<h3>Please don't squaze me 😱.</h3>
-			<h4>Have mercy on me 👦🏾.</h4>
+			<h2>Please don't squaze me 😱.</h2>
 			<p>I think your screen is just to small for me to support it.</p>
-			<p>Please rotate your screen 📱 or resize your browser 💻 if posible for better looking layout.</p>
+			<p>Please rotate your 📱 screen or resize your 💻 browser for better looking layout.</p>
 		</div>
 	</div>
 

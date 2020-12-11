@@ -46,9 +46,9 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="/dwaan/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/dwaan/favicon-16x16.png">
 	<link rel="manifest" href="/dwaan/manifest.json">
-	<meta name="msapplication-TileColor" content="#A4CDD6">
+	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/dwaan/ms-icon-144x144.png">
-	<meta name="theme-color" content="#A4CDD6">
+	<meta name="theme-color" content="#ffffff">
 
 	<!-- Primary Meta Tags -->
 	<title><?php echo $title; ?> - Dwan</title>

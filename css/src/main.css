@@ -337,13 +337,17 @@ picture img {
 	top: 0;
 	bottom: 0;
 	padding: 40px;
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
 	background-color: inherit;
 }
 .support .content {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate3d(-50%,-50%,0);
+	position: relative;
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
 }
 /* Screen width is too small to be usable */
 @media (max-width: 300px) {
@@ -377,32 +381,36 @@ picture img {
 		overflow: hidden;
 	}
 	.support {
-		display: block;
+		display: flex;
 	}
 	.support h1 {
-		font-size: 30vh;
-		float: left;
-		text-align: right;
-		width: 25%;
+		margin: 0 var(--padl) 0 0;
+		font-size: 20vh;
+		line-height: 20vh;
 	}
 	.support p,
-	.support h3,
 	.support h4 {
 		padding: 0;
-		float: right;
-		width: 70%;
-	}
-	.support h3 {
-		margin: 0 0 3vh;
-		font-size: 10vh;
 	}
 	.support h4 {
-		margin: 0 0 2vh;
+		margin: 0;
 		font-size: 8vh;
 	}
 	.support p {
-		margin: .25vh 0;
+		margin: 0 0 0 var(--padl);
 		font-size: 5vh;
+	}
+}
+@media (min-aspect-ratio: 5/1) {
+	.support h1 {
+		font-size: 30vh;
+		line-height: 30vh;
+	}
+	.support h4 {
+		font-size: 12vh;
+	}
+	.support p {
+		font-size: 10vh;
 	}
 }
 
@@ -2224,10 +2232,23 @@ img.rounded {
 
 /* Plurk - Statistics */
 .stats {
+	display: flex;
 	padding: var(--padl) 0 var(--padxl);
-	margin: 0;
-	display: grid;
-	grid-gap: var(--padl);
+	margin: 0 auto;
+	width: calc((var(--box) * var(--repeat)) + (var(--padl) * var(--repeat)));
+	flex-flow: row;
+	flex-wrap: wrap;
+	align-self: center;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.stats h3,
+.stats .wrap {
+	margin: calc(var(--padl) / 2);
+}
+.stats .wrap {
+	width: var(--box);
+	height: calc(4/3 * var(--box));
 }
 .stats h3 {
 	position: relative;
@@ -2236,8 +2257,8 @@ img.rounded {
 	align-items: baseline;
 	font-size: 2rem;
 	color: var(--black);
-	margin: 0;
 	padding: var(--padxl) 0 0;
+	width: calc((var(--box) * var(--repeat)) + (var(--padl) * (var(--repeat) - 1)));
 }
 .stats h3 span {
 	display: flex;
@@ -2258,6 +2279,9 @@ img.rounded {
 	height: 100%;
 	background-color: var(--black);
 	border-radius: 1px;
+}
+.stats .span2 {
+	width: calc((var(--box) * 2) + (var(--padl) * 1));
 }
 .stats .anim {
 	height: 100%;
@@ -2324,7 +2348,12 @@ img.rounded {
 .stats .loading .big {
 	font-size: 4.5rem;
 }
-.stats .title {
+.stats .loading i.month {
+	display: table;
+	margin-bottom: var(--pads);
+}
+.stats .title,
+.stats .loading i {
 	display: flex;
 	margin-top: var(--padm);
 	line-height: 140%;
@@ -2333,15 +2362,20 @@ img.rounded {
 	text-transform: uppercase;
 	opacity: .8;
 }
+.stats .title {
+	text-align: right;
+}
 .stats .title i {
+	text-align: left;
 	margin-right: auto;
 }
 .stats .chart {
 	flex: 1;
 }
-.stats i {
+.stats i,
+.stats .loading i {
 	display: inline-block;
-	padding: 0 8px;
+	padding: 4px 8px 2px;
 	font-style: normal;
 	color: var(--black);
 	background-color: var(--white);
@@ -2401,13 +2435,11 @@ img.rounded {
 
 /* Plurk - Statistics - Costum Page Style */
 #hello,
-#statistics,
-#statisticsthisyear {
+#statistics {
 	z-index: 2;
 	overflow: hidden;
 }
-#statistics,
-#statisticsthisyear {
+#statistics {
 	background-color: var(--white);
 }
 
@@ -2417,7 +2449,8 @@ img.rounded {
 	position: fixed;
 	z-index: 1;
 	left: 0;
-	top: 0;
+	top: initial;
+	bottom: 0;
 	justify-content: flex-end;
 }
 #credits .text {

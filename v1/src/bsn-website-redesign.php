@@ -42,17 +42,17 @@
 
 							<h5>Final Design</h5>
 							<div class="gallery gallery-auto-height">
-								<a href="/dwaan/img/ss-bsn/homepage.jpg" itemprop="contentUrl" data-size="1620x2733" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/homepage.jpg" itemprop="contentUrl" data-size="1620x2733" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-bsn/video.jpg" itemprop="contentUrl" data-size="1079x1224" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/video.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/video.jpg" itemprop="contentUrl" data-size="1079x1224" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/video.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-bsn/pengumuman.jpg" itemprop="contentUrl" data-size="1078x2017" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/pengumuman.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/pengumuman.jpg" itemprop="contentUrl" data-size="1078x2017" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/pengumuman.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-bsn/download.jpg" itemprop="contentUrl" data-size="1080x2116" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/download.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/download.jpg" itemprop="contentUrl" data-size="1080x2116" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/download.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
 							</div>
 
@@ -75,17 +75,17 @@
 
 							<h5>Proposed Design</h5>
 							<div class="gallery gallery-auto-height">
-								<a href="/dwaan/img/ss-bsn/homepage2.jpg" itemprop="contentUrl" data-size="1620x2632" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/homepage2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/homepage2.jpg" itemprop="contentUrl" data-size="1620x2632" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/homepage2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-bsn/homepage3.jpg" itemprop="contentUrl" data-size="1620x2103" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/homepage3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/homepage3.jpg" itemprop="contentUrl" data-size="1620x2103" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/homepage3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-bsn/homepage4.jpg" itemprop="contentUrl" data-size="2160x3375" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/homepage4.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/homepage4.jpg" itemprop="contentUrl" data-size="2160x3375" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/homepage4.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-bsn/homepage5.jpg" itemprop="contentUrl" data-size="1800x3666" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-bsn/homepage5.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-bsn/homepage5.jpg" itemprop="contentUrl" data-size="1800x3666" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-bsn/homepage5.thumb.jpg" itemprop="thumbnail" width="" height="" alt="BSN Website Redesign by Dwan" />
 								</a>
 							</div>
 

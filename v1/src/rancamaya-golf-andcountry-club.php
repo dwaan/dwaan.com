@@ -41,14 +41,14 @@
 							</div>
 
 							<div class="gallery gallery-normal">
-								<a href="/dwaan/img/ss-rancamaya/desktop-hd.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-rancamaya/desktop-hd.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-rancamaya/desktop-hd.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-rancamaya/desktop-hd.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-rancamaya/desktop-hd-page-2.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-rancamaya/desktop-hd-page-2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-rancamaya/desktop-hd-page-2.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-rancamaya/desktop-hd-page-2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
 								</a>
-								<a href="/dwaan/img/ss-rancamaya/desktop-hd-menu.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
-									<img src="/dwaan/img/ss-rancamaya/desktop-hd-menu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
+								<a href="/dwaan/v1/img/ss-rancamaya/desktop-hd-menu.jpg" itemprop="contentUrl" data-size="1680x1050" class="gallery__item no-barba">
+									<img src="/dwaan/v1/img/ss-rancamaya/desktop-hd-menu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Rancamaya - Website Redesign by Dwan" />
 								</a>
 							</div>
 

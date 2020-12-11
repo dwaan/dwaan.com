@@ -29,12 +29,6 @@
 		    </div>
 	    </section>
 
-    	<section id="statisticsthisyear" class="grant middle">
-    		<div class="text">
-		    	<p class="loading">Loading your plurk</p>
-		    </div>
-	    </section>
-
 		<section class="grant footer">
 			<div id="logout" class="logout spring big">
 				<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

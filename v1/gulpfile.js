@@ -76,8 +76,8 @@ exports.default = function() {
 	connect.server({
 		hostname: "0.0.0.0",
 		port: 8080,
-		base: "../",
-		router: "../router.php",
+		base: "../../",
+		router: "../../router.php",
 		keepalive: true
 	}, function () {
 		browserSync.init({

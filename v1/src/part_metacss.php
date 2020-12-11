@@ -17,7 +17,7 @@
 
 		$host = $_SERVER['HTTP_HOST'];
 		$uri = $_SERVER['REQUEST_URI'];
-		$params= $_SERVER['QUERY_STRING'];
+		$params= @$_SERVER['QUERY_STRING'];
 
 		if ($params == "") $url = $protocol . '://' . $host . $uri;
 		else $url = $protocol . '://' . $host . $uri . '?' . $params;
@@ -60,5 +60,5 @@
 	<meta property="twitter:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 	<meta property="twitter:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
 
-	<link rel="stylesheet" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
+	<link rel="stylesheet" href="/dwaan/v1/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
 

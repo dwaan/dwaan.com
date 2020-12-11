@@ -606,7 +606,7 @@ var Home = Barba
 			var fruits = ["empty.png", "apple.png", "avocado.png", "phone.png", "joycon.png"],
 				fruit = _q(".fruit"),
 				index = 0,
-				path = "/dwaan/img/";
+				path = "/dwaan/v1/img/";
 
 			// Randomize the fruits
 			if(gsap.utils.random(0, 10) > 5) gsap.utils.shuffle(fruits);

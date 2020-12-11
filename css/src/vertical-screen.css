@@ -685,6 +685,7 @@ header {
 
 #hello {
 	justify-content: flex-end;
+	padding-bottom: calc(7.5 * var(--padx))!important;
 }
 #hello img {
 	width: 128px;
@@ -692,7 +693,12 @@ header {
 	border-radius: 100%;
 }
 #hello h1 {
-	font-size: 4rem;
+	font-size: 3rem;
+}
+@media (min-width: 600px) {
+	#hello h1 {
+		font-size: 4rem;
+	}
 }
 #hello .arrow-big {
 	margin: var(--padl) 0 var(--padm) 0;
@@ -709,39 +715,32 @@ header {
 	font-size: 4rem;
 	letter-spacing: -.35rem;
 }
-
-.stats {
-	grid-template-columns: 80vw;
+@media (min-width: 600px) {
+	#permission {
+		padding: calc(2 * var(--pady)) var(--padx) var(--pady);
+	}
 }
-.stats .wrap {
-	height: calc(4/3 * 80vw);
+
+
+:root {
+	--repeat: 1;
+	--box: 80vw;
 }
 .stats .big {
-	font-size: 30vw;
+	font-size: 22.5vw;
 	letter-spacing: -.05rem;
 }
 .postcontent .post {
 	-webkit-line-clamp: 7;
 }
 @media (min-width: 600px) {
-	#permission {
-		padding: calc(2 * var(--pady)) var(--padx) var(--pady);
-	}
-	.stats {
-		grid-template-columns: repeat(2, 40vw);
-	}
-	.stats h3 {
-		grid-column: span 2;
+	:root {
+		--repeat: 2;
+		--box: 40vw;
 	}
 	.stats .big {
 		font-size: 12.5vw;
 		letter-spacing: -.05rem;
-	}
-	.stats .wrap {
-		height: calc(4/3 * 40vw);
-	}
-	.stats .span2 {
-		grid-column: span 2;
 	}
 }
 

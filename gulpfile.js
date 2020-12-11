@@ -17,7 +17,18 @@ function javascript() {
 			'node_modules/gsap/dist/ScrollTrigger.min.js',
 			'node_modules/gsap/dist/ScrollToPlugin.min.js',
 			'node_modules/@barba/core/dist/barba.umd.js',
-			'js/src/helper.js',
+			'js/src/helpers/helper.js',
+			'js/src/helpers/scroll.js',
+			'js/src/helpers/api.js',
+			'js/src/helpers/loader.js',
+			'js/src/helpers/animate.js',
+			'js/src/helpers/snap.js',
+			'js/src/views/home.js',
+			'js/src/views/detail.js',
+			'js/src/views/hi.js',
+			'js/src/views/me.js',
+			'js/src/views/lost.js',
+			'js/src/views/plurk.js',
 			'js/src/main.js'
 		])
 		.pipe(sourcemaps.init({
@@ -112,7 +123,7 @@ exports.default = function() {
 			proxy: "localhost:8080/dwaan/"
 		});
 	});
-	gulp.watch('js/src/*.js', { ignoreInitial: false }, javascript);
+	gulp.watch(['js/src/*.js', 'js/src/*/*.js'], { ignoreInitial: false }, javascript);
 	gulp.watch(['css/src/main.css', 'css/src/404.css', 'css/src/nojs.css', 'css/src/print.css'], { ignoreInitial: false }, css);
 	gulp.watch('css/src/vertical-screen.css', { ignoreInitial: false }, css_vertical);
 	gulp.watch('css/src/horizontal-screen.css', { ignoreInitial: false }, css_horizontal);
