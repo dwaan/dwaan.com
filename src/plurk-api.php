@@ -145,6 +145,25 @@
 					$response->plurk_id = $_GET['plurk_id'];
 
 					success(json_encode($response));
+				} else if(isset($_GET['plurk_ids'])) {
+					$responses = [];
+					if($_GET['plurk_ids']) {
+						$plurk_ids = explode(',', $_GET['plurk_ids']);
+						debug($plurk_ids);
+
+						foreach ($plurk_ids as $key => $value) {
+							$response = [];
+
+							$oauth->fetch("$api_url/Responses/get", array("plurk_id" => $value));
+							$response = json_decode($oauth->getLastResponse());
+							$response->plurk_id = $value;
+
+							$responses.push($response);
+						}
+						success(json_encode($responses));
+					} else {
+						error('Please provide one or more plurk ids');
+					}
 				} else {
 					error('Please provide plurk id');
 				}

@@ -353,17 +353,17 @@ barba.init({
 					if (!gsap.isTweening(items)) {
 						// Animate main element
 						gsap.to("main .middle", {
-							marginLeft: "-=100",
+							left: "-=100",
 							duration: .75,
 							ease:"power3.out"
 						});
 						gsap.to("main .middle > .text", {
-							marginLeft: "-=50",
+							left: "-=50",
 							duration: .75,
 							ease:"power3.out"
 						});
 						gsap.to("main .links, main .flares", {
-							marginLeft: "-=25",
+							left: "-=25",
 							duration: .75,
 							ease:"power3.out"
 						});
@@ -409,7 +409,7 @@ barba.init({
 						if (!gsap.isTweening(items)) {
 							// Animate main element
 							gsap.to("main .middle, main .middle > .text, main .links, main .flares", {
-								marginLeft: 0,
+								left: 0,
 								duration: .75,
 								ease:"power3.out"
 							});
