@@ -146,6 +146,12 @@
 .dark #nomokeybusiness a:hover:after {
 	background-image: url(../img/arrow.svg);
 }
+#nomokeybusiness dl {
+	display: inline;
+}
+#nomokeybusiness dt {
+	display: inline-block;
+}
 @media screen and (min-aspect-ratio: 1/1) {
 	#nomokeybusiness {
 		align-items: center;
