@@ -170,8 +170,8 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/sagara/sagara@2x.jpg">
-					<img src="img/sagara/sagara.jpg" width="" height="" alt="Sagara" />
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/sagara/sagara@2x.jpg">
+					<img src="/dwaan/img/sagara/sagara.jpg" width="" height="" alt="Sagara" />
 				</picture>
 			</div>
 		</div>

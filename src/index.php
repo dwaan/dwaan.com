@@ -37,7 +37,7 @@
 		<section class="middle full">
 			<div class="padding">
 				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
-					<img src="img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
+					<img src="/dwaan/img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
 				</a>
 			</div>
 			<div class="arrow-small">
@@ -50,7 +50,7 @@
 		<section class="middle full">
 			<div class="padding">
 				<a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
-					<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tike Apa Saja" />
+					<img src="/dwaan/img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tike Apa Saja" />
 				</a>
 			</div>
 			<div class="arrow-small">
@@ -86,7 +86,7 @@
 		<section class="flares side">
 			<?php
 				for ($img = $i = 1; $i <= 7; $i++) {
-					echo '<img src="img/flares/flare' . $img. '.png" width="" height="" alt="" class="flare' . $i . '" />';
+					echo '<img src="/dwaan/img/flares/flare' . $img. '.png" width="" height="" alt="" class="flare' . $i . '" />';
 					if(++$img > 5) $img = 1;
 				}
 			?>

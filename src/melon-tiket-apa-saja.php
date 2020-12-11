@@ -14,7 +14,7 @@
 	<main data-barba="container" data-barba-namespace="detail" class="detail">
 		<section class="middle full">
 			<div class="padding">
-				<img src="img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
+				<img src="/dwaan/img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
 			</div>
 			<h4 class="year">/2019</h4>
 			<div class="arrow-big">
@@ -34,9 +34,9 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/hero@3x.jpg">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/hero@2x.jpg">
-					<img src="img/tas/hero.jpg" width="" height="" alt="Tiket Apa Saja - Homepage" />
+					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/hero@3x.jpg">
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/hero@2x.jpg">
+					<img src="/dwaan/img/tas/hero.jpg" width="" height="" alt="Tiket Apa Saja - Homepage" />
 				</picture>
 			</div>
 		</section>
@@ -60,23 +60,23 @@
 				<ul class="flat">
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/oldlogo<?php echo $i ?>@3x.png">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/oldlogo<?php echo $i ?>@2x.png">
-							<img src="img/tas/oldlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/oldlogo<?php echo $i ?>@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/oldlogo<?php echo $i ?>@2x.png">
+							<img src="/dwaan/img/tas/oldlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/newlogo<?php echo $i ?>@3x.png">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/newlogo<?php echo $i ?>@2x.png">
-							<img src="img/tas/newlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/newlogo<?php echo $i ?>@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/newlogo<?php echo $i ?>@2x.png">
+							<img src="/dwaan/img/tas/newlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/pitching-mobile<?php echo $i ?>@3x.png">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/pitching-mobile<?php echo $i ?>@2x.png">
-							<img src="img/tas/pitching-mobile<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/pitching-mobile<?php echo $i ?>@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/pitching-mobile<?php echo $i ?>@2x.png">
+							<img src="/dwaan/img/tas/pitching-mobile<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 				</ul>
@@ -89,9 +89,9 @@
 					<?php for ($i=1; $i <= 3; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
-								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/desktop-<?php echo $i ?>@3x.jpg">
-								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/desktop-<?php echo $i ?>@2x.jpg">
-								<img src="img/tas/desktop-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
+								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@3x.jpg">
+								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@2x.jpg">
+								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -122,9 +122,9 @@
 					<?php for ($i=1; $i <= 6; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
-								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/desktop-final-<?php echo $i ?>@3x.jpg">
-								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/desktop-final-<?php echo $i ?>@2x.jpg">
-								<img src="img/tas/desktop-final-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
+								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@3x.jpg">
+								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@2x.jpg">
+								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -138,9 +138,9 @@
 					<?php for ($i=1; $i <= 6; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
-								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="img/tas/mobile-final-<?php echo $i ?>@3x.jpg">
-								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="img/tas/mobile-final-<?php echo $i ?>@2x.jpg">
-								<img src="img/tas/mobile-final-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
+								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@3x.jpg">
+								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@2x.jpg">
+								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.jpg" width="" height="" alt="Tiket Apa Saja" />
 							</picture>
 						</li>
 					<?php } ?>
