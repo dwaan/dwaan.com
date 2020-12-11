@@ -1,11 +1,13 @@
 // API call helper
 var api = {
-	url: "/plurk-api",
+	url: "./plurk-api",
 	request: [],
 	call: function(url, success, error) {
-		var request = this.request[this.request.push(new XMLHttpRequest()) - 1];
+		var request;
+		api.request[api.request.length] = new XMLHttpRequest();
+		request = api.request[api.request.length - 1];
 
-		request.open('GET', this.url + url, true);
+		request.open('GET', api.url + url, true);
 		request.onload = function() {
 			if (this.status == 200) {
 				if(success) success(JSON.parse(this.response));
@@ -16,9 +18,9 @@ var api = {
 		request.send();
 	},
 	abort: function() {
-		for (var i = 0; i < this.request.length; i++) {
-			this.request[i].abort();
+		for (var i = 0; i < api.request.length; i++) {
+			api.request[i].abort();
 		}
-		this.request = [];
+		api.request = [];
 	}
 }

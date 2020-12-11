@@ -1120,48 +1120,50 @@ var plurk = {
 
 			// Get the data
 			plurk.forEach(function(value, index) {
-				// Find and count all my emoticons from my post
-				most.myemoticons.count(value.content);
-				// Find and count all mentions from my post
-				most.mentions.count(value.content_raw);
-				// Find and count all hashtags from my post
-				most.hashtags.count(value.content_raw);
+				if(value.responded > 0) {
+					// Find and count all my emoticons from my post
+					most.myemoticons.count(value.content);
+					// Find and count all mentions from my post
+					most.mentions.count(value.content_raw);
+					// Find and count all hashtags from my post
+					most.hashtags.count(value.content_raw);
 
-				// Get the responses for each plurks
-				api.call("?fetch=response&plurk_id=" + value.plurk_id, function(data) {
-					if(value) {
-						var date = new Date(value.posted);
-						loading.update("Data from " + monthNames[date.getMonth()]);
-					} else {
-						loading.update();
-					}
-
-					// Attach responses to the post
-					var index = plurk.findIndex(function(el) {
-						return el.plurk_id == data.message.plurk_id;
-					});
-					if(index) plurk[index].response = data.message;
-
-					// Add friends from response lists
-					friends.add(data.message.friends);
-
-					// Count the rest of statistics
-					data.message.responses.forEach(function(value, index) {
-						// Find and count all responders
-						most.responders.count(data.message, value);
-
-						if (value.user_id == me.id) {
-							// Find and count all my emoticons from responses
-							most.myemoticons.count(value.content);
-							// Find and count all my mentions from responses
-							most.mentions.count(value.content_raw);
-							// Find and count all my hashtags from responses
-							most.hashtags.count(value.content_raw);
+					// Get the responses for each plurks
+					api.call("?fetch=response&plurk_id=" + value.plurk_id, function(data) {
+						if(value) {
+							var date = new Date(value.posted);
+							loading.update("Data from " + monthNames[date.getMonth()]);
+						} else {
+							loading.update();
 						}
-					});
-				}, function(data) {
-					console.log("Fail", data);
-				}, false);
+
+						// Attach responses to the post
+						var index = plurk.findIndex(function(el) {
+							return el.plurk_id == data.message.plurk_id;
+						});
+						if(index) plurk[index].response = data.message;
+
+						// Add friends from response lists
+						friends.add(data.message.friends);
+
+						// Count the rest of statistics
+						data.message.responses.forEach(function(value, index) {
+							// Find and count all responders
+							most.responders.count(data.message, value);
+
+							if (value.user_id == me.id) {
+								// Find and count all my emoticons from responses
+								most.myemoticons.count(value.content);
+								// Find and count all my mentions from responses
+								most.mentions.count(value.content_raw);
+								// Find and count all my hashtags from responses
+								most.hashtags.count(value.content_raw);
+							}
+						});
+					}, function(data) {
+						console.log("Fail", data);
+					}, false);
+				}
 			});
 		}
 
