@@ -449,6 +449,38 @@ header {
 		flex-wrap: nowrap;
 	}
 }
+.style-trunc .wrap:before,
+.style-trunc + .style-slideshow:before,
+.style-trunc + .style-slideshow:after {
+	position: absolute;
+	top: 15px;
+	left: -2.5vw;
+	bottom: 0;
+	display: block;
+	content: "";
+	width: 1.5vw;
+	height: auto;
+	border: 1px solid var(--black);
+	border-bottom: 0;
+	border-right: 0;
+}
+.style-trunc + .style-slideshow:before,
+.style-trunc + .style-slideshow:after {
+	top: 0;
+	border-top: none;
+	left: calc(50vw - (55vw / 2) - 2.5vw);
+	bottom: 50vh;
+}
+.style-trunc + .style-slideshow:after {
+	top: 50vh;
+	bottom: initial;
+	border: none;
+	border-radius: 100%;
+	width: 10px;
+	height: 10px;
+	margin: -5px 0 0 -5px;
+	background-color: var(--black);
+}
 /* Footer links in every detail page */
 .links {
 	padding: calc(2 * var(--padxl)) calc(2 * var(--padxl));

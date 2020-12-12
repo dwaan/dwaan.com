@@ -119,7 +119,9 @@ var detail = {
 					scroll.push(function(tl) {
 						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
 							opacity: 0,
-							y: "random(250, 500, 5)px",
+							y: 300,
+							x: 0,
+							rotation: 0
 						}, {
 							opacity: 1,
 							y: 0,
@@ -129,8 +131,8 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
-							start: "0 75%",
-							end: "100% 75%",
+							start: "0 100%-=100px",
+							end: "100% 100%-=100px",
 							animation: tl,
 							scrub: 1
 						});
@@ -140,10 +142,13 @@ var detail = {
 					// Move the pictures
 					scroll.push(function(tl) {
 						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
+							y: 0,
 							x: "random(-250, -500, 5)px",
+							opacity: 0,
 							rotation: gRandom(5, 10, 1)
 						}, {
 							x: 0,
+							opacity: 1,
 							rotation: -5,
 							ease: "expo.out"
 						}, 0);
@@ -281,10 +286,27 @@ var detail = {
 		// Style - Trunc
 		next.querySelectorAll(".style-trunc").forEach(function(el) {
 			// Move text
-			scroll.moveText({
-				elements: el.querySelectorAll(".text > *, .color ul > *"),
-				position: "100%",
-				horizontal: true
+			ScrollTrigger.matchMedia({
+				"(min-aspect-ratio: 1/1)": function() {
+					gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
+						y: 0,
+						opacity: 1
+					});
+					scroll.moveText({
+						elements: el.querySelectorAll(".text > *, .color ul > *"),
+						position: "100%",
+						horizontal: true
+					});
+				},
+				"(max-aspect-ratio: 1/1)": function() {
+					gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
+						x: 0,
+						opacity: 1
+					});
+					scroll.moveText({
+						elements: el.querySelectorAll(".text > *, .color")
+					});
+				}
 			});
 		});
 
@@ -662,18 +684,14 @@ var detail = {
 			//
 			scroll.push(function(tl) {
 				tl.fromTo(that.before, {
-					opacity: 0,
 					x: -100
 				}, {
-					opacity: 1,
 					x: 0,
 					ease: "expo.out"
 				}, 0);
 				tl.fromTo(that.after, {
-					opacity: 0,
 					x: 100
 				}, {
-					opacity: 1,
 					x: 0,
 					ease: "expo.out"
 				}, 0);
@@ -722,7 +740,7 @@ var detail = {
 		});
 
 		// Snap to element
-		snap(next.querySelectorAll("section.middle, .links"), .15);
+		// snap(next.querySelectorAll("section.middle, .links"), .15);
 	},
 	beforeLeave: function(data) {
 		gToArray(".style-slideshow").forEach(function(slideshow) {

@@ -45,9 +45,9 @@
 			    <form action="" method="GET">
 			    	<h1>Replurk<br/><sup>20</sup><sub>20</sub></h1>
 			    	<ol>
-			    		<li><p>Get your Plurk verification code below <br/><a href="#" id="tokenurl" target="_BLANK">Get Verification Code</a></p></li>
+			    		<li><p>Get your Plurk verification code <br/><a href="#" id="tokenurl" target="_BLANK">Get Verification Code</a></p></li>
 			    		<li>
-						    <p>Enter your verification code here:</p>
+						    <p>Enter your verification code</p>
 						    <p class="cuddle">
 						    	<input type="text" name="oauth_token" id="oauth_token" placeholder="Code" />
 						    	<span id="submit" class="submit">Verify</span>
@@ -57,8 +57,8 @@
 					    	<p id="login-message">Click the Verify button to verify continue.</p>
 					    </li>
 					    <li class="small">
-					    	<p><strong>IMPORTANT!</strong> Your data will be processed locally in your device. It can take normally up to 5 minutes to download all of your 2020 plurk, please be patient.<p>
-					    	<p>Other than session data from Plurk, this website didn't store any of your data in the server.</p>
+					    	<p><strong>IMPORTANT!</strong> Your data will be processed locally in your device. It can take normally up to 10 minutes to download all of your 2020 plurk, please be patient.<p>
+					    	<p>Other than session data from Plurk, this website didn't store any of your data in my server.</p>
 					    </li>
 				   </ol>
 			    </form>

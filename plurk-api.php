@@ -149,6 +149,7 @@
 					$responses = [];
 					if($_GET['plurk_ids']) {
 						$plurk_ids = explode(',', $_GET['plurk_ids']);
+						debug($plurk_ids);
 
 						foreach ($plurk_ids as $key => $value) {
 							$response = [];
@@ -157,9 +158,8 @@
 							$response = json_decode($oauth->getLastResponse());
 							$response->plurk_id = $value;
 
-							$responses[] = $response;
+							$responses.push($response);
 						}
-
 						success(json_encode($responses));
 					} else {
 						error('Please provide one or more plurk ids');

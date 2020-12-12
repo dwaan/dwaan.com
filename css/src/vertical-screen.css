@@ -14,6 +14,14 @@ html {
 }
 
 /* Default style */
+h1 {
+	font-size: 4rem;
+}
+@media (min-width: 600px) {
+	h1 {
+		font-size: 5rem;
+	}
+}
 p {
 	line-height: 140%;
 }
@@ -118,13 +126,13 @@ header {
 .padding {
 	display: flex;
 	margin: 30px 0;
-	padding: 0 50px;
+	padding: 0 30px;
 	max-height: 15vh;
 	justify-content: center;
 }
-@media (max-width: 360px) {
+@media (min-width: 600px) {
 	.padding {
-		padding: 0 30px;
+		padding: 0 50px;
 	}
 }
 
@@ -207,7 +215,7 @@ header {
 }
 .style-spread .text,
 .style-spread-left .text {
-	margin-bottom: 40px;
+	margin-bottom: var(--padm);
 	max-width: 400px;
 }
 .style-spread .thumbs {
@@ -303,6 +311,9 @@ header {
 }
 .style-trunc .wrap > * {
 	margin: 0!important;
+}
+.style-trunc .wrap > .meta {
+	margin: var(--padm) 0 0!important;
 }
 .style-trunc .wrap:before {
 	left: -20px;
@@ -416,6 +427,9 @@ header {
 .style-bottom-logo .thumbs li:last-child picture {
 	width: 100%;
 }
+.style-bottom-logo .thumbs {
+	max-width: 400px;
+}
 /* Style slideshow */
 .style-slideshow,
 .style-slideshow .thumbs,
@@ -427,7 +441,7 @@ header {
 	height: 100%;
 }
 .style-slideshow .thumbs {
-	padding: calc(2 * var(--padxl)) 0 calc((2 * var(--padxxl)) + 50px);
+	padding: calc(2 * var(--padxl)) 0 calc((2 * var(--padxl)) + 50px);
 	margin-bottom: -50px;
 }
 .style-slideshow .before,
@@ -664,6 +678,16 @@ header {
 .hi .main-text {
 	margin: 0;
 	padding: 0;
+}
+.hi h1 {
+	display: flex;
+	flex-flow: column;
+}
+.hi h1 a {
+	display:flex;
+	flex-flow: row;
+	flex-wrap: nowrap;
+	padding: var(--pads) 0;
 }
 
 

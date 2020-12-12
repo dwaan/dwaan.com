@@ -51,7 +51,7 @@
 			</div>
 		</section>
 
-		<section class="middle auto style-bottom-logo">
+		<section class="middle auto style-bottom-logo forcebright">
 			<div class="text">
 				<h3>The Solution</h3>
 				<p>The old and new logo contain too much information and it purely business decision. I suggested them to simplified their logo into something more memorable and with less distraction.</p>
@@ -60,23 +60,23 @@
 				<ul class="flat">
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/oldlogo<?php echo $i ?>@3x.png">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/oldlogo<?php echo $i ?>@2x.png">
-							<img src="/dwaan/img/tas/oldlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/oldlogo@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/oldlogo@2x.png">
+							<img src="/dwaan/img/tas/oldlogo.png" width="" height="" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/newlogo<?php echo $i ?>@3x.png">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/newlogo<?php echo $i ?>@2x.png">
-							<img src="/dwaan/img/tas/newlogo<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/newlogo@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/newlogo@2x.png">
+							<img src="/dwaan/img/tas/newlogo.png" width="" height="" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/pitching-mobile<?php echo $i ?>@3x.png">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/pitching-mobile<?php echo $i ?>@2x.png">
-							<img src="/dwaan/img/tas/pitching-mobile<?php echo $i ?>.png" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/pitching-mobile@3x.png">
+							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/pitching-mobile@2x.png">
+							<img src="/dwaan/img/tas/pitching-mobile.png" width="" height="" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 				</ul>

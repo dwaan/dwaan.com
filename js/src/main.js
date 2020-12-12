@@ -62,21 +62,6 @@ window.addEventListener('resize', displayRoundedCorner);
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-
-// Some browser have flexible toolbar size, like in safari mobile
-var deltatoolbar = (_q("#loader").offsetHeight - window.innerHeight) / 2;
-// Add padding to browser with variable toolbar size
-function addpadding() {
-	_qAll("section.middle").forEach(function (el, idx) {
-		el.style.paddingBottom = "";
-		gsap.set(el, {
-			paddingBottom: "+=" + deltatoolbar
-		});
-	});
-}
-addpadding();
-window.addEventListener("resize", addpadding);
-
 // Default barba hooks
 barba.hooks.before(function(data) {
 	api.abort();
@@ -115,20 +100,21 @@ barba.hooks.beforeEnter(function(data) {
 						// Show Arrow
 						tl.fromTo(arrow, {
 							position: "relative",
-							y: (idx > 0) ? "25vh" : 0,
+							x: 0,
+							y: 0,
 							opacity: 0
 						}, {
-							y: "0vh",
 							opacity: 1,
 							ease: "linear",
 							duration: 3
 						});
 						// Hide Arrow
 						tl.fromTo(arrow, {
-							y: "0vh",
+							x: 0,
+							y: 0,
 							opacity: 1
 						}, {
-							y: (idx < middle.length - 1) ? "25vh" : 0,
+							y: (idx < middle.length - 1) ? window.innerHeight / 4 : 0,
 							opacity: 0,
 							ease: "linear",
 							duration: 3
@@ -141,7 +127,7 @@ barba.hooks.beforeEnter(function(data) {
 							opacity: 1
 						}, {
 							x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
-							y: (idx == 0) ? window.innerHeight *  -1/5 : 0,
+							y: (idx == 0) ? window.innerHeight *  -1/10 : 0,
 							opacity: (idx < middle.length - 1) ? 0 : 1,
 							ease: "power3.in",
 							duration: 3
@@ -199,9 +185,6 @@ barba.hooks.beforeEnter(function(data) {
 		});
 	}
 
-	// Add additional padding
-	addpadding();
-
 	done();
 });
 barba.hooks.afterEnter(function(data) {
@@ -225,7 +208,7 @@ barba.hooks.afterEnter(function(data) {
 
 // Initialized barba.js
 barba.init({
-	debug: false,
+	debug: true,
 	transitions: [{
 		name: 'default-transition',
 		once: function(data) {
@@ -707,13 +690,16 @@ barba.init({
 						}
 					};
 
+				// tl = animate.top(tl);
 				tl.to(current.querySelectorAll(".flares > img"), {
 					x: "-=200",
 					opacity: 0
 				}, 0);
 				tl.to(current.querySelectorAll(".middle > *"), {
-					opacity: 0
+					opacity: 0,
+					stagger: false
 				}, .25);
+
 				if (window.matchMedia('(min-aspect-ratio: 1/1)').matches) {
 					tl.fromTo(current.querySelector(".footer .email"), from, to, 0);
 				} else {
@@ -734,16 +720,24 @@ barba.init({
 				// Show next container
 				next.style.opacity = 1;
 
+				gsap.set(next, {
+					position: "fixed",
+					top: 0
+				});
 				// Show next elements
-				next.querySelector(".footer").stlye.opacity = 1;
-				gsap.fromTo(next.querySelector(".main-text"), {
-					opacity: 0,
-					y: "100%"
+				next.querySelector(".footer").style.opacity = 1;
+				gsap.fromTo(next.querySelectorAll(".main-text h1 > *"), {
+					x: -100,
+					opacity: 0
 				}, {
+					x: 0,
 					opacity: 1,
-					y: "0%",
 					duration: .5,
-					ease: "expo.out",
+					ease: "power3.out",
+					stagger: {
+						from: "start",
+						amount: .1
+					},
 					onComplete: function() {
 						done();
 					}
@@ -784,52 +778,52 @@ barba.init({
 			}});
 
 			var from = {
-					position: "fixed",
-					height: "auto",
-					top: "initial",
-					left: window.innerWidth / 2,
-					bottom: window.innerHeight / 2,
-					x: "-50%",
-					y: "50%",
-					lineHeight: "80%",
-					fontSize: "6rem",
-					fontWeight: 500,
-					letterSpacing: "-0.06em"
-				},
-				to = {
-					left: gsap.getProperty(current.querySelector(".footer"), "padding-left"),
-					bottom: gsap.getProperty(current.querySelector(".footer"), "padding-bottom"),
-					x: "0%",
-					y: "0%",
-					lineHeight: "15px",
-					fontSize: "0.8rem",
-					fontWeight: 400,
-					letterSpacing: "0.1em",
-					duration: 1,
-					ease: "expo.inOut",
-					onComplete: function() {
-						// Selectively show next elements
-						gsap.set(next.querySelectorAll(".footer .email"), { opacity: 1 });
-					}
-				};
+				position: "fixed",
+				height: "auto",
+				top: "initial",
+				left: window.innerWidth / 2,
+				bottom: window.innerHeight / 2,
+				x: "-50%",
+				y: "50%",
+				lineHeight: "80%",
+				fontSize: "6rem",
+				fontWeight: 500,
+				letterSpacing: "-0.06em"
+			};
+			var to = {
+				left: gsap.getProperty(current.querySelector(".footer"), "padding-left"),
+				bottom: gsap.getProperty(current.querySelector(".footer"), "padding-bottom"),
+				x: "0%",
+				y: "0%",
+				lineHeight: "15px",
+				fontSize: "0.8rem",
+				fontWeight: 400,
+				letterSpacing: "0.1em",
+				duration: 1,
+				ease: "expo.inOut",
+				onComplete: function() {
+					// Selectively show next elements
+					gsap.set(next.querySelectorAll(".footer .email"), { opacity: 1 });
+				}
+			};
 
 			current.querySelector(".main-text").style = {};
 
 			// For vertical screen, just fade in.
 			if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
-				from.opacity = 1;
-				to.left = from.left;
-				to.bottom = from.bottom;
-				to.x = from.x;
-				to.y = from.y;
-				to.lineHeight = from.lineHeight = "90%";
-				to.fontSize = from.fontSize;
-				to.fontWeight = from.fontWeight;
-				to.letterSpacing = from.letterSpacing;
-				to.opacity = 0;
+				tl.fromTo(current.querySelectorAll(".main-text h1 > *"), {
+					x: 0,
+					opacity: 1
+				}, {
+					x: -100,
+					opacity: 0,
+					duration: .25,
+					stagger: .1,
+					ease: "power3.in"
+				}, 0);
+			} else {
+				tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);
 			}
-
-			tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);
 			// Show next container
 			tl.set(current, {
 				position: "fixed",

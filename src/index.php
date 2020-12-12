@@ -60,7 +60,7 @@
 			</div>
 		</section>
 
-		<section id="casestudy" class="middle full">
+		<section class="middle full">
 			<div class="padding">
 				<a href="./v1/" class="dwantitle" data-barba-prevent>dwaan <br /> <small>v1</small></a>
 			</div>
