@@ -78,10 +78,16 @@ header {
 }
 .dwantitle,
 .dwantitle small {
-	font-size: 8vw;
-	letter-spacing: -.3vw;
+	flex-flow: column;
+	font-size: 4rem;
+	letter-spacing: -.25rem;
 	margin: 0;
 	line-height: 100%;
+	align-self: center;
+}
+.dwantitle small {
+	font-size: 1rem;
+	letter-spacing: 0;
 }
 
 
