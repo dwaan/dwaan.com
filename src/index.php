@@ -62,10 +62,10 @@
 
 		<section class="middle full">
 			<div class="padding">
-				<a href="https://v1.dwaan.com" class="dwantitle" data-barba-prevent>dwaan <br /> <small>v1</small></a>
+				<a href="http://v1.dwaan.com" class="dwantitle" data-barba-prevent>dwaan <br /> <small>v1</small></a>
 			</div>
 			<div class="arrow-small">
-				<a href="https://v1.dwaan.com" class="arrow" data-barba-prevent>
+				<a href="http://v1.dwaan.com" class="arrow" data-barba-prevent>
 					<span>Previous version</span>
 				</a>
 			</div>
