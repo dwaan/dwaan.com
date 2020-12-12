@@ -1,7 +1,7 @@
 #Options +FollowSymlinks
 RewriteEngine On
 RewriteBase /
-DirectoryIndex /index.php
+DirectoryIndex index.php
 
 # Redirect index to the root of www
 RewriteRule ^(.*)index(.*)$ http://v1.dwaan.com/ [L,R=301]
