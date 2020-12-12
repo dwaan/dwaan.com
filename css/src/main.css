@@ -48,6 +48,8 @@
 	--padl: 30px;
 	--padxl: 40px;
 	--padxxl: 60px;
+
+	--animation: background-color .5s ease, color .25s ease;
 }
 @media screen and (min-width: 700px) {
 	:root {
@@ -96,7 +98,6 @@
 * {
 	box-sizing: border-box;
 	outline: none;
-	transition: background-color .5s ease, color .25s ease;
 }
 
 /* Costumize selection color */
@@ -153,7 +154,8 @@ html {
 	letter-spacing: 0.02em;
 	color: var(--black);
 	background-color: var(--white);
-	transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04);
+	transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04), background-color .5s ease, color .25s ease;
+
 }
 /* Common styles */
 html,
@@ -189,6 +191,9 @@ h1, h2, h3, h4, p {
 	margin: 0;
 	padding: 0;
 	will-change: opacity, transform;
+}
+h1, h2, h3, h4, p, span, li {
+	transition: color .5s ease;
 }
 h1, h2, h3, h4 {
 	font-weight: 500;
@@ -1056,7 +1061,7 @@ header .right {
 	filter: blur(40px);
 }
 /* Style text on the left and image spread like fan */
-.style-spread:after {
+/*.style-spread:after {
 	z-index: 3;
 	display: block;
 	content: "";
@@ -1075,7 +1080,7 @@ header .right {
 	background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,.75) 20%, rgba(0,0,0,0) 100%);
 	background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,.75) 20%, rgba(0,0,0,0) 100%);
 	background: linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,.75) 20%, rgba(0,0,0,0) 100%);
-}
+}*/
 .style-spread,
 .style-spread-left {
 	display: flex;
@@ -1185,6 +1190,7 @@ header .right {
 	overflow: hidden;
 	justify-content: flex-start;
 	background-color: var(--dark-white);
+	transition: background-color .5s ease;
 }
 .style-angled .thumbs {
 	display: flex;
@@ -1363,7 +1369,6 @@ header .right {
 }
 /* Footer links in every detail page */
 .links {
-	background-color: var(--white);
 	position: relative;
 	z-index: 1;
 	display: flex;
@@ -2032,6 +2037,7 @@ img.rounded {
 .plurk .first {
 	background-color: var(--lime);
 	overflow: hidden;
+	transition: background-color .5s ease;
 }
 .plurk .bgtext {
 	position: absolute;
@@ -2049,6 +2055,7 @@ img.rounded {
 	letter-spacing: -10vw;
 	color: var(--yellow);
 	pointer-events: none;
+	transition: color .25s ease;
 }
 .plurk .bgtext sup {
 	margin: -30vh 0 0 0;
@@ -2074,6 +2081,7 @@ img.rounded {
 	border-radius: var(--padm);
 	overflow: hidden;
 	box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+	transition: background-color .5s ease;
 }
 #permission h1 {
 	color: var(--red);
@@ -2220,6 +2228,7 @@ img.rounded {
 .stats .wrap {
 	width: var(--box);
 	height: calc(4/3 * var(--box));
+	transition: background-color .5s ease;
 }
 .stats h3 {
 	position: relative;
@@ -2250,6 +2259,7 @@ img.rounded {
 	height: 100%;
 	background-color: var(--black);
 	border-radius: 1px;
+	transition: background-color .5s ease;
 }
 .stats .span2 {
 	width: calc((var(--box) * 2) + (var(--padl) * 1));
@@ -2260,6 +2270,7 @@ img.rounded {
 	border-radius: var(--pads);
 	padding: var(--padl);
 	overflow: hidden;
+	transition: background-color .5s ease;
 }
 .stats .anim p,
 .stats .anim a,
@@ -2298,10 +2309,12 @@ img.rounded {
 	margin-bottom: var(--padm);
 	border-radius: 10000px;
 	overflow: hidden;
+	transition: background-color .5s ease;
 }
 .stats .graph i {
 	background-color: var(--yellow);
 	border-radius: 0;
+	transition: background-color .5s ease;
 }
 .stats .avatar img {
 	height: 48px;
@@ -2351,6 +2364,7 @@ img.rounded {
 	color: var(--black);
 	background-color: var(--white);
 	border-radius: 4px;
+	transition: background-color .5s ease;
 }
 
 /* Plurk - Statistics - Spesific Style */
@@ -2398,6 +2412,7 @@ img.rounded {
 	font-size: .7rem;
 	font-weight: 500;
 	padding: 0 var(--pads);
+	transition: background-color .5s ease;
 }
 .chart .plurkers .avatar img {
 	height: 24px;
@@ -2412,6 +2427,7 @@ img.rounded {
 }
 #statistics {
 	background-color: var(--white);
+	transition: background-color .5s ease;
 }
 
 #credits {
