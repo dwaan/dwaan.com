@@ -150,14 +150,13 @@
 					if($_GET['plurk_ids']) {
 						$plurk_ids = explode(',', $_GET['plurk_ids']);
 
+						$response = [];
 						foreach ($plurk_ids as $key => $value) {
-							$response = [];
-
 							$oauth->fetch("$api_url/Responses/get", array("plurk_id" => $value));
 							$response = json_decode($oauth->getLastResponse());
 							$response->plurk_id = $value;
 
-							$responses.push($response);
+							$responses[] = $response;
 						}
 						success(json_encode($responses));
 					} else {
