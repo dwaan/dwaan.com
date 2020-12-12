@@ -41,26 +41,26 @@
 							</div>
 
 							<div class="gallery gallery-normal">
-								<a href="/dwaan/v1/img/ss-loket/login.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/login.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/dwaan/v1/img/ss-loket/dashboard.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/dashboard.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/dwaan/v1/img/ss-loket/pos-selected.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/pos-selected.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pos-selected.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pos-selected.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/dwaan/v1/img/ss-loket/pos-topping.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/pos-topping.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pos-topping.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pos-topping.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/dwaan/v1/img/ss-loket/pos-ticket-redeemption.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/pos-ticket-redeemption.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pos-ticket-redeemption.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pos-ticket-redeemption.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/dwaan/v1/img/ss-loket/pembayaran.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/pembayaran.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pembayaran.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pembayaran.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/dwaan/v1/img/ss-loket/pembayaran-kartu.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/dwaan/v1/img/ss-loket/pembayaran-kartu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pembayaran-kartu.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pembayaran-kartu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
 							</div>
 

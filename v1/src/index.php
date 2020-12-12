@@ -23,7 +23,7 @@
 								<div>
 									<div class="hero__text">
 										<div class="par_h1"><h1>hello! my name is dwan</h1></div>
-										<div class="par_p"><p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="/dwaan/v1/me" class="more">read more</a></p></div>
+										<div class="par_p"><p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="/me" class="more">read more</a></p></div>
 									</div>
 
 									<div class="stats block">
@@ -31,19 +31,19 @@
 
 										<div class="stats__content">
 											<p>
-												<a href="/dwaan/v1/say-hi">
+												<a href="/say-hi">
 													<b id="year__living">36+</b>
 													<small>years of experience living on earth</small>
 												</a>
 											</p>
 											<p>
-												<a href="/dwaan/v1/work">
+												<a href="/work">
 													<b id="year__designer">12+</b>
 													<small>years of working as a UX/UI designer</small>
 												</a>
 											</p>
 											<p>
-												<a href="/dwaan/v1/me">
+												<a href="/me">
 													<b id="year__managerial">9+</b>
 													<small>years of working in managerial position</small>
 												</a>
@@ -57,8 +57,8 @@
 								<div class="parallax">
 									<div class="img">
 										<div class="box">
-											<img class="dwan" src="/dwaan/v1/img/dwan.png" width="" height="" alt="Dwan" />
-											<img class="fruit" src="/dwaan/v1/img/empty.png" width="" height="" alt="Fruit" />
+											<img class="dwan" src="/img/dwan.png" width="" height="" alt="Dwan" />
+											<img class="fruit" src="/img/empty.png" width="" height="" alt="Fruit" />
 										</div>
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 							<div class="hero__image hero__image_poof">
 								<div class="img">
 									<div class="box">
-										<img class="fruit poof" src="/dwaan/v1/img/poof.png" width="" height="" alt="Fruit" />
+										<img class="fruit poof" src="/img/poof.png" width="" height="" alt="Fruit" />
 									</div>
 								</div>
 							</div>
@@ -115,10 +115,10 @@
 								<div class="scroller__trigger"></div>
 								<div class="block scroller">
 									<div class="block gallery block__clear">
-										<a href="/dwaan/v1/melon-tiket-apa-saja"><span><img src="/dwaan/v1/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
-										<a href="/dwaan/v1/ppatk-e-learning-for-bank-frontliner"><span><img src="/dwaan/v1/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a>
-										<a href="/dwaan/v1/angkasa-pura-1-performace-dashboard"><span><img src="/dwaan/v1/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
-										<a href="/dwaan/v1/work">See All</a>
+										<a href="/melon-tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
+										<a href="/ppatk-e-learning-for-bank-frontliner"><span><img src="/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a>
+										<a href="/angkasa-pura-1-performace-dashboard"><span><img src="/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
+										<a href="/work">See All</a>
 									</div>
 								</div>
 							</div>

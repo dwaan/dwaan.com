@@ -76,13 +76,13 @@ exports.default = function() {
 	connect.server({
 		hostname: "0.0.0.0",
 		port: 8080,
-		base: "../../",
+		base: "./",
 		router: "../../router.php",
 		keepalive: true
 	}, function () {
 		browserSync.init({
 			open: false,
-			proxy: "localhost:8080/dwaan/"
+			proxy: "localhost:8080/"
 		});
 	});
 	gulp.watch('js/src/*.js', { ignoreInitial: false }, javascript);
