@@ -149,7 +149,6 @@
 					$responses = [];
 					if($_GET['plurk_ids']) {
 						$plurk_ids = explode(',', $_GET['plurk_ids']);
-						debug($plurk_ids);
 
 						foreach ($plurk_ids as $key => $value) {
 							$response = [];
