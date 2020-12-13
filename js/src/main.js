@@ -1,4 +1,3 @@
-'use strict';
 var REPORTSIZE = false;
 
 var gToArray = gsap.utils.toArray;
@@ -208,7 +207,7 @@ barba.hooks.afterEnter(function(data) {
 
 // Initialized barba.js
 barba.init({
-	debug: false,
+	debug: true,
 	transitions: [{
 		name: 'default-transition',
 		once: function(data) {

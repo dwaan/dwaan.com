@@ -116,7 +116,7 @@
 
 				$parameters = array("filter" => $filter);
 				do {
-					if ($offset != 0) $parameters = array("offset" => $offset, "filter" => $filter);
+					if($offset != 0) $parameters = array("offset" => $offset, "filter" => $filter);
 
 					$oauth->fetch("$api_url/Timeline/getPlurks", $parameters);
 					$plurks = json_decode($oauth->getLastResponse());
@@ -135,6 +135,22 @@
 					}
 				} while($postyear == $year);
 				success(json_encode($content));
+			} else if ($fetch == "plurk") {
+				// Get Plurk
+				$plurker = [];
+				$parameters = [];
+
+				if(isset($_GET['offset'])) $parameters["offset"] = $_GET['offset'];
+				if(isset($_GET['filter'])) $parameters["filter"] = $_GET['filter'];
+
+				$oauth->fetch("$api_url/Timeline/getPlurks", $parameters);
+				$plurks = json_decode($oauth->getLastResponse());
+
+				$postdate = date_create($plurks->plurks[sizeof($plurks->plurks) - 1]->posted);
+				$offset = date_format($postdate,"Y-m-d\TH:i:s");
+				$plurks->offset = $offset;
+
+				success(json_encode($plurks));
 			} else if ($fetch == "response") {
 				// Get Response
 				if(isset($_GET['plurk_id'])) {

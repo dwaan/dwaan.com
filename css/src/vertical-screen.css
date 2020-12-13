@@ -758,8 +758,12 @@ header {
 	--box: 80vw;
 }
 .stats .big {
-	font-size: 22.5vw;
+	font-size: 20vw;
 	letter-spacing: -.05rem;
+}
+.stats .graph {
+	width: 40vw;
+	margin: 0 auto var(--padm);
 }
 .postcontent .post {
 	-webkit-line-clamp: 7;
@@ -779,6 +783,11 @@ header {
 	margin: var(--padl) 0;
 }
 
+@media (max-width: 600px) {
+	.stats .spansmall {
+		height: calc(3/4 * var(--box));
+	}
+}
 
 #credits {
 	padding: calc(4 * var(--pady)) calc(2 * var(--padx))!important;

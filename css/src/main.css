@@ -2347,6 +2347,7 @@ img.rounded {
 	opacity: .8;
 }
 .stats .title {
+	align-items: center;
 	text-align: right;
 }
 .stats .title i {
@@ -2361,6 +2362,7 @@ img.rounded {
 	display: inline-block;
 	padding: 4px 8px 2px;
 	font-style: normal;
+	line-height: 120%;
 	color: var(--black);
 	background-color: var(--white);
 	border-radius: 4px;
@@ -2446,6 +2448,14 @@ img.rounded {
 #credits p {
 	margin: var(--pads) 0;
 	opacity: .5;
+}
+#credits a {
+	text-decoration: none;
+	font-weight: 500;
+	transition: color .5s ease;
+}
+#credits a:hover {
+	color: var(--red);
 }
 #credits .made {
 	font-weight: 500;

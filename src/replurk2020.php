@@ -3,7 +3,7 @@
 
 <head>
 	<?php
-		$title = "Plurk 2020";
+		$title = "Replurk 2020";
 		include_once "part_metacss.php";
 	?>
 </head>
@@ -70,7 +70,7 @@
 	    	<div class="text">
 		    	<p class="loading">1 0f 3. Loading, please wait...</p>
 		    	<p class="made">Made with ❤️ in TLV</p>
-		    	<p class="like">If you like this web app, you can friend-ed or fan-ed me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> which ever you like. Or even better, send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some coins</a> if you will.</p>
+		    	<p class="like">If you like this web app, you can friend-ed or fan-ed me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> which ever you like. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an 🍦 ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some 🪙 coins</a> if you will.</p>
 		    	<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. Please feel free to <a href="./say-hi">contact me</a> if there's some copyrighted materials that shouldn't be in this web app.</p>
 		    </div>
 	    </section>

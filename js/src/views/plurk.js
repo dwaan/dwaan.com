@@ -1,3 +1,4 @@
+var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var plurk = {
 	namespace: 'plurk',
 	beforeEnter: function(data) {
@@ -277,7 +278,7 @@ var plurk = {
 				return '<div class="wrap ' + style + '"><div class="anim">' + text + '</div></div>';
 			},
 			draw: function(style, number, text) {
-				if (typeof number == "string" || (typeof number == "number" && number > 0)) {
+				if(typeof number == "string" || (typeof number == "number" && number > 0)) {
 					this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
 						<p>\
 							<span class="big">' + number + '</span>\
@@ -292,6 +293,7 @@ var plurk = {
 				'));
 			},
 			drawGraph: function(style, number, text) {
+				var el = this.el.querySelectorAll(".graph i");
 				if (typeof number == "string" || (typeof number == "number" && number > 0)) {
 					this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
 						<p>\
@@ -396,7 +398,7 @@ var plurk = {
 						opacity: opacity,
 						zIndex: zIndex,
 						duration: .5,
-						ease: "power3.out",
+						ease: "power3.inOut",
 						onComplete: function() {
 							if(hidden) {
 								gsap.set(node.el, {
@@ -410,13 +412,13 @@ var plurk = {
 				node.update();
 			},
 			drawAll: function() {
-				this.draw('', this.plurk_count, 'You posted <i>' + plural(this.plurk_count, 'plurk') + '</i>');
-				this.drawGraph('center', Math.round(this.noresponse_count/this.plurk_count*100), this.noresponse_count + ' of ' + plural(this.plurk_count, 'plurk') + ' you posted have no response. That\'s around ' + Math.round(this.noresponse_count/this.plurk_count*100) + '% of your plurk <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
-				this.draw('', this.response_count, 'You posted <i>' + plural(this.response_count, 'response') + '</i>');
-				this.draw('', this.post_count, 'In total, you posted <i>' + plural(this.post_count, 'post') + '</i>, that\'s quite a lot <img src="https://s.plurk.com/emoticons/platinum/8073c1716e75d32eb79f97a9f521fa01.gif" /></span>');
-				this.draw('', this.whispers_count, 'You posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
-				this.draw('', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
-				this.draw('', this.has_gift_count, 'You recieved <i>' + plural(this.has_gift_count, 'gift') + '</i>');
+				this.draw('spansmall', this.plurk_count, 'You posted <i>' + plural(this.plurk_count, 'plurk') + '</i>');
+				this.drawGraph('center', Math.round(this.noresponse_count/this.plurk_count*100), this.noresponse_count + ' of ' + plural(this.plurk_count, 'plurk') + ' you posted have no response. That\'s around ' + Math.round(this.noresponse_count/this.plurk_count*100) + '% of your plurk 😢');
+				this.draw('spansmall', this.response_count, 'You posted <i>' + plural(this.response_count, 'response') + '</i>');
+				this.draw('spansmall', this.post_count, 'In total, you posted <i>' + plural(this.post_count, 'post') + '</i>, that\'s quite a lot 😮</span>');
+				this.draw('spansmall', this.whispers_count, 'You posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
+				this.draw('spansmall', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
+				this.draw('spansmall', this.has_gift_count, 'You recieved <i>' + plural(this.has_gift_count, 'gift') + '</i>');
 			}
 		};
 		var most = {
@@ -656,11 +658,16 @@ var plurk = {
 				this.counts = length;
 				this.draw(0);
 			},
-			update: function(month) {
+			update: function(month, value) {
 				if(month) next.querySelector("#statistics .loading .month").innerHTML = month;
+
 				if (this.counts >= 0) {
-					this.count++;
-					this.draw(100 * (this.count / this.counts));
+					if(value) {
+						this.count = value;
+					} else {
+						this.count++;
+					}
+					this.draw(Math.round(100 * (this.count / this.counts)));
 				}
 			},
 			fakeupdate: function() {
@@ -736,17 +743,17 @@ var plurk = {
 				opacity: 0,
 				stagger: {
 					from: "end",
-					amount: .4
+					amount: .2
 				},
 				duration: 1,
-				ease: "power3.out"
+				ease: "power3.in"
 			});
 			tl.fromTo(next.querySelectorAll("#permission"), {
 				opacity: 1
 			}, {
 				opacity: 0,
 				duration: 1,
-				ease: "power3.out"
+				ease: "power3.in"
 			}, ">-.2");
 			tl.set(next.querySelectorAll("#permission"), {
 				position: "",
@@ -791,6 +798,7 @@ var plurk = {
 			return tl;
 		}
 		function hideStatisticPages(tl) {
+			tl = animate.top(tl);
 			tl.fromTo(next.querySelectorAll(".grant .bgtext > *, .grant .email, .grant .thumbs, .grant .text > *, .grant .arrow-big"), {
 				opacity: 1,
 				y: 0
@@ -800,16 +808,16 @@ var plurk = {
 				duration: 1,
 				stagger: {
 					from: "end",
-					amount: .4
+					amount: .2
 				},
-				ease: "power3.out"
+				ease: "power3.in"
 			}, ">-.2");
 			tl.fromTo(next.querySelectorAll(".grant"), {
 				opacity: 1
 			}, {
 				opacity: 0,
 				duration: 1,
-				ease: "power3.out"
+				ease: "power3.in"
 			}, ">-.5");
 			tl.set(next.querySelectorAll(".grant"), { display: "none" });
 
@@ -841,7 +849,7 @@ var plurk = {
 			var submit = next.querySelector("#submit");
 
 			submit.innerHTML = "...";
-			message("Fetching your data, please wait.");
+			message("Checking your code, please wait.");
 
 			api.call("?request=permanenttoken&token=" + token, function(data) {
 				login();
@@ -887,15 +895,22 @@ var plurk = {
 					}, "<");
 				}
 
-				input.onkeyup = function(event) {
-					if (input.value != "") addClass(submit, "validated");
-					else removeClass(submit, "validated");
-				}
+				var interval = setInterval(function() {
+					input.value = input.value.trim();
+
+					var result = input.value.match(/[^0-9]/g);
+					if (result == null && input.value != "") {
+						addClass(submit, "validated");
+					} else {
+						input.value = "";
+						removeClass(submit, "validated");
+					}
+				}, 1000);
 				submit.onclick = function(event) {
 					if(input.value == "") input.focus();
 					else {
-						input.onkeyup = function() {};
 						submit.onclick = function() {};
+						clearInterval(interval);
 						requestPermanentToken(encodeURI(input.value));
 					}
 				};
@@ -913,7 +928,6 @@ var plurk = {
 			clearInterval(interval);
 
 			// Hide statistic pages
-			tl = animate.top(tl);
 			tl = hideStatisticPages(tl);
 			tl.to(next.querySelectorAll("#credits .loading"), {
 				opacity: 1,
@@ -998,14 +1012,14 @@ var plurk = {
 			var responses = Math.round(plurker.response_count / days);
 
 			next.querySelector("#hello .thumbs").innerHTML = "<img src='" + plurker.avatar_big + "' />";
-			next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "!</h1><p>This is your 2020 Plurks</p>";
+			next.querySelector("#hello .text").innerHTML = "<h1>👋 " + plurker.display_name + "!</h1><p>This is your 2020 Plurks</p>";
 
 			// Draw statistic
 			statistics.title('All Time');
 			if(plurker.anniversary.years && plurker.anniversary.days) {
-				statistics.draw('', plurker.anniversary.years, "You joined Plurk " + plural(plurker.anniversary.years, "year") + " and " + plural(plurker.anniversary.days, "day") + " ago");
-				statistics.draw('badges', plurker.badges.length, "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
-				statistics.draw('', Math.round(plurker.plurks_count / days), "You posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+				statistics.draw('spansmall', plurker.anniversary.years, "You joined Plurk " + plural(plurker.anniversary.years, "year") + " and " + plural(plurker.anniversary.days, "day") + " ago 👏");
+				statistics.draw('spansmall badges', plurker.badges.length, "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
+				statistics.draw('spansmall', Math.round(plurker.plurks_count / days), "You posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
 				if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>';
 				else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>';
 				statistics.draw('', responses, "You responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
@@ -1045,25 +1059,41 @@ var plurk = {
 		}
 		// Display statistics
 		function displayStatistics() {
-			var plurk;
+			var plurk = [];
+			var newyear = new Date("1 Januari 2020");
+			var days = 60*60*24*1000;
+			var fulldays = 365;
 
 			statistics.title('This Year');
-			statistics.draw("loading", "", "2 of 3. Loading your 2020 plurks. It can take up to 1 minutes.");
+			statistics.draw("loading", "", "<i class='month'>Data from December</i>2 of 3. Loading your 2020 plurks. It can take up to 1 minute.");
 
 			loading.init();
-			loading.loop(100);
-			interval = setInterval(function() {
-				loading.fakeupdate();
-			}, 500);
+			loading.loop(fulldays);
 
 			// Load 2020 Plurk
-			api.call("?fetch=plurks&filter=my", function(data) {
-			// api.call("?fetch=plurks&filter=my&loop=1", function(data) {
-				plurk = data.message;
-				clearInterval(interval);
+			var getPlurk = function(offset) {
+				if (!offset) offset = "";
+				else offset = "&offset=" + offset;
 
-				loading.forcedone();
-			});
+				api.call("?fetch=plurk&filter=my" + offset, function(data) {
+					friends.add(data.message.plurk_users);
+					plurk = plurk.concat(data.message.plurks);
+
+					var lastposted = new Date(plurk[plurk.length - 1].posted);
+
+					if(lastposted.getFullYear() == 2020) {
+						getPlurk(data.message.offset);
+						loading.update("Data from " + monthNames[lastposted.getMonth()], fulldays - Math.floor((lastposted - newyear) / days));
+					} else {
+						while(lastposted.getFullYear() != 2020) {
+							plurk.pop();
+							lastposted = new Date(plurk[plurk.length - 1].posted);
+						}
+						loading.forcedone();
+					}
+				});
+			}
+			getPlurk();
 
 			// When loading done
 			loading.onDone = function() {
@@ -1098,8 +1128,12 @@ var plurk = {
 		}
 		// Display extended statistics
 		function displayExtendedStatistics(plurk) {
-			var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
+			// Sort based on date
+			plurk.sort(function(a, b) {
+				var c = new Date(a.posted);
+				var d = new Date(b.posted);
+				return d - c;
+			});
 			// Get the responses for each plurks in serial
 			var loop = plurk.length;
 			var getResponses = function() {
