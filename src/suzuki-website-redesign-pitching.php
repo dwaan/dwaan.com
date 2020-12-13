@@ -144,7 +144,7 @@
 		<section class="links">
 			<nav>
 				<div class="prototype">
-					<a href="#prototype" aria-label="Figma Prototype - Melon - Tiket Apa Saja Website Redesign"><span>visit the prototype</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&viewport=34%2C332%2C0.06296657025814056&scaling=contain" aria-label="Figma Prototype - Melon - Tiket Apa Saja Website Redesign" target="_BLANK"><span>visit the prototype</span></a>
 				</div>
 				<div class="continue">
 					<a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign"><span><strong>next case study</strong>  <i>-  Tiket Apa Saja</i></span></a>
