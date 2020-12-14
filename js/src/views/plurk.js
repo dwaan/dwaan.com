@@ -432,6 +432,7 @@ var plurk = {
 				if(!hidden || !node.hidden) {
 					var currentTop = position / (max - 1) * 100;
 
+					gsap.killTweensOf(node.el);
 					gsap.to(node.el, {
 						top: currentTop + "%",
 						opacity: opacity,
@@ -608,10 +609,15 @@ var plurk = {
 			hashtags: {
 				data: [],
 				count: function(content) {
-					most.findregex(/hashtag\"\>(.*?)\</g, function(value) {
-						return value.replace(/hashtag\"\>\#|\</g, '');
+					most.findregex(/\#(\w{1,30})[\ |\.]/g, function(value) {
+						return value.replace(/\#|\ |\./g, '');
 					}, content, this.data);
 				},
+				// count: function(content) {
+				// 	most.findregex(/hashtag\"\>(.*?)\</g, function(value) {
+				// 		return value.replace(/hashtag\"\>\#|\</g, '');
+				// 	}, content, this.data);
+				// },
 				draw: function() {
 					var html = "";
 					this.data.sort(most.sort);
@@ -1260,18 +1266,22 @@ var plurk = {
 					friends.add(data.message.plurk_users);
 					plurk = plurk.concat(data.message.plurks);
 
-					var lastposted = new Date(plurk[plurk.length - 1].posted);
+					// Debug
+					// data.message.plurks = [];
+					if(data.message.plurks.length > 0) {
+						var lastposted = new Date(plurk[plurk.length - 1].posted);
 
-					if(lastposted.getFullYear() == year) {
-						// Debug
-						getPlurk(data.message.offset);
-						loading.update("Data from " + monthNames[lastposted.getMonth()], fulldays - Math.floor((lastposted - newyear) / days));
-						// loading.forcedone();
-					} else {
-						while(lastposted.getFullYear() != year) {
-							plurk.pop();
-							lastposted = new Date(plurk[plurk.length - 1].posted);
+						if(lastposted.getFullYear() == year) {
+							getPlurk(data.message.offset);
+							loading.update("Data from " + monthNames[lastposted.getMonth()], fulldays - Math.floor((lastposted - newyear) / days));
+						} else {
+							while(lastposted.getFullYear() != year) {
+								plurk.pop();
+								lastposted = new Date(plurk[plurk.length - 1].posted);
+							}
+							loading.forcedone();
 						}
+					} else {
 						loading.forcedone();
 					}
 				});
@@ -1334,7 +1344,7 @@ var plurk = {
 					// Find and count all mentions from my post
 					most.mentions.count(plurk[loop].content_raw);
 					// Find and count all hashtags from my post
-					most.hashtags.count(plurk[loop].content);
+					most.hashtags.count(plurk[loop].content_raw);
 					// Find and count all links post
 					most.links.count(plurk[loop].content);
 					// Find and count all pictures post
@@ -1365,7 +1375,7 @@ var plurk = {
 										// Find and count all my mentions from responses
 										most.mentions.count(response.content_raw);
 										// Find and count all my hashtags from responses
-										most.hashtags.count(response.content);
+										most.hashtags.count(response.content_raw);
 										// Find and count all links post
 										most.links.count(response.content);
 										// Find and count all pictures post
