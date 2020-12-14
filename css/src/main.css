@@ -2324,6 +2324,48 @@ img.rounded {
 	text-align: center;
 }
 
+.grid .htmlcontent {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin: auto calc(-1 * var(--padm));
+}
+.grid .htmlcontent div {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	margin: var(--padm);
+}
+.grid.emoticons .htmlcontent div:nth-child(10) {
+	display: none;
+}
+.grid .htmlcontent img {
+	flex: 0;
+}
+.grid .htmlcontent .count {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(75%,-75%);
+}
+@media (min-width: 375px) {
+	.grid .htmlcontent {
+		margin: auto calc(-1 * calc(1.5 * var(--padm)));
+	}
+	.grid .htmlcontent div {
+		margin: calc(1.5 * var(--padm));
+	}
+}
+@media (min-width: 600px) {
+	.grid.emoticons .htmlcontent div:nth-child(10) {
+		display: flex;
+	}
+}
+
 /* Plurk - Statistics - Loading */
 .stats .loading,
 .stats .loading .big {
@@ -2402,6 +2444,7 @@ img.rounded {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.grid .count,
 .chart .plurkers .count {
 	color: var(--black);
 	background-color: var(--yellow);

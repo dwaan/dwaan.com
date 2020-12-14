@@ -331,6 +331,14 @@ var plurk = {
 					</a>\
 				'));
 			},
+			drawHTML: function(style, title, html) {
+				this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+					<div>\
+						<div class="htmlcontent">' + html + '</div>\
+						<div class="title">' + title + '</div>\
+					</div>\
+				'));
+			},
 			drawLink: function(style, link, title, text, badge) {
 				this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
 					<a href="' + link + '" target="_BLANK">\
@@ -521,8 +529,13 @@ var plurk = {
 					}, content, this.data);
 				},
 				draw: function() {
+					var html = "";
 					this.data.sort(most.sort);
-					if(this.data[0]) statistics.drawImage("emoticons", this.data[0].value, '#', '<i>Most Used My Emoticon</i>', '', this.data[0].count);
+					for (var i = 0; i < 10; i++) {
+						if(this.data[i])
+							html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
+					}
+					if(html != "") statistics.drawHTML("span2 grid emoticons", '<i>Most Used My Emoticons</i>', html);
 				}
 			},
 			mentions: {
@@ -589,8 +602,13 @@ var plurk = {
 					}, content, this.data);
 				},
 				draw: function() {
+					var html = "";
 					this.data.sort(most.sort);
-					if(this.data[0]) statistics.drawLink('', 'https://plurk.com/search?q=' + this.data[0].value, '<i>Most Hashtags by You</i>', '#' + this.data[0].value, this.data[0].count);
+					for (var i = 0; i < 10; i++) {
+						if(this.data[i])
+							html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" />#' + this.data[i].value + '</a> <span class="count">' + this.data[i].count + '</span></div>';
+					}
+					if(html != "") statistics.drawHTML("span2 grid hashtags", '<i>Most Hashtags by You</i>', html);
 				}
 			},
 			links: {
@@ -1253,7 +1271,7 @@ var plurk = {
 
 							// Get next response
 							getResponses();
-							console.error("Fail loading plurks:", responsestoload);
+							console.info("Fail loading plurks", data);
 						});
 					} else {
 						getResponses();
