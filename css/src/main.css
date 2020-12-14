@@ -2212,7 +2212,7 @@ img.rounded {
 /* Plurk - Statistics */
 .stats {
 	display: flex;
-	padding: var(--padl) 0 var(--padxl);
+	padding: var(--padl) 0 calc(5 * var(--padl));
 	margin: 0 auto;
 	width: calc((var(--box) * var(--repeat)) + (var(--padl) * var(--repeat)));
 	flex-flow: row;
@@ -2291,7 +2291,7 @@ img.rounded {
 .stats .anim .big {
 	font-weight: 500;
 	line-height: 100%;
-	color: var(--yellow);
+	color: var(--white);
 	display: block;
 	margin-bottom: auto;
 }
@@ -2344,7 +2344,6 @@ img.rounded {
 	font-size: .6rem;
 	letter-spacing: .1rem;
 	text-transform: uppercase;
-	opacity: .8;
 }
 .stats .title {
 	align-items: center;

@@ -761,8 +761,14 @@ header {
 	font-size: 20vw;
 	letter-spacing: -.05rem;
 }
+.stats .mediumnumber .big {
+	font-size: 16vw;
+}
+.stats .largenumber .big {
+	font-size: 14vw;
+}
 .stats .graph {
-	width: 40vw;
+	width: 50%;
 	margin: 0 auto var(--padm);
 }
 .postcontent .post {
@@ -773,9 +779,15 @@ header {
 		--repeat: 2;
 		--box: 40vw;
 	}
-	.stats .big {
-		font-size: 12.5vw;
-		letter-spacing: -.05rem;
+	.stats .big,
+	.stats .span2.mediumnumber .big,
+	.stats .span2.largenumber .big {
+		font-size: 10vw;
+		letter-spacing: -.5vw;
+	}
+	.stats .mediumnumber .big,
+	.stats .largenumber .big {
+		font-size: 7.5vw;
 	}
 }
 

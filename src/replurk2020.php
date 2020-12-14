@@ -57,7 +57,8 @@
 					    	<p id="login-message">Click the Verify button to verify continue.</p>
 					    </li>
 					    <li class="small">
-					    	<p><strong>IMPORTANT!</strong> Your data will be processed locally in your device. It can take normally up to 10 minutes to download all of your 2020 plurk, please be patient.<p>
+					    	<p>If you open this link inside Plurk APP, please reopen this website in your browser. The verification code will appeared in your Plurk App and it might be covered by this website.</p>
+					    	<p><strong>IMPORTANT!</strong> Your data will be processed locally in your device. It can take normally up to 10 minutes (or even more) to download all of your 2020 plurk, please be patient.<p>
 					    	<p>Other than session data from Plurk, this website didn't store any of your data in my server.</p>
 					    </li>
 				   </ol>

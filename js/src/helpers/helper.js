@@ -1,4 +1,6 @@
 'use strict';
+////////////// Helper variables
+var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 ////////////// Helper functions
 //
 // _q(element)
@@ -81,8 +83,31 @@ var removeStyle = function(el) {
 // Add plural to word
 function plural(number, word, locale) {
 	if(!locale) locale = "en-US";
-	if (number > 1) return number.toLocaleString(locale) + " " + word + "s";
-	else return number.toLocaleString(locale) + " " + word;
+	if(!word) {
+		word = '';
+	} else {
+		word = ' ' + word;
+		if (number > 1) word = word + 's';
+	}
+	return number.toLocaleString(locale) + word;
+}
+function pluralinwords(number, word, locale) {
+	if(!locale) locale = "en-US";
+
+	if(!word) {
+		word = '';
+	} else {
+		word = ' ' + word;
+		if (number > 1) word = word + 's';
+	}
+
+	if (Math.round(number / 1000000) > 0) {
+		number = plural(Math.floor(number / 1000000), "million");
+	} else if (Math.round(number / 1000) > 0) {
+		number = plural(Math.floor(number / 1000), "thousand");
+	}
+
+	return number.toLocaleString(locale) + word;
 }
 // Humanize date difference
 function datediff(date) {

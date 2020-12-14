@@ -691,8 +691,12 @@ header {
 	--box: 40vw;
 }
 .stats .big {
-	font-size: 7.5vw;
-	letter-spacing: -.25rem;
+	font-size: 7vw;
+	letter-spacing: -.25vw;
+}
+.stats .mediumnumber.big,
+.stats .largenumber .big {
+	font-size: 6vw;
 }
 .postcontent .post {
 	-webkit-line-clamp: 8;
@@ -708,8 +712,16 @@ header {
 		--repeat: 4;
 		--box: 20vw;
 	}
-	.stats .big {
-		font-size: 5.5vw;
+	.stats .big,
+	.stats .span2.mediumnumber .big,
+	.stats .span2.largenumber .big {
+		font-size: 5vw;
+	}
+	.stats .mediumnumber .big {
+		font-size: 4vw;
+	}
+	.stats .largenumber .big {
+		font-size: 3.5vw;
 	}
 
 	.postcontent .post {
