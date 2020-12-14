@@ -2323,6 +2323,19 @@ img.rounded {
 .stats .center {
 	text-align: center;
 }
+.stats .link {
+	position: absolute;
+	display: block;
+	top: 0;
+	right: 0;
+	padding: 0;
+	text-transform: uppercase;
+	fill: var(--white);
+	transition: fill .5s ease;
+}
+.stats .link:hover {
+	fill: var(--yellow);
+}
 
 .grid .htmlcontent {
 	display: flex;
