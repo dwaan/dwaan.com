@@ -2030,14 +2030,11 @@ img.rounded {
 /*  Plurk - First section */
 .plurk .first {
 	text-align: center;
+	background-color: var(--lime);
+	transition: background-color .5s ease;
 }
 .plurk .first h1 {
 	margin: var(--padl) 0 var(--pads)  0;
-}
-.plurk .first {
-	background-color: var(--lime);
-	overflow: hidden;
-	transition: background-color .5s ease;
 }
 .plurk .bgtext {
 	position: absolute;
@@ -2267,7 +2264,7 @@ img.rounded {
 .stats .anim {
 	height: 100%;
 	background-color: var(--yellow);
-	border-radius: var(--pads);
+	border-radius: var(--padm);
 	padding: var(--padl);
 	overflow: hidden;
 	transition: background-color .5s ease;
@@ -2478,6 +2475,9 @@ img.rounded {
 
 /* Plurk - Statistics - Costum Page Style */
 #hello,
+#statistics {
+	z-index: 3;
+}
 #statistics {
 	z-index: 2;
 	overflow: hidden;

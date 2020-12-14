@@ -213,7 +213,6 @@ var plurk = {
 
 					// Scroll animation wrap section
 					scroll.push(function(tl) {
-
 						tl.fromTo(el.children, {
 							y: 100,
 							opacity: 0,
@@ -227,11 +226,15 @@ var plurk = {
 							var number = Number(el.querySelector(".big").textContent);
 							if(number > 0) {
 								var load = { progress: 0 };
+								var duration = 1;
+								if(number >= 500 && number < 1000) duration = 2;
+								else if(number >= 1000 && number < 99999) duration = 3;
+								else if(number >= 99999) duration = 4;
 								tl.to(load, {
 									progress: number,
 									snap: "progress",
-									ease: "ease.inOut",
-									duration: 5,
+									ease: "power3.inOut",
+									duration: duration,
 									onUpdate: function() {
 										el.querySelector(".big").textContent = plural(load.progress);
 									}
@@ -289,7 +292,6 @@ var plurk = {
 						});
 					});
 				}
-
 				ScrollTrigger.refresh();
 			},
 			wrapper: function(style, text) {
@@ -386,7 +388,7 @@ var plurk = {
 				if(node.position <= max){
 					hidden = false;
 					zIndex = position = (node.position - 1);
-					opacity = 1
+					opacity = 1;
 				}
 
 				// Create the box
@@ -414,14 +416,12 @@ var plurk = {
 					this.el.insertAdjacentElement("beforeend", wrapper);
 				}
 
-				var percentageNodeHeight = 0;
 				// Add  element
-				if(!node.attached) {
+				if(!hidden && !node.attached) {
 					var maxTop = max / (max - 1) * 100;
 
 					this.el.querySelector("." + id + ' .chart').insertAdjacentElement("beforeend", node.el);
 					gsap.set(node.el, {
-						display: "none",
 						top: maxTop + "%",
 						opacity: 0,
 						zIndex: 0,
@@ -429,11 +429,10 @@ var plurk = {
 					node.attached = true;
 				}
 				// Update position
-				if(!hidden || !node.el.hidden) {
+				if(!hidden || !node.hidden) {
 					var currentTop = position / (max - 1) * 100;
 
 					gsap.to(node.el, {
-						display: "",
 						top: currentTop + "%",
 						opacity: opacity,
 						zIndex: zIndex,
@@ -441,13 +440,12 @@ var plurk = {
 						ease: "power3.inOut",
 						onComplete: function() {
 							if(hidden) {
-								gsap.set(node.el, {
-									display: "none"
-								});
+								node.attached = false;
+								node.el.parentNode.removeChild(node.el);
 							}
 						}
 					});
-					node.el.hidden = hidden;
+					node.hidden = hidden;
 				}
 				node.update();
 			},
@@ -1185,17 +1183,43 @@ var plurk = {
 
 			// Scroll animation hello section
 			scroll.push(function(tl) {
-				tl.fromTo(next.querySelectorAll("#hello .text, #hello .thumbs, #hello .arrow-big"), {
+				tl.fromTo(next.querySelectorAll("#hello .text, #hello .thumbs"), {
 					y: 0
 				}, {
-					y: window.innerHeight * 1/2,
-					ease: "linear"
+					y: window.innerHeight * -3/4,
+					ease: "linear",
+					duration: 1
 				}, 0);
-				tl.fromTo(next.querySelectorAll("#hello .bgtext sup, #hello .bgtext sub"), {
-					y: 0
+				tl.fromTo(next.querySelectorAll("#hello .bgtext sup"), {
+					y: 0,
+					x: 0,
+					rotation: 0
 				}, {
-					y: window.innerHeight * 3/4,
-					ease: "linear"
+					y: window.innerHeight * -1/4,
+					x: window.innerHeight * -1/10,
+					rotation: -10,
+					ease: "linear",
+					duration: 1
+				}, 0);
+				tl.fromTo(next.querySelectorAll("#hello .bgtext sub"), {
+					y: 0,
+					x: 0,
+					rotation: 0
+				}, {
+					y: window.innerHeight * -1/4,
+					x: window.innerHeight * 1/10,
+					rotation: 10,
+					ease: "linear",
+					duration: 1
+				}, 0);
+				tl.fromTo(next.querySelectorAll("#hello .arrow-big"), {
+					y: 0,
+					opacity: 1
+				}, {
+					y: window.innerHeight * 1/4,
+					opacity: 0,
+					ease: "linear",
+					duration: .25
 				}, 0);
 				return tl;
 			}, function(tl) {
@@ -1207,6 +1231,10 @@ var plurk = {
 					scrub: true
 				});
 			});
+			gsap.set(next.querySelectorAll("#credits .text > *:not(.loading)"), {
+				opacity: 1
+			});
+			ScrollTrigger.refresh();
 
 			if(callback) callback();
 		}
