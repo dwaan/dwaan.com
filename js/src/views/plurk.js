@@ -1092,6 +1092,67 @@ var plurk = {
 				// Request token
 				requestToken();
 
+				// Scroll animation permission section
+				scroll.push(function(tl) {
+					tl.fromTo(next.querySelectorAll("#permission form"), {
+						y: 0
+					}, {
+						y: window.innerHeight * -3/4,
+						ease: "linear"
+					}, 0);
+					tl.fromTo(next.querySelectorAll("#permission .bgtext sup"), {
+						y: 0,
+						x: 0,
+						rotation: 0
+					}, {
+						y: window.innerHeight * -1/4,
+						x: window.innerHeight * -1/10,
+						rotation: -10,
+						ease: "linear"
+					}, 0);
+					tl.fromTo(next.querySelectorAll("#permission .bgtext sub"), {
+						y: 0,
+						x: 0,
+						rotation: 0
+					}, {
+						y: window.innerHeight * -1/4,
+						x: window.innerHeight * 1/10,
+						rotation: 10,
+						ease: "linear"
+					}, 0);
+					return tl;
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: next.querySelectorAll("#permission"),
+						start: "0 0",
+						end: "100% 0",
+						animation: tl,
+						scrub: .5
+					});
+				});
+				scroll.push(function(tl) {
+					tl.fromTo(next.querySelectorAll("#credits .text > *"), {
+						opacity: 0
+					}, {
+						opacity: 1,
+						stagger: {
+							from: 'end',
+							amount: .1
+						},
+						ease: "power3.in"
+					}, 0);
+					return tl;
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: next.querySelectorAll("#permission"),
+						start: "0 0",
+						end: "50% 0",
+						animation: tl,
+						scrub: .5
+					});
+				});
+				ScrollTrigger.refresh();
+
 				if(callback) callback();
 			});
 		}
@@ -1128,14 +1189,12 @@ var plurk = {
 					y: 0
 				}, {
 					y: window.innerHeight * 1/2,
-					duration: 1,
 					ease: "linear"
 				}, 0);
 				tl.fromTo(next.querySelectorAll("#hello .bgtext sup, #hello .bgtext sub"), {
 					y: 0
 				}, {
 					y: window.innerHeight * 3/4,
-					duration: 1,
 					ease: "linear"
 				}, 0);
 				return tl;
@@ -1354,23 +1413,23 @@ var plurk = {
 			return ScrollTrigger.create({
 				trigger: 'main',
 				start: "0 0",
-				end: "100% 100%",
+				end: "100% 0",
 				animation: tl,
 				onUpdate: function(update) {
 					if (update.direction > 0) {
-						gsap.killTweensOf(_qAll("header, .footer"));
-						gsap.to(_qAll('header'), {
-							y: -100
+						gsap.killTweensOf(_qAll(".logo, .size, .lamp, .switch, .logout"));
+						gsap.to(_qAll('.logo, .size, .lamp, .switch'), {
+							y: -100,
+							opacity: 0
 						});
-						gsap.to(_qAll('.footer'), {
-							y: 100
+						gsap.to(_qAll('.logout'), {
+							y: 100,
+							opacity: 0
 						});
 					} else {
-						gsap.to(_qAll('header'), {
-							y: 0
-						});
-						gsap.to(_qAll('.footer'), {
-							y: 0
+						gsap.to(_qAll('.logo, .size, .lamp, .switch, .logout'), {
+							y: 0,
+							opacity: 1
 						});
 					}
 				}
