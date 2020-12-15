@@ -1147,27 +1147,42 @@ var plurk = {
 						scrub: .5
 					});
 				});
-				scroll.push(function(tl) {
-					tl.fromTo(next.querySelectorAll("#credits .text"), {
-						opacity: 0
-					}, {
-						opacity: 1,
-						stagger: {
-							from: 'end',
-							amount: .1
-						},
-						ease: "power3.in"
-					}, 0);
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: next.querySelectorAll("#permission"),
-						start: "0 0",
-						end: "50% 0",
-						animation: tl,
-						scrub: .5
-					});
-				});
+				// scroll.push(function(tl) {
+				// 	tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
+				// 		y: window.innerHeight * 1/8
+				// 	}, {
+				// 		y: 0,
+				// 		ease: "linear",
+				// 		duration: 2
+				// 	}, 0);
+				// 	tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
+				// 		opacity: 0
+				// 	}, {
+				// 		opacity: .5,
+				// 		stagger: {
+				// 			from: 'end',
+				// 			amount: .1
+				// 		},
+				// 		duration: 1,
+				// 		ease: "power3.in"
+				// 	}, 0);
+				// 	tl.fromTo(next.querySelectorAll("#credits .made"), {
+				// 		opacity: 0
+				// 	}, {
+				// 		opacity: 1,
+				// 		duration: 1,
+				// 		ease: "power3.in"
+				// 	}, .3);
+				// 	return tl;
+				// }, function(tl) {
+				// 	return ScrollTrigger.create({
+				// 		trigger: next.querySelectorAll("#permission"),
+				// 		start: "0 0",
+				// 		end: "100% 0",
+				// 		animation: tl,
+				// 		scrub: .5
+				// 	});
+				// });
 				ScrollTrigger.refresh();
 
 				if(callback) callback();
