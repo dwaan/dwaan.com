@@ -487,8 +487,7 @@ picture img {
 	background-color: transparent;
 	color: var(--black);
 }
-#loader p,
-#loader .simple span {
+#loader p {
 	display: flex;
 	flex-flow: row;
 	align-items: center;
@@ -503,7 +502,8 @@ picture img {
 	text-transform: uppercase;
 	font-weight: 400;
 	color: inherit;
-}
+},
+#loader .simple span:nth-child(2),
 #loader span:nth-child(2) {
 	display: block;
 	margin: 0 0 0 20px;
@@ -529,8 +529,8 @@ picture img {
 }
 #loader .simple span {
 	left: initial;
-	height: calc(var(--pads) - 4);
-	border-radius: calc((var(--pads) - 4) / 2);
+	height: calc(var(--pads) - 4px);
+	border-radius: calc((var(--pads) - 4px) / 2);
 	width: 100px
 }
 
