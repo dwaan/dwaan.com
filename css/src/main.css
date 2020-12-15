@@ -902,6 +902,9 @@ header .right {
 	color: var(--black);
 	max-width: 700px;
 }
+.hi .main-text h1 {
+	max-width: initial;
+}
 .main-text h1 a {
 	display: inline-block;
 	background: inherit;
@@ -909,6 +912,9 @@ header .right {
 @media (min-width: 1900px) {
 	.main-text h1 {
 		max-width: 800px;
+	}
+	.hi .main-text h1 {
+		max-width: initial;
 	}
 }
 
