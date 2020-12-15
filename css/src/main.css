@@ -527,6 +527,12 @@ picture img {
 	left: initial;
 	bottom: var(--pady);
 }
+#loader .simple span {
+	left: initial;
+	height: calc(var(--pads) - 4);
+	border-radius: calc((var(--pads) - 4) / 2);
+	width: 100px
+}
 
 
 /* Hidden and Fixed */
