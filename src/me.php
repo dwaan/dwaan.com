@@ -71,7 +71,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
-		<section class="imuiux middle">
+		<section id="hello" class="intro middle">
 			<div class="main-text">
 				<h1>Hello, my name is <strong>Dwan</strong></h1>
 			</div>
@@ -189,6 +189,14 @@
 
 		<section class="footer">
 			<a class="reading">Reading time: 120 seconds</a>
+		</section>
+
+		<section class="flares">
+			<?php
+				for ($i = 1; $i <= 5; $i++) {
+					// echo '<img src="/dwaan/img/flares/flare' . $i. '.png" width="" height="" alt="" class="flare' . $i . '" />';
+				}
+			?>
 		</section>
 	</main>
 

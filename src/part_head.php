@@ -17,7 +17,7 @@
 	<div id="loader"></div>
 	<div id="log"></div>
 
-	<header class="block__clear header__height">
+	<header>
 		<div class="left">
 			<a href="./" class="logo" aria-label="Dwan">
 				<svg class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -301,7 +301,7 @@ function waitForImg() {
 	}
 }());
 // Splitting text
-var splitText = function (els) {
+var splitText = function(els) {
 	var addTags = function (el, idx) {
 		var splord, splext;
 		var split = "";
@@ -336,10 +336,10 @@ var splitText = function (els) {
 				}
 			} else {
 				// Replace the inner text with split text
-				var str = childNodes[i].outerHTML,
+				var str = childNodes[i],
 					tags = travelTags(childNodes[i], idx + "" +i);
-				str = str.replace(tags[0][0], tags[0][1]);
-				split.push([childNodes[i].textContent, str]);
+				str.innerHTML = tags[0][1];
+				split.push([childNodes[i].textContent, str.outerHTML]);
 			}
 		}
 

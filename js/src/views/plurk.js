@@ -1,4 +1,5 @@
-var year = 2020;
+
+
 var plurk = {
 	namespace: 'plurk',
 	beforeEnter: function(data) {
@@ -14,9 +15,21 @@ var plurk = {
 		var observer;
 		var interval;
 
+		// Which year
+		var year = 2020;
 		// Me object
 		var me = {};
+		/////////////////////////
 		// Friends object
+		//
+		// Spesification:
+		// 1. data: contains all the friends collection data
+		// 2. add(data): add friend to friends collection data
+		// 3. find(user_id): return friend data based on their id
+		// 4. findByUsername(nick)name: return friend data based on their nick name
+		// 5. getAvatar(user_id): return avatar url based on their id for from friends collection data
+		// 6. getAvatarByUsername(user_id): return avatar url based on their nick name for from friends collection data
+		// 7. getName(user_id): return friend name
 		var friends = {
 			data: {},
 			init: function() {
@@ -74,7 +87,7 @@ var plurk = {
 			},
 		};
 		// Plurks array
-		var plurk = [];
+		var plurks = [];
 		// Statistics objects
 		var span = function(classname, text) {
 			var that = this;
@@ -608,16 +621,16 @@ var plurk = {
 			},
 			hashtags: {
 				data: [],
-				count: function(content) {
-					most.findregex(/\#(\w{1,30})[\ |\.]/g, function(value) {
-						return value.replace(/\#|\ |\./g, '');
-					}, content, this.data);
-				},
 				// count: function(content) {
-				// 	most.findregex(/hashtag\"\>(.*?)\</g, function(value) {
-				// 		return value.replace(/hashtag\"\>\#|\</g, '');
+				// 	most.findregex(/\#(.*?)[\ |\.]/g, function(value) {
+				// 		return value.replace(/\#|\ |\./g, '');
 				// 	}, content, this.data);
 				// },
+				count: function(content) {
+					most.findregex(/hashtag\"\>(.*?)\</g, function(value) {
+						return value.replace(/hashtag\"\>\#|\.\<|\</g, '');
+					}, content, this.data);
+				},
 				draw: function() {
 					var html = "";
 					this.data.sort(most.sort);
@@ -1135,7 +1148,7 @@ var plurk = {
 					});
 				});
 				scroll.push(function(tl) {
-					tl.fromTo(next.querySelectorAll("#credits .text > *"), {
+					tl.fromTo(next.querySelectorAll("#credits .text"), {
 						opacity: 0
 					}, {
 						opacity: 1,
@@ -1344,7 +1357,9 @@ var plurk = {
 					// Find and count all mentions from my post
 					most.mentions.count(plurk[loop].content_raw);
 					// Find and count all hashtags from my post
-					most.hashtags.count(plurk[loop].content_raw);
+					// Debug
+					most.hashtags.count(plurk[loop].content);
+					// most.hashtags.count('# #עִבְרִיתעִבְרִיתעִבְרִיתעִבְרִיתעִבְרִיתעִבְרִיתעִבְרִיתעִבְרִית #dsfdsfds #dwan #ภาษาไทย #官話 #官話 #dwan. #dwan_ds #dwan/ #dwan=dsaiu3 #עִבְרִית #עִבְרִית dfsafdsa');
 					// Find and count all links post
 					most.links.count(plurk[loop].content);
 					// Find and count all pictures post
@@ -1375,7 +1390,7 @@ var plurk = {
 										// Find and count all my mentions from responses
 										most.mentions.count(response.content_raw);
 										// Find and count all my hashtags from responses
-										most.hashtags.count(response.content_raw);
+										most.hashtags.count(response.content);
 										// Find and count all links post
 										most.links.count(response.content);
 										// Find and count all pictures post

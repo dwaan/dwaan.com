@@ -11,6 +11,8 @@ var home = {
 		els.forEach(function (el, idx) {
 			var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
 
+			// splitText(el.querySelectorAll("h1"));
+
 			// Animate text
 			scroll.push(function(tl) {
 				//Show

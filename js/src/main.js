@@ -207,7 +207,7 @@ barba.hooks.afterEnter(function(data) {
 
 // Initialized barba.js
 barba.init({
-	debug: false,
+	debug: true,
 	transitions: [{
 		name: 'default-transition',
 		once: function(data) {

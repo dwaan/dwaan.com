@@ -107,14 +107,6 @@ header {
 		font-size: 5rem;
 	}
 }
-.dwantitle,
-.dwantitle small {
-	font-size: 15vw;
-	line-height: 100%;
-	text-align: center;
-	margin: 0;
-	letter-spacing: -.2vw;
-}
 
 /* Homepage footer */
 .footer {
@@ -556,20 +548,16 @@ header {
 	}
 }
 
-.igstage .thumbs {
-	grid-template-columns: repeat(2, 40vw);
+
+.igstage {
+	padding: 7.5vh 2.5vh!important;
 }
 .igstage .thumbs a {
-	height: 40vw;
+	flex: 33.33%;
+	width: 33.33%;
+	height: calc(85vh / 4);
 }
-@media (min-width: 600px) {
-	.igstage .thumbs {
-		grid-template-columns: repeat(3, 25vw);
-	}
-	.igstage .thumbs a {
-		height: 25vw;
-	}
-}
+
 .igstage .arrow {
 	position: absolute;
 	flex-direction: row;

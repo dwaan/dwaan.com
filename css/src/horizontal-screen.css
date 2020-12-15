@@ -76,19 +76,6 @@ header {
 		white-space: normal;
 	}
 }
-.dwantitle,
-.dwantitle small {
-	flex-flow: column;
-	font-size: 4rem;
-	letter-spacing: -.25rem;
-	margin: 0;
-	line-height: 100%;
-	align-self: center;
-}
-.dwantitle small {
-	font-size: 1rem;
-	letter-spacing: 0;
-}
 
 
 /* Homepage footer */
@@ -643,22 +630,16 @@ header {
 	bottom: 30vh;
 }
 
-.igstage .thumbs {
-	grid-template-columns: repeat(3, 25vw);
+.igstage {
+	padding: 10vh 5vh!important;
 }
 .igstage .thumbs a {
-	height: 25vw;
+	flex: 25%;
+	width: 25%;
+	height: calc(80vh / 3);
 }
 .igstage .thumbs a:after {
 	background-size: 100%;
-}
-@media (min-width: 1200px) {
-	.igstage .thumbs {
-		grid-template-columns: repeat(4, 20vw);
-	}
-	.igstage .thumbs a {
-		height: 20vw;
-	}
 }
 
 
@@ -681,7 +662,7 @@ header {
 }
 @media (min-width: 1440px) {
 	#permission h1 {
-		font-size: 6rem;
+		font-size: 5rem;
 		letter-spacing: -.5rem;
 	}
 }
