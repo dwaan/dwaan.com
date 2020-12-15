@@ -503,7 +503,6 @@ picture img {
 	font-weight: 400;
 	color: inherit;
 },
-#loader .simple span:nth-child(2),
 #loader span:nth-child(2) {
 	display: block;
 	margin: 0 0 0 20px;
@@ -531,7 +530,8 @@ picture img {
 	left: initial;
 	height: calc(var(--pads) - 4px);
 	border-radius: calc((var(--pads) - 4px) / 2);
-	width: 100px
+	width: 100px;
+	background-color: var(--gray-light);
 }
 
 
