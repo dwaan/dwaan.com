@@ -44,7 +44,10 @@ var animate = {
 			opacity: 0
 		}, {
 			y: "-=200px",
-			opacity: 1
+			opacity: 1,
+			onComplete: function() {
+				removeStyle(nonsticky);
+			}
 		}, 0);
 		// Animate flare
 		tl.fromTo(next.querySelectorAll(".flares.side > img"), {

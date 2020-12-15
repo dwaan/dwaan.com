@@ -33,6 +33,7 @@ function log(params) {
 	console.log(params);
 	_q("#log").innerHTML = params;
 }
+console.warning = function() {}
 
 // Report size of window
 if (REPORTSIZE) {

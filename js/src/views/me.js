@@ -7,9 +7,9 @@ me = {
 	beforeEnter: function(data) {
 		var next = data.next.container;
 
-		snap(".intro, .igstage", 2);
+		snap(".me, .intro, .igstage", 2);
 
-		next.querySelectorAll(".intro").forEach(function(element, index) {
+		next.querySelectorAll(".me, .intro").forEach(function(element, index) {
 			scroll.push(function(tl) {
 				tl.fromTo(element.querySelectorAll('.main-text, .text'), {
 					y: 0
