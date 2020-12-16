@@ -154,27 +154,27 @@ var menu = {
 			borderRadius,
 			_hugeText = new hugeText(border + " > div ");
 
-		for (var i = 2; i <= 6; i++) {
-			if(i == 5) i = 6;
-
+		for (var i = 1; i <= 9; i++) {
 			this.el = _q('.menu__pop .menu__item li:nth-child(' + i + ') a');
 
-			if(i == 2)
-				this.el.borderRadius = "25% 2% 2% 2%";
-			else if(i == 3)
-				this.el.borderRadius = "2% 25% 2% 2%";
-			else if(i == 4)
-				this.el.borderRadius = "2% 2% 25% 2%";
-			else
-				this.el.borderRadius = "2% 2% 2% 25%";
+			if(this.el) {
+				if(i == 4)
+					this.el.borderRadius = "25% 2% 2% 2%";
+				else if(i == 5)
+					this.el.borderRadius = "2% 25% 2% 2%";
+				else if(i == 6)
+					this.el.borderRadius = "2% 2% 25% 2%";
+				else
+					this.el.borderRadius = "2% 2% 2% 25%";
 
-			this.el.onmouseenter = function() {
-				gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
-				_hugeText.show(this.innerHTML);
-			}
-			this.el.onmouseleave = function() {
-				gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
-				_hugeText.hide();
+				this.el.onmouseenter = function() {
+					gsap.to(border, { duration: .386, ease: "expo", borderRadius: this.borderRadius });
+					_hugeText.show(this.innerHTML);
+				}
+				this.el.onmouseleave = function() {
+					gsap.to(border, { duration: .386, ease: "expo", borderRadius: "2% 2% 2% 2%" });
+					_hugeText.hide();
+				}
 			}
 		}
 
