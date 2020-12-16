@@ -22,12 +22,14 @@ _q("header .menu__item").innerHTML = '\
 	<div class="menu__pos">\
 		<ul class="plain">\
 			<li class="close"><span>close <i class="icn icn_close"></i></span></li>\
+			<li><a href="https://dwaan.com">new</a></li>\
+			<li><hr /></li>\
 			<li><a href="./">home</a></li>\
 			<li><a href="./me">me</a></li>\
 			<li><a href="./work">work</a></li>\
 			<li><hr /></li>\
 			<li><a href="./say-hi">say, hi!</a></li>\
-			<li><p>I decide not to use any trackig cookies, local storage and analytics scripts in my website. You`re free from tracking.</p></li>\
+			<li><p>I decide not to use any tracking cookies, local storage and analytics scripts in my website. You`re free from tracking.</p></li>\
 		</ul>\
 	</div>';
 // Snoop which text or url that are currently clicked

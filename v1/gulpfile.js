@@ -75,14 +75,14 @@ function php() {
 exports.default = function() {
 	connect.server({
 		hostname: "0.0.0.0",
-		port: 8080,
+		port: 8081,
 		base: "./",
 		router: "../../router.php",
 		keepalive: true
 	}, function () {
 		browserSync.init({
 			open: false,
-			proxy: "localhost:8080/"
+			proxy: "localhost:8081/"
 		});
 	});
 	gulp.watch('js/src/*.js', { ignoreInitial: false }, javascript);

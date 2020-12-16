@@ -19,6 +19,8 @@
 					<div class="menu__pos">
 						<ul class="plain">
 							<li class="close"><span>close <i class="icn icn_close"></i></span></li>
+							<li><a href="httpw://dwaan.com">new</a></li>
+							<li><hr /></li>
 							<li><a href="./">home</a></li>
 							<li><a href="./me">me</a></li>
 							<li><a href="./work">work</a></li>
