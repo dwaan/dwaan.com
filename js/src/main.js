@@ -963,7 +963,7 @@ barba.init({
 
 			// Hide current view
 			tl = animate.top(tl);
-			tl.set(current.querySelectorAll("#credits"),  {
+			tl.set(current.querySelectorAll("#credits, #statistics"),  {
 				opacity: 0
 			}, "hide");
 			tl.to(current.querySelectorAll("#hello .bgtext sub, #permission .bgtext sub"),  {
