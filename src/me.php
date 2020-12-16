@@ -71,7 +71,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
-		<section id="me" class="me middle">
+		<section id="about" class="about middle">
 			<div class="main-text">
 				<h1>Hello, my name is <strong>Dwan</strong></h1>
 			</div>

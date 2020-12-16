@@ -19,17 +19,19 @@ var plurk = {
 		var year = 2020;
 		// Me object
 		var me = {};
-		/////////////////////////
-		// Friends object
-		//
-		// Spesification:
-		// 1. data: contains all the friends collection data
-		// 2. add(data): add friend to friends collection data
-		// 3. find(user_id): return friend data based on their id
-		// 4. findByUsername(nick)name: return friend data based on their nick name
-		// 5. getAvatar(user_id): return avatar url based on their id for from friends collection data
-		// 6. getAvatarByUsername(user_id): return avatar url based on their nick name for from friends collection data
-		// 7. getName(user_id): return friend name
+		// Plurks array
+		var plurks = [];
+		/*
+			Friends object spesification:
+
+			1. data: contains all the friends collection data
+			2. add(data): add friend to friends collection data
+			3. find(user_id): return friend data based on their id
+			4. findByUsername(nick)name: return friend data based on their nick name
+			5. getAvatar(user_id): return avatar url based on their id for from friends collection data
+			6. getAvatarByUsername(user_id): return avatar url based on their nick name for from friends collection data
+			7. getName(user_id): return friend name
+		*/
 		var friends = {
 			data: {},
 			init: function() {
@@ -86,9 +88,12 @@ var plurk = {
 				return false;
 			},
 		};
-		// Plurks array
-		var plurks = [];
-		// Statistics objects
+		/*
+			Simple span element object:
+
+			1. update(text): update the content with text value, and animate it if it's number
+			2. updateHTML(text): update the content with html value
+		*/
 		var span = function(classname, text) {
 			var that = this;
 
@@ -104,6 +109,18 @@ var plurk = {
 				that.el.innerHTML = text;
 			}
 		}
+		/*
+			Plurk element object spesification:
+
+			1. id: contain the id name
+			2. user: contain user object
+			3. attached: status of element is attached in DOM or not
+			4. create(): create the DOM element
+			4. destroy(): remove the DOM element
+			4. update(): update the DOM element based on it's current value
+			5. insertTo(element): insert DOM element to spesific element, also will check if it's already created or not
+
+		*/
 		var plurkerelement = function(id, data, customcreate) {
 			var that = this;
 
@@ -115,6 +132,8 @@ var plurk = {
 			this.count = 1;
 			this.position = 0;
 			this.reload = false;
+			this.customcreate = customcreate;
+			this.el = false;
 
 			this.create = function() {
 				that.el = document.createElement('a');
@@ -123,7 +142,7 @@ var plurk = {
 				that.el.setAttribute("href", 'https://plurk.com/' + that.user.nick_name);
 				that.el.setAttribute("target", '_BLANK');
 
-				if (!customcreate) {
+				if (!that.customcreate) {
 					that.avatar = new span('avatar', '<img src="' + friends.getAvatar(that.user_id) + '" />');
 					that.name = new span('name', that.user.display_name);
 					that.counts = new span('count', that.count);
@@ -131,25 +150,51 @@ var plurk = {
 					that.el.appendChild(that.name.el);
 					that.el.appendChild(that.counts.el);
 				} else {
-					customcreate(that);
+					that.customcreate(that);
 				}
 			}
-			this.create();
+
+			this.insertTo = function(element) {
+				if(!that.el) that.create();
+
+				that.attached = true;
+				element.insertAdjacentElement("beforeend", that.el);
+			}
+
+			this.destroy = function() {
+				that.attached = false;
+
+				if(that.el) {
+					that.el.parentNode.removeChild(that.el);
+					return true;
+				} else {
+					return false
+				}
+			}
 
 			this.update = function() {
-				that.counts.update(that.count);
-				if(that.reload) {
-					var plurker = friends.findByUsername(this.user.nick_name);
-					if(plurker) {
-						that.reload = false;
-						that.user = plurker;
-						that.user_id = plurker.id;
-						that.avatar.el.innerHTML = '<img src="' + friends.getAvatar(that.user_id) + '" />';
-						that.el.setAttribute("id", that.id + that.user_id);
+				// Only update when it's attached
+				if(that.attached) {
+					that.counts.update(that.count);
+					if(that.reload) {
+						var plurker = friends.findByUsername(this.user.nick_name);
+						if(plurker) {
+							that.reload = false;
+							that.user = plurker;
+							that.user_id = plurker.id;
+							that.avatar.el.innerHTML = '<img src="' + friends.getAvatar(that.user_id) + '" />';
+							that.el.setAttribute("id", that.id + that.user_id);
+						}
 					}
 				}
 			}
 		}
+		/*
+			Color randomizer
+
+			1. colors: array of colors value
+			2. getRandomColor(): get the randomized color from colors list
+		*/
 		var colors = function() {
 			this.oldcolor = "";
 			this.randomcolors = [];
@@ -163,6 +208,7 @@ var plurk = {
 				return color;
 			}
 		}
+		//
 		var statistics = {
 			el: false,
 			whispers_count: 0,
@@ -227,10 +273,25 @@ var plurk = {
 					// Scroll animation wrap section
 					scroll.push(function(tl) {
 						tl.fromTo(el.children, {
-							y: 100,
-							opacity: 0,
+							y: window.innerHeight * 1/5,
 						}, {
 							y: 0,
+							ease: "ease.out"
+						}, 0);
+						return tl;
+					}, function(tl) {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "0 100%-=100px",
+							end: "100px 100%-=100px",
+							animation: tl,
+							scrub: 1
+						});
+					});
+					scroll.push(function(tl) {
+						tl.fromTo(el.children, {
+							opacity: 0,
+						}, {
 							opacity: 1,
 							ease: "ease.out"
 						}, 0);
@@ -246,7 +307,7 @@ var plurk = {
 								tl.to(load, {
 									progress: number,
 									snap: "progress",
-									ease: "power3.inOut",
+									ease: "power3.out",
 									duration: duration,
 									onUpdate: function() {
 										el.querySelector(".big").textContent = plural(load.progress);
@@ -269,10 +330,8 @@ var plurk = {
 					// Scroll animation title section
 					scroll.push(function(tl) {
 						tl.fromTo(el.children, {
-							y: 50,
 							opacity: 0
 						}, {
-							y: 0,
 							opacity: 1,
 							ease: "ease.out"
 						}, 0);
@@ -280,10 +339,27 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
-							start: "0 100%-=100px",
-							end: "100px 100%-=100px",
+							start: "50% 100%-=100px",
+							end: "50% 100%-=100px",
 							animation: tl,
 							toggleActions: "play none none none"
+						});
+					});
+					scroll.push(function(tl) {
+						tl.fromTo(el.children, {
+							y: window.innerHeight * 1/6
+						}, {
+							y: 0,
+							ease: "ease.out"
+						}, 0);
+						return tl;
+					}, function(tl) {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "50% 100%-=100px",
+							end: "50% 100%-=100px",
+							animation: tl,
+							scrub: 1
 						});
 					});
 					// Scroll animation line section
@@ -298,10 +374,10 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
-							start: "0 100%",
-							end: "0 0",
+							start: "100% 100%",
+							end: "100% 0",
 							animation: tl,
-							scrub: .5
+							scrub: 1
 						});
 					});
 				}
@@ -370,13 +446,9 @@ var plurk = {
 					<div>\
 						<a href="' + url + '" class="link" target="_BLANK">\
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">\
-								<g id="Icons">\
-									<g id="link">\
-										<path id="right" d="M19.188,12.001c0,1.1-0.891,2.015-1.988,2.015l-4.195-0.015C13.543,15.089,13.968,16,15.002,16h3    C19.658,16,21,13.657,21,12s-1.342-4-2.998-4h-3c-1.034,0-1.459,0.911-1.998,1.999l4.195-0.015    C18.297,9.984,19.188,10.901,19.188,12.001z"/>\
-										<path id="center" d="M8,12c0,0.535,0.42,1,0.938,1h6.109c0.518,0,0.938-0.465,0.938-1c0-0.534-0.42-1-0.938-1H8.938    C8.42,11,8,11.466,8,12z"/>\
-										<path id="left" d="M4.816,11.999c0-1.1,0.891-2.015,1.988-2.015L11,9.999C10.461,8.911,10.036,8,9.002,8h-3    c-1.656,0-2.998,2.343-2.998,4s1.342,4,2.998,4h3c1.034,0,1.459-0.911,1.998-1.999l-4.195,0.015    C5.707,14.016,4.816,13.099,4.816,11.999z"/>\
-									</g>\
-								</g>\
+								<path id="right" d="M19.188,12.001c0,1.1-0.891,2.015-1.988,2.015l-4.195-0.015C13.543,15.089,13.968,16,15.002,16h3    C19.658,16,21,13.657,21,12s-1.342-4-2.998-4h-3c-1.034,0-1.459,0.911-1.998,1.999l4.195-0.015    C18.297,9.984,19.188,10.901,19.188,12.001z"/>\
+								<path id="center" d="M8,12c0,0.535,0.42,1,0.938,1h6.109c0.518,0,0.938-0.465,0.938-1c0-0.534-0.42-1-0.938-1H8.938    C8.42,11,8,11.466,8,12z"/>\
+								<path id="left" d="M4.816,11.999c0-1.1,0.891-2.015,1.988-2.015L11,9.999C10.461,8.911,10.036,8,9.002,8h-3    c-1.656,0-2.998,2.343-2.998,4s1.342,4,2.998,4h3c1.034,0,1.459-0.911,1.998-1.999l-4.195,0.015    C5.707,14.016,4.816,13.099,4.816,11.999z"/>\
 							</svg>\
 						</a>\
 						<span class="big">' + badge + '</span>\
@@ -433,13 +505,13 @@ var plurk = {
 				if(!hidden && !node.attached) {
 					var maxTop = max / (max - 1) * 100;
 
-					this.el.querySelector("." + id + ' .chart').insertAdjacentElement("beforeend", node.el);
+					node.insertTo(this.el.querySelector("." + id + ' .chart'));
+
 					gsap.set(node.el, {
 						top: maxTop + "%",
 						opacity: 0,
 						zIndex: 0,
 					});
-					node.attached = true;
 				}
 				// Update position
 				if(!hidden || !node.hidden) {
@@ -454,8 +526,7 @@ var plurk = {
 						ease: "power3.inOut",
 						onComplete: function() {
 							if(hidden) {
-								node.attached = false;
-								node.el.parentNode.removeChild(node.el);
+								node.destroy();
 							}
 						}
 					});
@@ -748,7 +819,7 @@ var plurk = {
 				this.prev_count = item;
 
 				if(!next.querySelector("#statistics .loading")) {
-					statistics.draw("loading", item + "%", "<i class='month'>Data from December</i> 3 of 3. Loading all responses, it can take up to 10 minutes");
+					statistics.draw("loading", item + "%", "<i class='month'>Data from December</i> 2 of 2. Loading all responses, it can take up to 10 minutes");
 				}
 
 				gsap.to(load, {
@@ -833,7 +904,7 @@ var plurk = {
 				stagger: .2,
 				duration: 1,
 				ease: "power3.out"
-			}, ">-.2");
+			}, ">-.5");
 			tl.set(next.querySelectorAll("#permission"), {
 				position: "",
 				top: ""
@@ -876,14 +947,15 @@ var plurk = {
 		}
 		// Statistic Pages
 		function showStatisticPages(tl) {
-			tl.fromTo(next.querySelectorAll(".grant"), {
+			tl.fromTo(next.querySelectorAll("#hello"), {
 				display: "",
 				opacity: 0
 			}, {
 				opacity: 1,
+				ease: "power3.in",
 				duration: 1
 			}, ">-.25");
-			tl.fromTo(next.querySelectorAll(".grant .bgtext > *"), {
+			tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
 				display: "",
 				opacity: 0,
 				y: 200
@@ -894,7 +966,7 @@ var plurk = {
 				stagger: .2,
 				ease: "power3.out"
 			}, ">-.5");
-			tl.fromTo(next.querySelectorAll(".grant #logout, .grant .thumbs, .grant .text > *, .grant .arrow-big"), {
+			tl.fromTo(next.querySelectorAll(" #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
 				display: "",
 				opacity: 0,
 				y: 200
@@ -904,13 +976,20 @@ var plurk = {
 				duration: 1,
 				stagger: .2,
 				ease: "power3.out"
+			}, ">-.5");
+			tl.fromTo(next.querySelectorAll(".grant:not(#hello)"), {
+				display: "",
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: .5
 			}, ">-.5");
 
 			return tl;
 		}
 		function hideStatisticPages(tl) {
 			tl = animate.top(tl);
-			tl.fromTo(next.querySelectorAll(".grant .bgtext > *, .grant .email, .grant .thumbs, .grant .text > *, .grant .arrow-big"), {
+			tl.fromTo(next.querySelectorAll("#logout, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
 				opacity: 1,
 				y: 0
 			}, {
@@ -923,7 +1002,10 @@ var plurk = {
 				},
 				ease: "power3.in"
 			}, ">-.2");
-			tl.fromTo(next.querySelectorAll(".grant"), {
+			tl.set(next.querySelectorAll(".grant:not(#hello)"), {
+				opacity: 0
+			}, ">-.5");
+			tl.fromTo(next.querySelectorAll("#hello"), {
 				opacity: 1
 			}, {
 				opacity: 0,
@@ -968,42 +1050,46 @@ var plurk = {
 				submit.innerHTML = "Verify";
 				input.value = "";
 				input.focus();
-				requestToken("Your verification code is invalid, please request the code again.");
+				requestToken("Your verification number is invalid, please request the code again.");
 			});
 		}
 		// Request token
 		function requestToken(text) {
+			var tokenlink = next.querySelector("#tokenurl");
+			tokenlink.textContent = "Contacting Plurk...";
+
+			var tl = gsap.timeline();
+			tl.fromTo(next.querySelectorAll("#permission form"), {
+				display: "",
+				y: 200,
+				opacity: 0,
+			}, {
+				y: 0,
+				opacity: 1,
+				duration: 1,
+				ease: "power3.out"
+			}, 1);
+			tl.fromTo(next.querySelectorAll("#permission h1, #permission li"), {
+				display: "",
+				y: 50,
+				opacity: 0,
+			}, {
+				y: 0,
+				opacity: 1,
+				stagger: .1,
+				duration: 1,
+				ease: "power3.out"
+			}, 1);
+
 			api.call("?request=token", function(data) {
 				var input = next.querySelector("#oauth_token");
 				var submit = next.querySelector("#submit");
 
-				next.querySelector("#tokenurl").setAttribute("href", data.message.url);
-
 				if(text) {
 					message(text);
 				} else  {
-					var tl = gsap.timeline();
-					tl.fromTo(next.querySelectorAll("#permission form"), {
-						display: "",
-						y: 200,
-						opacity: 0,
-					}, {
-						y: 0,
-						opacity: 1,
-						duration: 1,
-						ease: "power3.out"
-					});
-					tl.fromTo(next.querySelectorAll("#permission h1, #permission li"), {
-						display: "",
-						y: 50,
-						opacity: 0,
-					}, {
-						y: 0,
-						opacity: 1,
-						stagger: .1,
-						duration: 1,
-						ease: "power3.out"
-					}, "<");
+					tokenlink.textContent = "Open Authorization Page";
+					tokenlink.setAttribute("href", data.message.url);
 				}
 
 				var interval = setInterval(function() {
@@ -1040,9 +1126,6 @@ var plurk = {
 
 			// Hide statistic pages
 			tl = hideStatisticPages(tl);
-			tl.to(next.querySelectorAll("#credits .loading"), {
-				opacity: 1,
-			});
 			tl.set(next, {
 				onComplete: function() {
 					api.call("?request=logout", function(data) {
@@ -1052,7 +1135,7 @@ var plurk = {
 
 						login();
 					}, function() {
-						console.warn("can't logout, but login anyway");
+						console.warn("Can't logout, but login anyway");
 
 						next.querySelector("#oauth_token").value = "";
 						next.querySelector("#submit").innerHTML = "Verify";
@@ -1077,6 +1160,36 @@ var plurk = {
 			most.init();
 			clearInterval(interval);
 
+			var creditsAnimation = function(tl) {
+				tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
+					y: window.innerHeight * 1/8
+				}, {
+					y: 0,
+					ease: "linear",
+					duration: 2
+				}, 0);
+				tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
+					opacity: 0
+				}, {
+					opacity: .5,
+					stagger: {
+						from: 'end',
+						amount: .1
+					},
+					duration: 1,
+					ease: "power3.in"
+				}, 0);
+				tl.fromTo(next.querySelectorAll("#credits .made"), {
+					opacity: 0
+				}, {
+					opacity: 1,
+					duration: 1,
+					ease: "power3.in"
+				}, .3);
+
+				return tl;
+			}
+
 			api.call("", function(data) {
 				me = data.message;
 
@@ -1095,6 +1208,19 @@ var plurk = {
 					}
 
 					if(callback) callback();
+				});
+
+				scroll.push(function(tl) {
+					tl = creditsAnimation(tl);
+					return tl;
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: next.querySelectorAll("#statistics"),
+						start: "100%-=" + window.innerHeight + " 0",
+						end: "100% 0",
+						animation: tl,
+						scrub: .5
+					});
 				});
 
 				displayStatistics();
@@ -1147,42 +1273,18 @@ var plurk = {
 						scrub: .5
 					});
 				});
-				// scroll.push(function(tl) {
-				// 	tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
-				// 		y: window.innerHeight * 1/8
-				// 	}, {
-				// 		y: 0,
-				// 		ease: "linear",
-				// 		duration: 2
-				// 	}, 0);
-				// 	tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
-				// 		opacity: 0
-				// 	}, {
-				// 		opacity: .5,
-				// 		stagger: {
-				// 			from: 'end',
-				// 			amount: .1
-				// 		},
-				// 		duration: 1,
-				// 		ease: "power3.in"
-				// 	}, 0);
-				// 	tl.fromTo(next.querySelectorAll("#credits .made"), {
-				// 		opacity: 0
-				// 	}, {
-				// 		opacity: 1,
-				// 		duration: 1,
-				// 		ease: "power3.in"
-				// 	}, .3);
-				// 	return tl;
-				// }, function(tl) {
-				// 	return ScrollTrigger.create({
-				// 		trigger: next.querySelectorAll("#permission"),
-				// 		start: "0 0",
-				// 		end: "100% 0",
-				// 		animation: tl,
-				// 		scrub: .5
-				// 	});
-				// });
+				scroll.push(function(tl) {
+					tl = creditsAnimation(tl);
+					return tl;
+				}, function(tl) {
+					return ScrollTrigger.create({
+						trigger: next.querySelectorAll("#permission"),
+						start: "0 0",
+						end: "100% 0",
+						animation: tl,
+						scrub: .5
+					});
+				});
 				ScrollTrigger.refresh();
 
 				if(callback) callback();
@@ -1255,6 +1357,13 @@ var plurk = {
 					ease: "linear",
 					duration: .25
 				}, 0);
+				tl.fromTo(next.querySelectorAll("#hello .animate"), {
+					y: 0
+				}, {
+					y: window.innerHeight * -1/2,
+					ease: "power1.out",
+					duration: 1
+				}, 0);
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
@@ -1264,9 +1373,6 @@ var plurk = {
 					animation: tl,
 					scrub: true
 				});
-			});
-			gsap.set(next.querySelectorAll("#credits .text > *:not(.loading)"), {
-				opacity: 1
 			});
 			ScrollTrigger.refresh();
 
@@ -1280,7 +1386,7 @@ var plurk = {
 			var fulldays = 365;
 
 			statistics.title('This Year');
-			statistics.draw("loading", "", "<i class='month'>Data from December</i>2 of 3. Loading your " + year + " plurks. It can take up to 1 minute.");
+			statistics.draw("loading", "", "<i class='month'>Data from December</i>1 of 2. Loading your " + year + " plurks. It can take up to 1 minute.");
 
 			loading.init();
 			loading.loop(fulldays);
@@ -1465,10 +1571,6 @@ var plurk = {
 			opacity: 1,
 			onComplete: function() {
 				login(function () {
-					gsap.to(next.querySelectorAll('#credits .text .loading'), {
-						opacity: 0
-					});
-
 					done();
 				});
 			}

@@ -706,6 +706,12 @@ header {
 	justify-content: flex-end;
 	padding-bottom: calc(7.5 * var(--padx))!important;
 }
+@media (min-width: 600px) {
+	#hello {
+		justify-content: center;
+		padding-bottom: var(--padx)!important;
+	}
+}
 #hello img {
 	width: 128px;
 	height: 128px;

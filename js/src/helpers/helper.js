@@ -101,9 +101,9 @@ function pluralinwords(number, word, locale) {
 		if (number > 1) word = word + 's';
 	}
 
-	if (Math.round(number / 1000000) > 0) {
+	if (Math.floor(number / 1000000) > 0) {
 		number = plural(Math.floor(number / 1000000), "million");
-	} else if (Math.round(number / 1000) > 0) {
+	} else if (Math.floor(number / 1000) > 0) {
 		number = plural(Math.floor(number / 1000), "thousand");
 	}
 

@@ -7,7 +7,7 @@ me = {
 	beforeEnter: function(data) {
 		var next = data.next.container;
 
-		snap(".me, .intro, .igstage", 2);
+		snap(".about, .intro, .igstage", 2);
 
 		next.querySelectorAll(".me, .intro").forEach(function(element, index) {
 			scroll.push(function(tl) {
@@ -187,15 +187,14 @@ me = {
 			scroll.push(function(tl) {
 				var el = element.querySelectorAll(".thumbs, .text");
 
-				tl.fromTo(element.querySelectorAll("#post"), {
+				tl.fromTo(element.querySelectorAll("#post svg"), {
 					opacity: 0
 				}, {
 					opacity: 1,
 					ease: "power3.out",
 					duration: duration
 				}, (duration * 4));
-				tl.fromTo(element.querySelectorAll("#post"), {
-					x: "",
+				tl.fromTo(element.querySelectorAll("#post svg"), {
 					y: "100vh"
 				}, {
 					y: "0vh",

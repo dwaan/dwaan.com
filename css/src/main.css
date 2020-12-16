@@ -2301,34 +2301,40 @@ img.rounded {
 
 /* Plurk - Logout */
 #logout {
-	background-color: var(--red);
-	color: var(--white);
+	background-color: var(--yellow);
+	color: var(--black);
 	padding: var(--padm) var(--pads);
 	border-radius: 8px;
 	pointer-events: auto;
 	cursor: pointer;
 	transition: background .5s ease;
-	box-shadow: 0 10px 40px rgba(0,0,0,.5);
 }
 #logout:hover {
 	background-color: var(--black);
+	color: var(--white);
 }
 #logout svg {
 	margin-right: var(--pads);
 }
 #logout svg rect {
-	stroke: var(--white);
+	stroke: var(--black);
 	transition: stroke .25s ease;
 }
 #logout svg path {
-	fill: var(--white);
+	fill: var(--black);
 	transition: fill .25s ease;
+}
+#logout:hover svg rect {
+	stroke: var(--white);
+}
+#logout:hover svg path {
+	fill: var(--white);
 }
 
 /* Plurk - Statistics */
 .stats {
 	display: flex;
-	padding: var(--padl) 0 calc(5 * var(--padl));
+	padding: calc(2.5 * var(--padl)) 0 calc(5 * var(--padl));
 	margin: 0 auto;
 	width: calc((var(--box) * var(--repeat)) + (var(--padl) * var(--repeat)));
 	flex-flow: row;
@@ -2446,10 +2452,12 @@ img.rounded {
 	right: 0;
 	padding: 0;
 	text-transform: uppercase;
+}
+.stats .link svg {
 	fill: var(--white);
 	transition: fill .5s ease;
 }
-.stats .link:hover {
+.stats .link:hover svg {
 	fill: var(--yellow);
 }
 
@@ -2609,11 +2617,19 @@ img.rounded {
 #statistics {
 	z-index: 3;
 }
+#hello {
+	padding: 0;
+	margin-bottom: -50vh;
+	pointer-events: none;
+	background-color: transparent;
+}
+#hello .animate {
+	pointer-events: auto;
+	background-color: var(--lime);
+}
 #statistics {
 	z-index: 2;
 	overflow: hidden;
-}
-#statistics {
 	background-color: var(--white);
 	transition: background-color .5s ease;
 }

@@ -13,13 +13,15 @@
 
 	<main data-barba="container" data-barba-namespace="plurk" class="plurk">
 	    <section id="hello" class="grant middle first">
-	    	<div class="thumbs"></div>
-		    <div class="text">
-		    	<p class="loading">Loading your plurk</p>
-		    </div>
-		    <div class="bgtext"><sup>20</sup><sub>20</sub></div>
-		    <div class="arrow-big">
-			    <a href="#statistics" class="arrow scrollto">scroll</a>
+	    	<div class="animate middle">
+		    	<div class="thumbs"></div>
+			    <div class="text">
+			    	<p class="loading">Loading your plurk</p>
+			    </div>
+			    <div class="bgtext"><sup>20</sup><sub>20</sub></div>
+			    <div class="arrow-big">
+				    <a href="#statistics" class="arrow scrollto">scroll</a>
+				</div>
 			</div>
 	    </section>
 
@@ -45,23 +47,21 @@
 			    <form action="" method="GET">
 			    	<h1>Replurk<br/><sup>20</sup><sub>20</sub></h1>
 			    	<ol>
-			    		<li><p>Get your Plurk verification code <br/><a href="#" id="tokenurl" target="_BLANK">Get Verification Code</a></p></li>
+			    		<li><p>Get your Plurk verification number <br/><a href="#" id="tokenurl" target="_BLANK">Loading...</a></p></li>
 			    		<li>
-						    <p>Enter your verification code</p>
+						    <p>Enter your verification number</p>
 						    <p class="cuddle">
 						    	<input type="text" name="oauth_token" id="oauth_token" placeholder="Code" />
 						    	<span id="submit" class="submit">Verify</span>
 						    </p>
 					    </li>
 					    <li>
-					    	<p id="login-message">Click the Verify button to verify continue.</p>
+					    	<p id="login-message">Click the Verify button to continue.</p>
 					    </li>
 					    <li class="small">
-					    	<p><strong>IMPORTANT!</strong></p>
-					    	<p>If you open this website inside Plurk App, please reopen this website in your browser. The verification code will appeared in your Plurk App and it can be covered by this website.</p>
-					    	<p>Your data will be processed locally in your device. It can take normally up to 10 minutes (or even more) to download all of your 2020 plurk, please be patient.<p>
-					    	<p>It's advisable to <u>logout after you finish</u> using this website.</p>
-					    	<p>Other than session data from Plurk, this website didn't store any of your data in my server.</p>
+					    	<p>Please reopen this website in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this website.</p>
+					    	<p>Your data will be processed locally in your device. It can take around 10 minutes or more to download all your data.<p>
+					    	<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this website. Other than session data, this website didn't store any of your Plurk data in the server.</p>
 					    </li>
 				   </ol>
 			    </form>
@@ -71,10 +71,9 @@
 
 	    <section id="credits" class="middle">
 	    	<div class="text">
-		    	<p class="loading">1 0f 3. Loading, please wait...</p>
 		    	<p class="made">Made with ❤️ in TLV</p>
-		    	<p class="like">If you like this website, you can friend-ed or fan-ed me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> which ever you like. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an 🍦 ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some 🪙 coins</a> if you will.</p>
-		    	<p class="noaffiliation">This website doesn't have any affiliation with Plurk HQ. Please feel free to <a href="./say-hi">contact me</a> if there's some copyrighted materials that shouldn't be in this website.</p>
+		    	<p class="like">If you like this website, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> page. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an 🍦 ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some 🪙 coins</a> 😬.</p>
+		    	<p class="noaffiliation"><u>This website doesn't have any affiliation with Plurk HQ</u>. All of data from Plurk are not hosted inside this website. Please feel free to <a href="./say-hi">contact me</a> if there's some copyrighted materials that shouldn't be in this website.</p>
 		    </div>
 	    </section>
 
