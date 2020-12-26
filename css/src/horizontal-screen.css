@@ -559,9 +559,11 @@ header {
 	transform-origin: 100% 100%;
 	transform: translate(0,-350px) rotate(-90deg);
 }
+#now,
 #webdesigner {
 	padding-left: calc(2 * var(--padx));
 }
+#now .text,
 #webdesigner .text {
 	max-width: 640px;
 }

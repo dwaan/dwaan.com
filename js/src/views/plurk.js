@@ -1,5 +1,3 @@
-
-
 var plurk = {
 	namespace: 'plurk',
 	beforeEnter: function(data) {
@@ -265,14 +263,23 @@ var plurk = {
 
 				if(hasClass(el, 'wrap')) {
 					var color = new colors();
+					var anim = el.children;
 
-					gsap.set(el.children, {
+					gsap.set(anim, {
 						background: 'linear-gradient(5deg, ' + color.getRandomColor() + ' 0%, ' + color.getRandomColor() + ' 100%)'
 					});
 
+					gsap.fromTo(anim, {
+						opacity: 0
+					}, {
+						opacity: 1,
+						duration: 1,
+						ease: "power3.out"
+					}, 0);
+
 					// Scroll animation wrap section
 					scroll.push(function(tl) {
-						tl.fromTo(el.children, {
+						tl.fromTo(anim, {
 							y: window.innerHeight * 1/5,
 						}, {
 							y: 0,
@@ -289,13 +296,6 @@ var plurk = {
 						});
 					});
 					scroll.push(function(tl) {
-						tl.fromTo(el.children, {
-							opacity: 0,
-						}, {
-							opacity: 1,
-							ease: "ease.out"
-						}, 0);
-
 						if (el.querySelector(".big")) {
 							var number = Number(el.querySelector(".big").textContent);
 							if(number > 0) {

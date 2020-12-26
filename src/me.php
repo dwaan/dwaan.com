@@ -76,16 +76,31 @@
 				<h1>Hello, my name is <strong>Dwan</strong></h1>
 			</div>
 			<div class="arrow-big">
-				<a href="#imuiux" class="arrow scrollto">
+				<a href="#usedto" class="arrow scrollto">
 					<span>scroll down</span>
 				</a>
 			</div>
 		</section>
 
-		<section id="imuiux" class="intro middle">
+		<section id="usedto" class="intro middle hidearrow">
+			<div class="anim middle">
+				<div class="text">
+					<h2>I'm a UI/UX <br/> Designer and <br/> Strategist</h2>
+					<p>a.k.a. Web Designer in Steroid</p>
+				</div>
+			</div>
+			<div class="arrow-big">
+				<a href="#now" class="arrow scrollto">
+					<span>and now</span>
+				</a>
+			</div>
+		</section>
+
+		<section id="now" class="intro middle">
 			<div class="text">
-				<h2>I'm a UI/UX <br/> Designer and <br/> Strategist</h2>
-				<p>a.k.a. Web Designer in Steroid</p>
+				<span>1 <hr/> 3</span>
+				<h3>Now I'm <br/> <strong>a Freelancer</strong> <br/> in Tel Aviv</h3>
+				<p>doing mostly web design consultation and various hobbist open source project</p>
 			</div>
 			<div class="arrow-big">
 				<a href="#webdesigner" class="arrow scrollto">
@@ -96,9 +111,16 @@
 
 		<section id="webdesigner" class="intro middle">
 			<div class="text">
-				<span>1 <hr/> 3</span>
+				<span>2 <hr/> 3</span>
 				<h3>&amp; <br/> Before <br/> <strong>Web Designer</strong></h3>
-				<p>I did many of things in the past, like becoming Macromedia Flash Expert, Database Programmer, Creative Director, Chief Creative Officer, and CIO among others.</p>
+				<p>I did many of things in the past, like becoming Macromedia Flash Expert, Database Programmer, Creative Director, Chief Creative Officer, and Chief Information Officer among others.</p>
+				<p><em>- Not pictured</em></p>
+			</div>
+			<div class="thumbs">
+				<picture>
+					<img src="/dwaan/img/notpictured-dark.jpg" class="dark" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured.jpg" class="light" width="" height="" alt="Dwan" />
+				</picture>
 			</div>
 			<div class="arrow-big">
 				<a href="#sayhi" class="arrow scrollto">
@@ -110,7 +132,7 @@
 		<section id="sayhi" class="intro middle">
 			<div class="text">
 				<div class="title">
-					<span>2 <hr/> 3</span>
+					<span>3 <hr/> 3</span>
 					<h3>Would <br/> You <br/> Like To <br/> <strong>Say Hi!</strong>?</h3>
 				</div>
 				<p>I happen to live in in Tel Aviv-Yafo right now. If you happened to know any Indonesian living in Tel Aviv-Yafo, Mr. Goat wants to meet them. Other then that, if you wanted to work with me feel free to <a href="./say-hi" class="spring big">say hi</a>.</p>
@@ -189,14 +211,6 @@
 
 		<section class="footer">
 			<a class="reading">Reading time: 120 seconds</a>
-		</section>
-
-		<section class="flares">
-			<?php
-				for ($i = 1; $i <= 5; $i++) {
-					// echo '<img src="/dwaan/img/flares/flare' . $i. '.png" width="" height="" alt="" class="flare' . $i . '" />';
-				}
-			?>
 		</section>
 	</main>
 

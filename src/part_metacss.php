@@ -2,6 +2,16 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<!-- Primary Meta Tags -->
+	<title><?php echo $title; ?> - Dwan</title>
+	<meta name="title" content="<?php echo $title; ?> - Dwan">
+	<meta name="description" content="Hello! my name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
+
+<?php
+	// check for the server side x-barba request header
+	if(!isset($_SERVER['HTTP_X_BARBA'])) {
+?>
+
 	<link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
 	<link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
 	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
@@ -41,11 +51,6 @@
 	<meta name="msapplication-TileImage" content="/dwaan/mstile-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 
-	<!-- Primary Meta Tags -->
-	<title><?php echo $title; ?> - Dwan</title>
-	<meta name="title" content="<?php echo $title; ?> - Dwan">
-	<meta name="description" content="Hello! my name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
-
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="<?php echo $url; ?>">
@@ -59,3 +64,6 @@
 	<meta property="twitter:title" content="<?php echo $title; ?> - Dwan">
 	<meta property="twitter:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
 	<meta property="twitter:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
+<?php
+	}
+?>

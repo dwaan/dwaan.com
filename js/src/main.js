@@ -78,7 +78,7 @@ barba.hooks.beforeEnter(function(data) {
 
 	if (data.next.namespace != "plurk") {
 		// Scroll animate arrow
-		var middle = next.querySelectorAll("section.middle");
+		var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
 		middle.forEach(function (el, idx) {
 			var scrollfunc = function(tl) {
 				return ScrollTrigger.create({
@@ -182,6 +182,15 @@ barba.hooks.beforeEnter(function(data) {
 					}, scrollfunc);
 				}
 			});
+		});
+		var middle = next.querySelectorAll("section.middle.hidearrow");
+		middle.forEach(function (el, idx) {
+			var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
+			gsap.set(arrow, {
+				display: 'none',
+				opacity: 0,
+				pointerEvents: 'none'
+			})
 		});
 	}
 

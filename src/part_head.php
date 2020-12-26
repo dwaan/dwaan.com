@@ -1,3 +1,7 @@
+<?php
+	// check for the server side x-barba request header
+	if(!isset($_SERVER['HTTP_X_BARBA'])) {
+?>
 	<div id="corner">
 		<div class="tl"></div>
 		<div class="tr"></div>
@@ -97,3 +101,6 @@
 			</nav>
 		</div>
 	</header>
+<?php
+	}
+?>

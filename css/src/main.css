@@ -78,7 +78,7 @@
 	--black-gray: #111111;
 	--black-gray-light: #131313;
 	--gray-light: #C4C4C4;
-	--red: #B4352C;
+	--red: #FF0F1E;
 	--lime: #60e670;
 }
 .dark:root {
@@ -91,6 +91,7 @@
 	--black-gray: #bbb;
 	--black-gray-light: #aaa;
 	--gray-light: #333;
+	--red: #B4352C;
 	--lime: #0d4f03;
 }
 
@@ -225,7 +226,7 @@ h4 {
 }
 p {
 	font-size: 1rem;
-	line-height: 150%;
+	line-height: 175%;
 	opacity: .8;
 	letter-spacing: 0.02em;
 }
@@ -987,6 +988,9 @@ header .right {
 	display: flex;
 	justify-content: center;
 }
+.padding .plurktitle {
+	height: auto!important;
+}
 .padding,
 .padding sub,
 .padding sup {
@@ -1010,8 +1014,10 @@ header .right {
 
 .dwantitle {
 	position: relative;
+	display: flex;
 }
 .dwantitle svg {
+	height: 100%;
 	max-width: 100%;
 	height: 80px;
 }
@@ -1084,56 +1090,6 @@ header .right {
 .flare7 {
 	top: 35%;
 	left: -110%;
-}
-
-.me .flares img {
-	opacity: 0;
-	transition: opacity .5s ease, top 1s ease, left 1s ease, transform 1s ease;
-}
-.flares.hello .flare2 {
-	left: 0%;
-	top: 125%;
-	opacity: 0;
-}
-.flares.imuiux .flare2 {
-	left: 0%;
-	top: 75%;
-	opacity: 1;
-}
-.flares.webdesigner .flare2 {
-	left: 20%;
-	top: 35%;
-	transform: rotate(-40deg);
-	opacity: 1;
-}
-
-.flares.imuiux .flare4 {
-	left: 60%;
-	top: -40%;
-	transform: rotate(-40deg);
-	opacity: 0;
-}
-.flares.webdesigner .flare4 {
-	left: 50%;
-	top: -30%;
-	transform: rotate(-40deg);
-	opacity: 2;
-}
-
-.flares.sayhi .flare1 {
-	top: 70%;
-	left: 0%;
-	opacity: 1;
-}
-.flares.sayhi .flare2 {
-	top: 75%;
-	left: 40%;
-	opacity: 1;
-}
-.flares.sayhi .flare3 {
-	top: 75%;
-	left: -60%;
-	opacity: 1;
 }
 
 
@@ -1647,6 +1603,9 @@ header .right {
 	font-weight: inherit;
 	color: var(--red);
 }
+.me p {
+	margin-bottom: var(--padm);
+}
 
 .me .arrow-big a {
 	color: var(--black);
@@ -1663,11 +1622,98 @@ header .right {
 	margin: auto var(--pads);
 }
 
+#about {
+	z-index: 1;
+	overflow: hidden;
+}
+
+#usedto {
+	z-index: 2;
+	padding: 0!important;
+	overflow: hidden;
+	pointer-events: none;
+}
+#usedto .anim {
+	min-width: initial;
+	min-height: initial;
+	width: 70vh;
+	height: 70vh;
+	border-radius: 70vh;
+	background-color: var(--red);
+	overflow: hidden;
+}
+#usedto .text {
+	padding: 0;
+}
+#usedto h2,
+#usedto p {
+	font-size: 10vh;
+	color: var(--white);
+}
+#usedto p {
+	font-size: 2.5vh;
+	margin-bottom: 0;
+}
+
+#webdesigner {
+	z-index: 1;
+	margin-top: -100vh;
+}
+#now,
 #webdesigner {
 	align-items: flex-start;
 }
+#sayhi {
+	z-index: 0
+}
+#webdesigner,
+#sayhi {
+	background-color: var(--dark-white);
+}
+#now,
+#webdesigner,
+#sayhi,
+#webdesigner .thumbs {
+	pointer-events: none;
+}
+#now .arrow,
+#webdesigner .arrow,
+#sayhi .arrow,
+#now .text,
+#webdesigner .text,
+#sayhi .text {
+	pointer-events: auto;
+}
+#now .text,
 #webdesigner .text {
 	text-align: left;
+}
+#webdesigner .thumbs {
+	position: absolute;
+	top: var(--pady);
+	bottom: var(--pady);
+	right: var(--padx);
+	left: 50vw;
+}
+#webdesigner img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: auto!important;
+	height: 100%!important;
+	transform: translate(-50%,-50%);
+}
+#webdesigner img.dark {
+	opacity: 0;
+}
+#webdesigner img.light {
+	opacity: 1;
+}
+.dark #webdesigner img.dark {
+	opacity: 1;
+}
+.dark #webdesigner img.light {
+	opacity: 0;
 }
 
 
@@ -2386,6 +2432,7 @@ img.rounded {
 	width: calc((var(--box) * 2) + (var(--padl) * 1));
 }
 .stats .anim {
+	opacity: 0;
 	height: 100%;
 	background-color: var(--yellow);
 	border-radius: var(--padm);

@@ -7,52 +7,148 @@ me = {
 	beforeEnter: function(data) {
 		var next = data.next.container;
 
-		snap(".about, .intro, .igstage", 2);
+		// snap(".about, .intro, .igstage", 2);
 
-		next.querySelectorAll(".me, .intro").forEach(function(element, index) {
+		var about = next.querySelector("#about");
+		var usedto = next.querySelector("#usedto");
+		about.querySelector('.scrollto').setAttribute('href', '#now');
+		scroll.push(function(tl) {
+			tl.fromTo(about.querySelectorAll('.main-text'), {
+				scale: 1
+			}, {
+				scale: 25,
+				rotation: -180,
+				ease: 'power1.inOut',
+				duration: 1
+			}, 0);
+			tl.fromTo(about.querySelectorAll('.main-text'), {
+				opacity: 1
+			}, {
+				opacity: 0,
+				duration: .25
+			}, .5);
+
+			tl.set(usedto, {
+				position: "fixed",
+				top: 0,
+				left: 0
+			}, 0);
+			tl.fromTo(usedto.querySelectorAll(".anim"), {
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: .25
+			}, 0);
+			tl.fromTo(usedto.querySelectorAll(".anim"), {
+				scale: 1/25,
+				rotation: 180
+			}, {
+				scale: 1,
+				rotation: 0,
+				ease: 'power1.inOut',
+				duration: 1
+			}, 0);
+			tl.fromTo(usedto.querySelectorAll(".text"), {
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: .25
+			}, .25);
+
+			return tl;
+		}, function(tl) {
+			return ScrollTrigger.create({
+				trigger: about,
+				start: "0 0",
+				end: "100% 0",
+				animation: tl,
+				pin: true,
+				pinSpacing: true,
+				scrub: true
+			});
+		});
+
+		next.querySelectorAll("#webdesigner").forEach(function(element, index) {
 			scroll.push(function(tl) {
-				tl.fromTo(element.querySelectorAll('.main-text, .text'), {
-					y: 0
+				tl.fromTo(usedto.querySelectorAll('.anim'), {
+					y: 0,
 				}, {
-					y: window.innerHeight * 1/3,
-					ease: 'power1.in',
-					duration: 2
-				}, 0);
-				tl.fromTo(element.querySelectorAll('.main-text, .text'), {
-					opacity: 1
-				}, {
-					opacity: 0,
-					ease: 'ease.in',
+					y: window.innerHeight * -1,
+					ease: 'linear',
 					duration: 1
-				}, 1);
+				}, 0);
+				tl.set(usedto, {
+					display: 'none'
+				});
 
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
 					trigger: element,
-					start: "0 0",
-					end: "100% 0",
+					start: "0 100%",
+					end: "100% 100%",
 					animation: tl,
 					scrub: true
 				});
 			});
 
 			scroll.push(function(tl) {
-				tl.fromTo(next.querySelectorAll('.flares'), {
-					className: "flares"
+				tl.set(next.querySelectorAll('#now .arrow-big .arrow'), {
+					display: "none"
+				}, 0);
+				tl.fromTo(next.querySelectorAll('#now .text'), {
+					y: window.innerHeight * 1/8,
+					opacity: 1
 				}, {
-					className: "flares " + element.id,
-					duration: 1
-				});
-				tl.set(next.querySelectorAll('.flares'), {
-					className: "flares"
-				});
+					opacity: 0,
+					ease: 'linear',
+					duration: .25
+				}, 5);
+
+				tl.fromTo(element.querySelectorAll('.text'), {
+					y: window.innerHeight * 2/8,
+					opacity: 0
+				}, {
+					opacity: 1,
+					ease: 'linear',
+					duration: .25
+				}, 5.25);
+
+				tl.fromTo(element.querySelectorAll('.thumbs'), {
+					y: window.innerHeight * -1/2
+				}, {
+					y: window.innerHeight * 2/3,
+					ease: 'linear',
+					duration: 10
+				}, 0);
+
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
 					trigger: element,
-					start: "0 25%",
-					end: "100% 25%",
+					start: "0 200%",
+					end: "200% 0",
+					animation: tl,
+					scrub: true
+				});
+			});
+		});
+
+		next.querySelectorAll("#sayhi").forEach(function(element, index) {
+			scroll.push(function(tl) {
+				tl.fromTo(element.querySelectorAll('.text'), {
+					y: 0
+				}, {
+					y: window.innerHeight * 1/4,
+					ease: 'linear'
+				});
+
+				return tl;
+			}, function(tl) {
+				return ScrollTrigger.create({
+					trigger: element,
+					start: "0 100%",
+					end: "100% 0",
 					animation: tl,
 					scrub: true
 				});
@@ -103,7 +199,6 @@ me = {
 					start: "0 100%",
 					end: "100% 0",
 					animation: tl,
-					snap: 1,
 					scrub: .5
 				});
 			});
@@ -187,17 +282,17 @@ me = {
 			scroll.push(function(tl) {
 				var el = element.querySelectorAll(".thumbs, .text");
 
-				tl.fromTo(element.querySelectorAll("#post svg"), {
+				tl.fromTo(element.querySelectorAll("#post > *"), {
 					opacity: 0
 				}, {
 					opacity: 1,
 					ease: "power3.out",
 					duration: duration
 				}, (duration * 4));
-				tl.fromTo(element.querySelectorAll("#post svg"), {
-					y: "100vh"
+				tl.fromTo(element.querySelectorAll("#post > *"), {
+					y: window.innerHeight
 				}, {
-					y: "0vh",
+					y: 0,
 					ease: "linear",
 					duration: duration
 				}, (duration * 4));
