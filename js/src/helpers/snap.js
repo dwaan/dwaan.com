@@ -9,6 +9,7 @@ var snap = function(elements, snapPosition, markers) {
 			return tl;
 		}, function (tl) {
 			return ScrollTrigger.create({
+				scroller: "main",
 				markers: markers,
 				id: "snap",
 				trigger: element,

@@ -82,6 +82,7 @@ barba.hooks.beforeEnter(function(data) {
 		middle.forEach(function (el, idx) {
 			var scrollfunc = function(tl) {
 				return ScrollTrigger.create({
+					scroller: next,
 					trigger: el,
 					start: "0 50%",
 					end: "100% 50%",
@@ -203,7 +204,7 @@ barba.hooks.afterEnter(function(data) {
 	// Read more
 	next.querySelectorAll("a.scrollto").forEach(function(a) {
 		a.addEventListener("click", function(e) {
-			gsap.to(window, {
+			gsap.to(next, {
 				duration: 1,
 				ease: "expo.inOut",
 				scrollTo: e.target.getAttribute("href")
@@ -699,7 +700,7 @@ barba.init({
 						}
 					};
 
-				// tl = animate.top(tl);
+				// tl = animate.top(current, tl);
 				tl.to(current.querySelectorAll(".flares > img"), {
 					x: "-=200",
 					opacity: 0
@@ -971,7 +972,7 @@ barba.init({
 			loader.init();
 
 			// Hide current view
-			tl = animate.top(tl);
+			tl = animate.top(current, tl);
 			tl.set(current.querySelectorAll("#credits, #statistics"),  {
 				opacity: 0
 			}, "hide");

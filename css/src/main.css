@@ -156,7 +156,7 @@ html {
 	color: var(--black);
 	background-color: var(--white);
 	transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04), background-color .5s ease, color .25s ease;
-
+	overflow: hidden;
 }
 /* Common styles */
 html,
@@ -164,9 +164,21 @@ body,
 main,
 .middle {
 	display: block;
-	min-width: 100%;
-	max-width: 100vw;
-	min-height: 100vh;
+	width: 100%;
+	max-width: 100%;
+	height: 100%;
+	min-height: 100%;
+}
+main {
+	position: relative;
+	opacity: 0;
+	z-index: 1;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	scroll-snap-type: both mandatory;
+}
+.middle {
+    scroll-snap-align: start end;
 }
 .no-js .middle {
 	border-bottom: 1px dashed var(--gray-light);
@@ -176,12 +188,6 @@ main,
 }
 .middle.empty {
 	display: none;
-}
-main {
-	position: relative;
-	opacity: 0;
-	z-index: 1;
-	overflow-x: hidden;
 }
 body,
 html {
@@ -361,11 +367,6 @@ picture img {
 	#barba-wrapper {
 		display: none!important;
 	}
-	body {
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-	}
 	.support {
 		display: block;
 	}
@@ -375,14 +376,14 @@ picture img {
 	header,
 	main,
 	#barba-wrapper {
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 		overflow: hidden;
 		display: none!important;
 	}
 	body {
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 		overflow: hidden;
 	}
 	.support {
@@ -483,8 +484,8 @@ picture img {
 	align-items: center;
 	top: 0;
 	left: 0;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	background-color: transparent;
 	color: var(--black);
 }
@@ -1056,30 +1057,31 @@ header .right {
 	position: absolute;
 	transform: scale3d(1.25,1.25,1);
 }
-/* Blue */
+
+/* Purple */
 .flare1 {
 	top: 17.5%;
-	left: -10%;
+	left: -70%;
 }
 /* Red */
 .flare2 {
 	top: 30%;
 	left: -25%;
 }
-/* Purple */
+/* Blue */
 .flare3 {
 	top: 17.5%;
-	left: -70%;
-}
-/* Yellow */
-.flare4 {
-	top: 10%;
-	left: 40%;
+	left: -10%;
 }
 /* Green */
-.flare5 {
+.flare4 {
 	top: 20%;
 	left: 25%;
+}
+/* Yellow */
+.flare5 {
+	top: 10%;
+	left: 40%;
 }
 /* Blue */
 .flare6 {
@@ -1304,7 +1306,7 @@ header .right {
 /* Style slideshow */
 .style-slideshow {
 	display: block;
-	height: 100vh;
+	height: 100%;
 	padding: 0!important;
 	justify-content: flex-start;
 	overflow: hidden;
@@ -1345,15 +1347,15 @@ header .right {
 }
 .style-slideshow .thumbs,
 .style-slideshow ul li {
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 }
 .style-slideshow .thumbs {
 	position: relative;
 	z-index: 1;
 	overflow-y: hidden;
 	overflow-x: auto;
-	height: calc(100vh + 50px);
+	height: calc(100% + 50px);
 	padding-bottom: 50px;
 	margin-bottom: -50px;
 }
@@ -1542,7 +1544,7 @@ header .right {
 .menu-page .menu {
 	margin: 0;
 	padding: 0;
-	height: 100vh;
+	height: 100%;
 }
 .menu-page nav {
 	margin: 0;
@@ -1657,7 +1659,6 @@ header .right {
 
 #webdesigner {
 	z-index: 1;
-	margin-top: -100vh;
 }
 #now,
 #webdesigner {
@@ -1665,10 +1666,6 @@ header .right {
 }
 #sayhi {
 	z-index: 0
-}
-#webdesigner,
-#sayhi {
-	background-color: var(--dark-white);
 }
 #now,
 #webdesigner,
@@ -1687,6 +1684,7 @@ header .right {
 #now .text,
 #webdesigner .text {
 	text-align: left;
+	z-index: 2;
 }
 #webdesigner .thumbs {
 	position: absolute;
@@ -1694,6 +1692,7 @@ header .right {
 	bottom: var(--pady);
 	right: var(--padx);
 	left: 50vw;
+	z-index: 1;
 }
 #webdesigner img {
 	position: absolute;
@@ -1721,9 +1720,23 @@ header .right {
 /* Mr Goat */
 
 
-.mrgoat {
+#mrgoat {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: translate(0, 100%);
+	pointer-events: none;
+}
+.mrgoat,
+.mrgoat.hidden {
 	display: block;
 	overflow: hidden;
+	height: 100%;
+}
+.no-js .mrgoat.hidden {
+	height: 0;
 }
 .mrgoat h2,
 .mrgoat img {
@@ -1752,7 +1765,7 @@ header .right {
 	left: 0;
 	width: 100vw;
 	max-width: initial;
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
@@ -1811,6 +1824,7 @@ header .right {
 	position: absolute;
 	top: 50%;
 	display: block;
+	width: 100%;
 	padding: 0;
 	margin: 0;
 	border: none;
@@ -2713,5 +2727,5 @@ img.rounded {
 #permission,
 #statistics,
 #statisticsthisyear {
-	margin-bottom: 100vh;
+	margin-bottom: 100%;
 }

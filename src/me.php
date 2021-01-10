@@ -144,8 +144,13 @@
 			</div>
 		</section>
 
-
-		<section id="startmrgoat" class="mrgoat middle">
+		<div id="startmrgoat" class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div id="endmrgoat" class="mrgoat middle hidden"></div>
+		<section id="mrgoat" class="mrgoat middle">
 			<div class="text">
 				<div class="h2"><h2>This is <b>Mr. Goat</b></h2></div>
 			</div>
@@ -168,7 +173,7 @@
 			</div>
 		</section>
 
-		<section class="igstage middle">
+		<!-- <section class="igstage middle">
 			<div class="thumbs">
 				<?php
 					$length = 12;
@@ -182,7 +187,7 @@
 					}
 				?>
 			</div>
-		</section>
+		</section> -->
 
 		<div id="cofound" class="cofound middle clip">
 			<div class="text">

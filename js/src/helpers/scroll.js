@@ -13,6 +13,7 @@ var scroll = {
 		var move = (params.move === undefined)? true: params.move;
 		var markers = (params.markers)? params.markers: false;
 		var horizontal = (params.horizontal)? params.horizontal: false;
+		var scroller = (params.scroller)? params.scroller: window;
 		var that = this;
 
 		gToArray(elements).forEach(function(element, index) {
@@ -42,8 +43,8 @@ var scroll = {
 				}, 0);
 			}
 
-
 			that.st.push(ScrollTrigger.create({
+				scroller: scroller,
 				markers: markers,
 				trigger: trigger,
 				start: "0 " + position,
@@ -70,6 +71,7 @@ var scroll = {
 			}, 0);
 
 			that.st.push(ScrollTrigger.create({
+				scroller: "main",
 				trigger: element.parentNode,
 				start: "0 " + position,
 				end: "0 " + position,

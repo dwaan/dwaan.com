@@ -3,9 +3,6 @@ var home = {
 	beforeEnter: function(data) {
 		var next = data.next.container;
 
-		// Aggresive Snap
-		snap(next.querySelectorAll("section.middle"), 2);
-
 		// Scroll animate arrow
 		var els = next.querySelectorAll("section.middle");
 		els.forEach(function (el, idx) {
@@ -49,6 +46,7 @@ var home = {
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
+					scroller: next,
 					trigger: el,
 					start: "0 50%",
 					end: "100% 50%",
@@ -68,9 +66,11 @@ var home = {
 			return tl;
 		}, function (tl) {
 			return ScrollTrigger.create({
-				trigger: next,
+				scroller: next,
+				trigger: "#flarestart",
 				start: "0 0",
-				end: "100% 100%",
+				endTrigger: "#flareend",
+				end: "0 0",
 				scrub: true,
 				animation: tl
 			});

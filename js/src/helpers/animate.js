@@ -1,12 +1,12 @@
 // Animate functions
 var animate = {
-	top: function(tl) {
+	top: function(el, tl) {
 		if (tl == null) tl = gsap;
 
 		// Scroll to top
-		var scroll = (document.body.scrollTop || document.documentElement.scrollTop) / (window.outerHeight * 2);
+		var scroll = el.scrollTop / (window.outerHeight * 2);
 		if (scroll > 0) {
-			tl.to(window, {
+			tl.to(el, {
 				scrollTo: 0,
 				duration: (scroll > 2)? 2 : scroll,
 				ease: "expo.inOut"
@@ -51,10 +51,10 @@ var animate = {
 		}, 0);
 		// Animate flare
 		tl.fromTo(next.querySelectorAll(".flares.side > img"), {
-			x: "+=300px",
+			x: "+=" + (window.innerWidth * 1/2) + "px",
 			opacity: 0
 		}, {
-			x: "-=300px",
+			x: "-=" + (window.innerWidth * 1/2) + "px",
 			opacity: 1
 		}, 0);
 		// Run done after all all animation complete
@@ -165,7 +165,7 @@ var animate = {
 		}});
 
 		// Scroll to top
-		if (scrolltop) tl = this.top(tl);
+		if (scrolltop) tl = this.top(current, tl);
 
 		// Hide current view
 		tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {
