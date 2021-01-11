@@ -69,18 +69,23 @@ me = {
 		});
 		*/
 
-		/*
-		next.querySelectorAll("#webdesigner").forEach(function(element, index) {
+		gsap.set(next.querySelectorAll("#webdesigner"), {
+			marginTop: window.innerHeight * -1/2
+		});
+		gsap.set(next.querySelectorAll("#webdesigner .thumbs"), {
+			display: "none"
+		});
+		next.querySelectorAll("#now").forEach(function(element, index) {
 			scroll.push(function(tl) {
-				tl.fromTo(usedto.querySelectorAll('.anim'), {
-					y: 0,
+				tl.fromTo(element.querySelectorAll('.thumbs'), {
+					opacity: 0,
+					x: -40,
+					y: (window.innerHeight * -2/3),
 				}, {
-					y: window.innerHeight * -1,
-					ease: 'linear',
-					duration: 1
-				}, 0);
-				tl.set(usedto, {
-					display: 'none'
+					opacity: 1,
+					x: -10,
+					y: 0,
+					ease: 'linear'
 				});
 
 				return tl;
@@ -88,41 +93,35 @@ me = {
 				return ScrollTrigger.create({
 					scroller: next,
 					trigger: element,
-					start: "0 100%",
-					end: "100% 100%",
+					start: "0 50%",
+					end: "50% 50%",
 					animation: tl,
 					scrub: true
 				});
 			});
 
 			scroll.push(function(tl) {
-				tl.set(next.querySelectorAll('#now .arrow-big .arrow'), {
-					display: "none"
+				tl.fromTo(element.querySelectorAll('.thumbs'), {
+					x: -10,
+					y: 0,
+				}, {
+					x: 0,
+					y: (window.innerHeight * 1/2) + 25,
+					ease: 'linear'
 				}, 0);
-				tl.fromTo(next.querySelectorAll('#now .text'), {
-					y: window.innerHeight * 1/8,
+
+				tl.fromTo(element.querySelectorAll('.text'), {
 					opacity: 1
 				}, {
 					opacity: 0,
-					ease: 'linear',
-					duration: .25
-				}, 5);
+					ease: 'expo.out'
+				}, 0);
 
-				tl.fromTo(element.querySelectorAll('.text'), {
-					y: window.innerHeight * 2/8,
+				tl.fromTo(next.querySelectorAll("#webdesigner .text"), {
 					opacity: 0
 				}, {
 					opacity: 1,
-					ease: 'linear',
-					duration: .25
-				}, 5.25);
-
-				tl.fromTo(element.querySelectorAll('.thumbs'), {
-					y: window.innerHeight * -1/2
-				}, {
-					y: window.innerHeight * 2/3,
-					ease: 'linear',
-					duration: 10
+					ease: 'expo.in'
 				}, 0);
 
 				return tl;
@@ -130,14 +129,39 @@ me = {
 				return ScrollTrigger.create({
 					scroller: next,
 					trigger: element,
-					start: "0 200%",
-					end: "200% 0",
+					start: "50% 50%",
+					end: "100% 50%",
+					animation: tl,
+					scrub: true
+				});
+			});
+
+			scroll.push(function(tl) {
+				tl.fromTo(element.querySelectorAll('.thumbs'), {
+					opacity: 1,
+					x: 0,
+					y: (window.innerHeight * 1/2) + 25
+				}, {
+					opacity: 0,
+					x: 20,
+					y: (window.innerHeight * 9/8) + 25,
+					ease: 'linear'
+				});
+
+				return tl;
+			}, function(tl) {
+				return ScrollTrigger.create({
+					scroller: next,
+					trigger: element,
+					start: "100% 50%",
+					end: "150% 50%",
 					animation: tl,
 					scrub: true
 				});
 			});
 		});
 
+		/*
 		next.querySelectorAll("#sayhi").forEach(function(element, index) {
 			scroll.push(function(tl) {
 				tl.fromTo(element.querySelectorAll('.text'), {
@@ -364,39 +388,6 @@ me = {
 				});
 			});
 		});
-
-		// Ig Stage hover
-		/*
-		next.querySelectorAll(".igstage .thumbs a").forEach(function(el, index) {
-			// Hover
-			var picture = el.querySelector("img");
-			hoverEvents([el], function(el) {
-				gsap.set(el, {
-					zIndex: 10
-				});
-				gsap.killTweensOf(picture);
-				gsap.to(picture, {
-					rotation: "random(-10,10,2)",
-					scale: 1.25,
-					duration: .5,
-					boxShadow: '0 40px 60px rgba(0,0,0,0.5)',
-					ease: "back"
-				});
-			}, function(el) {
-				gsap.set(el, {
-					zIndex: 1
-				});
-				gsap.killTweensOf(picture);
-				gsap.to(picture, {
-					rotation: 0,
-					scale: 1,
-					boxShadow: '',
-					duration: .5,
-					ease: "expo.out"
-				});
-			});
-		});
-		*/
 
 		// Animate cofounder
 		next.querySelectorAll(".cofound").forEach(function(el, index) {

@@ -1647,7 +1647,6 @@ header .right {
 	z-index: 2;
 	padding: 0!important;
 	overflow: hidden;
-	pointer-events: none;
 }
 #usedto .anim {
 	min-width: initial;
@@ -1671,11 +1670,9 @@ header .right {
 	margin-bottom: 0;
 }
 
-#webdesigner {
-	z-index: 1;
-}
 #now,
 #webdesigner {
+	z-index: 1;
 	align-items: flex-start;
 }
 #sayhi {
@@ -1700,6 +1697,7 @@ header .right {
 	text-align: left;
 	z-index: 2;
 }
+#now .thumbs,
 #webdesigner .thumbs {
 	position: absolute;
 	top: var(--pady);
@@ -1708,6 +1706,7 @@ header .right {
 	left: 50vw;
 	z-index: 1;
 }
+#now img,
 #webdesigner img {
 	position: absolute;
 	top: 50%;
@@ -1716,15 +1715,19 @@ header .right {
 	height: 100%!important;
 	transform: translate(-50%,-50%);
 }
+#now img.dark,
 #webdesigner img.dark {
 	opacity: 0;
 }
+#now img.light,
 #webdesigner img.light {
 	opacity: 1;
 }
+.dark #now img.dark,
 .dark #webdesigner img.dark {
 	opacity: 1;
 }
+.dark #now img.light,
 .dark #webdesigner img.light {
 	opacity: 0;
 }
@@ -1956,6 +1959,9 @@ header .right {
 	flex-flow: column;
 	bottom: var(--pady);
 	transform: translate(-50%, 0);
+}
+#post a {
+	pointer-events: auto;
 }
 #post svg {
 	width: auto;

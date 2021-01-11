@@ -205,8 +205,8 @@ barba.hooks.afterEnter(function(data) {
 	next.querySelectorAll("a.scrollto").forEach(function(a) {
 		a.addEventListener("click", function(e) {
 			gsap.to(next, {
-				duration: 1,
-				ease: "expo.inOut",
+				duration: .75,
+				ease: "ease.inOut",
 				scrollTo: e.target.getAttribute("href")
 			});
 			e.preventDefault();
