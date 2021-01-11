@@ -13,10 +13,12 @@ var detail = {
 		next.querySelectorAll(".style-spread").forEach(function(el) {
 			// Move the text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
 			ScrollTrigger.defaults({
+				scroller: next,
 				trigger: el.querySelectorAll(".thumbs"),
 				toggleActions: "restart none none reverse"
 			});
@@ -108,10 +110,12 @@ var detail = {
 		next.querySelectorAll(".style-spread-left").forEach(function(el) {
 			// Move the text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
 			ScrollTrigger.defaults({
+				scroller: next,
 				trigger: el.querySelectorAll(".thumbs")
 			});
 			ScrollTrigger.matchMedia({
@@ -172,7 +176,12 @@ var detail = {
 		next.querySelectorAll(".style-top").forEach(function(el) {
 			// Move text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(".text h2, .text li")
+			});
+			ScrollTrigger.defaults({
+				scroller: next,
+				trigger: el
 			});
 			// Move thumbnails
 			ScrollTrigger.matchMedia({
@@ -188,7 +197,6 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
-							trigger: el,
 							start: "-50% 0",
 							end:  "100% 0",
 							scrub: .75,
@@ -209,7 +217,6 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
-							trigger: el,
 							start: "-25% 0",
 							end:  "200% 0",
 							scrub: .75,
@@ -218,14 +225,17 @@ var detail = {
 					});
 				}
 			});
+			// Reset
+			ScrollTrigger.defaults({});
 			// Move thumbnail again
-			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"));
+			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"), null, next);
 		});
 
 		// Style - Top
 		next.querySelectorAll(".style-top-text").forEach(function(el) {
 			// Move text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(".text h2, .text li")
 			});
 		});
@@ -234,6 +244,7 @@ var detail = {
 		next.querySelectorAll(".style-bottom-logo").forEach(function(el) {
 			// Move text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(".text > *")
 			});
 			// Move logo
@@ -265,6 +276,7 @@ var detail = {
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
+					scroller: next,
 					trigger: el,
 					start: (window.innerHeight * 1/4) + " " + (window.innerHeight * 3/4),
 					end: (window.innerHeight * 3/4) + " " + (window.innerHeight * 3/4),
@@ -278,6 +290,7 @@ var detail = {
 		next.querySelectorAll(".style-flex").forEach(function(el) {
 			// Move text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(".style-column > *"),
 				position: "100%"
 			});
@@ -293,6 +306,7 @@ var detail = {
 						opacity: 1
 					});
 					scroll.moveText({
+						scroller: next,
 						elements: el.querySelectorAll(".text > *, .color ul > *"),
 						position: "100%",
 						horizontal: true
@@ -304,6 +318,7 @@ var detail = {
 						opacity: 1
 					});
 					scroll.moveText({
+						scroller: next,
 						elements: el.querySelectorAll(".text > *, .color")
 					});
 				}
@@ -343,6 +358,7 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
+							scroller: next,
 							trigger: el,
 							start: "-25% 100%",
 							end:  "100% 50%",
@@ -363,6 +379,7 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
+							scroller: next,
 							trigger: el,
 							start: "-25% 100%",
 							end:  "100% 50%",
@@ -373,6 +390,7 @@ var detail = {
 
 					// Move text
 					scroll.moveText({
+						scroller: next,
 						delta: 25,
 						elements: alltext,
 						position: "75%"
@@ -380,6 +398,7 @@ var detail = {
 
 					// Move masonry
 					scroll.moveText({
+						scroller: next,
 						elements: thumbs
 					});
 				},
@@ -409,6 +428,7 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
+							scroller: next,
 							trigger: el,
 							start: "-25% 100%",
 							end:  "100% 50%",
@@ -419,12 +439,14 @@ var detail = {
 
 					// Move text
 					scroll.moveText({
+						scroller: next,
 						elements: alltext,
 						position: "75%"
 					});
 
 					// Move masonry
 					scroll.moveText({
+						scroller: next,
 						elements: thumbs
 					});
 				}
@@ -436,7 +458,7 @@ var detail = {
 		next.querySelectorAll(".style-angled").forEach(function(el) {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
-			scroll.moveThumbs(elPicture, "75%");
+			scroll.moveThumbs(elPicture, "75%", next);
 			// Scroll pictures
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": function() {
@@ -454,6 +476,7 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
+							scroller: next,
 							trigger: el,
 							endTrigger: ".links",
 							start: "0 100%",
@@ -478,6 +501,7 @@ var detail = {
 						return tl;
 					}, function(tl) {
 						return ScrollTrigger.create({
+							scroller: next,
 							trigger: el,
 							endTrigger: ".links",
 							start: "0 100%",
@@ -490,6 +514,7 @@ var detail = {
 			});
 			// Move text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll(" .text > *"),
 				position: "85%"
 			});
@@ -514,7 +539,8 @@ var detail = {
 			// Fixed size
 			that.fixedSize = function() {
 				var width = 0;
-				var height = 0;
+
+				that.slideshowParent.style.removeProperty('width');
 
 				gToArray(that.slideshowChild).forEach(function(element) {
 					element.style.removeProperty('width');
@@ -525,10 +551,13 @@ var detail = {
 				});
 
 				gsap.set(that.slideshowParent, {
+					height: that.offsetHeight,
 					width: width
-				})
-
-				return width;
+				});
+				gsap.set(that.slideshowScroll, {
+					height: that.offsetHeight + 50,
+					width: that.offsetWidth
+				});
 			}
 			that.fixedSize();
 			window.addEventListener("resize", that.fixedSize);
@@ -563,6 +592,7 @@ var detail = {
 					return tl;
 				}, function(tl) {
 					return ScrollTrigger.create({
+						scroller: next,
 						trigger: element,
 						scroller: that.slideshowScroll,
 						horizontal: true,
@@ -572,23 +602,6 @@ var detail = {
 							this.progress = value.progress;
 							this.direction = value.direction;
 							that.navigationHide();
-						},
-						snap: {
-							snapTo: function(value) {
-								var snap = 0;
-
-								if (this.progress < .1 && this.direction > 0) snap = 0;
-								else if (this.progress > .9 && this.direction < 0) snap = 1;
-								else if (this.direction > 0) snap = 1;
-
-								return snap;
-							},
-							delay: 0,
-							duration: {
-								min: .5,
-								max: 2
-							},
-							ease: "expo"
 						},
 						animation: tl
 					});
@@ -624,11 +637,11 @@ var detail = {
 			ScrollTrigger.matchMedia({
 				"(min-aspect-ratio: 1/1)": function() {
 					hoverEvents([that.before], function(e) {
-						gsap.to(that.slideshowChild, {
+						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
 							x: 20
 						});
 					}, function(e) {
-						gsap.to(that.slideshowChild, {
+						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
 							x: 0
 						});
 					});
@@ -650,11 +663,11 @@ var detail = {
 			ScrollTrigger.matchMedia({
 				"(min-aspect-ratio: 1/1)": function() {
 					hoverEvents([that.after], function(e) {
-						gsap.to(that.slideshowChild, {
+						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
 							x: -20
 						});
 					}, function(e) {
-						gsap.to(that.slideshowChild, {
+						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
 							x: 0
 						});
 					});
@@ -674,6 +687,7 @@ var detail = {
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
+					scroller: next,
 					trigger: that,
 					start: "12.5% 90%",
 					end: "50% 90%",
@@ -699,6 +713,7 @@ var detail = {
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
+					scroller: next,
 					trigger: that.before,
 					start: "0 90%",
 					end: (window.innerHeight / 5) + " 90%",
@@ -720,6 +735,7 @@ var detail = {
 				return tl;
 			}, function(tl) {
 				return ScrollTrigger.create({
+					scroller: next,
 					trigger: el,
 					start: "0 90%",
 					end: "50% 90%",
@@ -734,6 +750,7 @@ var detail = {
 		next.querySelectorAll(".links").forEach(function(el) {
 			// Move text
 			scroll.moveText({
+				scroller: next,
 				elements: el.querySelectorAll("nav > *"),
 				position: "100%"
 			});

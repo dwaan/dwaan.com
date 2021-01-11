@@ -41,7 +41,7 @@
 			</div>
 		</section>
 
-		<section class="middle auto style-top-text">
+		<section class="middle auto style-top-text height-auto snap-end">
 			<div class="text">
 				<h2>First Challenges</h2>
 				<ol class="zero">

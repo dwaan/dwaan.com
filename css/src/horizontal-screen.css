@@ -248,9 +248,6 @@ header {
 	}
 }
 /* Style text on the left and image spread like fan */
-.style-spread-left {
-	padding-bottom: calc(2 * var(--padxl))
-}
 .style-spread-left .text {
 	flex: none;
 	width: 380px;
@@ -260,7 +257,7 @@ header {
 	display: flex;
 	flex: 0;
 	align-self: flex-start;
-	margin-top: 100px;
+	margin-top: 125px;
 }
 .style-spread-left picture {
 	width: 300px;
@@ -269,12 +266,12 @@ header {
 }
 @media (min-width: 900px) {
 	.style-spread-left picture {
-		width: 400px;
+		width: 350px;
 	}
 }
 @media (min-width: 1024px) {
 	.style-spread-left picture {
-		width: 528px;
+		width: 428px;
 	}
 }
 @media (min-width: 1194px) {
@@ -311,6 +308,9 @@ header {
 	}
 }
 /* Style text on top without image */
+.style-top-text {
+	padding: calc(var(--padxl) * 4) var(--padx) calc(var(--padxl) * 3)!important;
+}
 .style-top-text .text {
 	width: 100%;
 	flex-flow: row nowrap;
@@ -428,7 +428,7 @@ header {
 }
 .style-trunc .color ul {
 	margin: 0!important;
-	width: 18vw;
+	width: 250px;
 	flex-wrap: wrap;
 }
 .style-trunc .color li {
@@ -446,8 +446,8 @@ header {
 .style-trunc + .style-slideshow:before,
 .style-trunc + .style-slideshow:after {
 	position: absolute;
-	top: 15px;
-	left: -2.5vw;
+	top: calc(var(--padxxl) + 2.25vh);
+	left: 19vw;
 	bottom: 0;
 	display: block;
 	content: "";
@@ -461,7 +461,6 @@ header {
 .style-trunc + .style-slideshow:after {
 	top: 0;
 	border-top: none;
-	left: calc(50vw - (55vw / 2) - 2.5vw);
 	bottom: 50vh;
 }
 .style-trunc + .style-slideshow:after {

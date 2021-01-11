@@ -43,7 +43,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-top">
+		<section class="middle style-top snap-start">
 			<div class="text">
 				<h2>Main Key Suggestions</h2>
 				<ol class="zero">

@@ -178,7 +178,19 @@ main {
 	scroll-snap-type: both mandatory;
 }
 .middle {
-    scroll-snap-align: start end;
+    scroll-snap-align: center;
+}
+.middle.snap-start {
+    scroll-snap-align: start;
+}
+.middle.snap-end {
+    scroll-snap-align: end;
+}
+.middle.snap-none {
+    scroll-snap-align: none;
+}
+.middle.height-auto {
+	height: auto;
 }
 .no-js .middle {
 	border-bottom: 1px dashed var(--gray-light);
@@ -1344,6 +1356,7 @@ header .right {
 }
 .style-slideshow ul {
 	white-space: nowrap;
+	height: 100%;
 }
 .style-slideshow .thumbs,
 .style-slideshow ul li {
@@ -1355,9 +1368,9 @@ header .right {
 	z-index: 1;
 	overflow-y: hidden;
 	overflow-x: auto;
-	height: calc(100% + 50px);
-	padding-bottom: 50px;
+	height: 100%;
 	margin-bottom: -50px;
+	scroll-snap-type: both mandatory;
 }
 .style-slideshow ul li {
 	display: flex;
@@ -1365,6 +1378,7 @@ header .right {
 	float: left;
 	align-items: center;
 	justify-content: center;
+	scroll-snap-align: start;
 }
 .style-slideshow-small .before {
 	left: var(--padx);
@@ -1412,12 +1426,12 @@ header .right {
 }
 /* Style truncate */
 .style-trunc {
-	min-height: 50vh;
+	min-height: initial;
+	height: auto;
 	flex-direction: row;
 	align-items: flex-end;
 }
 .style-trunc .wrap {
-	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

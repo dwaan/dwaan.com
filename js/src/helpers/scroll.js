@@ -55,8 +55,10 @@ var scroll = {
 		});
 	},
 	// Move elements up without scrub
-	moveThumbs: function(elements, position) {
+	moveThumbs: function(elements, position, scroller) {
 		var that = this;
+
+		scroller = (scroller)? scroller: window;
 
 		if (!position) position = "85%";
 		gToArray(elements).forEach(function(element) {
@@ -71,7 +73,7 @@ var scroll = {
 			}, 0);
 
 			that.st.push(ScrollTrigger.create({
-				scroller: "main",
+				scroller: scroller,
 				trigger: element.parentNode,
 				start: "0 " + position,
 				end: "0 " + position,
