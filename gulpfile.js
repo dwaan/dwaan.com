@@ -119,7 +119,7 @@ exports.default = function() {
 		keepalive: true
 	}, function () {
 		browserSync.init({
-			open: false,
+			open: true,
 			proxy: "localhost:8080/dwaan/"
 		});
 	});

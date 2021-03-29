@@ -11,7 +11,7 @@
 <body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
-	<main data-barba="container" data-barba-namespace="plurk" class="plurk">
+	<main data-barba="container" data-barba-namespace="plurk" class="plurk nosnap">
 	    <section id="hello" class="grant middle first">
 	    	<div class="animate middle">
 		    	<div class="thumbs"></div>
@@ -69,6 +69,7 @@
 		    <div class="bgtext"><sup>20</sup><sub>20</sub></div>
 	    </section>
 
+	    <section class="middle"></section>
 	    <section id="credits" class="middle">
 	    	<div class="text">
 		    	<p class="made">Made with ❤️ in TLV</p>

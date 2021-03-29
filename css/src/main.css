@@ -177,6 +177,9 @@ main {
 	overflow-y: scroll;
 	scroll-snap-type: both mandatory;
 }
+main.nosnap {
+	scroll-snap-type: initial;
+}
 .middle {
     scroll-snap-align: center;
 }
@@ -2708,6 +2711,7 @@ img.rounded {
 	background-color: var(--lime);
 }
 #statistics {
+	display: table;
 	z-index: 2;
 	overflow: hidden;
 	background-color: var(--white);
@@ -2742,10 +2746,4 @@ img.rounded {
 #credits .made {
 	font-weight: 500;
 	opacity: 1;
-}
-
-#permission,
-#statistics,
-#statisticsthisyear {
-	margin-bottom: 100%;
 }

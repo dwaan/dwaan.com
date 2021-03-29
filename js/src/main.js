@@ -204,12 +204,12 @@ barba.hooks.afterEnter(function(data) {
 	// Read more
 	next.querySelectorAll("a.scrollto").forEach(function(a) {
 		a.addEventListener("click", function(e) {
+			e.preventDefault();
 			gsap.to(next, {
 				duration: .75,
-				ease: "ease.inOut",
+				ease: "expo.inOut",
 				scrollTo: e.target.getAttribute("href")
 			});
-			e.preventDefault();
 		});
 	});
 

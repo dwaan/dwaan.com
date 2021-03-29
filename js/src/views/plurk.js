@@ -289,6 +289,7 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
+							scroller: next,
 							start: "0 100%-=100px",
 							end: "100px 100%-=100px",
 							animation: tl,
@@ -320,6 +321,7 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
+							scroller: next,
 							start: "0 100%-=100px",
 							end: "100px 100%-=100px",
 							animation: tl,
@@ -339,6 +341,7 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
+							scroller: next,
 							start: "50% 100%-=100px",
 							end: "50% 100%-=100px",
 							animation: tl,
@@ -356,6 +359,7 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
+							scroller: next,
 							start: "50% 100%-=100px",
 							end: "50% 100%-=100px",
 							animation: tl,
@@ -374,6 +378,7 @@ var plurk = {
 					}, function(tl) {
 						return ScrollTrigger.create({
 							trigger: el,
+							scroller: next,
 							start: "100% 100%",
 							end: "100% 0",
 							animation: tl,
@@ -1216,6 +1221,7 @@ var plurk = {
 				}, function(tl) {
 					return ScrollTrigger.create({
 						trigger: next.querySelectorAll("#statistics"),
+						scroller: next,
 						start: "100%-=" + window.innerHeight + " 0",
 						end: "100% 0",
 						animation: tl,
@@ -1267,6 +1273,7 @@ var plurk = {
 				}, function(tl) {
 					return ScrollTrigger.create({
 						trigger: next.querySelectorAll("#permission"),
+						scroller: next,
 						start: "0 0",
 						end: "100% 0",
 						animation: tl,
@@ -1279,6 +1286,7 @@ var plurk = {
 				}, function(tl) {
 					return ScrollTrigger.create({
 						trigger: next.querySelectorAll("#permission"),
+						scroller: next,
 						start: "0 0",
 						end: "100% 0",
 						animation: tl,
@@ -1368,6 +1376,7 @@ var plurk = {
 			}, function(tl) {
 				return ScrollTrigger.create({
 					trigger: next.querySelectorAll("#hello"),
+					scroller: next,
 					start: "0 0",
 					end: "100% 0",
 					animation: tl,
@@ -1582,6 +1591,7 @@ var plurk = {
 		}, function(tl) {
 			return ScrollTrigger.create({
 				trigger: 'main',
+				scroller: next,
 				start: "0 0",
 				end: "100% 0",
 				animation: tl,
