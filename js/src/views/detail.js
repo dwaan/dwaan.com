@@ -61,25 +61,24 @@ var detail = {
 					});
 				},
 				"(min-aspect-ratio: 1/1)": function() {
-					// Move the pictures
 					scroll.push(function(tl) {
 						tl.fromTo(el.querySelectorAll(".pic-4"), {
-							top: "random(50, 100, 5)%",
-							left: "random(300, 400, 5)%",
+							top: "75%",
+							left: "350%",
 							x: 0,
 							y: 0,
-							rotation: "random(15, 25, 1)"
+							rotation: 0
 						}, {
 							top: "25%",
 							left: "50%",
 							rotation: -10,
 							duration: 1,
 							ease: "expo.out"
-						}, .1);
+						}, 0);
 
 						tl.fromTo(el.querySelectorAll(".pic-5"), {
-							top: "random(50, 100, 5)%",
-							left: "random(300, 400, 5)%",
+							top: "75%",
+							left: "350%",
 							x: 0,
 							y: 0,
 							rotation: 0
@@ -147,9 +146,9 @@ var detail = {
 					scroll.push(function(tl) {
 						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
 							y: 0,
-							x: "random(-250, -500, 5)px",
+							x: "-325px",
 							opacity: 0,
-							rotation: gRandom(5, 10, 1)
+							rotation: "7.5deg"
 						}, {
 							x: 0,
 							opacity: 1,

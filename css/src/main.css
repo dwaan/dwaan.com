@@ -1135,7 +1135,7 @@ header .right {
 	filter: blur(40px);
 }
 /* Style text on the left and image spread like fan */
-/*.style-spread:after {
+.style-spread:after {
 	z-index: 3;
 	display: block;
 	content: "";
@@ -1154,7 +1154,7 @@ header .right {
 	background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,.75) 20%, rgba(0,0,0,0) 100%);
 	background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,.75) 20%, rgba(0,0,0,0) 100%);
 	background: linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,0,0,.75) 20%, rgba(0,0,0,0) 100%);
-}*/
+}
 .style-spread,
 .style-spread-left {
 	display: flex;
@@ -1448,6 +1448,7 @@ header .right {
 	position: relative;
 	z-index: 1;
 	display: flex;
+	scroll-snap-align: end;
 }
 .links nav {
 	display: flex;

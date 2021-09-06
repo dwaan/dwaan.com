@@ -11,8 +11,13 @@ var logosvg = _q(".logo").innerHTML;
 //////////////// Dark Mode
 var darkmode = false;
 function toggleDarkMode() {
-	if (darkmode) addClass(_q("html"), "dark");
-	else removeClass(_q("html"), "dark");
+	if (darkmode) {
+		addClass(_q("html"), "dark");
+		document.querySelector("meta[name=theme-color]").setAttribute("content", "#000000")
+	} else {
+		removeClass(_q("html"), "dark");
+		document.querySelector("meta[name=theme-color]").setAttribute("content", "#ffffff")
+	}
 }
 if (window.matchMedia){
 	var darkmodemedia = window.matchMedia('(prefers-color-scheme: dark)');
