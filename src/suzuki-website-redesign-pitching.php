@@ -3,7 +3,8 @@
 
 <head>
 	<?php
-		$title = "Suzuki Website Redesign - Pitching";
+		$title = "Suzuki Website Redesign";
+		$description = "A short study case of website redesing pitching for Suzuki Indonesia";
 		include_once "part_metacss.php";
 	?>
 </head>

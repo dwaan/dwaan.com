@@ -3,7 +3,8 @@
 
 <head>
 	<?php
-		$title = "Melon Indonesia - Tike Apa Saja - Redesign";
+		$title = "Tiket Apa Saja - Melon Indonesia";
+		$description = "A short study case of Tiket Apa Saja website redesign";
 		include_once "part_metacss.php";
 	?>
 </head>

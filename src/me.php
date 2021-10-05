@@ -64,7 +64,8 @@
 
 <head>
 	<?php
-		$title = "About";
+		$title = "About Me";
+		$description = "Learn more about me and Mr. Goat";
 		include_once "part_metacss.php";
 	?>
 </head>
@@ -102,7 +103,7 @@
 			<div class="text">
 				<span>1 <hr/> 3</span>
 				<h3>Now I'm <br/> <strong>a Freelancer</strong> <br/> in Tel Aviv</h3>
-				<p>doing mostly web design consultation and various hobbist open source project</p>
+				<p>doing mostly interface design consultation and various hobbist <a href="https://github.com/dwaan" data-barba-prevent target="BLANK" rel='noopener noreferrer'>open source projects</a></p>
 			</div>
 			<div class="thumbs">
 				<picture>
@@ -173,12 +174,12 @@
 				<div id="food" class="float"><span class="dot"><hr /><i></i></span><span class="line"><hr /></span><p>He likes to eat fancy food</p></div>
 				<div id="travel" class="float"><span class="dot"><hr /><i></i></span><span class="line"><hr /></span><p>He travel all over the world</p></div>
 				<div id="post" class="float">
-					<a href="https://www.instagram.com/mrgoatofficial/" target="BLANK">
+					<a href="https://www.instagram.com/mrgoatofficial/" data-barba-prevent target="BLANK" rel='noopener noreferrer'>
 						<svg width="29" height="48" id="phone" viewBox="0 0 29 48" fill="black" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M28.3636 4.36364C28.3636 1.95367 26.41 0 24 0H4.36364C1.95367 0 0 1.95366 0 4.36363V43.6364C0 46.0463 1.95367 48 4.36364 48H24C26.41 48 28.3636 46.0463 28.3636 43.6364L28.3636 4.36364ZM7.091 3.27271C4.98228 3.27271 3.27282 4.98216 3.27282 7.09089V13.6363C3.27282 15.7451 4.98228 17.4545 7.091 17.4545C9.19973 17.4545 10.9092 15.7451 10.9092 13.6363V7.09089C10.9092 4.98216 9.19973 3.27271 7.091 3.27271ZM9.27282 7.63641C9.27282 8.84139 8.29598 9.81823 7.091 9.81823C5.88601 9.81823 4.90918 8.84139 4.90918 7.63641C4.90918 6.43142 5.88601 5.45459 7.091 5.45459C8.29598 5.45459 9.27282 6.43142 9.27282 7.63641ZM7.09144 15.2727C7.99518 15.2727 8.72781 14.5401 8.72781 13.6364C8.72781 12.7326 7.99518 12 7.09144 12C6.1877 12 5.45508 12.7326 5.45508 13.6364C5.45508 14.5401 6.1877 15.2727 7.09144 15.2727Z"/>
 						</svg>
 					</a>
-					<a href="https://www.instagram.com/mrgoatofficial/" target="BLANK">you can check his instagram here</a>
+					<a href="https://www.instagram.com/mrgoatofficial/" data-barba-prevent target="BLANK" rel='noopener noreferrer'>you can check his instagram here</a>
 				</div>
 			</div>
 		</section>

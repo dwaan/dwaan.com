@@ -3,7 +3,8 @@
 
 <head>
 	<?php
-		$title = "Hello, This Menu Page Fallback - P.S. You're in dwaan.com";
+		$title = "Menu";
+		$description = "This Menu Page Fallback";
 		include_once "part_metacss.php";
 	?>
 </head>

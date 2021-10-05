@@ -3,7 +3,8 @@
 
 <head>
 	<?php
-		$title = "Hello!";
+		$title = "Dwan";
+		$description = "Hello! my name is Dwan, I'm an UI/UX Designer and Strategist";
 		include_once "part_metacss.php";
 	?>
 </head>

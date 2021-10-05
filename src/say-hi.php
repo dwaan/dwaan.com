@@ -4,6 +4,7 @@
 <head>
 	<?php
 		$title = "Say hi!";
+		$description = "How to contact me";
 		include_once "part_metacss.php";
 	?>
 </head>

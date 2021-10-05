@@ -3,9 +3,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- Primary Meta Tags -->
-	<title><?php echo $title; ?> - Dwan</title>
-	<meta name="title" content="<?php echo $title; ?> - Dwan">
-	<meta name="description" content="Hello! my name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
+	<title><?php echo $title; if($title != "Dwan") echo " - Dwan"; ?></title>
+	<meta name="title" content="<?php echo $title; if($title != "Dwan") echo " - Dwan"; ?>">
+	<meta name="description" content="<?php echo $description; ?>">
 
 <?php
 	// check for the server side x-barba request header
@@ -55,15 +55,15 @@
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="<?php echo $url; ?>">
-	<meta property="og:title" content="<?php echo $title; ?> - Dwan">
-	<meta property="og:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
+	<meta property="og:title" content="<?php echo $title; if($title != "Dwan") echo " - Dwan"; ?>">
+	<meta property="og:description" content="<?php echo $description; ?>">
 	<meta property="og:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:url" content="<?php echo $url; ?>">
-	<meta property="twitter:title" content="<?php echo $title; ?> - Dwan">
-	<meta property="twitter:description" content="Hello! My name is dwan and I do stuff like concept-ing, designing, producing and also delivering UI and UX.">
+	<meta property="twitter:title" content="<?php echo $title; if($title != "Dwan") echo " - Dwan"; ?>">
+	<meta property="twitter:description" content="<?php echo $description; ?>">
 	<meta property="twitter:image" content="https://dwaan.com/dwaan/meta1200×628.jpg">
 <?php
 	}
