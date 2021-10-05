@@ -39,7 +39,7 @@
 	<link rel="manifest" href="/manifest.json">
 	<meta name="msapplication-TileColor" content="#A4CDD6">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#A4CDD6">
+	<meta name="theme-color" content="#202526">
 
 	<!-- Primary Meta Tags -->
 	<title><?php echo $title; ?> - This is me @dwaan .com</title>

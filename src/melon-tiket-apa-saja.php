@@ -154,7 +154,7 @@
 					<a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?node-id=2%3A3&viewport=404%2C25%2C0.10638881474733353&scaling=scale-down" target="_BLANK"><span>visit the prototype</span></a>
 				</div>
 				<div class="continue">
-					<a href="#next"><span><strong>next case study</strong>  <i>-  Tiket Apa Saja</i></span></a>
+					<a href="http://v1.dwaan.com"><span><strong>next case study</strong>  <i>-  dwaan.com v1</i></span></a>
 				</div>
 			</nav>
 		</section>

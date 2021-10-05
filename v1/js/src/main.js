@@ -43,6 +43,13 @@ document.addEventListener('click', function (e) {
 
 
 // Dark Mode
+function toggleSafariAddressBarColor() {
+	if(dark_mode) {
+		document.querySelector("meta[name=theme-color]").setAttribute("content", "#202526");
+	} else {
+		document.querySelector("meta[name=theme-color]").setAttribute("content", "#a4cdd6");
+	}
+}
 function toggleDarkMode() {
 	var size = (window.innerHeight > window.innerWidth) ? window.innerHeight : window.innerWidth,
 		pos = _q('#mode').getBoundingClientRect(),
@@ -65,6 +72,7 @@ function toggleDarkMode() {
 				addClass(_q("html"), "dark");
 			}}, 0)
 		;
+		toggleSafariAddressBarColor();
 	} else {
 		dark_mode = false;
 		tl
@@ -77,6 +85,7 @@ function toggleDarkMode() {
 			.set("html", { backgroundColor: "#A4CDD6" }, 0)
 			.to("html", { duration: .256, onComplete: function() {
 				removeClass(_q("html"), "dark");
+				toggleSafariAddressBarColor();
 			}}, 0)
 		;
 	}
@@ -131,6 +140,12 @@ var menu = {
 				}})
 			;
 
+			if(dark_mode) {
+				document.querySelector("meta[name=theme-color]").setAttribute("content", "#111");
+			} else {
+				document.querySelector("meta[name=theme-color]").setAttribute("content", "#202526");
+			}
+
 			e.preventDefault();
 		}
 		this.el.onmouseenter = function() {
@@ -182,10 +197,13 @@ var menu = {
 		this.el = _q('.menu__item .close span');
 		this.el.onclick = function (e) {
 			var tl = gsap.timeline();
+
 			tl
 				.to('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', { xPercent: -200, opacity: 0, duration: .512, ease: "expo.in", stagger: {
 					from: 0,
 					amount: .128
+				}, onComplete: function() {
+					toggleSafariAddressBarColor();
 				}})
 				.to('.menu__pop .menu__item', { opacity: 0, duration: .256, ease: "power2" })
 			;
@@ -260,6 +278,12 @@ var loading = {
 		var that = this,
 			var_from = { xPercent: 0, yPercent: 100 },
 			var_to = { xPercent: 0, yPercent: 0, duration: .768, ease: "expo.inOut", onComplete: function() {
+					if(dark_mode) {
+						document.querySelector("meta[name=theme-color]").setAttribute("content", "#111111");
+					} else {
+						document.querySelector("meta[name=theme-color]").setAttribute("content", "#202526");
+					}
+
 					if(callback != undefined)
 						callback();
 					}
@@ -321,6 +345,8 @@ var loading = {
 					that.update({duration: 0, height: 0});
 					// Unhide loading
 					gsap.set(that.selector.querySelector(".loading"), {opacity: 1});
+					// Restore safari address bar color
+					toggleSafariAddressBarColor();
 					// Run callback
 					if(callback != undefined)
 						callback();
