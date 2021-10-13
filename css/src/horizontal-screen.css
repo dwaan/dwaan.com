@@ -542,9 +542,6 @@ header {
 .me .text {
 	padding: 0 calc(2 * var(--padx));
 }
-.me .arrow-big .arrow {
-	margin-bottom: -100px;
-}
 
 .intro .text p {
 	font-size: .9rem;
