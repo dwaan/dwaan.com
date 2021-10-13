@@ -416,9 +416,6 @@ header {
 		width: 465px;
 	}
 }
-/* Style with logo on the bottom */
-.style-bottom-logo {
-}
 /* Style truncate */
 .style-trunc {
 	padding: var(--padxxl) 0 0;

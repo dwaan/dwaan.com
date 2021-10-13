@@ -586,8 +586,6 @@ header {
 	height: 12px;
 	transform: initial;
 }
-.igstage .thumbs a:after {
-}
 
 @media (min-height: 1024px) {
 	.cofound {

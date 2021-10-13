@@ -519,7 +519,7 @@ picture img {
 	text-transform: uppercase;
 	font-weight: 400;
 	color: inherit;
-},
+}
 #loader span:nth-child(2) {
 	display: block;
 	margin: 0 0 0 20px;
@@ -528,7 +528,7 @@ picture img {
 	height: var(--pads);
 	border: 1px solid var(--black);
 	background-color: transparent;
-	appereance: none;
+	appearance: none;
 	border-radius: calc(var(--pads) / 2);
 }
 #loader span i {
@@ -2337,8 +2337,6 @@ img.rounded {
 #permission .cuddle {
 	display: flex;
 	flex-flow: row;
-}
-#permission .cuddle {
 }
 #permission input[type="text"] {
 	max-width: 175px;
