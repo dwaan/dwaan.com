@@ -14,6 +14,7 @@
 
 	<main data-barba="container" data-barba-namespace="home" class="home">
 		<div id="flarestart"></div>
+
 		<section class="middle full">
 			<div class="main-text">
 				<h1>Hello, my name is <a href="./me" arial-title="About Dwan">Dwan</a></h1>
@@ -27,7 +28,7 @@
 
 		<section id="casestudy" class="middle full">
 			<div class="padding">
-				<a href="./replurk2020" class="plurktitle">Replurk 2020</a>
+				<a href="./replurk2020" class="plurktitle">RePlurk 2020</a>
 			</div>
 			<div class="arrow-small">
 				<a href="./replurk2020" class="arrow">

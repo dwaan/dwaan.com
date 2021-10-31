@@ -4,8 +4,8 @@
 	$auth_url = "$base_url/OAuth/authorize";
 	$acc_url = "$base_url/OAuth/access_token";
 	$api_url = "$base_url/APP";
-	$conskey = 'qrMzkjPRRmaM';
-	$conssec = 'HMQ7W2gkzECcY753BG7h4f9LWDrf1LK3';
+	$app_key = 'qrMzkjPRRmaM';
+	$app_secret = 'HMQ7W2gkzECcY753BG7h4f9LWDrf1LK3';
 
 	function debug($str) {
 		print("<pre>");
@@ -47,41 +47,46 @@
 
 	session_start();
 
-	$_SESSION['year'] = '2020';
-
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') $url = 'https://';
     else $url = 'http://';
     $url.= $_SERVER['HTTP_HOST'];
     $url.= $_SERVER['REQUEST_URI'];
 
-	$oauth = new OAuth($conskey, $conssec, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
+	$oauth = new OAuth($app_key, $app_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
 
 	try {
 		if(isset($_GET['request'])) {
 			$request = $_GET['request'];
+
 			if ($request == "token") {
 				// Get first token
-				$request_token_info = $oauth->getRequestToken($req_url);
+				$uri = $_SERVER['REQUEST_URI'];
+				$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+				$url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+				$url = explode("?", $url);
+				$url = $url[0];
+
+				$request_token_info = $oauth->getRequestToken($req_url, $url . "?request=permanenttoken");
 				$_SESSION['token'] = $request_token_info['oauth_token'];
 				$_SESSION['secret'] = $request_token_info['oauth_token_secret'];
 
-				success('{"token":"'.$_SESSION['token'].'","url":"'.$auth_url.'?oauth_token='.$_SESSION['token']. '"}');
+				success('{"token":"'.$_SESSION['token'].'","url":"'.$auth_url.'?oauth_token='.$_SESSION['token'].'"}');
 			} else if ($request == "permanenttoken") {
 				if (!isset($_SESSION['token']) || !isset($_SESSION['secret'])) {
 					error('No token/token secret available');
 				}
-				if (!isset($_GET['token'])) {
+				if (!isset($_GET['oauth_verifier'])) {
 					error('Please provide access token');
 				}
 
-				$_SESSION['oauth_token'] = $_GET['token'];
+				$_SESSION['oauth_token'] = $_GET['oauth_verifier'];
 
 				$oauth->setToken($_SESSION['token'], $_SESSION['secret']);
 				$access_token_info = $oauth->getAccessToken($acc_url, $url, $_SESSION['oauth_token']);
 				$_SESSION['permanenttoken'] = $access_token_info['oauth_token'];
 				$_SESSION['permanentsecret'] = $access_token_info['oauth_token_secret'];
-
-				success('"Permanent tokens are saved"');
+				
+				readfile("plurk-api-success.php");
 			} else if ($request == "logout") {
 				session_destroy();
 				success('"You\'re logged out"');
@@ -116,7 +121,12 @@
 
 				$parameters = array("filter" => $filter);
 				do {
-					if($offset != 0) $parameters = array("offset" => $offset, "filter" => $filter);
+					if($offset != 0) $parameters = array(
+						"offset" => $offset, 
+						"filter" => $filter,
+						"minimal_data" => true,
+						"minimal_user" => true
+					);
 
 					$oauth->fetch("$api_url/Timeline/getPlurks", $parameters);
 					$plurks = json_decode($oauth->getLastResponse());

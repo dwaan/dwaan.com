@@ -3,7 +3,7 @@
 
 <head>
 <?php
-	$title = "RePlurk 2020";
+	$title = "RePlurk 2021";
 	$description = "Unofficial Plurk year end recap";
 	include_once "part_metacss.php";
 ?>
@@ -12,14 +12,14 @@
 <body data-barba="wrapper">
 <?php include_once "part_head.php" ?>
 
-<main data-barba="container" data-barba-namespace="plurk2020" class="plurk plurk2020 nosnap">
+<main data-barba="container" data-barba-namespace="plurk2021" class="plurk plurk2021 nosnap">
 	<section id="hello" class="grant middle first">
 		<div class="animate middle">
 			<div class="thumbs"></div>
 			<div class="text">
 				<p class="loading">Loading your plurk</p>
 			</div>
-			<div class="bgtext"><sup>20</sup><sub>20</sub></div>
+			<div class="bgtext"><sup>20</sup><sub>21</sub></div>
 			<div class="arrow-big">
 				<a href="#statistics" class="arrow scrollto">scroll</a>
 			</div>
@@ -46,9 +46,9 @@
 	<section id="permission" class="middle first">
 		<div class="text">
 			<form action="" method="GET">
-				<h1>Replurk<br/><sup>20</sup><sub>20</sub></h1>
+				<h1>Replurk<br/><sup>20</sup><sub>21</sub></h1>
 				<ol>
-				<li><p>Grant Replurk 2020 access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
+				<li><p>Grant Replurk 2021 access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
 				<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">
 						<p>Please reopen this website in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this website.</p>
@@ -57,7 +57,7 @@
 			</ol>
 			</form>
 		</div>
-		<div class="bgtext"><sup>20</sup><sub>20</sub></div>
+		<div class="bgtext"><sup>20</sup><sub>21</sub></div>
 	</section>
 
 	<section class="middle"></section>

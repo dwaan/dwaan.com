@@ -1,13 +1,13 @@
 {
 	"name": "dwaan",
-	"version": "1.0.0",
+	"version": "2.1.0",
 	"description": "dwaan.com source code",
 	"main": "js/main.js",
 	"directories": {
 		"doc": "doc"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "gulp"
 	},
 	"repository": {
 		"type": "git",
@@ -20,15 +20,15 @@
 	},
 	"homepage": "https://github.com/dwaan/dwaan#readme",
 	"devDependencies": {
-		"autoprefixer": "^9.8.6",
-		"browser-sync": "^2.26.14",
-		"cssnano": "^4.1.10",
+		"autoprefixer": "^10.3.7",
+		"browser-sync": "^2.27.5",
+		"cssnano": "^5.0.8",
 		"gulp": "^4.0.2",
 		"gulp-concat": "^2.6.1",
 		"gulp-connect-php": "^1.0.3",
 		"gulp-htmlmin": "^5.0.1",
-		"gulp-postcss": "^8.0.0",
-		"gulp-sourcemaps": "^2.6.5",
+		"gulp-postcss": "^9.0.1",
+		"gulp-sourcemaps": "^3.0.0",
 		"gulp-uglify": "^3.0.2"
 	},
 	"dependencies": {

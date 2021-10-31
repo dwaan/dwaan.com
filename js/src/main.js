@@ -81,7 +81,7 @@ barba.hooks.beforeEnter(function(data) {
 
 	window.scrollTo(0, 0);
 
-	if (data.next.namespace != "plurk") {
+	if (data.next.namespace != "plurk2020" && data.next.namespace != "plurk2021") {
 		// Scroll animate arrow
 		var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
 		middle.forEach(function (el, idx) {
@@ -241,7 +241,7 @@ barba.init({
 						loader.empty();
 						done();
 					});
-				} else if (data.next.namespace == "plurk") {
+				} else if (data.next.namespace == "plurk2020" || data.next.namespace == "plurk2021") {
 					animate.showinstant(next, function() {
 						loader.empty();
 						done();
@@ -1035,8 +1035,8 @@ barba.init({
 			return true;
 		},
 		from: {
-			namespace: ['plurk']
+			namespace: ['plurk2020', 'plurk2021']
 		}
 	}],
-	views: [home, detail, me, hi, lost, plurk]
+	views: [home, detail, me, hi, lost, plurk2020, plurk2021]
 });
