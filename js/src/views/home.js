@@ -1,4 +1,4 @@
-var home = {
+var homeview = {
 	namespace: 'home',
 	beforeEnter: function(data) {
 		var next = data.next.container;

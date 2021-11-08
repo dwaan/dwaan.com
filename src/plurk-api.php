@@ -70,7 +70,7 @@
 				$_SESSION['token'] = $request_token_info['oauth_token'];
 				$_SESSION['secret'] = $request_token_info['oauth_token_secret'];
 
-				success('{"token":"'.$_SESSION['token'].'","url":"'.$auth_url.'?oauth_token='.$_SESSION['token'].'"}');
+				success('{"token":"'.$_SESSION['token'].'","url":"'.$auth_url.'?oauth_token='.$_SESSION['token'].'&deviceid='.session_id().'&model=RePlurk"}');
 			} else if ($request == "permanenttoken") {
 				if (!isset($_SESSION['token']) || !isset($_SESSION['secret'])) {
 					error('No token/token secret available');
@@ -87,9 +87,6 @@
 				$_SESSION['permanentsecret'] = $access_token_info['oauth_token_secret'];
 				
 				readfile("plurk-api-success.php");
-			} else if ($request == "logout") {
-				session_destroy();
-				success('"You\'re logged out"');
 			} else {
 				error();
 			}
@@ -214,6 +211,11 @@
 				} else {
 					error('Please provide url and other parameters');
 				}
+			} else if ($fetch == "logout") {
+				$oauth->fetch("$api_url/expireToken");
+
+				session_destroy();
+				success('"You\'re logged out"');
 			} else {
 				// Output user data by default
 				$oauth->fetch("$api_url/Users/me");

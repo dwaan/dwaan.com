@@ -28,10 +28,11 @@
 
 		<section id="casestudy" class="middle full">
 			<div class="padding">
-				<a href="./replurk2020" class="plurktitle">RePlurk 2020</a>
+				<a href="./replurk" class="plurktitle">RePlurk 2021</a>
+				<a href="./replurk2020" class="plurksubtitle">or 2020</a>
 			</div>
 			<div class="arrow-small">
-				<a href="./replurk2020" class="arrow">
+				<a href="./replurk" class="arrow">
 					<span>Weekend Project</span>
 				</a>
 			</div>

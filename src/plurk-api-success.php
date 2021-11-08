@@ -5,11 +5,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login Success</title>
 	<script>
-        if (window.opener.replurk2021) window.opener.replurk2021.login();
-        else if (window.opener.replurk2020) window.opener.replurk2020.login();
-        else if (window.opener.replurk) window.opener.replurk.login();
+        var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
 
-		window.close()
+        if(namespace == "replurk2021") { window.opener.replurk2021.login(); namespace = ""; }
+        else if(namespace == "replurk2020") { window.opener.replurk2020.login(); namespace = ""; }
+        else if(namespace == "replurk") { window.opener.replurk.login(); namespace = ""; }
+
+		if(namespace == "") window.close()
 	</script>
     <style>
         * {

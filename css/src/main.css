@@ -73,6 +73,7 @@
 	--white: #fff;
 	--dark-white: #E8EAEB;
 	--yellow: #FFD700;
+	--black-75: rgba(0, 0, 0, 0.5);
 	--black-50: rgba(0, 0, 0, 0.25);
 	--black-25: rgba(0, 0, 0, 0.15);
 	--black-gray: #111111;
@@ -85,7 +86,8 @@
 	--black: #ccc;
 	--white: #000;
 	--dark-white: #111;
-	--yellow: rgb(112, 95, 2);
+	--yellow: #705f02;
+	--black-75: rgba(255, 255, 255, 0.50);
 	--black-50: rgba(255, 255, 255, 0.25);
 	--black-25: rgba(255, 255, 255, 0.15);
 	--black-gray: #bbb;
@@ -145,7 +147,7 @@
 	border-radius: 4px;
 	transform: translate3d(-50%,0,0);
 	z-index: 9999;
-	opacity: .5
+	font-size: .7rem;
 }
 
 
@@ -155,7 +157,7 @@ html {
 	letter-spacing: 0.02em;
 	color: var(--black);
 	background-color: var(--white);
-	transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04), background-color .5s ease, color .25s ease;
+	/* transition: font-size .5s cubic-bezier(.4,1.6,.62,1.04), background-color .5s ease, color .25s ease; */
 	overflow: hidden;
 }
 /* Common styles */
@@ -1006,6 +1008,12 @@ header .right {
 }
 .padding .plurktitle {
 	height: auto!important;
+}
+.padding .plurksubtitle {
+	height: auto!important;
+	margin-top: 2.5vh;
+	font-size: 1.6rem;
+	font-weight: 300;
 }
 .padding,
 .padding sub,
@@ -2238,7 +2246,7 @@ img.rounded {
 	position: absolute;
 	z-index: -1;
 	top: 0;
-	left: initial;
+	left: 0;
 	bottom: 0;
 	right: 0;
 	overflow: hidden;
@@ -2499,6 +2507,13 @@ img.rounded {
 	display: block;
 	margin-bottom: auto;
 }
+.stats .post i {
+	background-color: transparent;
+	display: inline;
+	font-style: italic;
+	padding: 0;
+	color: inherit;
+}
 .stats img {
 	display: inline-block;
 	width: auto;
@@ -2509,9 +2524,11 @@ img.rounded {
 	display: flex;
 	flex-flow: column;
 	justify-content: flex-end;
+	align-self: center;
 	background-color: var(--white);
 	margin-bottom: var(--padm);
 	border-radius: 10000px;
+	width: var(--padxxl);
 	overflow: hidden;
 	transition: background-color .5s ease;
 }
@@ -2524,6 +2541,21 @@ img.rounded {
 	height: 48px;
 	border-radius: 10000px;
 }
+.stats .avatar .title {
+	color: var(--white);
+	display: inline;
+	font-size: 1rem;
+	text-transform: none;
+	letter-spacing: .02em;
+	text-align: left;
+}
+.stats .avatar .htmlcontent {
+	flex: 1;
+	justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+}
+
 .stats .center {
 	text-align: center;
 }
@@ -2619,12 +2651,22 @@ img.rounded {
 	text-transform: uppercase;
 }
 .stats .title {
+	display: block;
 	align-items: center;
-	text-align: right;
+	text-align: left;
+	color: var(--white);
 }
 .stats .title i {
-	text-align: left;
-	margin-right: auto;
+	display: inline-block;
+}
+.stats .title strong {
+	font-weight: normal;
+	display: block;
+	text-transform: initial;
+	color: var(--white);
+	letter-spacing: .05rem;
+	opacity: .75;
+	padding: 2px 0 0;
 }
 .stats .chart {
 	flex: 1;
@@ -2644,8 +2686,17 @@ img.rounded {
 /* Plurk - Statistics - Spesific Style */
 .postcontent img {
 	width: auto;
-	height: 24px;
+	max-width: 64px;
 	margin-right: 4px;
+}
+.postcontent .title {
+	display: flex;
+}
+.postcontent .title i {
+	margin-right: auto;
+}
+.postcontent .emoticon_my {
+	max-width: initial;
 }
 .postcontent .post {
 	display: -webkit-box;
@@ -2668,7 +2719,14 @@ img.rounded {
 	transform: translate(0, -50%);
 }
 
-.chart .plurkers .name {
+.chart .plurkers,
+.stats .plurkers {
+	display: flex;
+	justify-content: space-around;
+	flex: 1;
+}
+.chart .plurkers .name,
+.stats .plurkers .name {
 	margin-right: auto;
 	line-height: 24px;
 	white-space: nowrap;
@@ -2676,7 +2734,8 @@ img.rounded {
 	text-overflow: ellipsis;
 }
 .grid .count,
-.chart .plurkers .count {
+.chart .plurkers .count,
+.stats .plurkers .count {
 	color: var(--black);
 	background-color: var(--yellow);
 	line-height: 24px;
@@ -2689,7 +2748,8 @@ img.rounded {
 	padding: 0 var(--pads);
 	transition: background-color .5s ease;
 }
-.chart .plurkers .avatar img {
+.chart .plurkers .avatar img,
+.stats .plurkers .avatar img {
 	height: 24px;
 	margin-right: var(--pads);
 }
@@ -2732,12 +2792,20 @@ img.rounded {
 }
 #credits p {
 	margin: var(--pads) 0;
-	opacity: .5;
+}
+#credits .like,
+#credits .noaffiliation {
+	color: var(--black-75);
+}
+#credits .noaffiliation {
+	font-size: .8rem;
+	letter-spacing: .025rem;
+	line-height: 1.25rem;
 }
 #credits a {
 	text-decoration: none;
-	font-weight: 500;
 	transition: color .5s ease;
+	font-weight: 500;
 }
 #credits a:hover {
 	color: var(--red);

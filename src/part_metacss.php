@@ -49,8 +49,7 @@
 	<link rel="mask-icon" href="/dwaan/safari-pinned-tab.svg" color="#000000">
 	<meta name="msapplication-TileColor" content="#ffc40d">
 	<meta name="msapplication-TileImage" content="/dwaan/mstile-144x144.png">
-	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-	<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+	<meta name="theme-color" content="#ffffff">
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">

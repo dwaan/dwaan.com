@@ -1,8 +1,10 @@
-<!doctype html><html lang="en"><head><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login Success</title><script>if (window.opener.replurk2021) window.opener.replurk2021.login();
-        else if (window.opener.replurk2020) window.opener.replurk2020.login();
-        else if (window.opener.replurk) window.opener.replurk.login();
+<!doctype html><html lang="en"><head><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login Success</title><script>var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
 
-		window.close()</script><style>* {
+        if(namespace == "replurk2021") { window.opener.replurk2021.login(); namespace = ""; }
+        else if(namespace == "replurk2020") { window.opener.replurk2020.login(); namespace = ""; }
+        else if(namespace == "replurk") { window.opener.replurk.login(); namespace = ""; }
+
+		if(namespace == "") window.close()</script><style>* {
             line-height: 1.2;
             margin: 0;
         }

@@ -1,4 +1,4 @@
-var lost = {
+var lostview = {
 	namespace: 'lost',
 	beforeEnter: function(data) {
 		var next = data.next.container;

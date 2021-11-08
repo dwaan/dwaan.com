@@ -1,4 +1,4 @@
-var hi = {
+var hiview = {
 	namespace: 'hi',
 	beforeEnter: function(data) {
 		var next = data.next.container;

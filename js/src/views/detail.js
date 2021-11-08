@@ -1,4 +1,4 @@
-var detail = {
+var detailview = {
 	namespace: 'detail',
 	beforeEnter: function(data) {
 		var next = data.next.container;

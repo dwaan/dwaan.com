@@ -10,14 +10,29 @@ var logosvg = _q(".logo").innerHTML;
 
 //////////////// Dark Mode
 var darkmode = false;
-function toggleDarkMode() {
+var browserColorLight = "";
+var browserColorDark = "";
+function toggleDarkMode(duration = 0.24, ease = "power3.in") {
+	var color = "";
+
 	if (darkmode) {
+		color = browserColorDark == "" ? "#000000" : browserColorDark;
 		addClass(_q("html"), "dark");
-		document.querySelector("meta[name=theme-color]").setAttribute("content", "#000000")
 	} else {
+		color = browserColorLight == "" ? "#FFFFFF" : browserColorLight;
 		removeClass(_q("html"), "dark");
-		document.querySelector("meta[name=theme-color]").setAttribute("content", "#ffffff")
 	}
+
+	gsap.to(document.querySelector("meta[name=theme-color]"), { 
+		attr: { "content": color }, 
+		duration: duration, 
+		ease: ease 
+	});
+	gsap.to(document.querySelector("html"), { 
+		backgroundColor: color, 
+		duration: duration,
+		ease: ease 
+	});
 }
 if (window.matchMedia){
 	var darkmodemedia = window.matchMedia('(prefers-color-scheme: dark)');
@@ -34,11 +49,13 @@ if (window.matchMedia){
 
 
 // HTML Log
+var debug = true;
 function log(params) {
-	console.log(params);
-	_q("#log").innerHTML = params;
+	if(debug) {
+		console.log(params);
+		_q("#log").innerHTML = params;
+	}
 }
-console.warning = function() {}
 
 // Report size of window
 if (REPORTSIZE) {
@@ -81,7 +98,7 @@ barba.hooks.beforeEnter(function(data) {
 
 	window.scrollTo(0, 0);
 
-	if (data.next.namespace != "plurk2020" && data.next.namespace != "plurk2021") {
+	if (data.next.namespace != "replurk2020" && data.next.namespace != "replurk2021") {
 		// Scroll animate arrow
 		var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
 		middle.forEach(function (el, idx) {
@@ -241,7 +258,7 @@ barba.init({
 						loader.empty();
 						done();
 					});
-				} else if (data.next.namespace == "plurk2020" || data.next.namespace == "plurk2021") {
+				} else if (data.next.namespace == "replurk2020" || data.next.namespace == "replurk2021") {
 					animate.showinstant(next, function() {
 						loader.empty();
 						done();
@@ -1002,7 +1019,12 @@ barba.init({
 			tl.to(current.querySelectorAll("#hello, #permission"),  {
 				opacity: 0,
 				duration: 1,
-				ease: "power3.in"
+				ease: "power3.in",
+				onStart: () => {
+					browserColorLight = "";
+					browserColorDark = "";
+					toggleDarkMode(1);
+				}
 			}, "hide+=.4");
 			tl.set(current, {
 				onComplete: function() {
@@ -1035,8 +1057,8 @@ barba.init({
 			return true;
 		},
 		from: {
-			namespace: ['plurk2020', 'plurk2021']
+			namespace: ['replurk2020', 'replurk2021']
 		}
 	}],
-	views: [home, detail, me, hi, lost, plurk2020, plurk2021]
+	views: [homeview, detailview, meview, hiview, lostview, replurk2020view, replurk2021view]
 });

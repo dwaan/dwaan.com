@@ -12,7 +12,7 @@
 <body data-barba="wrapper">
 <?php include_once "part_head.php" ?>
 
-<main data-barba="container" data-barba-namespace="plurk2021" class="plurk plurk2021 nosnap">
+<main data-barba="container" data-barba-namespace="replurk2021" class="plurk plurk2021 nosnap">
 	<section id="hello" class="grant middle first">
 		<div class="animate middle">
 			<div class="thumbs"></div>
@@ -46,26 +46,26 @@
 	<section id="permission" class="middle first">
 		<div class="text">
 			<form action="" method="GET">
-				<h1>Replurk<br/><sup>20</sup><sub>21</sub></h1>
+				<h1>RePlurk<br/><sup>20</sup><sub>21</sub></h1>
 				<ol>
-				<li><p>Grant Replurk 2021 access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
-				<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
+					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
+					<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">
 						<p>Please reopen this website in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this website.</p>
 						<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this website. Other than session data, this website didn't store any of your Plurk data in the server.</p>
 					</li>
-			</ol>
+				</ol>
 			</form>
 		</div>
 		<div class="bgtext"><sup>20</sup><sub>21</sub></div>
 	</section>
 
-	<section class="middle"></section>
+	<section class="middle" style="pointer-events: none;"></section>
 	<section id="credits" class="middle">
 		<div class="text">
-			<p class="made">Made with ❤️ in TLV</p>
-			<p class="like">If you like this website, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">Plurk</a> page. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an 🍦 ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">some 🪙 coins</a> 😬.</p>
-			<p class="noaffiliation"><u>This website doesn't have any affiliation with Plurk HQ</u>. All of data from Plurk are not hosted inside this website. Please feel free to <a href="./say-hi">contact me</a> if there's some copyrighted materials that shouldn't be in this website.</p>
+			<p class="made">Made with &hearts; in TLV</p>
+			<p class="like">If you like this website, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">plurk profile</a>. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">plurk coins</a> ;).</p>
+			<p class="noaffiliation">This website doesn't have any affiliation with Plurk HQ. All of data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this website, feel free to <a href="./say-hi">contact me</a> for removal.</p>
 		</div>
 	</section>
 
