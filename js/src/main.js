@@ -1,4 +1,4 @@
-var REPORTSIZE = false;
+var debug = false;
 
 var gToArray = gsap.utils.toArray;
 var gRandom = gsap.utils.random;
@@ -47,18 +47,8 @@ if (window.matchMedia){
 	});
 }
 
-
-// HTML Log
-var debug = true;
-function log(params) {
-	if(debug) {
-		console.log(params);
-		_q("#log").innerHTML = params;
-	}
-}
-
 // Report size of window
-if (REPORTSIZE) {
+if (debug) {
 	console.info("Window:", window.innerWidth, window.innerHeight);
 	console.info("Body:", _q("body").offsetWidth, _q("body").offsetHeight);
 	window.addEventListener('resize', function() {

@@ -2240,7 +2240,7 @@ img.rounded {
 	transition: background-color .5s ease;
 }
 .plurk .first h1 {
-	margin: var(--padl) 0 var(--pads)  0;
+	margin: var(--padl) 0 var(--padm)  0;
 }
 .plurk .bgtext {
 	position: absolute;
@@ -2500,6 +2500,12 @@ img.rounded {
 	opacity: 1;
 	height: 100%;
 }
+.stats .anim span small {
+	margin-top: var(--pads);
+	letter-spacing: .05rem;
+	line-height: 135%;
+	opacity: .75;
+}
 .stats .anim .big {
 	font-weight: 500;
 	line-height: 100%;
@@ -2606,6 +2612,9 @@ img.rounded {
 }
 .grid.hashtags .htmlcontent .count {
 	transform: translate(50%,-75%);
+}
+.grid .htmlcontent .count {
+		color: var(--black);
 }
 @media (min-width: 375px) {
 	.grid .htmlcontent {

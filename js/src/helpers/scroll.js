@@ -82,6 +82,11 @@ var scroll = {
 			}));
 		});
 	},
+	refresh: function() {
+		for (var i = 0; i < this.st.length; i++) {
+			this.st[i].refresh();
+		}
+	},
 	// Add custom animation
 	push: function(animationFunction, scrollFunction) {
 		if (!animationFunction || !scrollFunction) return false;
