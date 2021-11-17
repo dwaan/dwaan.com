@@ -2,8 +2,9 @@
 var api = {
 	url: "./plurk-api",
 	request: [],
-	call: function(url) {
-		return new Promise(resolve => {
+	storageExceeded: false,
+	call: function(url, wait = 2.5) {
+		return new Promise((resolve, reject) => {
 			var request;
 			var storage = sessionStorage.getItem(url);
 	
@@ -11,23 +12,26 @@ var api = {
 				// Give sometime out to allow browser to process
 				setTimeout(() => {
 					resolve(JSON.parse(LZString.decompressFromUTF16(storage)));
-				}, 2.5);
+				}, wait);
 			} else {
 				// Save it in array so it can be aborted later
 				this.request.push(new XMLHttpRequest());
 		
 				request = this.request[this.request.length - 1];
 				request.open('GET', this.url + url + "&include_plurks=false&minimal_user=true&minimal_data=true");
-				request.onload = function() {
-					if(this.status == 200 || this.status == 304) {
+				request.onload = () => {
+					if(request.status == 200 || request.status == 304) {
 						try {
-							sessionStorage.setItem(url, LZString.compressToUTF16(this.response));
+							sessionStorage.setItem(url, LZString.compressToUTF16(request.response));
 						} catch {
-							console.info("Exceeding maximum session storage");
+							if(!this.storageExceeded) {
+								console.info("Exceeding maximum session storage. Data will be downloaded directly from Plurk, if you recently open other RePlurk year in the same browser tab, you can try close this tab and open a new one to avoid downloading too much when reloading this page.");
+								this.storageExceeded = true;
+							}
 						}
-						resolve(JSON.parse(this.response));
+						resolve(JSON.parse(request.response));
 					}
-					else resolve(false);
+					else reject(false);
 				}
 				request.send();
 			}

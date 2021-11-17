@@ -26,12 +26,6 @@
 		</div>
 	</section>
 
-	<section id="statistics" class="grant middle">
-		<div class="text">
-			<p class="loading">Loading your plurk</p>
-		</div>
-	</section>
-
 	<section class="grant footer">
 		<div id="logout" class="logout">
 			<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +54,6 @@
 		<div class="bgtext"><sup>20</sup><sub>21</sub></div>
 	</section>
 
-	<section class="middle" style="pointer-events: none;"></section>
 	<section id="credits" class="middle">
 		<div class="text">
 			<p class="made">Made with &hearts; in TLV</p>
@@ -75,6 +68,8 @@
 			<p>Hi! you need to enable javascript to run this website. Thank you.</p>
 		</div>
 	</section>
+
+	<!-- Statistics will be inserted in here -->
 </main>
 
 <?php include_once "part_script.php"; ?>

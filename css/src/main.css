@@ -2209,6 +2209,14 @@ img.rounded {
 
 /* Plurk Statistics */
 
+.plurk:after {
+	content: "";
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	scroll-snap-align: start end;
+}
 .plurk sub,
 .plurk sup {
 	font-size: inherit;
@@ -2421,29 +2429,41 @@ img.rounded {
 }
 
 /* Plurk - Statistics */
-.stats {
+#statistics {
+	position: relative;
+	z-index: 2;
+	height: initial;
 	display: flex;
-	padding: calc(2.5 * var(--padl)) 0 calc(5 * var(--padl));
-	margin: 0 auto;
-	width: calc((var(--box) * var(--repeat)) + (var(--padl) * var(--repeat)));
 	flex-flow: row;
 	flex-wrap: wrap;
 	align-self: center;
 	align-items: flex-start;
 	justify-content: flex-start;
+	background-color: var(--white);
 }
-.stats h3,
-.stats .wrap {
+.statistics {
+	display: flex;
+	padding: calc(2.5 * var(--padl)) 0 calc(5 * var(--padl));
+	margin: 0 auto;
+	width: calc((var(--box) * var(--repeat)) + (var(--padl) * var(--repeat)));
+	height: initial;
+	min-height: initial;
+	transition: background-color .5s ease;
+}
+.statistics.title,
+.statistics.wrap {
 	margin: calc(var(--padl) / 2);
 }
-.stats .wrap {
+.statistics.wrap {
+	padding: 0;
 	width: var(--box);
 	height: calc(4/3 * var(--box));
 	transition: background-color .5s ease;
 }
-.stats h3 {
+.statistics.title {
 	position: relative;
 	display: flex;
+	height: auto;
 	flex-flow: row;
 	align-items: baseline;
 	font-size: 2rem;
@@ -2451,11 +2471,16 @@ img.rounded {
 	padding: var(--padxl) 0 0;
 	width: calc((var(--box) * var(--repeat)) + (var(--padl) * (var(--repeat) - 1)));
 }
-.stats h3 span {
+.statistics.title h3 {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+}
+.statistics.title span {
 	display: flex;
 	align-items: flex-start;
 }
-.stats h3 .line {
+.statistics.title .line {
 	flex: 1;
 	height: 1px;
 	margin-left: var(--pads);
@@ -2463,7 +2488,7 @@ img.rounded {
 	background-color: transparent;
 	border-radius: 1px;
 }
-.stats h3 .line i {
+.statistics.title .line i {
 	opacity: .5;
 	display: flex;
 	width: 100%;
@@ -2472,27 +2497,27 @@ img.rounded {
 	border-radius: 1px;
 	transition: background-color .5s ease;
 }
-.stats .span2 {
+.statistics.span2 {
 	width: calc((var(--box) * 2) + (var(--padl) * 1));
 }
-.stats .anim {
+.statistics .anim {
 	opacity: 0;
+	width: 100%;
 	height: 100%;
-	background-color: var(--yellow);
 	border-radius: var(--padm);
 	padding: var(--padl);
 	overflow: hidden;
-	transition: background-color .5s ease;
+	background-color: var(--lime);
 }
-.stats .anim p,
-.stats .anim a,
-.stats .anim span {
+.statistics .anim p,
+.statistics .anim a,
+.statistics .anim span {
 	color: var(--white);
 	opacity: 1;
 }
-.stats .anim > p,
-.stats .anim > a,
-.stats .anim > div {
+.statistics .anim > p,
+.statistics .anim > a,
+.statistics .anim > div {
 	position: relative;
 	display: flex;
 	flex-flow: column;
@@ -2500,32 +2525,33 @@ img.rounded {
 	opacity: 1;
 	height: 100%;
 }
-.stats .anim span small {
+.statistics .anim span small {
 	margin-top: var(--pads);
 	letter-spacing: .05rem;
 	line-height: 135%;
 	opacity: .75;
 }
-.stats .anim .big {
+.statistics .anim .big {
 	font-weight: 500;
+	font-size: var(--padxl);
 	line-height: 100%;
 	color: var(--white);
 	display: block;
 	margin-bottom: auto;
 }
-.stats .post i {
+.statistics .post i {
 	background-color: transparent;
 	display: inline;
 	font-style: italic;
 	padding: 0;
 	color: inherit;
 }
-.stats img {
+.statistics img {
 	display: inline-block;
 	width: auto;
 	height: auto;
 }
-.stats .graph {
+.statistics .graph {
 	flex: 1;
 	display: flex;
 	flex-flow: column;
@@ -2538,34 +2564,35 @@ img.rounded {
 	overflow: hidden;
 	transition: background-color .5s ease;
 }
-.stats .graph i {
+.statistics .graph i {
 	background-color: var(--yellow);
 	border-radius: 0;
 	transition: background-color .5s ease;
 }
-.stats .avatar img {
-	height: 48px;
+.statistics.avatar img {
+	height: 64px;
 	border-radius: 10000px;
 }
-.stats .avatar .title {
+.statistics.avatar .title {
 	color: var(--white);
 	display: inline;
 	font-size: 1rem;
 	text-transform: none;
 	letter-spacing: .02em;
 	text-align: left;
+	margin-top: auto;
 }
-.stats .avatar .htmlcontent {
+.statistics.avatar .htmlcontent {
 	flex: 1;
 	justify-content: space-between;
 	display: flex;
 	flex-direction: column;
 }
 
-.stats .center {
+.statistics .center {
 	text-align: center;
 }
-.stats .link {
+.statistics .link {
 	position: absolute;
 	display: block;
 	top: 0;
@@ -2573,11 +2600,11 @@ img.rounded {
 	padding: 0;
 	text-transform: uppercase;
 }
-.stats .link svg {
+.statistics .link svg {
 	fill: var(--white);
 	transition: fill .5s ease;
 }
-.stats .link:hover svg {
+.statistics .link:hover svg {
 	fill: var(--yellow);
 }
 
@@ -2639,36 +2666,38 @@ img.rounded {
 }
 
 /* Plurk - Statistics - Loading */
-.stats .loading,
-.stats .loading .big {
+.statistics.loading,
+.statistics.loading .big {
 	color: var(--white);
 }
-.stats .loading .big {
+.statistics.loading .big {
 	font-size: 4.5rem;
 }
-.stats .loading i.month {
+.statistics.loading i.month {
 	display: table;
 	margin-bottom: var(--pads);
 }
-.stats .title,
-.stats .loading i {
+.statistics.title,
+.statistics.loading i {
 	display: flex;
 	margin-top: var(--padm);
 	line-height: 140%;
 	font-size: .6rem;
 	letter-spacing: .1rem;
+}
+.statistics.loading i {
 	text-transform: uppercase;
 }
-.stats .title {
+.statistics.title {
 	display: block;
 	align-items: center;
 	text-align: left;
 	color: var(--white);
 }
-.stats .title i {
+.statistics .title i {
 	display: inline-block;
 }
-.stats .title strong {
+.statistics .title strong {
 	font-weight: normal;
 	display: block;
 	text-transform: initial;
@@ -2677,11 +2706,12 @@ img.rounded {
 	opacity: .75;
 	padding: 2px 0 0;
 }
-.stats .chart {
+.statistics .chart {
 	flex: 1;
+	margin-bottom: var(--padxl);
 }
-.stats i,
-.stats .loading i {
+.statistics i,
+.statistics.loading i {
 	display: inline-block;
 	padding: 4px 8px 2px;
 	font-style: normal;
@@ -2691,6 +2721,10 @@ img.rounded {
 	border-radius: 4px;
 	transition: background-color .5s ease;
 }
+.statistics .title {
+	font-size: .8rem;
+	text-transform: uppercase;
+}
 
 /* Plurk - Statistics - Spesific Style */
 .postcontent img {
@@ -2699,10 +2733,13 @@ img.rounded {
 	margin-right: 4px;
 }
 .postcontent .title {
+	font-size: .8rem;
 	display: flex;
+	margin-top: var(--padm);
 }
 .postcontent .title i {
 	margin-right: auto;
+	text-transform: uppercase;
 }
 .postcontent .emoticon_my {
 	max-width: initial;
@@ -2729,13 +2766,13 @@ img.rounded {
 }
 
 .chart .plurkers,
-.stats .plurkers {
+.statistics .plurkers {
 	display: flex;
 	justify-content: space-around;
 	flex: 1;
 }
 .chart .plurkers .name,
-.stats .plurkers .name {
+.statistics .plurkers .name {
 	margin-right: auto;
 	line-height: 24px;
 	white-space: nowrap;
@@ -2744,7 +2781,7 @@ img.rounded {
 }
 .grid .count,
 .chart .plurkers .count,
-.stats .plurkers .count {
+.statistics .plurkers .count {
 	color: var(--black);
 	background-color: var(--yellow);
 	line-height: 24px;
@@ -2758,14 +2795,13 @@ img.rounded {
 	transition: background-color .5s ease;
 }
 .chart .plurkers .avatar img,
-.stats .plurkers .avatar img {
+.statistics .plurkers .avatar img {
 	height: 24px;
 	margin-right: var(--pads);
 }
 
 /* Plurk - Statistics - Costum Page Style */
-#hello,
-#statistics {
+#hello {
 	z-index: 3;
 }
 #hello {
@@ -2777,13 +2813,6 @@ img.rounded {
 #hello .animate {
 	pointer-events: auto;
 	background-color: var(--lime);
-}
-#statistics {
-	display: table;
-	z-index: 2;
-	overflow: hidden;
-	background-color: var(--white);
-	transition: background-color .5s ease;
 }
 
 #credits {
@@ -2822,4 +2851,248 @@ img.rounded {
 #credits .made {
 	font-weight: 500;
 	opacity: 1;
+}
+
+
+
+/* Replurk 2021 */
+
+main.plurk2021 {
+	scroll-snap-type: both mandatory;
+}
+.plurk2021 #hello {
+	margin-bottom: 0!important;
+	padding-bottom: 0!important;
+}
+.plurk2021 .statistics {
+	padding: 0;
+	width: 100vw;
+	height: auto;
+	scroll-snap-align: start end;
+}
+
+.plurk2021 .statistics .wrap, 
+.plurk2021 .statistics h3 {
+	position: relative;
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+}
+.plurk2021 .statistics .wrap:before, 
+.plurk2021 .statistics h3:before {
+	background: url(../img/arrow.svg) no-repeat 100% 50%;
+	content: "";
+	display: block;
+	width: 120px;
+}
+.plurk2021 .statistics .wrap {
+	width: 100vw;
+}
+.plurk2021 .statistics .anim {
+	background: var(--white)!important;
+	border-radius: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.plurk2021 .statistics .anim > a,
+.plurk2021 .statistics .anim > p,
+.plurk2021 .statistics .anim > div {
+	color: var(--black);
+	height: auto;
+	width: 50vw;
+}
+@media (min-aspect-ratio: 1/1) {
+	.plurk2021 .statistics .anim > a,
+	.plurk2021 .statistics .anim > p,
+	.plurk2021 .statistics .anim > div {
+		height: auto;
+		width: calc(8 * var(--padx));
+	}
+}
+.plurk2021 .statistics .emoticons .anim > div,
+.plurk2021 .statistics .hashtags .anim > div {
+	max-width: 50vw;
+	width: auto;
+}
+.plurk2021 .statistics .anim > div.text {
+	min-height: calc(8 * var(--pady));
+}
+.plurk2021 .statistics .anim .graph,
+.plurk2021 .statistics .anim .chart,
+.plurk2021 .statistics .anim .htmlcontent {
+	height: calc(3 * var(--padxxl));
+}
+
+.plurk2021 .statistics h3 {
+	font-size: 5rem;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.plurk2021 .statistics h3 .line {
+	display: none;
+}
+.plurk2021 .statistics .anim a, 
+.plurk2021 .statistics .anim p, 
+.plurk2021 .statistics .anim span,
+.plurk2021 .statistics .anim .big,
+.plurk2021 .statistics.avatar .title {
+	color: var(--black);
+}
+.plurk2021 .statistics .anim .big {
+	font-size: 10vw;
+}
+.plurk2021 .statistics .loading i, 
+.plurk2021 .statistics i {
+	color: var(--white);
+	background: var(--black);
+}
+
+.plurk2021 .emoticons .title,
+.plurk2021 .hashtags .title {
+	text-align: center;
+}
+
+.plurk2021 .coins p {
+	display: flex;
+	align-items: center;
+}
+.plurk2021 .coins .anim .big,
+.plurk2021 .coins .anim .big:before,
+.plurk2021 .coins .anim .big:after {
+	position: relative;
+	z-index: 0;
+	display: block;
+	font-size: 24vw;
+	width: 40vw;
+	height: 40vw;
+	line-height: 40vw;
+	background-color: var(--yellow);
+	text-align: center;
+	border-radius: 100%;
+	text-shadow: -1vw 1vw .5vw rgba(0, 0, 0, .05);
+	margin-bottom: var(--padm);
+}
+.plurk2021 .coins .anim .big:before,
+.plurk2021 .coins .anim .big:after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	opacity: .5;
+	top: calc(1/2 * var(--padl));
+	left: calc(-1/2 * var(--padl));
+	filter: blur(.5vw);
+}
+.plurk2021 .coins .anim .big:after {
+	opacity: .25;
+	top: var(--padl);
+	left: calc(-1 * var(--padl));
+}
+.plurk2021 .coins .anim .text {
+	position: relative;
+	z-index: 4;
+	text-align: center;
+}
+@media (min-aspect-ratio: 1/1) {
+	.plurk2021 .coins .anim .big,
+	.plurk2021 .coins .anim .big:before,
+	.plurk2021 .coins .anim .big:after {
+		font-size: var(--padxxl);
+		width: calc(var(--padxxl) * 2);
+		height: calc(var(--padxxl) * 2);
+		line-height: calc(var(--padxxl) * 2);
+	}
+}
+
+/* Plurker list */
+.plurk2021 .avatar .anim .htmlcontent {
+	display: table;
+	text-align: center;
+	width: 100%;
+}
+.plurk2021 .avatar .title {
+	text-align: center;
+}
+.plurk2021 .avatar .anim > div {
+	width: 100%;
+}
+.plurk2021 .plurkers {
+	position: relative;
+	display: inline-flex;
+	width: 15vw;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 var(--pads) var(--padm);
+}
+.plurk2021 .plurkers:first-child {
+	width: calc(var(--padxl) * 2);
+	display: flex;
+	margin: 0 auto var(--padl);
+}
+.plurk2021 .plurkers .avatar img {
+	width: var(--padxl);
+	height: var(--padxl);
+}
+.plurk2021 .loved .count {
+	background-color: var(--red);
+	color: var(--white)!important;
+	line-height: 26px;
+}
+.plurk2021 .loved .count:before {
+	content: "♥";
+	margin-right: calc(var(--pads) / 2);
+}
+.plurk2021 .replurked .count:before {
+	content: "↩";
+	margin-right: calc(var(--pads) / 2);
+}
+@media (max-aspect-ratio: 1/1) {
+	.plurk2021 .plurkers {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		padding: 0 var(--padxl);
+	}
+	.plurk2021 .plurkers,
+	.plurk2021 .plurkers:first-child {
+		margin: 0 auto var(--padl);
+		width: auto;
+	}
+	.plurk2021 .plurkers .avatar {
+		width: var(--padxl);
+		margin-right: var(--padm);
+	}
+	.plurk2021 .avatar .title {
+		margin-top: var(--padl);
+	}
+}
+@media (min-aspect-ratio: 1/1) {
+	.plurk2021 .plurkers .count {
+		position: absolute;
+		top: calc(-.5 * var(--pady));
+		left: 50%;
+	}
+	.plurk2021 .plurkers .name {
+		margin-right: initial;
+		width: 100%;
+		text-align: center;
+	}
+	.plurk2021 .plurkers:first-child .avatar img {
+		width: calc(var(--padxl) * 2);
+		height: calc(var(--padxl) * 2);
+	}
+}
+
+.plurk2021 .statistics .anim .graph {
+	width: 25vh;
+	height: 50vh;
+	margin-bottom: 5vh;
+	background: var(--black-25);
+}
+.plurk2021 .statistics .anim .graph i {
+	background: var(--black);
 }

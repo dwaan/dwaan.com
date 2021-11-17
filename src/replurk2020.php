@@ -26,11 +26,7 @@
 		</div>
 	</section>
 
-	<section id="statistics" class="grant middle">
-		<div class="text">
-			<p class="loading">Loading your plurk</p>
-		</div>
-	</section>
+	<section id="statistics" class="grant middle"></section>
 
 	<section class="grant footer">
 		<div id="logout" class="logout">
@@ -60,7 +56,6 @@
 		<div class="bgtext"><sup>20</sup><sub>20</sub></div>
 	</section>
 
-	<section class="middle" style="pointer-events: none;"></section>
 	<section id="credits" class="middle">
 		<div class="text">
 			<p class="made">Made with &hearts; in TLV</p>

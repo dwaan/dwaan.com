@@ -18,6 +18,7 @@ function javascript() {
 			'node_modules/gsap/dist/ScrollToPlugin.min.js',
 			'node_modules/@barba/core/dist/barba.umd.js',
 			'node_modules/lz-string/libs/lz-string.min.js',
+			'node_modules/html2canvas/dist/html2canvas.min.js',
 			'js/src/helpers/helper.js',
 			'js/src/helpers/scroll.js',
 			'js/src/helpers/api.js',
