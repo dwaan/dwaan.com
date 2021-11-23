@@ -670,8 +670,8 @@ header {
 	font-size: 7vw;
 	letter-spacing: -.25vw;
 }
-.statistics .mediumnumber.big,
-.statistics .largenumber .big {
+.statistics.mediumnumber.big,
+.statistics.largenumber .big {
 	font-size: 6vw;
 }
 .postcontent .post {
@@ -696,14 +696,14 @@ header {
 	}
 
 	.statistics .big,
-	.statistics .span2.mediumnumber .big,
-	.statistics .span2.largenumber .big {
+	.statistics.span2.mediumnumber .big,
+	.statistics.span2.largenumber .big {
 		font-size: 5vw;
 	}
-	.statistics .mediumnumber .big {
+	.statistics.mediumnumber .big {
 		font-size: 4vw;
 	}
-	.statistics .largenumber .big {
+	.statistics.largenumber .big {
 		font-size: 3.5vw;
 	}
 

@@ -773,19 +773,38 @@ header {
 	--repeat: 1;
 	--box: 80vw;
 }
+.statistics.wrap {
+	height: calc(1.25 * var(--box));
+}
+.statistics.wrap.span2 {
+	height: calc(1.5 * var(--box));
+}
+.statistics.wrap.bubble,
+.statistics.wrap.hashtags {
+	height: calc(1.75 * var(--box));
+}
+.statistics.wrap.mediumnumber {
+	height: calc(1.25 * var(--box));
+}
 .statistics .big {
 	font-size: 20vw;
 	letter-spacing: -.05rem;
 }
-.statistics .mediumnumber .big {
-	font-size: 16vw;
-}
-.statistics .largenumber .big {
+.statistics.mediumnumber .big {
 	font-size: 14vw;
+}
+.statistics.largenumber .big {
+	font-size: 12vw;
 }
 .statistics .graph {
 	width: 50%;
 	margin: 0 auto var(--padm);
+}
+.statistics.avatar .htmlcontent {
+	margin-bottom: var(--padl);
+}
+.statistics .title {
+	margin-top: var(--padl);
 }
 .postcontent .post {
 	-webkit-line-clamp: 7;
@@ -796,19 +815,19 @@ header {
 		--box: 40vw;
 	}
 	.statistics .big,
-	.statistics .span2.mediumnumber .big,
-	.statistics .span2.largenumber .big {
+	.statistics.span2.mediumnumber .big,
+	.statistics.span2.largenumber .big {
 		font-size: 10vw;
 		letter-spacing: -.5vw;
 	}
-	.statistics .mediumnumber .big,
-	.statistics .largenumber .big {
+	.statistics.mediumnumber .big,
+	.statistics.largenumber .big {
 		font-size: 7.5vw;
 	}
 }
 
 .chart {
-	margin: var(--padl) 0;
+	margin: var(--padxl) 0;
 }
 
 @media (max-width: 600px) {
@@ -825,4 +844,33 @@ header {
 }
 #credits p {
 	font-size: .9rem;
+}
+
+@media (max-width: 400px) {
+	.chart {
+		margin: var(--pads) 0;
+	}
+	.grid .htmlcontent div {
+		margin: calc(var(--pads) * 2/3);
+	}
+	.emoticons .htmlcontent div {
+		margin: var(--padm);
+	}
+	.statistics.avatar .htmlcontent {
+		margin-bottom: var(--padm);
+	}
+	.statistics.wrap.span2.emoticons {
+		height: calc(var(--box) * 1.75);
+	}
+	.statistics .title {
+		margin-top: var(--pads);
+	}
+	.bubble .plurkers {
+		max-width: 30vw;
+	}
+	.bubble .plurkers:nth-child(1) .avatar img { width: calc(2.25 * var(--padl)) }
+	.bubble .plurkers:nth-child(2) .avatar img { width: calc(2 * var(--padl)) }
+	.bubble .plurkers:nth-child(3) .avatar img { width: calc(1.75 * var(--padl)) }
+	.bubble .plurkers:nth-child(4) .avatar img { width: calc(1.15 * var(--padl)) }
+	.bubble .plurkers:nth-child(5) .avatar img { width: calc(1 * var(--padl)) }
 }

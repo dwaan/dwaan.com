@@ -234,7 +234,7 @@ class replurk {
 		replurker_count: 0,
 		replurker_list: [],
 		favourite_count: 0,
-		favourite_list: [],
+		favorite_list: [],
 		response_count: 0,
 		responded_count: 0,
 		responded_other_count: 0,
@@ -255,7 +255,7 @@ class replurk {
 			this.replurker_count = 0;
 			this.replurker_list = [];
 			this.favourite_count = 0;
-			this.favourite_list = [];
+			this.favorite_list = [];
 			this.response_count = 0;
 			this.responded_count = 0;
 			this.responded_other_count = 0;
@@ -322,23 +322,46 @@ class replurk {
 				}, 0);	
 
 				// Scroll animation wrap section
-				scroll.push(tl => {
-					tl.fromTo(el.children, {
-						y: window.innerHeight * 1/5,
-					}, {
-						y: 0,
-						ease: "ease.out"
-					}, 0);
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						scroller: this.next,
-						start: "0 100%-=100px",
-						end: "100px 100%-=100px",
-						animation: tl,
-						scrub: 1
-					});
+				ScrollTrigger.matchMedia({
+					"(min-aspect-ratio: 1/1)": () => {
+						scroll.push(tl => {
+							tl.fromTo(el.children, {
+								y: window.innerHeight * 1/5
+							}, {
+								y: 0,
+								ease: "ease.out"
+							}, 0);
+							return tl;
+						}, tl => {
+							return ScrollTrigger.create({
+								trigger: el,
+								scroller: this.next,
+								start: "0 100%-=100px",
+								end: "100px 100%-=100px",
+								animation: tl,
+								scrub: 1
+							});
+						});
+					},
+					"(max-aspect-ratio: 1/1)": () => {
+						scroll.push(tl => {
+							tl.fromTo(el.children, {
+								y: 0
+							}, {
+								y: 0
+							}, 0);
+							return tl;
+						}, tl => {
+							return ScrollTrigger.create({
+								trigger: el,
+								scroller: this.next,
+								start: "0 100%-=100px",
+								end: "100px 100%-=100px",
+								animation: tl,
+								scrub: 1
+							});
+						});
+					}
 				});
 					
 				scroll.push(function(tl) {
@@ -420,7 +443,7 @@ class replurk {
 						scrub: 1
 					});
 				});
-			}	
+			}
 
 			// Capture function
 			var capture = el.querySelector(".capture small");
@@ -544,7 +567,7 @@ class replurk {
 		},
 		drawUserList: async function(style, id, title, list) {
 			var html = "";
-			var max = 5;
+			var max = list.length >= 5 ? 5 : list.length;
 
 			this.drawHTML(style + " drawuserlist movetitle " + id, title, "<span class='info'>Downloading user data</span>");
 			for(var index = 0; index < max; index++) {
@@ -556,7 +579,7 @@ class replurk {
 						if (friend) {
 							var plurker = new plurkerElement(value.id, friend, "", plurker => {
 								plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user.id) + '" />');
-								plurker.name = new span('name', "@" + plurker.user.nick_name);
+								plurker.name = new span('name', plurker.user.display_name);
 								plurker.counts = new span('count', value.count);
 								plurker.el.appendChild(plurker.avatar.el);
 								plurker.el.appendChild(plurker.name.el);
@@ -574,6 +597,56 @@ class replurk {
 				}
 			}
 			this.el.querySelector("." + id + " .htmlcontent").innerHTML = html;
+
+			// Stagger animation
+			if(id == 'mostinteraction') {
+				scroll.push(tl => {
+					tl.fromTo(this.el.querySelectorAll("." + id +" .plurkers"), {
+						y: 100,
+						opacity: 0
+					}, {
+						y: 0,
+						opacity: 1,
+						stagger: {
+							amount: .2,
+							from: "end"
+						}
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: this.el.querySelector("." + id),
+						scroller: this.parent.next,
+						start: "100% 100%",
+						end: "100% 100%",
+						animation: tl,
+						scrub: 1
+					});
+				});
+			} else {
+				scroll.push(tl => {
+					tl.fromTo(this.el.querySelectorAll("." + id +" .plurkers"), {
+						y: 50,
+						opacity: 0
+					}, {
+						y: 0,
+						opacity: 1,
+						stagger: .1
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: this.el.querySelector("." + id),
+						scroller: this.parent.next,
+						start: "0% 100%",
+						end: "50% 100%",
+						animation: tl,
+						scrub: 2
+					});
+				});
+			}
 		},
 		attach: function(charttitle, node, max) {
 			var that = this;
@@ -682,7 +755,7 @@ class replurk {
 			if(this.coins_count > 0) this.draw('spansmall coins', this.coins_count, 'You recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
 	
 			try {
-				if(this.favourite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> Your Posts", this.favourite_list.sort(this.parent.most.sort));
+				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> Your Posts", this.favorite_list.sort(this.parent.most.sort));
 				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>Replurked</i> Your Posts", this.replurker_list.sort(this.parent.most.sort));
 			} catch {
 				console.info("Error while displaying your favourite and or replurker list");
@@ -795,7 +868,7 @@ class replurk {
 					}
 				}
 			},
-			draw: function() {;
+			draw: function() {
 				var index = 0;
 				if(this.data.length > 0) {
 					while((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
@@ -929,7 +1002,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>Your Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
+						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
 						return;
 					}
 				}
@@ -945,7 +1018,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>Your Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
+						this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
 						return;
 					}
 				}
@@ -961,9 +1034,98 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>Your Most Favorited</i> ' + datediff(value.posted), value.content, value.favorite_count);
+						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>Most Favorited</i> ' + datediff(value.posted), value.content, value.favorite_count);
 						return;
 					}
+				}
+			}
+		},
+		interaction: {
+			data: [],
+			parent: this,
+			count: function(response) {
+				var index = this.data.findIndex(function(el) {
+					return el.id == response.user_id;
+				});
+	
+				if(index < 0) {
+					this.data.push({
+						id: response.user_id,
+						count: 1,
+						multiplier: 1,
+						plurk_id: response.plurk_id
+					});
+				} else {
+					if(this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier++;
+					else this.data[index].multiplier = 1;
+					this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
+				}
+				this.data.sort(this.parent.most.sort);
+			},
+			draw: function() {
+				var result= [];
+				var length = 0;
+				var index = 0;
+				while(this.data[index] && length <= 5) {
+					if(this.data[index].id != this.parent.me.id) {
+						result.push(this.data[index]);
+						length++;
+					}
+					index++;
+				}
+
+				try {
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>interact</i> with you", result);
+				} catch {
+					console.info("Error while counting most interacted plurker");
+				}
+			}
+		},
+		mvp: {
+			data: [],
+			parent: this,
+			count: function(response, type) {
+				var index = this.data.findIndex(function(el) {
+					return el.id == response.user_id;
+				});
+	
+				if(index < 0) {
+					this.data.push({
+						id: response.user_id,
+						count: 1,
+						multiplier: 1,
+						plurk_id: response.plurk_id
+					});
+				} else {
+					if(type == "replurk") {
+						this.data[index].count += (response.count * 500);
+					} else if(type == "favorite") {
+						this.data[index].count += (response.count * 50);
+					} else {
+						if(this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier = 2;
+						else this.data[index].multiplier = 1;
+						this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
+					}
+				}
+				this.data.sort(this.parent.most.sort);
+			},
+			draw: function() {
+				console.log(this.data);
+				var result= [];
+				var length = 0;
+				var index = 0;
+				while(this.data[index] && length <= 5) {
+					if(this.data[index].id != this.parent.me.id) {
+						result.push(this.data[index]);
+						length++;
+					}
+					index++;
+				}
+
+				try {
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "<i>Most Valuable Plurkers</i>", result);
+				} catch {
+					console.info("Error while counting your mvp");
 				}
 			}
 		}
@@ -1683,7 +1845,7 @@ class replurk {
 					this.statistics.replurker_count += plurk.replurkers.length;
 					this.statistics.replurker_list = this.statistics.listCount(this.statistics.replurker_list, plurk.replurkers);
 					this.statistics.favourite_count += plurk.favorers.length;
-					this.statistics.favourite_list = this.statistics.listCount(this.statistics.favourite_list, plurk.favorers);
+					this.statistics.favorite_list = this.statistics.listCount(this.statistics.favorite_list, plurk.favorers);					
 					if (plurk.anonymous) this.statistics.whispers_count++;
 					if (plurk.coins) this.statistics.coins_count += plurk.coins;
 					if (plurk.porn) this.statistics.porn_count++;
@@ -1742,6 +1904,8 @@ class replurk {
 					for(var response of message.responses) {
 						// Find and count all responders
 						await this.most.responders.count(response);
+						this.most.interaction.count(response);
+						this.most.mvp.count(response, "response");
 						// Count all
 						await this.most.countAll(response);
 					}
@@ -1750,22 +1914,39 @@ class replurk {
 		}
 
 		// Draw Results
-		// Display Most Mentioned by me
-		this.most.mentions.draw();
 		// Display Most Responder
-		this.most.responders.draw();
+		// this.most.responders.draw();
+		
+		// Display Most Interaction
+		this.most.interaction.draw();
+
+		// Display Most Mentioned by me
+		// this.most.mentions.draw();
+
 		// Display How Many Words-Characters
 		this.most.types.draw();
 
-		// Display Most hashtags by me
-		this.most.hashtags.draw();
 		// Display How Many Links
 		this.most.links.drawLinks();
-		
 		// Display How Many Pictures
 		this.most.links.drawPics();
+
+		// Display Most hashtags by me
+		this.most.hashtags.draw();
+		
 		// Display Most My Emoticons
 		this.most.myemoticons.draw();
+
+		// Display Most Interaction
+
+		this.statistics.replurker_list.forEach(value => {
+			this.most.mvp.count({ user_id: value.id, count: value.count }, "replurk");
+		});
+		this.statistics.favorite_list.forEach(value => {
+			this.most.mvp.count({ user_id: value.id, count: value.count }, "favorite");
+		});
+		this.most.mvp.draw();
+
 	}
 
 	// Check login status

@@ -2512,6 +2512,9 @@ img.rounded {
 .statistics.span2 {
 	width: calc((var(--box) * 2) + (var(--padl) * 1));
 }
+.statistics.span3 {
+	width: calc((var(--box) * 3) + (var(--padl) * 1));
+}
 .statistics .anim {
 	z-index: 2;
 	opacity: 0;
@@ -2869,6 +2872,50 @@ img.rounded {
 	margin-right: var(--pads);
 }
 
+/* Most interaction with */
+
+.bubble .count {
+	display: none;
+}
+.bubble .htmlcontent {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: auto 0;
+}
+.bubble .htmlcontent .plurkers {
+	display: flex;
+	flex-direction: column;
+	margin: auto 0 var(--pads);
+}
+.bubble .plurkers:nth-child(1) { order: 3 }
+.bubble .plurkers:nth-child(2) { order: 2 }
+.bubble .plurkers:nth-child(3) { order: 3 }
+.bubble .plurkers:nth-child(4) { order: 4 }
+.bubble .plurkers:nth-child(5) { order: 1 }
+.bubble .plurkers span {
+	width: 100%;
+	text-align: center;
+}
+.bubble .plurkers .avatar {
+	margin-bottom: var(--pads);
+}
+.bubble .plurkers .avatar img {
+	width: var(--padl);
+	height: auto;
+	border-radius: 100%;
+}
+.bubble .plurkers:nth-child(1) .avatar img { width: calc(3 * var(--padl)) }
+.bubble .plurkers:nth-child(2) .avatar img { width: calc(2.5 * var(--padl)) }
+.bubble .plurkers:nth-child(3) .avatar img { width: calc(2 * var(--padl)) }
+.bubble .plurkers:nth-child(4) .avatar img { width: calc(1.5 * var(--padl)) }
+.bubble .title {
+	color: var(--white);
+	text-transform: none;
+	font-size: 1rem;
+}
 
 /* Plurk - Statistics - Costum Page Style */
 #hello {
