@@ -726,7 +726,7 @@ header {
 
 #hello {
 	justify-content: flex-end;
-	padding-bottom: calc(7.5 * var(--padx))!important;
+	/* padding-bottom: calc(7.5 * var(--padx))!important; */
 }
 @media (min-width: 600px) {
 	#hello {
@@ -773,17 +773,17 @@ header {
 	--repeat: 1;
 	--box: 80vw;
 }
-.stats .big {
+.statistics .big {
 	font-size: 20vw;
 	letter-spacing: -.05rem;
 }
-.stats .mediumnumber .big {
+.statistics .mediumnumber .big {
 	font-size: 16vw;
 }
-.stats .largenumber .big {
+.statistics .largenumber .big {
 	font-size: 14vw;
 }
-.stats .graph {
+.statistics .graph {
 	width: 50%;
 	margin: 0 auto var(--padm);
 }
@@ -795,14 +795,14 @@ header {
 		--repeat: 2;
 		--box: 40vw;
 	}
-	.stats .big,
-	.stats .span2.mediumnumber .big,
-	.stats .span2.largenumber .big {
+	.statistics .big,
+	.statistics .span2.mediumnumber .big,
+	.statistics .span2.largenumber .big {
 		font-size: 10vw;
 		letter-spacing: -.5vw;
 	}
-	.stats .mediumnumber .big,
-	.stats .largenumber .big {
+	.statistics .mediumnumber .big,
+	.statistics .largenumber .big {
 		font-size: 7.5vw;
 	}
 }
@@ -812,7 +812,7 @@ header {
 }
 
 @media (max-width: 600px) {
-	.stats .spansmall {
+	.statistics .spansmall {
 		height: calc(3/4 * var(--box));
 	}
 }

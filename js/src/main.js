@@ -39,11 +39,11 @@ if (window.matchMedia){
 	var setdarkmode = function(e) {
 		if (e.matches) darkmode = true;
 		else darkmode = false;
+		toggleDarkMode();
 	}
 	setdarkmode(darkmodemedia);
 	darkmodemedia.addListener(function(e) {
 		setdarkmode(e);
-		toggleDarkMode();
 	});
 }
 

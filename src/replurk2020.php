@@ -47,8 +47,8 @@
 					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
 					<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">
-						<p>Please reopen this website in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this website.</p>
-						<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this website. Other than session data, this website didn't store any of your Plurk data in the server.</p>
+						<p>Please reopen this web app in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this web app.</p>
+						<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this web app. Other than session data, this web app didn't store any of your Plurk data in the server.</p>
 					</li>
 				</ol>
 			</form>
@@ -56,18 +56,19 @@
 		<div class="bgtext"><sup>20</sup><sub>20</sub></div>
 	</section>
 
+	<section id="creditscover" class="middle"></section>
 	<section id="credits" class="middle">
 		<div class="text">
-			<p class="made">Made with &hearts; in TLV</p>
-			<p class="like">If you like this website, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">plurk profile</a>. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">plurk coins</a> ;).</p>
-			<p class="noaffiliation">This website doesn't have any affiliation with Plurk HQ. All of data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this website, feel free to <a href="./say-hi">contact me</a> for removal.</p>
+			<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
+			<p class="like">If you like this web app, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">plurk profile</a>. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">plurk coins</a> ;).</p>
+			<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this website, feel free to <a href="./say-hi">contact me</a> for removal.</p>
 		</div>
 	</section>
 
 	<section id="nojs" class="middle">
 		<div class="text">
 			<h3>Javascript</h3>
-			<p>Hi! you need to enable javascript to run this website. Thank you.</p>
+			<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
 		</div>
 	</section>
 </main>

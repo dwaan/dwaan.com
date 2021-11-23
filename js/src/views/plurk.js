@@ -1,6 +1,3 @@
-var SCROLLTYPE1 = "scrolltype1";
-var SCROLLTYPE2 = "scrolltype2";
-
 /*
 	Simple span element object:
 
@@ -109,7 +106,7 @@ class plurkerElement {
 		this.attached = false;
 
 		if (this.el) {
-			this.el.parentNode.removeChild(this.el);
+			this.el.remove();
 			return true;
 		} else {
 			return false;
@@ -249,7 +246,7 @@ class replurk {
 		el: document.createElement('div'),
 		randomcolors: [],
 		parent: this,
-		init: function(next, scrolltype) {
+		init: function(next) {
 			this.whispers_count = 0;
 			this.coins_count = 0;
 			this.porn_count = 0;
@@ -268,14 +265,13 @@ class replurk {
 			this.next = next;
 			this.randomcolors = [];
 	
-			if(this.parent.scrolltype == SCROLLTYPE2) this.el = this.next;
-			else this.el = this.next.querySelector("#statistics");
+			this.el = this.next.querySelector("#statistics");
 	
 			// Obverse when element is added to DOM
 			var observer = new MutationObserver((mutationsList) => {
 				mutationsList.forEach(mutation => {
 					mutation.addedNodes.forEach(el => {
-						this.afterDraw(el, this.next, scrolltype);
+						this.afterDraw(el);
 					});
 				});
 			});
@@ -284,6 +280,9 @@ class replurk {
 				childList: true,
 				subtree: false
 			});
+		},
+		clear: function() {
+			this.el.innerHTML = "";
 		},
 		listCount: function(list, collection) {
 			if(collection.length > 0) {
@@ -297,50 +296,51 @@ class replurk {
 	
 			return list;
 		},
-		title: function(text) {
-			this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title"><h3><span>'+ text + '</span><span class="line"><i/></span</h3></div>');
+		title: function(text, loading = false) {
+			if(loading) {
+				this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title"><h3><span>'+ text + '</span><span class="loading"><i/></span></h3></div>');
+			} else {
+				this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title"><h3><span>'+ text + '</span><span class="line"><i/></span></h3></div>');
+			}
 		},
-		afterDraw: function(el, next, scrolltype) {
+		afterDraw: function(el) {
 			if(hasClass(el, 'wrap')) {
 				var color = new colors();
-				var anim = el.children;
+				var randomcolors = [color.getRandomColor(), color.getRandomColor()]
+				var anim = el.querySelector(".anim");
 
-	
-				if(scrolltype == SCROLLTYPE1) {
-					gsap.set(anim, {
-						background: 'linear-gradient(5deg, ' + color.getRandomColor() + ' 0%, ' + color.getRandomColor() + ' 100%)'
-					});
-				}
-	
+				gsap.set(anim, {
+					background: 'radial-gradient(at 10% 10%, ' + randomcolors[0] + ' 0%, ' + randomcolors[1] + ' 100%)'
+				});
+					
 				gsap.fromTo(anim, {
 					opacity: 0
 				}, {
 					opacity: 1,
-					duration: 1,
+					duration: 0.5,
 					ease: "power3.out"
-				}, 0);
-	
+				}, 0);	
+
 				// Scroll animation wrap section
-				if(scrolltype == SCROLLTYPE1) {
-					scroll.push(function(tl) {
-						tl.fromTo(anim, {
-							y: window.innerHeight * 1/5,
-						}, {
-							y: 0,
-							ease: "ease.out"
-						}, 0);
-						return tl;
-					}, function(tl) {
-						return ScrollTrigger.create({
-							trigger: el,
-							scroller: next,
-							start: "0 100%-=100px",
-							end: "100px 100%-=100px",
-							animation: tl,
-							scrub: 1
-						});
+				scroll.push(tl => {
+					tl.fromTo(el.children, {
+						y: window.innerHeight * 1/5,
+					}, {
+						y: 0,
+						ease: "ease.out"
+					}, 0);
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						scroller: this.next,
+						start: "0 100%-=100px",
+						end: "100px 100%-=100px",
+						animation: tl,
+						scrub: 1
 					});
-				}
+				});
+					
 				scroll.push(function(tl) {
 					if (el.querySelector(".big")) {
 						var number = Number(el.querySelector(".big").textContent);
@@ -355,7 +355,7 @@ class replurk {
 								snap: "progress",
 								ease: "power3.out",
 								duration: duration,
-								onUpdate: function() {
+								onUpdate: () => {
 									el.querySelector(".big").textContent = plural(load.progress);
 								}
 							}, 0);
@@ -363,10 +363,10 @@ class replurk {
 					}
 	
 					return tl;
-				}, function(tl) {
+				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						scroller: next,
+						scroller: this.next,
 						start: "0 100%-=100px",
 						end: "100px 100%-=100px",
 						animation: tl,
@@ -374,45 +374,8 @@ class replurk {
 					});
 				});
 			} else {
-				// Scroll animation title section
-				scroll.push(function(tl) {
-					tl.fromTo(el.children, {
-						opacity: 0
-					}, {
-						opacity: 1,
-						ease: "ease.out"
-					}, 0);
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: el,
-						scroller: next,
-						start: "50% 100%-=100px",
-						end: "50% 100%-=100px",
-						animation: tl,
-						toggleActions: "play none none none"
-					});
-				});
-				scroll.push(function(tl) {
-					tl.fromTo(el.children, {
-						y: window.innerHeight * 1/6
-					}, {
-						y: 0,
-						ease: "ease.out"
-					}, 0);
-					return tl;
-				}, function(tl) {
-					return ScrollTrigger.create({
-						trigger: el,
-						scroller: next,
-						start: "50% 100%-=100px",
-						end: "50% 100%-=100px",
-						animation: tl,
-						scrub: 1
-					});
-				});
 				// Scroll animation line section
-				scroll.push(function(tl) {
+				scroll.push(tl => {
 					tl.fromTo(el.querySelectorAll("i"), {
 						x: "-100%"
 					}, {
@@ -420,10 +383,10 @@ class replurk {
 						ease: "ease.out"
 					}, 0);
 					return tl;
-				}, function(tl) {
+				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						scroller: next,
+						scroller: this.next,
 						start: "100% 100%",
 						end: "100% 0",
 						animation: tl,
@@ -431,14 +394,81 @@ class replurk {
 					});
 				});
 			}
-	
+
+			if(hasClass(el, 'drawgraph')) {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelector(".graph"), {
+						y: 100
+					}, {
+						y: 0
+					}, 0);
+
+					tl.fromTo(el.querySelector(".graph i"), {
+						height: "0%"
+					}, {
+						height: el.querySelector(".graph i").getAttribute("data-number") + "%"
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						scroller: this.next,
+						start: "50% 100%",
+						end: "100% 100%",
+						animation: tl,
+						scrub: 1
+					});
+				});
+			}	
+
+			// Capture function
+			var capture = el.querySelector(".capture small");
+			if(capture) {
+				capture.onclick = () => {
+					if(!capture.generating) {
+						capture.innerHTML = "Generating image...";
+						capture.generating = true;
+						document.body.style.cursor = "wait";
+
+						el.querySelectorAll("img").forEach(img => {
+							if(!img.localUrl) {
+								img.localUrl = true;
+								img.setAttribute("src", api.url + "?img=" + img.getAttribute("src"));
+							}
+						});
+
+						html2canvas(el.querySelector(".anim"), {
+							backgroundColor: null,
+							logging: false
+						}).then(canvas => {
+							var link = document.createElement("a");
+							link.style.display = "none";
+							link.download = "replurk" + this.parent.year + "-" + Date.now() + ".png";
+							link.href = canvas.toDataURL();
+							document.body.appendChild(link);
+							link.click();
+							document.body.removeChild(link);
+							link.remove();
+
+							capture.innerHTML = "Done";
+							document.body.style.cursor = "default";
+							setTimeout(() => {
+								capture.innerHTML = "Redownload";
+								capture.generating = false;
+							}, 3000);
+						});
+					}
+				}
+			}
+
 			scroll.refresh();
 		},
-		wrapper: function(style, text, background = "") {
-			if(background == "" || !background) {
-				return '<div class="statistics middle wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div></div>';
+		wrapper: function(style, text, background) {
+			if(!background) {
+				return '<div class="statistics middle wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Download</small></div></div>';
 			} else {
-				return '<div class="statistics middle wrap ' + style + '"><div class="anim">' + text + '</div></div>';
+				return '<div class="statistics middle wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
 			}
 		},
 		draw: function(style, number, text, background) {
@@ -458,34 +488,35 @@ class replurk {
 		},
 		drawGraph: function(style, number, text) {
 			if (typeof number == "string" || (typeof number == "number" && number > 0)) {
-				this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+				this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawgraph movetitle", '\
 					<p>\
-						<span class="graph"><i style="height:' + number + '%;"></i></span>\
-						<span>' + text + '</span>\
+						<span class="graph"><i data-number="' + number + '"></i></span>\
+						<span class="info">' + text + '</span>\
 					</p>\
 				'));
 			}
 		},
 		drawImage: function(style, image, link, title, text, badge) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawimage", '\
 				<a href="' + link + '" target="_BLANK">\
 					<span class="big">' + badge + '</span>\
 					<span class="avatar"><img src="' + image + '" /></span>\
-					<span>' + text + '</span>\
+					<span class="text">' + text + '</span>\
 					<span class="title">' + title + '</span>\
 				</a>\
 			'));
 		},
 		drawHTML: function(style, title, html) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawhtml", '\
 				<div>\
 					<div class="htmlcontent">' + html + '</div>\
 					<div class="title">' + title + '</div>\
 				</div>\
 			'));
+			return 
 		},
 		drawLink: function(style, link, title, text, badge) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawlink", '\
 				<a href="' + link + '" target="_BLANK">\
 					<span class="big">' + badge + '</span>\
 					<span>' + text + '</span>\
@@ -496,7 +527,7 @@ class replurk {
 		drawPost: function(style, id, title, text, badge) {
 			var url = ""
 			if(id) url = 'https://plurk.com/p/' + id.toString(36);
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", '\
 				<div>\
 					<a href="' + url + '" class="link" target="_BLANK">\
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">\
@@ -511,10 +542,11 @@ class replurk {
 				</div>\
 			'));
 		},
-		drawUserList: async function(style, title, list) {
+		drawUserList: async function(style, id, title, list) {
 			var html = "";
 			var max = 5;
-			
+
+			this.drawHTML(style + " drawuserlist movetitle " + id, title, "<span class='info'>Downloading user data</span>");
 			for(var index = 0; index < max; index++) {
 				var value = list[index];
 				if(value) {
@@ -541,7 +573,7 @@ class replurk {
 					}
 				}
 			}
-			this.drawHTML(style, title, html);
+			this.el.querySelector("." + id + " .htmlcontent").innerHTML = html;
 		},
 		attach: function(charttitle, node, max) {
 			var that = this;
@@ -551,6 +583,7 @@ class replurk {
 			var text;
 			var anim;
 			var wrapper;
+			var capture;
 	
 			var opacity = 0;
 			var position = max;
@@ -581,10 +614,17 @@ class replurk {
 				anim.setAttribute('class', 'anim');
 				anim.appendChild(text);
 	
-				wrapper = document.createElement('div');
-				wrapper.setAttribute('class', 'statistics middle wrap ' + id);
-				wrapper.appendChild(anim);
+				text = document.createElement('small');
+				text.innerHTML = "Download";
+				capture = document.createElement('div');
+				capture.setAttribute('class', 'capture');
+				capture.appendChild(text);
 	
+				wrapper = document.createElement('div');
+				wrapper.setAttribute('class', 'statistics middle wrap attach ' + id);
+				wrapper.appendChild(anim);
+				wrapper.appendChild(capture);
+
 				that.el.insertAdjacentElement("beforeend", wrapper);
 			}
 	
@@ -622,22 +662,28 @@ class replurk {
 	
 			node.update();
 		},
-		drawAll: async function() {
+		drawAll: async function(plurks) {
 			var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
-	
-			this.drawGraph('center', response_percentage, 'Around <i>' + response_percentage + '%</i> of your plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
-			this.draw('spansmall', this.plurks_count + " &rarr; " + this.response_count, 'You got <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
-	
-			if(this.favourite_count > 0) this.draw('spansmall', this.favourite_count, 'Your recieved <i>' + plural(this.favourite_count, 'love') + '</i>');
-			if(this.replurker_count > 0) this.draw('spansmall', this.replurker_count, 'You got <i>' + plural(this.replurker_count, 'replurk') + '</i>');
-			if(this.private_count > 0) this.draw('spansmall', this.private_count, 'You posted <i>' + plural(this.private_count, 'private plurk') + '</i>');
-			if(this.whispers_count > 0) this.draw('spansmall', this.whispers_count, 'You posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
-			if(this.porn_count > 0) this.draw('spansmall', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
+
+			this.parent.most.responses.draw(plurks);
+			this.drawGraph('center graph', response_percentage, 'Around <i>' + response_percentage + '%</i> of your plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
+
+			if(this.replurker_count > 0) this.draw('spansmall recievereplurk', this.replurker_count, 'You got <i>' + plural(this.replurker_count, 'replurk') + '</i>');
+			this.parent.most.replurk.draw(plurks);
+
+			this.parent.most.favorite.draw(plurks);	
+			if(this.favourite_count > 0) this.draw('spansmall recievelove', this.favourite_count, 'Your recieved <i>' + plural(this.favourite_count, 'love') + '</i>');
+
+			if(this.private_count > 0) this.draw('spansmall privateplurk', this.private_count, 'You posted <i>' + plural(this.private_count, 'private plurk') + '</i>');
+			if(this.whispers_count > 0) this.draw('spansmall whisper', this.whispers_count, 'You posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
+			if(this.porn_count > 0) this.draw('spansmall porn', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
+
+			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'You got <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
 			if(this.coins_count > 0) this.draw('spansmall coins', this.coins_count, 'You recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
 	
 			try {
-				if(this.favourite_list.length > 0) await this.drawUserList("avatar loved", "These Plurkers <i>Loved</i> Your Posts", this.favourite_list.sort(this.parent.most.sort));
-				if(this.replurker_list.length > 0) await this.drawUserList("avatar replurked", "These Plurkers likes to <i>Replurked</i> Your Posts", this.replurker_list.sort(this.parent.most.sort));
+				if(this.favourite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> Your Posts", this.favourite_list.sort(this.parent.most.sort));
+				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>Replurked</i> Your Posts", this.replurker_list.sort(this.parent.most.sort));
 			} catch {
 				console.info("Error while displaying your favourite and or replurker list");
 			}
@@ -745,7 +791,7 @@ class replurk {
 					this.data[i].position = this.data.length;
 					if(this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++;
-						this.parent.statistics.attach('<i>Top Responders</i><strong>of Your Timeline</strong>', this.data[i], 5);
+						this.parent.statistics.attach('<i>Top Responders</i> <strong>of Your Timeline</strong>', this.data[i], 5);
 					}
 				}
 			},
@@ -789,11 +835,11 @@ class replurk {
 	
 							if(user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++;
-								this.parent.statistics.attach('<i>Most Mentioned</i><strong>in Your Timeline</strong>', this.data[idx], max);
+								this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in Your Timeline</strong>', this.data[idx], max);
 							}
 						}
 	
-						if(this.data[idx].el) this.parent.statistics.attach('<i>Most Mentioned</i><strong>in Your Timeline</strong>', this.data[idx], max);
+						if(this.data[idx].el) this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in Your Timeline</strong>', this.data[idx], max);
 					}
 				}
 			},
@@ -852,8 +898,10 @@ class replurk {
 					else this.links.push(data);
 				}
 			},
-			draw: function() {
+			drawLinks: function() {
 				if(this.links.length > 0) this.parent.statistics.draw('spansmall', this.links.length, 'You shared <i>' + plural(this.links.length, 'link') + '</i>');
+			},
+			drawPics: function() {
 				if(this.pics.length > 0) this.parent.statistics.draw('spansmall', this.pics.length, 'You shared <i>' + plural(this.pics.length, 'picture') + '</i>');
 			}
 		},
@@ -881,7 +929,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2', value.plurk_id, '<i>Your Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
+						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>Your Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
 						return;
 					}
 				}
@@ -897,7 +945,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2', value.plurk_id, '<i>Your Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
+						this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>Your Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
 						return;
 					}
 				}
@@ -913,7 +961,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2', value.plurk_id, '<i>Your Most Favorited</i> ' + datediff(value.posted), value.content, value.favorite_count);
+						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>Your Most Favorited</i> ' + datediff(value.posted), value.content, value.favorite_count);
 						return;
 					}
 				}
@@ -952,8 +1000,8 @@ class replurk {
 			return new Promise(resolve => {
 				this.prev_count = item;
 	
-				if(!this.next.querySelector(".loading")) {
-					this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
+				if(!this.next.querySelector(".statistics.loading")) {
+					this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
 				}
 	
 				// Animate loading
@@ -962,7 +1010,7 @@ class replurk {
 					progress: Math.round(item),
 					snap: "progress",
 					ease: "linear",
-					duration: .5,
+					duration: .24,
 					onUpdate: () => {
 						var el = this.next.querySelector(".loading .big");
 						if(el) el.innerHTML = load.progress + "%";
@@ -1001,15 +1049,19 @@ class replurk {
 		},
 		done: function() {
 			return new Promise(resolve => {
-				console.log(this.isComplete());
 				if(this.isComplete()) {
-					var el = this.next.querySelector(".loading");
-	
+					var el = this.next.querySelector(".statistics.loading");
+										
 					this.clean = false;
 					gsap.to(el, {
 						opacity: 0,
+						width: 0,
+						height: 0,
+						padding: 0,
+						margin: 0,
+						overflow: "hidden",
 						duration: .5,
-						ease: "expo.in",
+						ease: "power3.out",
 						onComplete: () => {
 							el.remove();
 							scroll.refresh();
@@ -1128,30 +1180,6 @@ class replurk {
 				});
 			});
 		},
-		browserBar: (type) => {
-			// TODO: Scroll animate browser bar
-			scroll.push((tl) => {
-				tl.call(this.browserColor, ["green", .16, "linear"]);
-				tl.to(this.next.querySelectorAll("#statistics"), {
-					duration: type == "type1" ? 20 : 1,
-					onUpdate: () => {
-						this.browserColor(type == "type1" ? "" : "green", .16, "linear");
-					}
-				});
-				tl.call(this.browserColor, ["yellow", .16, "linear"]);
-				return tl;
-			}, (tl) => {
-				return ScrollTrigger.create({
-					trigger: this.next.querySelector("#hello"),
-					endTrigger: this.next.querySelector(".statistics:last-child"),
-					scroller: this.next,
-					start: "100% 100%",
-					end: "100% 0",
-					animation: tl,
-					scrub: true
-				});
-			});
-		},
 		menu: () => {
 			var next = this.next;
 
@@ -1179,22 +1207,91 @@ class replurk {
 					}
 				});
 			});
+		},
+		browserBar: (login = true) => {
+			if(login) {
+				scroll.push((tl) => {
+					return tl;
+				}, (tl) => {
+					return ScrollTrigger.create({
+						trigger: '#hello',
+						scroller: this.next,
+						start: "0 0",
+						end: "100% 10px",
+						animation: tl,
+						scrub: true,
+						onLeave: () => {
+							this.browserColor("white");
+						}, 
+						onEnterBack: () => {
+							this.browserColor("green");
+						}
+					});
+				});
+				scroll.push((tl) => {
+					return tl;
+				}, (tl) => {
+					return ScrollTrigger.create({
+						trigger: '#statistics',
+						scroller: this.next,
+						start: "0 0",
+						end: "100% 10px",
+						animation: tl,
+						scrub: true,
+						onLeave: () => {
+							this.browserColor("yellow");
+						},
+						onEnter: () => {
+							this.browserColor("white");
+						},
+						onEnterBack: () => {
+							this.browserColor("white");
+						}
+					});
+				});
+			} else {
+				scroll.push((tl) => {
+					return tl;
+				}, (tl) => {
+					return ScrollTrigger.create({
+						trigger: '#permission',
+						scroller: this.next,
+						start: "0 0",
+						end: "100% 10px",
+						animation: tl,
+						scrub: true,
+						onLeave: () => {
+							this.browserColor("yellow");
+						},
+						onEnterBack: () => {
+							this.browserColor("green");
+						}
+					});
+				});
+			}
 		}
 	}
 
-	constructor(year, scrolltype) {
+	constructor(year) {
 		// Which year?
 		this.year = year;
 		this.startDate = this.year + '-10-29T09:00:00';
 		this.endDate = new Date((this.year - 1) + '-10-29T09:00:00');
 		this.days = 60*60*24*1000;
 		this.fulldays = 365;
-		this.scrolltype = scrolltype;
 	}
 
 	// Browser color
-	browserColor(state, duration, ease) {
-		if(state == "green") {
+	getSetStateColor(state) {
+		if(typeof(state) == "object" && state.length >= 1) {
+			if(state.length == 1) {
+				browserColorDark =  state[0];
+				browserColorLight = state[0];
+			} else {
+				browserColorDark =  state[1];
+				browserColorLight = state[0];
+			}
+		} else if(state == "green") {
 			browserColorDark = "#0d4f03";
 			browserColorLight = "#60e670";
 		} else if (state == "yellow") {
@@ -1204,6 +1301,11 @@ class replurk {
 			browserColorDark =  "#000000";
 			browserColorLight = "#FFFFFF";
 		}
+
+		return [browserColorLight, browserColorDark];
+	}
+	browserColor(state, duration, ease) {
+		this.getSetStateColor(state);
 		toggleDarkMode(duration, ease);
 	}
 
@@ -1320,7 +1422,7 @@ class replurk {
 			stagger: .2,
 			ease: "power3.out"
 		}, ">-.5");
-		tl.fromTo(next.querySelectorAll(".grant:not(#hello)"), {
+		tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
 			display: "",
 			opacity: 0
 		}, {
@@ -1347,7 +1449,7 @@ class replurk {
 			},
 			ease: "power3.in"
 		}, ">-.2");
-		tl.set(next.querySelectorAll(".grant:not(#hello)"), {
+		tl.set(next.querySelectorAll(".grant:not(#hello), .statistics"), {
 			opacity: 0
 		}, ">-.5");
 		tl.fromTo(next.querySelectorAll("#hello"), {
@@ -1396,8 +1498,10 @@ class replurk {
 		tl.set(this.next, {
 			onComplete: () => {
 				api.call("?fetch=logout").then(() => {
+					this.statistics.clear();
 					api.clear();
 					this.login();
+					scroll.refresh();
 				});
 			}
 		});
@@ -1447,7 +1551,7 @@ class replurk {
 	}
 
 	// Display current Plurker data
-	displayPlurkerData(callback) {
+	async displayPlurkerData(callback) {
 		var plurker = this.me;
 		var next = this.next;
 		var extra = "";
@@ -1460,7 +1564,7 @@ class replurk {
 		next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>" + this.year + " have been a rough year for some of us, but hopefully RePlurk will cheer you up a bit</p>";
 
 		// Draw statistic
-		this.statistics.title('All Time');
+		this.statistics.title('All Time', false);
 		if(plurker.anniversary.years && plurker.anniversary.days) {
 			this.statistics.draw('spansmall', plurker.anniversary.years, "You joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
 			this.statistics.draw('spansmall badges', plurker.badges.length, "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
@@ -1513,15 +1617,6 @@ class replurk {
 				ease: "linear",
 				duration: .25
 			}, 0);
-			if(this.scrolltype == SCROLLTYPE1) {
-				tl.fromTo(next.querySelectorAll("#hello .animate"), {
-					y: 0
-				}, {
-					y: window.innerHeight * -1/2,
-					ease: "power1.out",
-					duration: 1
-				}, 0);
-			}
 			return tl;
 		}, function(tl) {
 			return ScrollTrigger.create({
@@ -1578,11 +1673,6 @@ class replurk {
 
 		// When loading done
 		if (this.plurks.length > 1) {			
-			// Draw some of the most plurk
-			this.most.responses.draw(this.plurks);
-			this.most.replurk.draw(this.plurks);
-			this.most.favorite.draw(this.plurks);
-
 			// Count user statistics
 			this.statistics.plurks_count = 0;
 			this.plurks.forEach(plurk => {
@@ -1608,7 +1698,7 @@ class replurk {
 
 			// Draw statistics
 			try {
-				await this.statistics.drawAll();
+				await this.statistics.drawAll(this.plurks);
 			} catch {
 				console.info("Error while counting your statistics");
 			}
@@ -1627,9 +1717,10 @@ class replurk {
 	async displayExtendedStatistics() {
 		// Deeper user statistics
 		this.statistics.title('Dig Deeper');
+		this.statistics.draw("loading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
+
 		// Load each post responses and calculate statistics
 		this.loading.init(this.next);
-		// Start loading
 		this.loading.loop(this.plurks.length);
 
 		// Get the responses for each plurks in parallel
@@ -1659,16 +1750,20 @@ class replurk {
 		}
 
 		// Draw Results
-		// Display How Many Words-Characters
-		this.most.types.draw();
-		// Display How Many Links and Pictures
-		this.most.links.draw();
-		// Display Most Responder
-		this.most.responders.draw();
 		// Display Most Mentioned by me
 		this.most.mentions.draw();
+		// Display Most Responder
+		this.most.responders.draw();
+		// Display How Many Words-Characters
+		this.most.types.draw();
+
 		// Display Most hashtags by me
 		this.most.hashtags.draw();
+		// Display How Many Links
+		this.most.links.drawLinks();
+		
+		// Display How Many Pictures
+		this.most.links.drawPics();
 		// Display Most My Emoticons
 		this.most.myemoticons.draw();
 	}
@@ -1679,7 +1774,7 @@ class replurk {
 
 		this.me = { id: 0 };
 		this.friends.init();
-		this.statistics.init(next, this.scrolltype);
+		this.statistics.init(next);
 		this.most.init();
 		this.plurks = [];
 
@@ -1689,7 +1784,7 @@ class replurk {
 		this.browserColor("yellow");
 
 		// Scroll animation menu and logout
-		if(this.scrolltype == SCROLLTYPE1) this.scrollAnimate.menu();
+		this.scrollAnimate.menu();
 
 		// Check is server have open session 
 		var tl = gsap.timeline();
@@ -1715,10 +1810,12 @@ class replurk {
 			});
 
 			// Scroll animate statistics
-			if(this.scrolltype == SCROLLTYPE1) this.scrollAnimate.statistics();
-			// Scroll animate browser bar
-			this.scrollAnimate.browserBar("type1");
-
+			this.scrollAnimate.statistics();
+			// Scroll browser bar
+			this.scrollAnimate.browserBar();
+			
+			scroll.refresh();
+			
 			this.displayStatistics();
 		}, () => {
 			// Hide statistic pages
@@ -1730,10 +1827,10 @@ class replurk {
 
 			// Scroll animation permission section
 			this.scrollAnimate.permisions();
-			// Scroll animate browser bar
-			this.scrollAnimate.browserBar("type2");
+			// Scroll browser bar
+			this.scrollAnimate.browserBar(false);
 
-			ScrollTrigger.refresh();
+			scroll.refresh();
 
 			if(callback) callback();
 		});
@@ -1759,7 +1856,7 @@ class replurk {
 }
 
 // Replurk page 2020
-var replurk2020 = new replurk(2020, SCROLLTYPE1);
+var replurk2020 = new replurk(2020);
 var replurk2020view = {
 	namespace: 'replurk2020',
 	beforeEnter: function(data) {
@@ -1781,7 +1878,7 @@ var replurk2020view = {
 }
 
 // Replurk page 2021
-var replurk2021 = new replurk(2021, SCROLLTYPE2);
+var replurk2021 = new replurk(2021);
 var replurk2021view = {
 	namespace: 'replurk2021',
 	beforeEnter: function(data) {
