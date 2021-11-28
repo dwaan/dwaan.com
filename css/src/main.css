@@ -3174,9 +3174,9 @@ img.rounded {
 	margin-right: 6px;
 }
 
-.statistics .post br,
-.statistics .post img,
-.statistics .post .pictureservices {
+.statistics .box .post br,
+.statistics .box .post img,
+.statistics .box .post .pictureservices {
 	display: none;
 }
 .statistics .post div.meta {

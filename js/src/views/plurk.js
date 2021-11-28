@@ -525,7 +525,7 @@ class replurk {
 			}
 		},
 		drawDiv: function(style, text) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="drawdiv">' + text + '</div>'));
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="box">' + text + '</div>'));
 		},
 		drawGraph: function(style, number, text) {
 			if (typeof number == "string" || (typeof number == "number" && number > 0)) {
@@ -1246,7 +1246,7 @@ class replurk {
 				this.prev_count = item;
 	
 				if(!this.next.querySelector(".statistics.loading")) {
-					this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
+					this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>");
 				}
 	
 				// Animate loading
