@@ -726,12 +726,10 @@ header {
 
 #hello {
 	justify-content: flex-end;
-	/* padding-bottom: calc(7.5 * var(--padx))!important; */
 }
 @media (min-width: 600px) {
 	#hello {
 		justify-content: center;
-		padding-bottom: var(--padx)!important;
 	}
 }
 #hello img {
@@ -741,6 +739,7 @@ header {
 }
 #hello h1 {
 	font-size: 3rem;
+	line-height: 100%;
 }
 @media (min-width: 600px) {
 	#hello h1 {
@@ -752,6 +751,24 @@ header {
 }
 #hello .arrow:after {
 	margin: var(--pads) 0 0;
+}
+@media (max-width: 600px) {
+	#hello .arrow-big {
+		margin-bottom: calc(-1 * var(--padxxl));
+	}
+}
+@media (max-width: 400px) {
+	#hello h1 {
+		font-size: 2.5rem;
+	}
+}
+@media (max-width: 360px) {
+	#hello h1 {
+		font-size: 2rem;
+	}
+	#hello .arrow-big {
+		margin-top: var(--padm);
+	}
 }
 
 
@@ -781,7 +798,7 @@ header {
 }
 .statistics.wrap.bubble,
 .statistics.wrap.hashtags {
-	height: calc(1.75 * var(--box));
+	height: calc(1.5 * var(--box));
 }
 .statistics.wrap.mediumnumber {
 	height: calc(1.25 * var(--box));
@@ -789,6 +806,9 @@ header {
 .statistics .big {
 	font-size: 20vw;
 	letter-spacing: -.05rem;
+}
+.statistics.center .big {
+	margin-top: var(--padm);
 }
 .statistics.mediumnumber .big {
 	font-size: 14vw;
@@ -800,14 +820,14 @@ header {
 	width: 50%;
 	margin: 0 auto var(--padm);
 }
-.statistics.avatar .htmlcontent {
-	margin-bottom: var(--padl);
-}
 .statistics .title {
-	margin-top: var(--padl);
+	margin-top: var(--padm);
 }
 .postcontent .post {
 	-webkit-line-clamp: 7;
+}
+.statistics .chart {
+	margin: var(--padm) 0;
 }
 @media (min-width: 600px) {
 	:root {
@@ -825,14 +845,31 @@ header {
 		font-size: 7.5vw;
 	}
 }
-
-.chart {
-	margin: var(--padxl) 0;
-}
-
 @media (max-width: 600px) {
 	.statistics .spansmall {
 		height: calc(3/4 * var(--box));
+	}
+	.statistics.wrap.hashtags {
+		height: calc(1.25 * var(--box));
+	}
+	.statistics.coins .big {
+		width: calc(var(--box) - var(--padxl) * 3);
+		height: calc(var(--box) - var(--padxl) * 3);
+		line-height: calc(var(--box) - var(--padxl) * 3);
+	}
+	.statistics .chart {
+		margin: var(--padl) 0 var(--padxl);
+	}
+	.statistics .anim .post {
+		margin-bottom: auto;
+	}
+}
+@media (max-width: 375px) {
+	.statistics.wrap.bubble {
+		height: calc(1.75 * var(--box));
+	}
+	.statistics.responded .text {
+		margin: auto 0;
 	}
 }
 
@@ -873,4 +910,10 @@ header {
 	.bubble .plurkers:nth-child(3) .avatar img { width: calc(1.75 * var(--padl)) }
 	.bubble .plurkers:nth-child(4) .avatar img { width: calc(1.15 * var(--padl)) }
 	.bubble .plurkers:nth-child(5) .avatar img { width: calc(1 * var(--padl)) }
+}
+
+/* order */
+@media (min-width: 600px) {
+	.statistics.posted 				{ order: 3; }
+	.statistics.responded 			{ order: 2; }
 }

@@ -296,12 +296,9 @@ class replurk {
 	
 			return list;
 		},
-		title: function(text, loading = false) {
-			if(loading) {
-				this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title"><h3><span>'+ text + '</span><span class="loading"><i/></span></h3></div>');
-			} else {
-				this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title"><h3><span>'+ text + '</span><span class="line"><i/></span></h3></div>');
-			}
+		title: function(text, style = "", loading = false) {
+			if(loading) this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="loading"><i/></span></h3></div>');
+			else this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="line"><i/></span></h3></div>');
 		},
 		afterDraw: function(el) {
 			if(hasClass(el, 'wrap')) {
@@ -337,9 +334,9 @@ class replurk {
 								trigger: el,
 								scroller: this.next,
 								start: "0 100%-=100px",
-								end: "100px 100%-=100px",
+								end: "0 100%-=100px",
 								animation: tl,
-								scrub: 1
+								scrub: 2
 							});
 						});
 					},
@@ -441,6 +438,27 @@ class replurk {
 						end: "100% 100%",
 						animation: tl,
 						scrub: 1
+					});
+				});
+			}
+
+			if(hasClass(el, 'coins')) {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelector(".big"), {
+						y: "50%"
+					}, {
+						y: 0,
+						ease: "power3.out"
+					}, 0);
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						scroller: this.next,
+						start: "50% 100%",
+						end: "100% 100%",
+						animation: tl,
+						scrub: 2
 					});
 				});
 			}
@@ -599,16 +617,18 @@ class replurk {
 			this.el.querySelector("." + id + " .htmlcontent").innerHTML = html;
 
 			// Stagger animation
-			if(id == 'mostinteraction') {
+			if(id == 'mostinteraction' || id == 'mvp') {
 				scroll.push(tl => {
 					tl.fromTo(this.el.querySelectorAll("." + id +" .plurkers"), {
-						y: 100,
+						scale: .3,
 						opacity: 0
 					}, {
-						y: 0,
+						scale: 1,
 						opacity: 1,
+						ease: "elastic.out(1.2, 0.5)",
+						duration: .75,
 						stagger: {
-							amount: .2,
+							amount: .3,
 							from: "end"
 						}
 					}, 0);
@@ -618,10 +638,10 @@ class replurk {
 					return ScrollTrigger.create({
 						trigger: this.el.querySelector("." + id),
 						scroller: this.parent.next,
-						start: "100% 100%",
-						end: "100% 100%",
+						start: "50% 100%",
+						end: "50% 100%",
 						animation: tl,
-						scrub: 1
+						toggleActions: "play none none reverse"
 					});
 				});
 			} else {
@@ -632,7 +652,9 @@ class replurk {
 					}, {
 						y: 0,
 						opacity: 1,
-						stagger: .1
+						duration: 1,
+						ease: "power3.out",
+						stagger: .3
 					}, 0);
 
 					return tl;
@@ -641,9 +663,9 @@ class replurk {
 						trigger: this.el.querySelector("." + id),
 						scroller: this.parent.next,
 						start: "0% 100%",
-						end: "50% 100%",
+						end: "0% 100%",
 						animation: tl,
-						scrub: 2
+						toggleActions: "play none none reverse"
 					});
 				});
 			}
@@ -739,7 +761,7 @@ class replurk {
 			var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
 
 			this.parent.most.responses.draw(plurks);
-			this.drawGraph('center graph', response_percentage, 'Around <i>' + response_percentage + '%</i> of your plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
+			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of your plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
 
 			if(this.replurker_count > 0) this.draw('spansmall recievereplurk', this.replurker_count, 'You got <i>' + plural(this.replurker_count, 'replurk') + '</i>');
 			this.parent.most.replurk.draw(plurks);
@@ -752,7 +774,7 @@ class replurk {
 			if(this.porn_count > 0) this.draw('spansmall porn', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
 
 			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'You got <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
-			if(this.coins_count > 0) this.draw('spansmall coins', this.coins_count, 'You recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
+			if(this.coins_count > 0) this.draw('spansmall center coins', this.coins_count, 'You recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
 	
 			try {
 				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> Your Posts", this.favorite_list.sort(this.parent.most.sort));
@@ -837,7 +859,7 @@ class replurk {
 			// Find and count all hashtags from my post
 			if(data.user_id == this.parent.me.id) this.hashtags.count(data.content);
 			// Find and count all links and pictures post from my post
-			if(data.user_id == this.parent.me.id) this.links.count(data.content);
+			if(data.user_id == this.parent.me.id) this.links.count(data.content, data.plurk_id, data.response_count, data.replurkers_count, data.favorite_count);
 			// Find and count characther and words from my post
 			if(data.user_id == this.parent.me.id) this.types.count(data.content_raw);
 		},
@@ -934,11 +956,10 @@ class replurk {
 			},
 			draw: function() {
 				var html = "";
+				var max = 10;
 				this.data.sort(this.parent.most.sort);
-				for(var i = 0; i < 10; i++) {
-					if(this.data[i])
-						html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
-				}
+				for(var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++) 
+					if(this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
 				if(html != "") this.parent.statistics.drawHTML("span2 grid emoticons", '<i>Most Used My Emoticons</i>', html);
 			}
 		},
@@ -952,30 +973,83 @@ class replurk {
 			},
 			draw: function() {
 				var html = "";
+				var max = 5;
 				this.data.sort(this.parent.most.sort);
-				for (var i = 0; i < 10; i++) {
-					if(this.data[i])
-						html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" />#' + this.data[i].value + '</a> <span class="count">' + this.data[i].count + '</span></div>';
+				for(var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++) 
+					if(this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>';
+				if(html != "") { 
+					html = "<strong>#</strong>" + html;
+					this.parent.statistics.drawHTML("hashtags", '<i>Most Used Hashtags</i>', html);
 				}
-				if(html != "") this.parent.statistics.drawHTML("span2 grid hashtags", '<i>Most Used Hashtags</i>', html);
 			}
 		},
 		links: {
+			data: {},
 			links: [],
 			pics:[],
 			parent: this,
-			count: function(content) {
+			count: function(content, id, response, replurk, loved) {
 				var result = content.match(/href\=\"(.*?)\"\ class=\"(.*?)\"\ rel/g);
 				if(result) for(var data of result) {
-					if(data.includes("pictureservices")) this.pics.push(data);
-					else this.links.push(data);
+					if(data.includes("pictureservices")) {
+						this.pics.push(data);
+
+						console.log(id, response, replurk, loved);
+						if(response != undefined) {
+							var pic = data.split('\"')
+							if(this.data[id]) {
+								this.data[id].pics.push({
+									url: pic[1],
+									response: response,
+									replurk: replurk,
+									loved: loved
+								});
+							} else {
+								this.data[id] = {
+									pics: [{
+										url: pic[1],
+										response: response,
+										replurk: replurk,
+										loved: loved
+									}],
+									links: []
+								}
+							}
+						}
+					}
+					else {
+						this.links.push(data);
+
+						if(response != undefined) {
+							var link = data.split('\"')
+							if(this.data[id]) {
+								this.data[id].links.push({
+									url: link[1],
+									response: response,
+									replurk: replurk,
+									loved: loved
+								});
+							} else {
+								this.data[id] = {
+									pics: [],
+									links: [{
+										url: link[1],
+										response: response,
+										replurk: replurk,
+										loved: loved
+									}]
+								}
+							}
+						}
+					}
 				}
 			},
 			drawLinks: function() {
-				if(this.links.length > 0) this.parent.statistics.draw('spansmall', this.links.length, 'You shared <i>' + plural(this.links.length, 'link') + '</i>');
+				console.log(this.data);
+				if(this.links.length > 0) this.parent.statistics.draw('spansmall sharedlinks', this.links.length, 'You shared <i>' + plural(this.links.length, 'link') + '</i>');
 			},
 			drawPics: function() {
-				if(this.pics.length > 0) this.parent.statistics.draw('spansmall', this.pics.length, 'You shared <i>' + plural(this.pics.length, 'picture') + '</i>');
+				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'You shared <i>' + plural(this.pics.length, 'picture') + '</i>');
 			}
 		},
 		types: {
@@ -989,7 +1063,7 @@ class replurk {
 				this.words += words.length;
 			},
 			draw: function() {
-				if(this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'You typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i>');
+				if(this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'You typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year');
 			}
 		},
 		responses: {
@@ -1098,19 +1172,18 @@ class replurk {
 					});
 				} else {
 					if(type == "replurk") {
-						this.data[index].count += (response.count * 500);
+						this.data[index].count += (response.count * 250);
 					} else if(type == "favorite") {
 						this.data[index].count += (response.count * 50);
-					} else {
-						if(this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier = 2;
-						else this.data[index].multiplier = 1;
+					} else if(response.content_raw.length > 16){
+						if(this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier += .5;
+						else this.data[index].multiplier = .5;
 						this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
 					}
 				}
 				this.data.sort(this.parent.most.sort);
 			},
 			draw: function() {
-				console.log(this.data);
 				var result= [];
 				var length = 0;
 				var index = 0;
@@ -1723,17 +1796,22 @@ class replurk {
 		var responses = Math.round(plurker.response_count / days);
 
 		next.querySelector("#hello .thumbs").innerHTML = "<img src='" + plurker.avatar_big + "' />";
-		next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>" + this.year + " have been a rough year for some of us, but hopefully RePlurk will cheer you up a bit</p>";
+		if(this.year == 2021) next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>If " + this.year + " have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories</p>";
+		else next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>This is your year end RePlurk recap. Hopefully it will bring lots of good memories.</p>";
 
 		// Draw statistic
-		this.statistics.title('All Time', false);
+		this.statistics.title('All Time', 'alltime');
 		if(plurker.anniversary.years && plurker.anniversary.days) {
-			this.statistics.draw('spansmall', plurker.anniversary.years, "You joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-			this.statistics.draw('spansmall badges', plurker.badges.length, "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
-			this.statistics.draw('spansmall', Math.round(plurker.plurks_count / days), "You posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
-			if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>';
-			else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>';
-			this.statistics.draw('', responses, "You responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
+			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "You posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+			
+			// Responses
+			if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>, when you\'re not asleep';
+			else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>, when you\'re not asleep';
+			this.statistics.draw('span2 center responded', responses, "You responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
+
+			var join = new Date (plurker.join_date)
+			this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "You joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
+			this.statistics.draw('spansmall center badges', "9", "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
 		} else {
 			this.statistics.draw('', '-', "There is no data of you joining Plurk");
 			this.statistics.draw('', plurker.badges.length, "But at least you have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
@@ -1796,7 +1874,7 @@ class replurk {
 	}
 	// Display statistics
 	async displayStatistics() {
-		this.statistics.title('This Year');
+		this.statistics.title('This Year', 'thisyear');
 		this.statistics.draw("loading", "", "<i class='month'>Data from December</i>1 of 2. Loading your " + this.year + " plurks. It can take up to 1 minute.");
 
 		this.loading.init(this.next);
@@ -1878,7 +1956,7 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		this.statistics.title('Dig Deeper');
+		this.statistics.title('Dig Deeper', 'digdeeper');
 		this.statistics.draw("loading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
 
 		// Load each post responses and calculate statistics
@@ -1913,6 +1991,11 @@ class replurk {
 			}
 		}
 
+		// Display How Many Links
+		this.most.links.drawLinks();
+		// Display How Many Pictures
+		this.most.links.drawPics();
+
 		// Draw Results
 		// Display Most Responder
 		// this.most.responders.draw();
@@ -1926,19 +2009,13 @@ class replurk {
 		// Display How Many Words-Characters
 		this.most.types.draw();
 
-		// Display How Many Links
-		this.most.links.drawLinks();
-		// Display How Many Pictures
-		this.most.links.drawPics();
-
 		// Display Most hashtags by me
 		this.most.hashtags.draw();
 		
 		// Display Most My Emoticons
 		this.most.myemoticons.draw();
 
-		// Display Most Interaction
-
+		// Display MVP
 		this.statistics.replurker_list.forEach(value => {
 			this.most.mvp.count({ user_id: value.id, count: value.count }, "replurk");
 		});

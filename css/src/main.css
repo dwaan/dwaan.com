@@ -2513,7 +2513,7 @@ img.rounded {
 	width: calc((var(--box) * 2) + (var(--padl) * 1));
 }
 .statistics.span3 {
-	width: calc((var(--box) * 3) + (var(--padl) * 1));
+	width: calc((var(--box) * 3) + (var(--padl) * 2));
 }
 .statistics .anim {
 	z-index: 2;
@@ -2525,6 +2525,9 @@ img.rounded {
 	background-color: var(--lime);
 	transform-origin: center left;
 	transition: box-shadow .24s ease-out, margin-top .24s ease-out;
+}
+.statistics p .text{
+	line-height: 165%;
 }
 .statistics:hover .anim {
 	position: relative;
@@ -2699,12 +2702,7 @@ img.rounded {
 	top: 0;
 	right: 0;
 	transform: translate(75%,-75%);
-}
-.grid.hashtags .htmlcontent .count {
-	transform: translate(50%,-75%);
-}
-.grid .htmlcontent .count {
-		color: var(--black);
+	color: var(--black);
 }
 @media (min-width: 375px) {
 	.grid .htmlcontent {
@@ -2713,26 +2711,11 @@ img.rounded {
 	.grid .htmlcontent div {
 		margin: calc(1.5 * var(--padm));
 	}
-	.grid.hashtags .htmlcontent div {
-		margin: var(--pads) calc(1.5 * var(--padm)) var(--pads) var(--padm);
-	}
 }
 @media (min-width: 600px) {
 	.grid.emoticons .htmlcontent div:nth-child(10) {
 		display: flex;
 	}
-}
-.grid.hashtags a {
-	max-width: 200px;
-	padding: 0 var(--pads);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	transition: background-color .24s ease-in-out, color .24s ease-in-out;
-	border-radius: calc(1/2 * var(--pads));
-}
-.grid.hashtags a:hover {
-	background-color: var(--white);
-	color: var(--black);
 }
 
 /* Plurk - Statistics - Loading */
@@ -2872,8 +2855,73 @@ img.rounded {
 	margin-right: var(--pads);
 }
 
-/* Most interaction with */
+/* Center style */
+.statistics.center .big {
+	display: block;
+	margin: var(--padl) auto auto;
+	text-align: center;
+	line-height: 100%;
+}
+.statistics.center .text {
+	text-align: center;
+}
 
+/* Hashtag style */
+.hashtags .htmlcontent {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	justify-content: space-between;
+	padding-bottom: var(--padm);
+}
+.hashtags .htmlcontent > div {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	border-bottom: 1px dashed var(--white);
+}
+.hashtags .htmlcontent > div:last-child {
+	margin-bottom: auto;
+	border-bottom: 0;
+}
+.hashtags .htmlcontent strong {
+	display: block;
+	text-align: center;
+	margin: 0 auto auto;
+	font-size: var(--padl);
+	width: var(--padxl);
+	height: var(--padxl);
+	line-height: var(--padxl);
+	color: transparent;
+	font-weight: 200;
+	border-radius: 1000px;
+	background-color: var(--white);
+	transition: box-shadow .24s ease-out;
+}
+.hashtags:hover strong {
+	box-shadow: inset 0 var(--padm) var(--padxl) rgba(0, 0, 0, 0.5);
+}
+.hashtags .htmlcontent a {
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition: background-color .24s ease-in-out, color .24s ease-in-out;
+}
+.hashtags .htmlcontent .count {
+	display: inline-block;
+	background-color: var(--yellow);
+	color: var(--black);
+	padding: 0 var(--pads);
+	border-radius: 10000px;
+	font-size: .7rem;
+	transition: color .2s ease-in-out, background-color .2s ease-in-out;
+}
+.hashtags .htmlcontent a:hover + .count {
+	background-color: var(--lime);
+}
+
+/* Bubble style */
 .bubble .count {
 	display: none;
 }
@@ -2917,6 +2965,135 @@ img.rounded {
 	font-size: 1rem;
 }
 
+/* Responsed style */
+.statistics.responded .big {
+	display: none;
+}
+.statistics.responded .text {
+	margin: auto var(--padxl);
+	text-align: center;
+	font-size: 1.5rem;
+	line-height: 150%;
+	letter-spacing: 0;
+}
+
+/* Posted style */
+.statistics.posted .text {
+	text-align: center;
+}
+.statistics.posted .big {
+	position: relative; 
+	background-color: var(--yellow);
+	color: var(--black);
+	font-size: 5rem;
+	letter-spacing: -.25rem;
+	padding: 0 calc(3/4 * var(--padxl));
+	min-width: calc(var(--box) * .5);
+	height: calc(var(--box) * .4);
+	line-height: calc(var(--box) * .4);
+	border-radius: 10000px;
+}
+.statistics.posted .big:after {
+	position: absolute;
+	content: "";
+	bottom: 0;
+	right: 0;
+	border-left: var(--padm) solid transparent;
+	border-right: var(--padm) solid transparent;
+	border-top: var(--padl) solid var(--yellow);
+	border-bottom: var(--padl) solid transparent;
+	transform: translate(15%, 50%) rotate(-40deg);
+}
+
+/* Coins */
+.statistics.coins .big {
+	background-color: var(--yellow);
+	color: var(--black);
+	width: calc(var(--box) - (2 * var(--padl)));
+	height: calc(var(--box) - (2 * var(--padl)));
+	line-height: calc(var(--box) - (2 * var(--padl)));
+	border-radius: 100%;
+}
+
+/* Badges */
+.statistics.badges .big {
+	font-size: 5rem;
+	letter-spacing: -.25rem;
+	background-color: var(--yellow);
+	color: var(--black);
+	width: calc(1/2 * var(--box));
+	height: calc(4/7 * var(--box));
+	line-height: calc(4/7 * var(--box));
+	padding: 0 var(--padm) calc(3/4 * var(--padxl));
+	border-radius: var(--padl) var(--padl) 100% 100%;
+}
+
+/* MVP */
+.mvp .htmlcontent .avatar {
+	z-index: 1;
+	position: relative;
+	width: auto;
+	margin: 0 auto var(--pads);
+}
+.mvp .htmlcontent .avatar img {
+	margin-right: 0;
+}
+.mvp .htmlcontent .avatar:after {
+	content: "🏅";
+	display: block;
+	position: absolute;
+	bottom: calc(-1 * var(--pads));
+	right: calc(-1 * var(--pads));
+	line-height: 100%;
+	font-size: 1.5rem;
+	padding: 0;
+	border-radius: 100%;
+}
+.mvp .htmlcontent a:nth-child(1) .avatar:after { content: "🥇"; font-size: 3rem; }
+.mvp .htmlcontent a:nth-child(2) .avatar:after { content: "🥈"; font-size: 2.5rem; }
+.mvp .htmlcontent a:nth-child(3) .avatar:after { content: "🥉"; font-size: 2rem; }
+
+/* Anniversary */
+.statistics.anniversary .big {
+	display: flex;
+	flex-direction: column;
+	width: calc(1/2 * var(--box));
+	height: calc(4/7 * var(--box));
+	background-color: var(--yellow);
+	overflow: hidden;
+	border-radius: var(--padm);
+}
+.statistics.anniversary .big strong {
+	display: flex;
+	flex-direction: row;
+	padding: var(--pads) var(--padm);
+	font-size: 1rem;
+	letter-spacing: .015rem;
+	line-height: 100%;
+	text-transform: uppercase;
+	border-bottom: 1px solid var(--black-25);
+}
+.statistics.anniversary .big strong i {
+	display: flex;
+	padding: 0;
+	font-weight: 400;
+	background-color: transparent;
+	margin: 0 0 0 auto;
+	color: var(--black);
+}
+.statistics.anniversary .big strong i:first-child {
+	margin-left: 0;
+}
+.statistics.anniversary .big em {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--black);
+	background-color: var(--white);
+	font-style: normal;
+}
+
 /* Plurk - Statistics - Costum Page Style */
 #hello {
 	z-index: 3;
@@ -2930,6 +3107,7 @@ img.rounded {
 	transition: background .5s ease;
 }
 
+/* Credits style */
 #credits {
 	background-color: var(--yellow);
 	opacity: 0;
@@ -2967,3 +3145,33 @@ img.rounded {
 	font-weight: 500;
 	opacity: 1;
 }
+
+/* Block order */
+.statistics.alltime 			{ order: 1; }
+.statistics.posted 				{ order: 2; }
+.statistics.responded 			{ order: 3; }
+.statistics.anniversary 		{ order: 4; }
+.statistics.badges 				{ order: 5; }
+.statistics.thisyear 			{ order: 6; }
+.statistics.mostresponded 		{ order: 7; }
+.statistics.percentage 			{ order: 8; }
+.statistics.recievereplurk 		{ order: 9; }
+.statistics.mostreplurked 		{ order: 10; }
+.statistics.mostfavorited 		{ order: 11; }
+.statistics.recievelove 		{ order: 12; }
+.statistics.porn 				{ order: 13; }
+.statistics.responsecount 		{ order: 14; }
+.statistics.coins 				{ order: 15; }
+.statistics.loved 				{ order: 16; }
+.statistics.replurked 			{ order: 17; }
+.statistics.digdeeper 			{ order: 18; }
+.statistics.mostmentionedbyme 	{ order: 19; }
+.statistics.mostresponders 		{ order: 20; }
+.statistics.sharedlinks 		{ order: 21; }
+.statistics.sharedpictures 		{ order: 22; }
+.statistics.mostinteraction 	{ order: 23; }
+.statistics.mediumnumber 		{ order: 24; }
+.statistics.hashtags 			{ order: 25; }
+.statistics.emoticons 			{ order: 26; }
+.statistics.mvp 				{ order: 27; }
+.statistics.loading 			{ order: 100; }
