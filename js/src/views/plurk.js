@@ -4,6 +4,8 @@
 	1. update(text): update the content with text value, and animate it if it's number
 	2. updateHTML(text): update the content with html value
 */
+
+var iconLink = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><path id="right" d="M19.188,12.001c0,1.1-0.891,2.015-1.988,2.015l-4.195-0.015C13.543,15.089,13.968,16,15.002,16h3C19.658,16,21,13.657,21,12s-1.342-4-2.998-4h-3c-1.034,0-1.459,0.911-1.998,1.999l4.195-0.015C18.297,9.984,19.188,10.901,19.188,12.001z"/><path id="center" d="M8,12c0,0.535,0.42,1,0.938,1h6.109c0.518,0,0.938-0.465,0.938-1c0-0.534-0.42-1-0.938-1H8.938C8.42,11,8,11.466,8,12z"/><path id="left" d="M4.816,11.999c0-1.1,0.891-2.015,1.988-2.015L11,9.999C10.461,8.911,10.036,8,9.002,8h-3c-1.656,0-2.998,2.343-2.998,4s1.342,4,2.998,4h3c1.034,0,1.459-0.911,1.998-1.999l-4.195,0.015C5.707,14.016,4.816,13.099,4.816,11.999z"/></svg>';
 class span {
 	constructor(classname, text) {
 		this.el = document.createElement('span');
@@ -523,9 +525,7 @@ class replurk {
 			}
 		},
 		drawDiv: function(style, text) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
-				<div class="text">' + text + '</div>\
-			'));
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="drawdiv">' + text + '</div>'));
 		},
 		drawGraph: function(style, number, text) {
 			if (typeof number == "string" || (typeof number == "number" && number > 0)) {
@@ -554,7 +554,6 @@ class replurk {
 					<div class="title">' + title + '</div>\
 				</div>\
 			'));
-			return 
 		},
 		drawLink: function(style, link, title, text, badge) {
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawlink", '\
@@ -566,17 +565,11 @@ class replurk {
 			'));
 		},
 		drawPost: function(style, id, title, text, badge) {
-			var url = ""
+			var url = "";
 			if(id) url = 'https://plurk.com/p/' + id.toString(36);
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", '\
 				<div>\
-					<a href="' + url + '" class="link" target="_BLANK">\
-						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">\
-							<path id="right" d="M19.188,12.001c0,1.1-0.891,2.015-1.988,2.015l-4.195-0.015C13.543,15.089,13.968,16,15.002,16h3C19.658,16,21,13.657,21,12s-1.342-4-2.998-4h-3c-1.034,0-1.459,0.911-1.998,1.999l4.195-0.015C18.297,9.984,19.188,10.901,19.188,12.001z"/>\
-							<path id="center" d="M8,12c0,0.535,0.42,1,0.938,1h6.109c0.518,0,0.938-0.465,0.938-1c0-0.534-0.42-1-0.938-1H8.938C8.42,11,8,11.466,8,12z"/>\
-							<path id="left" d="M4.816,11.999c0-1.1,0.891-2.015,1.988-2.015L11,9.999C10.461,8.911,10.036,8,9.002,8h-3c-1.656,0-2.998,2.343-2.998,4s1.342,4,2.998,4h3c1.034,0,1.459-0.911,1.998-1.999l-4.195,0.015C5.707,14.016,4.816,13.099,4.816,11.999z"/>\
-						</svg>\
-					</a>\
+					<a href="' + url + '" class="link" target="_BLANK">' + iconLink + '</a>\
 					<span class="big">' + badge + '</span>\
 					<p class="post">' + text + '</p>\
 					<span class="title">' + title + '</span>\
@@ -761,26 +754,26 @@ class replurk {
 			var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
 
 			this.parent.most.responses.draw(plurks);
-			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of your plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
+			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
 
-			if(this.replurker_count > 0) this.draw('spansmall recievereplurk', this.replurker_count, 'You got <i>' + plural(this.replurker_count, 'replurk') + '</i>');
+			this.draw('spansmall recievereplurk', this.replurker_count, 'I got <i>' + plural(this.replurker_count, 'replurk') + '</i>');
 			this.parent.most.replurk.draw(plurks);
 
 			this.parent.most.favorite.draw(plurks);	
-			if(this.favourite_count > 0) this.draw('spansmall recievelove', this.favourite_count, 'Your recieved <i>' + plural(this.favourite_count, 'love') + '</i>');
+			this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i>' + plural(this.favourite_count, 'love') + '</i>');
 
-			if(this.private_count > 0) this.draw('spansmall privateplurk', this.private_count, 'You posted <i>' + plural(this.private_count, 'private plurk') + '</i>');
-			if(this.whispers_count > 0) this.draw('spansmall whisper', this.whispers_count, 'You posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
-			if(this.porn_count > 0) this.draw('spansmall porn', this.porn_count, 'You posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
+			this.draw('spansmall privateplurk', this.private_count, 'I posted <i>' + plural(this.private_count, 'private plurk') + '</i>');
+			this.draw('spansmall whisper', this.whispers_count, 'I posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
+			this.draw('spansmall porn', this.porn_count, 'I posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
 
-			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'You got <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
-			if(this.coins_count > 0) this.draw('spansmall center coins', this.coins_count, 'You recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
+			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I got <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
+			this.draw('spansmall center coins', this.coins_count, 'I recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
 	
 			try {
-				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> Your Posts", this.favorite_list.sort(this.parent.most.sort));
-				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>Replurked</i> Your Posts", this.replurker_list.sort(this.parent.most.sort));
+				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
+				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
 			} catch {
-				console.info("Error while displaying your favourite and or replurker list");
+				console.info("Error while displaying most favourite and or replurker list");
 			}
 		}
 	};
@@ -854,7 +847,7 @@ class replurk {
 			try {
 				await this.mentions.count(data.content_raw);
 			} catch {
-				console.info("There were some errors while counting your mentions");
+				console.info("There were some errors while counting mentions");
 			}
 			// Find and count all hashtags from my post
 			if(data.user_id == this.parent.me.id) this.hashtags.count(data.content);
@@ -886,7 +879,7 @@ class replurk {
 					this.data[i].position = this.data.length;
 					if(this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++;
-						this.parent.statistics.attach('<i>Top Responders</i> <strong>of Your Timeline</strong>', this.data[i], 5);
+						this.parent.statistics.attach('<i>Top Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
 					}
 				}
 			},
@@ -930,11 +923,11 @@ class replurk {
 	
 							if(user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++;
-								this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in Your Timeline</strong>', this.data[idx], max);
+								this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
 							}
 						}
 	
-						if(this.data[idx].el) this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in Your Timeline</strong>', this.data[idx], max);
+						if(this.data[idx].el) this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
 					}
 				}
 			},
@@ -942,7 +935,7 @@ class replurk {
 				var index = 0;
 				if(this.data.length > 0) {
 					while((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-					if(this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by You', "@" + this.data[index].value, this.data[index].count);
+					if(this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count);
 				}
 			}
 		},
@@ -956,11 +949,11 @@ class replurk {
 			},
 			draw: function() {
 				var html = "";
-				var max = 10;
+				var max = 7;
 				this.data.sort(this.parent.most.sort);
 				for(var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++) 
 					if(this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
-				if(html != "") this.parent.statistics.drawHTML("span2 grid emoticons", '<i>Most Used My Emoticons</i>', html);
+				if(html != "") this.parent.statistics.drawHTML("smallspan grid emoticons", 'Most Used <i>My Emoticons</i>', html);
 			}
 		},
 		hashtags: {
@@ -979,77 +972,94 @@ class replurk {
 					if(this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>';
 				if(html != "") { 
 					html = "<strong>#</strong>" + html;
-					this.parent.statistics.drawHTML("hashtags", '<i>Most Used Hashtags</i>', html);
+					this.parent.statistics.drawHTML("hashtags", 'Most Used <i>Hashtags</i>', html);
 				}
 			}
 		},
 		links: {
-			data: {},
+			data: [],
 			links: [],
 			pics:[],
 			parent: this,
 			count: function(content, id, response, replurk, loved) {
 				var result = content.match(/href\=\"(.*?)\"\ class=\"(.*?)\"\ rel/g);
+				var count = 0;
+				var pics = [];
+				var links = [];
+
 				if(result) for(var data of result) {
+					if(!this.data[id]) {
+						count = response + (replurk * 250) + (loved * 50);
+					}
+
 					if(data.includes("pictureservices")) {
 						this.pics.push(data);
-
-						console.log(id, response, replurk, loved);
-						if(response != undefined) {
+						if(count > 0) {
 							var pic = data.split('\"')
-							if(this.data[id]) {
-								this.data[id].pics.push({
-									url: pic[1],
-									response: response,
-									replurk: replurk,
-									loved: loved
-								});
-							} else {
-								this.data[id] = {
-									pics: [{
-										url: pic[1],
-										response: response,
-										replurk: replurk,
-										loved: loved
-									}],
-									links: []
-								}
-							}
+							pics.push({
+								url: pic[1],
+								response: response,
+								replurk: replurk,
+								loved: loved
+							});
 						}
 					}
 					else {
 						this.links.push(data);
-
-						if(response != undefined) {
+						if(count > 0) {
 							var link = data.split('\"')
-							if(this.data[id]) {
-								this.data[id].links.push({
-									url: link[1],
-									response: response,
-									replurk: replurk,
-									loved: loved
-								});
-							} else {
-								this.data[id] = {
-									pics: [],
-									links: [{
-										url: link[1],
-										response: response,
-										replurk: replurk,
-										loved: loved
-									}]
-								}
-							}
+							links.push({
+								url: link[1],
+								response: response,
+								replurk: replurk,
+								loved: loved
+							});
 						}
+
 					}
 				}
+
+				if(count) this.data.push({
+					id: id,
+					pics: pics,
+					links: links,
+					count: count,
+					content: content
+				});
 			},
 			drawLinks: function() {
-				console.log(this.data);
-				if(this.links.length > 0) this.parent.statistics.draw('spansmall sharedlinks', this.links.length, 'You shared <i>' + plural(this.links.length, 'link') + '</i>');
+				var max = 1;
+				var index = 0;
+				var result = "";
+				this.data.sort(this.parent.most.sort);
+				while(index < this.data.length && max > 0) {
+					if(this.data[index].links.length > 0) {
+						var link = this.data[index].links[0];
+						var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
+						result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response">💬 ' + link.response + '</span><span class="replurk">📢 ' + link.replurk + '</span><span class="loved">❤️ ' + link.loved + '</span>' + url + '</div></div>';
+						max--;
+					}
+					index++;
+				}
+				if(this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>" + plural(this.links.length, 'link') + '</i> and here\'s the most popular one</div>' + result);
 			},
 			drawPics: function() {
-				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'You shared <i>' + plural(this.pics.length, 'picture') + '</i>');
+				var max = 1;
+				var index = 0;
+				var result = "";
+				this.data.sort(this.parent.most.sort);
+				while(index < this.data.length && max > 0) {
+					if(this.data[index].pics.length > 0) {
+						var pics = this.data[index].pics[0];
+						var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
+						result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response">💬 ' + pics.response + '</span><span class="replurk">📢 ' + pics.replurk + '</span><span class="loved">❤️ ' + pics.loved + '</span>' + url + '</div></div></div>';
+						max--;
+					}
+					index++;
+				}
+
+				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>' + plural(this.pics.length, 'image') + '</i>');
+				if(result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>Most Popular Image</i>', result);
 			}
 		},
 		types: {
@@ -1063,7 +1073,7 @@ class replurk {
 				this.words += words.length;
 			},
 			draw: function() {
-				if(this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'You typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year');
+				if(this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year');
 			}
 		},
 		responses: {
@@ -1108,7 +1118,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>Most Favorited</i> ' + datediff(value.posted), value.content, value.favorite_count);
+						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
 						return;
 					}
 				}
@@ -1149,7 +1159,7 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>interact</i> with you", result);
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>interact</i> with me", result);
 				} catch {
 					console.info("Error while counting most interacted plurker");
 				}
@@ -1196,9 +1206,9 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "<i>Most Valuable Plurkers</i>", result);
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My <i>MVP</i> this year", result);
 				} catch {
-					console.info("Error while counting your mvp");
+					console.info("Error while counting my mvp");
 				}
 			}
 		}
@@ -1207,11 +1217,11 @@ class replurk {
 	// Inactive plurker object
 	inactive = {
 		draw: (data, year) => {
-			this.statistics.draw('inactive', year + " &#8617;", 'You\'ve been inactive since ' + year + ' <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
-			this.statistics.drawPost('postcontent span2', data.plurk_id, '<i>Your last Plurk</i> ' + datediff(data.posted), data.content, data.response_count);
+			this.statistics.draw('inactive', year + " &#8617;", 'I\'ve been inactive since ' + year + ' <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
+			this.statistics.drawPost('postcontent span2 inactivemore', data.plurk_id, '<i>My last Plurk</i> ' + datediff(data.posted), data.content, data.response_count);
 		},
 		empty: () => {
-			this.statistics.draw('inactive', '-', 'You didn\'t post anything at this year <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
+			this.statistics.draw('inactive', '-', 'I didn\'t post anything at this year <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
 		}
 	}
 	
@@ -1802,19 +1812,19 @@ class replurk {
 		// Draw statistic
 		this.statistics.title('All Time', 'alltime');
 		if(plurker.anniversary.years && plurker.anniversary.days) {
-			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "You posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "I posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
 			
 			// Responses
-			if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>, when you\'re not asleep';
-			else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>, when you\'re not asleep';
-			this.statistics.draw('span2 center responded', responses, "You responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
+			if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>, when I\'m not asleep';
+			else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>, when I\'m not asleep';
+			this.statistics.draw('span2 center responded', responses, "I responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
 
 			var join = new Date (plurker.join_date)
-			this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "You joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-			this.statistics.draw('spansmall center badges', "9", "You have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
+			this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
+			this.statistics.draw('spansmall center badges', "9", "I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
 		} else {
-			this.statistics.draw('', '-', "There is no data of you joining Plurk");
-			this.statistics.draw('', plurker.badges.length, "But at least you have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
+			this.statistics.draw('', '-', "There is no data in my timeline");
+			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
 		}
 
 		// Scroll animation hello section
@@ -1875,7 +1885,7 @@ class replurk {
 	// Display statistics
 	async displayStatistics() {
 		this.statistics.title('This Year', 'thisyear');
-		this.statistics.draw("loading", "", "<i class='month'>Data from December</i>1 of 2. Loading your " + this.year + " plurks. It can take up to 1 minute.");
+		this.statistics.draw("loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.");
 
 		this.loading.init(this.next);
 		this.loading.loop(this.fulldays);
@@ -1940,7 +1950,7 @@ class replurk {
 			try {
 				await this.statistics.drawAll(this.plurks);
 			} catch {
-				console.info("Error while counting your statistics");
+				console.info("Error while counting statistics");
 			}
 
 			// Display extended statistics
@@ -1957,7 +1967,7 @@ class replurk {
 	async displayExtendedStatistics() {
 		// Deeper user statistics
 		this.statistics.title('Dig Deeper', 'digdeeper');
-		this.statistics.draw("loading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
+		this.statistics.draw("loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
 
 		// Load each post responses and calculate statistics
 		this.loading.init(this.next);

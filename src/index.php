@@ -28,7 +28,7 @@
 
 		<section id="casestudy" class="middle full">
 			<div class="padding">
-				<a href="./replurk" class="plurktitle">RePlurk 2021</a>
+				<a href="./replurk2021" class="plurktitle">RePlurk 2021</a>
 				<a href="./replurk2020" class="plurksubtitle">or 2020</a>
 			</div>
 			<div class="arrow-small">

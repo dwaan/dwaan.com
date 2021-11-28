@@ -727,6 +727,7 @@ header {
 	.statistics.responded .text {
 		font-size: 1.15rem;
 		margin: auto;
+		line-height: 175%;
 	}
 }
 @media (min-width: 1800px) {
@@ -748,10 +749,10 @@ header {
 
 /* order */
 @media (min-width: 500px) {
-	.statistics.posted 				{ order: 3; }
-	.statistics.responded 			{ order: 2; }
+	.statistics.posted 				{ order: 5; }
+	.statistics.responded 			{ order: 3; }
 }
 @media (min-width: 1000px) {
-	.statistics.posted 				{ order: 2; }
-	.statistics.responded 			{ order: 3; }
+	.statistics.posted 				{ order: 3; }
+	.statistics.responded 			{ order: 5; }
 }
