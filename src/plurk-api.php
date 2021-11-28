@@ -49,8 +49,8 @@
 
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') $url = 'https://';
     else $url = 'http://';
-    $url.= $_SERVER['HTTP_HOST'];
-    $url.= $_SERVER['REQUEST_URI'];
+    $url = $url . $_SERVER['HTTP_HOST'];
+    $url = $url . $_SERVER['REQUEST_URI'];
 
 	$oauth = new OAuth($app_key, $app_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
 

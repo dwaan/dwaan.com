@@ -756,7 +756,7 @@ class replurk {
 			this.parent.most.responses.draw(plurks);
 			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
 
-			this.draw('spansmall recievereplurk', this.replurker_count, 'I got <i>' + plural(this.replurker_count, 'replurk') + '</i>');
+			this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i>' + plural(this.replurker_count, 'replurk') + '</i>');
 			this.parent.most.replurk.draw(plurks);
 
 			this.parent.most.favorite.draw(plurks);	
@@ -766,7 +766,7 @@ class replurk {
 			this.draw('spansmall whisper', this.whispers_count, 'I posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
 			this.draw('spansmall porn', this.porn_count, 'I posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
 
-			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I got <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
+			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
 			this.draw('spansmall center coins', this.coins_count, 'I recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
 	
 			try {
