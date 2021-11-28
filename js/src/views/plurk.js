@@ -1041,7 +1041,7 @@ class replurk {
 					}
 					index++;
 				}
-				if(this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>" + plural(this.links.length, 'link') + '</i> and here\'s the most popular one</div>' + result);
+				if(this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>" + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result);
 			},
 			drawPics: function() {
 				var max = 1;
@@ -1206,7 +1206,7 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My <i>MVP</i> this year", result);
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>MVP</i>", result);
 				} catch {
 					console.info("Error while counting my mvp");
 				}

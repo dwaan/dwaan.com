@@ -3157,6 +3157,9 @@ img.rounded {
 	line-height: 120%;
 	background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5) 75%);
 }
+.dark .statistics.previewpics .box .post {
+	background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.5) 75%);
+}
 .statistics.previewpics .post a {
 	color: inherit;
 }
