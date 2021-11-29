@@ -33,7 +33,7 @@
 				<a href="./replurk2020" class="plurksubtitle">or 2020</a>
 			</div>
 			<div class="arrow-small">
-				<a href="./replurk" class="arrow">
+				<a href="./replurk2021" class="arrow">
 					<span>Weekend Project</span>
 				</a>
 			</div>
