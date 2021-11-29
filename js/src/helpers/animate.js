@@ -13,7 +13,7 @@ var animate = {
 			}, 0);
 		}
 
-		return tl
+		return tl;
 	},
 	show: function (next, done, nonsticky, footer){
 		if (next == undefined) return false;

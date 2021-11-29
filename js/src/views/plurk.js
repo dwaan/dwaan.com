@@ -1440,12 +1440,12 @@ class replurk {
 					animation: tl,
 					onUpdate: (update) => {
 						var el1 = '.logo, .size, .lamp, .switch';
-						var el2 = el1 + ", .logout";
+						var el2 = el1 + ", .footer > *";
 
 						if (update.direction > 0) {
 							gsap.killTweensOf(_qAll(el2));
 							gsap.to(_qAll(el1), { y: -100, opacity: 0 });
-							gsap.to(_qAll('.logout'), { y: 100, opacity: 0 });
+							gsap.to(_qAll('.footer > *'), { y: 100, opacity: 0 });
 						} else {
 							gsap.to(_qAll(el2), { y: 0, opacity: 1 });
 						}
@@ -1680,8 +1680,8 @@ class replurk {
 	hideStatisticPages(tl) {
 		var next = this.next;
 
-		tl = animate.top(tl);
-		tl.fromTo(next.querySelectorAll("#logout, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
+		tl = animate.top(next, tl);
+		tl.fromTo(next.querySelectorAll(".footer > *, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
 			opacity: 1,
 			y: 0
 		}, {
@@ -1785,7 +1785,7 @@ class replurk {
 			if(text) {
 				message(text);
 			} else  {
-				tokenlink.textContent = "Open Authorization Page";
+				tokenlink.textContent = "Grant Access";
 				tokenlink.setAttribute("href", data.message.url);
 			}
 		}, () => {
@@ -2060,7 +2060,7 @@ class replurk {
 			this.me = data.message;
 
 			this.displayPlurkerData(() => {
-				tl = animate.top(tl);
+				tl = animate.top(next, tl);
 
 				// Hide login page
 				if (callback) next.querySelector("#permission").style.display = "none";
@@ -2152,6 +2152,13 @@ var replurk2021view = {
 	beforeEnter: function(data) {
 		var next = data.next.container;
 
+		next.querySelector("#backtotop").onclick = () => {
+			gsap.to(next, {
+				duration: 2, 
+				ease: "expo.inOut",
+				scrollTo: "#statistics"
+			});
+		}
 		next.querySelectorAll("#permission, .grant").forEach(function(el) {
 			el.style.display = "none";
 		});
@@ -2163,6 +2170,6 @@ var replurk2021view = {
 		});
 	},
 	beforeLeave: function(data) {
-		gsap.killTweensOf(_qAll("header, .footer"));
+		gsap.killTweensOf(_qAll("header, .footer, #backtotop"));
 	}
 }

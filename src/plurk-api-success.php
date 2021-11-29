@@ -11,8 +11,9 @@
         else if(namespace == "replurk2020") { window.opener.replurk2020.login(); namespace = ""; }
         else if(namespace == "replurk") { window.opener.replurk.login(); namespace = ""; }
 
-		if(namespace == "") window.close()
+		if(namespace == "") window.close();
 	</script>
+	<meta name="theme-color" content="#FFD700">
     <style>
         * {
             line-height: 1.2;
@@ -20,7 +21,7 @@
         }
 
         html {
-            color: #888;
+            color: rgba(0,0,0,.75);
             display: table;
             font-family: sans-serif;
             height: 100%;
@@ -32,21 +33,21 @@
             display: table-cell;
             vertical-align: middle;
             margin: 2em auto;
+            background-color: #FFD700;
         }
 
         h1 {
-            color: #555;
+            color: #000;
             font-size: 2em;
             font-weight: 400;
         }
 
         p {
             margin: 10px auto;
-            width: 280px;
+            width: 380px;
         }
 
         @media only screen and (max-width: 280px) {
-
             body, p {
                 width: 95%;
             }
@@ -62,6 +63,7 @@
 <body>
     <h1>Success 🥳</h1>
     <p>Please close this window and refresh RePlurk page manually if this window didn't automatically close.</p>
+    <p>If you open this web app inside Plurk app. please reaopen the web app in your browser and restart the autorization process.</p>
 </body>
 </html>
 

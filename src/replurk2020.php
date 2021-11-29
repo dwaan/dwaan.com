@@ -36,6 +36,9 @@
 			</svg>
 			Logout
 		</div>
+		<a href="./replurk2020" class="now">2020</a>
+		<span>&bull;</span>
+		<a href="./replurk2021">2021</a>
 	</section>
 
 	<!-- Login -->
@@ -44,10 +47,10 @@
 			<form action="" method="GET">
 				<h1>RePlurk<br/><sup>20</sup><sub>20</sub></h1>
 				<ol>
+					<li><p>Open this web app in your browser.</p></li>
 					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
 					<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">
-						<p>Please reopen this web app in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this web app.</p>
 						<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this web app. Other than session data, this web app didn't store any of your Plurk data in the server.</p>
 					</li>
 				</ol>

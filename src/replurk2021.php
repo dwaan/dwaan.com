@@ -26,7 +26,9 @@
 		</div>
 	</section>
 
-	<section id="statistics" class="grant middle"></section>
+	<section id="statistics" class="grant middle">
+		<section id="backtotop" class="grant middle snap-end">&uarr;</section>
+	</section>
 
 	<section class="grant footer">
 		<div id="logout" class="logout">
@@ -36,6 +38,9 @@
 			</svg>
 			Logout
 		</div>
+		<a href="./replurk2020">2020</a>
+		<span>&bull;</span>
+		<a href="./replurk2021" class="now">2021</a>
 	</section>
 
 	<section id="permission" class="middle first snap-start">
@@ -43,10 +48,10 @@
 			<form action="" method="GET">
 				<h1>RePlurk<br/><sup>20</sup><sub>21</sub></h1>
 				<ol>
+					<li><p>Open this web app in your browser.</p></li>
 					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
 					<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">
-						<p>Please reopen this web app in your browser if you open this inside Plurk app. The verification number will appeared in your Plurk App and it can be covered by this web app.</p>
 						<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this web app. Other than session data, this web app didn't store any of your Plurk data in the server.</p>
 					</li>
 				</ol>
@@ -58,10 +63,16 @@
 	<section id="credits" class="middle">
 		<div class="text">
 			<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
-			<p class="like">If you like this web app, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">plurk profile</a>. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">plurk coins</a> ;).</p>
-			<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="./say-hi">contact me</a> for removal.</p>
+			<p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
+			<p class="like likeandsupport">
+				<a href="https://plurk.com/dwan" target="_BLANK">🙇🏽‍♂️ <i>Say Hi! to me in Plurk</i></a>				
+				<a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">🪙 <i>Send me a Plurk Coins</i></a>
+				<a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">🍦 <i>Buy me an Ice Cream</i></a>
+			</p>
+			<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="./say-hi">contact me</a> for removal</p>
+			<p class="noaffiliation">You can clone this web app source code from <a href="https://github.com/dwaan/replurk">GitHub</a></p>
 		</div>
-	</section>
+	</section>🍦
 
 	<section id="nojs" class="middle">
 		<div class="text">

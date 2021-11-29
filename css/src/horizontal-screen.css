@@ -741,12 +741,54 @@ header {
 }
 
 #credits {
-	padding: calc(4 * var(--pady)) var(--padx)!important;
+	padding: calc(2.5 * var(--pady)) var(--padx)!important;
 }
 #credits .made {
 	font-size: 2rem;
 }
-
+@media (max-width: 790px) {
+	#credits {
+		padding: var(--pady) var(--padx)!important;
+	}
+	#credits .made {
+		font-size: 1.75rem;
+	}
+	#credits .text {
+		max-width: initial;
+	}
+	#credits .likeandsupport {
+		margin: var(--pads) 0;
+		padding-bottom: var(--pads);
+	}
+	#credits .likeandsupport a {
+		flex-flow: row;
+		padding: var(--pads);
+		font-size: 2rem;
+		align-items: center;
+		justify-content: center;
+	}
+	#credits .likeandsupport a i {
+		margin-top: 0;
+		margin-left: var(--pads);
+		text-align: left;
+	}
+}
+@media (max-width: 600px) {
+	#credits p {
+		margin: 4px 0;
+	}
+	#credits .made {
+		font-size: 1.5rem;
+	}
+	#credits .like {
+		font-size: .85rem;
+		line-height: 140%;
+	}
+	#credits .noaffiliation {
+		font-size: .7rem;
+		line-height: 140%;
+	}
+}
 /* order */
 @media (min-width: 500px) {
 	.statistics.posted 				{ order: 5; }

@@ -97,8 +97,6 @@
 
 				if (array_key_exists('content-type', $headers)) {
 					$ct = $headers['content-type'];
-					// print_r($ct);
-					// exit;
 	
 					if (preg_match('#image/png|image/.*icon|image/jpe?g|image/gif|application/octet-stream|binary/octet-stream#', strtolower($ct)) !== 1) {
 						header('HTTP/1.1 404 Not Found');
@@ -152,7 +150,7 @@
 				$_SESSION['permanenttoken'] = $access_token_info['oauth_token'];
 				$_SESSION['permanentsecret'] = $access_token_info['oauth_token_secret'];
 				
-				readfile("plurk-api-success.php");
+				include_once("plurk-api-success.php");
 			} else {
 				error();
 			}

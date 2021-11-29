@@ -76,6 +76,7 @@
 	--black-75: rgba(0, 0, 0, 0.5);
 	--black-50: rgba(0, 0, 0, 0.25);
 	--black-25: rgba(0, 0, 0, 0.15);
+	--black-15: rgba(0, 0, 0, 0.05);
 	--black-gray: #111111;
 	--black-gray-light: #131313;
 	--gray-light: #C4C4C4;
@@ -90,6 +91,7 @@
 	--black-75: rgba(255, 255, 255, 0.50);
 	--black-50: rgba(255, 255, 255, 0.25);
 	--black-25: rgba(255, 255, 255, 0.15);
+	--black-15: rgba(255, 255, 255, 0.05);
 	--black-gray: #bbb;
 	--black-gray-light: #aaa;
 	--gray-light: #333;
@@ -2278,7 +2280,7 @@ img.rounded {
 	transition: color .5s ease;
 }
 .plurk .bgtext sup {
-	margin: -30vh 0 0 0;
+	margin: -30vh 0 0 -10vw;
 }
 .plurk .bgtext sub {
 	margin: 30vh 0 0 0;
@@ -2382,10 +2384,11 @@ img.rounded {
 	background-color: var(--red);
 	color: var(--white);
 	padding: var(--pads) var(--padl);
+	margin-top: var(--pads);
 	vertical-align: middle;
 	text-align: center;
 	text-decoration: none;
-	border-radius: 4px;
+	border-radius: var(--pads);
 }
 #permission .submit {
 	color: var(--black);
@@ -3266,6 +3269,7 @@ img.rounded {
 }
 #credits p {
 	margin: var(--pads) 0;
+	line-height: 150%;
 }
 #credits .like,
 #credits .noaffiliation {
@@ -3278,8 +3282,11 @@ img.rounded {
 }
 #credits a {
 	text-decoration: none;
-	transition: color .5s ease;
-	font-weight: 500;
+	transition: color .125s ease-in-out, background-color .125s ease-in-out;
+	color: inherit;
+	border-bottom: 1px dashed var(--black-75);
+	columns: inherit;
+	color: var(--black);
 }
 #credits a:hover {
 	color: var(--red);
@@ -3287,6 +3294,95 @@ img.rounded {
 #credits .made {
 	font-weight: 500;
 	opacity: 1;
+}
+#credits .likeandsupport {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: var(--padm);
+	margin: var(--padm) 0 var(--padm);
+	border-bottom: 1px dotted var(--black-50);
+}
+#credits .likeandsupport a,
+#credits .likeandsupport i {
+	display: block;
+	font-style: initial;
+	border: none;
+	padding: 0;
+}
+#credits .likeandsupport a {
+	display: flex;
+	width: 30%;
+	background-color: var(--black-15);
+	padding: var(--padm);
+	border-radius: var(--padm);
+	flex-direction: column;
+	align-items: center;
+	font-size: 4rem;
+	line-height: 100%;
+	transition: background-color .125s ease-in-out;
+}
+#credits .likeandsupport a:hover {
+	background-color: var(--white);
+}
+#credits .likeandsupport a i {
+	margin-top: var(--pads);
+	text-align: center;
+	font-size: .75rem;
+	line-height: 130%;
+}
+
+/* Back to top */
+#backtotop {
+	position: relative;
+	color: var(--black);
+	font-size: 2rem;
+	text-align: center;
+	width: 100%;
+	height: calc(1/3 * var(--box));
+	line-height: calc(1/3 * var(--box));
+	margin: var(--padxxl) auto 0;
+	cursor: pointer;
+	transition: color .125s ease-in-out;
+}
+#backtotop:before {
+	position: absolute;
+	content: "";
+	display: block;
+	z-index: -1;
+	width: calc(1/3 * var(--box));
+	height: calc(1/3 * var(--box));
+	border: 1px dashed var(--black-25);
+	border-radius: 100%;
+	transition: background-color .125s ease-in-out;
+}
+#backtotop:hover {
+	color: var(--white);
+}
+#backtotop:hover:before {
+	background-color: var(--black);
+}
+
+/* Replurk footer */
+.plurk .footer {
+	align-items: center;
+}
+.plurk .footer div {
+	margin-right: auto;
+}
+.plurk .footer a {
+	pointer-events: all;
+}
+.plurk .footer a,
+.plurk .footer span {
+	font-weight: 300;
+	margin-right: var(--padm);
+}
+.plurk .footer a.now {
+	font-weight: 400;
+	pointer-events: none;
+}
+.plurk .footer a:last-child {
+	margin-right: var(--padxl);
 }
 
 /* Block order */
@@ -3328,3 +3424,5 @@ img.rounded {
 .statistics.emoticons 			{ order: 210; }
 .statistics.mediumnumber 		{ order: 211; }
 .statistics.mvp 				{ order: 212; }
+/* Back to top */
+#backtotop						{ order: 1000; }

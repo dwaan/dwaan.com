@@ -784,6 +784,34 @@ header {
 		padding: calc(2 * var(--pady)) var(--padx) var(--pady);
 	}
 }
+@media (max-width: 400px) {
+	#permission h1 {
+		font-size: 2.75rem;
+		letter-spacing: -.25rem;
+		line-height: 100%;
+	}
+	#permission li {
+		padding-top: var(--pads);
+		padding-bottom: var(--pads);
+	}
+	#permission p,
+	#permission li:before {
+		font-size: .9rem;;
+		line-height: 140%;
+	}
+	#permission .small p {
+		font-size: .6rem;
+		line-height: 160%;
+	}
+}
+@media (max-width: 370px) {
+	#permission h1 {
+		font-size: 2.5rem;
+	}
+	#permission form {
+		padding: var(--padm);
+	}
+}
 
 
 :root {
@@ -888,13 +916,17 @@ header {
 }
 
 #credits {
-	padding: calc(4 * var(--pady)) calc(2 * var(--padx))!important;
+	padding: calc(2.5 * var(--pady)) calc(2 * var(--padx))!important;
 }
 #credits .made {
 	font-size: 1.5rem;
 }
 #credits p {
 	font-size: .9rem;
+}
+#credits .likeandsupport a {
+	padding: var(--pads);
+	font-size: 2rem;
 }
 
 @media (max-width: 400px) {
@@ -924,6 +956,10 @@ header {
 	.bubble .plurkers:nth-child(3) .avatar img { width: calc(1.75 * var(--padl)) }
 	.bubble .plurkers:nth-child(4) .avatar img { width: calc(1.15 * var(--padl)) }
 	.bubble .plurkers:nth-child(5) .avatar img { width: calc(1 * var(--padl)) }
+}
+
+.plurk .footer a:last-child {
+	margin-right: 0;
 }
 
 /* order */
