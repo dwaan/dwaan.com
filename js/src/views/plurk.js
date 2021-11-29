@@ -754,24 +754,24 @@ class replurk {
 			var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
 
 			this.parent.most.responses.draw(plurks);
-			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
+			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got 💬 responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
 
-			this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i>' + plural(this.replurker_count, 'replurk') + '</i>');
+			this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i>📢 ' + plural(this.replurker_count, 'replurk') + '</i>');
 			this.parent.most.replurk.draw(plurks);
 
 			this.parent.most.favorite.draw(plurks);	
-			this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i>' + plural(this.favourite_count, 'love') + '</i>');
+			this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i>❤️ ' + plural(this.favourite_count, 'love') + '</i>');
 
-			this.draw('spansmall privateplurk', this.private_count, 'I posted <i>' + plural(this.private_count, 'private plurk') + '</i>');
-			this.draw('spansmall whisper', this.whispers_count, 'I posted <i>' + plural(this.whispers_count, 'whisper') + '</i>');
-			this.draw('spansmall porn', this.porn_count, 'I posted <i>' + plural(this.porn_count, 'adult plurk') + '</i>');
+			this.draw('spansmall privateplurk', this.private_count, 'I posted <i>💋 ' + plural(this.private_count, 'private plurk') + '</i>');
+			this.draw('spansmall whisper', this.whispers_count, 'I posted <i>🤫 ' + plural(this.whispers_count, 'whisper') + '</i>');
+			this.draw('spansmall porn', this.porn_count, 'I posted <i>🤤 ' + plural(this.porn_count, 'adult plurk') + '</i>');
 
-			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i>' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
-			this.draw('spansmall center coins', this.coins_count, 'I recieved <i>' + plural(this.coins_count, 'coin') + '</i>');
+			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i>💬 ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
+			this.draw('spansmall center coins', this.coins_count, 'I recieved <i>🪙 ' + plural(this.coins_count, 'coin') + '</i>');
 	
 			try {
-				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
-				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
+				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>❤️ Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
+				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>📢 Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
 			} catch {
 				console.info("Error while displaying most favourite and or replurker list");
 			}
@@ -879,7 +879,7 @@ class replurk {
 					this.data[i].position = this.data.length;
 					if(this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++;
-						this.parent.statistics.attach('<i>Top Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
+						this.parent.statistics.attach('<i>Top 💬 Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
 					}
 				}
 			},
@@ -923,11 +923,11 @@ class replurk {
 	
 							if(user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++;
-								this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+								this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
 							}
 						}
 	
-						if(this.data[idx].el) this.parent.statistics.attach('<i>Most Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+						if(this.data[idx].el) this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
 					}
 				}
 			},
@@ -1041,7 +1041,7 @@ class replurk {
 					}
 					index++;
 				}
-				if(this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>" + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result);
+				if(this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result);
 			},
 			drawPics: function() {
 				var max = 1;
@@ -1058,8 +1058,8 @@ class replurk {
 					index++;
 				}
 
-				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>' + plural(this.pics.length, 'image') + '</i>');
-				if(result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>Most Popular Image</i>', result);
+				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🏞 ' + plural(this.pics.length, 'image') + '</i>');
+				if(result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🏞 Most Popular Image</i>', result);
 			}
 		},
 		types: {
@@ -1086,7 +1086,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
+						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>💬 Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
 						return;
 					}
 				}
@@ -1102,7 +1102,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
+						this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>📢 Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
 						return;
 					}
 				}
@@ -1118,7 +1118,7 @@ class replurk {
 				for(var index in data){
 					var value = data[index];
 					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
+						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>❤️ Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
 						return;
 					}
 				}
@@ -1159,7 +1159,7 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>interact</i> with me", result);
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>🗣 interact</i> with me", result);
 				} catch {
 					console.info("Error while counting most interacted plurker");
 				}
@@ -1206,7 +1206,7 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>MVP</i>", result);
+					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>👄 MVP</i>", result);
 				} catch {
 					console.info("Error while counting my mvp");
 				}
@@ -1812,16 +1812,17 @@ class replurk {
 		// Draw statistic
 		this.statistics.title('All Time', 'alltime');
 		if(plurker.anniversary.years && plurker.anniversary.days) {
-			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "I posted around <i>" + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "I posted around <i>💬 " + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
 			
 			// Responses
-			if (responses <= 24) extra = "That's almost 1 response every <i>" + plural(Math.round(24 / responses), "hour") + '</i>, when I\'m not asleep';
-			else extra = "That's almost 1 response every <i>" + plural(Math.round(24 * 60 / responses), "minute") + '</i>, when I\'m not asleep';
-			this.statistics.draw('span2 center responded', responses, "I responded around <i>" + plural(responses, "time") + "</i> per day. " + extra);
+			var oneday = 16;
+			if (responses <= oneday) extra = "That's almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>';
+			else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>';
+			this.statistics.draw('span2 center responded', responses, "I responded around <i>💬 " + plural(responses, "time") + "</i> per day. " + extra + " when I'm not asleep");
 
 			var join = new Date (plurker.join_date)
 			this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-			this.statistics.draw('spansmall center badges', "9", "I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
+			this.statistics.draw('spansmall center badges', "9", "I have <i>🛡 " + plural(plurker.badges.length, "badge") + "</i> right now");
 		} else {
 			this.statistics.draw('', '-', "There is no data in my timeline");
 			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
