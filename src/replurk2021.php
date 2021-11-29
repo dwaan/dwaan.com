@@ -65,8 +65,8 @@
 			<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
 			<p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
 			<p class="like likeandsupport">
-				<a href="https://plurk.com/dwan" target="_BLANK">🙇🏽‍♂️ <i>Say Hi! to me in Plurk</i></a>				
-				<a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">🪙 <i>Send me a Plurk Coins</i></a>
+				<a href="https://www.plurk.com/p/onlc5m" target="_BLANK">🙇🏽‍♂️ <i>Say Hi! to me in Plurk</i></a>				
+				<a href="https://www.plurk.com/Premium/gift?plurk_id=1490814922" target="_BLANK">🪙 <i>Send me a Plurk Coin</i></a>
 				<a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">🍦 <i>Buy me an Ice Cream</i></a>
 			</p>
 			<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="./say-hi">contact me</a> for removal</p>
