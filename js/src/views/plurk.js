@@ -1909,7 +1909,6 @@ class replurk {
 				}
 			} else {
 				this.requestLogout();
-				break;
 			}
 		}
 		await getTimeline(this.startDate);

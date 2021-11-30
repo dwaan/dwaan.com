@@ -4,7 +4,7 @@
         else if(namespace == "replurk2020") { window.opener.replurk2020.login(); namespace = ""; }
         else if(namespace == "replurk") { window.opener.replurk.login(); namespace = ""; }
 
-		if(namespace == "") window.close();</script><meta name="theme-color" content="#FFD700"><style>* {
+		if(namespace == "") window.close();</script><meta name="theme-color" content="#ffffff"><style>* {
             line-height: 1.2;
             margin: 0;
         }
@@ -22,7 +22,7 @@
             display: table-cell;
             vertical-align: middle;
             margin: 2em auto;
-            background-color: #FFD700;
+            background-color: #ffffff;
         }
 
         h1 {
@@ -37,8 +37,8 @@
         }
 
         @media only screen and (max-width: 280px) {
-            body, p {
-                width: 95%;
+            p {
+                width: 90%;
             }
 
             h1 {

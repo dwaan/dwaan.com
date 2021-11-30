@@ -7,9 +7,16 @@
 	$app_key = 'qrMzkjPRRmaM';
 	$app_secret = 'HMQ7W2gkzECcY753BG7h4f9LWDrf1LK3';
 
+	function html($str) {
+?> <html><head><title><?php echo $str; ?></title><meta name="theme-color" content="#ffffff"><style>* { padding: 0; margin: 0; }
+			body { display: flex; padding: 20px; justify-content: center; align-items: center; font-family: sans-serif; background-color: #ffffff; letter-spacing: .05em; }</style><script>setTimeout(() => {
+				window.location = "<?php echo $_GET['redirect']; ?>"
+			}, 1000);</script></head><body> <?php echo $str; ?> </body></html> <?php
+	}
+
 	function debug($str) {
 		print("<pre>");
-		print_r($str);
+		var_dump($str);
 		exit();
 	}
 
@@ -59,10 +66,8 @@
 			if(preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['redirect']) === 0) {
 				exit;
 			}
-?> <html><head><title>Redirecting, please wait...</title><meta name="theme-color" content="#ffffff"><meta name="viewport" content="width=device-width,initial-scale=1"><style>* { padding: 0}
-			body { display: flex; justify-content: center; align-items: center; font-family: sans-serif; background-color: #ffffff; letter-spacing: .05em; }</style><script>setTimeout(() => {
-				window.location = "<?php echo $_GET['redirect']; ?>"
-			}, 1000);</script></head><body>Redirecting, please wait...</body></html> <?php
+
+			html("Redirecting, please wait...");
 			exit;
 		} else if(isset($_GET['img'])) {
 			if(preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['img']) === 0) {
@@ -132,8 +137,6 @@
 			$request = $_GET['request'];
 
 			if ($request == "token") {
-				// Get first token
-				$uri = $_SERVER['REQUEST_URI'];
 				$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 				$url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 				$url = explode("?", $url);
@@ -143,25 +146,21 @@
 				$_SESSION['token'] = $request_token_info['oauth_token'];
 				$_SESSION['secret'] = $request_token_info['oauth_token_secret'];
 
-				success('{"token":"'.$_SESSION['token'].'","url":"'.$auth_url.'?oauth_token='.$_SESSION['token'].'&deviceid='.session_id().'&model=RePlurk"}');
+				success('{"url":"'.$auth_url.'?oauth_token='.$_SESSION['token'].'&deviceid='.session_id().'&model=RePlurk"}');
 			} else if ($request == "permanenttoken") {
-				if (!isset($_SESSION['token']) || !isset($_SESSION['secret'])) {
-					error('No token/token secret available');
+				if (!isset($_SESSION['token']) || !isset($_SESSION['secret']) || !isset($_GET['oauth_verifier'])) {
+					error('Token is invalid');
 				}
-				if (!isset($_GET['oauth_verifier'])) {
-					error('Please provide access token');
-				}
-
 				$_SESSION['oauth_token'] = $_GET['oauth_verifier'];
-
 				$oauth->setToken($_SESSION['token'], $_SESSION['secret']);
+
 				$access_token_info = $oauth->getAccessToken($acc_url, $url, $_SESSION['oauth_token']);
 				$_SESSION['permanenttoken'] = $access_token_info['oauth_token'];
 				$_SESSION['permanentsecret'] = $access_token_info['oauth_token_secret'];
 				
 				include_once("plurk-api-success.php");
 			} else {
-				error();
+				error("Invalid request");
 			}
 		} else {
 			if (!isset($_SESSION['permanenttoken']) || !isset($_SESSION['permanentsecret'])) {
