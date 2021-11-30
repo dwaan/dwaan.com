@@ -235,9 +235,10 @@
 					$response = [];
 
 					$oauth->fetch("$api_url/Responses/get", array("plurk_id" => $_GET['plurk_id']));
+
 					$response = json_decode($oauth->getLastResponse());
 					$response->plurk_id = $_GET['plurk_id'];
-
+					
 					success(json_encode($response));
 				} else if(isset($_GET['plurk_ids'])) {
 					$responses = [];

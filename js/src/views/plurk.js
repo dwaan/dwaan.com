@@ -1741,13 +1741,16 @@ class replurk {
 		// Hide statistic pages
 		tl = this.hideStatisticPages(tl);
 		tl.set(this.next, {
-			onComplete: () => {
-				api.call("?fetch=logout").then(() => {
-					this.statistics.clear();
-					api.clear();
-					this.login();
-					scroll.refresh();
-				});
+			onComplete: async() => {
+				try {
+					await api.call("?fetch=logout");
+				} catch {
+					console.info("Error while loging out");
+				}
+				this.statistics.clear();
+				api.clear();
+				this.login();
+				scroll.refresh();
 			}
 		});
 	}
