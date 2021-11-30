@@ -798,3 +798,12 @@ header {
 	.statistics.posted 				{ order: 3; }
 	.statistics.responded 			{ order: 5; }
 }
+
+@media (max-width: 1100px) {
+	.statistics.wrap {
+		height: calc(var(--box) * 1.85);
+	}
+	.statistics.sharedlinks .post {
+		font-size: .65rem;
+	}
+}
