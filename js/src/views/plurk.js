@@ -1058,8 +1058,8 @@ class replurk {
 					index++;
 				}
 
-				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🏞 ' + plural(this.pics.length, 'image') + '</i>');
-				if(result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🏞 Most Popular Image</i>', result);
+				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>');
+				if(result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🖼 Most Popular Image</i>', result);
 			}
 		},
 		types: {
@@ -1971,7 +1971,7 @@ class replurk {
 	async displayExtendedStatistics() {
 		// Deeper user statistics
 		this.statistics.title('Dig Deeper', 'digdeeper');
-		this.statistics.draw("loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>You can resume later by refreshing the page, as long as you didn't close your browser tab.</small>");
+		this.statistics.draw("loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>");
 
 		// Load each post responses and calculate statistics
 		this.loading.init(this.next);
