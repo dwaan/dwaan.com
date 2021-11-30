@@ -48,8 +48,8 @@
 			<form action="" method="GET">
 				<h1>RePlurk<br/><sup>20</sup><sub>21</sub></h1>
 				<ol>
-					<li><p>Open this web app in your browser.</p></li>
 					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
+					<li><p>If you got error message from Plurk, reopen this web app in a new browser tab.</p></li>
 					<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">
 						<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this web app. Other than session data, this web app didn't store any of your Plurk data in the server.</p>
