@@ -1978,6 +1978,8 @@ class replurk {
 		this.loading.loop(this.plurks.length);
 
 		// Get the responses for each plurks in parallel
+		var index = 0;
+		this.plurks.sort((a, b) => new Date(a.posted) < new Date(b.posted));
 		for(var plurk of this.plurks) {
 			var date = new Date(plurk.posted);
 			this.loading.update("Data from " + monthNames[date.getMonth()] + " " + date.getFullYear());

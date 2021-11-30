@@ -26,15 +26,17 @@ var api = {
 				request.onload = () => {
 					if(request.status == 200 || request.status == 304) {
 						var result = JSON.parse(request.response);
-						try {
-							sessionStorage.setItem(url, LZString.compressToUTF16(JSON.stringify(result.message)));
-						} catch {
-							if(!this.storageExceeded) {
-								console.info("Exceeding maximum session storage. Data will be downloaded directly from Plurk, if you recently open other RePlurk year in the same browser tab, you can try close this tab and open a new one to avoid downloading too much when reloading this page.");
-								this.storageExceeded = true;
+						if(result.success) {
+							try {
+								sessionStorage.setItem(url, LZString.compressToUTF16(JSON.stringify(result.message)));
+							} catch {
+								if(!this.storageExceeded) {
+									console.info("Exceeding maximum session storage. Data will be downloaded directly from Plurk, if you recently open other RePlurk year in the same browser tab, you can try close this tab and open a new one to avoid downloading too much when reloading this page.");
+									this.storageExceeded = true;
+								}
 							}
-						}
-						resolve(result);
+							resolve(result);
+						} else reject(false);
 					}
 					else reject(false);
 				}
