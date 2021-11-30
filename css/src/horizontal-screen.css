@@ -125,7 +125,7 @@ header {
 	position: absolute;
 }
 .arrow-big .arrow {
-	bottom: 0;
+	bottom: 40px;
 	right: 0;
 }
 .arrow {

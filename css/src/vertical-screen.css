@@ -961,10 +961,6 @@ header {
 	.bubble .plurkers:nth-child(5) .avatar img { width: calc(1 * var(--padl)) }
 }
 
-.plurk .footer a:last-child {
-	margin-right: 0;
-}
-
 /* order */
 @media (min-width: 600px) {
 	.statistics.posted 				{ order: 5; }

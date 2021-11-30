@@ -3375,7 +3375,7 @@ img.rounded {
 	pointer-events: none;
 }
 .plurk .footer a:last-child {
-	margin-right: var(--padxl);
+	margin-right: 0;
 }
 
 /* Block order */
