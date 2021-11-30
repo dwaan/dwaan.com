@@ -1786,7 +1786,7 @@ class replurk {
 				message(text);
 			} else  {
 				tokenlink.textContent = "Grant Access";
-				tokenlink.setAttribute("href", data.message.url);
+				tokenlink.setAttribute("href", api.url + "?redirect=" + data.message.url);
 			}
 		}, () => {
 			message("Error when requesting verification from Plurk, please reload your browser again.");

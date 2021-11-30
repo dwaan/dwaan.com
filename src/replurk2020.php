@@ -47,7 +47,7 @@
 			<form action="" method="GET">
 				<h1>RePlurk<br/><sup>20</sup><sub>20</sub></h1>
 				<ol>
-					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" target="_BLANK" rel="opener">Loading...</a></p></li>
+					<li><p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br/><a href="#" id="tokenurl" data-barba-prevent target="_BLANK" rel="opener">Loading...</a></p></li>
 					<li><p>If you got error message from Plurk, reopen this web app in a new browser tab.</p></li>
 					<li><p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.</li>
 					<li class="small">

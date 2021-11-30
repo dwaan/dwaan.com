@@ -55,7 +55,14 @@
 	$oauth = new OAuth($app_key, $app_secret, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
 
 	try {
-		if (isset($_GET['img'])) {
+		if(isset($_GET['redirect'])) {
+			if(preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['redirect']) === 0) {
+				exit;
+			}
+
+			header('Location: ' . $_GET['redirect']);
+			exit;
+		} else if(isset($_GET['img'])) {
 			if(preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['img']) === 0) {
 				exit;
 			} else {
