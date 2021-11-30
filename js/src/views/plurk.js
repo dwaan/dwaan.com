@@ -481,26 +481,28 @@ class replurk {
 							}
 						});
 
-						html2canvas(el.querySelector(".anim"), {
-							backgroundColor: null,
-							logging: false
-						}).then(canvas => {
-							var link = document.createElement("a");
-							link.style.display = "none";
-							link.download = "replurk" + this.parent.year + "-" + Date.now() + ".png";
-							link.href = canvas.toDataURL();
-							document.body.appendChild(link);
-							link.click();
-							document.body.removeChild(link);
-							link.remove();
+						setTimeout(() => {
+							html2canvas(el.querySelector(".anim"), {
+								backgroundColor: null,
+								logging: false
+							}).then(canvas => {
+								var link = document.createElement("a");
+								link.style.display = "none";
+								link.download = "replurk" + this.parent.year + "-" + Date.now() + ".png";
+								link.href = canvas.toDataURL();
+								document.body.appendChild(link);
+								link.click();
+								document.body.removeChild(link);
+								link.remove();
 
-							capture.innerHTML = "Done";
-							document.body.style.cursor = "default";
-							setTimeout(() => {
-								capture.innerHTML = "Redownload";
-								capture.generating = false;
-							}, 3000);
-						});
+								capture.innerHTML = "Done";
+								document.body.style.cursor = "default";
+								setTimeout(() => {
+									capture.innerHTML = "Redownload";
+									capture.generating = false;
+								}, 1500);
+							});
+						}, 1500);
 					}
 				}
 			}
