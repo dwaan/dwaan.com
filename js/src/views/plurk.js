@@ -1025,7 +1025,6 @@ class replurk {
 				while(index < this.data.length && max > 0) {
 					if(this.data[index].links.length > 0) {
 						var link = this.data[index].links[0];
-						console.log(this.data[index].id.toString(36));
 						var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
 						result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response">💬 ' + link.response + '</span><span class="replurk">📢 ' + link.replurk + '</span><span class="loved">❤️ ' + link.loved + '</span>' + url + '</div></div>';
 						max--;
@@ -1724,7 +1723,7 @@ class replurk {
 	}
 
 	// Logout
-	requestLogout() {
+	requestLogout(reason) {
 		var tl = gsap.timeline();
 
 		api.abort();
@@ -1733,11 +1732,7 @@ class replurk {
 		tl = this.hideStatisticPages(tl);
 		tl.set(this.next, {
 			onComplete: async() => {
-				try {
-					await api.call("?fetch=logout");
-				} catch {
-					console.info("Error while loging out");
-				}
+				await api.call("?fetch=logout");
 				this.statistics.clear();
 				api.clear();
 				this.login();
@@ -1890,7 +1885,7 @@ class replurk {
 			offset = (!offset) ? "" : "&offset=" + offset;
 
 			var data = await api.call("?fetch=plurk&filter=my" + offset, 1);
-			if(data) {
+			if(data.success) {
 				this.friends.add(data.message.plurk_users);
 				this.plurks = this.plurks.concat(data.message.plurks);
 
@@ -1912,6 +1907,9 @@ class replurk {
 				} else {
 					await this.loading.forcedone();
 				}
+			} else {
+				this.requestLogout();
+				break;
 			}
 		}
 		await getTimeline(this.startDate);
@@ -1994,6 +1992,9 @@ class replurk {
 						// Count all
 						await this.most.countAll(response);
 					}
+				} else {
+					this.requestLogout();
+					break;
 				}
 			}
 		}

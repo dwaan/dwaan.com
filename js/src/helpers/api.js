@@ -8,8 +8,8 @@ var api = {
 			var request;
 			var storage = sessionStorage.getItem(url);
 			if(storage == null) storage = sessionStorage[url];
-	
-			if(storage && (url != "?fetch=logout" || url != "?request=token" || url != "?")) {
+			
+			if(storage && !(url == "?fetch=logout" || url == "?request=token" || url == "?")) {
 				// Give sometime out to allow browser to process
 				setTimeout(() => {
 					resolve({
