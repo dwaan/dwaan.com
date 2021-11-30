@@ -59,8 +59,11 @@
 			if(preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['redirect']) === 0) {
 				exit;
 			}
-
-			header('Location: ' . $_GET['redirect']);
+?> <html><head><title>Redirecting, please wait...</title><meta name="theme-color" content="#FFD700"><style>* { padding: 0}
+			body { display: flex; justify-content: center; align-items: center; font-family: sans-serif; background-color: #FFD700; letter-spacing: .05em; }</style><script>setTimeout(() => {
+				window.location = "<?php echo $_GET['redirect']; ?>"
+			}, 1000);</script></head><body>Redirecting, please wait...</body></html> <?php
+			// header('Location: ' . $_GET['redirect']);
 			exit;
 		} else if(isset($_GET['img'])) {
 			if(preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['img']) === 0) {
@@ -295,6 +298,6 @@
 			}
 		}
 	} catch(OAuthException $E) {
-		error('Bad request');
+		error($E);
 	}
 ?>
