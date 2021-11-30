@@ -1984,20 +1984,24 @@ class replurk {
 
 			// Count responses
 			if(plurk.response_count > 0 && (plurk.responded || plurk.owner_id == this.me.id)) {
-				var result = await api.call("?fetch=response&plurk_ids=" + plurk.plurk_id);
-				if(result) for(var message of result.message) {
-					// Add friends from response lists
-					this.friends.add(message.friends);
+				try {
+					var result = await api.call("?fetch=response&plurk_ids=" + plurk.plurk_id);
+					if(result) for(var message of result.message) {
+						// Add friends from response lists
+						this.friends.add(message.friends);
 
-					// Count the rest of statistics
-					for(var response of message.responses) {
-						// Find and count all responders
-						await this.most.responders.count(response);
-						this.most.interaction.count(response);
-						this.most.mvp.count(response, "response");
-						// Count all
-						await this.most.countAll(response);
+						// Count the rest of statistics
+						for(var response of message.responses) {
+							// Find and count all responders
+							await this.most.responders.count(response);
+							this.most.interaction.count(response);
+							this.most.mvp.count(response, "response");
+							// Count all
+							await this.most.countAll(response);
+						}
 					}
+				} catch {
+					console.info("Error loading response: " + plurk.plurk_id);
 				}
 			}
 		}
