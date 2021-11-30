@@ -298,6 +298,6 @@
 			}
 		}
 	} catch(OAuthException $E) {
-		error($E);
+		error("Invalid token detected");
 	}
 ?>
