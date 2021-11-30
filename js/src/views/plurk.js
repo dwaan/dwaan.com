@@ -160,10 +160,10 @@ class replurk {
 			} else {
 				var result = await api.call("?fetch=APP&url=/Profile/getPublicProfile&user_id=" + user_id);
 			
-				if(result) {
+				if(result.success) {
 					var temp = {};
 					temp[result.message.user_info.id] = result.message.user_info;
-					friends.add(temp);
+					this.add(temp);
 					return result.message.user_info;
 				} else {
 					this.unavailable.push(user_id);
@@ -188,10 +188,10 @@ class replurk {
 			} else {
 				var result = await api.call("?fetch=APP&url=/Profile/getPublicProfile&nick_name=" + nick_name);
 			
-				if(result) {
+				if(result.success) {
 					var temp = {};
 					temp[result.message.user_info.id] = result.message.user_info;
-					friends.add(temp);
+					this.add(temp);
 					return result.message.user_info;
 				} else {
 					this.unavailable.push(nick_name);
@@ -586,25 +586,21 @@ class replurk {
 			for(var index = 0; index < max; index++) {
 				var value = list[index];
 				if(value) {
-					try {
-						var friends = this.parent.friends;
-						var friend = await friends.find(value.id);
-						if (friend) {
-							var plurker = new plurkerElement(value.id, friend, "", plurker => {
-								plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user.id) + '" />');
-								plurker.name = new span('name', plurker.user.display_name);
-								plurker.counts = new span('count', value.count);
-								plurker.el.appendChild(plurker.avatar.el);
-								plurker.el.appendChild(plurker.name.el);
-								plurker.el.appendChild(plurker.counts.el);
-								plurker.el.setAttribute("href", 'https://plurk.com/' + plurker.user.nick_name);
-							});
-							plurker.create();
-							html += plurker.el.outerHTML;
-						} else {
-							max++;
-						}
-					} catch {
+					var friends = this.parent.friends;
+					var friend = await friends.find(value.id);
+					if(friend) {
+						var plurker = new plurkerElement(value.id, friend, "", plurker => {
+							plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user.id) + '" />');
+							plurker.name = new span('name', plurker.user.display_name);
+							plurker.counts = new span('count', value.count);
+							plurker.el.appendChild(plurker.avatar.el);
+							plurker.el.appendChild(plurker.name.el);
+							plurker.el.appendChild(plurker.counts.el);
+							plurker.el.setAttribute("href", 'https://plurk.com/' + plurker.user.nick_name);
+						});
+						plurker.create();
+						html += plurker.el.outerHTML;
+					} else {
 						max++;
 					}
 				}
@@ -771,12 +767,8 @@ class replurk {
 			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i>💬 ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
 			this.draw('spansmall center coins', this.coins_count, 'I recieved <i>🪙 ' + plural(this.coins_count, 'coin') + '</i>');
 	
-			try {
-				if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>❤️ Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
-				if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>📢 Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
-			} catch {
-				console.info("Error while displaying most favourite and or replurker list");
-			}
+			if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>❤️ Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
+			if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>📢 Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
 		}
 	};
 	
@@ -846,11 +838,7 @@ class replurk {
 			// Find and count all my emoticons from my post
 			if(data.user_id == this.parent.me.id) this.myemoticons.count(data.content);
 			// Find and count all mentions from my post
-			try {
-				await this.mentions.count(data.content_raw);
-			} catch {
-				console.info("There were some errors while counting mentions");
-			}
+			await this.mentions.count(data.content_raw);
 			// Find and count all hashtags from my post
 			if(data.user_id == this.parent.me.id) this.hashtags.count(data.content);
 			// Find and count all links and pictures post from my post
@@ -1037,7 +1025,8 @@ class replurk {
 				while(index < this.data.length && max > 0) {
 					if(this.data[index].links.length > 0) {
 						var link = this.data[index].links[0];
-						var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
+						console.log(this.data[index].id.toString(36));
+						var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
 						result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response">💬 ' + link.response + '</span><span class="replurk">📢 ' + link.replurk + '</span><span class="loved">❤️ ' + link.loved + '</span>' + url + '</div></div>';
 						max--;
 					}
@@ -1900,7 +1889,7 @@ class replurk {
 		var getTimeline = async(offset) => {
 			offset = (!offset) ? "" : "&offset=" + offset;
 
-			var data = await api.call("?fetch=plurk" + offset, 1);
+			var data = await api.call("?fetch=plurk&filter=my" + offset, 1);
 			if(data) {
 				this.friends.add(data.message.plurk_users);
 				this.plurks = this.plurks.concat(data.message.plurks);
@@ -1991,24 +1980,20 @@ class replurk {
 
 			// Count responses
 			if(plurk.response_count > 0 && (plurk.responded || plurk.owner_id == this.me.id)) {
-				try {
-					var result = await api.call("?fetch=response&plurk_ids=" + plurk.plurk_id);
-					if(result) for(var message of result.message) {
-						// Add friends from response lists
-						this.friends.add(message.friends);
+				var result = await api.call("?fetch=response&plurk_ids=" + plurk.plurk_id);
+				if(result.success) for(var message of result.message) {
+					// Add friends from response lists
+					this.friends.add(message.friends);
 
-						// Count the rest of statistics
-						for(var response of message.responses) {
-							// Find and count all responders
-							await this.most.responders.count(response);
-							this.most.interaction.count(response);
-							this.most.mvp.count(response, "response");
-							// Count all
-							await this.most.countAll(response);
-						}
+					// Count the rest of statistics
+					for(var response of message.responses) {
+						// Find and count all responders
+						await this.most.responders.count(response);
+						this.most.interaction.count(response);
+						this.most.mvp.count(response, "response");
+						// Count all
+						await this.most.countAll(response);
 					}
-				} catch {
-					console.info("Error loading response: " + plurk.plurk_id);
 				}
 			}
 		}
@@ -2071,7 +2056,9 @@ class replurk {
 		tl.set(next.querySelector("#hello .arrow-big"), {
 			opacity: 0
 		});
-		api.call("?").then(data => {
+
+		var data = await api.call("?");
+		if(data.success) {
 			this.me = data.message;
 
 			this.displayPlurkerData(() => {
@@ -2100,7 +2087,7 @@ class replurk {
 			scroll.refresh();
 			
 			this.displayStatistics();
-		}, () => {
+		} else {
 			// Hide statistic pages
 			if(callback) next.querySelectorAll(".grant").forEach(function(el) { el.style.display = "none"; });
 			// Show login page
@@ -2116,7 +2103,7 @@ class replurk {
 			scroll.refresh();
 
 			if(callback) callback();
-		});
+		}
 	}
 
 	// Run the API call
