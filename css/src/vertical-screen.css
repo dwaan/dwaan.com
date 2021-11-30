@@ -896,6 +896,7 @@ header {
 	.statistics.sharedlinks .post {
 		margin-bottom: 0;
 	}
+	#credits img { width: auto; height: 48px; }
 }
 @media (max-width: 375px) {
 	.statistics.wrap.bubble {
@@ -914,6 +915,7 @@ header {
 		display: flex;
 		margin-right: var(--pads);
 	}
+	#credits img { width: auto; height: 32px; }
 }
 
 #credits {

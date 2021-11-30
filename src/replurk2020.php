@@ -59,7 +59,8 @@
 		<div class="bgtext"><sup>20</sup><sub>20</sub></div>
 	</section>
 
-	<section id="creditscover" class="middle"></section>
+
+	<section id="spacer" class="middle"></section>
 	<section id="credits" class="middle">
 		<div class="text">
 			<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
