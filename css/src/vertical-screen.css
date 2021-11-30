@@ -117,6 +117,7 @@ header {
 /* Homepage listing item */
 .padding {
 	display: flex;
+	flex-direction: column;
 	margin: 30px 0;
 	padding: 0 30px;
 	max-height: 15vh;

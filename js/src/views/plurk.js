@@ -2057,6 +2057,9 @@ class replurk {
 
 		// Check is server have open session 
 		var tl = gsap.timeline();
+		tl.set(next.querySelector("#hello .arrow-big"), {
+			opacity: 0
+		});
 		api.call("?").then(data => {
 			this.me = data.message;
 
