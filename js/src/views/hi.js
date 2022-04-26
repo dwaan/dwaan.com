@@ -1,6 +1,6 @@
 var hiview = {
 	namespace: 'hi',
-	beforeEnter: function(data) {
+	beforeEnter: function (data) {
 		var next = data.next.container;
 
 		var screenvertical = window.matchMedia('(max-aspect-ratio: 1/1)').matches;
@@ -8,7 +8,7 @@ var hiview = {
 
 		var flare = {
 			elements: "",
-			show: function(elements) {
+			show: function (elements) {
 				var that = this;
 
 				if (elements) this.elements = next.querySelectorAll(elements);
@@ -30,27 +30,27 @@ var hiview = {
 					});
 				}
 
-				var repeatanimation = function(element) {
+				var repeatanimation = function (element) {
 					gsap.to(element, {
 						x: "random(-100,100,10)%",
 						y: "random(10,30,5)%",
 						rotation: "random(-5,5,1)deg",
 						scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
-						opacity: gRandom(5,10,1) / 10,
-						duration: gRandom(5,10,1),
+						opacity: gRandom(5, 10, 1) / 10,
+						duration: gRandom(5, 10, 1),
 						ease: "ease.inOut",
-						onComplete: function() {
+						onComplete: function () {
 							repeatanimation(element);
 						}
 					});
 
 				}
 
-				this.elements.forEach(function(el) {
+				this.elements.forEach(function (el) {
 					repeatanimation(el);
 				});
 			},
-			hide: function() {
+			hide: function () {
 				gsap.killTweensOf(this.elements);
 				gsap.to(this.elements, {
 					opacity: 0,
@@ -66,7 +66,7 @@ var hiview = {
 		var textanim = {
 			el: "",
 			hint: "",
-			show: function(el, hint, positive) {
+			show: function (el, hint, positive) {
 				var split = -50;
 
 				this.el = el;
@@ -104,7 +104,7 @@ var hiview = {
 					duration: .5
 				});
 			},
-			hide: function() {
+			hide: function () {
 				gsap.to(next.querySelectorAll(this.el), {
 					x: 0,
 					ease: "power3.out",
@@ -127,25 +127,25 @@ var hiview = {
 			scale: "random(1,2,.5)"
 		});
 
-		hoverEvents(next.querySelectorAll(".email"), function(el) {
-			if(screenhorizontal) textanim.show(".email span", ".email small");
+		hoverEvents(next.querySelectorAll(".email"), function (el) {
+			if (screenhorizontal) textanim.show(".email span", ".email small");
 			flare.show("img.yellow, img.red");
-		}, function(el) {
-			if(screenhorizontal) textanim.hide();
+		}, function (el) {
+			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
-		hoverEvents(next.querySelectorAll(".social"), function(el) {
-			if(screenhorizontal) textanim.show([".website span", ".email span"], ".social span:first-child small");
+		hoverEvents(next.querySelectorAll(".social"), function (el) {
+			if (screenhorizontal) textanim.show([".website span", ".email span"], ".social span:first-child small");
 			flare.show("img.blue, img.red");
-		}, function(el) {
-			if(screenhorizontal) textanim.hide();
+		}, function (el) {
+			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
-		hoverEvents(next.querySelectorAll(".website"), function(el) {
-			if(screenhorizontal) textanim.show(".social span:nth-child(2), .website span", ".social span:nth-child(2) small", true);
+		hoverEvents(next.querySelectorAll(".website"), function (el) {
+			if (screenhorizontal) textanim.show(".social span:nth-child(2), .website span", ".social span:nth-child(2) small", true);
 			flare.show("img.blue, img.green");
-		}, function(el) {
-			if(screenhorizontal) textanim.hide();
+		}, function (el) {
+			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
 	}

@@ -97,7 +97,6 @@
 		<div class="mrgoat middle hidden"></div>
 		<div class="mrgoat middle hidden"></div>
 		<div class="mrgoat middle hidden"></div>
-		<div id="endmrgoat" class="mrgoat middle hidden"></div>
 		<section id="mrgoat" class="mrgoat middle">
 			<div class="text">
 				<div class="h2"><h2>This is <b>Mr. Goat</b></h2></div>
@@ -122,10 +121,11 @@
 				</div>
 			</div>
 		</section>
+		<div id="endmrgoat" class="mrgoat middle hidden"></div>
 
 		<div id="cofound" class="cofound middle clip">
 			<div class="text">
-				<h2>and 10 Years Ago</h2>
+				<h2>and <?php echo date("Y") - 2010; ?> Years Ago</h2>
 				<p>My friend and I decide to create Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner right now.</p>
 				<a href="http://sagara.id" class="spring" data-barba-prevent target="BLANK" rel='noopener noreferrer'>More about sagara.id</a>
 			</div>
@@ -143,7 +143,7 @@
 					<a href="./say-hi"><span>say hi</span></a>
 				</div>
 				<div class="continue">
-					<a href="./random-case-study"><span><strong>random case study</strong> <i>- Tiket Apa Saja</i></span></a>
+					<a href="./suzuki-website-redesign-pitching"><span><strong>random case study</strong> <i>- Suzuki Indonesia</i></span></a>
 				</div>
 			</nav>
 		</section>

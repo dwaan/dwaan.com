@@ -1,11 +1,11 @@
 // Snap functions
-var snap = function(elements, snapPosition, markers) {
+var snap = function (elements, snapPosition, markers) {
 	if (snapPosition == undefined) snapPosition = 1;
 	if (markers == undefined) markers = false;
 	if (typeof elements === "string") elements = gToArray(elements);
 	// Snap scroll to block
-	elements.forEach(function(element, index) {
-		scroll.push(function(tl) {
+	elements.forEach(function (element, index) {
+		scroll.push(function (tl) {
 			return tl;
 		}, function (tl) {
 			return ScrollTrigger.create({
@@ -15,12 +15,12 @@ var snap = function(elements, snapPosition, markers) {
 				trigger: element,
 				start: "0 0",
 				end: "100% 0",
-				onUpdate: function(value){
+				onUpdate: function (value) {
 					this.progress = value.progress;
 					this.direction = value.direction;
 				},
 				snap: {
-					snapTo: function(value) {
+					snapTo: function (value) {
 						var snap = this.progress;
 
 						if (snapPosition == 1) {

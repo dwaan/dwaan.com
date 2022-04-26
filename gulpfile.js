@@ -24,6 +24,7 @@ function javascript() {
 			'js/src/helpers/api.js',
 			'js/src/helpers/loader.js',
 			'js/src/helpers/animate.js',
+			'js/src/helpers/header.js',
 			'js/src/helpers/snap.js',
 			'js/src/views/home.js',
 			'js/src/views/detail.js',

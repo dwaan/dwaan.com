@@ -151,8 +151,11 @@
 
 		<section class="links">
 			<nav>
-				<div class="prototype">
-					<a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?node-id=2%3A3&viewport=404%2C25%2C0.10638881474733353&scaling=scale-down" target="_BLANK"><span>visit the prototype</span></a>
+				<div class="prototype group">
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&scaling=contain&page-id=138%3A786&starting-point-node-id=3948%3A0" target="_BLANK" class="title"><span>visit the prototype</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&scaling=contain&page-id=138%3A786&starting-point-node-id=3948%3A0" target="_BLANK"><span>desktop</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3076%3A21&scaling=scale-down&page-id=3076%3A0&starting-point-node-id=3076%3A21" target="_BLANK"><span>tablet</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3951%3A0&scaling=scale-down&page-id=138%3A8&starting-point-node-id=3951%3A0" target="_BLANK"><span>mobile</span></a>
 				</div>
 				<div class="continue">
 					<a href="http://v1.dwaan.com"><span><strong>next case study</strong>  <i>-  dwaan.com v1</i></span></a>

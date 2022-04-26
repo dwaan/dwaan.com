@@ -1,15 +1,15 @@
 // Loader functions
 var loader = {
 	el: _q("#loader"),
-	update: function(percent) {
+	update: function (percent) {
 		gsap.to(this.el.querySelectorAll(".loading"), {
 			width: percent + "%"
 		})
 	},
-	clean: function() {
+	clean: function () {
 		this.el.innerHTML = "";
 	},
-	init: function(done) {
+	init: function (done) {
 		var that = this;
 
 		document.body.style.cursor = "wait";
@@ -46,29 +46,29 @@ var loader = {
 
 		// Calling loading images function
 		if (els) {
-			waitForImg(els.querySelectorAll("img"), function(index, percent) {
+			waitForImg(els.querySelectorAll("img"), function (index, percent) {
 				gsap.to(_percent, {
 					score: percent,
 					roundProps: "score",
 					duration: .1,
-					onUpdate: function() {
+					onUpdate: function () {
 						that.update(_percent.score);
 					}
 				});
-			}, function() {
-				that.hide(function() {
+			}, function () {
+				that.hide(function () {
 					that.clean();
 					done();
 				});
 			});
 		} else {
-			that.hide(function() {
+			that.hide(function () {
 				that.clean();
 				done();
 			});
 		}
 	},
-	hide: function(done) {
+	hide: function (done) {
 		if (typeof done !== "function") return false;
 
 		var that = this;
@@ -78,12 +78,12 @@ var loader = {
 			opacity: 0,
 			ease: "expo.in",
 			duration: .25,
-			onComplete: function() {
+			onComplete: function () {
 				done();
 			}
 		});
 	},
-	empty: function() {
+	empty: function () {
 		this.clean();
 		document.body.style.cursor = "";
 		gsap.set(this.el, {

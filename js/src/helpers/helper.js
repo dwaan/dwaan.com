@@ -60,30 +60,30 @@ function nextElementSibling(el) {
 	return el
 }
 function hoverEvents(els, over, out) {
-	els.forEach(function(el) {
-		el.addEventListener("mouseover", function(e) {
+	els.forEach(function (el) {
+		el.addEventListener("mouseover", function (e) {
 			if (over) over(el, e);
 		});
-		el.addEventListener("mouseout", function(e){
+		el.addEventListener("mouseout", function (e) {
 			if (out) out(el, e);
 		});
 	});
 }
 
 // Clear the style
-var removeStyle = function(el) {
+var removeStyle = function (el) {
 	if (el.style) {
 		el.style = {};
 	} else {
-		gToArray(el).forEach(function(el) {
+		gToArray(el).forEach(function (el) {
 			removeStyle(el);
 		});
 	}
 }
 // Add plural to word
 function plural(number, word, locale) {
-	if(!locale) locale = "en-US";
-	if(!word) {
+	if (!locale) locale = "en-US";
+	if (!word) {
 		word = '';
 	} else {
 		word = ' ' + word;
@@ -92,9 +92,9 @@ function plural(number, word, locale) {
 	return number.toLocaleString(locale) + word;
 }
 function pluralinwords(number, word, locale) {
-	if(!locale) locale = "en-US";
+	if (!locale) locale = "en-US";
 
-	if(!word) {
+	if (!word) {
 		word = '';
 	} else {
 		word = ' ' + word;
@@ -134,18 +134,18 @@ function datediff(date) {
 	return when;
 }
 // Animate number
-function animateNumber(from, to, onUpdate, onComplete){
+function animateNumber(from, to, onUpdate, onComplete) {
 	var load = { progress: from }
 	gsap.to(load, {
 		progress: to,
 		snap: "progress",
 		ease: "linear",
 		duration: .5,
-		onUpdate: function() {
-			if(onUpdate) onUpdate(load.progress);
+		onUpdate: function () {
+			if (onUpdate) onUpdate(load.progress);
 		},
-		onComplete: function() {
-			if(onComplete) onComplete(load.progress);
+		onComplete: function () {
+			if (onComplete) onComplete(load.progress);
 		}
 	});
 }
@@ -155,9 +155,9 @@ function distributeByPosition(vars) {
 		from = vars.from || 0,
 		base = vars.base || 0,
 		axis = vars.axis,
-		ratio = {center: 0.5, end: 1, edges:0.5}[from] || 0,
+		ratio = { center: 0.5, end: 1, edges: 0.5 }[from] || 0,
 		distances;
-	return function(i, target, a) {
+	return function (i, target, a) {
 		var l = a.length,
 			originX, originY, x, y, d, j, minX, maxX, minY, maxY, positions;
 		if (!distances) {
@@ -181,7 +181,7 @@ function distributeByPosition(vars) {
 				if (y > maxY) {
 					maxY = y;
 				}
-				positions[j] = {x:x, y:y};
+				positions[j] = { x: x, y: y };
 			}
 			originX = isNaN(from) ? minX + (maxX - minX) * ratio : positions[from].x || 0;
 			originY = isNaN(from) ? minY + (maxY - minY) * ratio : positions[from].y || 0;
@@ -218,10 +218,10 @@ function waitForImg() {
 		done,
 		els_count;
 
-	if(arguments.length <= 0) {
+	if (arguments.length <= 0) {
 		return false;
 	} else {
-		if(typeof arguments[0] != "object") els = document.querySelectorAll(els);
+		if (typeof arguments[0] != "object") els = document.querySelectorAll(els);
 		else els = arguments[0];
 		els_count = els.length + 1;
 
@@ -235,26 +235,26 @@ function waitForImg() {
 
 		// At the beginning animate the progress a bit
 		els_count--;
-		if(progress) progress(els_count, 100-(els_count/els.length*100));
+		if (progress) progress(els_count, 100 - (els_count / els.length * 100));
 
-		if(els_count > 0) {
+		if (els_count > 0) {
 			for (var i = 0; i < els.length; i++) {
 				// When loaded report it as a progress
-				if(els[i].complete) {
-					if(progress) progress(els_count--, 100-(els_count/els.length*100));
+				if (els[i].complete) {
+					if (progress) progress(els_count--, 100 - (els_count / els.length * 100));
 
-					if(els_count == 0) done();
+					if (els_count == 0) done();
 				} else {
-					els[i].addEventListener("load", function(e) {
-						if(progress) progress(els_count--, 100-(els_count/els.length*100));
+					els[i].addEventListener("load", function (e) {
+						if (progress) progress(els_count--, 100 - (els_count / els.length * 100));
 
-						if(els_count == 0) done();
+						if (els_count == 0) done();
 					});
 				}
 
 			}
 		} else {
-			if(progress) progress(0, 100);
+			if (progress) progress(0, 100);
 			done();
 		}
 
@@ -264,7 +264,7 @@ function waitForImg() {
 // Prevent error in older browser for console
 (function () {
 	var method;
-	var noop = function () {};
+	var noop = function () { };
 	var methods = [
 		'assert',
 		'clear',
@@ -301,7 +301,7 @@ function waitForImg() {
 	}
 }());
 // Splitting text
-var splitText = function(els) {
+var splitText = function (els) {
 	var addTags = function (el, idx) {
 		var splord, splext;
 		var split = "";
@@ -322,7 +322,7 @@ var splitText = function(els) {
 		return split;
 	}
 
-	var travelTags = function(nodes, idx) {
+	var travelTags = function (nodes, idx) {
 		var split = [],
 			childNodes = nodes.childNodes;
 
@@ -337,7 +337,7 @@ var splitText = function(els) {
 			} else {
 				// Replace the inner text with split text
 				var str = childNodes[i],
-					tags = travelTags(childNodes[i], idx + "" +i);
+					tags = travelTags(childNodes[i], idx + "" + i);
 				str.innerHTML = tags[0][1];
 				split.push([childNodes[i].textContent, str.outerHTML]);
 			}
@@ -349,7 +349,7 @@ var splitText = function(els) {
 	if (typeof els == "string") els = _qAll(els);
 	if (els.length == undefined) els = [els];
 
-	els.forEach(function(el, i) {
+	els.forEach(function (el, i) {
 		var result = travelTags(el, i);
 		el.innerHTML = "";
 		for (var j = 0; j < result.length; j++) {
@@ -365,7 +365,7 @@ var hugeText = function (el) {
 	this.onshow = false;
 	this.tween = null;
 
-	gsap.set(this.element.children, {yPercent: 100});
+	gsap.set(this.element.children, { yPercent: 100 });
 	gsap.fromTo(this.element.children, {
 		xPercent: -25
 	}, {
@@ -446,7 +446,7 @@ function animateYears(selector, year) {
 	};
 	this.selector = _q(selector);
 	this.year__now = (new Date()).getFullYear(),
-	this.year__animate = (this.year__now - year);
+		this.year__animate = (this.year__now - year);
 	this.animate = function () {
 		gsap.to(that.game, 5, {
 			score: "+=" + that.year__animate,
@@ -462,17 +462,17 @@ function animateYears(selector, year) {
 }
 // Check touchevents
 function isTouchSupported() {
-    var msTouchEnabled = window.navigator.msMaxTouchPoints;
-    var generalTouchEnabled = "ontouchstart" in document.createElement("div");
+	var msTouchEnabled = window.navigator.msMaxTouchPoints;
+	var generalTouchEnabled = "ontouchstart" in document.createElement("div");
 
-    return (msTouchEnabled || generalTouchEnabled) ? true : false;
+	return (msTouchEnabled || generalTouchEnabled) ? true : false;
 }
 // Parallax on mouse move
 function parallax(callback) {
-	if(isTouchSupported()) {
+	if (isTouchSupported()) {
 		// Do something with gyroscpe
 	} else {
-		window.onmousemove = function(event) {
+		window.onmousemove = function (event) {
 			var eventDoc, doc, body;
 
 			event = event || window.event; // IE-ism
@@ -486,11 +486,11 @@ function parallax(callback) {
 				body = eventDoc.body;
 
 				event.pageX = event.clientX +
-				  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-				  (doc && doc.clientLeft || body && body.clientLeft || 0);
+					(doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+					(doc && doc.clientLeft || body && body.clientLeft || 0);
 				event.pageY = event.clientY +
-				  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-				  (doc && doc.clientTop  || body && body.clientTop  || 0 );
+					(doc && doc.scrollTop || body && body.scrollTop || 0) -
+					(doc && doc.clientTop || body && body.clientTop || 0);
 			}
 
 			if (event.screenX != null) {
@@ -612,9 +612,9 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
 	// parse picture index and gallery index from URL (#&pid=1&gid=2)
 	var photoswipeParseHash = function () {
 		var hash = window
-				.location
-				.hash
-				.substring(1),
+			.location
+			.hash
+			.substring(1),
 			params = {};
 
 		if (hash.length < 5) {
@@ -661,8 +661,8 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
 			getThumbBoundsFn: function (index) {
 				// See Options -> getThumbBoundsFn section of documentation for more info
 				var thumbnail = items[index]
-						.el
-						.getElementsByTagName('img')[0], // find thumbnail
+					.el
+					.getElementsByTagName('img')[0], // find thumbnail
 					pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
 					rect = thumbnail.getBoundingClientRect();
 
@@ -725,7 +725,7 @@ document.onkeydown = function (t) {
 	konami[keyIndex] == t.keyCode
 		? keyIndex++
 		: keyIndex = 0,
-	keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe width="905" height="510" src="https://www.youtube-nocookie.com/embed/tgbNymZ7vqY?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'), keyIndex = 0);
+		keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe width="905" height="510" src="https://www.youtube-nocookie.com/embed/tgbNymZ7vqY?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'), keyIndex = 0);
 	if (_q('#konamicode') != undefined) {
 		elem = _q('#konamicode');
 		elem.onclick = function (e) {

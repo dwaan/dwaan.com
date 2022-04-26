@@ -1,31 +1,40 @@
 // Animate functions
 var animate = {
-	top: function(el, tl) {
+	top: function (el, tl) {
+		var top = el == window ? el.pageYOffset : el.scrollTop;
 		if (tl == null) tl = gsap;
 
 		// Scroll to top
-		var scroll = el.scrollTop / (window.outerHeight * 2);
+		var scroll = top / (window.outerHeight * 2);
 		if (scroll > 0) {
+			console.log("Scroll top");
+
+			removeClass(_q("html"), "snap");
 			tl.to(el, {
 				scrollTo: 0,
-				duration: (scroll > 2)? 2 : scroll,
-				ease: "expo.inOut"
+				duration: (scroll > 2) ? 2 : scroll,
+				ease: "expo.inOut",
+				onComplete: function () {
+					addClass(_q("html"), "snap");
+				}
 			}, 0);
 		}
 
 		return tl;
 	},
-	show: function (next, done, nonsticky, footer){
+	show: function (next, done, nonsticky, footer) {
 		if (next == undefined) return false;
 		if (nonsticky == undefined) nonsticky = false;
 		if (footer == undefined) footer = true;
 
 		// Default gsap timeline value
-		var tl = gsap.timeline({ defaults: {
-			duration: 1,
-			stagger: .1,
-			ease: "expo.out"
-		}});
+		var tl = gsap.timeline({
+			defaults: {
+				duration: 1.28,
+				stagger: .24,
+				ease: "expo.out"
+			}
+		});
 
 		// Unhide main element
 		tl.set(next, {
@@ -45,26 +54,26 @@ var animate = {
 		}, {
 			y: "-=200px",
 			opacity: 1,
-			onComplete: function() {
+			onComplete: function () {
 				removeStyle(nonsticky);
 			}
 		}, 0);
 		// Animate flare
 		tl.fromTo(next.querySelectorAll(".flares.side > img"), {
-			x: "+=" + (window.innerWidth * 1/2) + "px",
+			x: "+=" + (window.innerWidth * 1 / 2) + "px",
 			opacity: 0
 		}, {
-			x: "-=" + (window.innerWidth * 1/2) + "px",
+			x: "-=" + (window.innerWidth * 1 / 2) + "px",
 			opacity: 1
 		}, 0);
 		// Run done after all all animation complete
 		tl.set(next, {
-			onComplete: function() {
+			onComplete: function () {
 				done();
 			}
 		});
 	},
-	showinstant: function (next, done){
+	showinstant: function (next, done) {
 		if (next == undefined) return false;
 
 		// Unhide main element
@@ -73,15 +82,17 @@ var animate = {
 		// Run done after all all animation complete
 		done();
 	},
-	show404: function (next, done){
+	show404: function (next, done) {
 		if (next == undefined) return false;
 
 		// Default gsap timeline value
-		var tl = gsap.timeline({ defaults: {
-			duration: 1,
-			stagger: .1,
-			ease: "expo.out"
-		}});
+		var tl = gsap.timeline({
+			defaults: {
+				duration: 1,
+				stagger: .1,
+				ease: "expo.out"
+			}
+		});
 
 		// Unhide main element
 		tl.set(next, {
@@ -99,7 +110,7 @@ var animate = {
 			y: "-=200px",
 			opacity: 1,
 			onCompleteParams: [[next.querySelectorAll(".text > *")]],
-			onComplete: function(els) {
+			onComplete: function (els) {
 				removeStyle(els);
 				done();
 			}
@@ -155,17 +166,20 @@ var animate = {
 		if (scrolltop == undefined) scrolltop = true;
 
 		// Default gsap timeline value
-		var tl = gsap.timeline({ defaults: {
-			duration: .75,
-			ease: "power3.in",
-			stagger: {
-				from: "end",
-				amount: .1
+		var tl = gsap.timeline({
+			defaults: {
+				duration: .75,
+				ease: "power3.in",
+				stagger: {
+					from: "end",
+					amount: .1
+				}
 			}
-		}});
+		});
 
 		// Scroll to top
-		if (scrolltop) tl = this.top(current, tl);
+		// if (scrolltop) tl = this.top(current, tl);
+		if (scrolltop) tl = this.top(window, tl);
 
 		// Hide current view
 		tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {
@@ -186,24 +200,26 @@ var animate = {
 
 		// Run loading after all animation
 		tl.set(current, {
-			onComplete: function() {
+			onComplete: function () {
 				done();
 			}
 		});
 	},
-	hide404: function (current, done){
+	hide404: function (current, done) {
 		if (current == undefined) return false;
 		if (typeof done !== "function") return false;
 
 		// Default gsap timeline value
-		var tl = gsap.timeline({ defaults: {
-			duration: .75,
-			ease: "power3.in",
-			stagger: {
-				from: "end",
-				amount: .1
+		var tl = gsap.timeline({
+			defaults: {
+				duration: .75,
+				ease: "power3.in",
+				stagger: {
+					from: "end",
+					amount: .1
+				}
 			}
-		}});
+		});
 
 		// Hide current view
 		tl.to(current.querySelectorAll(".thumbs"), {
@@ -222,7 +238,7 @@ var animate = {
 
 		// Run loading after all animation
 		tl.set(current, {
-			onComplete: function() {
+			onComplete: function () {
 				done();
 			}
 		});

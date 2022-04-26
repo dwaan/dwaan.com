@@ -1,6 +1,6 @@
 var homeview = {
 	namespace: 'home',
-	beforeEnter: function(data) {
+	beforeEnter: function (data) {
 		var next = data.next.container;
 
 		// Scroll animate arrow
@@ -8,10 +8,8 @@ var homeview = {
 		els.forEach(function (el, idx) {
 			var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
 
-			// splitText(el.querySelectorAll("h1"));
-
 			// Animate text
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				//Show
 				tl.fromTo(maintext, {
 					y: (idx > 0) ? window.innerHeight / -8 : 0
@@ -44,9 +42,9 @@ var homeview = {
 				}, 4);
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: el,
 					start: "0 50%",
 					end: "100% 50%",
@@ -57,16 +55,16 @@ var homeview = {
 		});
 
 		// Scroll animate flares
-		scroll.push(function(tl) {
+		scroll.push(function (tl) {
 			tl.to(next.querySelectorAll(".flares > img"), {
-				x: "random(10, 50, 5)%",
+				x: "random(-500, 500, 50)px",
 				ease: "linear"
 			}, 0);
 
 			return tl;
 		}, function (tl) {
 			return ScrollTrigger.create({
-				scroller: next,
+				// scroller: next,
 				trigger: "#flarestart",
 				start: "0 0",
 				endTrigger: "#flareend",

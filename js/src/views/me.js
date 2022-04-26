@@ -1,24 +1,19 @@
 meview = {
 	namespace: 'me',
-	beforeLeave: function(data) {
+	beforeLeave: function (data) {
 		var current = data.current.container;
 		removeClass(current.querySelector(".main-text h1 strong"), "emphasis");
 	},
-	beforeEnter: function(data) {
+	beforeEnter: function (data) {
 		var next = data.next.container;
 
-		gsap.set(next.querySelectorAll("#webdesigner"), {
-			marginTop: window.innerHeight * -1/2
-		});
-		gsap.set(next.querySelectorAll("#webdesigner .thumbs"), {
-			display: "none"
-		});
-		next.querySelectorAll("#now").forEach(function(element, index) {
-			scroll.push(function(tl) {
+		// Now section
+		next.querySelectorAll("#now").forEach(function (element) {
+			scroll.push(function (tl) {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					opacity: 0,
 					x: -40,
-					y: (window.innerHeight * -2/3),
+					y: (window.innerHeight * -2 / 3),
 				}, {
 					opacity: 1,
 					x: -10,
@@ -27,9 +22,8 @@ meview = {
 				});
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
 					trigger: element,
 					start: "0 50%",
 					end: "50% 50%",
@@ -38,13 +32,13 @@ meview = {
 				});
 			});
 
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					x: -10,
 					y: 0,
 				}, {
 					x: 0,
-					y: (window.innerHeight * 1/2) + 25,
+					y: (window.innerHeight * 1) + 25,
 					ease: 'linear'
 				}, 0);
 
@@ -63,47 +57,49 @@ meview = {
 				}, 0);
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
 					trigger: element,
 					start: "50% 50%",
-					end: "100% 50%",
+					end: "150% 50%",
 					animation: tl,
 					scrub: true
 				});
 			});
 
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					opacity: 1,
 					x: 0,
-					y: (window.innerHeight * 1/2) + 25
+					y: (window.innerHeight * 1) + 25
 				}, {
 					opacity: 0,
 					x: 20,
-					y: (window.innerHeight * 9/8) + 25,
+					y: (window.innerHeight * 1.75) + 25,
 					ease: 'linear'
 				});
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
 					trigger: element,
-					start: "100% 50%",
-					end: "150% 50%",
+					start: "150% 50%",
+					end: "200% 50%",
 					animation: tl,
 					scrub: true
 				});
 			});
 		});
 
+		// Webdesigner section
+		gsap.set(next.querySelectorAll("#webdesigner .thumbs"), {
+			display: "none"
+		});
+
 		// Spinning Mr. Goat and Pinning
-		next.querySelectorAll("#mrgoat").forEach(function(element, index) {
+		next.querySelectorAll("#mrgoat").forEach(function (element) {
 			// Statics
 			var duration = 1;
-			var thumbs = element.querySelectorAll(".thumbs");
 			var imgs = element.querySelectorAll(".thumbs > img");
 			var mrgoat = {
 				frame: 1
@@ -112,7 +108,7 @@ meview = {
 			// Defining
 			var repeat = 5;
 			// hide
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				tl.fromTo(element, {
 					y: "0%"
 				}, {
@@ -121,9 +117,9 @@ meview = {
 				});
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: "#endmrgoat",
 					start: "0 0",
 					end: "100% 0",
@@ -132,7 +128,12 @@ meview = {
 				});
 			});
 			// Show
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
+				tl.set(element, {
+					position: "fixed",
+					top: 0
+				});
+
 				tl.fromTo(element, {
 					y: "100%"
 				}, {
@@ -141,9 +142,9 @@ meview = {
 				});
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: "#startmrgoat",
 					start: "0 100%",
 					end: "100% 100%",
@@ -153,7 +154,7 @@ meview = {
 			});
 			// Spinning
 			gsap.set(imgs, { opacity: 0 });
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				tl.to(mrgoat, {
 					frame: imgs.length,
 					snap: "frame",
@@ -175,9 +176,9 @@ meview = {
 				}, 0);
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: "#startmrgoat",
 					endTrigger: "#endmrgoat",
 					start: "0 100%",
@@ -187,9 +188,9 @@ meview = {
 				});
 			});
 			// Facts
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				var el = element.querySelectorAll(".thumbs, .text");
-				var facts = function(els) {
+				var facts = function (els) {
 					var dur = duration / 7.5;
 					var tl = gsap.timeline();
 
@@ -200,7 +201,7 @@ meview = {
 						ease: "power3.in",
 						duration: dur
 					});
-					els.forEach(function(el) {
+					els.forEach(function (el) {
 						tl.fromTo(el.querySelectorAll(".dot hr"), {
 							width: "0%"
 						}, {
@@ -208,7 +209,7 @@ meview = {
 							duration: dur
 						});
 					});
-					els.forEach(function(el) {
+					els.forEach(function (el) {
 						tl.fromTo(el.querySelectorAll(".line hr"), {
 							width: "0%"
 						}, {
@@ -216,7 +217,7 @@ meview = {
 							duration: dur
 						});
 					});
-					els.forEach(function(el) {
+					els.forEach(function (el) {
 						tl.fromTo(el.querySelectorAll("p"), {
 							opacity: 0
 						}, {
@@ -252,9 +253,9 @@ meview = {
 				}, 0);
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: "#startmrgoat",
 					endTrigger: "#endmrgoat",
 					start: "0 0",
@@ -264,9 +265,7 @@ meview = {
 				});
 			});
 			// Pinning
-			scroll.push(function(tl) {
-				var el = element.querySelectorAll(".thumbs, .text");
-
+			scroll.push(function (tl) {
 				tl.fromTo(element.querySelectorAll("#post > *"), {
 					opacity: 0
 				}, {
@@ -290,9 +289,9 @@ meview = {
 				}, (duration * 4));
 
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: "#startmrgoat",
 					endTrigger: "#endmrgoat",
 					start: "0 0",
@@ -304,17 +303,17 @@ meview = {
 		});
 
 		// Animate cofounder
-		next.querySelectorAll(".cofound").forEach(function(el, index) {
+		next.querySelectorAll(".cofound").forEach(function (el, index) {
 			// Hover
 			var picture = el.querySelector("picture");
-			hoverEvents(el.querySelectorAll("a"), function() {
+			hoverEvents(el.querySelectorAll("a"), function () {
 				gsap.killTweensOf(picture);
 				gsap.to(picture, {
 					scale: 2,
 					duration: 120,
 					ease: "linear"
 				});
-			}, function() {
+			}, function () {
 				gsap.killTweensOf(picture);
 				gsap.to(picture, {
 					scale: 1,
@@ -324,11 +323,11 @@ meview = {
 			});
 			// Animate
 			var eltext = el.querySelectorAll(".text");
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				tl.fromTo(eltext, {
-					y: window.innerHeight * 1/10
+					y: window.innerHeight * 1 / 10
 				}, {
-					y: window.innerHeight * -1/10,
+					y: window.innerHeight * -1 / 10,
 					ease: "linear",
 					duration: 4
 				}, 0);
@@ -348,16 +347,16 @@ meview = {
 				}, 3);
 
 				tl.fromTo(el.querySelectorAll(".thumbs"), {
-					y: window.innerHeight * -1/4
+					y: window.innerHeight * -1 / 4
 				}, {
-					y: window.innerHeight * 1/4,
+					y: window.innerHeight * 1 / 4,
 					ease: "linear",
 					duration: 4
 				}, 0);
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: el,
 					start: "0 100%",
 					end: "100% 0",
@@ -368,18 +367,18 @@ meview = {
 		});
 
 		// Links
-		next.querySelectorAll(".links").forEach(function(el) {
+		next.querySelectorAll(".links").forEach(function (el) {
 			scroll.moveText({
-				scroller: next,
+				// scroller: next,
 				elements: el.querySelectorAll("nav > *"),
 				position: "100%"
 			});
 			// Snap
-			scroll.push(function(tl) {
+			scroll.push(function (tl) {
 				return tl;
-			}, function(tl) {
+			}, function (tl) {
 				return ScrollTrigger.create({
-					scroller: next,
+					// scroller: next,
 					trigger: el,
 					start: "0 100%",
 					end: "100% 100%",
@@ -391,7 +390,7 @@ meview = {
 		// Refresh
 		ScrollTrigger.refresh();
 	},
-	afterEnter: function(data) {
+	afterEnter: function (data) {
 		var next = data.next.container;
 
 		addClass(next.querySelector(".main-text h1 strong"), "emphasis");

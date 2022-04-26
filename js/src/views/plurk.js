@@ -34,14 +34,14 @@ class colors {
 	constructor() {
 		this.oldcolor = "";
 		this.randomcolors = [];
-		this.colors = ['rgb(63,94,251)', 'rgb(252,70,107)', 'rgb(34,193,195)', 'rgb(253,187,45)', 'rgb(195,34,190)', 'rgb(219,158,0)', 'rgb(75,231,152)','rgb(195,34,103)', 'rgb(45,182,253)'];
+		this.colors = ['rgb(63,94,251)', 'rgb(252,70,107)', 'rgb(34,193,195)', 'rgb(253,187,45)', 'rgb(195,34,190)', 'rgb(219,158,0)', 'rgb(75,231,152)', 'rgb(195,34,103)', 'rgb(45,182,253)'];
 	}
 
 	getRandomColor() {
 		var color;
 		do {
 			this.randomcolors = gsap.utils.shuffle(this.colors).slice();
-		} while(this.oldcolor == (color = this.randomcolors.pop()));
+		} while (this.oldcolor == (color = this.randomcolors.pop()));
 		this.oldcolor = color;
 		return color;
 	}
@@ -126,15 +126,15 @@ class plurkerElement {
 
 class replurk {
 	// Draw in which element?
-	next = document.createElement('div');	
+	next = document.createElement('div');
 	// Plurks array
 	plurks = [];
 	// Plurker profile object
-	me = {"id": 3203568, "has_profile_image": 1, "timeline_privacy": 0, "nick_name": "dwan", "display_name": "Dwan", "date_of_birth": "Sat, 29 Oct 1983 00:01:00 GMT", "avatar": 41917598, "gender": 1, "karma": 199.24, "premium": true, "verified_account": false, "dateformat": 3, "default_lang": "en", "friend_list_privacy": "public", "name_color": "FFA59A", "full_name": "Dwan B.", "location": "Tel Aviv-Yafo, Dan, Israel", "timezone": "Asia/Jerusalem", "phone_verified": 0, "bday_privacy": 1, "plurks_count": 14598, "response_count": 79484, "pinned_plurk_id": 0, "background_id": 0, "show_ads": false, "show_location": 0, "profile_views": 36112, "avatar_small": "https://avatars.plurk.com/3203568-small41917598.gif", "avatar_medium": "https://avatars.plurk.com/3203568-medium41917598.gif", "avatar_big": "https://avatars.plurk.com/3203568-big41917598.jpg", "about": "Mr. Goat\u2019s dad and full-time husband", "about_renderred": "Mr. Goat\u2019s dad and full-time husband", "page_title": "The world revolve around me", "recruited": 14, "relationship": "married", "friends_count": 571, "fans_count": 498, "join_date": "Wed, 15 Oct 2008 07:48:05 GMT", "privacy": "world", "accept_private_plurk_from": "all", "post_anonymous_plurk": false, "badges": ["10_invites", "14", "9", "10000_views", "10000_plurks", "50000_comments", "upload_profile_image", "50_fans", "coin"], "link_facebook": false, "setup_facebook_sync": false, "setup_twitter_sync": false, "setup_weibo_sync": false, "filter": {"porn": 2, "anonymous": 0, "keywords": null}, "anniversary": {"years": 13, "days": 27}, "phone_number": null, "creature": 0, "creature_url": null, "creature_special": 1, "creature_special_url": null};
-	
+	me = { "id": 3203568, "has_profile_image": 1, "timeline_privacy": 0, "nick_name": "dwan", "display_name": "Dwan", "date_of_birth": "Sat, 29 Oct 1983 00:01:00 GMT", "avatar": 41917598, "gender": 1, "karma": 199.24, "premium": true, "verified_account": false, "dateformat": 3, "default_lang": "en", "friend_list_privacy": "public", "name_color": "FFA59A", "full_name": "Dwan B.", "location": "Tel Aviv-Yafo, Dan, Israel", "timezone": "Asia/Jerusalem", "phone_verified": 0, "bday_privacy": 1, "plurks_count": 14598, "response_count": 79484, "pinned_plurk_id": 0, "background_id": 0, "show_ads": false, "show_location": 0, "profile_views": 36112, "avatar_small": "https://avatars.plurk.com/3203568-small41917598.gif", "avatar_medium": "https://avatars.plurk.com/3203568-medium41917598.gif", "avatar_big": "https://avatars.plurk.com/3203568-big41917598.jpg", "about": "Mr. Goat\u2019s dad and full-time husband", "about_renderred": "Mr. Goat\u2019s dad and full-time husband", "page_title": "The world revolve around me", "recruited": 14, "relationship": "married", "friends_count": 571, "fans_count": 498, "join_date": "Wed, 15 Oct 2008 07:48:05 GMT", "privacy": "world", "accept_private_plurk_from": "all", "post_anonymous_plurk": false, "badges": ["10_invites", "14", "9", "10000_views", "10000_plurks", "50000_comments", "upload_profile_image", "50_fans", "coin"], "link_facebook": false, "setup_facebook_sync": false, "setup_twitter_sync": false, "setup_weibo_sync": false, "filter": { "porn": 2, "anonymous": 0, "keywords": null }, "anniversary": { "years": 13, "days": 27 }, "phone_number": null, "creature": 0, "creature_url": null, "creature_special": 1, "creature_special_url": null };
+
 	/*
 		Friends object spesification:
-	
+
 		1. data: contains all the friends collection data
 		2. add(data): add friend to friends collection data
 		3. find(user_id): return friend data based on their id
@@ -146,21 +146,21 @@ class replurk {
 		data: {},
 		unavailable: [],
 		parent: this,
-		init: function() {
+		init: function () {
 			this.data = {};
 		},
-		add: function(new_friends) {
+		add: function (new_friends) {
 			Object.assign(this.data, new_friends);
 		},
-		find: async function(user_id) {
-			if(this.unavailable.findIndex(el => el == user_id) >= 0) return false;
-	
-			if(this.data && this.data[user_id]) {
+		find: async function (user_id) {
+			if (this.unavailable.findIndex(el => el == user_id) >= 0) return false;
+
+			if (this.data && this.data[user_id]) {
 				return this.data[user_id];
 			} else {
 				var result = await api.call("?fetch=APP&url=/Profile/getPublicProfile&user_id=" + user_id);
-			
-				if(result.success) {
+
+				if (result.success) {
 					var temp = {};
 					temp[result.message.user_info.id] = result.message.user_info;
 					this.add(temp);
@@ -171,24 +171,24 @@ class replurk {
 				}
 			}
 		},
-		findByUsername: async function(nick_name) {
+		findByUsername: async function (nick_name) {
 			var user_id = false;
-	
-			if(this.unavailable.findIndex(el => el == nick_name) >= 0) return false;
-			
-			for(var index in this.data) {
-				if(this.data[index].nick_name.toLowerCase() == nick_name.toLowerCase()) {
+
+			if (this.unavailable.findIndex(el => el == nick_name) >= 0) return false;
+
+			for (var index in this.data) {
+				if (this.data[index].nick_name.toLowerCase() == nick_name.toLowerCase()) {
 					user_id = index;
 					break;
 				}
 			}
-	
-			if(user_id) {
+
+			if (user_id) {
 				return this.data[user_id];
 			} else {
 				var result = await api.call("?fetch=APP&url=/Profile/getPublicProfile&nick_name=" + nick_name);
-			
-				if(result.success) {
+
+				if (result.success) {
 					var temp = {};
 					temp[result.message.user_info.id] = result.message.user_info;
 					this.add(temp);
@@ -199,9 +199,9 @@ class replurk {
 				}
 			}
 		},
-		getAvatar: function(user_id) {
-			if(user_id && this.data && this.data[user_id]) {
-				if(this.data[user_id].has_profile_image) {
+		getAvatar: function (user_id) {
+			if (user_id && this.data && this.data[user_id]) {
+				if (this.data[user_id].has_profile_image) {
 					var avatar = "";
 					if (this.data[user_id].avatar) avatar = this.data[user_id].avatar;
 					return 'https://avatars.plurk.com/' + user_id + '-big' + avatar + '.jpg';
@@ -209,22 +209,22 @@ class replurk {
 			}
 			return 'https://plurk.com/static/default_big.jpg';
 		},
-		getAvatarByUsername: function(user_name) {
+		getAvatarByUsername: function (user_name) {
 			var user_id = false;
-	
-			if(user_name) { 
-				for(var index in this.data) {
-					if(this.data[index].nick_name.toLowerCase() == user_name.toLowerCase()) {
+
+			if (user_name) {
+				for (var index in this.data) {
+					if (this.data[index].nick_name.toLowerCase() == user_name.toLowerCase()) {
 						user_id = index;
 						break;
 					}
 				}
 			}
-	
+
 			return this.getAvatar(user_id);
 		}
 	}
-	
+
 	// Statistics plurker object renderer
 	statistics = {
 		// Storage
@@ -248,7 +248,7 @@ class replurk {
 		el: document.createElement('div'),
 		randomcolors: [],
 		parent: this,
-		init: function(next) {
+		init: function (next) {
 			this.whispers_count = 0;
 			this.coins_count = 0;
 			this.porn_count = 0;
@@ -266,9 +266,9 @@ class replurk {
 			this.id = 0;
 			this.next = next;
 			this.randomcolors = [];
-	
+
 			this.el = this.next.querySelector("#statistics");
-	
+
 			// Obverse when element is added to DOM
 			var observer = new MutationObserver((mutationsList) => {
 				mutationsList.forEach(mutation => {
@@ -283,27 +283,27 @@ class replurk {
 				subtree: false
 			});
 		},
-		clear: function() {
+		clear: function () {
 			this.el.innerHTML = "";
 		},
-		listCount: function(list, collection) {
-			if(collection.length > 0) {
+		listCount: function (list, collection) {
+			if (collection.length > 0) {
 				collection.forEach(value => {
 					var index = list.findIndex(el => el.id == value)
-	
-					if(index < 0) list.push({ id: value, count: 1});
+
+					if (index < 0) list.push({ id: value, count: 1 });
 					else list[index].count++;
 				});
 			}
-	
+
 			return list;
 		},
-		title: function(text, style = "", loading = false) {
-			if(loading) this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="loading"><i/></span></h3></div>');
+		title: function (text, style = "", loading = false) {
+			if (loading) this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="loading"><i/></span></h3></div>');
 			else this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="line"><i/></span></h3></div>');
 		},
-		afterDraw: function(el) {
-			if(hasClass(el, 'wrap')) {
+		afterDraw: function (el) {
+			if (hasClass(el, 'wrap')) {
 				var color = new colors();
 				var randomcolors = [color.getRandomColor(), color.getRandomColor()]
 				var anim = el.querySelector(".anim");
@@ -311,21 +311,21 @@ class replurk {
 				gsap.set(anim, {
 					background: 'radial-gradient(at 10% 10%, ' + randomcolors[0] + ' 0%, ' + randomcolors[1] + ' 100%)'
 				});
-					
+
 				gsap.fromTo(anim, {
 					opacity: 0
 				}, {
 					opacity: 1,
 					duration: 0.5,
 					ease: "power3.out"
-				}, 0);	
+				}, 0);
 
 				// Scroll animation wrap section
 				ScrollTrigger.matchMedia({
 					"(min-aspect-ratio: 1/1)": () => {
 						scroll.push(tl => {
 							tl.fromTo(el.children, {
-								y: window.innerHeight * 1/5
+								y: window.innerHeight * 1 / 5
 							}, {
 								y: 0,
 								ease: "ease.out"
@@ -334,7 +334,6 @@ class replurk {
 						}, tl => {
 							return ScrollTrigger.create({
 								trigger: el,
-								scroller: this.next,
 								start: "0 100%-=100px",
 								end: "0 100%-=100px",
 								animation: tl,
@@ -353,7 +352,6 @@ class replurk {
 						}, tl => {
 							return ScrollTrigger.create({
 								trigger: el,
-								scroller: this.next,
 								start: "0 100%-=100px",
 								end: "100px 100%-=100px",
 								animation: tl,
@@ -362,16 +360,16 @@ class replurk {
 						});
 					}
 				});
-					
-				scroll.push(function(tl) {
+
+				scroll.push(function (tl) {
 					if (el.querySelector(".big")) {
 						var number = Number(el.querySelector(".big").textContent);
-						if(number > 0) {
+						if (number > 0) {
 							var load = { progress: 0 };
 							var duration = 1;
-							if(number >= 500 && number < 1000) duration = 2;
-							else if(number >= 1000 && number < 99999) duration = 3;
-							else if(number >= 99999) duration = 4;
+							if (number >= 500 && number < 1000) duration = 2;
+							else if (number >= 1000 && number < 99999) duration = 3;
+							else if (number >= 99999) duration = 4;
 							tl.to(load, {
 								progress: number,
 								snap: "progress",
@@ -383,12 +381,11 @@ class replurk {
 							}, 0);
 						}
 					}
-	
+
 					return tl;
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						scroller: this.next,
 						start: "0 100%-=100px",
 						end: "100px 100%-=100px",
 						animation: tl,
@@ -408,7 +405,6 @@ class replurk {
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						scroller: this.next,
 						start: "100% 100%",
 						end: "100% 0",
 						animation: tl,
@@ -417,7 +413,7 @@ class replurk {
 				});
 			}
 
-			if(hasClass(el, 'drawgraph')) {
+			if (hasClass(el, 'drawgraph')) {
 				scroll.push(tl => {
 					tl.fromTo(el.querySelector(".graph"), {
 						y: 100
@@ -435,7 +431,6 @@ class replurk {
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						scroller: this.next,
 						start: "50% 100%",
 						end: "100% 100%",
 						animation: tl,
@@ -444,7 +439,7 @@ class replurk {
 				});
 			}
 
-			if(hasClass(el, 'coins')) {
+			if (hasClass(el, 'coins')) {
 				scroll.push(tl => {
 					tl.fromTo(el.querySelector(".big"), {
 						y: "50%"
@@ -456,7 +451,6 @@ class replurk {
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						scroller: this.next,
 						start: "50% 100%",
 						end: "100% 100%",
 						animation: tl,
@@ -467,15 +461,15 @@ class replurk {
 
 			// Capture function
 			var capture = el.querySelector(".capture small");
-			if(capture) {
+			if (capture) {
 				capture.onclick = () => {
-					if(!capture.generating) {
+					if (!capture.generating) {
 						capture.innerHTML = "Generating image...";
 						capture.generating = true;
 						document.body.style.cursor = "wait";
 
 						el.querySelectorAll("img").forEach(img => {
-							if(!img.localUrl) {
+							if (!img.localUrl) {
 								img.localUrl = true;
 								img.setAttribute("src", api.url + "?img=" + img.getAttribute("src"));
 							}
@@ -509,15 +503,15 @@ class replurk {
 
 			scroll.refresh();
 		},
-		wrapper: function(style, text, background) {
-			if(!background) {
+		wrapper: function (style, text, background) {
+			if (!background) {
 				return '<div class="statistics middle wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Download</small></div></div>';
 			} else {
 				return '<div class="statistics middle wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
 			}
 		},
-		draw: function(style, number, text, background) {
-			if(typeof number == "string" || (typeof number == "number" && number > 0)) {
+		draw: function (style, number, text, background) {
+			if (typeof number == "string" || (typeof number == "number" && number > 0)) {
 				this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '\
 					<p>\
 						<span class="big">' + number + '</span>\
@@ -526,10 +520,10 @@ class replurk {
 				'), background);
 			}
 		},
-		drawDiv: function(style, text) {
+		drawDiv: function (style, text) {
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="box">' + text + '</div>'));
 		},
-		drawGraph: function(style, number, text) {
+		drawGraph: function (style, number, text) {
 			if (typeof number == "string" || (typeof number == "number" && number > 0)) {
 				this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawgraph movetitle", '\
 					<p>\
@@ -539,7 +533,7 @@ class replurk {
 				'));
 			}
 		},
-		drawImage: function(style, image, link, title, text, badge) {
+		drawImage: function (style, image, link, title, text, badge) {
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawimage", '\
 				<a href="' + link + '" target="_BLANK">\
 					<span class="big">' + badge + '</span>\
@@ -549,7 +543,7 @@ class replurk {
 				</a>\
 			'));
 		},
-		drawHTML: function(style, title, html) {
+		drawHTML: function (style, title, html) {
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawhtml", '\
 				<div>\
 					<div class="htmlcontent">' + html + '</div>\
@@ -557,7 +551,7 @@ class replurk {
 				</div>\
 			'));
 		},
-		drawLink: function(style, link, title, text, badge) {
+		drawLink: function (style, link, title, text, badge) {
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawlink", '\
 				<a href="' + link + '" target="_BLANK">\
 					<span class="big">' + badge + '</span>\
@@ -566,9 +560,9 @@ class replurk {
 				</a>\
 			'));
 		},
-		drawPost: function(style, id, title, text, badge) {
+		drawPost: function (style, id, title, text, badge) {
 			var url = "";
-			if(id) url = 'https://plurk.com/p/' + id.toString(36);
+			if (id) url = 'https://plurk.com/p/' + id.toString(36);
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", '\
 				<div>\
 					<a href="' + url + '" class="link" target="_BLANK">' + iconLink + '</a>\
@@ -578,17 +572,17 @@ class replurk {
 				</div>\
 			'));
 		},
-		drawUserList: async function(style, id, title, list) {
+		drawUserList: async function (style, id, title, list) {
 			var html = "";
 			var max = list.length >= 5 ? 5 : list.length;
 
 			this.drawHTML(style + " drawuserlist movetitle " + id, title, "<span class='info'>Downloading user data</span>");
-			for(var index = 0; index < max; index++) {
+			for (var index = 0; index < max; index++) {
 				var value = list[index];
-				if(value) {
+				if (value) {
 					var friends = this.parent.friends;
 					var friend = await friends.find(value.id);
-					if(friend) {
+					if (friend) {
 						var plurker = new plurkerElement(value.id, friend, "", plurker => {
 							plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user.id) + '" />');
 							plurker.name = new span('name', plurker.user.display_name);
@@ -608,9 +602,9 @@ class replurk {
 			this.el.querySelector("." + id + " .htmlcontent").innerHTML = html;
 
 			// Stagger animation
-			if(id == 'mostinteraction' || id == 'mvp') {
+			if (id == 'mostinteraction' || id == 'mvp') {
 				scroll.push(tl => {
-					tl.fromTo(this.el.querySelectorAll("." + id +" .plurkers"), {
+					tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
 						scale: .3,
 						opacity: 0
 					}, {
@@ -628,7 +622,6 @@ class replurk {
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: this.el.querySelector("." + id),
-						scroller: this.parent.next,
 						start: "50% 100%",
 						end: "50% 100%",
 						animation: tl,
@@ -637,7 +630,7 @@ class replurk {
 				});
 			} else {
 				scroll.push(tl => {
-					tl.fromTo(this.el.querySelectorAll("." + id +" .plurkers"), {
+					tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
 						y: 50,
 						opacity: 0
 					}, {
@@ -652,7 +645,6 @@ class replurk {
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: this.el.querySelector("." + id),
-						scroller: this.parent.next,
 						start: "0% 100%",
 						end: "0% 100%",
 						animation: tl,
@@ -661,7 +653,7 @@ class replurk {
 				});
 			}
 		},
-		attach: function(charttitle, node, max) {
+		attach: function (charttitle, node, max) {
 			var that = this;
 			var id = node.id;
 			var chart;
@@ -670,42 +662,42 @@ class replurk {
 			var anim;
 			var wrapper;
 			var capture;
-	
+
 			var opacity = 0;
 			var position = max;
 			var zIndex = 0;
 			var hidden = true;
-	
-			if(node.position <= max){
+
+			if (node.position <= max) {
 				hidden = false;
 				zIndex = position = (node.position - 1);
 				opacity = 1;
 			}
-	
+
 			// Create the box
-			if(!that.next.querySelector("." + id)) {
+			if (!that.next.querySelector("." + id)) {
 				chart = document.createElement('div');
 				chart.setAttribute('class', 'chart');
-	
+
 				title = document.createElement('div');
 				title.setAttribute('class', 'title');
 				title.innerHTML = charttitle;
-	
+
 				text = document.createElement('div');
 				text.setAttribute('class', 'text');
 				text.appendChild(chart);
 				text.appendChild(title);
-	
+
 				anim = document.createElement('div');
 				anim.setAttribute('class', 'anim');
 				anim.appendChild(text);
-	
+
 				text = document.createElement('small');
 				text.innerHTML = "Download";
 				capture = document.createElement('div');
 				capture.setAttribute('class', 'capture');
 				capture.appendChild(text);
-	
+
 				wrapper = document.createElement('div');
 				wrapper.setAttribute('class', 'statistics middle wrap attach ' + id);
 				wrapper.appendChild(anim);
@@ -713,13 +705,13 @@ class replurk {
 
 				that.el.insertAdjacentElement("beforeend", wrapper);
 			}
-	
+
 			// Add  element
-			if(!hidden && !node.attached) {
+			if (!hidden && !node.attached) {
 				var maxTop = max / (max - 1) * 100;
-	
+
 				node.insertTo(that.el.querySelector("." + id + ' .chart'));
-	
+
 				gsap.set(node.el, {
 					top: maxTop + "%",
 					opacity: 0,
@@ -727,9 +719,9 @@ class replurk {
 				});
 			}
 			// Update position
-			if(!hidden || !node.hidden) {
+			if (!hidden || !node.hidden) {
 				var currentTop = position / (max - 1) * 100;
-	
+
 				gsap.killTweensOf(node.el);
 				gsap.to(node.el, {
 					top: currentTop + "%",
@@ -737,27 +729,27 @@ class replurk {
 					zIndex: zIndex,
 					duration: .5,
 					ease: "power3.out",
-					onComplete: function() {
-						if(hidden) {
+					onComplete: function () {
+						if (hidden) {
 							node.destroy();
 						}
 					}
 				});
 				node.hidden = hidden;
 			}
-	
+
 			node.update();
 		},
-		drawAll: async function(plurks) {
+		drawAll: async function (plurks) {
 			var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
 
 			this.parent.most.responses.draw(plurks);
-			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got 💬 responses ' + ((response_percentage <= 50)? '😢' : '🤩'));
+			this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got 💬 responses ' + ((response_percentage <= 50) ? '😢' : '🤩'));
 
 			this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i>📢 ' + plural(this.replurker_count, 'replurk') + '</i>');
 			this.parent.most.replurk.draw(plurks);
 
-			this.parent.most.favorite.draw(plurks);	
+			this.parent.most.favorite.draw(plurks);
 			this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i>❤️ ' + plural(this.favourite_count, 'love') + '</i>');
 
 			this.draw('spansmall privateplurk', this.private_count, 'I posted <i>💋 ' + plural(this.private_count, 'private plurk') + '</i>');
@@ -766,26 +758,26 @@ class replurk {
 
 			this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i>💬 ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
 			this.draw('spansmall center coins', this.coins_count, 'I recieved <i>🪙 ' + plural(this.coins_count, 'coin') + '</i>');
-	
-			if(this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>❤️ Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
-			if(this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>📢 Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
+
+			if (this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>❤️ Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
+			if (this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>📢 Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
 		}
 	};
-	
+
 	// Most statistics object renderer
 	most = {
 		parent: this,
-		sort: function(a, b) {
+		sort: function (a, b) {
 			return b.count - a.count;
 		},
 		// Find and count all based on regex
-		findregex: function(regex, replace, content, storage) {
+		findregex: function (regex, replace, content, storage) {
 			var result = content.match(regex);
-	
-			for(var index in result) {
+
+			for (var index in result) {
 				var value = replace(result[index]);
 				var idx = storage.findIndex(el => el.value == value);
-	
+
 				if (idx < 0) {
 					storage.push({
 						id: value,
@@ -796,10 +788,10 @@ class replurk {
 					storage[idx].count++;
 				}
 			}
-	
+
 			return result;
 		},
-		init: function() {
+		init: function () {
 			this.responders.data = [];
 			this.mentions.data = [];
 			this.mentions.dataAll = [];
@@ -810,19 +802,19 @@ class replurk {
 			this.types.words = 0;
 			this.types.chars = 0;
 		},
-		caches: function(id, key, callback) {
+		caches: function (id, key, callback) {
 			var storage = sessionStorage.getItem(id);
 			var data = storage == undefined ? {} : JSON.parse(storage);
-			
-			if(data) {
-				if(!data[key]) {
+
+			if (data) {
+				if (!data[key]) {
 					data[key] = callback();
 					try {
 						sessionStorage.setItem(id, JSON.stringify(data));
 					} catch {
 						console.info("Exceeding maximum session storage");
 					}
-				} 
+				}
 			} else {
 				data[key] = callback();
 				try {
@@ -831,30 +823,30 @@ class replurk {
 					console.info("Exceeding maximum session storage");
 				}
 			}
-					
+
 			return data[key];
 		},
-		countAll: async function(data) {
+		countAll: async function (data) {
 			// Find and count all my emoticons from my post
-			if(data.user_id == this.parent.me.id) this.myemoticons.count(data.content);
+			if (data.user_id == this.parent.me.id) this.myemoticons.count(data.content);
 			// Find and count all mentions from my post
 			await this.mentions.count(data.content_raw);
 			// Find and count all hashtags from my post
-			if(data.user_id == this.parent.me.id) this.hashtags.count(data.content);
+			if (data.user_id == this.parent.me.id) this.hashtags.count(data.content);
 			// Find and count all links and pictures post from my post
-			if(data.user_id == this.parent.me.id) this.links.count(data.content, data.plurk_id, data.response_count, data.replurkers_count, data.favorite_count);
+			if (data.user_id == this.parent.me.id) this.links.count(data.content, data.plurk_id, data.response_count, data.replurkers_count, data.favorite_count);
 			// Find and count characther and words from my post
-			if(data.user_id == this.parent.me.id) this.types.count(data.content_raw);
+			if (data.user_id == this.parent.me.id) this.types.count(data.content_raw);
 		},
 		responders: {
 			data: [],
 			parent: this,
-			count: async function(response) {
-				var index = this.data.findIndex(function(el) {
+			count: async function (response) {
+				var index = this.data.findIndex(function (el) {
 					return el.user_id == response.user_id;
 				});
-	
-				if(index < 0) {
+
+				if (index < 0) {
 					var friends = this.parent.friends;
 					var user = await friends.find(response.user_id);
 					this.data.push(new plurkerElement('mostresponders', user, friends.getAvatar(user.id)));
@@ -862,22 +854,22 @@ class replurk {
 					this.data[index].count++;
 				}
 				this.data.sort(this.parent.most.sort);
-	
+
 				// Update top 5
 				var index = 1;
 				for (var i = 0; i < this.data.length; i++) {
 					this.data[i].position = this.data.length;
-					if(this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
+					if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++;
 						this.parent.statistics.attach('<i>Top 💬 Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
 					}
 				}
 			},
-			draw: function() {
+			draw: function () {
 				var index = 0;
-				if(this.data.length > 0) {
-					while((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-					if(this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
+				if (this.data.length > 0) {
+					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
+					if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
 				}
 			}
 		},
@@ -885,23 +877,23 @@ class replurk {
 			data: [],
 			dataAll: [],
 			parent: this,
-			count: async function(content) {
+			count: async function (content) {
 				var result = this.parent.most.findregex(/\@(\w{1,30})[\ |\:]/g, value => value.replace(/\@|\ |\:/g, ''), content, this.data);
 				var max = 5;
 				var index = 1;
-				
-				if(result) {
+
+				if (result) {
 					// Update top 5
 					this.data.sort(this.parent.most.sort);
-					for(var idx = 0; idx < this.data.length; idx++) {					
+					for (var idx = 0; idx < this.data.length; idx++) {
 						this.data[idx].position = this.data.length;
-						
-						if(index <= max) {
+
+						if (index <= max) {
 							var user = await this.parent.friends.findByUsername(this.data[idx].value);
-	
-							if(this.data[idx].el == undefined) {
+
+							if (this.data[idx].el == undefined) {
 								this.data[idx] = new plurkerElement('mostmentionedbyme', user, "", plurker => {
-									plurker.avatar = new span('avatar', '<img src="' + this.parent.friends.getAvatar(plurker.user_id) + '" />');		
+									plurker.avatar = new span('avatar', '<img src="' + this.parent.friends.getAvatar(plurker.user_id) + '" />');
 									plurker.name = new span('name', "@" + plurker.nick_name);
 									plurker.counts = new span('count', plurker.count);
 									plurker.el.appendChild(plurker.avatar.el);
@@ -910,57 +902,57 @@ class replurk {
 									plurker.el.setAttribute("href", 'https://plurk.com/' + plurker.nick_name);
 								});
 							}
-	
-							if(user.id != this.parent.me.id && user.id != 99999) {
+
+							if (user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++;
 								this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
 							}
 						}
-	
-						if(this.data[idx].el) this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+
+						if (this.data[idx].el) this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
 					}
 				}
 			},
-			draw: function() {			
+			draw: function () {
 				var index = 0;
-				if(this.data.length > 0) {
-					while((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-					if(this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count);
+				if (this.data.length > 0) {
+					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
+					if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count);
 				}
 			}
 		},
 		myemoticons: {
 			data: [],
 			parent: this,
-			count: function(content) {
-				this.parent.most.findregex(/emoticon_my\" src=\"(.*?)\"/g, function(value) {
-					return value.replace(/emoticon_my\" src=\"|\"/gi,'');
+			count: function (content) {
+				this.parent.most.findregex(/emoticon_my\" src=\"(.*?)\"/g, function (value) {
+					return value.replace(/emoticon_my\" src=\"|\"/gi, '');
 				}, content, this.data);
 			},
-			draw: function() {
+			draw: function () {
 				var html = "";
 				var max = 7;
 				this.data.sort(this.parent.most.sort);
-				for(var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++) 
-					if(this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
-				if(html != "") this.parent.statistics.drawHTML("smallspan grid emoticons", 'Most Used <i>My Emoticons</i>', html);
+				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
+					if (this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
+				if (html != "") this.parent.statistics.drawHTML("smallspan grid emoticons", 'Most Used <i>My Emoticons</i>', html);
 			}
 		},
 		hashtags: {
 			data: [],
 			parent: this,
-			count: function(content) {
-				this.parent.most.findregex(/hashtag\"\>(.*?)\</g, function(value) {
+			count: function (content) {
+				this.parent.most.findregex(/hashtag\"\>(.*?)\</g, function (value) {
 					return value.replace(/hashtag\"\>\#|\.\<|\</g, '');
 				}, content, this.data);
 			},
-			draw: function() {
+			draw: function () {
 				var html = "";
 				var max = 5;
 				this.data.sort(this.parent.most.sort);
-				for(var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++) 
-					if(this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>';
-				if(html != "") { 
+				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
+					if (this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>';
+				if (html != "") {
 					html = "<strong>#</strong>" + html;
 					this.parent.statistics.drawHTML("hashtags", 'Most Used <i>Hashtags</i>', html);
 				}
@@ -969,22 +961,22 @@ class replurk {
 		links: {
 			data: [],
 			links: [],
-			pics:[],
+			pics: [],
 			parent: this,
-			count: function(content, id, response, replurk, loved) {
+			count: function (content, id, response, replurk, loved) {
 				var result = content.match(/href\=\"(.*?)\"\ class=\"(.*?)\"\ rel/g);
 				var count = 0;
 				var pics = [];
 				var links = [];
 
-				if(result) for(var data of result) {
-					if(!this.data[id]) {
+				if (result) for (var data of result) {
+					if (!this.data[id]) {
 						count = response + (replurk * 250) + (loved * 50);
 					}
 
-					if(data.includes("pictureservices")) {
+					if (data.includes("pictureservices")) {
 						this.pics.push(data);
-						if(count > 0) {
+						if (count > 0) {
 							var pic = data.split('\"')
 							pics.push({
 								url: pic[1],
@@ -996,7 +988,7 @@ class replurk {
 					}
 					else {
 						this.links.push(data);
-						if(count > 0) {
+						if (count > 0) {
 							var link = data.split('\"')
 							links.push({
 								url: link[1],
@@ -1009,7 +1001,7 @@ class replurk {
 					}
 				}
 
-				if(count) this.data.push({
+				if (count) this.data.push({
 					id: id,
 					pics: pics,
 					links: links,
@@ -1017,13 +1009,13 @@ class replurk {
 					content: content
 				});
 			},
-			drawLinks: function() {
+			drawLinks: function () {
 				var max = 1;
 				var index = 0;
 				var result = "";
 				this.data.sort(this.parent.most.sort);
-				while(index < this.data.length && max > 0) {
-					if(this.data[index].links.length > 0) {
+				while (index < this.data.length && max > 0) {
+					if (this.data[index].links.length > 0) {
 						var link = this.data[index].links[0];
 						var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
 						result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response">💬 ' + link.response + '</span><span class="replurk">📢 ' + link.replurk + '</span><span class="loved">❤️ ' + link.loved + '</span>' + url + '</div></div>';
@@ -1031,15 +1023,15 @@ class replurk {
 					}
 					index++;
 				}
-				if(this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result);
+				if (this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result);
 			},
-			drawPics: function() {
+			drawPics: function () {
 				var max = 1;
 				var index = 0;
 				var result = "";
 				this.data.sort(this.parent.most.sort);
-				while(index < this.data.length && max > 0) {
-					if(this.data[index].pics.length > 0) {
+				while (index < this.data.length && max > 0) {
+					if (this.data[index].pics.length > 0) {
 						var pics = this.data[index].pics[0];
 						var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
 						result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response">💬 ' + pics.response + '</span><span class="replurk">📢 ' + pics.replurk + '</span><span class="loved">❤️ ' + pics.loved + '</span>' + url + '</div></div></div>';
@@ -1048,35 +1040,35 @@ class replurk {
 					index++;
 				}
 
-				if(this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>');
-				if(result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🖼 Most Popular Image</i>', result);
+				if (this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>');
+				if (result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🖼 Most Popular Image</i>', result);
 			}
 		},
 		types: {
 			words: 0,
 			chars: 0,
 			parent: this,
-			count: function(content) {
+			count: function (content) {
 				var words = content.split(" ");
-	
+
 				this.chars += content.length;
 				this.words += words.length;
 			},
-			draw: function() {
-				if(this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year');
+			draw: function () {
+				if (this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year');
 			}
 		},
 		responses: {
 			parent: this,
-			sort: function(a, b) {
+			sort: function (a, b) {
 				return b.response_count - a.response_count;
 			},
-			draw: function(data) {
+			draw: function (data) {
 				data.sort(this.sort);
-				for(var index in data){
+				for (var index in data) {
 					var value = data[index];
-					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>💬 Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);						
+					if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
+						this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>💬 Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);
 						return;
 					}
 				}
@@ -1084,14 +1076,14 @@ class replurk {
 		},
 		replurk: {
 			parent: this,
-			sort: function(a, b) {
+			sort: function (a, b) {
 				return b.replurkers_count - a.replurkers_count;
 			},
-			draw: function(data) {
+			draw: function (data) {
 				data.sort(this.sort);
-				for(var index in data){
+				for (var index in data) {
 					var value = data[index];
-					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
+					if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
 						this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>📢 Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
 						return;
 					}
@@ -1100,14 +1092,14 @@ class replurk {
 		},
 		favorite: {
 			parent: this,
-			sort: function(a, b) {
+			sort: function (a, b) {
 				return b.favorite_count - a.favorite_count;
 			},
-			draw: function(data) {
+			draw: function (data) {
 				data.sort(this.sort);
-				for(var index in data){
+				for (var index in data) {
 					var value = data[index];
-					if(value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
+					if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
 						this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>❤️ Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
 						return;
 					}
@@ -1117,12 +1109,12 @@ class replurk {
 		interaction: {
 			data: [],
 			parent: this,
-			count: function(response) {
-				var index = this.data.findIndex(function(el) {
+			count: function (response) {
+				var index = this.data.findIndex(function (el) {
 					return el.id == response.user_id;
 				});
-	
-				if(index < 0) {
+
+				if (index < 0) {
 					this.data.push({
 						id: response.user_id,
 						count: 1,
@@ -1130,18 +1122,18 @@ class replurk {
 						plurk_id: response.plurk_id
 					});
 				} else {
-					if(this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier++;
+					if (this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier++;
 					else this.data[index].multiplier = 1;
 					this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
 				}
 				this.data.sort(this.parent.most.sort);
 			},
-			draw: function() {
-				var result= [];
+			draw: function () {
+				var result = [];
 				var length = 0;
 				var index = 0;
-				while(this.data[index] && length <= 5) {
-					if(this.data[index].id != this.parent.me.id) {
+				while (this.data[index] && length <= 5) {
+					if (this.data[index].id != this.parent.me.id) {
 						result.push(this.data[index]);
 						length++;
 					}
@@ -1149,7 +1141,7 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>🗣 interact</i> with me", result);
+					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>🗣 interact</i> with me", result);
 				} catch {
 					console.info("Error while counting most interacted plurker");
 				}
@@ -1158,12 +1150,12 @@ class replurk {
 		mvp: {
 			data: [],
 			parent: this,
-			count: function(response, type) {
-				var index = this.data.findIndex(function(el) {
+			count: function (response, type) {
+				var index = this.data.findIndex(function (el) {
 					return el.id == response.user_id;
 				});
-	
-				if(index < 0) {
+
+				if (index < 0) {
 					this.data.push({
 						id: response.user_id,
 						count: 1,
@@ -1171,24 +1163,24 @@ class replurk {
 						plurk_id: response.plurk_id
 					});
 				} else {
-					if(type == "replurk") {
+					if (type == "replurk") {
 						this.data[index].count += (response.count * 250);
-					} else if(type == "favorite") {
+					} else if (type == "favorite") {
 						this.data[index].count += (response.count * 50);
-					} else if(response.content_raw.length > 16){
-						if(this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier += .5;
+					} else if (response.content_raw.length > 16) {
+						if (this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier += .5;
 						else this.data[index].multiplier = .5;
 						this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
 					}
 				}
 				this.data.sort(this.parent.most.sort);
 			},
-			draw: function() {
-				var result= [];
+			draw: function () {
+				var result = [];
 				var length = 0;
 				var index = 0;
-				while(this.data[index] && length <= 5) {
-					if(this.data[index].id != this.parent.me.id) {
+				while (this.data[index] && length <= 5) {
+					if (this.data[index].id != this.parent.me.id) {
 						result.push(this.data[index]);
 						length++;
 					}
@@ -1196,14 +1188,14 @@ class replurk {
 				}
 
 				try {
-					if(result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>👄 MVP</i>", result);
+					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>👄 MVP</i>", result);
 				} catch {
 					console.info("Error while counting my mvp");
 				}
 			}
 		}
 	};
-	
+
 	// Inactive plurker object
 	inactive = {
 		draw: (data, year) => {
@@ -1214,7 +1206,7 @@ class replurk {
 			this.statistics.draw('inactive', '-', 'I didn\'t post anything at this year <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
 		}
 	}
-	
+
 	// Loading object
 	loading = {
 		count: 0,
@@ -1223,22 +1215,22 @@ class replurk {
 		clean: false,
 		next: document.createElement('div'),
 		parent: this,
-		isComplete: function() { return this.count == this.counts }, 
-		init: function(next) {
+		isComplete: function () { return this.count == this.counts },
+		init: function (next) {
 			this.count = 0;
 			this.prev_count = 0;
 			this.counts = -1;
 			this.clean = false;
 			this.next = next;
 		},
-		draw: function(item) {
+		draw: function (item) {
 			return new Promise(resolve => {
 				this.prev_count = item;
-	
-				if(!this.next.querySelector(".statistics.loading")) {
+
+				if (!this.next.querySelector(".statistics.loading")) {
 					this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>");
 				}
-	
+
 				// Animate loading
 				var load = { progress: this.prev_count };
 				gsap.to(load, {
@@ -1248,45 +1240,45 @@ class replurk {
 					duration: .24,
 					onUpdate: () => {
 						var el = this.next.querySelector(".loading .big");
-						if(el) el.innerHTML = load.progress + "%";
+						if (el) el.innerHTML = load.progress + "%";
 					},
 					onComplete: async () => {
-						if(this.clean) await this.done();
+						if (this.clean) await this.done();
 						resolve();
 					}
 				});
 			});
 		},
-		loop: async function(length) {
+		loop: async function (length) {
 			this.clean = true;
 			this.counts = length;
 			await this.draw(0);
 		},
-		update: async function(month, value) {
+		update: async function (month, value) {
 			var el = this.next.querySelector(".loading .month");
-			if(month && el) el.innerHTML = month;
-	
+			if (month && el) el.innerHTML = month;
+
 			if (this.counts >= 0) {
 				this.count = value ? value : this.count + 1;
 				await this.draw(Math.round(100 * (this.count / this.counts)));
 			}
 		},
-		fakeupdate: async function() {
-			if(this.counts >= 0) {
+		fakeupdate: async function () {
+			if (this.counts >= 0) {
 				this.count++;
 				if (this.count >= (this.counts - 10)) this.count = (this.counts - 10);
 				await this.draw(100 * (this.count / this.counts));
 			}
 		},
-		forcedone: async function() {
+		forcedone: async function () {
 			this.count = this.counts;
 			await this.draw(100);
 		},
-		done: function() {
+		done: function () {
 			return new Promise(resolve => {
-				if(this.isComplete()) {
+				if (this.isComplete()) {
 					var el = this.next.querySelector(".statistics.loading");
-										
+
 					this.clean = false;
 					gsap.to(el, {
 						opacity: 0,
@@ -1314,7 +1306,7 @@ class replurk {
 			var next = this.next;
 
 			tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
-				y: window.innerHeight * 1/8
+				y: window.innerHeight * 1 / 8
 			}, {
 				y: 0,
 				ease: "linear",
@@ -1351,7 +1343,6 @@ class replurk {
 			}, (tl) => {
 				return ScrollTrigger.create({
 					trigger: next.querySelectorAll("#statistics"),
-					scroller: next,
 					start: "100%-=" + window.innerHeight + " 0",
 					end: "100% 0",
 					animation: tl,
@@ -1367,7 +1358,7 @@ class replurk {
 				tl.fromTo(next.querySelectorAll("#permission form"), {
 					y: 0
 				}, {
-					y: window.innerHeight * -3/4,
+					y: window.innerHeight * -3 / 4,
 					ease: "linear"
 				}, 0);
 				tl.fromTo(next.querySelectorAll("#permission .bgtext sup"), {
@@ -1375,8 +1366,8 @@ class replurk {
 					x: 0,
 					rotation: 0
 				}, {
-					y: window.innerHeight * -1/4,
-					x: window.innerHeight * -1/10,
+					y: window.innerHeight * -1 / 4,
+					x: window.innerHeight * -1 / 10,
 					rotation: -10,
 					ease: "linear"
 				}, 0);
@@ -1385,8 +1376,8 @@ class replurk {
 					x: 0,
 					rotation: 0
 				}, {
-					y: window.innerHeight * -1/4,
-					x: window.innerHeight * 1/10,
+					y: window.innerHeight * -1 / 4,
+					x: window.innerHeight * 1 / 10,
 					rotation: 10,
 					ease: "linear"
 				}, 0);
@@ -1394,7 +1385,6 @@ class replurk {
 			}, (tl) => {
 				return ScrollTrigger.create({
 					trigger: next.querySelectorAll("#permission"),
-					scroller: next,
 					start: "0 0",
 					end: "100% 0",
 					animation: tl,
@@ -1407,7 +1397,6 @@ class replurk {
 			}, (tl) => {
 				return ScrollTrigger.create({
 					trigger: next.querySelectorAll("#permission"),
-					scroller: next,
 					start: "0 0",
 					end: "100% 0",
 					animation: tl,
@@ -1424,7 +1413,6 @@ class replurk {
 			}, (tl) => {
 				return ScrollTrigger.create({
 					trigger: 'main',
-					scroller: next,
 					start: "0 0",
 					end: "100% 0",
 					animation: tl,
@@ -1444,20 +1432,19 @@ class replurk {
 			});
 		},
 		browserBar: (login = true) => {
-			if(login) {
+			if (login) {
 				scroll.push((tl) => {
 					return tl;
 				}, (tl) => {
 					return ScrollTrigger.create({
 						trigger: '#hello',
-						scroller: this.next,
 						start: "0 0",
 						end: "100% 10px",
 						animation: tl,
 						scrub: true,
 						onLeave: () => {
 							this.browserColor("white");
-						}, 
+						},
 						onEnterBack: () => {
 							this.browserColor("green");
 						}
@@ -1468,7 +1455,6 @@ class replurk {
 				}, (tl) => {
 					return ScrollTrigger.create({
 						trigger: '#statistics',
-						scroller: this.next,
 						start: "0 0",
 						end: "100% 10px",
 						animation: tl,
@@ -1490,7 +1476,6 @@ class replurk {
 				}, (tl) => {
 					return ScrollTrigger.create({
 						trigger: '#permission',
-						scroller: this.next,
 						start: "0 0",
 						end: "100% 10px",
 						animation: tl,
@@ -1512,28 +1497,28 @@ class replurk {
 		this.year = year;
 		this.startDate = this.year + '-10-29T09:00:00';
 		this.endDate = new Date((this.year - 1) + '-10-29T09:00:00');
-		this.days = 60*60*24*1000;
+		this.days = 60 * 60 * 24 * 1000;
 		this.fulldays = 365;
 	}
 
 	// Browser color
 	getSetStateColor(state) {
-		if(typeof(state) == "object" && state.length >= 1) {
-			if(state.length == 1) {
-				browserColorDark =  state[0];
+		if (typeof (state) == "object" && state.length >= 1) {
+			if (state.length == 1) {
+				browserColorDark = state[0];
 				browserColorLight = state[0];
 			} else {
-				browserColorDark =  state[1];
+				browserColorDark = state[1];
 				browserColorLight = state[0];
 			}
-		} else if(state == "green") {
+		} else if (state == "green") {
 			browserColorDark = "#0d4f03";
 			browserColorLight = "#60e670";
 		} else if (state == "yellow") {
-			browserColorDark =  "#705f02";
+			browserColorDark = "#705f02";
 			browserColorLight = "#FFD700";
 		} else {
-			browserColorDark =  "#000000";
+			browserColorDark = "#000000";
 			browserColorLight = "#FFFFFF";
 		}
 
@@ -1707,12 +1692,12 @@ class replurk {
 
 		var loginmessage = next.querySelector("#login-message");
 
-		if(quick) {
+		if (quick) {
 			loginmessage.innerHTML = message;
 		} else {
 			gsap.to(loginmessage, {
 				opacity: 0,
-				onComplete: function() {
+				onComplete: function () {
 					loginmessage.innerHTML = message;
 					gsap.to(loginmessage, {
 						opacity: 1
@@ -1731,7 +1716,7 @@ class replurk {
 		// Hide statistic pages
 		tl = this.hideStatisticPages(tl);
 		tl.set(this.next, {
-			onComplete: async() => {
+			onComplete: async () => {
 				await api.call("?fetch=logout");
 				this.statistics.clear();
 				api.clear();
@@ -1771,9 +1756,9 @@ class replurk {
 		}, 1);
 
 		api.call("?request=token").then(data => {
-			if(text) {
+			if (text) {
 				message(text);
-			} else  {
+			} else {
 				tokenlink.textContent = "Grant Access";
 				tokenlink.setAttribute("href", api.url + "?redirect=" + data.message.url);
 			}
@@ -1781,7 +1766,7 @@ class replurk {
 			message("Error when requesting verification from Plurk, please reload your browser again.");
 		});
 
-		if(!text) next.querySelector("#permission form").style.display = "none";
+		if (!text) next.querySelector("#permission form").style.display = "none";
 	}
 
 	// Display current Plurker data
@@ -1795,21 +1780,21 @@ class replurk {
 		var responses = Math.round(plurker.response_count / days);
 
 		next.querySelector("#hello .thumbs").innerHTML = "<img src='" + plurker.avatar_big + "' />";
-		if(this.year == 2021) next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>If " + this.year + " have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories</p>";
+		if (this.year == 2021) next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>If " + this.year + " have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories</p>";
 		else next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>This is your year end RePlurk recap. Hopefully it will bring lots of good memories.</p>";
 
 		// Draw statistic
 		this.statistics.title('All Time', 'alltime');
-		if(plurker.anniversary.years && plurker.anniversary.days) {
+		if (plurker.anniversary.years && plurker.anniversary.days) {
 			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "I posted around <i>💬 " + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
-			
+
 			// Responses
 			var oneday = 16;
 			if (responses <= oneday) extra = "That's almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>';
 			else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>';
 			this.statistics.draw('span2 center responded', responses, "I responded around <i>💬 " + plural(responses, "time") + "</i> per day. " + extra + " when I'm not asleep");
 
-			var join = new Date (plurker.join_date)
+			var join = new Date(plurker.join_date)
 			this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
 			this.statistics.draw('spansmall center badges', "9", "I have <i>🛡 " + plural(plurker.badges.length, "badge") + "</i> right now");
 		} else {
@@ -1822,7 +1807,7 @@ class replurk {
 			tl.fromTo(next.querySelectorAll("#hello .text, #hello .thumbs"), {
 				y: 0
 			}, {
-				y: window.innerHeight * -3/4,
+				y: window.innerHeight * -3 / 4,
 				ease: "linear",
 				duration: 1
 			}, 0);
@@ -1831,8 +1816,8 @@ class replurk {
 				x: 0,
 				rotation: 0
 			}, {
-				y: window.innerHeight * -1/4,
-				x: window.innerHeight * -1/10,
+				y: window.innerHeight * -1 / 4,
+				x: window.innerHeight * -1 / 10,
 				rotation: -10,
 				ease: "linear",
 				duration: 1
@@ -1842,8 +1827,8 @@ class replurk {
 				x: 0,
 				rotation: 0
 			}, {
-				y: window.innerHeight * -1/4,
-				x: window.innerHeight * 1/10,
+				y: window.innerHeight * -1 / 4,
+				x: window.innerHeight * 1 / 10,
 				rotation: 10,
 				ease: "linear",
 				duration: 1
@@ -1852,16 +1837,15 @@ class replurk {
 				y: 0,
 				opacity: 1
 			}, {
-				y: window.innerHeight * 1/4,
+				y: window.innerHeight * 1 / 4,
 				opacity: 0,
 				ease: "linear",
 				duration: .25
 			}, 0);
 			return tl;
-		}, function(tl) {
+		}, function (tl) {
 			return ScrollTrigger.create({
 				trigger: next.querySelectorAll("#hello"),
-				scroller: next,
 				start: "0 0",
 				end: "100% 0",
 				animation: tl,
@@ -1870,7 +1854,7 @@ class replurk {
 		});
 		scroll.refresh();
 
-		if(callback) callback();
+		if (callback) callback();
 	}
 	// Display statistics
 	async displayStatistics() {
@@ -1881,24 +1865,24 @@ class replurk {
 		this.loading.loop(this.fulldays);
 
 		// Load loop timeline
-		var getTimeline = async(offset) => {
+		var getTimeline = async (offset) => {
 			offset = (!offset) ? "" : "&offset=" + offset;
 
 			var data = await api.call("?fetch=plurk&filter=my" + offset, 1);
-			if(data.success) {
+			if (data.success) {
 				this.friends.add(data.message.plurk_users);
 				this.plurks = this.plurks.concat(data.message.plurks);
 
-				if(data.message.plurks.length > 0) {
+				if (data.message.plurks.length > 0) {
 					var lastposted = new Date(this.plurks[this.plurks.length - 1].posted);
 
-					if(lastposted >= this.endDate) {
+					if (lastposted >= this.endDate) {
 						this.loading.update("Data from " + monthNames[lastposted.getMonth()] + " " + lastposted.getFullYear(), this.fulldays - Math.floor((lastposted - this.endDate) / this.days));
 
 						// Load next plurks
 						await getTimeline(data.message.offset);
 					} else {
-						while(lastposted < this.endDate && this.plurks.length > 1) {
+						while (lastposted < this.endDate && this.plurks.length > 1) {
 							this.plurks.pop();
 							lastposted = new Date(this.plurks[this.plurks.length - 1].posted);
 						}
@@ -1914,7 +1898,7 @@ class replurk {
 		await getTimeline(this.startDate);
 
 		// When loading done
-		if (this.plurks.length > 1) {			
+		if (this.plurks.length > 1) {
 			// Count user statistics
 			this.statistics.plurks_count = 0;
 			this.plurks.forEach(plurk => {
@@ -1925,7 +1909,7 @@ class replurk {
 					this.statistics.replurker_count += plurk.replurkers.length;
 					this.statistics.replurker_list = this.statistics.listCount(this.statistics.replurker_list, plurk.replurkers);
 					this.statistics.favourite_count += plurk.favorers.length;
-					this.statistics.favorite_list = this.statistics.listCount(this.statistics.favorite_list, plurk.favorers);					
+					this.statistics.favorite_list = this.statistics.listCount(this.statistics.favorite_list, plurk.favorers);
 					if (plurk.anonymous) this.statistics.whispers_count++;
 					if (plurk.coins) this.statistics.coins_count += plurk.coins;
 					if (plurk.porn) this.statistics.porn_count++;
@@ -1948,7 +1932,7 @@ class replurk {
 			// Display extended statistics
 			this.displayExtendedStatistics();
 		} else {
-			if(this.plurks[0]) {
+			if (this.plurks[0]) {
 				var date = new Date(plurk[0].posted);
 				inactive.draw(plurk[0], date.getFullYear());
 			}
@@ -1968,7 +1952,7 @@ class replurk {
 		// Get the responses for each plurks in parallel
 		var index = 0;
 		this.plurks.sort((a, b) => new Date(a.posted) < new Date(b.posted));
-		for(var plurk of this.plurks) {
+		for (var plurk of this.plurks) {
 			var date = new Date(plurk.posted);
 			this.loading.update("Data from " + monthNames[date.getMonth()] + " " + date.getFullYear());
 
@@ -1976,14 +1960,14 @@ class replurk {
 			await this.most.countAll(plurk);
 
 			// Count responses
-			if(plurk.response_count > 0 && (plurk.responded || plurk.owner_id == this.me.id)) {
+			if (plurk.response_count > 0 && (plurk.responded || plurk.owner_id == this.me.id)) {
 				var result = await api.call("?fetch=response&plurk_ids=" + plurk.plurk_id);
-				if(result.success) for(var message of result.message) {
+				if (result.success) for (var message of result.message) {
 					// Add friends from response lists
 					this.friends.add(message.friends);
 
 					// Count the rest of statistics
-					for(var response of message.responses) {
+					for (var response of message.responses) {
 						// Find and count all responders
 						await this.most.responders.count(response);
 						this.most.interaction.count(response);
@@ -2006,7 +1990,7 @@ class replurk {
 		// Draw Results
 		// Display Most Responder
 		// this.most.responders.draw();
-		
+
 		// Display Most Interaction
 		this.most.interaction.draw();
 
@@ -2018,7 +2002,7 @@ class replurk {
 
 		// Display Most hashtags by me
 		this.most.hashtags.draw();
-		
+
 		// Display Most My Emoticons
 		this.most.myemoticons.draw();
 
@@ -2051,14 +2035,14 @@ class replurk {
 		// Scroll animation menu and logout
 		this.scrollAnimate.menu();
 
-		// Check is server have open session 
+		// Check is server have open session
 		var tl = gsap.timeline();
 		tl.set(next.querySelector("#hello .arrow-big"), {
 			opacity: 0
 		});
 
 		var data = await api.call("?");
-		if(data.success) {
+		if (data.success) {
 			this.me = data.message;
 
 			this.displayPlurkerData(() => {
@@ -2076,20 +2060,20 @@ class replurk {
 					this.requestLogout();
 				}
 
-				if(callback) callback();
+				if (callback) callback();
 			});
 
 			// Scroll animate statistics
 			this.scrollAnimate.statistics();
 			// Scroll browser bar
 			this.scrollAnimate.browserBar();
-			
+
 			scroll.refresh();
-			
+
 			this.displayStatistics();
 		} else {
 			// Hide statistic pages
-			if(callback) next.querySelectorAll(".grant").forEach(function(el) { el.style.display = "none"; });
+			if (callback) next.querySelectorAll(".grant").forEach(function (el) { el.style.display = "none"; });
 			// Show login page
 			this.showLoginPage(tl);
 			// Request token
@@ -2102,7 +2086,7 @@ class replurk {
 
 			scroll.refresh();
 
-			if(callback) callback();
+			if (callback) callback();
 		}
 	}
 
@@ -2129,20 +2113,20 @@ class replurk {
 var replurk2020 = new replurk(2020);
 var replurk2020view = {
 	namespace: 'replurk2020',
-	beforeEnter: function(data) {
+	beforeEnter: function (data) {
 		var next = data.next.container;
 
-		next.querySelectorAll("#permission, .grant").forEach(function(el) {
+		next.querySelectorAll("#permission, .grant").forEach(function (el) {
 			el.style.display = "none";
 		});
 	},
-	afterEnter: function(data) {
+	afterEnter: function (data) {
 		replurk2020.next = data.next.container;
 		replurk2020.run(() => {
 			this.async();
 		});
 	},
-	beforeLeave: function(data) {
+	beforeLeave: function (data) {
 		gsap.killTweensOf(_qAll("header, .footer"));
 	}
 }
@@ -2151,27 +2135,31 @@ var replurk2020view = {
 var replurk2021 = new replurk(2021);
 var replurk2021view = {
 	namespace: 'replurk2021',
-	beforeEnter: function(data) {
+	beforeEnter: function (data) {
 		var next = data.next.container;
 
 		next.querySelector("#backtotop").onclick = () => {
-			gsap.to(next, {
-				duration: 2, 
+			removeClass(_q("html"), "snap");
+			gsap.to(window, {
+				duration: 2,
 				ease: "expo.inOut",
-				scrollTo: "#statistics"
+				scrollTo: "#statistics",
+				onComplete: function () {
+					addClass(_q("html"), "snap");
+				}
 			});
 		}
-		next.querySelectorAll("#permission, .grant").forEach(function(el) {
+		next.querySelectorAll("#permission, .grant").forEach(function (el) {
 			el.style.display = "none";
 		});
 	},
-	afterEnter: function(data) {
+	afterEnter: function (data) {
 		replurk2021.next = data.next.container;
 		replurk2021.run(() => {
 			this.async();
 		});
 	},
-	beforeLeave: function(data) {
+	beforeLeave: function (data) {
 		gsap.killTweensOf(_qAll("header, .footer, #backtotop"));
 	}
 }

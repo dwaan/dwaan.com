@@ -4,21 +4,21 @@ var scroll = {
 	tl: [],
 	st: [],
 	// Move elements up with opacity with scrub
-	moveText: function(params) {
+	moveText: function (params) {
 		if (!params) return false;
 
-		var elements = (params.elements)? params.elements: [];
-		var position = (params.position)? params.position: "85%";
-		var delta = (params.delta)? params.delta: 100;
-		var move = (params.move === undefined)? true: params.move;
-		var markers = (params.markers)? params.markers: false;
-		var horizontal = (params.horizontal)? params.horizontal: false;
-		var scroller = (params.scroller)? params.scroller: window;
+		var elements = (params.elements) ? params.elements : [];
+		var position = (params.position) ? params.position : "85%";
+		var delta = (params.delta) ? params.delta : 100;
+		var move = (params.move === undefined) ? true : params.move;
+		var markers = (params.markers) ? params.markers : false;
+		var horizontal = (params.horizontal) ? params.horizontal : false;
+		var scroller = (params.scroller) ? params.scroller : window;
 		var that = this;
 
-		gToArray(elements).forEach(function(element, index) {
+		gToArray(elements).forEach(function (element, index) {
 			var y = delta + (15 * index);
-			var trigger = (params.trigger)? params.trigger: element.parentNode;
+			var trigger = (params.trigger) ? params.trigger : element.parentNode;
 			if (!move) y = 0;
 
 			that.l = that.tl.push(gsap.timeline()) - 1;
@@ -48,20 +48,20 @@ var scroll = {
 				markers: markers,
 				trigger: trigger,
 				start: "0 " + position,
-				end:  "+=175 " + position,
+				end: "+=175 " + position,
 				scrub: 1,
 				animation: that.tl[that.l]
 			}));
 		});
 	},
 	// Move elements up without scrub
-	moveThumbs: function(elements, position, scroller) {
+	moveThumbs: function (elements, position, scroller) {
 		var that = this;
 
-		scroller = (scroller)? scroller: window;
+		scroller = (scroller) ? scroller : window;
 
 		if (!position) position = "85%";
-		gToArray(elements).forEach(function(element) {
+		gToArray(elements).forEach(function (element) {
 			var y = gRandom(250, 500, 5) + "px";
 
 			that.l = that.tl.push(gsap.timeline()) - 1;
@@ -82,13 +82,13 @@ var scroll = {
 			}));
 		});
 	},
-	refresh: function() {
+	refresh: function () {
 		for (var i = 0; i < this.st.length; i++) {
 			this.st[i].refresh();
 		}
 	},
 	// Add custom animation
-	push: function(animationFunction, scrollFunction) {
+	push: function (animationFunction, scrollFunction) {
 		if (!animationFunction || !scrollFunction) return false;
 
 		this.l = this.tl.push(gsap.timeline()) - 1;
@@ -102,7 +102,7 @@ var scroll = {
 		}
 	},
 	// Call this to remove garbage
-	destroy: function() {
+	destroy: function () {
 		// Cleaning up GSAP timeline
 		for (var i = 0; i < this.tl.length; i++) {
 			this.tl[i].kill();

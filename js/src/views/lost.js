@@ -1,12 +1,12 @@
 var lostview = {
 	namespace: 'lost',
-	beforeEnter: function(data) {
+	beforeEnter: function (data) {
 		var next = data.next.container;
 		var speed = 10,
 			tween = [];
 
 		for (var i = 0; i < 5; i++) {
-			if(i % 2 == 0) {
+			if (i % 2 == 0) {
 				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
 					xPercent: -50
 				}, {
@@ -27,10 +27,10 @@ var lostview = {
 			}
 		}
 
-		next.querySelectorAll("#nomokeybusiness p").forEach(function(el) {
+		next.querySelectorAll("#nomokeybusiness p").forEach(function (el) {
 			splitText(el);
 			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": function() {
+				"(min-aspect-ratio: 1/1)": function () {
 					var text = {
 						speed: 1
 					};
@@ -40,7 +40,7 @@ var lostview = {
 						rotation: "random(-180,180,180)"
 					});
 
-					hoverEvents([el], function() {
+					hoverEvents([el], function () {
 						gsap.killTweensOf(text);
 						gsap.to(text, {
 							speed: 5,
@@ -59,7 +59,7 @@ var lostview = {
 							ease: "expo",
 							stagger: .005
 						});
-					}, function() {
+					}, function () {
 						gsap.killTweensOf(text);
 						gsap.to(text, {
 							speed: 1,
@@ -79,7 +79,7 @@ var lostview = {
 							stagger: .005
 						});
 					});
-				}, "(max-aspect-ratio: 1/1)": function() {
+				}, "(max-aspect-ratio: 1/1)": function () {
 					gsap.set(el.querySelectorAll(".splext"), {
 						y: "random(-1,1,1)",
 						rotation: "random(-5,5,1)"
