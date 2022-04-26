@@ -7,8 +7,6 @@ var animate = {
 		// Scroll to top
 		var scroll = top / (window.outerHeight * 2);
 		if (scroll > 0) {
-			console.log("Scroll top");
-
 			removeClass(_q("html"), "snap");
 			tl.to(el, {
 				scrollTo: 0,

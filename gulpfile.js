@@ -19,19 +19,9 @@ function javascript() {
 			'node_modules/@barba/core/dist/barba.umd.js',
 			'node_modules/lz-string/libs/lz-string.min.js',
 			'node_modules/html2canvas/dist/html2canvas.min.js',
-			'js/src/helpers/helper.js',
-			'js/src/helpers/scroll.js',
-			'js/src/helpers/api.js',
-			'js/src/helpers/loader.js',
-			'js/src/helpers/animate.js',
-			'js/src/helpers/header.js',
-			'js/src/helpers/snap.js',
-			'js/src/views/home.js',
-			'js/src/views/detail.js',
-			'js/src/views/hi.js',
-			'js/src/views/me.js',
-			'js/src/views/lost.js',
-			'js/src/views/plurk.js',
+			'js/src/helpers/*.js',
+			'js/src/transitions/*.js',
+			'js/src/views/*.js',
 			'js/src/main.js'
 		])
 		.pipe(sourcemaps.init({

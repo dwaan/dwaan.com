@@ -758,9 +758,6 @@ var detailview = {
 				position: "100%"
 			});
 		});
-
-		// Snap to element
-		// snap(next.querySelectorAll("section.middle, .links"), .15);
 	},
 	beforeLeave: function (data) {
 		gToArray(".style-slideshow").forEach(function (slideshow) {

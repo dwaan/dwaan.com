@@ -28,14 +28,19 @@ var loader = {
 		if (typeof done === "function") done();
 	},
 	show: function (els, done) {
-		if (typeof done != "function") return false;
+		if (typeof done != "function") return;
 
 		// Wait for all images to be loaded
-		var that = this;
-		var _percent = { score: 0 };
+		let _percent = { score: 0 };
+		let _hide = () => {
+			this.hide(() => {
+				this.clean();
+				done();
+			});
+		}
 
 		// Animate the loading
-		gsap.fromTo(that.el.children, {
+		gsap.fromTo(this.el.children, {
 			opacity: 0,
 		}, {
 			opacity: 1,
@@ -45,36 +50,27 @@ var loader = {
 		});
 
 		// Calling loading images function
-		if (els) {
-			waitForImg(els.querySelectorAll("img"), function (index, percent) {
-				gsap.to(_percent, {
-					score: percent,
-					roundProps: "score",
-					duration: .1,
-					onUpdate: function () {
-						that.update(_percent.score);
-					}
-				});
-			}, function () {
-				that.hide(function () {
-					that.clean();
-					done();
-				});
-			});
-		} else {
-			that.hide(function () {
-				that.clean();
-				done();
-			});
+		if (!els) {
+			_hide();
+			return;
 		}
+
+		waitForImg(els.querySelectorAll("img"), (_, percent) => {
+			gsap.to(_percent, {
+				score: percent,
+				roundProps: "score",
+				duration: .1,
+				onUpdate: () => {
+					this.update(_percent.score);
+				}
+			});
+		}, () => _hide());
 	},
 	hide: function (done) {
 		if (typeof done !== "function") return false;
 
-		var that = this;
-
-		gsap.killTweensOf(that.el.children);
-		gsap.to(that.el.children, {
+		gsap.killTweensOf(this.el.children);
+		gsap.to(this.el.children, {
 			opacity: 0,
 			ease: "expo.in",
 			duration: .25,
