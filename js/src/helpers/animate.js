@@ -20,10 +20,8 @@ var animate = {
 
 		return tl;
 	},
-	show: function (next, done, nonsticky, footer) {
+	show: function (next, done, nonsticky = false, footer = true) {
 		if (next == undefined) return false;
-		if (nonsticky == undefined) nonsticky = false;
-		if (footer == undefined) footer = true;
 
 		// Default gsap timeline value
 		var tl = gsap.timeline({
@@ -35,9 +33,7 @@ var animate = {
 		});
 
 		// Unhide main element
-		tl.set(next, {
-			opacity: 1
-		}, 0);
+		tl.to(next, { opacity: 1 }, 0);
 
 		if (typeof done !== "function") return false;
 
@@ -52,8 +48,8 @@ var animate = {
 		}, {
 			y: "-=200px",
 			opacity: 1,
-			onComplete: function () {
-				removeStyle(nonsticky);
+			onComplete: () => {
+				if (nonsticky) { removeStyle(nonsticky) }
 			}
 		}, 0);
 		// Animate flare
@@ -66,9 +62,7 @@ var animate = {
 		}, 0);
 		// Run done after all all animation complete
 		tl.set(next, {
-			onComplete: function () {
-				done();
-			}
+			onComplete: () => done()
 		});
 	},
 	showinstant: function (next, done) {

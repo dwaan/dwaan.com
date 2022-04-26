@@ -75,9 +75,9 @@ var removeStyle = function (el) {
 	if (el.style) {
 		el.style = {};
 	} else {
-		gToArray(el).forEach(function (el) {
-			removeStyle(el);
-		});
+		// gToArray(el).forEach(function (el) {
+		// 	removeStyle(el);
+		// });
 	}
 }
 // Add plural to word

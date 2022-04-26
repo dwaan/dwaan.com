@@ -37,7 +37,7 @@ barba.hooks.afterEnter(function (data) {
 
 // Initialized barba.js
 barba.init({
-	debug: true,
+	debug: false,
 	transitions: [transition_once, transition_home_to_detail, transition_home_to_me, transition_home_to_hi, transition_hi_to_home, transition_from_lost, transition_to_lost, transition_from_plurk],
 	views: [homeview, detailview, meview, hiview, lostview, replurk2020view, replurk2021view]
 });
