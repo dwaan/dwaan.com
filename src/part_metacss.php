@@ -12,7 +12,7 @@
 	if(!isset($_SERVER['HTTP_X_BARBA'])) {
 ?>
 
-	<link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
+	<link rel="stylesheet" media="all" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
 	<link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
 	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 

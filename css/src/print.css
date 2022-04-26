@@ -5,7 +5,6 @@
    ========================================================================== */
 
 @media print {
-
 	*,
 	*:before,
 	*:after {
@@ -15,19 +14,6 @@
 		-webkit-box-shadow: none !important;
 		box-shadow: none !important;
 		text-shadow: none !important;
-	}
-
-	a,
-	a:visited {
-		text-decoration: underline;
-	}
-
-	a[href]:after {
-		content: " ('attr(href) ')";
-	}
-
-	abbr[title]:after {
-		content: " ('attr(title) ')";
 	}
 
 	/*
@@ -74,5 +60,13 @@
 	h2,
 	h3 {
 		page-break-after: avoid;
+	}
+
+	main {
+		opacity: 1;
+	}
+
+	.support {
+		display: none;
 	}
 }
