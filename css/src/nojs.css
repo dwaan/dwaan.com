@@ -137,7 +137,12 @@ html.no-js {
 
 .no-js #permission,
 .no-js .grant,
-.no-js .igstage .scrollto {
+.no-js .igstage .scrollto,
+.no-js #statistics,
+.no-js #hello,
+.no-js #permission,
+.no-js #spacer,
+.no-js #credits {
 	display: none;
 }
 
