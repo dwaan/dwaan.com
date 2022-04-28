@@ -1,4 +1,131 @@
 /* For those who disable js */
+
+html.no-js {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	scroll-snap-type: y mandatory;
+	scroll-snap-stop: always;
+	animation-name: fade-out;
+	animation-duration: 1.28s;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+.no-js .menu .overlay {
+	display: block;
+	opacity: 0;
+	transition: opacity .32s ease-in-out;
+	pointer-events: none;
+	background-color: rgba(0, 0, 0, .24);
+}
+
+.no-js .menu .close {
+	display: none;
+}
+
+.no-js .menu .items {
+	margin-left: auto;
+	transform: translate3d(100%, 0, 0);
+	transition: transform .16s ease-in;
+	pointer-events: all;
+}
+
+.no-js .menu:hover .items {
+	transform: translate3d(0, 0, 0);
+	transition: transform .32s ease-out;
+}
+
+.no-js .menu .items:hover {
+	transform: translate3d(0, 0, 0);
+}
+
+.no-js .menu:hover .overlay {
+	opacity: 1;
+}
+
+
+.no-js .me .middle {
+	overflow: hidden;
+}
+
+.no-js .me .text {
+	padding: 0;
+}
+
+.no-js #mrgoat {
+	transform: translate(0, 0);
+	pointer-events: all;
+}
+
+.no-js .mrgoat.hidden {
+	display: none;
+	height: 0;
+}
+
+.no-js .mrgoat img {
+	display: none;
+}
+
+.no-js .mrgoat img:nth-child(4) {
+	display: block;
+}
+
+
+
+/* email movevent */
+
+.no-js .hi a span {
+	position: relative;
+	display: block;
+	transition: margin .24s ease-out;
+}
+
+.no-js .hi a small {
+	transform: translate3d(0, 25%, 0);
+	transition: opacity .32s ease-in, transform .32s ease-in;
+}
+
+.no-js .hi .email:hover span {
+	margin-right: var(--padl);
+}
+
+.no-js .hi .social:hover span:first-child,
+.no-js .hi h1:hover .social span:nth-child(2) {
+	margin-left: var(--padl);
+}
+
+.no-js .hi h1 .email:hover+.social span:nth-child(2),
+.no-js .hi h1 .social:hover span:nth-child(2) {
+	margin-left: 0;
+}
+
+.no-js .hi .social:hover span:nth-child(2) {
+	margin-right: var(--padl);
+}
+
+.no-js .hi .email:hover small,
+.no-js .hi .social:hover span:first-child small,
+.no-js .hi h1:hover .social span:nth-child(2) small {
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+	transition: opacity .16s ease-out, transform .16s ease-out;
+}
+
+.no-js .hi h1 .social:hover span:nth-child(2) small,
+.no-js .hi h1 .email:hover+.social span:nth-child(2) small {
+	transform: translate3d(0, 25%, 0);
+	opacity: 0;
+}
+
+
 .no-js .imuiux,
 .no-js .follow,
 .no-js .us,
@@ -13,6 +140,7 @@
 .no-js .igstage .scrollto {
 	display: none;
 }
+
 
 #nojs {
 	display: none;

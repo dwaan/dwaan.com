@@ -462,6 +462,7 @@ picture img {
 
 /* Screen height is too thin to be usable */
 @media (min-aspect-ratio: 3/1) {
+
 	header,
 	main,
 	#barba-wrapper {
@@ -731,6 +732,10 @@ picture img {
 	align-items: flex-end;
 	text-align: right;
 	color: var(--black);
+}
+
+.no-js .year {
+	position: absolute;
 }
 
 
@@ -1111,7 +1116,7 @@ header .right {
 /* Homepage footer */
 .footer {
 	position: fixed;
-	z-index: 3;
+	z-index: 2;
 	top: initial;
 	bottom: 0;
 	left: 0;
@@ -1876,7 +1881,8 @@ header .right {
 .menu-page .menu {
 	margin: 0;
 	padding: 0;
-	height: 100%;
+	height: 100vh;
+	border-bottom: none !important;
 }
 
 .menu-page nav {
@@ -1889,10 +1895,6 @@ header .right {
 .me .middle {
 	position: relative;
 	z-index: 2;
-}
-
-.no-js .me .middle {
-	overflow: hidden;
 }
 
 .me h1 strong {
@@ -1931,10 +1933,6 @@ header .right {
 	max-width: 700px;
 	text-align: center;
 	will-change: transform, background;
-}
-
-.no-js .me .text {
-	padding: 0;
 }
 
 .me h2,
@@ -2083,11 +2081,6 @@ header .right {
 
 
 #mrgoat {
-	/* position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0; */
 	transform: translate(0, 100%);
 	pointer-events: none;
 }
@@ -2101,10 +2094,6 @@ header .right {
 
 .mrgoat.hidden {
 	z-index: 0;
-}
-
-.no-js .mrgoat.hidden {
-	height: 0;
 }
 
 .mrgoat h2,
@@ -2122,14 +2111,6 @@ header .right {
 
 .mrgoat img:nth-child(4) {
 	opacity: 1;
-}
-
-.no-js .mrgoat img {
-	display: none;
-}
-
-.no-js .mrgoat img:nth-child(4) {
-	display: block;
 }
 
 .mrgoat .text,
@@ -2380,10 +2361,6 @@ header .right {
 	transition: color 0.16s ease-out, fill 0.16s ease-out;
 }
 
-.no-js #post {
-	display: none;
-}
-
 .me .igstage {
 	z-index: 3;
 	will-change: transform;
@@ -2607,6 +2584,10 @@ header .right {
 	height: 75vh;
 	transform: initial;
 	will-change: transform, opacity;
+}
+
+.hi a em {
+	font-style: normal;
 }
 
 
