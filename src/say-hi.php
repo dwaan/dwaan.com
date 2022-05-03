@@ -42,7 +42,7 @@
 						else if($i % 3 == 0) $class = "purple";
 						else if($i % 2 == 0) $class = "red";
 						else $class = "blue";
-						echo '<img src="/dwaan/img/flares/flare' . $i. '.png" width="" height="" alt="" class="flare' . $j . ' ' . $class . '" />';
+						echo '<img src="/dwaan/img/flares/flare' . $i. '.webp" width="" height="" alt="" class="flare' . $j . ' ' . $class . '" />';
 					}
 				}
 			?>

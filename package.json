@@ -29,7 +29,9 @@
 		"gulp-htmlmin": "^5.0.1",
 		"gulp-postcss": "^9.0.1",
 		"gulp-sourcemaps": "^3.0.0",
+		"gulp-svgmin": "^4.1.0",
 		"gulp-uglify": "^3.0.2",
+		"gulp-webp": "^4.0.1",
 		"through2": "^4.0.2",
 		"vinyl-named": "^1.1.0",
 		"webpack-stream": "^7.0.0"

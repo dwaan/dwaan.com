@@ -15,7 +15,7 @@
 	<main data-barba="container" data-barba-namespace="lost" class="lost">
 		<section class="middle clip full">
 			<div class="thumbs fromtop">
-				<img id="mrmonkey" src="/dwaan/img/mr.monkey.png" width="" height="" alt="Me are Mr. Monkey" />
+				<img id="mrmonkey" src="/dwaan/img/mr.monkey.webp" width="" height="" alt="Me are Mr. Monkey" />
 			</div>
 			<div id="nomokeybusiness" class="text">
 				<h1>me here to halp</h1>

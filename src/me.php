@@ -46,8 +46,8 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured-dark.jpg" class="dark" width="" height="" alt="Dwan" />
-					<img src="/dwaan/img/notpictured.jpg" class="light" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured-dark.webp" class="dark" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured.webp" class="light" width="" height="" alt="Dwan" />
 				</picture>
 			</div>
 			<div class="arrow-big">
@@ -66,8 +66,8 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured-dark.jpg" class="dark" width="" height="" alt="Dwan" />
-					<img src="/dwaan/img/notpictured.jpg" class="light" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured-dark.webp" class="dark" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured.webp" class="light" width="" height="" alt="Dwan" />
 				</picture>
 			</div>
 			<div class="arrow-big">
@@ -103,7 +103,7 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-				<img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.png" width="" height="" alt="Mr. Goat" />
+				<img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="" height="" alt="Mr. Goat" />
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">
@@ -131,8 +131,8 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/sagara/sagara@2x.jpg">
-					<img src="/dwaan/img/sagara/sagara.jpg" width="" height="" alt="Sagara" />
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/sagara/sagara@2x.webp">
+					<img src="/dwaan/img/sagara/sagara.webp" width="" height="" alt="Sagara" />
 				</picture>
 			</div>
 		</div>

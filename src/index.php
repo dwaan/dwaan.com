@@ -95,7 +95,7 @@
 		<section class="flares side">
 			<?php
 				for ($img = $i = 1; $i <= 5; $i++) {
-					echo '<img src="/dwaan/img/flares/flare' . $img. '.png" width="" height="" alt="" class="flare' . $i . '" />';
+					echo '<img src="/dwaan/img/flares/flare' . $img. '.webp" width="" height="" alt="" class="flare' . $i . '" />';
 					if(++$img > 5) $img = 1;
 				}
 			?>

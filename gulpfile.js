@@ -11,7 +11,9 @@ const
 	cssnano = require('cssnano'),
 	htmlmin = require('gulp-htmlmin'),
 	through = require('through2'),
-	webpack = require('webpack-stream');
+	webpack = require('webpack-stream'),
+	webp = require('gulp-webp'),
+	svgmin = require('gulp-svgmin');
 
 function javascript() {
 	return gulp.src(['src/js/main.js'])
@@ -96,6 +98,25 @@ function php() {
 		.pipe(browserSync.stream());
 }
 
+function img() {
+	return gulp.src([
+		'src/img/*.jpg',
+		'src/img/*.png',
+		'src/img/*/*.jpg',
+		'src/img/*/*.png'
+	])
+		.pipe(webp())
+		.pipe(gulp.dest('img/'))
+		.pipe(browserSync.stream());
+}
+
+function svg() {
+	return gulp.src(['src/img/*.svg', 'src/img/*/*.svg'])
+		.pipe(svgmin())
+		.pipe(gulp.dest('img/'))
+		.pipe(browserSync.stream());
+}
+
 exports.default = function () {
 	connect.server({
 		hostname: "0.0.0.0",
@@ -110,8 +131,10 @@ exports.default = function () {
 		});
 	});
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, javascript);
-	gulp.watch(['src/css/main.css', 'src/css/404.css', 'src/css/nojs.css', 'src/css/print.css'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/*.css', 'src/css/404.css', 'src/css/nojs.css', 'src/css/print.css'], { ignoreInitial: false }, css);
 	gulp.watch('src/css/vertical-screen.css', { ignoreInitial: false }, css_vertical);
 	gulp.watch('src/css/horizontal-screen.css', { ignoreInitial: false }, css_horizontal);
+	gulp.watch(['src/img/*.jpg', 'src/img/*.png', 'src/img/*/*.jpg', 'src/img/*/*.png'], { ignoreInitial: false }, img);
+	gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
 	gulp.watch('src/*.php', { ignoreInitial: false }, php);
 };

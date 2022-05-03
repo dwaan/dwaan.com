@@ -493,7 +493,7 @@ class replurk {
 							}).then(canvas => {
 								var link = document.createElement("a");
 								link.style.display = "none";
-								link.download = "replurk" + this.parent.year + "-" + Date.now() + ".png";
+								link.download = "replurk" + this.parent.year + "-" + Date.now() + ".webp";
 								link.href = canvas.toDataURL();
 								document.body.appendChild(link);
 								link.click();
