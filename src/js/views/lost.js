@@ -1,6 +1,8 @@
 "use strict";
 
 import gsap from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { hoverEvents, splitText } from "../helpers/helper";
 
 var lostview = {
 	namespace: 'lost',
