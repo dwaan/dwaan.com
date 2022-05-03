@@ -1,3 +1,14 @@
+"use strict";
+
+import gsap from "gsap";
+import html2canvas from "html2canvas";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import api from "../helpers/api";
+import scroll from "../helpers/scroll";
+import darkmode from "../helpers/darkmode";
+import animate from "../helpers/animate";
+import { _q, _qAll, hasClass, plural, monthNames, animateNumber, removeClass, addClass, datediff, pluralinwords } from '../helpers/helper';
+
 /*
 	Simple span element object:
 
@@ -1189,8 +1200,8 @@ class replurk {
 
 				try {
 					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>👄 MVP</i>", result);
-				} catch {
-					console.info("Error while counting my mvp");
+				} catch (error) {
+					console.info("Error while counting my mvp", error);
 				}
 			}
 		}
@@ -1505,28 +1516,28 @@ class replurk {
 	getSetStateColor(state) {
 		if (typeof (state) == "object" && state.length >= 1) {
 			if (state.length == 1) {
-				browserColorDark = state[0];
-				browserColorLight = state[0];
+				darkmode.browserColorDark = state[0];
+				darkmode.browserColorLight = state[0];
 			} else {
-				browserColorDark = state[1];
-				browserColorLight = state[0];
+				darkmode.browserColorDark = state[1];
+				darkmode.browserColorLight = state[0];
 			}
 		} else if (state == "green") {
-			browserColorDark = "#0d4f03";
-			browserColorLight = "#60e670";
+			darkmode.browserColorDark = "#0d4f03";
+			darkmode.browserColorLight = "#60e670";
 		} else if (state == "yellow") {
-			browserColorDark = "#705f02";
-			browserColorLight = "#FFD700";
+			darkmode.browserColorDark = "#705f02";
+			darkmode.browserColorLight = "#FFD700";
 		} else {
-			browserColorDark = "#000000";
-			browserColorLight = "#FFFFFF";
+			darkmode.browserColorDark = "#000000";
+			darkmode.browserColorLight = "#FFFFFF";
 		}
 
-		return [browserColorLight, browserColorDark];
+		return [darkmode.browserColorLight, darkmode.browserColorDark];
 	}
 	browserColor(state, duration, ease) {
 		this.getSetStateColor(state);
-		toggleDarkMode(duration, ease);
+		darkmode.setDarkMode(duration, ease);
 	}
 
 	// Show/hide Animations
@@ -1925,8 +1936,8 @@ class replurk {
 			// Draw statistics
 			try {
 				await this.statistics.drawAll(this.plurks);
-			} catch {
-				console.info("Error while counting statistics");
+			} catch (error) {
+				console.info("Error while counting statistics", error);
 			}
 
 			// Display extended statistics
@@ -2109,57 +2120,61 @@ class replurk {
 	}
 }
 
-// Replurk page 2020
-var replurk2020 = new replurk(2020);
-var replurk2020view = {
-	namespace: 'replurk2020',
-	beforeEnter: function (data) {
-		var next = data.next.container;
+var replurkview = {
+	// Replurk page 2020
+	replurk2020: new replurk(2020),
+	replurk2020view: {
+		namespace: 'replurk2020',
+		beforeEnter: function (data) {
+			var next = data.next.container;
 
-		next.querySelectorAll("#permission, .grant").forEach(function (el) {
-			el.style.display = "none";
-		});
-	},
-	afterEnter: function (data) {
-		replurk2020.next = data.next.container;
-		replurk2020.run(() => {
-			this.async();
-		});
-	},
-	beforeLeave: function (data) {
-		gsap.killTweensOf(_qAll("header, .footer"));
-	}
-}
-
-// Replurk page 2021
-var replurk2021 = new replurk(2021);
-var replurk2021view = {
-	namespace: 'replurk2021',
-	beforeEnter: function (data) {
-		var next = data.next.container;
-
-		next.querySelector("#backtotop").onclick = () => {
-			removeClass(_q("html"), "snap");
-			gsap.to(window, {
-				duration: 2,
-				ease: "expo.inOut",
-				scrollTo: "#statistics",
-				onComplete: function () {
-					addClass(_q("html"), "snap");
-				}
+			next.querySelectorAll("#permission, .grant").forEach(function (el) {
+				el.style.display = "none";
 			});
+		},
+		afterEnter: function (data) {
+			replurkview.replurk2020.next = data.next.container;
+			replurkview.replurk2020.run(() => {
+				this.async();
+			});
+		},
+		beforeLeave: function () {
+			gsap.killTweensOf(_qAll("header, .footer"));
 		}
-		next.querySelectorAll("#permission, .grant").forEach(function (el) {
-			el.style.display = "none";
-		});
 	},
-	afterEnter: function (data) {
-		replurk2021.next = data.next.container;
-		replurk2021.run(() => {
-			this.async();
-		});
-	},
-	beforeLeave: function (data) {
-		gsap.killTweensOf(_qAll("header, .footer, #backtotop"));
+
+	// Replurk page 2021
+	replurk2021: new replurk(2021),
+	replurk2021view: {
+		namespace: 'replurk2021',
+		beforeEnter: function (data) {
+			var next = data.next.container;
+
+			next.querySelector("#backtotop").onclick = () => {
+				removeClass(_q("html"), "snap");
+				gsap.to(window, {
+					duration: 2,
+					ease: "expo.inOut",
+					scrollTo: "#statistics",
+					onComplete: function () {
+						addClass(_q("html"), "snap");
+					}
+				});
+			}
+			next.querySelectorAll("#permission, .grant").forEach(function (el) {
+				el.style.display = "none";
+			});
+		},
+		afterEnter: function (data) {
+			replurkview.replurk2021.next = data.next.container;
+			replurkview.replurk2021.run(() => {
+				this.async();
+			});
+		},
+		beforeLeave: function () {
+			gsap.killTweensOf(_qAll("header, .footer, #backtotop"));
+		}
 	}
 }
+
+export default replurkview;

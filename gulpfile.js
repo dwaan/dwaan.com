@@ -8,42 +8,36 @@ const
 	autoprefixer = require('autoprefixer'),
 	postcss = require('gulp-postcss'),
 	cssnano = require('cssnano'),
-	htmlmin = require('gulp-htmlmin')
-;
+	htmlmin = require('gulp-htmlmin'),
+	through = require('through2'),
+	webpack = require('webpack-stream');
 
 function javascript() {
-	return gulp.src([
-			'node_modules/gsap/dist/gsap.min.js',
-			'node_modules/gsap/dist/ScrollTrigger.min.js',
-			'node_modules/gsap/dist/ScrollToPlugin.min.js',
-			'node_modules/@barba/core/dist/barba.umd.js',
-			'node_modules/lz-string/libs/lz-string.min.js',
-			'node_modules/html2canvas/dist/html2canvas.min.js',
-			'js/src/helpers/*.js',
-			'js/src/transitions/*.js',
-			'js/src/views/*.js',
-			'js/src/main.js'
-		])
-		.pipe(sourcemaps.init({
-			largeFile: true,
-			loadMaps: true
+	return gulp.src(['js/src/main.js'])
+		.pipe(webpack({
+			devtool: 'source-map',
+			mode: 'development'
+		}))
+		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(through.obj(function (file, _, cb) {
+			const isSourceMap = /\.map$/.test(file.path);
+			if (!isSourceMap) this.push(file);
+			cb();
 		}))
 		.pipe(uglify())
-		.pipe(concat("bundle.js"))
-		.pipe(sourcemaps.write("."))
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('js/'))
-		.pipe(browserSync.stream())
-	;
+		.pipe(browserSync.stream());
 }
 
 function css() {
 	return gulp.src([
-			'node_modules/normalize.css/normalize.css',
-			'css/src/main.css',
-			'css/src/404.css',
-			'css/src/nojs.css',
-			'css/src/print.css'
-		])
+		'node_modules/normalize.css/normalize.css',
+		'css/src/main.css',
+		'css/src/404.css',
+		'css/src/nojs.css',
+		'css/src/print.css'
+	])
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
@@ -54,14 +48,13 @@ function css() {
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
-		.pipe(browserSync.stream())
-	;
+		.pipe(browserSync.stream());
 }
 
 function css_vertical() {
 	return gulp.src([
-			'css/src/vertical-screen.css'
-		])
+		'css/src/vertical-screen.css'
+	])
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
@@ -72,14 +65,13 @@ function css_vertical() {
 		.pipe(concat("vertical-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
-		.pipe(browserSync.stream())
-	;
+		.pipe(browserSync.stream());
 }
 
 function css_horizontal() {
 	return gulp.src([
-			'css/src/horizontal-screen.css'
-		])
+		'css/src/horizontal-screen.css'
+	])
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
@@ -90,8 +82,7 @@ function css_horizontal() {
 		.pipe(concat("horizontal-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('css'))
-		.pipe(browserSync.stream())
-	;
+		.pipe(browserSync.stream());
 }
 
 function php() {
@@ -100,10 +91,10 @@ function php() {
 			collapseWhitespace: true
 		}))
 		.pipe(gulp.dest('./'))
-		.pipe(browserSync.stream())
+		.pipe(browserSync.stream());
 }
 
-exports.default = function() {
+exports.default = function () {
 	connect.server({
 		hostname: "0.0.0.0",
 		port: 8080,

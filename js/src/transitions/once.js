@@ -1,3 +1,9 @@
+"use strict";
+
+import animate from '../helpers/animate';
+import loader from '../helpers/loader';
+import header from '../helpers/header';
+
 let transition_once = {
     name: 'default-transition',
     once: function (data) {
@@ -28,12 +34,7 @@ let transition_once = {
             }
         });
 
-        header.show();
-        header.waving();
-        header.slide();
-        header.hamburger();
-        header.darkmodeswitch();
-        header.textswitch();
+        header.init();
     },
     // leave: () => true,
     before: function (data) {
@@ -60,7 +61,8 @@ let transition_once = {
     },
     after: function () {
         loader.empty();
-
         return true;
     },
 }
+
+export default transition_once;

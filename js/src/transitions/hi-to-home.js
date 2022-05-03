@@ -1,3 +1,9 @@
+"use strict";
+
+import gsap from 'gsap';
+import loader from '../helpers/loader';
+import animate from '../helpers/animate';
+
 let transition_hi_to_home = {
     name: 'hi-to-home',
     leave: () => true,
@@ -105,3 +111,5 @@ let transition_hi_to_home = {
         namespace: ['home']
     }
 }
+
+export default transition_hi_to_home;

@@ -1,6 +1,11 @@
-var homeview = {
+"use strict";
+
+import scroll from "../helpers/scroll.js";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+let homeview = {
 	namespace: 'home',
-	beforeEnter: function (data) {
+	beforeEnter: data => {
 		var next = data.next.container;
 
 		// Scroll animate arrow
@@ -73,5 +78,8 @@ var homeview = {
 				animation: tl
 			});
 		});
-	}
+	},
+	afterEnter: () => console.info("Hello, my name is Dwan!")
 }
+
+export default homeview;

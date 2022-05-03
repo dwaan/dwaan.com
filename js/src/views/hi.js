@@ -1,9 +1,12 @@
+"use strict";
+
+import gsap from "gsap";
+import { hoverEvents } from "../helpers/helper";
+
 var hiview = {
 	namespace: 'hi',
 	beforeEnter: function (data) {
 		var next = data.next.container;
-
-		var screenvertical = window.matchMedia('(max-aspect-ratio: 1/1)').matches;
 		var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
 
 		var flare = {
@@ -36,8 +39,8 @@ var hiview = {
 						y: "random(10,30,5)%",
 						rotation: "random(-5,5,1)deg",
 						scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
-						opacity: gRandom(5, 10, 1) / 10,
-						duration: gRandom(5, 10, 1),
+						opacity: gsap.utils.random(5, 10, 1) / 10,
+						duration: gsap.utils.random(5, 10, 1),
 						ease: "ease.inOut",
 						onComplete: function () {
 							repeatanimation(element);
@@ -148,5 +151,8 @@ var hiview = {
 			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
-	}
+	},
+	afterEnter: () => console.info("me@dwaan.com")
 }
+
+export default hiview;

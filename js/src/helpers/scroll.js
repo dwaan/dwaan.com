@@ -1,3 +1,8 @@
+"use strict";
+
+import gsap from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
 // Predefined scroll animation
 var scroll = {
 	l: 0,
@@ -16,7 +21,7 @@ var scroll = {
 		var scroller = (params.scroller) ? params.scroller : window;
 		var that = this;
 
-		gToArray(elements).forEach(function (element, index) {
+		gsap.utils.toArray(elements).forEach(function (element, index) {
 			var y = delta + (15 * index);
 			var trigger = (params.trigger) ? params.trigger : element.parentNode;
 			if (!move) y = 0;
@@ -61,8 +66,8 @@ var scroll = {
 		scroller = (scroller) ? scroller : window;
 
 		if (!position) position = "85%";
-		gToArray(elements).forEach(function (element) {
-			var y = gRandom(250, 500, 5) + "px";
+		gsap.utils.toArray(elements).forEach(function (element) {
+			var y = gsap.utils.random(250, 500, 5) + "px";
 
 			that.l = that.tl.push(gsap.timeline()) - 1;
 			that.tl[that.l].fromTo(element, {
@@ -117,3 +122,5 @@ var scroll = {
 		this.l = 0;
 	}
 }
+
+export default scroll;

@@ -1,3 +1,9 @@
+"use strict";
+
+import loader from '../helpers/loader';
+import animate from '../helpers/animate';
+import { removeStyle } from '../helpers/helper';
+
 let transition_home_to_detail = {
     name: 'home-to-detail',
     leave: () => true,
@@ -46,3 +52,5 @@ let transition_home_to_detail = {
         namespace: ['detail']
     }
 }
+
+export default transition_home_to_detail;

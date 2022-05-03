@@ -1,3 +1,8 @@
+"use strict";
+
+import gsap from 'gsap';
+import { _q, removeStyle, addClass, removeClass } from './helper';
+
 // Animate functions
 var animate = {
 	top: function (el, tl) {
@@ -236,3 +241,5 @@ var animate = {
 		});
 	},
 }
+
+export default animate;

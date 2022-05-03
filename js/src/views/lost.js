@@ -1,3 +1,7 @@
+"use strict";
+
+import gsap from "gsap";
+
 var lostview = {
 	namespace: 'lost',
 	beforeEnter: function (data) {
@@ -89,3 +93,5 @@ var lostview = {
 		});
 	}
 }
+
+export default lostview;

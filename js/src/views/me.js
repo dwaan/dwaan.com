@@ -1,4 +1,11 @@
-meview = {
+"use strict";
+
+import gsap from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import scroll from "../helpers/scroll";
+import { addClass, removeClass, hoverEvents } from "../helpers/helper";
+
+var meview = {
 	namespace: 'me',
 	beforeLeave: function (data) {
 		var current = data.current.container;
@@ -9,7 +16,7 @@ meview = {
 
 		// Now section
 		next.querySelectorAll("#now").forEach(function (element) {
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					opacity: 0,
 					x: -40,
@@ -22,7 +29,7 @@ meview = {
 				});
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					trigger: element,
 					start: "0 50%",
@@ -32,7 +39,7 @@ meview = {
 				});
 			});
 
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					x: -10,
 					y: 0,
@@ -57,7 +64,7 @@ meview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					trigger: element,
 					start: "50% 50%",
@@ -67,7 +74,7 @@ meview = {
 				});
 			});
 
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					opacity: 1,
 					x: 0,
@@ -80,7 +87,7 @@ meview = {
 				});
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					trigger: element,
 					start: "150% 50%",
@@ -108,7 +115,7 @@ meview = {
 			// Defining
 			var repeat = 5;
 			// hide
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(element, {
 					y: "0%"
 				}, {
@@ -117,7 +124,7 @@ meview = {
 				});
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: "#endmrgoat",
@@ -128,7 +135,7 @@ meview = {
 				});
 			});
 			// Show
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.set(element, {
 					position: "fixed",
 					top: 0
@@ -142,7 +149,7 @@ meview = {
 				});
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: "#startmrgoat",
@@ -154,7 +161,7 @@ meview = {
 			});
 			// Spinning
 			gsap.set(imgs, { opacity: 0 });
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.to(mrgoat, {
 					frame: imgs.length,
 					snap: "frame",
@@ -176,7 +183,7 @@ meview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: "#startmrgoat",
@@ -188,7 +195,7 @@ meview = {
 				});
 			});
 			// Facts
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				var el = element.querySelectorAll(".thumbs, .text");
 				var facts = function (els) {
 					var dur = duration / 7.5;
@@ -253,7 +260,7 @@ meview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: "#startmrgoat",
@@ -265,7 +272,7 @@ meview = {
 				});
 			});
 			// Pinning
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll("#post > *"), {
 					opacity: 0
 				}, {
@@ -289,7 +296,7 @@ meview = {
 				}, (duration * 4));
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: "#startmrgoat",
@@ -323,7 +330,7 @@ meview = {
 			});
 			// Animate
 			var eltext = el.querySelectorAll(".text");
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(eltext, {
 					y: window.innerHeight * 1 / 10
 				}, {
@@ -354,7 +361,7 @@ meview = {
 					duration: 4
 				}, 0);
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: el,
@@ -374,9 +381,9 @@ meview = {
 				position: "100%"
 			});
 			// Snap
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
 					// scroller: next,
 					trigger: el,
@@ -390,9 +397,13 @@ meview = {
 		// Refresh
 		ScrollTrigger.refresh();
 	},
-	afterEnter: function (data) {
+	afterEnter: data => {
 		var next = data.next.container;
 
 		addClass(next.querySelector(".main-text h1 strong"), "emphasis");
+
+		console.info("Hello, my name is Dwan! I'm a UI/UX Designer and Strategist a.k.a. Web Designer in Steroid")
 	}
 }
+
+export default meview;

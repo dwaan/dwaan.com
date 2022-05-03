@@ -1,3 +1,8 @@
+"use strict";
+
+import gsap from 'gsap';
+import { _q, _qAll, waitForImg } from '../helpers/helper.js';
+
 // Loader functions
 var loader = {
 	el: _q("#loader"),
@@ -10,8 +15,6 @@ var loader = {
 		this.el.innerHTML = "";
 	},
 	init: function (done) {
-		var that = this;
-
 		document.body.style.cursor = "wait";
 		if (done === true) {
 			// Simple style
@@ -88,3 +91,5 @@ var loader = {
 		});
 	}
 }
+
+export default loader;

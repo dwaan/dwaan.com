@@ -1,15 +1,29 @@
-var debug = false;
+"use strict";
 
-var gToArray = gsap.utils.toArray;
-var gRandom = gsap.utils.random;
+// Plugins
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
+import barba from '@barba/core';
 
+// Helper
+import { _q, _qAll, addClass, konami, removeClass } from './helpers/helper';
+import displayRoundedCorner from './helpers/roundedcorner';
+import header from './helpers/header';
+import api from './helpers/api';
+import scroll from './helpers/scroll';
+import scrollto from './helpers/scrollto';
 
-// Logo SVG
-var logosvg = _q(".logo").innerHTML;
-addClass(_q("html"), "snap");
+// Transitions
+import transitions from './transitions/transitions';
 
+// Views
+import views from "./views/views";
 
 ////////// Initial
+
+addClass(_q("html"), "snap");
+removeClass(_q("html"),"no-js");
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -37,7 +51,24 @@ barba.hooks.afterEnter(function (data) {
 
 // Initialized barba.js
 barba.init({
-	debug: false,
-	transitions: [transition_once, transition_home_to_detail, transition_home_to_me, transition_home_to_hi, transition_hi_to_home, transition_from_lost, transition_to_lost, transition_from_plurk],
-	views: [homeview, detailview, meview, hiview, lostview, replurk2020view, replurk2021view]
+	debug: true,
+	transitions: transitions,
+	views: views
 });
+
+displayRoundedCorner();
+konami();
+
+
+// Prevent error in older browser for console
+(function () {
+	var method;
+	var noop = function () { };
+	var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'];
+	var length = methods.length;
+	var console = (window.console = window.console || {});
+	while (length--) {
+		method = methods[length];
+		if (!console[method]) console[method] = noop
+	}
+}());

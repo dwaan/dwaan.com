@@ -1,13 +1,16 @@
 'use strict';
+
+import gsap from 'gsap';
+
 ////////////// Helper variables
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 ////////////// Helper functions
-//
-// _q(element)
-// _qAll(elements)
-// removeClass(element, className)
-// addClass(element, className)
-// nextElementSibling(element)
+/**
+ * Return an element object of HTML DOM
+ * @param {string} argument HTML selector string
+ * @returns
+ */
 function _q(argument) {
 	return document.querySelector(argument);
 }
@@ -26,6 +29,11 @@ function removeClass(el, className) {
 			.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ')
 	}
 }
+/**
+ * Add class name to element of HTML DOM
+ * @param {element} el Element object
+ * @param {string} className Class name
+ */
 function addClass(el, className) {
 	if (el.classList) {
 		el
@@ -71,11 +79,15 @@ function hoverEvents(els, over, out) {
 }
 
 // Clear the style
-var removeStyle = function (el) {
+/**
+ * Remove a class from elements in query selector
+ * @param {element} el Elements from HTML DOM
+ */
+function removeStyle(el) {
 	if (el.style) {
 		el.style = {};
 	} else {
-		// gToArray(el).forEach(function (el) {
+		// gsap.utils.toArray(el).forEach(function (el) {
 		// 	removeStyle(el);
 		// });
 	}
@@ -261,47 +273,8 @@ function waitForImg() {
 		return true;
 	}
 }
-// Prevent error in older browser for console
-(function () {
-	var method;
-	var noop = function () { };
-	var methods = [
-		'assert',
-		'clear',
-		'count',
-		'debug',
-		'dir',
-		'dirxml',
-		'error',
-		'exception',
-		'group',
-		'groupCollapsed',
-		'groupEnd',
-		'info',
-		'log',
-		'markTimeline',
-		'profile',
-		'profileEnd',
-		'table',
-		'time',
-		'timeEnd',
-		'timeline',
-		'timelineEnd',
-		'timeStamp',
-		'trace',
-		'warn'
-	];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
-	while (length--) {
-		method = methods[length];
-		if (!console[method]) {
-			console[method] = noop
-		}
-	}
-}());
 // Splitting text
-var splitText = function (els) {
+function splitText(els) {
 	var addTags = function (el, idx) {
 		var splord, splext;
 		var split = "";
@@ -358,107 +331,112 @@ var splitText = function (els) {
 	});
 }
 ////////////////////// Huge text animation
-var hugeText = function (el) {
-	this.element = _q(el);
-	this.element.innerHTML = "<span></span>";
-	this.cancelhide = false;
-	this.onshow = false;
-	this.tween = null;
+class hugeText {
+	constructor(el) {
+		this.element = _q(el);
+		this.element.innerHTML = "<span></span>";
+		this.cancelhide = false;
+		this.onshow = false;
+		this.tween = null;
 
-	gsap.set(this.element.children, { yPercent: 100 });
-	gsap.fromTo(this.element.children, {
-		xPercent: -25
-	}, {
-		duration: 10,
-		repeat: -1,
-		ease: "linear",
-		xPercent: -75
-	});
-
-	this.show = function (text) {
-		this.cancelhide = true;
-		this
-			.element
-			.querySelector("span")
-			.innerHTML = "<i>" + text + "</i><i>" + text + "</i><i>" + text + "</i><i>" + text + "</i>";
-		if (this.tween != null)
-			this.tween.kill();
-		this.tween = gsap.to(this.element.children, {
-			duration: .512,
-			ease: "expo",
-			yPercent: 0
+		gsap.set(this.element.children, { yPercent: 100 });
+		gsap.fromTo(this.element.children, {
+			xPercent: -25
+		}, {
+			duration: 10,
+			repeat: -1,
+			ease: "linear",
+			xPercent: -75
 		});
-	}
 
-	this.hide = function () {
-		var that = this;
-		this.tween = gsap.to(this.element.children, {
-			duration: .512,
-			ease: "expo",
-			yPercent: 100,
-			onComplete: function () {
-				if (that.cancelhide) {
-					that.cancelhide = false;
-				} else {
-					that
-						.element
-						.querySelector("span")
-						.innerHTML = "";
+		this.show = function (text) {
+			this.cancelhide = true;
+			this
+				.element
+				.querySelector("span")
+				.innerHTML = "<i>" + text + "</i><i>" + text + "</i><i>" + text + "</i><i>" + text + "</i>";
+			if (this.tween != null)
+				this.tween.kill();
+			this.tween = gsap.to(this.element.children, {
+				duration: .512,
+				ease: "expo",
+				yPercent: 0
+			});
+		};
+
+		this.hide = function () {
+			var that = this;
+			this.tween = gsap.to(this.element.children, {
+				duration: .512,
+				ease: "expo",
+				yPercent: 100,
+				onComplete: function () {
+					if (that.cancelhide) {
+						that.cancelhide = false;
+					} else {
+						that
+							.element
+							.querySelector("span")
+							.innerHTML = "";
+					}
 				}
-			}
-		});
-	}
+			});
+		};
 
-	return this;
+		return this;
+	}
 }
 ///////////////// Animate Number
-function animateNumbers(selector) {
-	var that = this;
-	this.game = {
-		score: 0
-	};
-	this.selector = _q(selector);
-	this.value = this.selector.textContent || this.selector.innerText;
-	this.plus = "+";
-	this.value = this.value.split("+");
-	if (this.value.length <= 1) {
-		this.plus = ""
+class animateNumbers {
+	constructor(selector) {
+		var that = this;
+		this.game = {
+			score: 0
+		};
+		this.selector = _q(selector);
+		this.value = this.selector.textContent || this.selector.innerText;
+		this.plus = "+";
+		this.value = this.value.split("+");
+		if (this.value.length <= 1) {
+			this.plus = "";
+		}
+		this.value = this.value[0];
+		this.selector.innerHTML = "0" + this.plus;
+		this.animate = function () {
+			gsap.to(that.game, 5, {
+				score: "+=" + that.value,
+				roundProps: "score",
+				onUpdate: that.updateHandler,
+				ease: "expo.out"
+			});
+		};
+		this.updateHandler = function () {
+			that.selector.innerHTML = that.game.score + that.plus;
+		};
+		this.animate();
 	}
-	this.value = this.value[0];
-	this.selector.innerHTML = "0" + this.plus;
-	this.animate = function () {
-		gsap.to(that.game, 5, {
-			score: "+=" + that.value,
-			roundProps: "score",
-			onUpdate: that.updateHandler,
-			ease: "expo.out"
-		})
-	};
-	this.updateHandler = function () {
-		that.selector.innerHTML = that.game.score + that.plus
-	};
-	this.animate()
 }
-function animateYears(selector, year) {
-	var that = this;
-	this.game = {
-		score: 0
-	};
-	this.selector = _q(selector);
-	this.year__now = (new Date()).getFullYear(),
-		this.year__animate = (this.year__now - year);
-	this.animate = function () {
-		gsap.to(that.game, 5, {
-			score: "+=" + that.year__animate,
-			roundProps: "score",
-			onUpdate: that.updateHandler,
-			ease: "expo.out"
-		})
-	};
-	this.updateHandler = function () {
-		that.selector.innerHTML = that.game.score + "+"
-	};
-	this.animate()
+class animateYears {
+	constructor(selector, year) {
+		this.game = {
+			score: 0
+		};
+		this.selector = _q(selector);
+		this.year__now = (new Date()).getFullYear(),
+			this.year__animate = (this.year__now - year);
+		this.animate = () => {
+			gsap.to(this.game, 5, {
+				score: "+=" + this.year__animate,
+				roundProps: "score",
+				onUpdate: this.updateHandler,
+				ease: "expo.out"
+			});
+		};
+		this.updateHandler = () => {
+			this.selector.innerHTML = this.game.score + "+";
+		};
+		this.animate();
+	}
 }
 // Check touchevents
 function isTouchSupported() {
@@ -503,7 +481,7 @@ function parallax(callback) {
 	}
 }
 // Photoswipe helper
-var initPhotoSwipeFromDOM = function (gallerySelector) {
+function initPhotoSwipeFromDOM(gallerySelector) {
 	// parse slide data (url, title, size ...) from DOM elements (children of
 	// gallerySelector)
 	var parseThumbnailElements = function (el) {
@@ -718,27 +696,58 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
 		openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
 	}
 }
-////////////// Konami Code
-var konami = "38,38,40,40,37,39,37,39,66,65".split(","),
-	keyIndex = 0;
-document.onkeydown = function (t) {
-	konami[keyIndex] == t.keyCode
-		? keyIndex++
-		: keyIndex = 0,
-		keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe width="905" height="510" src="https://www.youtube-nocookie.com/embed/tgbNymZ7vqY?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'), keyIndex = 0);
-	if (_q('#konamicode') != undefined) {
-		elem = _q('#konamicode');
-		elem.onclick = function (e) {
-			gsap.to('#konamicode', {
-				duration: 1,
-				ease: "expo.in",
-				opacity: 0,
-				onComplete: function () {
-					elem
-						.parentNode
-						.removeChild(elem)
-				}
-			})
+
+/**
+ * Call konami code script
+ */
+function konami() {
+	var konami = "38,38,40,40,37,39,37,39,66,65".split(","),
+		keyIndex = 0;
+	document.onkeydown = function (t) {
+		konami[keyIndex] == t.keyCode
+			? keyIndex++
+			: keyIndex = 0,
+			keyIndex == konami.length && (0 === _qAll("#konamicode").length && (_q("body").innerHTML += '<div id="konamicode"><iframe width="905" height="510" src="https://www.youtube-nocookie.com/embed/tgbNymZ7vqY?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'), keyIndex = 0);
+		if (_q('#konamicode') != undefined) {
+			elem = _q('#konamicode');
+			elem.onclick = function (e) {
+				gsap.to('#konamicode', {
+					duration: 1,
+					ease: "expo.in",
+					opacity: 0,
+					onComplete: function () {
+						elem
+							.parentNode
+							.removeChild(elem)
+					}
+				})
+			}
 		}
-	}
+	};
+}
+
+export {
+	monthNames,
+	_q,
+	_qAll,
+	removeClass,
+	addClass,
+	hasClass,
+	nextElementSibling,
+	hoverEvents,
+	removeStyle,
+	plural,
+	pluralinwords,
+	datediff,
+	animateNumber,
+	distributeByPosition,
+	waitForImg,
+	splitText,
+	hugeText,
+	animateNumbers,
+	animateYears,
+	isTouchSupported,
+	parallax,
+	konami,
+	initPhotoSwipeFromDOM
 };

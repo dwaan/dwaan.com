@@ -1,3 +1,7 @@
+"use strict";
+
+import LZString from "lz-string";
+
 // API call helper
 var api = {
 	url: "./plurk-api",
@@ -53,3 +57,5 @@ var api = {
 		this.request = [];
 	}
 }
+
+export default api;

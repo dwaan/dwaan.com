@@ -1,3 +1,10 @@
+"use strict";
+
+import gsap from 'gsap';
+import animate from '../helpers/animate';
+import loader from '../helpers/loader';
+import { removeStyle } from '../helpers/helper';
+
 let transition_home_to_me = {
     name: 'home-to-me',
     leave: () => true,
@@ -10,7 +17,7 @@ let transition_home_to_me = {
         loader.init(true);
 
         // Hide current view
-        animate.hide(current, function () {
+        animate.hide(current, () => {
             // Kill scrollbar
             gsap.set(current, {
                 position: "fixed",
@@ -57,3 +64,5 @@ let transition_home_to_me = {
         namespace: ['home', 'me']
     }
 }
+
+export default transition_home_to_me;

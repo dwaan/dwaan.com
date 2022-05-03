@@ -1,3 +1,8 @@
+"use strict";
+
+import animate from '../helpers/animate';
+import loader from '../helpers/loader';
+
 let transition_to_lost = {
     name: 'to-lost',
     leave: () => true,
@@ -26,3 +31,5 @@ let transition_to_lost = {
         namespace: ['lost']
     }
 }
+
+export default transition_to_lost;

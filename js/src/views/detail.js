@@ -1,30 +1,35 @@
+"use strict";
+
+import gsap from "gsap";
+import scroll from "../helpers/scroll";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { _q, _qAll, hoverEvents } from '../helpers/helper';
+
 var detailview = {
 	namespace: 'detail',
-	beforeEnter: function (data) {
+	beforeEnter: data => {
 		var next = data.next.container;
 
 		// Performace hog in firefox
 		// Create shadow based on content
-		next.querySelectorAll("picture").forEach(function (el) {
-			// el.insertAdjacentHTML('beforeend', ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />"));
-		});
+		// next.querySelectorAll("picture").forEach(el => {
+		// el.insertAdjacentHTML('beforeend', ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />"));
+		// });
 
 		// Style - Spread
-		next.querySelectorAll(".style-spread").forEach(function (el) {
+		next.querySelectorAll(".style-spread").forEach(el => {
 			// Move the text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
 			ScrollTrigger.defaults({
-				// scroller: next,
 				trigger: el.querySelectorAll(".thumbs"),
 				toggleActions: "restart none none reverse"
 			});
 			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".pic-4"), {
 							top: "random(250, 500, 5)px",
 							left: "50%",
@@ -51,7 +56,7 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
 							start: "0 75%",
 							end: "100% 75%",
@@ -60,8 +65,8 @@ var detailview = {
 						});
 					});
 				},
-				"(min-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
+				"(min-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".pic-4"), {
 							top: "75%",
 							left: "350%",
@@ -91,7 +96,7 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
 							start: "-25% 50%",
 							end: "50% 50%",
@@ -106,20 +111,18 @@ var detailview = {
 		});
 
 		// Style - Spread Left
-		next.querySelectorAll(".style-spread-left").forEach(function (el) {
+		next.querySelectorAll(".style-spread-left").forEach(el => {
 			// Move the text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
 			ScrollTrigger.defaults({
-				// scroller: next,
 				trigger: el.querySelectorAll(".thumbs")
 			});
 			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
 							opacity: 0,
 							y: 300,
@@ -132,7 +135,7 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
 							start: "0 100%-=100px",
 							end: "100% 100%-=100px",
@@ -141,9 +144,9 @@ var detailview = {
 						});
 					});
 				},
-				"(min-aspect-ratio: 1/1)": function () {
+				"(min-aspect-ratio: 1/1)": () => {
 					// Move the pictures
-					scroll.push(function (tl) {
+					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
 							y: 0,
 							x: "-325px",
@@ -157,7 +160,7 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
 							start: "-50% 50%",
 							end: "50% 50%",
@@ -172,20 +175,18 @@ var detailview = {
 		});
 
 		// Style - Top
-		next.querySelectorAll(".style-top").forEach(function (el) {
+		next.querySelectorAll(".style-top").forEach(el => {
 			// Move text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(".text h2, .text li")
 			});
 			ScrollTrigger.defaults({
-				// scroller: next,
 				trigger: el
 			});
 			// Move thumbnails
 			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".thumbs"), {
 							x: 500
 						}, {
@@ -194,7 +195,7 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
 							start: "-50% 0",
 							end: "100% 0",
@@ -203,8 +204,8 @@ var detailview = {
 						});
 					});
 				},
-				"(min-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
+				"(min-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".thumbs"), {
 							x: 500
 						}, {
@@ -214,7 +215,7 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
 							start: "-25% 0",
 							end: "200% 0",
@@ -231,23 +232,21 @@ var detailview = {
 		});
 
 		// Style - Top
-		next.querySelectorAll(".style-top-text").forEach(function (el) {
+		next.querySelectorAll(".style-top-text").forEach(el => {
 			// Move text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(".text h2, .text li")
 			});
 		});
 
 		// Style - Bottom
-		next.querySelectorAll(".style-bottom-logo").forEach(function (el) {
+		next.querySelectorAll(".style-bottom-logo").forEach(el => {
 			// Move text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(".text > *")
 			});
 			// Move logo
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(el.querySelectorAll(".thumbs"), {
 					x: -100,
 					y: 300,
@@ -273,9 +272,8 @@ var detailview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
-					// scroller: next,
 					trigger: el,
 					start: (window.innerHeight * 1 / 4) + " " + (window.innerHeight * 3 / 4),
 					end: (window.innerHeight * 3 / 4) + " " + (window.innerHeight * 3 / 4),
@@ -286,38 +284,35 @@ var detailview = {
 		});
 
 		// Style - Flex
-		next.querySelectorAll(".style-flex").forEach(function (el) {
+		next.querySelectorAll(".style-flex").forEach(el => {
 			// Move text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(".style-column > *"),
 				position: "100%"
 			});
 		});
 
 		// Style - Trunc
-		next.querySelectorAll(".style-trunc").forEach(function (el) {
+		next.querySelectorAll(".style-trunc").forEach(el => {
 			// Move text
 			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": function () {
+				"(min-aspect-ratio: 1/1)": () => {
 					gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
 						y: 0,
 						opacity: 1
 					});
 					scroll.moveText({
-						// scroller: next,
 						elements: el.querySelectorAll(".text > *, .color ul > *"),
 						position: "100%",
 						horizontal: true
 					});
 				},
-				"(max-aspect-ratio: 1/1)": function () {
+				"(max-aspect-ratio: 1/1)": () => {
 					gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
 						x: 0,
 						opacity: 1
 					});
 					scroll.moveText({
-						// scroller: next,
 						elements: el.querySelectorAll(".text > *, .color")
 					});
 				}
@@ -325,7 +320,7 @@ var detailview = {
 		});
 
 		// Style - Masonry
-		next.querySelectorAll(".style-masonry").forEach(function (el) {
+		next.querySelectorAll(".style-masonry").forEach(el => {
 			var thumbs = el.querySelectorAll(".thumbs");
 			var alltext = el.querySelectorAll(".text > *");
 
@@ -338,9 +333,9 @@ var detailview = {
 					});
 
 					// Scroll up
-					scroll.push(function (tl) {
+					scroll.push(tl => {
 						for (var index = 1; index <= 4; index++) {
-							var yplus = gRandom(250, 750, 25),
+							var yplus = gsap.utils.random(250, 750, 25),
 								y = 25;
 
 							if (index == 3) yplus = 0;
@@ -355,9 +350,8 @@ var detailview = {
 						}
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
-							// scroller: next,
 							trigger: el,
 							start: "-25% 100%",
 							end: "100% 50%",
@@ -367,7 +361,7 @@ var detailview = {
 					});
 
 					// Scroll left
-					scroll.push(function (tl) {
+					scroll.push(tl => {
 						tl.fromTo(thumbs, {
 							x: 0,
 						}, {
@@ -376,9 +370,8 @@ var detailview = {
 						}, 0);
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
-							// scroller: next,
 							trigger: el,
 							start: "-25% 100%",
 							end: "100% 50%",
@@ -389,7 +382,6 @@ var detailview = {
 
 					// Move text
 					scroll.moveText({
-						// scroller: next,
 						delta: 25,
 						elements: alltext,
 						position: "75%"
@@ -397,7 +389,6 @@ var detailview = {
 
 					// Move masonry
 					scroll.moveText({
-						// scroller: next,
 						elements: thumbs
 					});
 				},
@@ -408,9 +399,9 @@ var detailview = {
 					});
 
 					// Scroll
-					scroll.push(function (tl) {
+					scroll.push(tl => {
 						for (var index = 1; index <= 4; index++) {
-							var yplus = gRandom(250, 1000, 25),
+							var yplus = gsap.utils.random(250, 1000, 25),
 								y = 50;
 
 							if (index == 3) yplus = 0;
@@ -425,27 +416,24 @@ var detailview = {
 						}
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
-							// scroller: next,
 							trigger: el,
 							start: "-25% 100%",
 							end: "100% 50%",
-							scrub: gRandom(75, 125, 5) / 100,
+							scrub: gsap.utils.random(75, 125, 5) / 100,
 							animation: tl
 						});
 					});
 
 					// Move text
 					scroll.moveText({
-						// scroller: next,
 						elements: alltext,
 						position: "75%"
 					});
 
 					// Move masonry
 					scroll.moveText({
-						// scroller: next,
 						elements: thumbs
 					});
 				}
@@ -454,15 +442,15 @@ var detailview = {
 
 
 		// Style - Angled
-		next.querySelectorAll(".style-angled").forEach(function (el) {
+		next.querySelectorAll(".style-angled").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "75%");
 			// Scroll pictures
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
-						gToArray(elPicture).forEach(function (picture) {
+					scroll.push(tl => {
+						gsap.utils.toArray(elPicture).forEach(function (picture) {
 							tl.fromTo(picture, {
 								rotation: -5,
 								x: 650,
@@ -473,9 +461,8 @@ var detailview = {
 						});
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
-							// scroller: next,
 							trigger: el,
 							endTrigger: ".links",
 							start: "0 100%",
@@ -486,7 +473,7 @@ var detailview = {
 					});
 				},
 				"(min-aspect-ratio: 1/1)": function () {
-					scroll.push(function (tl) {
+					scroll.push(tl => {
 						elPicture.forEach(function (picture) {
 							tl.fromTo(picture, {
 								rotation: 0,
@@ -498,9 +485,8 @@ var detailview = {
 						});
 
 						return tl;
-					}, function (tl) {
+					}, tl => {
 						return ScrollTrigger.create({
-							// scroller: next,
 							trigger: el,
 							endTrigger: ".links",
 							start: "0 100%",
@@ -513,7 +499,6 @@ var detailview = {
 			});
 			// Move text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll(" .text > *"),
 				position: "85%"
 			});
@@ -521,7 +506,7 @@ var detailview = {
 
 		// Style - Slideshow
 		// Full and big
-		next.querySelectorAll(".style-slideshow").forEach(function (el) {
+		next.querySelectorAll(".style-slideshow").forEach(el => {
 			// Add navigation
 			el.insertAdjacentHTML('beforeend', "<div class='before'></div><div class='after'></div>");
 			// Variables
@@ -529,7 +514,7 @@ var detailview = {
 			that.slideshowScroll = that.children[0];
 			that.slideshowParent = that.querySelector("ul");
 			that.slideshowChild = that.slideshowScroll.querySelectorAll("li");
-			that.l = gToArray(that.slideshowChild).length;
+			that.l = gsap.utils.toArray(that.slideshowChild).length;
 			that.pos = 0;
 			that.pos_start = true;
 			that.pos_end = false;
@@ -541,7 +526,7 @@ var detailview = {
 
 				that.slideshowParent.style.removeProperty('width');
 
-				gToArray(that.slideshowChild).forEach(function (element) {
+				gsap.utils.toArray(that.slideshowChild).forEach(function (element) {
 					element.style.removeProperty('width');
 					gsap.set(element, {
 						width: element.offsetWidth
@@ -586,12 +571,11 @@ var detailview = {
 			}
 			that.navigationHide();
 			// Scroll events
-			gToArray(that.slideshowChild).forEach(function (element, index) {
-				scroll.push(function (tl) {
+			gsap.utils.toArray(that.slideshowChild).forEach(function (element, index) {
+				scroll.push(tl => {
 					return tl;
-				}, function (tl) {
+				}, tl => {
 					return ScrollTrigger.create({
-						// scroller: next,
 						trigger: element,
 						// scroller: that.slideshowScroll,
 						horizontal: true,
@@ -677,7 +661,7 @@ var detailview = {
 				}
 			});
 			// Scroll animation
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(that.slideshowScroll, {
 					opacity: 0,
 					y: 500
@@ -688,9 +672,8 @@ var detailview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
-					// scroller: next,
 					trigger: that,
 					start: "12.5% 90%",
 					end: "50% 90%",
@@ -699,7 +682,7 @@ var detailview = {
 				});
 			});
 			//
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				tl.fromTo(that.before, {
 					x: -100
 				}, {
@@ -714,9 +697,8 @@ var detailview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
-					// scroller: next,
 					trigger: that.before,
 					start: "0 90%",
 					end: (window.innerHeight / 5) + " 90%",
@@ -726,8 +708,8 @@ var detailview = {
 			});
 		});
 		// Smaller one
-		next.querySelectorAll(".style-slideshow-small").forEach(function (el) {
-			scroll.push(function (tl) {
+		next.querySelectorAll(".style-slideshow-small").forEach(el => {
+			scroll.push(tl => {
 				tl.fromTo(el.children[0].querySelectorAll("picture"), {
 					x: "200%"
 				}, {
@@ -736,9 +718,8 @@ var detailview = {
 				}, 0);
 
 				return tl;
-			}, function (tl) {
+			}, tl => {
 				return ScrollTrigger.create({
-					// scroller: next,
 					trigger: el,
 					start: "0 90%",
 					end: "50% 90%",
@@ -750,18 +731,19 @@ var detailview = {
 		});
 
 		// Links
-		next.querySelectorAll(".links").forEach(function (el) {
+		next.querySelectorAll(".links").forEach(el => {
 			// Move text
 			scroll.moveText({
-				// scroller: next,
 				elements: el.querySelectorAll("nav > *"),
 				position: "100%"
 			});
 		});
 	},
-	beforeLeave: function (data) {
-		gToArray(".style-slideshow").forEach(function (slideshow) {
+	beforeLeave: () => {
+		gsap.utils.toArray(".style-slideshow").forEach(slideshow => {
 			window.removeEventListener("resize", slideshow.fixedSize);
 		});
 	}
 }
+
+export default detailview;

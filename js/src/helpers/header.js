@@ -1,9 +1,26 @@
-header = {
+"use strict";
+
+import gsap from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import scroll from "./scroll";
+import { _q, hoverEvents } from "./helper";
+import darkmode from "./darkmode";
+
+let header = {
+    init: function () {
+        this.show();
+        this.waving();
+        this.slide();
+        this.hamburger();
+        this.darkmodeswitch();
+        this.textswitch();
+    },
     // Animate header showing
     show: function () {
         gsap.set("header", {
             opacity: 1
         });
+
         gsap.fromTo("header .logo, header .size, header .lamp, header .switch", {
             y: -200,
             opacity: 0
@@ -19,19 +36,21 @@ header = {
 
     // Logo events animations - waving
     waving: function () {
-        gToArray('header .logo').forEach(function (el) {
+        gsap.utils.toArray('header .logo').forEach(function (el) {
             // Waving animation
             var lefthand = el.querySelector(".left-hand");
             var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 } });
+
             waving
                 .set(lefthand, { yPercent: 0, rotation: 0 })
                 .to(lefthand, { duration: .25, rotation: 70 })
                 .fromTo(lefthand, { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
                 .to(lefthand, { duration: .25, yPercent: 0, rotation: 0 })
                 .to(lefthand, { yPercent: 0, duration: 10 });
+
             // Hat move on hover
             var hat = el.querySelector(".hat");
-            hoverEvents([el], function () {
+            hoverEvents([el], () => {
                 gsap.to(hat, {
                     transformOrigin: "50% 75%",
                     yPercent: -3,
@@ -41,23 +60,22 @@ header = {
                     ease: "elastic.out"
                 });
                 waving.restart();
-            },
-                function () {
-                    gsap.to(hat, {
-                        transformOrigin: "50% 75%",
-                        yPercent: 0,
-                        xPercent: 0,
-                        rotation: 0,
-                        duration: 1,
-                        ease: "elastic.out"
-                    });
+            }, () => {
+                gsap.to(hat, {
+                    transformOrigin: "50% 75%",
+                    yPercent: 0,
+                    xPercent: 0,
+                    rotation: 0,
+                    duration: 1,
+                    ease: "elastic.out"
                 });
+            });
         });
     },
 
     // Menu events - slide
     slide: function () {
-        gToArray('header .switch').forEach(function (el) {
+        gsap.utils.toArray('header .switch').forEach(function (el) {
             // Hat move on hover
             var menu = el.querySelectorAll("svg line");
             var tl = gsap.timeline();
@@ -88,12 +106,11 @@ header = {
                 tl.repeat(0);
             });
         });
-
     },
 
     // Main menu - hamburger slide
     hamburger: function () {
-        gToArray("header .menu").forEach(function (el) {
+        gsap.utils.toArray("header .menu").forEach(function (el) {
             var overlay = el.querySelector(".overlay");
             var items = el.querySelector(".items");
 
@@ -191,18 +208,17 @@ header = {
 
     // Dark mode switcher event
     darkmodeswitch: function () {
-        gToArray("header .lamp").forEach(function (el) {
+        gsap.utils.toArray("header .lamp").forEach(function (el) {
             el.addEventListener("click", function (e) {
                 e.preventDefault();
-                darkmode = !darkmode;
-                toggleDarkMode();
+                darkmode.toggleDarkMode();
             });
         });
     },
 
     // Text switcher event
     textswitch: function () {
-        gToArray("header .size").forEach(function (el) {
+        gsap.utils.toArray("header .size").forEach(function (el) {
             var tl = gsap.timeline();
             tl.to(el, {
                 scale: 1.25,
@@ -252,6 +268,8 @@ header = {
     arrow: function (next) {
         // Scroll animate arrow
         var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
+        if(!middle) return;
+
         middle.forEach(function (el, idx) {
             var scrollfunc = function (tl) {
                 return ScrollTrigger.create({
@@ -368,3 +386,5 @@ header = {
         });
     }
 }
+
+export default header;

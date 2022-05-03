@@ -1,3 +1,10 @@
+"use strict";
+
+import gsap from 'gsap';
+import loader from '../helpers/loader';
+import animate from '../helpers/animate';
+import darkmode from '../helpers/darkmode';
+
 let transition_from_plurk = {
     name: 'from-plurk',
     leave: () => true,
@@ -37,9 +44,9 @@ let transition_from_plurk = {
             duration: 1,
             ease: "power3.in",
             onStart: () => {
-                browserColorLight = "";
-                browserColorDark = "";
-                toggleDarkMode(1);
+                darkmode.browserColorLight = "";
+                darkmode.browserColorDark = "";
+                darkmode.setDarkMode(1);
             }
         }, "hide+=.4");
         tl.set(current, {
@@ -74,3 +81,5 @@ let transition_from_plurk = {
         namespace: ['replurk2020', 'replurk2021']
     }
 }
+
+export default transition_from_plurk;
