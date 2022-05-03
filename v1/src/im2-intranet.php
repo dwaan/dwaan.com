@@ -41,26 +41,26 @@
 							</div>
 
 							<div class="gallery gallery-normal">
-								<a href="/img/ss-im2/login.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/login.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/login.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
-								<a href="/img/ss-im2/dashboard.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/dashboard.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/dashboard.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
-								<a href="/img/ss-im2/social.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/social.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/social.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/social.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
-								<a href="/img/ss-im2/gallery.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/gallery.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/gallery.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/gallery.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
-								<a href="/img/ss-im2/gallery-detail.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/gallery-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/gallery-detail.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/gallery-detail.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
-								<a href="/img/ss-im2/address.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/address.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/address.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/address.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
-								<a href="/img/ss-im2/dokumen.jpg" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
-									<img src="/img/ss-im2/dokumen.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
+								<a href="/img/ss-im2/dokumen.webp" itemprop="contentUrl" data-size="1800x1020" class="gallery__item no-barba">
+									<img src="/img/ss-im2/dokumen.thumb.webp" itemprop="thumbnail" width="" height="" alt="Indosat Mega Media (IndosatM2) - Intranet Redesign by Dwan" />
 								</a>
 							</div>
 

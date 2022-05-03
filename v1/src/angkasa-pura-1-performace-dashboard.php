@@ -41,20 +41,20 @@
 							</div>
 
 							<div class="gallery gallery-normal">
-								<a href="/img/ss-ap1dashboard/login.jpg" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
-									<img src="/img/ss-ap1dashboard/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
+								<a href="/img/ss-ap1dashboard/login.webp" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
+									<img src="/img/ss-ap1dashboard/login.thumb.webp" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
 								</a>
-								<a href="/img/ss-ap1dashboard/vision.jpg" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
-									<img src="/img/ss-ap1dashboard/vision.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
+								<a href="/img/ss-ap1dashboard/vision.webp" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
+									<img src="/img/ss-ap1dashboard/vision.thumb.webp" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
 								</a>
-								<a href="/img/ss-ap1dashboard/dashboard.jpg" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
-									<img src="/img/ss-ap1dashboard/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
+								<a href="/img/ss-ap1dashboard/dashboard.webp" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
+									<img src="/img/ss-ap1dashboard/dashboard.thumb.webp" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
 								</a>
-								<a href="/img/ss-ap1dashboard/dashboard-detail.jpg" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
-									<img src="/img/ss-ap1dashboard/dashboard-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
+								<a href="/img/ss-ap1dashboard/dashboard-detail.webp" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
+									<img src="/img/ss-ap1dashboard/dashboard-detail.thumb.webp" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
 								</a>
-								<a href="/img/ss-ap1dashboard/dashboard-detail-popup.jpg" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
-									<img src="/img/ss-ap1dashboard/dashboard-detail-popup.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
+								<a href="/img/ss-ap1dashboard/dashboard-detail-popup.webp" itemprop="contentUrl" data-size="2560x1440" class="gallery__item no-barba">
+									<img src="/img/ss-ap1dashboard/dashboard-detail-popup.thumb.webp" itemprop="thumbnail" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard by Dwan" />
 								</a>
 							</div>
 

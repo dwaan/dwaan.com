@@ -42,29 +42,29 @@
 
 							<h5>Final Design</h5>
 							<div class="gallery gallery-auto-height">
-								<a href="/img/ss-tiketapasaja/large/homepage.jpg" itemprop="contentUrl" data-size="1728x1846" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/homepage.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/homepage.webp" itemprop="contentUrl" data-size="1728x1846" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/homepage.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/listing-newest.jpg" itemprop="contentUrl" data-size="1728x2245" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/listing-newest.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/listing-newest.webp" itemprop="contentUrl" data-size="1728x2245" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/listing-newest.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/artist-widelanes.jpg" itemprop="contentUrl" data-size="1728x2082" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/artist-widelanes.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/artist-widelanes.webp" itemprop="contentUrl" data-size="1728x2082" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/artist-widelanes.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/news.jpg" itemprop="contentUrl" data-size="1728x3609" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/news.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/news.webp" itemprop="contentUrl" data-size="1728x3609" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/news.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/news-detail.jpg" itemprop="contentUrl" data-size="1728x3429" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/news-detail.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/news-detail.webp" itemprop="contentUrl" data-size="1728x3429" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/news-detail.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/how-to-buy.jpg" itemprop="contentUrl" data-size="1728x2839" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/how-to-buy.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/how-to-buy.webp" itemprop="contentUrl" data-size="1728x2839" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/how-to-buy.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/user-unpaid-tickets.jpg" itemprop="contentUrl" data-size="1728x1960" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/user-unpaid-tickets.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/user-unpaid-tickets.webp" itemprop="contentUrl" data-size="1728x1960" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/user-unpaid-tickets.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/large/user-the-e-tickets.jpg" itemprop="contentUrl" data-size="1728x2350" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/large/user-the-e-tickets.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/large/user-the-e-tickets.webp" itemprop="contentUrl" data-size="1728x2350" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/large/user-the-e-tickets.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
 							</div>
 
@@ -90,20 +90,20 @@
 
 							<h5>Proposed Design</h5>
 							<div class="gallery gallery-normal">
-								<a href="/img/ss-tiketapasaja/idea1-desktop-1.jpg" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/idea1-desktop-1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/idea1-desktop-1.webp" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/idea1-desktop-1.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/idea1-desktop-3.jpg" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/idea1-desktop-3.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/idea1-desktop-3.webp" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/idea1-desktop-3.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/idea1-desktop-2.jpg" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/idea1-desktop-2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/idea1-desktop-2.webp" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/idea1-desktop-2.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/idea2-desktop-2.jpg" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/idea2-desktop-2.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/idea2-desktop-2.webp" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/idea2-desktop-2.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
-								<a href="/img/ss-tiketapasaja/idea2-desktop-1.jpg" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
-									<img src="/img/ss-tiketapasaja/idea2-desktop-1.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
+								<a href="/img/ss-tiketapasaja/idea2-desktop-1.webp" itemprop="contentUrl" data-size="1728x1050" class="gallery__item no-barba">
+									<img src="/img/ss-tiketapasaja/idea2-desktop-1.thumb.webp" itemprop="thumbnail" width="" height="" alt="Melon Indonesia - Tiket Apa Saja by Dwan" />
 								</a>
 							</div>
 

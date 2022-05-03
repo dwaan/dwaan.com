@@ -28,7 +28,9 @@
     "gulp-connect-php": "^1.0.3",
     "gulp-postcss": "^8.0.0",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-uglify": "^3.0.2"
+    "gulp-svgmin": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-webp": "^4.0.1"
   },
   "dependencies": {
     "barba.js": "^1.0.0",

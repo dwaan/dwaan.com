@@ -57,8 +57,8 @@
 								<div class="parallax">
 									<div class="img">
 										<div class="box">
-											<img class="dwan" src="/img/dwan.png" width="" height="" alt="Dwan" />
-											<img class="fruit" src="/img/empty.png" width="" height="" alt="Fruit" />
+											<img class="dwan" src="/img/dwan.webp" width="" height="" alt="Dwan" />
+											<img class="fruit" src="/img/empty.webp" width="" height="" alt="Fruit" />
 										</div>
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 							<div class="hero__image hero__image_poof">
 								<div class="img">
 									<div class="box">
-										<img class="fruit poof" src="/img/poof.png" width="" height="" alt="Fruit" />
+										<img class="fruit poof" src="/img/poof.webp" width="" height="" alt="Fruit" />
 									</div>
 								</div>
 							</div>
@@ -115,9 +115,9 @@
 								<div class="scroller__trigger"></div>
 								<div class="block scroller">
 									<div class="block gallery block__clear">
-										<a href="/melon-tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.jpg" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
-										<a href="/ppatk-e-learning-for-bank-frontliner"><span><img src="/img/ss1.jpg" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a>
-										<a href="/angkasa-pura-1-performace-dashboard"><span><img src="/img/ss2.jpg" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
+										<a href="/melon-tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
+										<a href="/ppatk-e-learning-for-bank-frontliner"><span><img src="/img/ss1.webp" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a>
+										<a href="/angkasa-pura-1-performace-dashboard"><span><img src="/img/ss2.webp" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
 										<a href="/work">See All</a>
 									</div>
 								</div>

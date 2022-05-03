@@ -41,26 +41,26 @@
 							</div>
 
 							<div class="gallery gallery-normal">
-								<a href="/img/ss-loket/login.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/login.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/login.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/login.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/img/ss-loket/dashboard.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/dashboard.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/dashboard.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/dashboard.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/img/ss-loket/pos-selected.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/pos-selected.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pos-selected.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pos-selected.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/img/ss-loket/pos-topping.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/pos-topping.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pos-topping.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pos-topping.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/img/ss-loket/pos-ticket-redeemption.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/pos-ticket-redeemption.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pos-ticket-redeemption.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pos-ticket-redeemption.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/img/ss-loket/pembayaran.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/pembayaran.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pembayaran.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pembayaran.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
-								<a href="/img/ss-loket/pembayaran-kartu.jpg" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
-									<img src="/img/ss-loket/pembayaran-kartu.thumb.jpg" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
+								<a href="/img/ss-loket/pembayaran-kartu.webp" itemprop="contentUrl" data-size="2560x1600" class="gallery__item no-barba">
+									<img src="/img/ss-loket/pembayaran-kartu.thumb.webp" itemprop="thumbnail" width="" height="" alt="Loket - Point of Sales by Dwan" />
 								</a>
 							</div>
 
