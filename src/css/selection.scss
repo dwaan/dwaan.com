@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+
+/* Costumize selection color */
+::-moz-selection {
+    background: var(--yellow);
+    text-shadow: none;
+}
+
+::selection {
+    background: var(--yellow);
+    text-shadow: none;
+}
+
+
+/* Costumize placeholder */
+::-webkit-input-placeholder {
+    color: var(--gray-light);
+}
+
+:-moz-placeholder {
+    color: var(--gray-light);
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    color: var(--gray-light);
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: var(--gray-light);
+}
+
+::-ms-input-placeholder {
+    color: var(--gray-light);
+}
+
+::placeholder {
+    color: var(--gray-light);
+}

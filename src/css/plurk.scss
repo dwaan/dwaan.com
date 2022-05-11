@@ -1168,7 +1168,7 @@
     background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .5) 75%);
 }
 
-
+/* Box and meta */
 .statistics {
 
     .box .post br,
@@ -1197,6 +1197,7 @@
         }
     }
 }
+
 
 /* Shared links */
 .statistics.sharedlinks {
@@ -1261,6 +1262,7 @@
         transition: background .5s ease;
     }
 }
+
 
 /* Credits style */
 #credits {
@@ -1353,6 +1355,7 @@
 
 }
 
+
 /* Back to top */
 #backtotop {
     position: relative;
@@ -1387,6 +1390,7 @@
     }
 }
 
+
 /* Replurk footer */
 .plurk .footer {
     align-items: center;
@@ -1415,8 +1419,10 @@
     }
 }
 
-/* Block order */
+
+/* Blocks order */
 .statistics {
+
     &.alltime {
         order: 0;
     }
@@ -1448,10 +1454,10 @@
     &.badges {
         order: 7;
     }
-}
 
-/* This year */
-.statistics {
+
+    /* This year */
+
     &.thisyear {
         order: 100;
     }
@@ -1511,10 +1517,11 @@
     &.replurked {
         order: 114;
     }
-}
 
-/* Dig deeper */
-.statistics {
+
+
+    /* Dig deeper */
+
     &.digdeeper {
         order: 200;
     }
