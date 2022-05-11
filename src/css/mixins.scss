@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+@mixin zero-box() {
+	margin: 0;
+	padding: 0;
+}
+
+@mixin position($top: 0, $right: false, $bottom: false, $left: false) {
+	top: $top;
+
+	@if $right  !=false {
+		right: $right;
+	}
+
+	@else {
+		right: $top;
+	}
+
+	@if $bottom  !=false {
+		bottom: $bottom;
+	}
+
+	@else {
+		bottom: $top;
+	}
+
+	@if $left  !=false {
+		left: $left;
+	}
+
+	@else if $right  !=false {
+		left: $right;
+	}
+
+	@else {
+		left: $top;
+	}
+}
+
+@mixin block-spread($display: block, $position: absolute, $zindex: 1, $backgroundcolor: false, $opacity: false, $borderradius: false) {
+	display: $display;
+	position: $position;
+	z-index: $zindex;
+	@include position();
+
+	@if $backgroundcolor  !=false {
+		background-color: $backgroundcolor;
+	}
+
+	@if $opacity  !=false {
+		opacity: $opacity;
+	}
+
+	@if $borderradius  !=false {
+		border-radius: $borderradius;
+	}
+}

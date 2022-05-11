@@ -2,8 +2,10 @@
 
 /* Custom fonts */
 
+$fontname: 'Rubik';
+
 @mixin font($weight, $local1, $local2, $url) {
-	font-family: 'Rubik';
+	font-family: $fontname;
 	font-style: normal;
 	font-weight: $weight;
 	font-display: swap;

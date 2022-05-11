@@ -21,6 +21,10 @@ html.no-js {
 
 .no-js {
 
+	.middle {
+		border-bottom: 1px dashed var(--gray-light);
+	}
+
 	.size,
 	.lamp {
 		display: none;

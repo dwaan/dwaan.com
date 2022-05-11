@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
+@use 'mixins';
 @use 'fonts';
 @use 'selection';
+
 
 /* Variables */
 :root {
@@ -146,40 +148,22 @@ main {
 	opacity: 0;
 }
 
-.no-js .middle {
-	border-bottom: 1px dashed var(--gray-light);
-}
-
 body,
 html {
-	font-family: "Rubik", sans-serif;
+	font-family: fonts.$fontname, sans-serif;
 	letter-spacing: .065rem;
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
-	margin: 0;
-	padding: 0;
+%zero-will-change {
+	@include mixins.zero-box;
 	will-change: opacity, transform;
 }
 
-h1,
-h2,
-h3,
-h4,
-p,
-span,
-li {
+%transition {
 	transition: color .5s ease;
 }
 
-h1,
-h2,
-h3,
-h4 {
+%bold-child-no-transiton {
 	font-weight: 500;
 
 	* {
@@ -187,14 +171,22 @@ h4 {
 	}
 }
 
-h2,
-h3,
-h4,
-p {
+%gray-color {
 	color: var(--black-gray-light);
 }
 
+%inline-block {
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
 h1 {
+	@extend %zero-will-change;
+	@extend %transition;
+	@extend %bold-child-no-transiton;
 	margin: 0 0 var(--padl) 0;
 	font-size: 5rem;
 	line-height: 80%;
@@ -202,6 +194,10 @@ h1 {
 }
 
 h2 {
+	@extend %zero-will-change;
+	@extend %transition;
+	@extend %bold-child-no-transiton;
+	@extend %gray-color;
 	margin: 0 0 var(--padl);
 	font-size: 3.2rem;
 	line-height: 90%;
@@ -209,18 +205,29 @@ h2 {
 }
 
 h3 {
+	@extend %zero-will-change;
+	@extend %transition;
+	@extend %bold-child-no-transiton;
+	@extend %gray-color;
 	margin: 0 0 var(--padm);
 	font-size: 2rem;
 	line-height: 100%;
 }
 
 h4 {
+	@extend %zero-will-change;
+	@extend %transition;
+	@extend %bold-child-no-transiton;
+	@extend %gray-color;
 	margin: 0 0 var(--padm);
 	font-size: 1.4rem;
 	line-height: 110%;
 }
 
 p {
+	@extend %zero-will-change;
+	@extend %transition;
+	@extend %gray-color;
 	font-size: 1rem;
 	line-height: 175%;
 	opacity: .8;
@@ -231,56 +238,16 @@ p {
 	}
 }
 
-a,
-.spring {
-	position: relative;
-	display: inline-block;
-	text-decoration: none;
-	color: inherit;
-	cursor: pointer;
+span {
+	@extend %transition;
 }
 
-.spring {
-	&:before {
-		content: "";
-		display: block;
-		position: absolute;
-		z-index: -1;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: var(--yellow);
-		opacity: 0;
-		border-radius: 8px;
-		pointer-events: none;
-		transform: scale(1.15);
-		transition: opacity .2s ease, transform .3s cubic-bezier(.59, 1.83, .81, 1);
-		will-change: opacity, transform;
-
-		&.big {
-			top: -4px;
-			bottom: -4px;
-			left: -12px;
-			right: -12px;
-		}
-
-		&.superbig {
-			top: -8px;
-			bottom: -8px;
-			left: -20px;
-			right: -20px;
-		}
-
-		&:hover {
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
+li {
+	@extend %transition;
 }
 
-.dark .spring:hover {
-	color: var(--white);
+a {
+	@extend %inline-block;
 }
 
 small {
@@ -323,8 +290,7 @@ video {
 /* Remove default fieldset styles */
 fieldset {
 	border: 0;
-	margin: 0;
-	padding: 0;
+	@include mixins.zero-box;
 }
 
 /* Allow only vertical resizing of textareas. */
@@ -347,18 +313,11 @@ picture img {
 }
 
 .support {
-	display: none;
-	position: fixed;
-	z-index: 999999;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
+	@include mixins.block-spread(none, fixed, 999999, inherit);
 	padding: 40px;
 	flex-flow: row;
 	align-items: center;
 	justify-content: center;
-	background-color: inherit;
 
 	.content {
 		position: relative;
@@ -445,20 +404,44 @@ picture img {
 
 /* Global costum Style */
 
+.spring {
+	@extend %inline-block;
+
+	&:before {
+		content: "";
+		@include mixins.block-spread($zindex: -1, $opacity: 0, $backgroundcolor: var(--yellow), $borderradius: 8px);
+		pointer-events: none;
+		transform: scale(1.15);
+		transition: opacity .2s ease, transform .3s cubic-bezier(.59, 1.83, .81, 1);
+		will-change: opacity, transform;
+
+		&.big {
+			@include mixins.position(-4px, -12px);
+		}
+
+		&.superbig {
+			@include mixins.position(-8px, -20px);
+		}
+
+		&:hover {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+}
+
+.dark .spring:hover {
+	color: var(--white);
+}
+
 .red {
 	color: var(--red);
 }
 
 #corner,
 #back {
-	position: fixed;
-	display: none;
-	z-index: 999999;
+	@include mixins.block-spread(none, fixed, 999999);
 	pointer-events: none;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
 }
 
 .rounded body {
@@ -511,17 +494,10 @@ picture img {
 
 /* Loading style */
 #loader {
-	position: fixed;
-	z-index: 999999;
-	display: flex;
+	@include mixins.block-spread(flex, fixed, 999999, transparent);
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: transparent;
 	color: var(--black);
 
 	p {
@@ -530,10 +506,7 @@ picture img {
 		align-items: center;
 		justify-content: center;
 		position: fixed;
-		top: initial;
-		left: var(--padx);
-		right: var(--padx);
-		bottom: var(--pady);
+		@include mixins.position(initial, var(--padx), var(--pady));
 		font-size: .7rem;
 		letter-spacing: .05rem;
 		text-transform: uppercase;
@@ -585,11 +558,7 @@ picture img {
 }
 
 .fixed {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	@include mixins.block-spread(block, fixed);
 }
 
 
@@ -658,8 +627,7 @@ picture img {
 .year {
 	position: fixed;
 	display: flex;
-	margin: 0;
-	padding: 0;
+	@include mixins.zero-box;
 	align-items: flex-end;
 	text-align: right;
 	color: var(--black);
@@ -803,16 +771,9 @@ header {
 /* Slide right menu items */
 .menu {
 	.overlay {
-		position: fixed;
-		z-index: 1000;
-		display: none;
+		@include mixins.block-spread(none, fixed, 1000, rgba(0, 0, 0, 0));
 		align-items: flex-start;
 		justify-content: flex-end;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background-color: rgba(0, 0, 0, 0);
 	}
 
 	.items {
@@ -874,8 +835,7 @@ header {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		margin: 0;
-		padding: 0;
+		@include mixins.zero-box;
 	}
 
 	li {
@@ -923,8 +883,7 @@ header {
 		}
 
 		&:last-child {
-			margin: 0;
-			padding: 0;
+			@include mixins.zero-box;
 			height: auto;
 
 			p {
@@ -991,10 +950,7 @@ header {
 		background-color: var(--black);
 		visibility: hidden;
 		opacity: 0;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
+		@include mixins.position;
 	}
 }
 
@@ -1007,8 +963,7 @@ header {
 /* Split text style */
 .splord,
 .splext {
-	padding: 0;
-	margin: 0;
+	@include mixins.zero-box;
 	display: inline-block;
 }
 
@@ -1149,8 +1104,7 @@ header {
 	sup {
 		font-size: 5rem;
 		font-weight: 500;
-		margin: 0;
-		padding: 0;
+		@include mixins.zero-box;
 	}
 
 	sub,
@@ -1280,10 +1234,7 @@ header {
 		position: absolute;
 		z-index: 0;
 		display: block;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		@include mixins.position;
 		opacity: .4;
 		background-size: 100%;
 		/*background-color: #333;*/
@@ -1299,10 +1250,7 @@ header {
 		display: block;
 		content: "";
 		position: absolute;
-		left: 0;
-		right: 0;
-		top: 85%;
-		bottom: -1%;
+		@include mixins.position(85%, 0, -1%);
 		background: transparent;
 		background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
 		background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
@@ -1538,11 +1486,11 @@ header {
 
 	.before,
 	.after {
+		content: "";
 		position: absolute;
 		z-index: 2;
 		top: 50vh;
 		right: 50vw;
-		content: "";
 		display: block;
 		width: 100px;
 		height: 30px;
@@ -1745,8 +1693,7 @@ header {
 .zero {
 	display: flex;
 	width: 100%;
-	margin: 0;
-	padding: 0;
+	@include mixins.zero-box;
 
 	li {
 		position: relative;
@@ -1807,8 +1754,7 @@ header {
 .flat {
 	display: flex;
 	list-style: none;
-	margin: 0;
-	padding: 0;
+	@include mixins.zero-box;
 	flex-flow: row nowrap;
 }
 
@@ -1816,8 +1762,7 @@ header {
 .bland {
 	display: flex;
 	list-style: none;
-	margin: 0;
-	padding: 0;
+	@include mixins.zero-box;
 	flex-flow: column nowrap;
 }
 
@@ -1848,8 +1793,7 @@ header {
 
 .menu-page {
 	.menu {
-		margin: 0;
-		padding: 0;
+		@include mixins.zero-box;
 		height: 100vh;
 		border-bottom: none !important;
 	}
@@ -2010,10 +1954,7 @@ header {
 #now .thumbs,
 #webdesigner .thumbs {
 	position: absolute;
-	top: var(--pady);
-	bottom: var(--pady);
-	right: var(--padx);
-	left: 50vw;
+	@include mixins.position(var(--pady), var(--padx), var(--pady), 50vw);
 	z-index: 1;
 }
 
@@ -2072,8 +2013,7 @@ header {
 
 	h2,
 	img {
-		margin: 0;
-		padding: 0;
+		@include mixins.zero-box;
 		position: relative;
 		z-index: 1;
 	}
@@ -2165,8 +2105,7 @@ header {
 			top: 50%;
 			display: block;
 			width: 100%;
-			padding: 0;
-			margin: 0;
+			@include mixins.zero-box;
 			border: none;
 			background-color: var(--black);
 			border-radius: var(--pads);
@@ -2372,13 +2311,7 @@ header {
 
 			&:after {
 				content: "";
-				z-index: 0;
-				position: absolute;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				display: none;
+				@include mixins.block-spread(none, absolute, 0);
 				background: url(../img/drop-shadow.webp) 0 0 no-repeat;
 				background-size: 100% 100%;
 				transform: scale3d(1.5, 1.5, 1);
@@ -2579,16 +2512,9 @@ header {
 
 /* Konami code */
 #konamicode {
-	position: fixed;
-	z-index: 999;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: flex;
+	@include mixins.block-spread(flex, fixed, 99999999, rgba(0, 0, 0, .85));
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(0, 0, 0, .85);
 }
 
 img.rounded {
