@@ -1,0 +1,189 @@
+/* For those who disable js */
+
+html.no-js {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	scroll-snap-type: y mandatory;
+	scroll-snap-stop: always;
+	animation-name: fade-out;
+	animation-duration: 1.28s;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+.no-js {
+
+	.size,
+	.lamp {
+		display: none;
+	}
+
+	.year {
+		position: absolute;
+	}
+
+	.menu {
+		.overlay {
+			display: block;
+			opacity: 0;
+			transition: opacity .32s ease-in-out;
+			pointer-events: none;
+			background-color: rgba(0, 0, 0, .24);
+		}
+
+		.close {
+			display: none;
+		}
+
+		.items {
+			margin-left: auto;
+			transform: translate3d(100%, 0, 0);
+			transition: transform .16s ease-in;
+			pointer-events: all;
+
+			&:hover {
+				transform: translate3d(0, 0, 0);
+			}
+		}
+
+		&:hover {
+			.items {
+				transform: translate3d(0, 0, 0);
+				transition: transform .32s ease-out;
+			}
+
+			.overlay {
+				opacity: 1;
+			}
+		}
+	}
+
+
+	.me {
+		.middle {
+			overflow: hidden;
+		}
+
+		.text {
+			padding: 0;
+		}
+	}
+
+	#mrgoat {
+		transform: translate(0, 0);
+		pointer-events: all;
+	}
+
+	.mrgoat {
+		&.hidden {
+			display: none;
+			height: 0;
+		}
+
+		img {
+			display: none;
+
+			&:nth-child(4) {
+				display: block;
+			}
+		}
+	}
+
+
+
+	/* email movevent */
+
+	.hi {
+		a {
+			span {
+				position: relative;
+				display: block;
+				transition: margin .24s ease-out;
+			}
+
+			small {
+				transform: translate3d(0, 25%, 0);
+				transition: opacity .32s ease-in, transform .32s ease-in;
+			}
+		}
+
+		.email:hover span {
+			margin-right: var(--padl);
+		}
+
+		.social:hover span:first-child,
+		h1:hover .social span:nth-child(2) {
+			margin-left: var(--padl);
+		}
+
+		h1 .email:hover+.social span:nth-child(2),
+		h1 .social:hover span:nth-child(2) {
+			margin-left: 0;
+		}
+
+		.social:hover span:nth-child(2) {
+			margin-right: var(--padl);
+		}
+
+		.email:hover small,
+		.social:hover span:first-child small,
+		h1:hover .social span:nth-child(2) small {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+			transition: opacity .16s ease-out, transform .16s ease-out;
+		}
+
+		h1 .social:hover span:nth-child(2) small,
+		h1 .email:hover+.social span:nth-child(2) small {
+			transform: translate3d(0, 25%, 0);
+			opacity: 0;
+		}
+	}
+
+
+	.imuiux,
+	.follow,
+	.us,
+	.know,
+	.mrgoat {
+		position: relative;
+		pointer-events: auto;
+	}
+
+	#permission,
+	.grant,
+	.igstage .scrollto,
+	#statistics,
+	#hello,
+	#permission,
+	#spacer,
+	#credits {
+		display: none;
+	}
+}
+
+
+#nojs {
+	display: none;
+	background: url(../img/honocoroko.jpg) center top no-repeat;
+	background-size: cover;
+
+	.text {
+		text-align: center;
+		background-color: var(--white);
+		max-width: 300px;
+		padding: var(--padl);
+	}
+}
+
+.no-js #nojs {
+	display: flex;
+}

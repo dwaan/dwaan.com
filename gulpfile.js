@@ -6,9 +6,7 @@ const
 	concat = require('gulp-concat'),
 	connect = require('gulp-connect-php'),
 	browserSync = require('browser-sync'),
-	autoprefixer = require('autoprefixer'),
-	postcss = require('gulp-postcss'),
-	cssnano = require('cssnano'),
+	sass = require('gulp-sass')(require('sass')),
 	htmlmin = require('gulp-htmlmin'),
 	through = require('through2'),
 	webpack = require('webpack-stream'),
@@ -37,18 +35,16 @@ function javascript() {
 function css() {
 	return gulp.src([
 		'node_modules/normalize.css/normalize.css',
-		'src/css/main.css',
-		'src/css/404.css',
-		'src/css/nojs.css',
-		'src/css/print.css'
+		'src/css/main.scss',
+		'src/css/plurk.scss',
+		'src/css/404.scss',
+		'src/css/nojs.scss',
+		'src/css/print.scss'
 	])
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(postcss([
-			autoprefixer(),
-			cssnano()
-		]))
+		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('./css/'))
@@ -57,15 +53,12 @@ function css() {
 
 function css_vertical() {
 	return gulp.src([
-		'src/css/vertical-screen.css'
+		'src/css/vertical-screen.scss'
 	])
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(postcss([
-			autoprefixer(),
-			cssnano()
-		]))
+		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(concat("vertical-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('./css/'))
@@ -74,15 +67,12 @@ function css_vertical() {
 
 function css_horizontal() {
 	return gulp.src([
-		'src/css/horizontal-screen.css'
+		'src/css/horizontal-screen.scss'
 	])
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(postcss([
-			autoprefixer(),
-			cssnano()
-		]))
+		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(concat("horizontal-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('./css/'))
@@ -131,9 +121,9 @@ exports.default = function () {
 		});
 	});
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, javascript);
-	gulp.watch(['src/css/*.css', 'src/css/404.css', 'src/css/nojs.css', 'src/css/print.css'], { ignoreInitial: false }, css);
-	gulp.watch('src/css/vertical-screen.css', { ignoreInitial: false }, css_vertical);
-	gulp.watch('src/css/horizontal-screen.css', { ignoreInitial: false }, css_horizontal);
+	gulp.watch(['src/css/*.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss'], { ignoreInitial: false }, css);
+	gulp.watch('src/css/vertical-screen.scss', { ignoreInitial: false }, css_vertical);
+	gulp.watch('src/css/horizontal-screen.scss', { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/img/*.jpg', 'src/img/*.png', 'src/img/*/*.jpg', 'src/img/*/*.png'], { ignoreInitial: false }, img);
 	gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
 	gulp.watch('src/*.php', { ignoreInitial: false }, php);
