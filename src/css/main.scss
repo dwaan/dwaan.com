@@ -5,6 +5,11 @@
 @use 'selection';
 
 
+@mixin make-it-block($display: block) {
+	content: "";
+	display: $display;
+}
+
 /* Variables */
 :root {
 	--pic-w: 181px;
@@ -81,10 +86,8 @@
 
 
 #log {
-	position: fixed;
+	@include mixins.block(fixed, 10px, 50%);
 	padding: 0 16px;
-	top: 10px;
-	left: 50%;
 	color: white;
 	background-color: black;
 	border-radius: 4px;
@@ -154,16 +157,16 @@ html {
 	letter-spacing: .065rem;
 }
 
-%zero-will-change {
-	@include mixins.zero-box;
-	will-change: opacity, transform;
-}
-
 %transition {
 	transition: color .5s ease;
 }
 
-%bold-child-no-transiton {
+%zero-box-will-change {
+	@include mixins.zero-box;
+	will-change: opacity, transform;
+}
+
+%bold-child-initial-transiton {
 	font-weight: 500;
 
 	* {
@@ -184,9 +187,9 @@ html {
 }
 
 h1 {
-	@extend %zero-will-change;
+	@extend %zero-box-will-change;
 	@extend %transition;
-	@extend %bold-child-no-transiton;
+	@extend %bold-child-initial-transiton;
 	margin: 0 0 var(--padl) 0;
 	font-size: 5rem;
 	line-height: 80%;
@@ -194,9 +197,9 @@ h1 {
 }
 
 h2 {
-	@extend %zero-will-change;
+	@extend %zero-box-will-change;
 	@extend %transition;
-	@extend %bold-child-no-transiton;
+	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
 	margin: 0 0 var(--padl);
 	font-size: 3.2rem;
@@ -205,9 +208,9 @@ h2 {
 }
 
 h3 {
-	@extend %zero-will-change;
+	@extend %zero-box-will-change;
 	@extend %transition;
-	@extend %bold-child-no-transiton;
+	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
 	margin: 0 0 var(--padm);
 	font-size: 2rem;
@@ -215,9 +218,9 @@ h3 {
 }
 
 h4 {
-	@extend %zero-will-change;
+	@extend %zero-box-will-change;
 	@extend %transition;
-	@extend %bold-child-no-transiton;
+	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
 	margin: 0 0 var(--padm);
 	font-size: 1.4rem;
@@ -225,7 +228,7 @@ h4 {
 }
 
 p {
-	@extend %zero-will-change;
+	@extend %zero-box-will-change;
 	@extend %transition;
 	@extend %gray-color;
 	font-size: 1rem;
@@ -299,6 +302,14 @@ textarea {
 }
 
 /* make img inside picture tag follow picture size */
+img {
+	display: block;
+
+	&.rounded {
+		border-radius: var(--pads);
+	}
+}
+
 picture img {
 	width: 100% !important;
 	height: auto !important;
@@ -362,42 +373,44 @@ picture img {
 
 	.support {
 		display: flex;
-	}
 
-	.support h1 {
-		margin: 0 var(--padl) 0 0;
-		font-size: 20vh;
-		line-height: 20vh;
-	}
+		h1 {
+			margin: 0 var(--padl) 0 0;
+			font-size: 20vh;
+			line-height: 20vh;
+		}
 
-	.support p,
-	.support h4 {
-		padding: 0;
-	}
+		p,
+		h4 {
+			padding: 0;
+		}
 
-	.support h4 {
-		margin: 0;
-		font-size: 8vh;
-	}
+		h4 {
+			margin: 0;
+			font-size: 8vh;
+		}
 
-	.support p {
-		margin: 0 0 0 var(--padl);
-		font-size: 5vh;
+		p {
+			margin: 0 0 0 var(--padl);
+			font-size: 5vh;
+		}
 	}
 }
 
 @media (min-aspect-ratio: 5/1) {
-	.support h1 {
-		font-size: 30vh;
-		line-height: 30vh;
-	}
+	.support {
+		h1 {
+			font-size: 30vh;
+			line-height: 30vh;
+		}
 
-	.support h4 {
-		font-size: 12vh;
-	}
+		h4 {
+			font-size: 12vh;
+		}
 
-	.support p {
-		font-size: 10vh;
+		p {
+			font-size: 10vh;
+		}
 	}
 }
 
@@ -408,7 +421,7 @@ picture img {
 	@extend %inline-block;
 
 	&:before {
-		content: "";
+		@include make-it-block;
 		@include mixins.block-spread($zindex: -1, $opacity: 0, $backgroundcolor: var(--yellow), $borderradius: 8px);
 		pointer-events: none;
 		transform: scale(1.15);
@@ -416,14 +429,16 @@ picture img {
 		will-change: opacity, transform;
 
 		&.big {
-			@include mixins.position(-4px, -12px);
+			@include mixins.positions(-4px, -12px);
 		}
 
 		&.superbig {
-			@include mixins.position(-8px, -20px);
+			@include mixins.positions(-8px, -20px);
 		}
+	}
 
-		&:hover {
+	&:hover {
+		&:before {
 			opacity: 1;
 			transform: scale(1);
 		}
@@ -460,11 +475,7 @@ picture img {
 
 #corner {
 	div {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: var(--padm);
-		height: var(--padm);
+		@include mixins.block(fixed, 0, 0, var(--padm), var(--padm));
 		background-color: #000;
 		transform-origin: center;
 		transform: translate3d(0, 0, 0);
@@ -478,10 +489,7 @@ picture img {
 	}
 
 	.br {
-		top: initial;
-		bottom: 0;
-		left: initial;
-		right: 0;
+		@include mixins.positions(initial, 0, 0, initial);
 		transform: rotate(180deg);
 	}
 
@@ -506,7 +514,7 @@ picture img {
 		align-items: center;
 		justify-content: center;
 		position: fixed;
-		@include mixins.position(initial, var(--padx), var(--pady));
+		@include mixins.positions(initial, var(--padx), var(--pady));
 		font-size: .7rem;
 		letter-spacing: .05rem;
 		text-transform: uppercase;
@@ -536,9 +544,7 @@ picture img {
 	}
 
 	.simple {
-		position: fixed;
-		top: initial;
-		left: initial;
+		@include mixins.block(fixed, initial, initial);
 		bottom: var(--pady);
 
 		span {
@@ -575,8 +581,7 @@ picture img {
 
 .arrow {
 	&:after {
-		content: "";
-		display: block;
+		@include make-it-block;
 		background: url(../img/arrow.svg) no-repeat 100% 50%;
 	}
 
@@ -611,8 +616,7 @@ picture img {
 
 		&:before,
 		&:after {
-			content: "";
-			display: block;
+			@include make-it-block;
 			margin: 0;
 			pointer-events: none;
 		}
@@ -789,13 +793,10 @@ header {
 
 .items {
 	.close {
-		position: absolute;
-		top: var(--pady);
-		left: initial;
+		@include mixins.block(absolute, var(--pady), initial, initial, 36px);
 		right: var(--padx);
 		padding: 0 12px 0 48px;
 		margin: 4px -12px;
-		height: 36px;
 		line-height: 36px;
 		border-radius: 8px;
 		transition: all .15s ease;
@@ -807,13 +808,8 @@ header {
 
 			&:after,
 			&:before {
-				content: "";
-				position: absolute;
-				top: 50%;
-				left: 24px;
-				display: block;
-				width: 20px;
-				height: 2px;
+				@include make-it-block;
+				@include mixins.block(absolute, 50%, 24px, 20px, 2px);
 				background-color: var(--black);
 				border-radius: 2px;
 				transform-origin: center;
@@ -825,9 +821,13 @@ header {
 			}
 		}
 
-		&:before,
-		&:hover:before {
-			background-color: var(--black-25);
+		&:before {
+			@include make-it-block;
+
+			&,
+			&:hover {
+				background-color: var(--black-25);
+			}
 		}
 	}
 
@@ -858,12 +858,8 @@ header {
 
 		&:before,
 		&:after {
-			content: "";
-			display: block;
-			position: absolute;
-			z-index: 2;
-			top: 50%;
-			left: 0;
+			@include make-it-block;
+			@include mixins.block(absolute, 50%, 0, $zindex: 2);
 			pointer-events: none;
 			transform: translate3d(0, -50%, 0);
 		}
@@ -950,7 +946,7 @@ header {
 		background-color: var(--black);
 		visibility: hidden;
 		opacity: 0;
-		@include mixins.position;
+		@include mixins.positions;
 	}
 }
 
@@ -1018,12 +1014,8 @@ header {
 
 /* Homepage footer */
 .footer {
-	position: fixed;
-	z-index: 2;
-	top: initial;
+	@include mixins.block(fixed, initial, 0, 100%, $zindex: 2);
 	bottom: 0;
-	left: 0;
-	width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: flex-end;
@@ -1138,10 +1130,8 @@ header {
 	}
 
 	small {
-		top: 0;
+		@include mixins.block(absolute, 0, initial);
 		right: 0;
-		left: initial;
-		position: absolute;
 		font-size: .6rem;
 		background-color: var(--yellow);
 		color: var(--black);
@@ -1172,48 +1162,41 @@ header {
 		position: absolute;
 		transform: scale3d(1.25, 1.25, 1);
 	}
-}
 
-/* Purple */
-.flare1 {
-	top: 17.5%;
-	left: -70%;
-}
+	/* Purple */
+	.flare1 {
+		@include mixins.position(17.5%, -70%);
+	}
 
-/* Red */
-.flare2 {
-	top: 30%;
-	left: -25%;
-}
+	/* Red */
+	.flare2 {
+		@include mixins.position(30%, -25%);
+	}
 
-/* Blue */
-.flare3 {
-	top: 17.5%;
-	left: -10%;
-}
+	/* Blue */
+	.flare3 {
+		@include mixins.position(17.5%, -10%);
+	}
 
-/* Green */
-.flare4 {
-	top: 20%;
-	left: 25%;
-}
+	/* Green */
+	.flare4 {
+		@include mixins.position(20%, 25%);
+	}
 
-/* Yellow */
-.flare5 {
-	top: 10%;
-	left: 40%;
-}
+	/* Yellow */
+	.flare5 {
+		@include mixins.position(10%, 40%);
+	}
 
-/* Blue */
-.flare6 {
-	top: 15%;
-	left: -80%;
-}
+	/* Blue */
+	.flare6 {
+		@include mixins.position(15%, -80%);
+	}
 
-/* Red */
-.flare7 {
-	top: 35%;
-	left: -110%;
+	/* Red */
+	.flare7 {
+		@include mixins.position(35%, -110%);
+	}
 }
 
 
@@ -1230,27 +1213,34 @@ header {
 	}
 
 	.shadow {
-		content: "";
+		@include make-it-block;
+		@include mixins.positions;
 		position: absolute;
 		z-index: 0;
-		display: block;
-		@include mixins.position;
 		opacity: .4;
 		background-size: 100%;
-		/*background-color: #333;*/
 		transform: translate3d(-10px, 30px, 0);
 		filter: blur(40px);
 	}
 }
 
 /* Style text on the left and image spread like fan */
+
+%style-spread {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
 .style-spread {
+	@extend %style-spread;
+
 	&:after {
+		@include make-it-block;
+		@include mixins.positions(85%, 0, -1%);
 		z-index: 3;
-		display: block;
-		content: "";
 		position: absolute;
-		@include mixins.position(85%, 0, -1%);
 		background: transparent;
 		background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
 		background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
@@ -1290,15 +1280,9 @@ header {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
 }
 
-.style-spread,
 .style-spread-left {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-}
+	@extend %style-spread;
 
-.style-spread-left {
 	.text {
 		order: 2;
 	}
@@ -1308,8 +1292,26 @@ header {
 	}
 }
 
+
+/*
+	Style top
+*/
+
+%style-top {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: flex-start;
+
+	.text {
+		display: flex;
+		flex-flow: column nowrap;
+	}
+}
+
 /* Style text on top and Images in the bottom */
 .style-top {
+	@extend %style-top;
 	height: auto;
 
 	.thumbs {
@@ -1326,23 +1328,12 @@ header {
 	}
 }
 
-.style-top,
-.style-top-text {
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	justify-content: flex-start;
-
-	.text {
-		display: flex;
-		flex-flow: column nowrap;
-	}
-}
-
 /* Style text on top without image */
 .style-top-text {
+	@extend %style-top;
 	justify-content: center;
 }
+
 
 /* Style with mansonry like layout with text on the right */
 .style-masonry {
@@ -1448,27 +1439,27 @@ header {
 		margin: -300px 0 -85px;
 		display: flex;
 		align-items: flex-end;
-	}
 
-	.thumbs li {
-		flex: 1;
-		padding-bottom: 160px;
-	}
+		li {
+			flex: 1;
+			padding-bottom: 160px;
 
-	.thumbs li:last-child {
-		padding-bottom: 0;
-		margin-right: -40px;
-	}
+			picture {
+				box-shadow: none;
+				padding-right: var(--padl);
+			}
 
-	.thumbs li picture {
-		box-shadow: none;
-		padding-right: var(--padl);
-	}
+			&:last-child {
+				padding-bottom: 0;
+				margin-right: -40px;
 
-	.thumbs li:last-child picture {
-		width: 495px;
-		margin: 0;
-		padding-right: 0;
+				picture {
+					width: 495px;
+					margin: 0;
+					padding-right: 0;
+				}
+			}
+		}
 	}
 }
 
@@ -1486,14 +1477,8 @@ header {
 
 	.before,
 	.after {
-		content: "";
-		position: absolute;
-		z-index: 2;
-		top: 50vh;
-		right: 50vw;
-		display: block;
-		width: 100px;
-		height: 30px;
+		@include make-it-block;
+		@include mixins.block(absolute, 50vh, 50vw, 100px, 30px, 2);
 		margin-top: -15px;
 		background: url(../img/arrow.svg) right center no-repeat;
 		background-size: contain;
@@ -1515,40 +1500,43 @@ header {
 		width: 65vw;
 	}
 
-	ul {
-		white-space: nowrap;
-		height: 100%;
-	}
-
-	.thumbs,
-	ul li {
+	%hundred-percent {
 		width: 100%;
 		height: 100%;
 	}
 
+	ul {
+		white-space: nowrap;
+		height: 100%;
+
+		li {
+			@extend %hundred-percent;
+			display: flex;
+			flex: none;
+			float: left;
+			align-items: center;
+			justify-content: center;
+			scroll-snap-align: start;
+		}
+	}
+
 	.thumbs {
+		@extend %hundred-percent;
 		position: relative;
 		z-index: 1;
 		overflow-y: hidden;
 		overflow-x: auto;
-		height: 100%;
 		margin-bottom: -50px;
 		scroll-snap-type: x mandatory;
 	}
-
-	ul li {
-		display: flex;
-		flex: none;
-		float: left;
-		align-items: center;
-		justify-content: center;
-		scroll-snap-align: start;
-	}
 }
 
-.dark .style-slideshow .before,
-.dark .style-slideshow .after {
-	background-image: url(../img/arrow-white.svg);
+.dark .style-slideshow {
+
+	.before,
+	.after {
+		background-image: url(../img/arrow-white.svg);
+	}
 }
 
 .style-slideshow-small {
@@ -1654,8 +1642,7 @@ header {
 
 		&:before,
 		&:after {
-			content: "";
-			display: inline-block;
+			@include make-it-block(inline-block);
 		}
 
 		&:before {
@@ -1689,103 +1676,77 @@ header {
 	}
 }
 
-/* Common ol/ul style with leading zero style */
-.zero {
-	display: flex;
-	width: 100%;
-	@include mixins.zero-box;
+/* Common ol/ul style */
+ul,
+ol {
 
-	li {
-		position: relative;
+	/* Common ol/ul style with leading zero style */
+	&.zero {
 		display: flex;
-		align-items: flex-start;
-		flex: 1;
-		padding: 0;
-		line-height: 150%;
-		letter-spacing: 0.02em;
-		font-feature-settings: 'liga';
-		color: var(--black-gray-light);
+		width: 100%;
+		@include mixins.zero-box;
 
-		&:before {
-			content: "00";
+		li {
+			position: relative;
 			display: flex;
-			flex: 0;
+			align-items: flex-start;
+			flex: 1;
+			padding: 0;
+			line-height: 150%;
+			letter-spacing: 0.02em;
+			font-feature-settings: 'liga';
+			color: var(--black-gray-light);
 
-			&:nth-child(2) {
-				content: "01"
-			}
+			&:before {
+				display: flex;
+				flex: 0;
 
-			&:nth-child(3) {
-				content: "02"
-			}
-
-			&:nth-child(4) {
-				content: "03"
-			}
-
-			&:nth-child(5) {
-				content: "04"
-			}
-
-			&:nth-child(6) {
-				content: "05"
-			}
-
-			&:nth-child(7) {
-				content: "06"
-			}
-
-			&:nth-child(8) {
-				content: "07"
-			}
-
-			&:nth-child(9) {
-				content: "08"
-			}
-
-			&:nth-child(10) {
-				content: "09"
+				@for $i from 1 through 10 {
+					&:nth-child(#{$i}) {
+						content: "0" + ($i - 1);
+					}
+				}
 			}
 		}
 	}
-}
 
-/* ol/ul with flat style */
-.flat {
-	display: flex;
-	list-style: none;
-	@include mixins.zero-box;
-	flex-flow: row nowrap;
-}
-
-/* ol/ul with without style */
-.bland {
-	display: flex;
-	list-style: none;
-	@include mixins.zero-box;
-	flex-flow: column nowrap;
-}
-
-/* ol/ul for branding color for Suzuki */
-.color {
-	display: flex;
-	flex-flow: column nowrap;
-
-	li {
+	/* ol/ul with flat style */
+	&.flat {
 		display: flex;
-		align-items: center;
-		border: 1px solid var(--black-50);
-		font-size: 1rem;
-		line-height: 15px;
-		letter-spacing: 0.05em;
-		border-radius: 4px;
+		list-style: none;
+		@include mixins.zero-box;
+		flex-flow: row nowrap;
+	}
 
-		&:last-child {
-			border: none;
-			width: auto;
-			height: auto;
+	/* ol/ul with without style */
+	&.bland {
+		display: flex;
+		list-style: none;
+		@include mixins.zero-box;
+		flex-flow: column nowrap;
+	}
+
+	/* ol/ul for branding color for Suzuki */
+	&.color {
+		display: flex;
+		flex-flow: column nowrap;
+
+		li {
+			display: flex;
+			align-items: center;
+			border: 1px solid var(--black-50);
+			font-size: 1rem;
+			line-height: 15px;
+			letter-spacing: 0.05em;
+			border-radius: 4px;
+
+			&:last-child {
+				border: none;
+				width: auto;
+				height: auto;
+			}
+
 		}
-
 	}
 }
 
@@ -1819,13 +1780,9 @@ header {
 		transition: color .5s ease;
 
 		&:after {
-			content: "";
-			position: absolute;
-			top: initial;
+			@include make-it-block;
+			@include mixins.block(absolute, initial, initial, 0, 4px);
 			bottom: -8px;
-			display: block;
-			width: 0%;
-			height: 4px;
 			border-radius: 2px;
 			background-color: var(--black);
 			transition: width .25s ease-in-out;
@@ -1872,7 +1829,8 @@ header {
 
 .intro .text {
 	display: flex;
-	flex: row nowrap;
+	flex-direction: column;
+	flex-wrap: nowrap;
 	font-size: .8rem;
 	color: var(--gray-light);
 
@@ -1920,74 +1878,72 @@ header {
 }
 
 #now,
-#webdesigner {
-	z-index: 1;
-	align-items: flex-start;
-}
-
-#sayhi {
-	z-index: 0
-}
-
-#now,
 #webdesigner,
 #sayhi,
 #webdesigner .thumbs {
 	pointer-events: none;
 }
 
-#now .arrow,
-#webdesigner .arrow,
-#sayhi .arrow,
-#now .text,
-#webdesigner .text,
-#sayhi .text {
-	pointer-events: auto;
+#now,
+#webdesigner,
+#sayhi {
+
+	.arrow,
+	.text {
+		pointer-events: auto;
+	}
 }
 
-#now .text,
-#webdesigner .text {
-	text-align: left;
-	z-index: 2;
-}
-
-#now .thumbs,
-#webdesigner .thumbs {
-	position: absolute;
-	@include mixins.position(var(--pady), var(--padx), var(--pady), 50vw);
+#now,
+#webdesigner {
 	z-index: 1;
+	align-items: flex-start;
+
+	.text {
+		text-align: left;
+		z-index: 2;
+	}
+
+	.thumbs {
+		position: absolute;
+		@include mixins.positions(var(--pady), var(--padx), var(--pady), 50vw);
+		z-index: 1;
+	}
+
+	img {
+		@include mixins.block(absolute, 50%, 50%, auto !important, 100% !important);
+		transform: translate(-50%, -50%);
+
+		.dark {
+			opacity: 0;
+		}
+
+		.light {
+			opacity: 1;
+		}
+	}
 }
 
-#now img,
-#webdesigner img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: auto !important;
-	height: 100% !important;
-	transform: translate(-50%, -50%);
+.dark {
+
+	#now,
+	#webdesigner {
+		img {
+
+			.dark {
+				opacity: 1;
+			}
+
+			.light {
+				opacity: 0;
+			}
+		}
+	}
 }
 
-#now img.dark,
-#webdesigner img.dark {
-	opacity: 0;
+#sayhi {
+	z-index: 0
 }
-
-#now img.light,
-#webdesigner img.light {
-	opacity: 1;
-}
-
-.dark #now img.dark,
-.dark #webdesigner img.dark {
-	opacity: 1;
-}
-
-.dark #now img.light,
-.dark #webdesigner img.light {
-	opacity: 0;
-}
-
 
 
 /* Mr Goat */
@@ -2029,12 +1985,8 @@ header {
 
 	.text,
 	.thumbs {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
+		@include mixins.block(absolute, 0, 0, 100vw, 100%);
 		max-width: initial;
-		height: 100%;
 		display: flex;
 		flex-flow: column;
 		align-items: center;
@@ -2101,11 +2053,9 @@ header {
 		.line hr,
 		.dot i,
 		.dot hr {
-			position: absolute;
-			top: 50%;
-			display: block;
-			width: 100%;
+			@include mixins.block(absolute, 50%, initial, 100%);
 			@include mixins.zero-box;
+			display: block;
 			border: none;
 			background-color: var(--black);
 			border-radius: var(--pads);
@@ -2124,12 +2074,14 @@ header {
 			width: var(--pads);
 		}
 
-		.line hr,
-		.dot hr {
-			left: initial;
-			right: 0;
-			flex: 1;
-			height: 1px;
+		.line,
+		.dot {
+			hr {
+				left: initial;
+				right: 0;
+				flex: 1;
+				height: 1px;
+			}
 		}
 
 		p {
@@ -2160,27 +2112,32 @@ header {
 #nyc {
 	left: var(--padx);
 	right: 50vw;
+
+	.dot {
+		transform-origin: 0 center;
+	}
+
+	@media (min-width: 640px) {
+		& {
+			left: calc(2 * var(--padx));
+		}
+	}
 }
 
 #viet {
 	top: 30vh;
+
+	.dot {
+		transform: rotate(45deg);
+	}
 }
 
 #nyc {
 	bottom: 30vh;
-}
 
-#viet .dot,
-#nyc .dot {
-	transform-origin: 0 center;
-}
-
-#viet .dot {
-	transform: rotate(45deg);
-}
-
-#nyc .dot {
-	transform: rotate(-45deg);
+	.dot {
+		transform: rotate(-45deg);
+	}
 }
 
 #food,
@@ -2188,35 +2145,40 @@ header {
 	justify-content: flex-end;
 	left: 50vw;
 	right: var(--padx);
+
+	p {
+		text-align: left;
+		order: 3;
+		margin: 0 0 0 var(--pads);
+	}
+
+	.dot,
+	.dot {
+		order: 1;
+		transform-origin: 100% center;
+	}
+
+	@media (min-width: 640px) {
+		& {
+			right: calc(2 * var(--padx))
+		}
+	}
 }
 
 #food {
 	top: 35vh;
+
+	.dot {
+		transform: rotate(-45deg);
+	}
 }
 
 #travel {
 	bottom: 35vh;
-}
 
-#food p,
-#travel p {
-	text-align: left;
-	order: 3;
-	margin: 0 0 0 var(--pads);
-}
-
-#food .dot,
-#travel .dot {
-	order: 1;
-	transform-origin: 100% center;
-}
-
-#food .dot {
-	transform: rotate(-45deg);
-}
-
-#travel .dot {
-	transform: rotate(45deg);
+	.dot {
+		transform: rotate(45deg);
+	}
 }
 
 #food .dot hr,
@@ -2226,19 +2188,6 @@ header {
 #food .line hr,
 #travel .line hr {
 	left: 0;
-}
-
-@media (min-width: 640px) {
-
-	#viet,
-	#nyc {
-		left: calc(2 * var(--padx));
-	}
-
-	#food,
-	#travel {
-		right: calc(2 * var(--padx))
-	}
 }
 
 #post {
@@ -2310,7 +2259,7 @@ header {
 			will-change: opacity, transform;
 
 			&:after {
-				content: "";
+				@include make-it-block;
 				@include mixins.block-spread(none, absolute, 0);
 				background: url(../img/drop-shadow.webp) 0 0 no-repeat;
 				background-size: 100% 100%;
@@ -2367,31 +2316,23 @@ header {
 	}
 
 	.thumbs {
-		z-index: 1;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
+		@include mixins.block(absolute, 0, 0, 100%, 100%, 1, hidden);
 	}
 
 	picture {
+		@include mixins.block(absolute, 0, 50%);
 		display: block;
-		position: absolute;
-		top: 0;
-		left: 50%;
 		opacity: .2;
 		transform: translate3d(-50%, 0, 0);
 		will-change: transform;
-	}
 
-	picture,
-	picture img {
-		width: auto !important;
-		height: auto !important;
-		min-width: 100% !important;
-		min-height: 100% !important;
+		&,
+		img {
+			width: auto !important;
+			height: auto !important;
+			min-width: 100% !important;
+			min-height: 100% !important;
+		}
 	}
 
 	a {
@@ -2429,20 +2370,16 @@ header {
 /* Say Hi page */
 .hi {
 
-	h1,
-	h1 a,
-	h1 span,
-	h1 small {
-		display: flex;
-		flex-direction: row nowrap;
-	}
-
-	.main-text h1 {
-		margin: 0;
-		letter-spacing: -0.06em;
-	}
-
 	h1 {
+
+		&,
+		a,
+		span,
+		small {
+			display: flex;
+			flex-direction: row nowrap;
+		}
+
 		a {
 			cursor: pointer;
 		}
@@ -2455,10 +2392,8 @@ header {
 		}
 
 		small {
-			position: absolute;
+			@include mixins.block(absolute, 100%, 0);
 			align-items: flex-end;
-			left: 0;
-			top: 100%;
 			font-size: .8rem;
 			font-weight: 400;
 			line-height: var(--padl);
@@ -2466,25 +2401,27 @@ header {
 			height: var(--padxxl);
 			opacity: 0;
 			white-space: nowrap;
-		}
 
-		small:before,
-		small:after {
-			position: absolute;
-			left: var(--pads);
-			top: 0;
-			bottom: calc(var(--padl) / 2);
-			content: "";
-			display: block;
-			border-left: 1px solid var(--black);
-		}
+			&:before,
+			&:after {
+				@include make-it-block;
+				@include mixins.block(absolute, 0, var(--pads));
+				bottom: calc(var(--padl) / 2);
+				border-left: 1px solid var(--black);
+			}
 
-		small:after {
-			top: initial;
-			padding-left: var(--padm);
-			border-left: 0;
-			border-top: 1px solid var(--black);
+			&:after {
+				top: initial;
+				padding-left: var(--padm);
+				border-left: 0;
+				border-top: 1px solid var(--black);
+			}
 		}
+	}
+
+	.main-text h1 {
+		margin: 0;
+		letter-spacing: -0.06em;
 	}
 
 	.flares {
@@ -2493,12 +2430,8 @@ header {
 		align-items: center;
 
 		img {
-			position: absolute;
-			top: initial;
-			left: initial;
+			@include mixins.block(absolute, initial, initial, auto, 75vh);
 			opacity: 0;
-			width: auto;
-			height: 75vh;
 			transform: initial;
 			will-change: transform, opacity;
 		}
@@ -2517,6 +2450,8 @@ header {
 	align-items: center;
 }
 
-img.rounded {
-	border-radius: var(--pads);
-}
+
+@import 'plurk';
+@import '404';
+@import 'nojs';
+@import 'print';

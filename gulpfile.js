@@ -35,11 +35,7 @@ function javascript() {
 function css() {
 	return gulp.src([
 		'node_modules/normalize.css/normalize.css',
-		'src/css/main.scss',
-		'src/css/plurk.scss',
-		'src/css/404.scss',
-		'src/css/nojs.scss',
-		'src/css/print.scss'
+		'src/css/main.scss'
 	])
 		.pipe(sourcemaps.init({
 			loadMaps: true

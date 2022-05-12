@@ -5,7 +5,12 @@
 	padding: 0;
 }
 
-@mixin position($top: 0, $right: false, $bottom: false, $left: false) {
+@mixin position($top: 0, $left: 0) {
+	top: $top;
+	left: $left;
+}
+
+@mixin positions($top: 0, $right: false, $bottom: false, $left: false) {
 	top: $top;
 
 	@if $right  !=false {
@@ -41,7 +46,7 @@
 	display: $display;
 	position: $position;
 	z-index: $zindex;
-	@include position();
+	@include positions();
 
 	@if $backgroundcolor  !=false {
 		background-color: $backgroundcolor;
@@ -53,5 +58,27 @@
 
 	@if $borderradius  !=false {
 		border-radius: $borderradius;
+	}
+}
+
+@mixin block($position: absolute, $top: 0, $left: 0, $width: false, $height: false, $zindex: false, $overflow: false) {
+	@if $zindex  !=false {
+		z-index: $zindex;
+	}
+
+	position: $position;
+	top: $top;
+	left: $left;
+
+	@if $width  !=false {
+		width: $width;
+	}
+
+	@if $height  !=false {
+		height: $height;
+	}
+
+	@if $overflow  !=false {
+		overflow: $overflow;
 	}
 }

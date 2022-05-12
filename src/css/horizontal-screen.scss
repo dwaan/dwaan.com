@@ -681,7 +681,8 @@ header {
 #sayhi .text {
 	display: flex;
 	text-align: left;
-	flex: row nowrap;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	align-items: flex-end;
 	padding: 0;
 }
