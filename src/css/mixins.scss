@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+
+$screen-ultrawide: 1900px;
+$screen-verywide: 1600px;
+$screen-wide: 1194px;
+$screen-abitwide: 1024px;
+$screen-medium: 900px;
+$screen-small: 760px;
+
 @mixin zero-box() {
 	margin: 0;
 	padding: 0;
@@ -80,5 +88,27 @@
 
 	@if $overflow  !=false {
 		overflow: $overflow;
+	}
+}
+
+@mixin typography($fontsize: false, $fontweight: false, $lineheight: false, $letterspacing: false, $color: false) {
+	@if $fontsize  !=false {
+		font-size: $fontsize;
+	}
+
+	@if $fontweight  !=false {
+		font-weight: $fontweight;
+	}
+
+	@if $lineheight  !=false {
+		line-height: $lineheight;
+	}
+
+	@if $letterspacing  !=false {
+		letter-spacing: $letterspacing;
+	}
+
+	@if $color  !=false {
+		color: $color;
 	}
 }

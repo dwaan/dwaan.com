@@ -88,12 +88,11 @@
 #log {
 	@include mixins.block(fixed, 10px, 50%);
 	padding: 0 16px;
-	color: white;
 	background-color: black;
 	border-radius: 4px;
 	transform: translate3d(-50%, 0, 0);
 	z-index: 9999;
-	font-size: .7rem;
+	@include mixins.typography($fontsize: .5rem, $color: white);
 }
 
 
@@ -191,9 +190,7 @@ h1 {
 	@extend %transition;
 	@extend %bold-child-initial-transiton;
 	margin: 0 0 var(--padl) 0;
-	font-size: 5rem;
-	line-height: 80%;
-	letter-spacing: -0.06em;
+	@include mixins.typography(5rem, false, 80%, -0.06em);
 }
 
 h2 {
@@ -202,9 +199,7 @@ h2 {
 	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
 	margin: 0 0 var(--padl);
-	font-size: 3.2rem;
-	line-height: 90%;
-	letter-spacing: -0.02em;
+	@include mixins.typography(3.2rem, false, 90%, -0.02em);
 }
 
 h3 {
@@ -213,8 +208,7 @@ h3 {
 	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
 	margin: 0 0 var(--padm);
-	font-size: 2rem;
-	line-height: 100%;
+	@include mixins.typography(2rem, false, 100%);
 }
 
 h4 {
@@ -223,18 +217,15 @@ h4 {
 	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
 	margin: 0 0 var(--padm);
-	font-size: 1.4rem;
-	line-height: 110%;
+	@include mixins.typography(1.4rem, false, 110%);
 }
 
 p {
 	@extend %zero-box-will-change;
 	@extend %transition;
 	@extend %gray-color;
-	font-size: 1rem;
-	line-height: 175%;
+	@include mixins.typography(1rem, normal, 175%, .02em);
 	opacity: .8;
-	letter-spacing: 0.02em;
 
 	a {
 		text-decoration: underline;
@@ -255,9 +246,7 @@ a {
 
 small {
 	display: inline-block;
-	font-size: .8rem;
-	line-height: 12px;
-	letter-spacing: 0.14em;
+	@include mixins.typography(.8rem, inherit, 12px, .14em);
 }
 
 /* Basic HR styling */
@@ -376,8 +365,7 @@ picture img {
 
 		h1 {
 			margin: 0 var(--padl) 0 0;
-			font-size: 20vh;
-			line-height: 20vh;
+			@include mixins.typography(20vh, false, 20vh);
 		}
 
 		p,
@@ -400,8 +388,7 @@ picture img {
 @media (min-aspect-ratio: 5/1) {
 	.support {
 		h1 {
-			font-size: 30vh;
-			line-height: 30vh;
+			@include mixins.typography(30vh, false, 30vh);
 		}
 
 		h4 {
@@ -515,10 +502,8 @@ picture img {
 		justify-content: center;
 		position: fixed;
 		@include mixins.positions(initial, var(--padx), var(--pady));
-		font-size: .7rem;
-		letter-spacing: .05rem;
+		@include mixins.typography(.7rem, 400, false, .05rem);
 		text-transform: uppercase;
-		font-weight: 400;
 		color: inherit;
 	}
 
@@ -586,9 +571,7 @@ picture img {
 	}
 
 	span {
-		font-size: .9rem;
-		line-height: 17px;
-		letter-spacing: 0.05em;
+		@include mixins.typography(.9rem, inherit, 17px, .05rem);
 		order: 0;
 		white-space: nowrap;
 		align-self: center;
@@ -752,10 +735,7 @@ header {
 .switch span {
 	display: block;
 	height: 44px;
-	line-height: 44px;
-	font-size: .9rem;
-	letter-spacing: 0.05em;
-	color: var(--black);
+	@include mixins.typography(.9rem, inherit, 44px, .05rem, var(--black));
 }
 
 .switch {
@@ -802,6 +782,10 @@ header {
 		transition: all .15s ease;
 		will-change: background-color;
 
+		&:before {
+			@include make-it-block;
+		}
+
 		span {
 			display: inline-block;
 			text-indent: -666rem;
@@ -820,22 +804,13 @@ header {
 				transform: translate3d(-50%, -50%, 0) rotate(-45deg);
 			}
 		}
-
-		&:before {
-			@include make-it-block;
-
-			&,
-			&:hover {
-				background-color: var(--black-25);
-			}
-		}
 	}
 
 	ol {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
 		@include mixins.zero-box;
+		display: flex;
+		width: 100%;
+		flex-direction: column;
 	}
 
 	li {
@@ -845,8 +820,7 @@ header {
 		margin: 0 0 var(--padl);
 		padding: 0;
 		list-style: none;
-		font-size: 1.6rem;
-		letter-spacing: 0.025em;
+		@include mixins.typography(1.6rem, $letterspacing: .025em);
 
 		&.hr {
 			display: block;
@@ -969,11 +943,8 @@ header {
 	flex-flow: column;
 
 	h1 {
-		font-size: 6rem;
-		font-weight: 500;
+		@include mixins.typography(6rem, false, 80%, false, var(--black));
 		padding: 0 !important;
-		line-height: 80%;
-		color: var(--black);
 		max-width: 700px;
 
 		a {
@@ -1037,12 +1008,9 @@ header {
 
 
 .reading {
-	font-weight: 500;
-	font-size: .6rem;
-	line-height: 12px;
+	@include mixins.typography(.6rem, 500, 12px, .14em);
 	display: flex;
 	align-items: flex-end;
-	letter-spacing: 0.14em;
 	text-transform: uppercase;
 	pointer-events: auto;
 }
@@ -1087,15 +1055,13 @@ header {
 	.plurksubtitle {
 		height: auto !important;
 		margin-top: 2.5vh;
-		font-size: 1.6rem;
-		font-weight: 300;
+		@include mixins.typography(1.6rem, 300);
 	}
 
 	&,
 	sub,
 	sup {
-		font-size: 5rem;
-		font-weight: 500;
+		@include mixins.typography(5rem, 500);
 		@include mixins.zero-box;
 	}
 
@@ -1132,9 +1098,8 @@ header {
 	small {
 		@include mixins.block(absolute, 0, initial);
 		right: 0;
-		font-size: .6rem;
+		@include mixins.typography(.6rem, $color: var(--black));
 		background-color: var(--yellow);
-		color: var(--black);
 		padding: calc(var(--pads) / 2) var(--pads);
 		border-radius: 8px;
 		transform: translate(50%, -50%);
@@ -1201,9 +1166,18 @@ header {
 
 
 /* Detail page common style */
-.detail picture {
-	position: relative;
-	display: block;
+.detail {
+	picture {
+		position: relative;
+		display: block;
+	}
+	.color li {
+		border: 1px solid var(--black-25);
+
+		&:last-child {
+			border: none;
+		}
+	}
 }
 
 .dark .detail picture {
@@ -1700,9 +1674,11 @@ ol {
 			&:before {
 				display: flex;
 				flex: 0;
+			}
 
-				@for $i from 1 through 10 {
-					&:nth-child(#{$i}) {
+			@for $i from 1 through 10 {
+				&:nth-child(#{$i}) {
+					&:before {
 						content: "0" + ($i - 1);
 					}
 				}
@@ -1735,9 +1711,7 @@ ol {
 			display: flex;
 			align-items: center;
 			border: 1px solid var(--black-50);
-			font-size: 1rem;
-			line-height: 15px;
-			letter-spacing: 0.05em;
+			@include mixins.typography(1rem, false, 15p, .05em);
 			border-radius: 4px;
 
 			&:last-child {
@@ -1814,8 +1788,7 @@ ol {
 	}
 
 	h3 strong {
-		font-weight: inherit;
-		color: var(--red);
+		@include mixins.typography($fontweight: inherit, $color: var(--red));
 	}
 
 	p {
@@ -1831,8 +1804,7 @@ ol {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	font-size: .8rem;
-	color: var(--gray-light);
+	@include mixins.typography(.8rem, $color: var(--gray-light));
 
 	& hr {
 		display: inline-block;
@@ -1867,8 +1839,7 @@ ol {
 
 	h2,
 	p {
-		font-size: 10vh;
-		color: var(--white);
+		@include mixins.typography(10vh, $color: var(--white));
 	}
 
 	p {
@@ -2012,9 +1983,8 @@ ol {
 		text-align: center;
 
 		b {
-			font-weight: inherit;
+			@include mixins.typography($fontweight: inherit, $color: var(--red));
 			white-space: nowrap;
-			color: var(--red);
 		}
 	}
 
@@ -2393,14 +2363,12 @@ ol {
 
 		small {
 			@include mixins.block(absolute, 100%, 0);
-			align-items: flex-end;
-			font-size: .8rem;
-			font-weight: 400;
-			line-height: var(--padl);
+			@include mixins.typography(.8rem, 400, var(--padl));
 			padding-left: calc((2 * var(--padm)) + var(--pads));
 			height: var(--padxxl);
 			opacity: 0;
 			white-space: nowrap;
+			align-items: flex-end;
 
 			&:before,
 			&:after {
