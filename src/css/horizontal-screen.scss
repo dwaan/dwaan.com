@@ -286,7 +286,6 @@ header {
 	.thumbs {
 		display: flex;
 		flex: 0;
-		align-self: flex-start;
 		margin-top: 125px;
 	}
 
@@ -296,15 +295,11 @@ header {
 		transform: rotate(-5deg);
 
 		@media (min-width: mixins.$screen-medium) {
-			.style-spread-left picture {
-				width: 350px;
-			}
+			width: 350px;
 		}
 
 		@media (min-width: mixins.$screen-abitwide) {
-			.style-spread-left picture {
-				width: 428px;
-			}
+			width: 428px;
 		}
 	}
 
@@ -611,6 +606,16 @@ header {
 			width: 32px;
 			height: 32px;
 			margin: 0 var(--padm);
+			font-size: .65rem;
+			line-height: 32px;
+
+			@media screen and (max-width: 900px) {
+				margin: 0 var(--pads);
+
+				&:first-child {
+					margin-left: var(--padm);
+				}
+			}
 		}
 	}
 

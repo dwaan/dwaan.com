@@ -1,33 +1,26 @@
 const
 	gulp = require('gulp'),
-	uglify = require('gulp-uglify'),
-	named = require('vinyl-named'),
 	sourcemaps = require('gulp-sourcemaps'),
 	concat = require('gulp-concat'),
 	connect = require('gulp-connect-php'),
 	browserSync = require('browser-sync'),
 	sass = require('gulp-sass')(require('sass')),
 	htmlmin = require('gulp-htmlmin'),
-	through = require('through2'),
 	webpack = require('webpack-stream'),
 	webp = require('gulp-webp'),
 	svgmin = require('gulp-svgmin');
 
 function javascript() {
 	return gulp.src(['src/js/main.js'])
-		.pipe(named())
 		.pipe(webpack({
+			watch: true,
 			devtool: 'source-map',
-			mode: 'development'
+			mode: 'development',
+			output: {
+				filename: 'bundle.js',
+				clean: true
+			}
 		}))
-		.pipe(sourcemaps.init({ loadMaps: true }))
-		.pipe(through.obj(function (file, _, cb) {
-			const isSourceMap = /\.map$/.test(file.path);
-			if (!isSourceMap) this.push(file);
-			cb();
-		}))
-		.pipe(uglify())
-		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('./js/'))
 		.pipe(browserSync.stream());
 }
@@ -40,7 +33,7 @@ function css() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('./css/'))
@@ -54,7 +47,7 @@ function css_vertical() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("vertical-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('./css/'))
@@ -68,7 +61,7 @@ function css_horizontal() {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("horizontal-screen.css"))
 		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest('./css/'))
@@ -117,10 +110,10 @@ exports.default = function () {
 		});
 	});
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, javascript);
-	gulp.watch(['src/css/*.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss'], { ignoreInitial: false }, css);
 	gulp.watch('src/css/vertical-screen.scss', { ignoreInitial: false }, css_vertical);
 	gulp.watch('src/css/horizontal-screen.scss', { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/img/*.jpg', 'src/img/*.png', 'src/img/*/*.jpg', 'src/img/*/*.png'], { ignoreInitial: false }, img);
 	gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
 	gulp.watch('src/*.php', { ignoreInitial: false }, php);
-};
+}

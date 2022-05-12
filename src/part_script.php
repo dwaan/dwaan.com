@@ -13,7 +13,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="/dwaan/js/main.js?<?php echo filemtime('js/main.js') ?>"></script>
+	<script type="text/javascript" src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>"></script>
 	<style type="text/css">.no-js #loader, .no-js #mode { display: none; } .no-js main, .no-js header, .no-js .footer { opacity: 1; }</style>
 <?php
 	}
