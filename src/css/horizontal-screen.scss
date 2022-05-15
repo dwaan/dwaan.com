@@ -549,6 +549,10 @@ header {
 			margin-left: 0;
 		}
 
+		&:after {
+			width: 20px;
+		}
+
 		&:first-child:before {
 			display: block;
 			flex: none;
@@ -560,7 +564,7 @@ header {
 
 		&:last-child:after {
 			flex: none;
-			width: 100px;
+			width: 120px;
 		}
 	}
 

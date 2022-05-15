@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+
+@use 'mixins';
+
+
 @mixin root {
     --black: #ccc;
     --white: #000;
@@ -63,7 +67,7 @@
             }
 
             .shadow {
-                @include make-it-block;
+                @include mixins.make-it-block;
                 @include mixins.positions;
                 position: absolute;
                 z-index: 0;

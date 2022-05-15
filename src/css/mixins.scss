@@ -8,6 +8,12 @@ $screen-abitwide: 1024px;
 $screen-medium: 900px;
 $screen-small: 760px;
 
+
+@mixin make-it-block($display: block) {
+	content: "";
+	display: $display;
+}
+
 @mixin zero-box() {
 	margin: 0;
 	padding: 0;
