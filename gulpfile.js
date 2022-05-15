@@ -110,10 +110,10 @@ exports.default = function () {
 		});
 	});
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, javascript);
-	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss'], { ignoreInitial: false }, css);
-	gulp.watch('src/css/vertical-screen.scss', { ignoreInitial: false }, css_vertical);
-	gulp.watch('src/css/horizontal-screen.scss', { ignoreInitial: false }, css_horizontal);
+	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss', , 'src/css/dark.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
+	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/img/*.jpg', 'src/img/*.png', 'src/img/*/*.jpg', 'src/img/*/*.png'], { ignoreInitial: false }, img);
 	gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
-	gulp.watch('src/*.php', { ignoreInitial: false }, php);
+	gulp.watch(['src/*.php'], { ignoreInitial: false }, php);
 }

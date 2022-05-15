@@ -20054,20 +20054,6 @@ var detailview = {
 				},
 				"(min-aspect-ratio: 1/1)": () => {
 					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
-						tl.fromTo(el.querySelectorAll(".pic-4"), {
-							top: "75%",
-							left: "350%",
-							x: 0,
-							y: 0,
-							rotation: 0
-						}, {
-							top: "25%",
-							left: "50%",
-							rotation: -10,
-							duration: 1,
-							ease: "expo.out"
-						}, 0);
-
 						tl.fromTo(el.querySelectorAll(".pic-5"), {
 							top: "75%",
 							left: "350%",
@@ -20081,6 +20067,20 @@ var detailview = {
 							duration: 1,
 							ease: "expo.out"
 						}, 0);
+
+						tl.fromTo(el.querySelectorAll(".pic-4"), {
+							top: "75%",
+							left: "350%",
+							x: 0,
+							y: 0,
+							rotation: 0
+						}, {
+							top: "25%",
+							left: "50%",
+							rotation: -10,
+							duration: 1,
+							ease: "expo.out"
+						}, .064);
 
 						return tl;
 					}, tl => {

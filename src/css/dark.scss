@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+@mixin root {
+    --black: #ccc;
+    --white: #000;
+    --dark-white: #111;
+    --yellow: #705f02;
+    --black-75: rgba(255, 255, 255, 0.50);
+    --black-50: rgba(255, 255, 255, 0.25);
+    --black-25: rgba(255, 255, 255, 0.15);
+    --black-15: rgba(255, 255, 255, 0.05);
+    --black-gray: #bbb;
+    --black-gray-light: #aaa;
+    --gray-light: #333;
+    --red: #B4352C;
+    --lime: #0d4f03;
+}
+
+@mixin dark {
+    #sun {
+        opacity: 0;
+    }
+
+    #moon {
+        opacity: 1;
+    }
+
+    .spring:hover {
+        color: var(--white);
+    }
+
+    .arrow:after {
+        background-image: url(../img/arrow-white.svg);
+    }
+
+    .logo.tas {
+        filter: invert(100%);
+    }
+
+    .items {
+        background-color: var(--dark-white);
+
+        .close:hover {
+            color: var(--black);
+        }
+
+        li:hover {
+
+            &:before,
+            &hover:after {
+                color: var(--white);
+            }
+        }
+    }
+
+    .detail {
+        picture {
+            box-shadow: none;
+
+            img {
+                position: relative;
+                z-index: 1;
+            }
+
+            .shadow {
+                @include make-it-block;
+                @include mixins.positions;
+                position: absolute;
+                z-index: 0;
+                opacity: .4;
+                background-size: 100%;
+                transform: translate3d(-10px, 30px, 0);
+                filter: blur(40px);
+            }
+        }
+    }
+
+    .style-spread:after {
+        @media (prefers-color-scheme: dark) {
+            background: transparent;
+            background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
+            background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
+        }
+    }
+
+    .forcebright {
+        background-color: #4f4f4f;
+    }
+
+    .style-slideshow {
+
+        .before,
+        .after {
+            background-image: url(../img/arrow-white.svg);
+        }
+    }
+
+    .links {
+        &:after {
+            background-image: url(../img/arrow-white.svg);
+        }
+    }
+
+    #now,
+    #webdesigner {
+        img {
+            .dark {
+                opacity: 1;
+            }
+
+            .light {
+                opacity: 0;
+            }
+        }
+    }
+
+    .cofound {
+        .thumbs {
+            background-color: var(--white);
+        }
+
+        a {
+            color: var(--white);
+
+            &:hover {
+                color: var(--black);
+            }
+        }
+    }
+
+}
+
+.dark {
+    &:root {
+        @include root();
+    }
+
+    @include dark();
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include root();
+    }
+
+    @include dark();
+}
