@@ -10,7 +10,7 @@ const
 	webp = require('gulp-webp'),
 	svgmin = require('gulp-svgmin');
 
-function javascript() {
+function js() {
 	return gulp.src(['src/js/main.js'])
 		.pipe(webpack({
 			watch: true,
@@ -21,7 +21,10 @@ function javascript() {
 				clean: true
 			}
 		}))
-		.pipe(gulp.dest('./js/'))
+		.pipe(gulp.dest('./js/'));
+}
+function js_refresh() {
+	return gulp.src(['js/*.js'])
 		.pipe(browserSync.stream());
 }
 
@@ -109,8 +112,9 @@ exports.default = function () {
 			proxy: "localhost:8080/dwaan/"
 		});
 	});
-	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, javascript);
-	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss', , 'src/css/dark.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js);
+	gulp.watch(['js/*.js'], { ignoreInitial: false }, js_refresh);
+	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss', 'src/css/plurk.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
 	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/img/*.jpg', 'src/img/*.png', 'src/img/*/*.jpg', 'src/img/*/*.png'], { ignoreInitial: false }, img);

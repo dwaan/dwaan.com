@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
-		<section class="middle full">
+		<section class="middle full snap">
 			<div class="padding">
 				<span><img src="/dwaan/img/logo-suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
 			</div>
@@ -25,7 +25,7 @@
 			</div>
 		</section>
 
-		<section id="more" class="middle style-spread clip">
+		<section id="more" class="middle style-spread clip snap">
 			<div class="text">
 				<div class="titles">
 					<h4>Project Pitching</h4>
@@ -44,7 +44,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-top snap-start">
+		<section class="middle style-top">
 			<div class="text">
 				<h2>Main Key Suggestions</h2>
 				<ol class="zero">

@@ -92,11 +92,11 @@
 			</div>
 		</section>
 
-		<div id="startmrgoat" class="mrgoat middle hidden"></div>
-		<div class="mrgoat middle hidden"></div>
-		<div class="mrgoat middle hidden"></div>
-		<div class="mrgoat middle hidden"></div>
-		<div class="mrgoat middle hidden"></div>
+		<section id="startmrgoat" class="mrgoat middle hidden"></section>
+		<section class="mrgoat middle hidden"></section>
+		<section class="mrgoat middle hidden"></section>
+		<section class="mrgoat middle hidden"></section>
+		<section class="mrgoat middle hidden"></section>
 		<section id="mrgoat" class="mrgoat middle">
 			<div class="text">
 				<div class="h2"><h2>This is <b>Mr. Goat</b></h2></div>
@@ -121,9 +121,9 @@
 				</div>
 			</div>
 		</section>
-		<div id="endmrgoat" class="mrgoat middle hidden"></div>
+		<section id="endmrgoat" class="mrgoat middle hidden"></section>
 
-		<div id="cofound" class="cofound middle clip">
+		<section id="cofound" class="cofound middle clip">
 			<div class="text">
 				<h2>and <?php echo date("Y") - 2010; ?> Years Ago</h2>
 				<p>My friend and I decide to create Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner right now.</p>
@@ -135,7 +135,7 @@
 					<img src="/dwaan/img/sagara/sagara.webp" width="" height="" alt="Sagara" />
 				</picture>
 			</div>
-		</div>
+		</section>
 
 		<section class="links">
 			<nav>

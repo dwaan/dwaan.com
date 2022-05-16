@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail">
-		<section class="middle full">
+		<section class="middle full snap">
 			<div class="padding">
 				<img src="/dwaan/img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
 			</div>
@@ -25,7 +25,7 @@
 			</div>
 		</section>
 
-		<section id="more" class="middle style-spread-left">
+		<section id="more" class="middle style-spread-left snap">
 			<div class="text">
 				<div class="titles">
 					<h4>Concept and Design</h4>

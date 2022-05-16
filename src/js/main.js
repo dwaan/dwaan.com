@@ -22,7 +22,6 @@ import views from "./views/views";
 
 ////////// Initial
 
-addClass(_q("html"), "snap");
 removeClass(_q("html"),"no-js");
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);

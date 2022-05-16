@@ -194,14 +194,11 @@ header {
 .flares {
 	top: 0;
 	left: 0;
-	width: 100vh;
-	height: 100vw;
-	transform-origin: top left;
-	transform: translate3d(0, 100vh, 0) rotate(-90deg);
+	width: 100vw;
+	height: 100vh;
 
 	img {
-		width: 100vh;
-		height: 50vh;
+		height: 75vh;
 	}
 }
 
@@ -580,8 +577,8 @@ header {
 
 		h2,
 		h3 {
-			font-size: 4rem;
-			letter-spacing: -.25rem;
+			font-size: 12vw;
+			letter-spacing: -.75vw;
 			padding: var(--padm) 0 var(--padl);
 		}
 
@@ -638,13 +635,25 @@ header {
 	}
 }
 
-#post p {
-	max-width: 200px;
+#post {
+	margin-bottom: var(--padl);
+
+	a {
+		font-size: .8rem;
+	}
+
+	p {
+		max-width: 200px;
+	}
 }
 
 
 
 /* Mr. Goat */
+
+#mrgoat h2 b {
+	display: block;
+}
 
 .mrgoat {
 	h2 {
@@ -657,6 +666,12 @@ header {
 			font-size: 5rem;
 			max-width: 400px;
 		}
+	}
+
+	img {
+		width: 400px;
+		max-width: 65vw;
+		height: auto;
 	}
 
 	.thumbs {
@@ -675,10 +690,8 @@ header {
 		flex: 0;
 	}
 
-	img {
-		width: 400px;
-		max-width: 65vw;
-		height: auto;
+	.float p {
+		font-size: .9rem;
 	}
 }
 

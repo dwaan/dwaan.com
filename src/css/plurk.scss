@@ -133,21 +133,11 @@
         &:before {
             position: absolute;
             left: 0;
+        }
 
-            &:nth-child(1) {
-                content: "00";
-            }
-
-            &:nth-child(2) {
-                content: "01";
-            }
-
-            &:nth-child(3) {
-                content: "02";
-            }
-
-            &:nth-child(4) {
-                content: "03";
+        @for $i from 1 through 4 {
+            &:nth-child(#{$i}):before {
+                content: "0" + ($i - 1);
             }
         }
 

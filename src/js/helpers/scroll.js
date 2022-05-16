@@ -87,6 +87,46 @@ var scroll = {
 			}));
 		});
 	},
+	snap: function (el, type = "regular") {
+		let start = "0 100%";
+		let end = "100% 100%";
+
+		type = type.toLowerCase();
+
+		if (type == "top") {
+			start = "0 0";
+			end = "100% 100%";
+		} else if (type == "center") {
+			start = "0 50%";
+			end = "100% 50%";
+		}
+
+		// Snap
+		let duration = 1;
+		this.push(tl => tl, tl => ScrollTrigger.create({
+			trigger: el,
+			start: start,
+			end: end,
+			animation: tl,
+			markers: type == "top" ? true : false,
+			snap: {
+				snapTo: value => {
+					let final = value <= 0.5 ? 0 : 1;
+					if (type == "center") {
+						final = .5;
+					}
+
+					duration = value;
+					console.log(value, final);
+
+					return final;
+				},
+				duration: duration,
+				delay: 0,
+				ease: "expo.inOut"
+			}
+		}));
+	},
 	refresh: function () {
 		for (var i = 0; i < this.st.length; i++) {
 			this.st[i].refresh();

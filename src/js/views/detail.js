@@ -440,7 +440,6 @@ var detailview = {
 			});
 		});
 
-
 		// Style - Angled
 		next.querySelectorAll(".style-angled").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
@@ -737,6 +736,12 @@ var detailview = {
 				elements: el.querySelectorAll("nav > *"),
 				position: "100%"
 			});
+		});
+
+
+		// Snap
+		next.querySelectorAll("section.snap").forEach(el => {
+			scroll.snap(el);
 		});
 	},
 	beforeLeave: () => {

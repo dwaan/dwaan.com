@@ -108,11 +108,6 @@ html {
 	letter-spacing: 0.02em;
 	color: var(--black);
 	background-color: var(--white);
-	overflow-x: hidden;
-
-	&.snap {
-		scroll-snap-type: y mandatory;
-	}
 }
 
 body,
@@ -127,6 +122,7 @@ main {
 	display: block;
 	position: relative;
 	opacity: 0;
+	overflow: hidden
 }
 
 h1 {
@@ -878,6 +874,7 @@ header {
 	display: inline-block;
 }
 
+
 /* Main text in Homepage and Me */
 .main-text {
 	display: flex;
@@ -920,6 +917,24 @@ header {
 		& {
 			max-width: initial;
 		}
+	}
+}
+
+.home2 {
+	&-replurk {
+		background-color: darken($color: white, $amount: 2);
+	}
+
+	&-suzuki {
+		background-color: darken($color: white, $amount: 4);
+	}
+
+	&-tas {
+		background-color: darken($color: white, $amount: 6);
+	}
+
+	&-old {
+		background-color: darken($color: white, $amount: 8);
 	}
 }
 
@@ -1066,6 +1081,7 @@ header {
 	position: fixed;
 	z-index: 1;
 	overflow: hidden;
+	display: none;
 
 	img {
 		position: absolute;
@@ -1584,10 +1600,8 @@ ol {
 			}
 
 			@for $i from 1 through 10 {
-				&:nth-child(#{$i}) {
-					&:before {
-						content: "0" + ($i - 1);
-					}
+				&:nth-child(#{$i}):before {
+					content: "0" + ($i - 1);
 				}
 			}
 		}
@@ -1952,7 +1966,7 @@ ol {
 			text-align: right;
 			order: 1;
 			font-size: 1rem;
-			width: 75px;
+			width: 100px;
 
 			@media (min-width: 640px) {
 				& {
