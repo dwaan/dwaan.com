@@ -44,7 +44,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-top">
+		<section class="middle style-top snap">
 			<div class="text">
 				<h2>Main Key Suggestions</h2>
 				<ol class="zero">
@@ -64,7 +64,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-flex">
+		<section class="middle style-flex snap">
 			<div class="style-row">
 				<div class="style-column">
 					<div class="meta">
@@ -107,7 +107,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-masonry">
+		<section class="middle style-masonry snap-center">
 			<div class="thumbs">
 				<?php for ($i=1; $i <= 11; $i++) { ?>
 					<?php if($i == 7) { ?>
@@ -126,7 +126,7 @@
 			<div class="shade"></div>
 		</section>
 
-		<section class="middle style-angled">
+		<section class="middle style-angled snap-bottom">
 			<div class="text">
 				<h3>Navigation</h3>
 				<p>Further improvement in navigation means visitor can easily see their latest products with fewer taps.</p>
@@ -142,7 +142,7 @@
 			</div>
 		</section>
 
-		<section class="links">
+		<section class="links snap-bottom">
 			<nav>
 				<div class="prototype">
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&viewport=34%2C332%2C0.06296657025814056&scaling=contain" aria-label="Figma Prototype - Melon - Tiket Apa Saja Website Redesign" target="_BLANK"><span>visit the prototype</span></a>

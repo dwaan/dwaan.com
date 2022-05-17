@@ -19160,37 +19160,32 @@ var scroll = {
 		});
 	},
 	snap: function (el, type = "regular") {
-		let start = "0 100%";
-		let end = "100% 100%";
+		let start = "0 0";
+		let end = "100% 0";
 
 		type = type.toLowerCase();
-
-		if (type == "top") {
-			start = "0 0";
-			end = "100% 100%";
-		} else if (type == "center") {
-			start = "0 50%";
-			end = "100% 50%";
+		if (type == "bottom") {
+			start = "0 100%";
+			end = "100% 100%"
 		}
 
 		// Snap
 		let duration = 1;
+		let direction = false;
 		this.push(tl => tl, tl => gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"].create({
 			trigger: el,
 			start: start,
 			end: end,
 			animation: tl,
-			markers: type == "top" ? true : false,
+			markers: true,
+			onUpdate: self => direction = self.direction,
 			snap: {
 				snapTo: value => {
-					let final = value <= 0.5 ? 0 : 1;
-					if (type == "center") {
-						final = .5;
-					}
+					let final = value <= .25 ? 0 : direction <= 0 ? 0 : 1;
+					if (type == "center") final = value <= .5 ? .25 : direction <= 0 ? .25 : 1;
+					duration = value / 2;
 
-					duration = value;
-					console.log(value, final);
-
+					console.log(direction, final, value);
 					return final;
 				},
 				duration: duration,
@@ -20769,6 +20764,12 @@ var detailview = {
 		// Snap
 		next.querySelectorAll("section.snap").forEach(el => {
 			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].snap(el);
+		});
+		next.querySelectorAll("section.snap-bottom").forEach(el => {
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].snap(el, "bottom");
+		});
+		next.querySelectorAll("section.snap-center").forEach(el => {
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].snap(el, "center");
 		});
 	},
 	beforeLeave: () => {
@@ -23643,6 +23644,14 @@ class replurk {
 
 			if (callback) callback();
 		}
+
+		// Snap
+		next.querySelectorAll("section.snap").forEach(el => {
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_2__["default"].snap(el);
+		});
+		next.querySelectorAll("section.snap-bottom").forEach(el => {
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_2__["default"].snap(el, "bottom");
+		});
 	}
 
 	// Run the API call
@@ -23695,14 +23704,10 @@ var replurkview = {
 			var next = data.next.container;
 
 			next.querySelector("#backtotop").onclick = () => {
-				(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_5__.removeClass)((0,_helpers_helper__WEBPACK_IMPORTED_MODULE_5__._q)("html"), "snap");
 				gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(window, {
 					duration: 2,
 					ease: "expo.inOut",
-					scrollTo: "#statistics",
-					onComplete: function () {
-						(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_5__.addClass)((0,_helpers_helper__WEBPACK_IMPORTED_MODULE_5__._q)("html"), "snap");
-					}
+					scrollTo: "#statistics"
 				});
 			}
 			next.querySelectorAll("#permission, .grant").forEach(function (el) {

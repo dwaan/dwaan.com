@@ -88,37 +88,32 @@ var scroll = {
 		});
 	},
 	snap: function (el, type = "regular") {
-		let start = "0 100%";
-		let end = "100% 100%";
+		let start = "0 0";
+		let end = "100% 0";
 
 		type = type.toLowerCase();
-
-		if (type == "top") {
-			start = "0 0";
-			end = "100% 100%";
-		} else if (type == "center") {
-			start = "0 50%";
-			end = "100% 50%";
+		if (type == "bottom") {
+			start = "0 100%";
+			end = "100% 100%"
 		}
 
 		// Snap
 		let duration = 1;
+		let direction = false;
 		this.push(tl => tl, tl => ScrollTrigger.create({
 			trigger: el,
 			start: start,
 			end: end,
 			animation: tl,
-			markers: type == "top" ? true : false,
+			markers: true,
+			onUpdate: self => direction = self.direction,
 			snap: {
 				snapTo: value => {
-					let final = value <= 0.5 ? 0 : 1;
-					if (type == "center") {
-						final = .5;
-					}
+					let final = value <= .25 ? 0 : direction <= 0 ? 0 : 1;
+					if (type == "center") final = value <= .5 ? .25 : direction <= 0 ? .25 : 1;
+					duration = value / 2;
 
-					duration = value;
-					console.log(value, final);
-
+					console.log(direction, final, value);
 					return final;
 				},
 				duration: duration,

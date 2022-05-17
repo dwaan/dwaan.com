@@ -12,8 +12,8 @@
 <body data-barba="wrapper">
 <?php include_once "part_head.php" ?>
 
-<main data-barba="container" data-barba-namespace="replurk2020" class="plurk plurk2020 nosnap">
-	<section id="hello" class="grant middle first">
+<main data-barba="container" data-barba-namespace="replurk2020" class="plurk plurk2020">
+	<section id="hello" class="grant middle first snap">
 		<div class="animate middle">
 			<div class="thumbs"></div>
 			<div class="text">
@@ -42,7 +42,7 @@
 	</section>
 
 	<!-- Login -->
-	<section id="permission" class="middle first">
+	<section id="permission" class="middle first snap-bottom">
 		<div class="text">
 			<form action="" method="GET">
 				<h1>RePlurk<br/><sup>20</sup><sub>20</sub></h1>

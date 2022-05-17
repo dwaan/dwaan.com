@@ -2099,6 +2099,14 @@ class replurk {
 
 			if (callback) callback();
 		}
+
+		// Snap
+		next.querySelectorAll("section.snap").forEach(el => {
+			scroll.snap(el);
+		});
+		next.querySelectorAll("section.snap-bottom").forEach(el => {
+			scroll.snap(el, "bottom");
+		});
 	}
 
 	// Run the API call
@@ -2151,14 +2159,10 @@ var replurkview = {
 			var next = data.next.container;
 
 			next.querySelector("#backtotop").onclick = () => {
-				removeClass(_q("html"), "snap");
 				gsap.to(window, {
 					duration: 2,
 					ease: "expo.inOut",
-					scrollTo: "#statistics",
-					onComplete: function () {
-						addClass(_q("html"), "snap");
-					}
+					scrollTo: "#statistics"
 				});
 			}
 			next.querySelectorAll("#permission, .grant").forEach(function (el) {

@@ -743,6 +743,12 @@ var detailview = {
 		next.querySelectorAll("section.snap").forEach(el => {
 			scroll.snap(el);
 		});
+		next.querySelectorAll("section.snap-bottom").forEach(el => {
+			scroll.snap(el, "bottom");
+		});
+		next.querySelectorAll("section.snap-center").forEach(el => {
+			scroll.snap(el, "center");
+		});
 	},
 	beforeLeave: () => {
 		gsap.utils.toArray(".style-slideshow").forEach(slideshow => {

@@ -42,7 +42,7 @@
 			</div>
 		</section>
 
-		<section class="middle auto style-top-text height-auto snap-end">
+		<section class="middle auto style-top-text height-auto snap">
 			<div class="text">
 				<h2>First Challenges</h2>
 				<ol class="zero">
@@ -52,7 +52,7 @@
 			</div>
 		</section>
 
-		<section class="middle auto style-bottom-logo forcebright">
+		<section class="middle auto style-bottom-logo forcebright snap">
 			<div class="text">
 				<h3>The Solution</h3>
 				<p>The old and new logo contain too much information and it purely business decision. I suggested them to simplified their logo into something more memorable and with less distraction.</p>
@@ -84,7 +84,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-slideshow">
+		<section class="middle style-slideshow snap">
 			<div class="thumbs">
 				<ul class="flat">
 					<?php for ($i=1; $i <= 3; $i++) { ?>
@@ -100,7 +100,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-trunc">
+		<section class="middle style-trunc snap">
 			<div class="wrap">
 				<div class="text">
 					<h3>The New New Logo</h3>
@@ -117,7 +117,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-slideshow">
+		<section class="middle style-slideshow snap">
 			<div class="thumbs">
 				<ul class="flat">
 					<?php for ($i=1; $i <= 6; $i++) { ?>
@@ -133,7 +133,7 @@
 			</div>
 		</section>
 
-		<section class="middle style-slideshow style-slideshow-small">
+		<section class="middle style-slideshow style-slideshow-small snap-bottom">
 			<div class="thumbs">
 				<ul class="flat">
 					<?php for ($i=1; $i <= 6; $i++) { ?>
@@ -149,7 +149,7 @@
 			</div>
 		</section>
 
-		<section class="links">
+		<section class="links snap-bottom">
 			<nav>
 				<div class="prototype group">
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&scaling=contain&page-id=138%3A786&starting-point-node-id=3948%3A0" target="_BLANK" class="title"><span>visit the prototype</span></a>
