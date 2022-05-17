@@ -288,45 +288,6 @@ let header = {
                     var year = el.querySelectorAll(".year");
 
                     scroll.push(function (tl) {
-                        // Show Arrow
-                        tl.fromTo(arrow, {
-                            position: "relative",
-                            x: 0,
-                            y: 0,
-                            opacity: 0
-                        }, {
-                            opacity: 1,
-                            ease: "linear",
-                            duration: 3
-                        });
-                        // Hide Arrow
-                        tl.fromTo(arrow, {
-                            x: 0,
-                            y: 0,
-                            opacity: 1
-                        }, {
-                            y: (idx < middle.length - 1) ? window.innerHeight / 4 : 0,
-                            opacity: 0,
-                            ease: "linear",
-                            duration: 3
-                        });
-                        // Hide Year
-                        tl.fromTo(year, {
-                            position: "fixed",
-                            x: 0,
-                            y: 0,
-                            opacity: 1
-                        }, {
-                            x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
-                            y: (idx == 0) ? window.innerHeight * -1 / 10 : 0,
-                            opacity: (idx < middle.length - 1) ? 0 : 1,
-                            ease: "power3.in",
-                            duration: 3
-                        }, "<");
-                        tl.set(year, {
-                            position: "absolute"
-                        });
-
                         return tl;
                     }, scrollfunc);
                 },
