@@ -60,6 +60,16 @@ header {
 	}
 }
 
+
+.horizontal {
+	display: block!important;
+}
+
+.vertical {
+	display: none!important;
+}
+
+
 /* Homepage content */
 .main-text {
 	max-width: 800px;

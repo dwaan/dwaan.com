@@ -17802,7 +17802,7 @@ let header = {
 
     // Logo events animations - waving
     waving: function () {
-        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray('header .logo').forEach(function (el) {
+        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray('header .logo').forEach(el => {
             // Waving animation
             var lefthand = el.querySelector(".left-hand");
             var waving = gsap__WEBPACK_IMPORTED_MODULE_3__["default"].timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 } });
@@ -17841,7 +17841,7 @@ let header = {
 
     // Menu events - slide
     slide: function () {
-        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray('header .switch').forEach(function (el) {
+        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray('header .switch').forEach(el => {
             // Hat move on hover
             var menu = el.querySelectorAll("svg line");
             var tl = gsap__WEBPACK_IMPORTED_MODULE_3__["default"].timeline();
@@ -17876,7 +17876,7 @@ let header = {
 
     // Main menu - hamburger slide
     hamburger: function () {
-        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray("header .menu").forEach(function (el) {
+        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray("header .menu").forEach(el => {
             var overlay = el.querySelector(".overlay");
             var items = el.querySelector(".items");
 
@@ -17974,8 +17974,8 @@ let header = {
 
     // Dark mode switcher event
     darkmodeswitch: function () {
-        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray("header .lamp").forEach(function (el) {
-            el.addEventListener("click", function (e) {
+        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray("header .lamp").forEach(el => {
+            el.addEventListener("click", e => {
                 e.preventDefault();
                 _darkmode__WEBPACK_IMPORTED_MODULE_2__["default"].toggleDarkMode();
             });
@@ -17984,7 +17984,7 @@ let header = {
 
     // Text switcher event
     textswitch: function () {
-        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray("header .size").forEach(function (el) {
+        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray("header .size").forEach(el => {
             var tl = gsap__WEBPACK_IMPORTED_MODULE_3__["default"].timeline();
             tl.to(el, {
                 scale: 1.25,
@@ -18031,52 +18031,51 @@ let header = {
         });
     },
 
-    arrow: function (next) {
+    arrow: next => {
         // Scroll animate arrow
         var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
-        if(!middle) return;
+        if (!middle) return;
 
-        middle.forEach(function (el, idx) {
-            var scrollfunc = function (tl) {
-                return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__["default"].create({
-                    trigger: el,
-                    start: "0 50%",
-                    end: "100% 50%",
-                    scrub: true,
-                    animation: tl
-                })
-            };
+        middle.forEach((el, idx) => {
+            var scrollfunc = tl => gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__["default"].create({
+                trigger: el,
+                start: "0 50%",
+                end: "100% 50%",
+                scrub: true,
+                animation: tl
+            });
 
             // Animate arrow
             gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__["default"].matchMedia({
-                "(max-aspect-ratio: 1/1)": function () {
+                "(max-aspect-ratio: 1/1)": () => {
                     var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
                     var year = el.querySelectorAll(".year");
 
-                    _scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(function (tl) {
-                        // Show Arrow
-                        tl.fromTo(arrow, {
-                            position: "relative",
+                    // Animate text
+                    _scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+                        tl.set(arrow, {
                             x: 0,
-                            y: 0,
-                            opacity: 0
-                        }, {
                             opacity: 1,
-                            ease: "linear",
-                            duration: 3
+                            position: "relative"
                         });
-                        // Hide Arrow
                         tl.fromTo(arrow, {
-                            x: 0,
-                            y: 0,
-                            opacity: 1
+                            y: window.innerHeight * 1 / 3
                         }, {
-                            y: (idx < middle.length - 1) ? window.innerHeight / 4 : 0,
-                            opacity: 0,
-                            ease: "linear",
-                            duration: 3
+                            y: 0,
+                            ease: "power3.out"
                         });
-                        // Hide Year
+
+                        return tl;
+                    }, tl => gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__["default"].create({
+                        trigger: el,
+                        start: "0 50%",
+                        end: "50% 50%",
+                        scrub: 4,
+                        animation: tl
+                    }));
+
+                    // Year
+                    _scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
                         tl.fromTo(year, {
                             position: "fixed",
                             x: 0,
@@ -18096,10 +18095,10 @@ let header = {
                         return tl;
                     }, scrollfunc);
                 },
-                "(min-aspect-ratio: 1/1)": function () {
+                "(min-aspect-ratio: 1/1)": () => {
                     var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
 
-                    _scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(function (tl) {
+                    _scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
                         // Show
                         tl.fromTo(arrow, {
                             position: "absolute",
@@ -18142,7 +18141,7 @@ let header = {
         });
 
         var middle = next.querySelectorAll("section.middle.hidearrow");
-        middle.forEach(function (el) {
+        middle.forEach(el => {
             var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
             gsap__WEBPACK_IMPORTED_MODULE_3__["default"].set(arrow, {
                 display: 'none',
@@ -19177,15 +19176,12 @@ var scroll = {
 			start: start,
 			end: end,
 			animation: tl,
-			markers: true,
 			onUpdate: self => direction = self.direction,
 			snap: {
 				snapTo: value => {
 					let final = value <= .25 ? 0 : direction <= 0 ? 0 : 1;
 					if (type == "center") final = value <= .5 ? .25 : direction <= 0 ? .25 : 1;
 					duration = value / 2;
-
-					console.log(direction, final, value);
 					return final;
 				},
 				duration: duration,

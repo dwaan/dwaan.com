@@ -36,7 +36,7 @@ let header = {
 
     // Logo events animations - waving
     waving: function () {
-        gsap.utils.toArray('header .logo').forEach(function (el) {
+        gsap.utils.toArray('header .logo').forEach(el => {
             // Waving animation
             var lefthand = el.querySelector(".left-hand");
             var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 } });
@@ -75,7 +75,7 @@ let header = {
 
     // Menu events - slide
     slide: function () {
-        gsap.utils.toArray('header .switch').forEach(function (el) {
+        gsap.utils.toArray('header .switch').forEach(el => {
             // Hat move on hover
             var menu = el.querySelectorAll("svg line");
             var tl = gsap.timeline();
@@ -110,7 +110,7 @@ let header = {
 
     // Main menu - hamburger slide
     hamburger: function () {
-        gsap.utils.toArray("header .menu").forEach(function (el) {
+        gsap.utils.toArray("header .menu").forEach(el => {
             var overlay = el.querySelector(".overlay");
             var items = el.querySelector(".items");
 
@@ -208,8 +208,8 @@ let header = {
 
     // Dark mode switcher event
     darkmodeswitch: function () {
-        gsap.utils.toArray("header .lamp").forEach(function (el) {
-            el.addEventListener("click", function (e) {
+        gsap.utils.toArray("header .lamp").forEach(el => {
+            el.addEventListener("click", e => {
                 e.preventDefault();
                 darkmode.toggleDarkMode();
             });
@@ -218,7 +218,7 @@ let header = {
 
     // Text switcher event
     textswitch: function () {
-        gsap.utils.toArray("header .size").forEach(function (el) {
+        gsap.utils.toArray("header .size").forEach(el => {
             var tl = gsap.timeline();
             tl.to(el, {
                 scale: 1.25,
@@ -265,36 +265,74 @@ let header = {
         });
     },
 
-    arrow: function (next) {
+    arrow: next => {
         // Scroll animate arrow
         var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
-        if(!middle) return;
+        if (!middle) return;
 
-        middle.forEach(function (el, idx) {
-            var scrollfunc = function (tl) {
-                return ScrollTrigger.create({
-                    trigger: el,
-                    start: "0 50%",
-                    end: "100% 50%",
-                    scrub: true,
-                    animation: tl
-                })
-            };
+        middle.forEach((el, idx) => {
+            var scrollfunc = tl => ScrollTrigger.create({
+                trigger: el,
+                start: "0 50%",
+                end: "100% 50%",
+                scrub: true,
+                animation: tl
+            });
 
             // Animate arrow
             ScrollTrigger.matchMedia({
-                "(max-aspect-ratio: 1/1)": function () {
+                "(max-aspect-ratio: 1/1)": () => {
                     var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
                     var year = el.querySelectorAll(".year");
 
-                    scroll.push(function (tl) {
+                    // Animate text
+                    scroll.push(tl => {
+                        tl.set(arrow, {
+                            x: 0,
+                            opacity: 1,
+                            position: "relative"
+                        });
+                        tl.fromTo(arrow, {
+                            y: window.innerHeight * 1 / 3
+                        }, {
+                            y: 0,
+                            ease: "power3.out"
+                        });
+
+                        return tl;
+                    }, tl => ScrollTrigger.create({
+                        trigger: el,
+                        start: "0 50%",
+                        end: "50% 50%",
+                        scrub: 4,
+                        animation: tl
+                    }));
+
+                    // Year
+                    scroll.push(tl => {
+                        tl.fromTo(year, {
+                            position: "fixed",
+                            x: 0,
+                            y: 0,
+                            opacity: 1
+                        }, {
+                            x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
+                            y: (idx == 0) ? window.innerHeight * -1 / 10 : 0,
+                            opacity: (idx < middle.length - 1) ? 0 : 1,
+                            ease: "power3.in",
+                            duration: 3
+                        }, "<");
+                        tl.set(year, {
+                            position: "absolute"
+                        });
+
                         return tl;
                     }, scrollfunc);
                 },
-                "(min-aspect-ratio: 1/1)": function () {
+                "(min-aspect-ratio: 1/1)": () => {
                     var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
 
-                    scroll.push(function (tl) {
+                    scroll.push(tl => {
                         // Show
                         tl.fromTo(arrow, {
                             position: "absolute",
@@ -337,7 +375,7 @@ let header = {
         });
 
         var middle = next.querySelectorAll("section.middle.hidearrow");
-        middle.forEach(function (el) {
+        middle.forEach(el => {
             var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
             gsap.set(arrow, {
                 display: 'none',

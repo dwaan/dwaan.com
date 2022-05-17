@@ -34,15 +34,25 @@
 				<p>Tiket Apa Saja wanted to redesign their website, after recently got acquired by Melon, a subsidionary company of Telkom Indonesia. They wanted to reflect the changes into their core business.</p>
 			</div>
 			<div class="thumbs">
-				<picture>
+				<picture class="horizontal">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/hero@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/hero@2x.webp">
-					<img src="/dwaan/img/tas/hero.webp" width="" height="" alt="Tiket Apa Saja - Homepage" />
+					<img src="/dwaan/img/tas/hero.webp" width="" height="" alt="Tiket Apa Saja - Dekstop- Homepage" />
+				</picture>
+				<picture class="vertical">
+					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-1@3x.webp">
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-1@2x.webp">
+					<img src="/dwaan/img/tas/mobile-final-1.webp" width="" height="" alt="Tiket Apa Saja - Mobile - Homepage" />
+				</picture>
+				<picture class="vertical">
+					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-2@3x.webp">
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-2@2x.webp">
+					<img src="/dwaan/img/tas/mobile-final-2.webp" width="" height="" alt="Tiket Apa Saja - Mobile - Listing" />
 				</picture>
 			</div>
 		</section>
 
-		<section class="middle auto style-top-text height-auto snap">
+		<section class="middle auto style-top-text snap">
 			<div class="text">
 				<h2>First Challenges</h2>
 				<ol class="zero">

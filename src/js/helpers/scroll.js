@@ -105,15 +105,12 @@ var scroll = {
 			start: start,
 			end: end,
 			animation: tl,
-			markers: true,
 			onUpdate: self => direction = self.direction,
 			snap: {
 				snapTo: value => {
 					let final = value <= .25 ? 0 : direction <= 0 ? 0 : 1;
 					if (type == "center") final = value <= .5 ? .25 : direction <= 0 ? .25 : 1;
 					duration = value / 2;
-
-					console.log(direction, final, value);
 					return final;
 				},
 				duration: duration,
