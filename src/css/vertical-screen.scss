@@ -83,6 +83,11 @@ header {
 	}
 }
 
+.home-aai.middle img.logo,
+.aai .middle img.logo {
+	max-height: 7.5vh;
+}
+
 .horizontal {
 	display: none !important;
 }
@@ -239,8 +244,8 @@ header {
 
 .style-spread {
 	@extend %style-spread;
-	padding: 0;
-	height: auto;
+	// padding: 0;
+	// height: auto;
 
 	@media (min-width: 400px) {
 		justify-content: center;
@@ -281,6 +286,29 @@ header {
 			&:nth-child(2) {
 				transform: translate3d(20%, 0, 0) rotate(-7.5deg);
 			}
+		}
+	}
+
+	&.style-spread-big {
+		picture {
+			transform-origin: bottom center;
+			width: calc(1.25 * var(--pic-w));
+		}
+	}
+}
+
+.no-js .style-spread-big {
+	picture {
+		&.pic-1 {
+			transform: translate(-50%, 0) rotate(0deg);
+		}
+
+		&.pic-2 {
+			transform: translate(-5%, 10%) rotate(-12.5deg);
+		}
+
+		&.pic-3 {
+			transform: translate(-45%, 10%) rotate(12.5deg);
 		}
 	}
 }
@@ -334,6 +362,13 @@ header {
 
 		&:nth-child(2n+1) {
 			margin-top: calc(var(--pic-m) * 3);
+		}
+	}
+
+	&.style-top-auto {
+		picture {
+			width: calc(1.5 * var(--pic-w));
+			height: auto;
 		}
 	}
 }
@@ -405,6 +440,19 @@ header {
 	}
 }
 
+
+/* Style with background image */
+.style-background {
+	.text {
+		width: 80%;
+	}
+
+	.thumbs img {
+		width: auto;
+		height: 110vh;
+	}
+}
+
 /* Style that look like table */
 .style-flex {
 	height: auto;
@@ -436,6 +484,12 @@ header {
 		@media (min-width: 400px) {
 			width: unset;
 			flex: 1;
+		}
+
+		img {
+			margin-top: var(--pads);
+			max-width: 90%;
+			height: auto;
 		}
 	}
 
@@ -525,13 +579,13 @@ header {
 	}
 
 	ul {
-		height: 100%!important;
+		height: 100% !important;
 	}
 
 	.thumbs {
 		padding: calc(2.5 * var(--padxl)) 0 calc((2 * var(--padxl)) + 50px);
 		margin-bottom: -50px;
-		height: 100%!important;
+		height: 100% !important;
 	}
 
 	.before,
@@ -857,6 +911,7 @@ header {
 
 			&:last-child {
 				flex: 100px;
+				height: initial;
 			}
 		}
 	}

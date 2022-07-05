@@ -3,8 +3,8 @@
 
 <head>
     <?php
-		$title = "AAI Website Redesign";
-		$description = "A short study case of website redesign for AAI";
+		$title = "Asosiasi Antropologi Indonesia | AAI Website Redesign";
+		$description = "A short study case of website redesign for Asosiasi Antropologi Indonesia | AAI";
 		include_once "part_metacss.php";
 	?>
 </head>
@@ -25,7 +25,7 @@
             </div>
         </section>
 
-        <section id="more" class="middle style-spread style-spread-2 clip snap">
+        <section id="more" class="middle style-spread style-spread-big clip snap">
             <div class="text">
                 <div class="titles">
                     <h4>Website Redesign</h4>
@@ -48,7 +48,7 @@
             </div>
         </section>
 
-        <section class="middle style-top snap">
+        <section class="middle style-top style-top-auto snap">
             <div class="text">
                 <h2>From Idea<br />to Execution</h2>
                 <ol class="zero">
@@ -72,7 +72,7 @@
             </div>
         </section>
 
-        <section class="middle style-flex snap">
+        <section class="middle style-flex style-flex-swap snap">
             <div class="style-row">
                 <div class="style-column">
                     <div class="meta">
@@ -89,11 +89,13 @@
                         <ul class="flat">
                             <li style="background: #A0290B"></li>
                             <li style="background: #2E1415"></li>
+                            <li></li>
                         </ul>
                         <ul class="flat">
                             <li style="background: #fff"></li>
                             <li style="background: #FAFBAB"></li>
                             <li style="background: #000"></li>
+                            <li></li>
                         </ul>
                     </div>
                     <div class="text">
@@ -116,10 +118,10 @@
         <section class="middle style-masonry style-masonry-2 snap-center">
             <div class="thumbs">
                 <?php for ($i=8; $i <= 18; $i++) { ?>
-                <?php if($i == 13) { ?>
+                <?php if($i == 14) { ?>
                 <div class="text">
-                    <h3>Giving Words The Visual Treatment</h3>
-                    <p>By providing photo not only for decoration but to as visual guide and break from monotonius wordy
+                    <h3>The Visual Treatment</h3>
+                    <p>Providing thematic photos as visual guide to break from monotonous wordy
                         content.</p>
                 </div>
                 <?php } ?>
@@ -138,7 +140,7 @@
 
         <section class="middle style-background clip snap-bottom">
             <div class="text">
-                <h3>Interface<br />Guideline</h3>
+                <h3>The<br />Interface<br />Guideline</h3>
                 <p>The newly created interface guideline will provide consistent interface development in the future.
                 </p>
             </div>
@@ -169,7 +171,7 @@
         </section>
 
         <section class="footer">
-            <a class="reading">Reading time: 50 seconds</a>
+            <a class="reading">Reading time: 40 seconds</a>
         </section>
     </main>
 

@@ -111,7 +111,7 @@ var detailview = {
 		});
 
 		// Style - Spread
-		next.querySelectorAll(".style-spread-2").forEach(el => {
+		next.querySelectorAll(".style-spread-big").forEach(el => {
 			// Scroll animation
 			ScrollTrigger.defaults({
 				trigger: el.querySelectorAll(".thumbs"),
@@ -120,38 +120,26 @@ var detailview = {
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".pic-1"), {
-							top: "random(250, 500, 5)px",
-							left: "50%",
-							x: "-20%",
-							rotation: 0
-						}, {
-							top: 0,
-							left: "50%",
-							rotation: 7.5,
-							ease: "expo.out"
-						}, 0);
-
-						tl.fromTo(el.querySelectorAll(".pic-2"), {
-							top: "random(250, 500, 5)px",
-							left: "initial",
-							right: "50%",
-							x: "20%",
-							rotation: 0
-						}, {
-							top: 0,
-							right: "50%",
-							rotation: -7.5,
-							ease: "expo.out"
-						}, 0);
+						for (let idx = 1; idx <= 3; idx++) {
+							tl.fromTo(el.querySelectorAll(".pic-" + idx), {
+								y: "30%",
+								x: -100,
+								rotation: 0
+							}, {
+								y: idx == 1 ? 0 : "10%",
+								x: idx == 1 ? "-50%" : idx == 2 ? "-55%" : "-45%",
+								rotation: idx == 1 ? 0 : idx == 2 ? -12.5 : 12.5,
+								duration: 1
+							}, (idx - 1) * .064);
+						}
 
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
-							start: "0 75%",
-							end: "100% 75%",
+							start: "50% 100%",
+							end: "100% 100%",
 							animation: tl,
-							scrub: 1
+							scrub: 1.25
 						});
 					});
 				},
@@ -581,18 +569,17 @@ var detailview = {
 
 		// Style - Background
 		next.querySelectorAll(".style-background").forEach(el => {
-			var elPicture = el.querySelectorAll(" .thumbs > img");
+			var elPicture = el.querySelectorAll(".thumbs");
 			// Scroll pictures
 			scroll.push(tl => {
 				elPicture.forEach(function (picture) {
 					tl.fromTo(picture, {
-						rotation: -5,
-						x: -10,
-						y: -200
+						x: "1%",
+						y: "-50%"
 					}, {
-						rotation: -5,
-						x: 10,
-						y: 200
+						x: "-1%",
+						y: "50%",
+						ease: "linear"
 					}, 0);
 				});
 
@@ -600,17 +587,32 @@ var detailview = {
 			}, tl => {
 				return ScrollTrigger.create({
 					trigger: el,
-					endTrigger: ".links",
 					start: "0 100%",
 					end: "100% 0",
 					scrub: true,
 					animation: tl
 				});
 			});
-			// Move text
-			scroll.moveText({
-				elements: el.querySelectorAll(" .text"),
-				position: "85%"
+			// Scroll text
+			el.querySelectorAll(".text").forEach(text => {
+				scroll.push(tl => {
+					tl.fromTo(text, {
+						y: "100%"
+					}, {
+						y: "-100%",
+						ease: "linear"
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: .5,
+						animation: tl
+					});
+				});
 			});
 		});
 

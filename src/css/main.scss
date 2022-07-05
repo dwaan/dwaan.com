@@ -1161,13 +1161,13 @@ header {
 
 	&:after {
 		@include mixins.make-it-block();
-		@include mixins.positions(85%, 0, -1%);
+		@include mixins.positions(90%, 0, -1%);
 		z-index: 3;
 		position: absolute;
 		background: transparent;
-		background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
-		background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
-		background: linear-gradient(0deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .75) 20%, rgba(255, 255, 255, 0) 100%);
+		background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, .75) 30%, rgba(255, 255, 255, 0) 80%);
+		background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, .75) 30%, rgba(255, 255, 255, 0) 80%);
+		background: linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, .75) 30%, rgba(255, 255, 255, 0) 80%);
 	}
 
 	.text {
@@ -1194,7 +1194,7 @@ header {
 		}
 	}
 
-	&.style-spread-2 {
+	&.style-spread-big {
 		picture {
 			display: block;
 
@@ -1223,6 +1223,11 @@ header {
 	.thumb {
 		order: 1;
 	}
+}
+
+.style-plain {
+	@extend %style-spread;
+
 }
 
 
@@ -1302,20 +1307,24 @@ header {
 		flex-flow: column nowrap;
 		justify-content: flex-end;
 		background-color: var(--white);
-		padding: var(--padxl) var(--padl);
+		padding: var(--padxl) var(--padl) var(--padl);
 		border-radius: var(--pads);
 		box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
 	}
 
 	.thumbs {
-		position: absolute;
 		z-index: 1;
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		img {
 			opacity: .35;
-			width: 110vw;
-			transform: rotate(-5deg);
 			transform-origin: center;
+			transform: rotate(-5deg);
 		}
 	}
 }
