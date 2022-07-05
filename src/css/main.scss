@@ -1140,6 +1140,10 @@ header {
 			border: none;
 		}
 	}
+
+	&.aai .color li {
+		border-radius: 100%;
+	}
 }
 
 
@@ -1187,6 +1191,24 @@ header {
 		&.pic-5 {
 			z-index: 1;
 			display: block;
+		}
+	}
+
+	&.style-spread-2 {
+		picture {
+			display: block;
+
+			&.pic-1 {
+				z-index: 3;
+			}
+
+			&.pic-2 {
+				z-index: 2;
+			}
+
+			&.pic-3 {
+				z-index: 1;
+			}
 		}
 	}
 }
@@ -1252,6 +1274,10 @@ header {
 		flex: none;
 	}
 
+	picture {
+		overflow: hidden;
+	}
+
 	.text {
 		display: flex;
 		flex-flow: column nowrap;
@@ -1259,8 +1285,39 @@ header {
 	}
 }
 
+.aai .style-masonry,
 .suzuki .style-masonry {
 	height: auto;
+}
+
+/* Style with background image */
+.style-background {
+	background-color: var(--gray-light);
+
+	.text {
+		position: relative;
+		width: var(--pic-w);
+		z-index: 2;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: flex-end;
+		background-color: var(--white);
+		padding: var(--padxl) var(--padl);
+		border-radius: var(--pads);
+		box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+	}
+
+	.thumbs {
+		position: absolute;
+		z-index: 1;
+
+		img {
+			opacity: .35;
+			width: 110vw;
+			transform: rotate(-5deg);
+			transform-origin: center;
+		}
+	}
 }
 
 /* Style that look like table */

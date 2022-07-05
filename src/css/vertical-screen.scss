@@ -74,7 +74,7 @@ header {
 	}
 
 	&.auto {
-		padding: calc(2 * var(--padxl)) var(--padx);
+		padding: calc(2 * var(--padxl)) var(--padxl);
 	}
 
 	img.logo {
@@ -229,7 +229,7 @@ header {
 
 %style-spread {
 	flex-direction: column;
-	padding: calc(2 * var(--padxl)) var(--padx);
+	padding: calc(2 * var(--padxl)) var(--padxl);
 
 	.text {
 		margin-bottom: var(--padl);
@@ -249,7 +249,6 @@ header {
 	}
 
 	.thumbs {
-		width: 100%;
 		height: var(--pic-h);
 
 		@media (min-width: 400px) {
@@ -292,7 +291,7 @@ header {
 
 	.thumbs {
 		max-width: 400px;
-		margin-bottom: -10vh;
+		margin: 0 calc(-1 * var(--padm)) -10vh;
 		align-self: center;
 		display: flex;
 		flex-direction: row;
@@ -491,7 +490,7 @@ header {
 
 	.thumbs {
 		max-width: 400px;
-		margin-bottom: -5vh;
+		margin: 0 0 -5vh;
 
 		ul {
 			margin: var(--padxxl) 0 calc(-1 * var(--padxl));
@@ -503,8 +502,8 @@ header {
 				width: 45%;
 
 				&:last-child {
-					margin: -160px 0 0 12.5%;
-					width: 87.5%;
+					margin: -160px 0 0 7.5%;
+					width: 95%;
 
 					picture {
 						width: 100%;

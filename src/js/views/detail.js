@@ -110,6 +110,82 @@ var detailview = {
 			ScrollTrigger.defaults({});
 		});
 
+		// Style - Spread
+		next.querySelectorAll(".style-spread-2").forEach(el => {
+			// Scroll animation
+			ScrollTrigger.defaults({
+				trigger: el.querySelectorAll(".thumbs"),
+				toggleActions: "restart none none reverse"
+			});
+			ScrollTrigger.matchMedia({
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						tl.fromTo(el.querySelectorAll(".pic-1"), {
+							top: "random(250, 500, 5)px",
+							left: "50%",
+							x: "-20%",
+							rotation: 0
+						}, {
+							top: 0,
+							left: "50%",
+							rotation: 7.5,
+							ease: "expo.out"
+						}, 0);
+
+						tl.fromTo(el.querySelectorAll(".pic-2"), {
+							top: "random(250, 500, 5)px",
+							left: "initial",
+							right: "50%",
+							x: "20%",
+							rotation: 0
+						}, {
+							top: 0,
+							right: "50%",
+							rotation: -7.5,
+							ease: "expo.out"
+						}, 0);
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							start: "0 75%",
+							end: "100% 75%",
+							animation: tl,
+							scrub: 1
+						});
+					});
+				},
+				"(min-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						for (let idx = 1; idx <= 3; idx++) {
+							tl.fromTo(el.querySelectorAll(".pic-" + idx), {
+								top: (9.5 - (idx * 5 / 6)) * 10 + "%",
+								left: (12.25 + (idx * 5 / 4)) * 10 + "%",
+								rotation: (idx + 2) * 5
+							}, {
+								top: (4.5 - (idx * 5 / 6)) * 10 + "%",
+								left: (2.25 + (idx * 5 / 4)) * 10 + "%",
+								rotation: (idx - 2) * 5,
+								duration: 1,
+								ease: "expo.out"
+							}, (idx - 1) * .064);
+						}
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							start: "-25% 50%",
+							end: "50% 50%",
+							scrub: 1,
+							animation: tl
+						});
+					});
+				}
+			});
+			// Reset
+			ScrollTrigger.defaults({});
+		});
+
 		// Style - Spread Left
 		next.querySelectorAll(".style-spread-left").forEach(el => {
 			// Move the text
@@ -499,6 +575,41 @@ var detailview = {
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(" .text > *"),
+				position: "85%"
+			});
+		});
+
+		// Style - Background
+		next.querySelectorAll(".style-background").forEach(el => {
+			var elPicture = el.querySelectorAll(" .thumbs > img");
+			// Scroll pictures
+			scroll.push(tl => {
+				elPicture.forEach(function (picture) {
+					tl.fromTo(picture, {
+						rotation: -5,
+						x: -10,
+						y: -200
+					}, {
+						rotation: -5,
+						x: 10,
+						y: 200
+					}, 0);
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					endTrigger: ".links",
+					start: "0 100%",
+					end: "100% 0",
+					scrub: true,
+					animation: tl
+				});
+			});
+			// Move text
+			scroll.moveText({
+				elements: el.querySelectorAll(" .text"),
 				position: "85%"
 			});
 		});

@@ -15,7 +15,7 @@
 	<main data-barba="container" data-barba-namespace="detail" class="detail">
 		<section class="middle full snap">
 			<div class="padding">
-				<img src="/dwaan/img/logo-tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
+				<img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
 			</div>
 			<h4 class="year">/2019</h4>
 			<div class="arrow-big">
@@ -162,10 +162,10 @@
 		<section class="links snap-bottom">
 			<nav>
 				<div class="prototype group">
-					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&scaling=contain&page-id=138%3A786&starting-point-node-id=3948%3A0" target="_BLANK" class="title"><span>visit the prototype</span></a>
-					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3948%3A0&scaling=contain&page-id=138%3A786&starting-point-node-id=3948%3A0" target="_BLANK"><span>desktop</span></a>
-					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3076%3A21&scaling=scale-down&page-id=3076%3A0&starting-point-node-id=3076%3A21" target="_BLANK"><span>tablet</span></a>
-					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3951%3A0&scaling=scale-down&page-id=138%3A8&starting-point-node-id=3951%3A0" target="_BLANK"><span>mobile</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A786&viewport=136%2C2470%2C0.6&scaling=scale-down&starting-point-node-id=251%3A0" target="_BLANK" class="title"><span>visit the prototype</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A786&viewport=136%2C2470%2C0.6&scaling=scale-down&starting-point-node-id=251%3A0" target="_BLANK"><span>desktop</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3076%3A0&viewport=232%2C40%2C0.64&scaling=scale-down&starting-point-node-id=3076%3A21" target="_BLANK"><span>tablet</span></a>
+					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
 				</div>
 				<div class="continue">
 					<a href="http://v1.dwaan.com"><span><strong>next case study</strong>  <i>-  dwaan.com v1</i></span></a>
