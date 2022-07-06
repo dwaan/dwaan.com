@@ -114,7 +114,7 @@ body,
 html {
 	font-family: fonts.$fontname, sans-serif;
 	letter-spacing: .065rem;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 /* Common styles */
@@ -165,7 +165,7 @@ p {
 	@extend %zero-box-will-change;
 	@extend %transition;
 	@extend %gray-color;
-	@include mixins.typography(1rem, 500, 175%, .02em);
+	@include mixins.typography(1rem, 600, 175%, .02em);
 	opacity: .8;
 
 	a {
@@ -583,6 +583,7 @@ picture img {
 	align-items: flex-end;
 	text-align: right;
 	color: var(--black);
+	pointer-events: none;
 }
 
 
@@ -731,7 +732,7 @@ header {
 		right: var(--padx);
 		padding: 0 12px 0 48px;
 		margin: 4px -12px;
-		line-height: 36px;
+		line-height: 35px;
 		border-radius: 8px;
 		transition: all .15s ease;
 		will-change: background-color;
@@ -960,17 +961,21 @@ header {
 	}
 
 	.email {
+		font-weight: 600;
 		pointer-events: auto;
 	}
 }
 
 
 .reading {
-	@include mixins.typography(.6rem, 500, 12px, .14em);
+	@include mixins.typography(.6rem, 600, 12px, .14em);
 	display: flex;
 	align-items: flex-end;
 	text-transform: uppercase;
-	pointer-events: auto;
+	pointer-events: none;
+	margin: 0!important;
+	padding: 0!important;
+	line-height: 100%;
 }
 
 .location {

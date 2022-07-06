@@ -34,7 +34,7 @@ let transition_home_to_hi = {
                 y: "0%",
                 lineHeight: "15px",
                 fontSize: "0.8rem",
-                fontWeight: 400,
+                fontWeight: 600,
                 letterSpacing: "0.1em"
             },
                 to = {
@@ -43,8 +43,8 @@ let transition_home_to_hi = {
                     x: "-50%",
                     y: "50%",
                     lineHeight: "80%",
-                    fontSize: "6rem",
-                    fontWeight: 500,
+                    fontSize: "5.75rem",
+                    fontWeight: 700,
                     letterSpacing: "-0.06em",
                     duration: 1,
                     ease: "expo.inOut",

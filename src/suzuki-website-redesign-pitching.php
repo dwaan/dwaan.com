@@ -160,7 +160,7 @@
         </section>
 
         <section class="footer">
-            <a class="reading">Reading time: 50 seconds</a>
+            <p class="reading">Reading time: 50 seconds</p>
         </section>
     </main>
 
