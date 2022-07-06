@@ -114,7 +114,7 @@ body,
 html {
 	font-family: fonts.$fontname, sans-serif;
 	letter-spacing: .065rem;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 /* Common styles */
@@ -165,7 +165,7 @@ p {
 	@extend %zero-box-will-change;
 	@extend %transition;
 	@extend %gray-color;
-	@include mixins.typography(1rem, 600, 175%, .02em);
+	@include mixins.typography(1rem, 500, 175%, .02em);
 	opacity: .8;
 
 	a {
@@ -1036,7 +1036,7 @@ header {
 	&,
 	sub,
 	sup {
-		@include mixins.typography(5rem, 500);
+		@include mixins.typography(5rem, 600);
 		@include mixins.zero-box;
 	}
 
@@ -1362,6 +1362,12 @@ header {
 	flex-direction: row;
 	align-items: flex-end;
 
+	.meta {
+		display: flex;
+		gap: var(--padxl);
+		flex-direction: column;
+	}
+
 	.text small {
 		line-height: 150%;
 		letter-spacing: 0.05em;
@@ -1406,6 +1412,15 @@ header {
 		order: 3
 	}
 
+}
+
+.style-angled-individual {
+	height: auto;
+	background-color: transparent;
+
+	.color li {
+		border-radius: 100px;
+	}
 }
 
 /* Style with logo on the bottom */

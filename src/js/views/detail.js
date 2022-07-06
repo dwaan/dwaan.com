@@ -17,7 +17,7 @@ var detailview = {
 		// });
 
 		// Style - Spread
-		next.querySelectorAll(".style-spread").forEach(el => {
+		next.querySelectorAll(".style-spread:not(.style-spread-big)").forEach(el => {
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".titles > *, p")
@@ -109,8 +109,6 @@ var detailview = {
 			// Reset
 			ScrollTrigger.defaults({});
 		});
-
-		// Style - Spread
 		next.querySelectorAll(".style-spread-big").forEach(el => {
 			// Scroll animation
 			ScrollTrigger.defaults({
@@ -505,7 +503,7 @@ var detailview = {
 		});
 
 		// Style - Angled
-		next.querySelectorAll(".style-angled").forEach(el => {
+		next.querySelectorAll(".style-angled:not(.style-angled-individual)").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "75%");
@@ -559,6 +557,38 @@ var detailview = {
 						});
 					});
 				}
+			});
+			// Move text
+			scroll.moveText({
+				elements: el.querySelectorAll(" .text > *"),
+				position: "85%"
+			});
+		});
+		next.querySelectorAll(".style-angled-individual").forEach(el => {
+			var elPicture = el.querySelectorAll(" .thumbs > picture");
+			// Move pictures
+			scroll.moveThumbs(elPicture, "100%");
+			// Scroll pictures
+			scroll.push(tl => {
+				elPicture.forEach(function (picture) {
+					tl.fromTo(picture, {
+						rotation: -5,
+						x: 500,
+					}, {
+						rotation: -5,
+						x: -500
+					}, 0);
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 0",
+					scrub: .75,
+					animation: tl
+				});
 			});
 			// Move text
 			scroll.moveText({

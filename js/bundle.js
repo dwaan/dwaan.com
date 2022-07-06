@@ -20035,7 +20035,7 @@ var detailview = {
 		// });
 
 		// Style - Spread
-		next.querySelectorAll(".style-spread").forEach(el => {
+		next.querySelectorAll(".style-spread:not(.style-spread-big)").forEach(el => {
 			// Move the text
 			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].moveText({
 				elements: el.querySelectorAll(".titles > *, p")
@@ -20127,8 +20127,6 @@ var detailview = {
 			// Reset
 			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].defaults({});
 		});
-
-		// Style - Spread
 		next.querySelectorAll(".style-spread-big").forEach(el => {
 			// Scroll animation
 			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].defaults({
@@ -20523,7 +20521,7 @@ var detailview = {
 		});
 
 		// Style - Angled
-		next.querySelectorAll(".style-angled").forEach(el => {
+		next.querySelectorAll(".style-angled:not(.style-angled-individual)").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].moveThumbs(elPicture, "75%");
@@ -20577,6 +20575,38 @@ var detailview = {
 						});
 					});
 				}
+			});
+			// Move text
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].moveText({
+				elements: el.querySelectorAll(" .text > *"),
+				position: "85%"
+			});
+		});
+		next.querySelectorAll(".style-angled-individual").forEach(el => {
+			var elPicture = el.querySelectorAll(" .thumbs > picture");
+			// Move pictures
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].moveThumbs(elPicture, "100%");
+			// Scroll pictures
+			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+				elPicture.forEach(function (picture) {
+					tl.fromTo(picture, {
+						rotation: -5,
+						x: 500,
+					}, {
+						rotation: -5,
+						x: -500
+					}, 0);
+				});
+
+				return tl;
+			}, tl => {
+				return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 0",
+					scrub: .75,
+					animation: tl
+				});
 			});
 			// Move text
 			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].moveText({

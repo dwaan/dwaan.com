@@ -47,7 +47,8 @@
         <section class="middle auto style-flex snap">
             <div class="style-row">
                 <div class="style-column big">
-                    <div class="meta">
+                    <div class="meta musiku">
+                        <img src="/dwaan/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" />
                         <picture>
                             <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/icon@3x.webp">
                             <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/icon@2x.webp">
@@ -61,6 +62,30 @@
                         <p>Creating design without a product name means that placeholder contents need to be created from scratch that include brand identity that include logo, color schemes, and various content.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="middle auto style-angled style-angled-individual snap">
+            <div class="text">
+                <div class="meta color">
+                    <ul class="flat">
+                        <li style="background: #F6EF58"></li>
+                        <li style="background: #B7FF1C"></li>
+                        <li style="background: #4180DF"></li>
+                        <li style="background: #A628AC"></li>
+                    </ul>
+                </div>
+                <h3>The Contrast</h3>
+                <p>As a concept, the vibrant and contrast color system were introduce to make the website look fresh and cheerful. This was also intended to distance itself with other govermental website that sometimes looks dull.</p>
+            </div>
+            <div class="thumbs">
+                <?php for ($i = 2; $i <= 6; $i++) { ?>
+                    <picture class="pic-<?php echo $i ?>">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="" height="" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
+                <?php } ?>
             </div>
         </section>
 

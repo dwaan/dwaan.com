@@ -559,6 +559,35 @@ header {
 	}
 }
 
+.style-angled-individual {
+	background-color: transparent;
+	gap: var(--padxxl);
+
+	.text {
+		margin: 0;
+		align-self: center;
+
+		.meta {
+			margin-bottom: var(--padl);
+
+			ul {
+				gap: var(--padm);
+			}
+		}
+	}
+
+	.thumbs {
+		transform: none;
+		width: 100%;
+
+		picture {
+			width: calc(var(--pic-w) * 7/6);
+			height: auto;
+			transform: rotate(-5deg);
+		}
+	}
+}
+
 /* Style truncate */
 .style-trunc {
 	padding: var(--padxxl) 0 0;
@@ -690,16 +719,14 @@ header {
 /* ol/ul for branding color for Suzuki */
 .detail {
 	.color {
-		margin: calc(-1 * var(--padm)) 0;
-
 		ul {
-			margin: var(--padm) calc(-1 * var(--padm));
+			display: flex;
+			gap: calc(2 * var(--padm));
 		}
 
 		li {
 			width: 32px;
 			height: 32px;
-			margin: 0 var(--padm);
 			font-size: .65rem;
 			line-height: 32px;
 
@@ -778,6 +805,29 @@ header {
 	p {
 		margin-left: var(--padm);
 		max-width: 300px;
+	}
+}
+
+/* Musiku page */
+
+.musiku {
+	.style-row {
+		width: auto;
+		padding: calc(2 * var(--padxxl));
+	}
+
+	.style-column {
+		.meta {
+			width: auto;
+
+			.logo {
+				width: 138px;
+			}
+
+			picture {
+				width: 184px;
+			}
+		}
 	}
 }
 
