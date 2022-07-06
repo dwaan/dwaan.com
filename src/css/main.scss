@@ -15,7 +15,7 @@
 }
 
 %bold-child-initial-transiton {
-	font-weight: 500;
+	font-weight: 700;
 
 	* {
 		transition: initial;
@@ -114,6 +114,7 @@ body,
 html {
 	font-family: fonts.$fontname, sans-serif;
 	letter-spacing: .065rem;
+	font-weight: 500;
 }
 
 /* Common styles */
@@ -164,7 +165,7 @@ p {
 	@extend %zero-box-will-change;
 	@extend %transition;
 	@extend %gray-color;
-	@include mixins.typography(1rem, normal, 175%, .02em);
+	@include mixins.typography(1rem, 500, 175%, .02em);
 	opacity: .8;
 
 	a {
@@ -278,7 +279,7 @@ picture img {
 	}
 
 	.support {
-		display: block;
+		display: flex;
 	}
 }
 
@@ -882,9 +883,9 @@ header {
 	flex-flow: column;
 
 	h1 {
-		@include mixins.typography(6rem, false, 80%, false, var(--black));
+		@include mixins.typography(5.75rem, false, 80%, false, var(--black));
 		padding: 0 !important;
-		max-width: 700px;
+		max-width: 720px;
 
 		a {
 			display: inline-block;
@@ -1010,12 +1011,21 @@ header {
 		line-height: 90%;
 		letter-spacing: -.24rem;
 		text-align: center;
+		font-weight: 700;
 	}
+
 
 	.plurksubtitle {
 		height: auto !important;
 		margin-top: 2.5vh;
 		@include mixins.typography(1.6rem, 300);
+		text-align: center;
+
+		a {
+			display: inline-block;
+			font-weight: 600;
+			text-decoration: none;
+		}
 	}
 
 	&,
@@ -1629,7 +1639,7 @@ header {
 
 	.title {
 		pointer-events: none;
-		font-weight: bold;
+		font-weight: 700;
 	}
 }
 

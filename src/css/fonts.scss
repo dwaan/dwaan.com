@@ -2,7 +2,7 @@
 
 /* Custom fonts */
 
-$fontname: 'Rubik';
+$fontname: 'Quicksand';
 
 @mixin font($weight, $local1, $local2, $url) {
 	font-family: $fontname;
@@ -14,17 +14,21 @@ $fontname: 'Rubik';
 }
 
 @font-face {
-	@include font(300, 'Rubik Light', 'Rubik-Light', "../fonts/rubik-light.woff2");
+	@include font(300, $fontname + ' Light', 'Quicksand-Light', "../fonts/Quicksand-Light.woff2");
 }
 
 @font-face {
-	@include font(400, 'Rubik', 'Rubik-Regular', "../fonts/rubik-regular.woff2");
+	@include font(400, $fontname, 'Quicksand-Regular', "../fonts/Quicksand-Regular.woff2");
 }
 
 @font-face {
-	@include font(500, 'Rubik Medium', 'Rubik-Medium', "../fonts/rubik-medium.woff2");
+	@include font(500, $fontname + ' Medium', 'Quicksand-Medium', "../fonts/Quicksand-Medium.woff2");
 }
 
 @font-face {
-	@include font(700, 'Rubik Bold', 'Rubik-Bold', "../fonts/rubik-bold.woff2");
+	@include font(600, $fontname + ' SemiBold', 'Quicksand-SemiBold', "../fonts/Quicksand-SemiBold.woff2");
+}
+
+@font-face {
+	@include font(700, $fontname + ' Bold', 'Quicksand-Bold', "../fonts/Quicksand-Bold.woff2");
 }

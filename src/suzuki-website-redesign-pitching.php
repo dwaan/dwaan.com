@@ -3,10 +3,10 @@
 
 <head>
     <?php
-		$title = "Suzuki Website Redesign";
-		$description = "A short study case of website redesign pitching for Suzuki Indonesia";
-		include_once "part_metacss.php";
-	?>
+    $title = "Suzuki Website Redesign";
+    $description = "A short study case of website redesign pitching for Suzuki Indonesia";
+    include_once "part_metacss.php";
+    ?>
 </head>
 
 <body data-barba="wrapper">
@@ -15,8 +15,7 @@
     <main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/dwaan/img/logo/suzuki.svg" width="147" height="180" class="logo"
-                        alt="Suzuki's Logo" /></span>
+                <span><img src="/dwaan/img/logo/suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
             </div>
             <h4 class="year">/2020</h4>
             <div class="arrow-big">
@@ -36,15 +35,12 @@
                     that their website needs more improvement.</p>
             </div>
             <div class="thumbs">
-                <?php for ($i=4; $i <= 5; $i++) { ?>
-                <picture class="pic-<?php echo $i ?>">
-                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                    <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height=""
-                        alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
-                </picture>
+                <?php for ($i = 4; $i <= 5; $i++) { ?>
+                    <picture class="pic-<?php echo $i ?>">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
                 <?php } ?>
             </div>
         </section>
@@ -57,19 +53,16 @@
                     </li>
                     <li>Restructuring their website information based on initial user persona is the key vital point for
                         redesign.</li>
-                    <li>Further more, I suggest improvement on their website server infrastructures.</li>
+                    <li>Further more, suggesting some improvement on their website server infrastructures.</li>
                 </ol>
             </div>
             <div class="thumbs">
                 <?php for ($i = 2; $i <= 9; $i++) { ?>
-                <picture class="pic-<?php echo $i ?>">
-                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                    <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height=""
-                        alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
-                </picture>
+                    <picture class="pic-<?php echo $i ?>">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
                 <?php } ?>
             </div>
         </section>
@@ -121,22 +114,18 @@
 
         <section class="middle style-masonry snap-center">
             <div class="thumbs">
-                <?php for ($i=1; $i <= 11; $i++) { ?>
-                <?php if($i == 7) { ?>
-                <div class="text">
-                    <h3>Optimizing Layout</h3>
-                    <p>Products page layout are more optimized for mobile visitor with clear separation between
-                        information.</p>
-                </div>
-                <?php } ?>
-                <picture class="pic-<?php echo $i ?>">
-                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                    <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height=""
-                        alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
-                </picture>
+                <?php for ($i = 1; $i <= 11; $i++) { ?>
+                    <?php if ($i == 7) { ?>
+                        <div class="text">
+                            <h3>Optimizing Layout</h3>
+                            <p>Products page layout are more optimized for mobile visitor with clear separation between information.</p>
+                        </div>
+                    <?php } ?>
+                    <picture class="pic-<?php echo $i ?>">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
                 <?php } ?>
             </div>
             <div class="shade"></div>
@@ -149,15 +138,12 @@
                 </p>
             </div>
             <div class="thumbs">
-                <?php for ($i=1; $i <= 11; $i++) { ?>
-                <picture class="pic-<?php echo $i ?>">
-                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)"
-                        srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                    <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height=""
-                        alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
-                </picture>
+                <?php for ($i = 1; $i <= 11; $i++) { ?>
+                    <picture class="pic-<?php echo $i ?>">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
                 <?php } ?>
             </div>
         </section>
@@ -165,14 +151,10 @@
         <section class="links snap-bottom">
             <nav>
                 <div class="prototype">
-                    <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3"
-                        aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK"><span>visit the
-                            prototype</span></a>
+                    <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK"><span>visit the prototype</span></a>
                 </div>
                 <div class="continue">
-                    <a href="./melon-tiket-apa-saja"
-                        aria-label="Melon - Tiket Apa Saja Website Redesign"><span><strong>next case study</strong> <i>-
-                                Tiket Apa Saja</i></span></a>
+                    <a href="./musiku"><span><strong>next case study</strong> <i>- Musiku</i></span></a>
                 </div>
             </nav>
         </section>

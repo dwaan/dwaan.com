@@ -51,7 +51,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 70vw;
         letter-spacing: -10vw;
         color: var(--yellow);
@@ -389,7 +389,7 @@
             width: 100%;
             text-align: center;
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 500;
             font-size: .6rem;
         }
     }
@@ -443,7 +443,7 @@
     }
 
     .anim .big {
-        font-weight: 500;
+        font-weight: 600;
         line-height: 100%;
         color: var(--white);
         display: block;
@@ -656,7 +656,7 @@
         }
 
         strong {
-            font-weight: normal;
+            font-weight: 500;
             display: block;
             text-transform: initial;
             color: var(--white);
@@ -747,7 +747,7 @@
     text-align: center;
     border-radius: 24px;
     font-size: .7rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0 var(--pads);
     transition: background-color .5s ease;
 }
@@ -796,7 +796,7 @@
             height: var(--padxl);
             line-height: var(--padxl);
             color: transparent;
-            font-weight: 200;
+            font-weight: 300;
             border-radius: 1000px;
             background-color: var(--white);
             transition: box-shadow .24s ease-out;
@@ -1054,7 +1054,7 @@
         i {
             display: flex;
             padding: 0;
-            font-weight: 400;
+            font-weight: 500;
             background-color: transparent;
             margin: 0 0 0 auto;
             color: var(--black);
@@ -1299,7 +1299,7 @@
     }
 
     .made {
-        font-weight: 500;
+        font-weight: 600;
         opacity: 1;
     }
 
@@ -1393,7 +1393,7 @@
         pointer-events: all;
 
         &.now {
-            font-weight: 400;
+            font-weight: 500;
             pointer-events: none;
         }
 
@@ -1404,7 +1404,7 @@
 
     a,
     span {
-        font-weight: 300;
+        font-weight: 400;
         margin-right: var(--padm);
     }
 }

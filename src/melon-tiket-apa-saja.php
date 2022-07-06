@@ -56,8 +56,8 @@
 			<div class="text">
 				<h2>First Challenges</h2>
 				<ol class="zero">
-					<li>I felt that their old and new logo are too complex, but strongly felt that the old one is more distinctive.</li>
-					<li>I pitched a new redesign based on the idea that they need to get back to their old simplified logo.</li>
+					<li>Based on observation upon their old and new logo, both felt too complex, but the old logo looks more distinctive.</li>
+					<li>Suggested a new redesign based on the idea that they need to get back to their old simplified logo.</li>
 				</ol>
 			</div>
 		</section>
@@ -65,7 +65,7 @@
 		<section class="middle auto style-bottom-logo forcebright snap">
 			<div class="text">
 				<h3>The Solution</h3>
-				<p>The old and new logo contain too much information and it purely business decision. I suggested them to simplified their logo into something more memorable and with less distraction.</p>
+				<p>The old and new logo contain too manu information and it purely business decision. Simplification of their logo into something more memorable, fun, and with less distraction.</p>
 			</div>
 			<div class="thumbs">
 				<ul class="flat">
@@ -114,7 +114,7 @@
 			<div class="wrap">
 				<div class="text">
 					<h3>The New New Logo</h3>
-					<p>They finally agree that they need to simplified their logo resulting simplier logo. I adapted the new logo and color scheme into the new design.</p>
+					<p>They agree that they need to simplified their logo resulting simplier logo. So the new the final design will reflect with the new logo and color scheme.</p>
 				</div>
 				<div class="meta color">
 					<ul class="flat">
@@ -168,7 +168,7 @@
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
 				</div>
 				<div class="continue">
-					<a href="http://v1.dwaan.com"><span><strong>next case study</strong>  <i>-  dwaan.com v1</i></span></a>
+					<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><strong>next case study</strong> <i>- Suzuki Indonesia Website Redesign Pitching</i></span></a>
 				</div>
 			</nav>
 		</section>
