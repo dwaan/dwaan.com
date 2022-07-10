@@ -213,6 +213,10 @@ header {
 	picture {
 		box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
 
+		&.plain {
+			box-shadow: none;
+		}
+
 		&,
 		img {
 			border-radius: 8px;
@@ -221,6 +225,39 @@ header {
 
 	.meta picture {
 		box-shadow: none;
+	}
+
+	.color {
+		ul {
+			display: flex;
+			gap: calc(2 * var(--padm));
+		}
+
+		li {
+			width: 32px;
+			height: 32px;
+			font-size: .65rem;
+			line-height: 32px;
+
+			@media screen and (max-width: 900px) {
+				margin: 0 var(--pads);
+
+				&:first-child {
+					margin-left: var(--padm);
+				}
+			}
+		}
+	}
+
+	.bland {
+		margin: -10px 0;
+
+		li {
+			width: 113px;
+			height: 32px;
+			margin: 10px 0;
+			border-radius: 0 0 100px;
+		}
 	}
 }
 
@@ -317,6 +354,38 @@ header {
 
 	picture {
 		width: 65vw;
+
+		&.plain {
+			width: auto;
+		}
+	}
+
+	&.style-plain-scroll {
+		gap: 0;
+		padding: 0 calc(2 * var(--padx)) 0 0;
+
+		.text {
+			display: flex;
+			flex: none;
+			flex-direction: column;
+			justify-content: center;
+			height: 100%;
+			width: calc(var(--padxl) + calc(2 * var(--padx)) + var(--pic-w));
+			padding: 0 var(--padxl) 0 calc(2 * var(--padx));
+		}
+
+		.scroll {
+			width: var(--pic-w);
+
+			.thumbs {
+				gap: var(--padxl);
+			}
+
+			picture {
+				width: var(--pic-w);
+				height: auto;
+			}
+		}
 	}
 }
 
@@ -712,42 +781,6 @@ header {
 			margin-bottom: var(--padm);
 			font-size: 2rem;
 			min-height: calc(var(--padm) * 1.5);
-		}
-	}
-}
-
-/* ol/ul for branding color for Suzuki */
-.detail {
-	.color {
-		ul {
-			display: flex;
-			gap: calc(2 * var(--padm));
-		}
-
-		li {
-			width: 32px;
-			height: 32px;
-			font-size: .65rem;
-			line-height: 32px;
-
-			@media screen and (max-width: 900px) {
-				margin: 0 var(--pads);
-
-				&:first-child {
-					margin-left: var(--padm);
-				}
-			}
-		}
-	}
-
-	.bland {
-		margin: -10px 0;
-
-		li {
-			width: 113px;
-			height: 32px;
-			margin: 10px 0;
-			border-radius: 0 0 100px;
 		}
 	}
 }

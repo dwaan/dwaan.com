@@ -31,9 +31,7 @@
                     <h4>Concept and Design</h4>
                     <h1>Music<br />Royalty</h1>
                 </div>
-                <p>Musiku was an internal codename for this design concept of music royalty system. As a new concept in
-                    Indonesia, it need to teach visitors about the system itself. The project launched at of 2021, but
-                    the concept already started since 2019.</p>
+                <p>Musiku was an internal codename for this design concept of music royalty system. As a new concept in Indonesia, it need to teach visitors about the system itself. The project launched at of 2021, but the concept already started since 2019.</p>
             </div>
             <div class="thumbs">
                 <picture class="pic-1">
@@ -86,6 +84,40 @@
                         <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="" height="" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
+            </div>
+        </section>
+
+        <section class="middle style-plain clip snap">
+            <div class="text">
+                <div class="titles">
+                    <h1>Stock<br />Vectors</h1>
+                </div>
+                <p>The usage of stock vectors from <a href="https://icons8.com/illustrations/style--clip" target="BLANK">icons8.com</a> speed up the design process. They also give the overal freshness and cheerfulness of the design.</p>
+            </div>
+            <div class="thumbs">
+                <picture class="pic-1 plain">
+                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/vector@3x.webp">
+                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/vector@2x.webp">
+                    <img src="/dwaan/img/musiku/vector.webp" width="" height="" alt="Musiku Concept and Design - Vector - by icons8.com" />
+                </picture>
+            </div>
+        </section>
+
+        <section class="middle auto style-plain style-plain-scroll">
+            <div class="text">
+                <h3>The<br />Simplicity<br />of Complexity</h3>
+                <p>While the homepage provide a very simple explanation of the service, the user page provide expansive tools that was made with great consistency to provide easy operation.</p>
+            </div>
+            <div class="scroll">
+                <div class="thumbs">
+                    <?php for ($i = 7; $i <= 12; $i++) { ?>
+                        <picture class="pic-<?php echo $i ?>">
+                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
+                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
+                            <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="" height="" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                        </picture>
+                    <?php } ?>
+                </div>
             </div>
         </section>
 

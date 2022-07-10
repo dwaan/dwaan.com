@@ -973,8 +973,8 @@ header {
 	align-items: flex-end;
 	text-transform: uppercase;
 	pointer-events: none;
-	margin: 0!important;
-	padding: 0!important;
+	margin: 0 !important;
+	padding: 0 !important;
 	line-height: 100%;
 }
 
@@ -1243,6 +1243,27 @@ header {
 .style-plain {
 	@extend %style-spread;
 
+	&.style-plain-scroll {
+		background-color: var(--dark-white);
+
+		.text {
+			flex: none;
+		}
+
+		.scroll {
+			flex: 1;
+
+			.thumbs {
+				display: flex;
+				flex-direction: row;
+			}
+
+			picture {
+				flex: none;
+				flex-grow: 0;
+			}
+		}
+	}
 }
 
 
