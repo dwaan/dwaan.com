@@ -10,11 +10,198 @@ var detailview = {
 	beforeEnter: data => {
 		var next = data.next.container;
 
-		// Performace hog in firefox
-		// Create shadow based on content
-		// next.querySelectorAll("picture").forEach(el => {
-		// el.insertAdjacentHTML('beforeend', ("<span class='shadow' style='background-image:url(" + el.querySelector("img").getAttribute("src") + ")' />"));
-		// });
+		// Style - Plain
+		next.querySelectorAll(".style-plain").forEach(el => {
+			// Move the text
+			scroll.moveText({
+				elements: el.querySelectorAll(".titles > *, h3, p"),
+				position: "80%"
+			});
+		});
+
+		next.querySelectorAll(".style-plain-single").forEach(el => {
+			ScrollTrigger.matchMedia({
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
+							y: "50%",
+							opacity: 0
+						}, {
+							y: "0%",
+							opacity: 1,
+							ease: "expo"
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el.querySelectorAll(".thumbs"),
+							start: "0 100%",
+							end: "50% 100%",
+							scrub: 5,
+							animation: tl
+						});
+					});
+				},
+				"(min-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
+							opacity: 1,
+							y: "25%"
+						}, {
+							y: "-25%",
+							ease: "linear"
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "0 100%",
+							end: "100% 0",
+							scrub: 1,
+							animation: tl
+						});
+					});
+				}
+			});
+		});
+
+		next.querySelectorAll(".style-plain-sticky").forEach(el => {
+			var pictures = el.querySelectorAll("picture");
+
+			// Scroll animation
+			ScrollTrigger.matchMedia({
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						pictures.forEach((picture, index) => {
+							tl.fromTo(picture, {
+								rotation: 0,
+								x: (index + 1) * 50 + "%",
+								y: (index + 1) * 30 + "%",
+								zIndex: pictures.length - index
+							}, {
+								x: index * 20 + "%",
+								y: index * 20 + "%",
+								ease: "power1.out",
+								duration: 1
+							}, 0);
+
+							tl.to(picture, {
+								rotation: 0,
+								x: (index + 1) * -30 + "%",
+								y: (index + 1) * 7.5 + "%",
+								ease: "power1.in",
+								duration: 1
+							}, 1);
+
+							tl.fromTo(picture, {
+								opacity: 0,
+								ease: "expo.in"
+							}, {
+								opacity: 1,
+								duration: .1
+							}, .05);
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "0 100%",
+							end: "100% 0",
+							scrub: 1,
+							animation: tl
+						});
+					});
+				},
+				"(min-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						pictures.forEach((picture, index) => {
+							tl.fromTo(picture, {
+								rotation: (pictures.length - index - 1) * 5,
+								x: ((pictures.length - index - 1) * 7.5) + "%",
+								y: ((pictures.length - index - 1) * 40) + "%",
+								zIndex: pictures.length - index
+							}, {
+								rotation: index * -5,
+								x: index * -10 + "%",
+								y: index * -80 + "%",
+								ease: "power1.inOut",
+								duration: 1
+							}, 0);
+
+							tl.fromTo(picture, {
+								opacity: 0,
+								ease: "expo.in"
+							}, {
+								opacity: 1,
+								duration: .1
+							}, .05);
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "0 100%",
+							end: "100% 0",
+							scrub: 1,
+							animation: tl
+						});
+					});
+				}
+			});
+		});
+
+		next.querySelectorAll(".style-plain-scroll").forEach(el => {
+			// Move thumbnail again
+			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"), null);
+
+			ScrollTrigger.matchMedia({
+				"(max-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						tl.fromTo(el.querySelector(".thumbs"), {
+							x: 0
+						}, {
+							x: (el.querySelector(".thumbs").offsetWidth - el.querySelector(".scroll").offsetWidth) * -1,
+							ease: "ease.in"
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el.querySelector(".thumbs"),
+							start: "0 80%",
+							end: "100% 80%",
+							scrub: 3,
+							animation: tl
+						});
+					});
+				},
+				"(min-aspect-ratio: 1/1)": () => {
+					scroll.push(tl => {
+						tl.fromTo(el.querySelector(".thumbs"), {
+							x: (el.querySelector(".thumbs").offsetWidth - el.querySelector(".scroll").offsetWidth) * -1
+						}, {
+							x: 0,
+							ease: "ease.in"
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "50% 100%",
+							end: "100% 100%",
+							scrub: 3,
+							animation: tl
+						});
+					});
+				}
+			});
+		});
+
 
 		// Style - Spread
 		next.querySelectorAll(".style-spread:not(.style-spread-big)").forEach(el => {
@@ -23,17 +210,12 @@ var detailview = {
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
-			ScrollTrigger.defaults({
-				trigger: el.querySelectorAll(".thumbs"),
-				toggleActions: "restart none none reverse"
-			});
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
 						tl.fromTo(el.querySelectorAll(".pic-4"), {
 							top: "random(250, 500, 5)px",
 							left: "50%",
-							x: "-20%",
 							rotation: 0
 						}, {
 							top: 0,
@@ -46,7 +228,6 @@ var detailview = {
 							top: "random(250, 500, 5)px",
 							left: "initial",
 							right: "50%",
-							x: "20%",
 							rotation: 0
 						}, {
 							top: 0,
@@ -58,7 +239,8 @@ var detailview = {
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
-							start: "0 75%",
+							trigger: el,
+							start: "50% 75%",
 							end: "100% 75%",
 							animation: tl,
 							scrub: 1
@@ -70,8 +252,7 @@ var detailview = {
 						tl.fromTo(el.querySelectorAll(".pic-5"), {
 							top: "75%",
 							left: "350%",
-							x: 0,
-							y: 0,
+							right: "initial",
 							rotation: 0
 						}, {
 							top: "40%",
@@ -84,8 +265,6 @@ var detailview = {
 						tl.fromTo(el.querySelectorAll(".pic-4"), {
 							top: "75%",
 							left: "350%",
-							x: 0,
-							y: 0,
 							rotation: 0
 						}, {
 							top: "25%",
@@ -98,6 +277,7 @@ var detailview = {
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
+							trigger: el,
 							start: "-25% 50%",
 							end: "50% 50%",
 							scrub: 1,
@@ -106,15 +286,9 @@ var detailview = {
 					});
 				}
 			});
-			// Reset
-			ScrollTrigger.defaults({});
 		});
 		next.querySelectorAll(".style-spread-big").forEach(el => {
 			// Scroll animation
-			ScrollTrigger.defaults({
-				trigger: el.querySelectorAll(".thumbs"),
-				toggleActions: "restart none none reverse"
-			});
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
@@ -134,6 +308,7 @@ var detailview = {
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
+							trigger: el.querySelectorAll(".thumbs"),
 							start: "50% 100%",
 							end: "100% 100%",
 							animation: tl,
@@ -153,23 +328,22 @@ var detailview = {
 								left: (2.25 + (idx * 5 / 4)) * 10 + "%",
 								rotation: (idx - 2) * 5,
 								duration: 1,
-								ease: "expo.out"
+								ease: "expo"
 							}, (idx - 1) * .064);
 						}
 
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
+							trigger: el.querySelectorAll(".thumbs"),
 							start: "-25% 50%",
 							end: "50% 50%",
-							scrub: 1,
+							scrub: 2,
 							animation: tl
 						});
 					});
 				}
 			});
-			// Reset
-			ScrollTrigger.defaults({});
 		});
 
 		// Style - Spread Left
@@ -179,9 +353,6 @@ var detailview = {
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
-			ScrollTrigger.defaults({
-				trigger: el.querySelectorAll(".thumbs")
-			});
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
@@ -199,6 +370,7 @@ var detailview = {
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
+							trigger: el.querySelectorAll(".thumbs"),
 							start: "0 100%-=100px",
 							end: "100% 100%-=100px",
 							animation: tl,
@@ -224,6 +396,7 @@ var detailview = {
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
+							trigger: el.querySelectorAll(".thumbs"),
 							start: "-50% 50%",
 							end: "50% 50%",
 							scrub: 1,
@@ -232,46 +405,45 @@ var detailview = {
 					});
 				}
 			});
-			// Reset
-			ScrollTrigger.defaults({});
 		});
 
 		// Style - Top
 		next.querySelectorAll(".style-top").forEach(el => {
+			var thumbs = el.querySelector(".thumbs");
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text h2, .text li")
 			});
 			ScrollTrigger.defaults({
-				trigger: el
+				start: "0 100%",
+				end: "100% 0",
+				scrub: .75
 			});
 			// Move thumbnails
 			ScrollTrigger.matchMedia({
 				"(max-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".thumbs"), {
-							x: 500
+						tl.fromTo(thumbs, {
+							x: 0
 						}, {
-							x: -500,
+							x: (el.offsetWidth - thumbs.offsetWidth),
 							ease: "linear"
 						}, 0);
 
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
-							start: "-50% 0",
-							end: "100% 0",
-							scrub: .75,
+							trigger: el,
 							animation: tl
 						});
 					});
 				},
 				"(min-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".thumbs"), {
-							x: 500
+						tl.fromTo(thumbs, {
+							x: 0
 						}, {
-							x: -500,
+							x: (el.offsetWidth - thumbs.offsetWidth),
 							ease: "linear",
 							duration: 5,
 						}, 0);
@@ -279,9 +451,7 @@ var detailview = {
 						return tl;
 					}, tl => {
 						return ScrollTrigger.create({
-							start: "-25% 0",
-							end: "200% 0",
-							scrub: .75,
+							trigger: el,
 							animation: tl
 						});
 					});
@@ -290,7 +460,7 @@ var detailview = {
 			// Reset
 			ScrollTrigger.defaults({});
 			// Move thumbnail again
-			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"), null);
+			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"));
 		});
 
 		// Style - Top
@@ -349,8 +519,8 @@ var detailview = {
 		next.querySelectorAll(".style-flex").forEach(el => {
 			// Move text
 			scroll.moveText({
-				elements: el.querySelectorAll(".style-column > *"),
-				position: "100%"
+				elements: el.querySelectorAll(".style-column .text, .style-column .meta > *"),
+				position: "90%"
 			});
 		});
 
@@ -541,7 +711,8 @@ var detailview = {
 								x: 500,
 							}, {
 								rotation: 0,
-								x: -500
+								x: -500,
+								ease: "linear"
 							}, 0);
 						});
 

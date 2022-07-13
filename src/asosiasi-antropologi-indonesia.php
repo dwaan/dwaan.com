@@ -65,7 +65,7 @@
             </div>
         </section>
 
-        <section class="middle style-flex style-flex-swap snap">
+        <section class="middle style-flex style-flex-swap auto snap">
             <div class="style-row">
                 <div class="style-column big">
                     <div class="meta">
@@ -81,18 +81,13 @@
                         <ul class="flat">
                             <li style="background: #A0290B"></li>
                             <li style="background: #2E1415"></li>
-                            <li></li>
-                        </ul>
-                        <ul class="flat">
                             <li style="background: #fff"></li>
                             <li style="background: #FAFBAB"></li>
-                            <li style="background: #000"></li>
                             <li></li>
                         </ul>
                     </div>
                     <div class="text">
-                        <small>The color of red in the logo was suitable obvious pick for brand identity. Using it as
-                            prominent color.</small>
+                        <small>The color of red in the logo was suitable obvious pick for brand identity. Using it as prominent color.</small>
                     </div>
                 </div>
                 <div class="style-column">
@@ -144,7 +139,8 @@
                     <a href="https://www.figma.com/proto/adzmnbh8sUFWV8G9vdB28Q/AAI---Mobile?page-id=0%3A1&node-id=1%3A2&viewport=385%2C26%2C0.06&scaling=contain&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" aria-label="Figma Prototype - AAI - Website Redesign" target="_BLANK"><span>mobile</span></a>
                 </div>
                 <div class="continue">
-                <a href="./melon-tiket-apa-saja" aria-label="Melon- Tiket Apa Saja Website Redesign"><span><strong>next case study</strong> <i>- Melon- Tiket Apa Saja Website Redesign</i></span></a>
+                    <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign" class="title"><span>next case study</span></a>
+                    <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign"><span>Melon - Tiket Apa Saja Website Redesign</span></a>
                 </div>
             </nav>
         </section>

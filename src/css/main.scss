@@ -52,7 +52,18 @@
 
 	--animation: background-color .5s ease, color .25s ease;
 
-	@media screen and (min-width: 700px) {
+	@media screen and (min-width: mixins.$screen-small) {
+		--padx: 30px;
+		--pady: 25px;
+
+		--pads: 1vh;
+		--padm: 2vh;
+		--padl: 6vh;
+		--padxl: 12.5vh;
+		--padxxl: 17.5vh;
+	}
+
+	@media screen and (min-width: mixins.$screen-medium) {
 		--pic-w: 271.5px;
 		--pic-h: 463.5px;
 		--pic-m: 20px;
@@ -849,12 +860,6 @@ header {
 		overflow: hidden;
 	}
 
-	img.logo {
-		width: auto;
-		max-width: 100%;
-		height: 100%;
-	}
-
 	.shade {
 		position: absolute;
 		background-color: var(--black);
@@ -884,9 +889,13 @@ header {
 	flex-flow: column;
 
 	h1 {
-		@include mixins.typography(5.75rem, false, 80%, false, var(--black));
+		@include mixins.typography(4.75rem, false, 85%, false, var(--black));
 		padding: 0 !important;
 		max-width: 720px;
+
+		@media (min-width: mixins.$screen-wide) {
+			@include mixins.typography(5.75rem, false, 80%, false, var(--black));
+		}
 
 		a {
 			display: inline-block;
@@ -1019,10 +1028,8 @@ header {
 		font-weight: 700;
 	}
 
-
 	.plurksubtitle {
 		height: auto !important;
-		margin-top: 2.5vh;
 		@include mixins.typography(1.6rem, 300);
 		text-align: center;
 
@@ -1146,6 +1153,14 @@ header {
 	picture {
 		position: relative;
 		display: block;
+
+		&.plain {
+			box-shadow: none;
+		}
+	}
+
+	.meta picture {
+		box-shadow: none;
 	}
 
 	.color li {
@@ -1243,25 +1258,43 @@ header {
 .style-plain {
 	@extend %style-spread;
 
+	&.style-plain-sticky {
+		picture {
+			transform-origin: center;
+		}
+	}
+
 	&.style-plain-scroll {
 		background-color: var(--dark-white);
 
 		.text {
-			flex: none;
+			z-index: 2;
 		}
 
 		.scroll {
+			z-index: 1;
 			flex: 1;
+		}
 
-			.thumbs {
-				display: flex;
-				flex-direction: row;
-			}
+		.thumbs {
+			display: inline-flex;
+			flex-direction: row;
+		}
 
-			picture {
-				flex: none;
-				flex-grow: 0;
-			}
+		picture {
+			width: var(--pic-w);
+			height: auto;
+			flex: none;
+			flex-grow: 0;
+			transform: rotate(2.5deg);
+		}
+	}
+
+	&.style-plain-single {
+		gap: var(--padx);
+
+		@media screen and (min-width: mixins.$screen-medium) {
+			gap: var(--padxl)
 		}
 	}
 }
@@ -1271,12 +1304,13 @@ header {
 %style-top {
 	display: flex;
 	flex-flow: column nowrap;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
 
 	.text {
 		display: flex;
 		flex-flow: column nowrap;
+		align-self: center;
 	}
 }
 
@@ -1343,9 +1377,13 @@ header {
 		flex-flow: column nowrap;
 		justify-content: flex-end;
 		background-color: var(--white);
-		padding: var(--padxl) var(--padl) var(--padl);
+		padding: calc(1.5 * var(--pady)) var(--padx) var(--pady);
 		border-radius: var(--pads);
 		box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+
+		@media (min-width: mixins.$screen-medium) {
+			padding: var(--padxl) var(--padl) var(--padl);
+		}
 	}
 
 	.thumbs {
@@ -1385,7 +1423,6 @@ header {
 
 	.meta {
 		display: flex;
-		gap: var(--padxl);
 		flex-direction: column;
 	}
 
@@ -1400,7 +1437,6 @@ header {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	overflow: hidden;
 	justify-content: flex-start;
 	background-color: var(--dark-white);
 	transition: background-color .5s ease;
@@ -1433,14 +1469,37 @@ header {
 		order: 3
 	}
 
-}
 
-.style-angled-individual {
-	height: auto;
-	background-color: transparent;
+	&.style-angled-individual {
+		height: auto;
+		background-color: transparent;
+		gap: calc(3 * var(--pady));
 
-	.color li {
-		border-radius: 100px;
+		@media (min-width: mixins.$screen-wide) {
+			gap: var(--padxxl);
+		}
+
+		.meta {
+			margin-bottom: var(--padl);
+
+			ul {
+				gap: var(--padm);
+			}
+		}
+
+		.thumbs {
+			transform: none;
+			width: 100%;
+
+			picture {
+				height: auto;
+				transform: rotate(-5deg);
+			}
+		}
+
+		.color li {
+			border-radius: 100px;
+		}
 	}
 }
 
@@ -1637,10 +1696,33 @@ header {
 	nav {
 		display: flex;
 		flex-flow: column wrap;
+		gap: var(--pady);
 	}
 
 	div {
 		display: flex;
+		position: relative;
+		padding-left: calc(2 * var(--padx));
+		min-height: var(--padx);
+
+		&:before {
+			@include mixins.make-it-block(inline-block);
+			position: absolute;
+			top: 50%;
+			left: 0;
+			box-sizing: border-box;
+			transform: translate(0, -50%);
+			border: 2px solid var(--black);
+			border-radius: 100%;
+			background-color: var(--black);
+			width: var(--padx);
+			height: var(--padx);
+			margin-right: var(--padxl);
+		}
+
+		&:first-child:before {
+			background-color: var(--white);
+		}
 	}
 
 	a {
@@ -1652,25 +1734,24 @@ header {
 			color: var(--red);
 		}
 
-		&:before,
 		&:after {
 			@include mixins.make-it-block(inline-block);
-		}
-
-		&:before {
-			border: 2px solid var(--black);
-			border-radius: 100%;
-		}
-
-		&:after {
-			@media (prefers-color-scheme: dark) {
-				background-image: url(../img/arrow-white.svg);
-			}
+			width: var(--padx);
 		}
 
 		&:last-child:after {
 			background: url(../img/arrow.svg) no-repeat right 50%;
-			height: 15px;
+			height: 100%;
+			width: calc(2 * var(--padx));
+			margin-left: var(--padx);
+		}
+
+		&:last-child:after {
+			flex: none;
+		}
+
+		span {
+			color: inherit;
 		}
 	}
 
@@ -2353,7 +2434,6 @@ ol {
 
 /* Say Hi page */
 .hi {
-
 	h1 {
 
 		&,

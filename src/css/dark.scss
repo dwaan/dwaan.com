@@ -93,7 +93,6 @@
     }
 
     .style-slideshow {
-
         .before,
         .after {
             background-image: url(../img/arrow-white.svg);
@@ -101,7 +100,7 @@
     }
 
     .links {
-        &:after {
+        a:last-child:after {
             background-image: url(../img/arrow-white.svg);
         }
     }

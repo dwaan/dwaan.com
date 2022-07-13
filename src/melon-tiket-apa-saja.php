@@ -12,7 +12,7 @@
 <body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
-	<main data-barba="container" data-barba-namespace="detail" class="detail">
+	<main data-barba="container" data-barba-namespace="detail" class="detail tas">
 		<section class="middle full snap">
 			<div class="padding">
 				<img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
@@ -168,7 +168,8 @@
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
 				</div>
 				<div class="continue">
-					<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><strong>next case study</strong> <i>- Suzuki Indonesia Website Redesign Pitching</i></span></a>
+				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching" class="title"><span><strong>next case study</strong></span></a>
+				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><i>Suzuki Indonesia Website Redesign Pitching</i></span></a>
 				</div>
 			</nav>
 		</section>

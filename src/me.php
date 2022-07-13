@@ -15,7 +15,7 @@
 	<main data-barba="container" data-barba-namespace="me" class="me">
 		<section id="about" class="about middle">
 			<div class="main-text">
-				<h1>Hello, my name is <strong>Dwan</strong></h1>
+				<h1>Hello, my name<br />is <strong>Dwan</strong></h1>
 			</div>
 			<div class="arrow-big">
 				<a href="#usedto" class="arrow scrollto">

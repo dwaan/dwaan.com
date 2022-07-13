@@ -32,6 +32,30 @@ html {
 
 
 /* Default style */
+h1 {
+	@media screen and (max-width: mixins.$screen-medium) {
+		font-size: 3rem;
+	}
+}
+
+h2 {
+	@media screen and (max-width: mixins.$screen-medium) {
+		@include mixins.typography(2.5rem, false, 100%, -0.02em);
+	}
+}
+
+h3 {
+	@media screen and (max-width: mixins.$screen-medium) {
+		@include mixins.typography(1.75rem, false, 110%);
+	}
+}
+
+h4 {
+	@media screen and (max-width: mixins.$screen-medium) {
+		@include mixins.typography(1.2rem, false, 110%);
+	}
+}
+
 p {
 	line-height: 150%;
 }
@@ -56,7 +80,11 @@ header {
 	padding: var(--pady) var(--padx);
 
 	&.auto {
-		padding: calc(2 * var(--padxl)) var(--padx);
+		padding: calc(2 * var(--pady)) var(--padx);
+
+		@media (min-width: mixins.$screen-wide) {
+			padding: calc(2 * var(--padxl)) var(--padx);
+		}
 	}
 }
 
@@ -98,15 +126,15 @@ header {
 
 /* Homepage listing item */
 .padding {
-	padding: 0 60px;
+	padding: 0 calc(2 * var(--padx));
 
 	a,
-	span {
-		height: 120px;
-
-		@media (min-width: 900px) {
-			height: initial;
-		}
+	span,
+	img.logo {
+		width: auto;
+		height: 100%;
+		max-width: 50vw;
+		max-height: 30vh;
 	}
 }
 
@@ -211,10 +239,10 @@ header {
 /* Detail page common style */
 .detail {
 	picture {
-		box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+		box-shadow: -5px 15px 30px rgba(0, 0, 0, 0.25);
 
-		&.plain {
-			box-shadow: none;
+		@media (min-height: mixins.$screen-small) {
+			box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
 		}
 
 		&,
@@ -223,28 +251,24 @@ header {
 		}
 	}
 
-	.meta picture {
-		box-shadow: none;
-	}
-
 	.color {
 		ul {
 			display: flex;
-			gap: calc(2 * var(--padm));
+			gap: calc(var(--padx) / 2);
 		}
 
 		li {
-			width: 32px;
-			height: 32px;
+			width: 24px;
+			height: 24px;
+			line-height: 24px;
+			flex: none;
 			font-size: .65rem;
-			line-height: 32px;
 
-			@media screen and (max-width: 900px) {
-				margin: 0 var(--pads);
-
-				&:first-child {
-					margin-left: var(--padm);
-				}
+			@media screen and (min-width: mixins.$screen-medium) {
+				width: 32px;
+				height: 32px;
+				line-height: 32px;
+				font-size: .65rem;
 			}
 		}
 	}
@@ -268,7 +292,7 @@ header {
 	padding: 0 var(--padxl);
 
 	.text {
-		width: 360px;
+		width: 37.5vw;
 		flex: none;
 
 		@media (min-width: 900px) {
@@ -342,21 +366,46 @@ header {
 
 .style-plain {
 	@extend %style-spread;
-
-	overflow: hidden;
-	justify-content: flex-start;
-	gap: var(--padxl);
-	padding: var(--pady) var(--padxxl);
+	gap: var(--padl);
 
 	.text {
 		width: calc(1.5 * var(--pic-w));
 	}
 
 	picture {
-		width: 65vw;
+		width: 100vh;
 
 		&.plain {
 			width: auto;
+		}
+	}
+
+	&.style-plain-sticky {
+		padding: 0;
+
+		.middle {
+			display: flex;
+			align-self: flex-start;
+			flex-direction: row;
+			gap: var(--padxl);
+			padding: var(--pady) var(--padxxl);
+		}
+
+		.thumbs {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			width: 100%;
+			height: 100%;
+
+			picture {
+				opacity: 0;
+				position: absolute;
+
+				&.pic-1-1 {
+					opacity: 1;
+				}
+			}
 		}
 	}
 
@@ -372,19 +421,38 @@ header {
 			height: 100%;
 			width: calc(var(--padxl) + calc(2 * var(--padx)) + var(--pic-w));
 			padding: 0 var(--padxl) 0 calc(2 * var(--padx));
+			background: transparent;
+			background: -moz-linear-gradient(90deg, var(--dark-white) 80%, rgba(232, 234, 235, 0) 100%);
+			background: -webkit-linear-gradient(90deg, var(--dark-white) 80%, rgba(232, 234, 235, 0) 100%);
+			background: linear-gradient(90deg, var(--dark-white) 80%, rgba(232, 234, 235, 0) 100%);
 		}
 
 		.scroll {
 			width: var(--pic-w);
+		}
 
-			.thumbs {
+		.thumbs {
+			gap: var(--padx);
+
+			@media (min-width: mixins.$screen-wide) {
 				gap: var(--padxl);
 			}
+		}
+	}
 
-			picture {
-				width: var(--pic-w);
-				height: auto;
+
+	&.style-plain-single {
+
+		.text {
+			width: calc(1.25 * var(--pic-w));
+
+			@media screen and (min-width: mixins.$screen-medium) {
+				width: calc(1.5 * var(--pic-w));
 			}
+		}
+
+		picture {
+			max-width: calc(2.5 * var(--pic-w))
 		}
 	}
 }
@@ -439,8 +507,13 @@ header {
 
 /* Style text on top and Images in the bottom */
 .style-top {
-	padding: 120px 40px;
+	padding: calc(2 * var(--pady)) calc(2 * var(--padx));
+	gap: var(--padxl);
 	overflow: hidden;
+
+	@media screen and (min-width: mixins.$screen-medium) {
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx));
+	}
 
 	h2 {
 		max-width: 468px;
@@ -448,11 +521,6 @@ header {
 
 	.text {
 		max-width: 732px;
-		margin-bottom: var(--padxl);
-
-		@media (min-height: mixins.$screen-small) {
-			margin-bottom: calc(2 * var(--padxl));
-		}
 	}
 
 	picture {
@@ -467,8 +535,12 @@ header {
 
 	&.style-top-auto {
 		picture {
-			width: calc(2 * var(--pic-w));
+			width: calc(1.75 * var(--pic-w));
 			height: auto;
+
+			@media (min-height: mixins.$screen-small) {
+				width: calc(2 * var(--pic-w));
+			}
 		}
 	}
 }
@@ -539,7 +611,11 @@ header {
 /* Style with background image */
 .style-background {
 	.text {
-		width: var(--pic-w);
+		width: calc(1.25 * var(--pic-w));
+
+		@media (min-width: mixins.$screen-wide) {
+			width: var(--pic-w);
+		}
 	}
 
 	.thumbs img {
@@ -550,6 +626,7 @@ header {
 /* Style that look like table */
 .style-row {
 	margin: calc(-1 * var(--padl)) 0;
+	gap: var(--pady);
 
 	@media (min-width: mixins.$screen-medium) {
 		width: 817px;
@@ -557,7 +634,7 @@ header {
 }
 
 .style-column {
-	margin: var(--padl) 0;
+	margin: 0;
 	gap: var(--padxl);
 
 	&.big {
@@ -566,8 +643,9 @@ header {
 
 	.meta {
 		width: 230px;
+		gap: calc(var(--pady) / 2);
 
-		@media (min-width: 900px) {
+		@media (min-width: mixins.$screen-medium) {
 			width: 310px;
 		}
 	}
@@ -594,20 +672,20 @@ header {
 
 /* Style with angled photo on the bottom */
 .style-angled {
-	padding: 120px 0 0;
-	overflow: hidden;
+	padding: calc(3 * var(--pady)) 0 0;
+	gap: var(--padxl);
 
-	@media (min-width: 1194px) {
-		padding: 120px 272px 0;
+	@media (min-width: mixins.$screen-medium) {
+		padding-top: calc(4 * var(--pady));
+		gap: calc(4 * var(--pady));
+	}
+
+	@media (min-width: mixins.$screen-wide) {
+		padding: calc(4 * var(--pady)) calc(7 * var(--padx)) 0;
 	}
 
 	.text {
 		width: 50%;
-		margin-bottom: 100px;
-
-		@media (min-height: mixins.$screen-small) {
-			margin-bottom: 180px;
-		}
 
 		@media (min-width: mixins.$screen-wide) {
 			align-self: flex-start;
@@ -626,15 +704,12 @@ header {
 		width: var(--pic-w);
 		height: var(--pic-h);
 	}
-}
 
-.style-angled-individual {
-	background-color: transparent;
-	gap: var(--padxxl);
-
-	.text {
-		margin: 0;
-		align-self: center;
+	&.style-angled-individual {
+		.text {
+			margin: 0;
+			align-self: center;
+		}
 
 		.meta {
 			margin-bottom: var(--padl);
@@ -643,16 +718,11 @@ header {
 				gap: var(--padm);
 			}
 		}
-	}
 
-	.thumbs {
-		transform: none;
-		width: 100%;
-
-		picture {
-			width: calc(var(--pic-w) * 7/6);
-			height: auto;
-			transform: rotate(-5deg);
+		.thumbs {
+			picture {
+				width: calc(var(--pic-w) * 7/6);
+			}
 		}
 	}
 }
@@ -725,43 +795,10 @@ header {
 
 /* Footer links in every detail page */
 .links {
-	padding: calc(2 * var(--padxl)) calc(2 * var(--padxl));
+	padding: calc(2 * var(--padxl)) calc(2 * var(--padx));
 
-	nav {
-		margin: calc(-1 * var(--padm)) 0;
-	}
-
-	div {
-		margin: var(--padm) 0;
-	}
-
-	a {
-		&:before {
-			display: none;
-			margin-left: 0;
-		}
-
-		&:after {
-			width: 20px;
-		}
-
-		&:first-child:before {
-			display: block;
-			flex: none;
-			width: var(--padx);
-			height: var(--padx);
-			margin-left: 0;
-			margin-right: var(--padxl);
-		}
-
-		&:last-child:after {
-			flex: none;
-			width: 120px;
-		}
-	}
-
-	.links span {
-		margin-right: var(--padl);
+	@media screen and (min-width: mixins.$screen-medium) {
+		padding: calc(2 * var(--padxl)) calc(2 * var(--padxl));
 	}
 }
 
@@ -780,7 +817,6 @@ header {
 		&:before {
 			margin-bottom: var(--padm);
 			font-size: 2rem;
-			min-height: calc(var(--padm) * 1.5);
 		}
 	}
 }
@@ -850,15 +886,46 @@ header {
 	}
 
 	.style-column {
+		width: 75vw;
+
 		.meta {
 			width: auto;
 
 			.logo {
-				width: 138px;
+				width: 20vw;
+				height: auto;
 			}
 
 			picture {
-				width: 184px;
+				width: 28vw;
+			}
+		}
+
+		@media screen and (min-width: mixins.$screen-medium) {
+			width: 55vw;
+
+			.meta {
+				.logo {
+					width: 10vw;
+				}
+
+				picture {
+					width: 14vw;
+				}
+			}
+		}
+	}
+}
+
+/* AAI page */
+
+.aai {
+	.style-column {
+		.meta {
+			width: 180px;
+
+			@media (min-width: mixins.$screen-medium) {
+				width: 310px;
 			}
 		}
 	}

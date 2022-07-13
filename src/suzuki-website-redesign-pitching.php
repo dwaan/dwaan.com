@@ -67,7 +67,7 @@
             </div>
         </section>
 
-        <section class="middle style-flex snap">
+        <section class="middle style-flex auto snap">
             <div class="style-row">
                 <div class="style-column">
                     <div class="meta">
@@ -131,7 +131,7 @@
             <div class="shade"></div>
         </section>
 
-        <section class="middle style-angled snap-bottom">
+        <section class="middle style-angled snap-bottom clip">
             <div class="text">
                 <h3>Navigation</h3>
                 <p>Further improvement in navigation means visitor can easily see their latest products with fewer taps.
@@ -151,10 +151,12 @@
         <section class="links snap-bottom">
             <nav>
                 <div class="prototype">
-                    <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK"><span>visit the prototype</span></a>
+                    <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK" class="title"><span>visit the prototype</span></a>
+                    <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK"><span>mobile</span></a>
                 </div>
                 <div class="continue">
-                    <a href="./musiku"><span><strong>next case study</strong> <i>- Musiku</i></span></a>
+                    <a href="./musiku" class="title"><span>next case study</span></a>
+                    <a href="./musiku"><span><i>Musiku</i></span></a>
                 </div>
             </nav>
         </section>

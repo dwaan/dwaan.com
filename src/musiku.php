@@ -25,24 +25,28 @@
             </div>
         </section>
 
-        <section id="more" class="middle style-plain clip snap">
-            <div class="text">
-                <div class="titles">
-                    <h4>Concept and Design</h4>
-                    <h1>Music<br />Royalty</h1>
+        <section id="more" class="middle auto style-plain style-plain-sticky snap">
+            <div class="middle">
+                <div class="text">
+                    <div class="titles">
+                        <h4>Concept and Design</h4>
+                        <h1>Music<br />Royalty</h1>
+                    </div>
+                    <p>Musiku was an internal codename for this design concept of music royalty system. As a new concept in Indonesia, it need to teach visitors about the system itself. The project launched at of 2021, but the concept already started since 2019.</p>
                 </div>
-                <p>Musiku was an internal codename for this design concept of music royalty system. As a new concept in Indonesia, it need to teach visitors about the system itself. The project launched at of 2021, but the concept already started since 2019.</p>
-            </div>
-            <div class="thumbs">
-                <picture class="pic-1">
-                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-1@3x.webp">
-                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-1@2x.webp">
-                    <img src="/dwaan/img/musiku/musiku-1.webp" width="" height="" alt="Musiku Concept and Design - Page 1 - by Dwan" />
-                </picture>
+                <div class="thumbs">
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                        <picture class="pic-1-<?php echo $i ?>">
+                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-1-<?php echo $i ?>@3x.webp">
+                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-1-<?php echo $i ?>@2x.webp">
+                            <img src="/dwaan/img/musiku/musiku-1-<?php echo $i ?>.webp" width="" height="" alt="Musiku Concept and Design - Page 1 - <?php echo $i ?> - by Dwan" />
+                        </picture>
+                    <?php } ?>
+                </div>
             </div>
         </section>
 
-        <section class="middle auto style-flex snap">
+        <section class="middle style-flex auto snap">
             <div class="style-row">
                 <div class="style-column big">
                     <div class="meta musiku">
@@ -71,6 +75,7 @@
                         <li style="background: #B7FF1C"></li>
                         <li style="background: #4180DF"></li>
                         <li style="background: #A628AC"></li>
+                        <li></li>
                     </ul>
                 </div>
                 <h3>The Contrast</h3>
@@ -87,12 +92,12 @@
             </div>
         </section>
 
-        <section class="middle style-plain clip snap">
+        <section class="middle auto style-plain style-plain-single snap">
             <div class="text">
                 <div class="titles">
                     <h1>Stock<br />Vectors</h1>
                 </div>
-                <p>The usage of stock vectors from <a href="https://icons8.com/illustrations/style--clip" target="BLANK">icons8.com</a> speed up the design process. They also give the overal freshness and cheerfulness of the design.</p>
+                <p>The usage of stock vectors and icons from <a href="https://icons8.com" target="BLANK">icons8.com</a> speed up the design process. They also give the overal freshness and cheerfulness of the design.</p>
             </div>
             <div class="thumbs">
                 <picture class="pic-1 plain">
@@ -103,7 +108,7 @@
             </div>
         </section>
 
-        <section class="middle auto style-plain style-plain-scroll">
+        <section class="middle auto style-plain style-plain-scroll clip snap-bottom">
             <div class="text">
                 <h3>The<br />Simplicity<br />of Complexity</h3>
                 <p>While the homepage provide a very simple explanation of the service, the user page provide expansive tools that was made with great consistency to provide easy operation.</p>
@@ -130,7 +135,8 @@
                     <a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
                 </div>
                 <div class="continue">
-                    <a href="./aai"><span><strong>next case study</strong> <i>- Asosiasi Antropologi Indonesia</i></span></a>
+                    <a href="./aai" class="title"><span>next case study</span></a>
+                    <a href="./aai"><span><i>Asosiasi Antropologi Indonesia</i></span></a>
                 </div>
             </nav>
         </section>

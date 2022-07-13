@@ -54,7 +54,7 @@ var scroll = {
 				trigger: trigger,
 				start: "0 " + position,
 				end: "+=175 " + position,
-				scrub: 1,
+				scrub: 2,
 				animation: that.tl[that.l]
 			}));
 		});
