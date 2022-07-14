@@ -21287,24 +21287,29 @@ let homeview = {
 		// Scroll text
 		var els = next.querySelectorAll("section.middle");
 		els.forEach((el, idx) => {
-			var maintext = el.querySelectorAll(".main-text > h1, .padding > a");
+			var maintext = el.querySelectorAll(".main-text > *, .padding > *");
 
 			// Animate text
 			_helpers_scroll_js__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
 				//Show
 				tl.fromTo(maintext, {
-					y: idx == 0 ? 0 : window.innerHeight * 1 / 3
+					y: window.innerHeight * 1 / 5
 				}, {
 					y: 0,
-					ease: "power3.out"
+					ease: "linear"
+				});
+
+				tl.to(maintext, {
+					y: window.innerHeight * -1 / 5,
+					ease: "linear"
 				});
 
 				return tl;
 			}, tl => gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"].create({
 				trigger: el,
-				start: "0 50%",
-				end: "50% 50%",
-				scrub: 3,
+				start: "15% 50%",
+				end: "85% 50%",
+				scrub: 1,
 				animation: tl
 			}));
 
