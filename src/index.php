@@ -17,7 +17,7 @@
 
         <section class="middle full">
             <div class="main-text">
-                <h1>Hello, my name is <a href="./me" arial-title="About Dwan">Dwan</a></h1>
+                <h1>Hello, my name is <a href="./me" arial-title="About Dwan" id="to-about">Dwan</a></h1>
             </div>
             <div class="arrow-big">
                 <a href="#casestudy" title="Scroll Down" class="arrow scrollto">
@@ -120,7 +120,16 @@
                 </a>
             </div>
         </section>
+
         <div id="flareend"></div>
+
+        <section class="flares">
+            <?php
+            for ($i = 1; $i <= 5; $i++) {
+                echo '<img src="/dwaan/img/flares/flare' . $i . '.webp" width="" height="" alt="" class="flare flare' . $i . '" />';
+            }
+            ?>
+        </section>
 
         <section class="footer">
             <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>

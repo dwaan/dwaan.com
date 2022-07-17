@@ -17751,6 +17751,82 @@ var darkmode = new darkMode();
 
 /***/ }),
 
+/***/ "./src/js/helpers/flares.js":
+/*!**********************************!*\
+  !*** ./src/js/helpers/flares.js ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper */ "./src/js/helpers/helper.js");
+
+
+
+
+
+var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
+var flare = {
+    elements: "",
+    show: function (elements) {
+        if (elements) this.elements = (0,_helper__WEBPACK_IMPORTED_MODULE_0__._qAll)(elements);
+
+        console.log(this.elements);
+        gsap__WEBPACK_IMPORTED_MODULE_1__["default"].killTweensOf(this.elements);
+        if (elements) {
+            gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(this.elements, {
+                opacity: 1,
+                ease: "ease.out",
+                duration: 1
+            });
+            gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(this.elements, {
+                x: "random(-100,100,10)%",
+                y: "random(10,30,5)%",
+                rotation: "random(-5,5,1)deg",
+                scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
+                ease: "ease.out",
+                duration: .5
+            });
+        }
+
+        var repeatanimation = function (element) {
+            gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(element, {
+                x: "random(-100,100,10)%",
+                y: "random(10,30,5)%",
+                rotation: "random(-5,5,1)deg",
+                scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
+                opacity: gsap__WEBPACK_IMPORTED_MODULE_1__["default"].utils.random(5, 10, 1) / 10,
+                duration: gsap__WEBPACK_IMPORTED_MODULE_1__["default"].utils.random(5, 10, 1),
+                ease: "ease.inOut",
+                onComplete: function () {
+                    repeatanimation(element);
+                }
+            });
+
+        }
+
+        this.elements.forEach(function (el) {
+            repeatanimation(el);
+        });
+    },
+    hide: function () {
+        gsap__WEBPACK_IMPORTED_MODULE_1__["default"].killTweensOf(this.elements);
+        gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(this.elements, {
+            opacity: 0,
+            scale: 1,
+            x: "random(-50,50,10)%",
+            y: "random(0,20,5)%",
+            scale: 1,
+            ease: "ease.in"
+        });
+    }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (flare);
+
+/***/ }),
+
 /***/ "./src/js/helpers/header.js":
 /*!**********************************!*\
   !*** ./src/js/helpers/header.js ***!
@@ -17778,6 +17854,7 @@ let header = {
         this.waving();
         this.slide();
         this.hamburger();
+        this.moonsun();
         this.darkmodeswitch();
         this.textswitch();
     },
@@ -17969,6 +18046,16 @@ let header = {
                     }
                 });
             });
+        });
+    },
+
+    moonsun: function () {
+        var el = (0,_helper__WEBPACK_IMPORTED_MODULE_1__._q)('.lamp');
+        gsap__WEBPACK_IMPORTED_MODULE_3__["default"].set(el.querySelector("#ray"), { transformOrigin: "center center" })
+        ;(0,_helper__WEBPACK_IMPORTED_MODULE_1__.hoverEvents)([el], () => {
+            gsap__WEBPACK_IMPORTED_MODULE_3__["default"].to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: .768, ease: "elastic.out" });
+        }, () => {
+            gsap__WEBPACK_IMPORTED_MODULE_3__["default"].to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: .768, ease: "elastic.out" });
         });
     },
 
@@ -21101,8 +21188,10 @@ var detailview = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var _helpers_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/helper */ "./src/js/helpers/helper.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var _helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/flares.js */ "./src/js/helpers/flares.js");
+/* harmony import */ var _helpers_helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/helper */ "./src/js/helpers/helper.js");
+
 
 
 
@@ -21113,63 +21202,6 @@ var hiview = {
 	beforeEnter: function (data) {
 		var next = data.next.container;
 		var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
-
-		var flare = {
-			elements: "",
-			show: function (elements) {
-				var that = this;
-
-				if (elements) this.elements = next.querySelectorAll(elements);
-
-				gsap__WEBPACK_IMPORTED_MODULE_1__["default"].killTweensOf(this.elements);
-				if (elements) {
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(this.elements, {
-						opacity: 1,
-						ease: "ease.out",
-						duration: 1
-					});
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(this.elements, {
-						x: "random(-100,100,10)%",
-						y: "random(10,30,5)%",
-						rotation: "random(-5,5,1)deg",
-						scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
-						ease: "ease.out",
-						duration: .5
-					});
-				}
-
-				var repeatanimation = function (element) {
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(element, {
-						x: "random(-100,100,10)%",
-						y: "random(10,30,5)%",
-						rotation: "random(-5,5,1)deg",
-						scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
-						opacity: gsap__WEBPACK_IMPORTED_MODULE_1__["default"].utils.random(5, 10, 1) / 10,
-						duration: gsap__WEBPACK_IMPORTED_MODULE_1__["default"].utils.random(5, 10, 1),
-						ease: "ease.inOut",
-						onComplete: function () {
-							repeatanimation(element);
-						}
-					});
-
-				}
-
-				this.elements.forEach(function (el) {
-					repeatanimation(el);
-				});
-			},
-			hide: function () {
-				gsap__WEBPACK_IMPORTED_MODULE_1__["default"].killTweensOf(this.elements);
-				gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(this.elements, {
-					opacity: 0,
-					scale: 1,
-					x: "random(-50,50,10)%",
-					y: "random(0,20,5)%",
-					scale: 1,
-					ease: "ease.in"
-				});
-			}
-		};
 
 		var textanim = {
 			el: "",
@@ -21183,27 +21215,27 @@ var hiview = {
 				if (positive) split = 50;
 
 				if (el.length == 2) {
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].killTweensOf(next.querySelectorAll(this.el.toString()));
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(next.querySelectorAll(this.el[0]), {
+					gsap__WEBPACK_IMPORTED_MODULE_2__["default"].killTweensOf(next.querySelectorAll(this.el.toString()));
+					gsap__WEBPACK_IMPORTED_MODULE_2__["default"].to(next.querySelectorAll(this.el[0]), {
 						x: split * -1,
 						ease: "power3.out",
 						duration: .5
 					});
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(next.querySelectorAll(this.el[1]), {
+					gsap__WEBPACK_IMPORTED_MODULE_2__["default"].to(next.querySelectorAll(this.el[1]), {
 						x: split,
 						ease: "power3.out",
 						duration: .5
 					});
 				} else {
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].killTweensOf(next.querySelectorAll(this.el));
-					gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(next.querySelectorAll(this.el), {
+					gsap__WEBPACK_IMPORTED_MODULE_2__["default"].killTweensOf(next.querySelectorAll(this.el));
+					gsap__WEBPACK_IMPORTED_MODULE_2__["default"].to(next.querySelectorAll(this.el), {
 						x: split,
 						ease: "power3.out",
 						duration: .5
 					});
 				}
 
-				gsap__WEBPACK_IMPORTED_MODULE_1__["default"].fromTo(next.querySelectorAll(this.hint), {
+				gsap__WEBPACK_IMPORTED_MODULE_2__["default"].fromTo(next.querySelectorAll(this.hint), {
 					y: 50
 				}, {
 					y: 0,
@@ -21213,13 +21245,13 @@ var hiview = {
 				});
 			},
 			hide: function () {
-				gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(next.querySelectorAll(this.el), {
+				gsap__WEBPACK_IMPORTED_MODULE_2__["default"].to(next.querySelectorAll(this.el), {
 					x: 0,
 					ease: "power3.out",
 					delay: .1,
 					duration: .5
 				});
-				gsap__WEBPACK_IMPORTED_MODULE_1__["default"].to(next.querySelectorAll(this.hint), {
+				gsap__WEBPACK_IMPORTED_MODULE_2__["default"].to(next.querySelectorAll(this.hint), {
 					y: 50,
 					opacity: 0,
 					ease: "power3.out",
@@ -21228,33 +21260,33 @@ var hiview = {
 			}
 		}
 
-		gsap__WEBPACK_IMPORTED_MODULE_1__["default"].set(".hi img", {
+		gsap__WEBPACK_IMPORTED_MODULE_2__["default"].set(".hi img", {
 			x: "random(-100,100,10)%",
 			y: "random(10,30,5)%",
 			rotation: "random(-5,5,1)deg",
 			scale: "random(1,2,.5)"
 		});
 
-		(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_0__.hoverEvents)(next.querySelectorAll(".email"), function (el) {
+		(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_1__.hoverEvents)(next.querySelectorAll(".email"), function (el) {
 			if (screenhorizontal) textanim.show(".email span", ".email small");
-			flare.show("img.yellow, img.red");
+			_helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__["default"].show("img.yellow, img.red");
 		}, function (el) {
 			if (screenhorizontal) textanim.hide();
-			flare.hide();
+			_helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__["default"].hide();
 		});
-		(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_0__.hoverEvents)(next.querySelectorAll(".social"), function (el) {
+		(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_1__.hoverEvents)(next.querySelectorAll(".social"), function (el) {
 			if (screenhorizontal) textanim.show([".website span", ".email span"], ".social span:first-child small");
-			flare.show("img.blue, img.red");
+			_helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__["default"].show("img.blue, img.red");
 		}, function (el) {
 			if (screenhorizontal) textanim.hide();
-			flare.hide();
+			_helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__["default"].hide();
 		});
-		(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_0__.hoverEvents)(next.querySelectorAll(".website"), function (el) {
+		(0,_helpers_helper__WEBPACK_IMPORTED_MODULE_1__.hoverEvents)(next.querySelectorAll(".website"), function (el) {
 			if (screenhorizontal) textanim.show(".social span:nth-child(2), .website span", ".social span:nth-child(2) small", true);
-			flare.show("img.blue, img.green");
+			_helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__["default"].show("img.blue, img.green");
 		}, function (el) {
 			if (screenhorizontal) textanim.hide();
-			flare.hide();
+			_helpers_flares_js__WEBPACK_IMPORTED_MODULE_0__["default"].hide();
 		});
 	},
 	afterEnter: () => console.info("me@dwaan.com")
@@ -21272,8 +21304,12 @@ var hiview = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 /* harmony import */ var _helpers_scroll_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/scroll.js */ "./src/js/helpers/scroll.js");
-/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+/* harmony import */ var _helpers_flares_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/flares.js */ "./src/js/helpers/flares.js");
+/* harmony import */ var _helpers_helper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/helper.js */ "./src/js/helpers/helper.js");
+
+
 
 
 
@@ -21305,13 +21341,20 @@ let homeview = {
 				});
 
 				return tl;
-			}, tl => gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"].create({
+			}, tl => gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__["default"].create({
 				trigger: el,
 				start: "15% 50%",
 				end: "85% 50%",
-				scrub: 1,
+				scrub: true,
 				animation: tl
 			}));
+
+			// Hover
+			(0,_helpers_helper_js__WEBPACK_IMPORTED_MODULE_2__.hoverEvents)(next.querySelectorAll("#to-about"), () => {
+				_helpers_flares_js__WEBPACK_IMPORTED_MODULE_1__["default"].show(".flares .flare");
+			}, () => {
+				_helpers_flares_js__WEBPACK_IMPORTED_MODULE_1__["default"].hide();
+			});
 
 			// Snap
 			_helpers_scroll_js__WEBPACK_IMPORTED_MODULE_0__["default"].snap(el);

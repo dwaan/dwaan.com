@@ -1,7 +1,9 @@
 "use strict";
 
-import scroll from "../helpers/scroll.js";
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import scroll from "../helpers/scroll.js";
+import flare from "../helpers/flares.js";
+import { hoverEvents } from '../helpers/helper.js';
 
 let homeview = {
 	namespace: 'home',
@@ -33,9 +35,16 @@ let homeview = {
 				trigger: el,
 				start: "15% 50%",
 				end: "85% 50%",
-				scrub: 1,
+				scrub: true,
 				animation: tl
 			}));
+
+			// Hover
+			hoverEvents(next.querySelectorAll("#to-about"), () => {
+				flare.show(".flares .flare");
+			}, () => {
+				flare.hide();
+			});
 
 			// Snap
 			scroll.snap(el);

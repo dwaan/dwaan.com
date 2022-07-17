@@ -651,6 +651,10 @@ header {
 	flex: none;
 	order: 0;
 	align-self: center;
+
+	svg {
+		pointer-events: none;
+	}
 }
 
 /* Text size item */
@@ -1107,9 +1111,9 @@ header {
 	position: fixed;
 	z-index: 1;
 	overflow: hidden;
-	display: none;
 
 	img {
+		opacity: 0;
 		position: absolute;
 		transform: scale3d(1.25, 1.25, 1);
 	}

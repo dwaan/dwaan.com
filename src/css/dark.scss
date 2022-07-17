@@ -29,6 +29,11 @@
         opacity: 1;
     }
 
+    #ray {
+        opacity: .5;
+        stroke: var(--black);
+    }
+
     .spring:hover {
         color: var(--white);
     }
