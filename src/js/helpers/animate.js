@@ -32,7 +32,7 @@ var animate = {
 		var tl = gsap.timeline({
 			defaults: {
 				duration: 1.28,
-				stagger: .24,
+				stagger: .16,
 				ease: "expo.out"
 			}
 		});
@@ -45,7 +45,7 @@ var animate = {
 		// Show current view
 		var els = next.querySelectorAll(".flares:not(.side)")
 		if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
-		if (!nonsticky) nonsticky = next.querySelector("section.middle").children;
+		if (!nonsticky) nonsticky = next.querySelector("section.middle > *:not(.arrow-big, .year)");
 		// Animate text
 		tl.fromTo([nonsticky, els], {
 			y: "+=200px",

@@ -547,6 +547,7 @@ picture img {
 .arrow {
 	&:after {
 		@include mixins.make-it-block();
+		transition: filter 1s ease;
 		background: url(../img/arrow.svg) no-repeat 100% 50%;
 	}
 
@@ -628,6 +629,8 @@ header {
 
 /* Logo item */
 .logo {
+	transition: filter 1s ease;
+
 	svg {
 		width: 25.6px;
 		height: 40px;

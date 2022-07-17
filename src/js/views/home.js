@@ -17,7 +17,7 @@ let homeview = {
 			scroll.push(tl => {
 				//Show
 				tl.fromTo(maintext, {
-					y: window.innerHeight * 1 / 5
+					y: idx == 0 ? 0 : window.innerHeight * 1 / 5
 				}, {
 					y: 0,
 					ease: "linear"

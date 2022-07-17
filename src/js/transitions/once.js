@@ -30,7 +30,7 @@ let transition_once = {
                 animate.show(next, function () {
                     loader.empty();
                     done();
-                }, true);
+                });
             }
         });
 

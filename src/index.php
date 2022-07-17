@@ -42,7 +42,7 @@
         <section class="middle full home-musiku">
             <div class="padding">
                 <a href="./musiku" aria-label="Musiku Website">
-                    <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo" alt="Logo Musiku" />
+                    <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo Musiku" />
                 </a>
             </div>
             <div class="arrow-small">

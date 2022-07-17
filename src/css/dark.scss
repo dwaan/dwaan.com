@@ -34,11 +34,14 @@
     }
 
     .arrow:after {
-        background-image: url(../img/arrow-white.svg);
+        filter: invert(100%);
     }
 
-    .logo.tas {
-        filter: invert(100%);
+    .logo {
+        &.musiku,
+        &.tas {
+            filter: invert(100%);
+        }
     }
 
     .items {
@@ -93,6 +96,7 @@
     }
 
     .style-slideshow {
+
         .before,
         .after {
             background-image: url(../img/arrow-white.svg);

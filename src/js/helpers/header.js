@@ -27,10 +27,10 @@ let header = {
         }, {
             y: 0,
             opacity: 1,
-            duration: 1.6,
+            duration: 1.28,
             ease: "expo.out",
-            delay: .5,
-            stagger: .2
+            delay: .24,
+            stagger: .16
         });
     },
 
@@ -338,7 +338,7 @@ let header = {
                             position: "absolute",
                             x: (idx > 0) ? -50 : 0,
                             y: 0,
-                            opacity: (idx > 0) ? 0 : 1
+                            opacity: 0
                         }, {
                             position: "fixed",
                             x: 0,

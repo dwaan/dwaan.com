@@ -17377,7 +17377,7 @@ var animate = {
 		var tl = gsap__WEBPACK_IMPORTED_MODULE_1__["default"].timeline({
 			defaults: {
 				duration: 1.28,
-				stagger: .24,
+				stagger: .16,
 				ease: "expo.out"
 			}
 		});
@@ -17390,7 +17390,7 @@ var animate = {
 		// Show current view
 		var els = next.querySelectorAll(".flares:not(.side)")
 		if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
-		if (!nonsticky) nonsticky = next.querySelector("section.middle").children;
+		if (!nonsticky) nonsticky = next.querySelector("section.middle > *:not(.arrow-big, .year)");
 		// Animate text
 		tl.fromTo([nonsticky, els], {
 			y: "+=200px",
@@ -17793,10 +17793,10 @@ let header = {
         }, {
             y: 0,
             opacity: 1,
-            duration: 1.6,
+            duration: 1.28,
             ease: "expo.out",
-            delay: .5,
-            stagger: .2
+            delay: .24,
+            stagger: .16
         });
     },
 
@@ -18104,7 +18104,7 @@ let header = {
                             position: "absolute",
                             x: (idx > 0) ? -50 : 0,
                             y: 0,
-                            opacity: (idx > 0) ? 0 : 1
+                            opacity: 0
                         }, {
                             position: "fixed",
                             x: 0,
@@ -19881,7 +19881,7 @@ let transition_once = {
                 _helpers_animate__WEBPACK_IMPORTED_MODULE_0__["default"].show(next, function () {
                     _helpers_loader__WEBPACK_IMPORTED_MODULE_1__["default"].empty();
                     done();
-                }, true);
+                });
             }
         });
 
@@ -21293,7 +21293,7 @@ let homeview = {
 			_helpers_scroll_js__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
 				//Show
 				tl.fromTo(maintext, {
-					y: window.innerHeight * 1 / 5
+					y: idx == 0 ? 0 : window.innerHeight * 1 / 5
 				}, {
 					y: 0,
 					ease: "linear"
