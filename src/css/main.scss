@@ -2015,14 +2015,6 @@ ol {
 	img {
 		@include mixins.block(absolute, 50%, 50%, auto !important, 100% !important);
 		transform: translate(-50%, -50%);
-
-		.dark {
-			opacity: 0;
-		}
-
-		.light {
-			opacity: 1;
-		}
 	}
 }
 

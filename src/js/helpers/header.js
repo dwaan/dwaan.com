@@ -211,9 +211,9 @@ let header = {
         var el = _q('.lamp');
         gsap.set(el.querySelector("#ray"), { transformOrigin: "center center" })
         hoverEvents([el], () => {
-            gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: .768, ease: "elastic.out" });
+            gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: 1.28, ease: "elastic.out" });
         }, () => {
-            gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: .768, ease: "elastic.out" });
+            gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: 1.28, ease: "elastic.out" });
         });
     },
 

@@ -18053,9 +18053,9 @@ let header = {
         var el = (0,_helper__WEBPACK_IMPORTED_MODULE_1__._q)('.lamp');
         gsap__WEBPACK_IMPORTED_MODULE_3__["default"].set(el.querySelector("#ray"), { transformOrigin: "center center" })
         ;(0,_helper__WEBPACK_IMPORTED_MODULE_1__.hoverEvents)([el], () => {
-            gsap__WEBPACK_IMPORTED_MODULE_3__["default"].to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: .768, ease: "elastic.out" });
+            gsap__WEBPACK_IMPORTED_MODULE_3__["default"].to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: 1.28, ease: "elastic.out" });
         }, () => {
-            gsap__WEBPACK_IMPORTED_MODULE_3__["default"].to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: .768, ease: "elastic.out" });
+            gsap__WEBPACK_IMPORTED_MODULE_3__["default"].to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: 1.28, ease: "elastic.out" });
         });
     },
 

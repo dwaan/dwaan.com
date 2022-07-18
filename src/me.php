@@ -48,8 +48,7 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured-dark.webp" class="dark" width="" height="" alt="Dwan" />
-					<img src="/dwaan/img/notpictured.webp" class="light" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured.webp" width="" height="" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big">
@@ -70,8 +69,7 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured-dark.webp" class="dark" width="" height="" alt="Dwan" />
-					<img src="/dwaan/img/notpictured.webp" class="light" width="" height="" alt="Dwan" />
+					<img src="/dwaan/img/notpictured.webp" width="" height="" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big">
