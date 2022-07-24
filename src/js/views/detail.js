@@ -1068,7 +1068,8 @@ var detailview = {
 		gsap.utils.toArray(".style-slideshow").forEach(slideshow => {
 			window.removeEventListener("resize", slideshow.fixedSize);
 		});
-	}
+	},
+	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!")
 }
 
 export default detailview;

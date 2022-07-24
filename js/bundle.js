@@ -21173,7 +21173,8 @@ var detailview = {
 		gsap__WEBPACK_IMPORTED_MODULE_3__["default"].utils.toArray(".style-slideshow").forEach(slideshow => {
 			window.removeEventListener("resize", slideshow.fixedSize);
 		});
-	}
+	},
+	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!")
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (detailview);

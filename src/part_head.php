@@ -73,9 +73,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 							<li><a class="spring" href="./me">About Me</a></li>
 							<li class="hr"></li>
 							<li><a class="spring" href="./say-hi">Say, Hi!</a></li>
-							<li>
-								<p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p>
-							</li>
+							<li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and tracking cookies inside my website.</p></li>
 						</ol>
 					</div>
 				</div>
