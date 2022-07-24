@@ -88,12 +88,10 @@
     }
 
     .style-spread:after {
-        @media (prefers-color-scheme: dark) {
-            background: transparent;
-            background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
-            background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
-            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
-        }
+        background: transparent;
+        background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
+        background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
+        background: linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
     }
 
     .forcebright {
@@ -101,7 +99,6 @@
     }
 
     .style-slideshow {
-
         .before,
         .after {
             background-image: url(../img/arrow-white.svg);
