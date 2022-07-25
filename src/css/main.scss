@@ -1952,7 +1952,6 @@ ol {
 #usedto {
 	z-index: 2;
 	padding: 0 !important;
-	overflow: hidden;
 
 	.anim {
 		min-width: initial;
@@ -1989,6 +1988,7 @@ ol {
 #now,
 #webdesigner,
 #sayhi {
+	position: relative;
 
 	.arrow,
 	.text {

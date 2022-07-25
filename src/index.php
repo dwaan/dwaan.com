@@ -3,8 +3,8 @@
 
 <head>
     <?php
-    $title = "Dwan";
-    $description = "🙋🏾‍♂️ Hello! my name is Dwan, I'm an UI/UX Designer and Strategist. Visit my website to learn more about my design portfolio 😙.";
+    $title = "Dwan 😙";
+    $description = "🙋🏾‍♂️ Hello! my name is Dwan, I'm an UI/UX Designer and Strategist. Visit my website to see and learn about my design portfolio 😙.";
     include_once "part_metacss.php";
     ?>
 </head>
@@ -28,12 +28,12 @@
 
         <section id="casestudy" class="middle full home-aai">
             <div class="padding">
-                <a href="./aai" aria-label="AAI Website">
+                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Redesign">
                     <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" />
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./aai" aria-label="AAI Website" class="arrow">
+                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Redesign" class="arrow">
                     <span>Website Redesign</span>
                 </a>
             </div>
@@ -41,12 +41,12 @@
 
         <section class="middle full home-musiku">
             <div class="padding">
-                <a href="./musiku" aria-label="Musiku Website">
+                <a href="./musiku" aria-label="Musiku Website Concept and Design">
                     <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo Musiku" />
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./musiku" aria-label="Musiku Website" class="arrow">
+                <a href="./musiku" aria-label="Musiku Website Concept and Design" class="arrow">
                     <span>Design Concept</span>
                 </a>
             </div>
@@ -92,7 +92,7 @@
 
         <section class="middle full home-old">
             <div class="padding">
-                <a href="http://v1.dwaan.com" class="dwantitle" data-barba-prevent>
+                <a href="http://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
                     <svg class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g fill="white">
                             <g class="right-hand">
@@ -115,7 +115,7 @@
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="http://v1.dwaan.com" class="arrow" data-barba-prevent>
+                <a href="http://v1.dwaan.com" class="arrow" aria-label="Previous version of dwaan.com" data-barba-prevent>
                     <span>Previous version</span>
                 </a>
             </div>
@@ -140,7 +140,6 @@
                 </svg>
                 <span>Tel Aviv-Yafo</span>
             </div>
-            <div></div>
         </section>
     </main>
 

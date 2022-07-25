@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- Primary Meta Tags -->
-	<title><?php echo $title; if($title != "Dwan") echo " - Dwan"; ?></title>
+	<title><?php echo $title; if($title != "Dwan 😙") echo " - Dwan 😙"; ?></title>
 	<meta name="title" content="<?php echo $title; if($title != "Dwan") echo " - Dwan"; ?>">
 	<meta name="description" content="<?php echo $description; ?>">
 

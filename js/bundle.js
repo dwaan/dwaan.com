@@ -21509,6 +21509,128 @@ var meview = {
 	beforeEnter: function (data) {
 		var next = data.next.container;
 
+		next.querySelectorAll("#about").forEach(function (element) {
+			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].matchMedia({
+				"(min-aspect-ratio: 1/1)": () => {
+					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						tl.fromTo(element.querySelectorAll(".main-text"), {
+							pointerEvents: "auto",
+							y: 0
+						}, {
+							pointerEvents: "none",
+							y: window.innerHeight * 1,
+							ease: 'linear',
+							duration: 1
+						}, 0);
+
+						tl.fromTo(element.querySelectorAll(".main-text"), {
+							opacity: 1
+						}, {
+							opacity: 0,
+							ease: 'expo.out',
+							duration: .5
+						}, 0);
+
+						return tl;
+					}, tl => {
+						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
+							trigger: element,
+							start: "0 0",
+							end: "100% 0",
+							animation: tl,
+							scrub: true
+						});
+					});
+				}
+			});
+		});
+
+		next.querySelectorAll("#usedto").forEach(function (element) {
+			var middle = element.querySelectorAll(".middle");
+
+			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].matchMedia({
+				"(min-aspect-ratio: 1/1)": () => {
+					// Stick on pos y when showing and hiding
+					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						tl.fromTo(middle, {
+							pointerEvents: "none",
+							y: window.innerHeight * -1,
+						}, {
+							y: 0,
+							pointerEvents: "auto",
+							ease: 'linear',
+							duration: 1
+						}, 0);
+
+						tl.fromTo(middle, {
+							pointerEvents: "auto",
+						}, {
+							pointerEvents: "none",
+							ease: 'linear',
+							duration: 1
+						}, 1);
+
+						return tl;
+					}, tl => {
+						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
+							trigger: element,
+							start: "0 100%",
+							end: "100% 0",
+							animation: tl,
+							scrub: true
+						});
+					});
+
+					// Scale and fade when showing
+					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						tl.fromTo(middle, {
+							scale: 5,
+						}, {
+							scale: 1,
+							ease: 'expo.out',
+							duration: 2
+						}, 0);
+
+						tl.fromTo(middle, {
+							opacity: 0
+						}, {
+							opacity: 1,
+							ease: 'expo.out',
+							duration: .5
+						}, 0);
+
+						middle.forEach(function (el) {
+							tl.fromTo(el.querySelectorAll(".text > *"), {
+								opacity: 0,
+							}, {
+								opacity: 1,
+								ease: 'expo.out',
+								duration: 1
+							}, .25);
+
+							tl.fromTo(el.querySelectorAll(".text > *"), {
+								y: 200,
+							}, {
+								y: 0,
+								ease: 'expo.out',
+								duration: 2
+							}, 0);
+						});
+
+						return tl;
+					}, tl => {
+						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
+							trigger: element,
+							start: "0 100%",
+							end: "0 50%",
+							animation: tl,
+							scrub: .5
+						});
+					});
+				}
+			});
+		});
+
 		// Now section
 		next.querySelectorAll("#now").forEach(function (element) {
 			_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
