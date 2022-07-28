@@ -21514,6 +21514,13 @@ var meview = {
 
 			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].matchMedia({
 				"(min-aspect-ratio: 1/1)": () => {
+					gsap__WEBPACK_IMPORTED_MODULE_3__["default"].set(text, {
+						pointerEvents: "auto",
+						y: 0,
+						opacity: 1
+					});
+				},
+				"(min-aspect-ratio: 1/1)": () => {
 					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
 						tl.fromTo(text, {
 							pointerEvents: "auto",
@@ -21551,6 +21558,22 @@ var meview = {
 			var middle = element.querySelectorAll(".middle");
 
 			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].matchMedia({
+				"(min-aspect-ratio: 1/1)": () => {
+					gsap__WEBPACK_IMPORTED_MODULE_3__["default"].set(middle, {
+						pointerEvents: "auto",
+						x: 0,
+						y: 0,
+						opacity: 1,
+						scale: 1
+					});
+					middle.forEach(function (el) {
+						// Move in
+						gsap__WEBPACK_IMPORTED_MODULE_3__["default"].set(el.querySelectorAll(".text > *"), {
+							y: 0,
+							opacity: 1
+						});
+					});
+				},
 				"(min-aspect-ratio: 1/1)": () => {
 					// Stick on pos y when showing and hiding
 					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {

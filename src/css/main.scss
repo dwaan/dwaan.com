@@ -1969,7 +1969,7 @@ ol {
 
 	h2,
 	p {
-		@include mixins.typography(10vh, $color: var(--white));
+		@include mixins.typography(4.5rem, $color: var(--white));
 	}
 
 	p {

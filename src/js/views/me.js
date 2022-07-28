@@ -19,6 +19,13 @@ var meview = {
 
 			ScrollTrigger.matchMedia({
 				"(min-aspect-ratio: 1/1)": () => {
+					gsap.set(text, {
+						pointerEvents: "auto",
+						y: 0,
+						opacity: 1
+					});
+				},
+				"(min-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
 						tl.fromTo(text, {
 							pointerEvents: "auto",
@@ -56,6 +63,22 @@ var meview = {
 			var middle = element.querySelectorAll(".middle");
 
 			ScrollTrigger.matchMedia({
+				"(min-aspect-ratio: 1/1)": () => {
+					gsap.set(middle, {
+						pointerEvents: "auto",
+						x: 0,
+						y: 0,
+						opacity: 1,
+						scale: 1
+					});
+					middle.forEach(function (el) {
+						// Move in
+						gsap.set(el.querySelectorAll(".text > *"), {
+							y: 0,
+							opacity: 1
+						});
+					});
+				},
 				"(min-aspect-ratio: 1/1)": () => {
 					// Stick on pos y when showing and hiding
 					scroll.push(tl => {
