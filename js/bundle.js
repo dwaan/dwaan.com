@@ -21510,10 +21510,12 @@ var meview = {
 		var next = data.next.container;
 
 		next.querySelectorAll("#about").forEach(function (element) {
+			var text = element.querySelectorAll(".main-text h1");
+
 			gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].matchMedia({
 				"(min-aspect-ratio: 1/1)": () => {
 					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
-						tl.fromTo(element.querySelectorAll(".main-text"), {
+						tl.fromTo(text, {
 							pointerEvents: "auto",
 							y: 0
 						}, {
@@ -21523,7 +21525,7 @@ var meview = {
 							duration: 1
 						}, 0);
 
-						tl.fromTo(element.querySelectorAll(".main-text"), {
+						tl.fromTo(text, {
 							opacity: 1
 						}, {
 							opacity: 0,
@@ -21556,26 +21558,18 @@ var meview = {
 							pointerEvents: "none",
 							y: window.innerHeight * -1,
 						}, {
-							y: 0,
 							pointerEvents: "auto",
+							y: window.innerHeight * 3,
 							ease: 'linear',
-							duration: 1
-						}, 0);
-
-						tl.fromTo(middle, {
-							pointerEvents: "auto",
-						}, {
-							pointerEvents: "none",
-							ease: 'linear',
-							duration: 1
-						}, 1);
+							duration: 4
+						});
 
 						return tl;
 					}, tl => {
 						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
 							trigger: element,
 							start: "0 100%",
-							end: "100% 0",
+							end: "400% 100%",
 							animation: tl,
 							scrub: true
 						});
@@ -21583,48 +21577,81 @@ var meview = {
 
 					// Scale and fade when showing
 					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						// Red dot - scale down in
 						tl.fromTo(middle, {
-							scale: 5,
+							x: 0,
+							scale: 3,
 						}, {
+							x: 0,
 							scale: 1,
-							ease: 'expo.out',
-							duration: 2
+							duration: .75
 						}, 0);
+						// Red dot - scale down out and move left
+						tl.to(middle, {
+							x: window.innerWidth * -1 / 2,
+							scale: .15,
+							duration: .75
+						}, 1.25);
 
+
+						// Red dot - fade in
 						tl.fromTo(middle, {
-							opacity: 0
+							opacity: 0,
 						}, {
 							opacity: 1,
+							ease: 'expo.in',
+							duration: .25
+						}, 0);
+						// Red dot - fade out
+						tl.to(middle, {
+							opacity: 0,
 							ease: 'expo.out',
 							duration: .5
-						}, 0);
+						}, 3.5);
 
+						// Text - move in, fade in, and fade out
 						middle.forEach(function (el) {
-							tl.fromTo(el.querySelectorAll(".text > *"), {
-								opacity: 0,
-							}, {
-								opacity: 1,
-								ease: 'expo.out',
-								duration: 1
-							}, .25);
-
+							// Move in
 							tl.fromTo(el.querySelectorAll(".text > *"), {
 								y: 200,
 							}, {
 								y: 0,
 								ease: 'expo.out',
-								duration: 2
+								duration: 1
 							}, 0);
+
+							// Fade in
+							tl.fromTo(el.querySelectorAll(".text > *"), {
+								opacity: 0,
+							}, {
+								opacity: 1,
+								ease: 'expo.out',
+								duration: .5
+							}, .125);
+
+							// Fade out
+							tl.fromTo(el.querySelectorAll(".text > *"), {
+								opacity: 1,
+							}, {
+								opacity: 0,
+								ease: 'expo.out',
+								duration: .5
+							}, 1.5);
 						});
+
+						// The lenght of the whole animation
+						tl.to(middle, {
+							duration: 4
+						}, 0);
 
 						return tl;
 					}, tl => {
 						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
 							trigger: element,
 							start: "0 100%",
-							end: "0 50%",
+							end: "400% 100%",
 							animation: tl,
-							scrub: .5
+							scrub: true
 						});
 					});
 				}
