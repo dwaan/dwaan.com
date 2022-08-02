@@ -852,10 +852,19 @@ header {
 	padding-left: calc(2 * var(--padx));
 
 	.text {
-		// max-width: 640px;
+		max-width: 50vw;
 	}
 }
 
+#usedto {
+	p {
+		font-size: 10vh;
+	}
+
+	p {
+		font-size: 2.5vh;
+	}
+}
 
 #webdesigner p {
 	max-width: 450px;

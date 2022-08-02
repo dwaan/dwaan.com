@@ -14,6 +14,7 @@ var meview = {
 	beforeEnter: function (data) {
 		var next = data.next.container;
 
+		// Main text
 		next.querySelectorAll("#about").forEach(function (element) {
 			var text = element.querySelectorAll(".main-text h1");
 
@@ -59,6 +60,7 @@ var meview = {
 			});
 		});
 
+		// Big red dot
 		next.querySelectorAll("#usedto").forEach(function (element) {
 			var middle = element.querySelectorAll(".middle");
 
@@ -82,15 +84,21 @@ var meview = {
 				"(min-aspect-ratio: 1/1)": () => {
 					// Stick on pos y when showing and hiding
 					scroll.push(tl => {
-						tl.fromTo(middle, {
-							pointerEvents: "none",
-							y: window.innerHeight * -1,
-						}, {
-							pointerEvents: "auto",
-							y: window.innerHeight * 3,
-							ease: 'linear',
-							duration: 4
-						});
+						tl.set(middle, {
+							position: "fixed",
+							top: "50%",
+							y: "-50%",
+							pointerEvents: "none"
+						}, 0);
+
+						tl.set(middle, {
+							pointerEvents: "auto"
+						}, 1);
+
+						tl.set(middle, {
+							position: "absolute",
+							pointerEvents: "none"
+						}, 4);
 
 						return tl;
 					}, tl => {
@@ -179,14 +187,14 @@ var meview = {
 							start: "0 100%",
 							end: "400% 100%",
 							animation: tl,
-							scrub: true
+							scrub: .5
 						});
 					});
 				}
 			});
 		});
 
-		// Now section
+		// Now section thumbs
 		next.querySelectorAll("#now").forEach(function (element) {
 			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
@@ -219,21 +227,7 @@ var meview = {
 					x: 0,
 					y: (window.innerHeight * 1) + 25,
 					ease: 'linear'
-				}, 0);
-
-				tl.fromTo(element.querySelectorAll('.text'), {
-					opacity: 1
-				}, {
-					opacity: 0,
-					ease: 'expo.out'
-				}, 0);
-
-				tl.fromTo(next.querySelectorAll("#webdesigner .text"), {
-					opacity: 0
-				}, {
-					opacity: 1,
-					ease: 'expo.in'
-				}, 0);
+				});
 
 				return tl;
 			}, tl => {
@@ -266,6 +260,84 @@ var meview = {
 					end: "200% 50%",
 					animation: tl,
 					scrub: true
+				});
+			});
+		});
+
+		// Now, Webdesigner, and Sayhi sections
+		next.querySelectorAll("#now, #webdesigner, #sayhi").forEach(function (element) {
+			var isSayHi = element.getAttribute('id') == "sayhi";
+			var el = isSayHi ? element.querySelectorAll('.text > div > *, .text > p') : element.querySelectorAll('.text > *');
+
+			// Fade in and fade out
+			scroll.push(tl => {
+				el.forEach(function (el, idx) {
+					tl.fromTo(el, {
+						opacity: 1
+					}, {
+						opacity: 0,
+						ease: 'linear',
+						duration: .25
+					}, idx / 5);
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: element,
+					start: "50% 50%",
+					end: "50% -50%",
+					animation: tl,
+					scrub: .5
+				});
+			});
+
+			// Slide in
+			scroll.push(tl => {
+				el.forEach(function (el, idx) {
+					console.log(element.getAttribute('id'), el, idx);
+					tl.fromTo(el, {
+						x: isSayHi && idx < 2 ? idx * -50 : 0,
+						y: isSayHi && idx < 2 ? 0 : idx * 50
+					}, {
+						x: 0,
+						y: 0,
+						ease: 'linear'
+					}, 0);
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: element,
+					start: "50% 150%",
+					end: "50% 50%",
+					animation: tl,
+					scrub: .5
+				});
+			});
+
+			// Slide out
+			scroll.push(tl => {
+				el.forEach(function (el, idx) {
+					tl.fromTo(el, {
+						x: 0,
+						y: 0
+					}, {
+						x: isSayHi && idx < 2 ? idx * 25 : 0,
+						y: isSayHi && idx < 2 ? 0 : idx * -25,
+						ease: 'linear'
+					}, 0);
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: element,
+					start: "50% 50%",
+					end: "50% -50%",
+					animation: tl,
+					scrub: 1
 				});
 			});
 		});
