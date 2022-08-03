@@ -21606,8 +21606,19 @@ var meview = {
 						});
 					});
 
-					// Scale and fade when showing
+					// Fade in and scale down
 					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						// Red dot - fade in
+						tl.fromTo(middle, {
+							display: "none",
+							opacity: 0,
+						}, {
+							display: "flex",
+							opacity: 1,
+							ease: 'expo.in',
+							duration: .25
+						}, 0);
+
 						// Red dot - scale down in
 						tl.fromTo(middle, {
 							x: 0,
@@ -21617,28 +21628,6 @@ var meview = {
 							scale: 1,
 							duration: .75
 						}, 0);
-						// Red dot - scale down out and move left
-						tl.to(middle, {
-							x: window.innerWidth * -1 / 2,
-							scale: .15,
-							duration: .75
-						}, 1.25);
-
-
-						// Red dot - fade in
-						tl.fromTo(middle, {
-							opacity: 0,
-						}, {
-							opacity: 1,
-							ease: 'expo.in',
-							duration: .25
-						}, 0);
-						// Red dot - fade out
-						tl.to(middle, {
-							opacity: 0,
-							ease: 'expo.out',
-							duration: .5
-						}, 3.5);
 
 						// Text - move in, fade in, and fade out
 						middle.forEach(function (el) {
@@ -21659,7 +21648,33 @@ var meview = {
 								ease: 'expo.out',
 								duration: .5
 							}, .125);
+						});
 
+						return tl;
+					}, tl => {
+						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
+							trigger: element,
+							start: "0 100%",
+							end: "75% 100%",
+							animation: tl,
+							scrub: 1
+						});
+					});
+
+					// Move to left and scale down
+					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						// Red dot - Move left
+						tl.fromTo(middle, {
+							x: 0,
+							scale: 1,
+						}, {
+							x: window.innerWidth * -1 / 2,
+							scale: .15,
+							duration: 1
+						}, 0);
+
+						// Text - fade out
+						middle.forEach(function (el) {
 							// Fade out
 							tl.fromTo(el.querySelectorAll(".text > *"), {
 								opacity: 1,
@@ -21667,22 +21682,38 @@ var meview = {
 								opacity: 0,
 								ease: 'expo.out',
 								duration: .5
-							}, 1.5);
+							}, .5);
 						});
-
-						// The lenght of the whole animation
-						tl.to(middle, {
-							duration: 4
-						}, 0);
 
 						return tl;
 					}, tl => {
 						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
 							trigger: element,
-							start: "0 100%",
-							end: "400% 100%",
+							start: "100% 100%",
+							end: "175% 100%",
 							animation: tl,
-							scrub: .5
+							scrub: 1
+						});
+					});
+
+					// Fade out dot
+					_helpers_scroll__WEBPACK_IMPORTED_MODULE_0__["default"].push(tl => {
+						// Red dot - fade out
+						tl.fromTo(middle, {
+							opacity: 1,
+						}, {
+							opacity: 0,
+							ease: 'expo.out',
+						});
+
+						return tl;
+					}, tl => {
+						return gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__["default"].create({
+							trigger: element,
+							start: "300% 100%",
+							end: "375% 100%",
+							animation: tl,
+							scrub: true
 						});
 					});
 				}
@@ -21819,7 +21850,7 @@ var meview = {
 						x: 0,
 						y: 0
 					}, {
-						x: isSayHi && idx < 2 ? idx * 25 : 0,
+						x: isSayHi && idx < 2 ? idx * -25 : 0,
 						y: isSayHi && idx < 2 ? 0 : idx * -25,
 						ease: 'linear'
 					}, 0);
@@ -21832,7 +21863,7 @@ var meview = {
 					start: "50% 50%",
 					end: "50% -50%",
 					animation: tl,
-					scrub: 1
+					scrub: .5
 				});
 			});
 		});
