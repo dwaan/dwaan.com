@@ -38,7 +38,8 @@
         color: var(--white);
     }
 
-    .arrow:after {
+    .arrow:after,
+    .musiku .logo {
         filter: invert(100%);
     }
 
