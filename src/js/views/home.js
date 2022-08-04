@@ -15,29 +15,63 @@ let homeview = {
 		els.forEach((el, idx) => {
 			var maintext = el.querySelectorAll(".main-text > *, .padding > *");
 
-			// Animate text
-			scroll.push(tl => {
-				//Show
-				tl.fromTo(maintext, {
-					y: idx == 0 ? 0 : window.innerHeight * 1 / 5
-				}, {
-					y: 0,
-					ease: "linear"
-				});
+			ScrollTrigger.matchMedia({
+				"(min-aspect-ratio: 1/1)": () => {
+					// Fade out
+					scroll.push(tl => {
+						tl.fromTo(maintext, {
+							y: 0
+						}, {
+							y: window.innerHeight * 1 / 3,
+							ease: "power1.out",
+							duration: 3
+						}, 0);
 
-				tl.to(maintext, {
-					y: window.innerHeight * -1 / 5,
-					ease: "linear"
-				});
+						tl.fromTo(maintext, {
+							opacity: 1
+						}, {
+							opacity: 0,
+							ease: "expo.in",
+							duration: 1
+						}, 2);
 
-				return tl;
-			}, tl => ScrollTrigger.create({
-				trigger: el,
-				start: "15% 50%",
-				end: "85% 50%",
-				scrub: true,
-				animation: tl
-			}));
+						return tl;
+					}, tl => ScrollTrigger.create({
+						trigger: el,
+						start: "50% 50%",
+						end: "100% 50%",
+						scrub: true,
+						animation: tl
+					}));
+
+					// Fade in
+					scroll.push(tl => {
+						tl.fromTo(maintext, {
+							opacity: 0
+						}, {
+							opacity: 1,
+							ease: "expo.out",
+							duration: 1
+						}, 0);
+
+						tl.fromTo(maintext, {
+							y: window.innerHeight * -1 / 3
+						}, {
+							y: 0,
+							ease: "power1.in",
+							duration: 3
+						}, 0);
+
+						return tl;
+					}, tl => ScrollTrigger.create({
+						trigger: el,
+						start: "0% 50%",
+						end: "50% 50%",
+						scrub: true,
+						animation: tl
+					}));
+				}
+			});
 
 			// Hover
 			hoverEvents(next.querySelectorAll("#to-about"), () => {

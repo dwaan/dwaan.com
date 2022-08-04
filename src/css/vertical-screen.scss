@@ -124,6 +124,7 @@ header {
 
 	img.logo {
 		width: auto;
+		max-width: 100%;
 		max-height: 15vh;
 	}
 }
@@ -173,7 +174,7 @@ header {
 
 /* Homepage content */
 .main-text {
-	margin: 0 0 calc(3 * var(--pady));
+	margin: 0 0 calc(2 * var(--pady));
 	padding: 0 var(--padx);
 	max-width: 450px;
 	align-items: flex-start;
@@ -218,9 +219,8 @@ header {
 .padding {
 	display: flex;
 	flex-direction: column;
-	margin: calc(3 * var(--pady)) 0 var(--pady);
-	max-width: calc(80vw - (2 * var(--padx)));
-	height: 15vh;
+	margin: calc(3 * var(--pady)) 0 0;
+	max-width: calc(100vw - (2 * var(--padx)));
 	justify-content: center;
 
 	.plurktitle {
@@ -820,12 +820,11 @@ header {
 /* Me page */
 
 .me {
-
 	h2,
 	h3 {
 		font-size: 3rem;
 		letter-spacing: -.2rem;
-		padding: var(--padm) 0 var(--padl);
+		padding: var(--padm) 0 calc(1.5 * var(--padm));
 	}
 
 	.text {
@@ -837,12 +836,10 @@ header {
 	}
 
 	@media screen and (min-width: mixins.$screen-verysmall) {
-
 		h2,
 		h3 {
 			font-size: 12vw;
 			letter-spacing: -.75vw;
-			padding: var(--padm) 0 var(--padl);
 		}
 
 		.text {
@@ -867,18 +864,18 @@ header {
 
 #usedto {
 	.anim {
-		width: 70vw;
-		height: 70vw;
+		width: calc(100vw - (2 * var(--padx)));
+		height: calc(100vw - (2 * var(--padx)));
 	}
 
 	h2 {
-		font-size: 10vw;
+		font-size: 12vw;
 		letter-spacing: -.1rem;
 		padding-bottom: var(--padm);
 	}
 
 	p {
-		font-size: 3.6vw;
+		font-size: 4vw;
 		letter-spacing: .024rem;
 		padding: 0 var(--padm);
 	}

@@ -16,25 +16,29 @@ var meview = {
 
 		// Main text
 		next.querySelectorAll("#about").forEach(function (element) {
-			var text = element.querySelectorAll(".main-text h1");
+			var text = element.querySelectorAll(".main-text");
 
 			ScrollTrigger.matchMedia({
 				"(min-aspect-ratio: 1/1)": () => {
 					gsap.set(text, {
+						position: "relative",
 						pointerEvents: "auto",
-						y: 0,
 						opacity: 1
 					});
 				},
 				"(min-aspect-ratio: 1/1)": () => {
 					scroll.push(tl => {
+						// Stick on pos y
+						tl.set(text, {
+							position: "fixed",
+							top: "50%",
+							y: "-50%"
+						}, 0);
+
 						tl.fromTo(text, {
-							pointerEvents: "auto",
-							y: 0
+							pointerEvents: "auto"
 						}, {
 							pointerEvents: "none",
-							y: window.innerHeight * 1,
-							ease: 'linear',
 							duration: 1
 						}, 0);
 
@@ -45,6 +49,10 @@ var meview = {
 							ease: 'expo.out',
 							duration: .5
 						}, 0);
+
+						tl.set(text, {
+							position: "relative"
+						}, 1);
 
 						return tl;
 					}, tl => {
@@ -65,8 +73,9 @@ var meview = {
 			var middle = element.querySelectorAll(".middle");
 
 			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": () => {
+				"(max-aspect-ratio: 1/1)": () => {
 					gsap.set(middle, {
+						display: "flex",
 						pointerEvents: "auto",
 						x: 0,
 						y: 0,
@@ -225,7 +234,7 @@ var meview = {
 			});
 		});
 
-		// Now section thumbs
+		// Photo of me on canoe
 		next.querySelectorAll("#now").forEach(function (element) {
 			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
@@ -299,77 +308,88 @@ var meview = {
 		next.querySelectorAll("#now, #webdesigner, #sayhi").forEach(function (element) {
 			var isSayHi = element.getAttribute('id') == "sayhi";
 			var el = isSayHi ? element.querySelectorAll('.text > div > *, .text > p') : element.querySelectorAll('.text > *');
+			var animation = function (horizontal = true) {
+				isSayHi = horizontal ? isSayHi : false;
 
-			// Fade in and fade out
-			scroll.push(tl => {
-				el.forEach(function (el, idx) {
-					tl.fromTo(el, {
-						opacity: 1
-					}, {
-						opacity: 0,
-						ease: 'linear',
-						duration: .25
-					}, idx / 5);
+				// Fade in and fade out
+				scroll.push(tl => {
+					el.forEach(function (el, idx) {
+						tl.fromTo(el, {
+							opacity: 1
+						}, {
+							opacity: 0,
+							ease: 'linear',
+							duration: .25
+						}, idx / 5);
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "50% 50%",
+						end: "50% -50%",
+						animation: tl,
+						scrub: .5
+					});
 				});
 
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: element,
-					start: "50% 50%",
-					end: "50% -50%",
-					animation: tl,
-					scrub: .5
-				});
-			});
+				// Slide in
+				scroll.push(tl => {
+					el.forEach(function (el, idx) {
+						tl.fromTo(el, {
+							x: isSayHi && idx < 2 ? idx * -50 : 0,
+							y: isSayHi && idx < 2 ? 0 : idx * 50
+						}, {
+							x: 0,
+							y: 0,
+							ease: 'linear'
+						}, 0);
+					});
 
-			// Slide in
-			scroll.push(tl => {
-				el.forEach(function (el, idx) {
-					console.log(element.getAttribute('id'), el, idx);
-					tl.fromTo(el, {
-						x: isSayHi && idx < 2 ? idx * -50 : 0,
-						y: isSayHi && idx < 2 ? 0 : idx * 50
-					}, {
-						x: 0,
-						y: 0,
-						ease: 'linear'
-					}, 0);
-				});
-
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: element,
-					start: "50% 150%",
-					end: "50% 50%",
-					animation: tl,
-					scrub: .5
-				});
-			});
-
-			// Slide out
-			scroll.push(tl => {
-				el.forEach(function (el, idx) {
-					tl.fromTo(el, {
-						x: 0,
-						y: 0
-					}, {
-						x: isSayHi && idx < 2 ? idx * -25 : 0,
-						y: isSayHi && idx < 2 ? 0 : idx * -25,
-						ease: 'linear'
-					}, 0);
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "50% 150%",
+						end: "50% 50%",
+						animation: tl,
+						scrub: .5
+					});
 				});
 
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: element,
-					start: "50% 50%",
-					end: "50% -50%",
-					animation: tl,
-					scrub: .5
+				// Slide out
+				scroll.push(tl => {
+					el.forEach(function (el, idx) {
+						tl.fromTo(el, {
+							x: 0,
+							y: 0
+						}, {
+							x: isSayHi && idx < 2 ? idx * -25 : 0,
+							y: isSayHi && idx < 2 ? 0 : idx * -25,
+							ease: 'linear'
+						}, 0);
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "50% 50%",
+						end: "50% -50%",
+						animation: tl,
+						scrub: .5
+					});
 				});
+			}
+
+			ScrollTrigger.matchMedia({
+				"(max-aspect-ratio: 1/1)": () => {
+					animation(false);
+				},
+				"(min-aspect-ratio: 1/1)": () => {
+					animation();
+				}
 			});
 		});
 
