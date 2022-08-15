@@ -15,7 +15,7 @@ function js() {
 		.pipe(webpack({
 			watch: true,
 			devtool: 'source-map',
-			mode: 'development',
+			mode: 'production',
 			output: {
 				filename: 'bundle.js',
 				clean: true
