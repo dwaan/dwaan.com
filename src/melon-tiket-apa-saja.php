@@ -41,17 +41,17 @@
 				<picture class="horizontal">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/hero@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/hero@2x.webp">
-					<img src="/dwaan/img/tas/hero.webp" width="auto" height="150" alt="Tiket Apa Saja - Dekstop- Homepage" />
+					<img src="/dwaan/img/tas/hero.webp" width="auto" height="250" alt="Tiket Apa Saja - Dekstop- Homepage" />
 				</picture>
 				<picture class="vertical">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-1@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-1@2x.webp">
-					<img src="/dwaan/img/tas/mobile-final-1.webp" width="auto" height="150" alt="Tiket Apa Saja - Mobile - Homepage" />
+					<img src="/dwaan/img/tas/mobile-final-1.webp" width="auto" height="250" alt="Tiket Apa Saja - Mobile - Homepage" />
 				</picture>
 				<picture class="vertical">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-2@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-2@2x.webp">
-					<img src="/dwaan/img/tas/mobile-final-2.webp" width="auto" height="150" alt="Tiket Apa Saja - Mobile - Listing" />
+					<img src="/dwaan/img/tas/mobile-final-2.webp" width="auto" height="250" alt="Tiket Apa Saja - Mobile - Listing" />
 				</picture>
 			</div>
 		</section>
@@ -119,7 +119,7 @@
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja" />
+								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja - Proposed Desktop Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -159,7 +159,7 @@
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja" />
+								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja - Desktop Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -180,7 +180,7 @@
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja" />
+								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.webp" width="auto" height="250" alt="Tiket Apa Saja - Mobile Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>

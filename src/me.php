@@ -91,8 +91,8 @@
 
 		<section id="sayhi" class="intro middle">
 			<div class="text">
-				<div class="title" hidden>
-					<span>3
+				<div class="title">
+					<span hidden>3
 						<hr /> 3
 					</span>
 					<h3>Would&nbsp;<br hidden />You&nbsp;<br hidden />Like To&nbsp;<br hidden /><strong>Say Hi!</strong>?</h3>

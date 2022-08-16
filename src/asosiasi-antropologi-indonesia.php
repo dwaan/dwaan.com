@@ -52,7 +52,7 @@
 
         <section class="middle style-top style-top-auto snap">
             <div class="text">
-                <h2>From Idea<br />to Execution</h2>
+                <h2>From Idea&nbsp;<br hidden />to Execution</h2>
                 <ol class="zero">
                     <li>AAI have clear idea on how the website will look. Because of that, the design process was quick
                         without the need of long brain storming.</li>
@@ -120,10 +120,10 @@
                             <p>Providing thematic photos as visual guide to break from monotonous wordy content.</p>
                         </div>
                     <?php } ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="auto" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="auto" height="250" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -134,12 +134,12 @@
 
         <section class="middle style-background clip snap-bottom">
             <div class="text">
-                <h3>The<br />Interface<br />Guideline</h3>
+                <h3>The&nbsp;<br hidden />Interface&nbsp;<br hidden />Guideline</h3>
                 <p>The newly created interface guideline will provide consistent interface development in the future.
                 </p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/aai/guideline.svg" width="auto" height="150" alt="AAI Website Redesign - Guideline - by Dwan" />
+                <img src="/dwaan/img/aai/guideline.svg" width="auto" height="500" alt="AAI Website Redesign - Guideline - by Dwan" />
             </div>
         </section>
 

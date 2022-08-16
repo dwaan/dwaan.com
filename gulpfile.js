@@ -71,7 +71,7 @@ function css_horizontal() {
 		.pipe(browserSync.stream());
 }
 
-function css_vertical() {
+function print() {
 	return gulp.src([
 		'src/css/print.scss'
 	])
@@ -128,9 +128,10 @@ exports.default = function () {
 	});
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js);
 	gulp.watch(['js/*.js'], { ignoreInitial: false }, js_refresh);
-	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/print.scss', 'src/css/plurk.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/plurk.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
 	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
+	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print);
 	gulp.watch(['src/img/*.jpg', 'src/img/*.png', 'src/img/*/*.jpg', 'src/img/*/*.png'], { ignoreInitial: false }, img);
 	gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
 	gulp.watch(['src/*.php'], { ignoreInitial: false }, php);

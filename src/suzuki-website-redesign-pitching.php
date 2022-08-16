@@ -43,7 +43,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -67,7 +67,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -134,7 +134,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -154,7 +154,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>

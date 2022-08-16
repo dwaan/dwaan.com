@@ -4,12 +4,50 @@
    https://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
 
+@use 'fonts';
+@use 'mixins';
+
+:root {
+	--padx: 20px;
+	--pady: 17.5px;
+
+	/* Color Schemes */
+	--black: #222;
+	--white: #fff;
+	--dark-white: #E8EAEB;
+	--yellow: #FFD700;
+	--black-75: rgba(0, 0, 0, 0.5);
+	--black-50: rgba(0, 0, 0, 0.25);
+	--black-25: rgba(0, 0, 0, 0.15);
+	--black-15: rgba(0, 0, 0, 0.05);
+	--black-gray: #111111;
+	--black-gray-light: #131313;
+	--gray-light: #C4C4C4;
+	--red: #FF0F1E;
+	--lime: #60e670;
+}
+
 @media print {
+
+	body,
+	html {
+		font-family: fonts.$fontname, sans-serif;
+		font-size: 16px;
+		letter-spacing: .065rem;
+		font-weight: 500;
+		margin: 0;
+		padding: 0;
+		line-height: 100%;
+		color: var(--black-gray);
+	}
+
+	body {
+		padding: var(--pady) var(--padx);
+	}
+
 	*,
 	*:before,
 	*:after {
-		background: transparent !important;
-		color: #000 !important;
 		/* Black prints faster */
 		box-shadow: none !important;
 		text-shadow: none !important;
@@ -61,11 +99,466 @@
 		page-break-after: avoid;
 	}
 
-	main {
-		opacity: 1;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		line-height: 120%;
 	}
 
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	p {
+		display: block;
+		padding: 0;
+		margin: calc(var(--pady) / 2) 0 calc(var(--pady) / 4);
+	}
+
+	p,
+	li {
+		font-size: 1rem;
+		line-height: 150%;
+	}
+
+	small {
+		line-height: 120%;
+	}
+
+	a {
+		display: inline-block;
+		text-decoration: none;
+		color: var(--red) !important;
+		pointer-events: all;
+	}
+
+	h1 {
+		font-size: 4rem;
+		letter-spacing: -.2rem;
+		line-height: 90%;
+	}
+
+	h2 {
+		font-size: 3rem;
+		letter-spacing: -.125rem;
+		line-height: 95%;
+	}
+
+	h3 {
+		font-size: 2rem;
+		letter-spacing: 0rem;
+	}
+
+	h4 {
+		font-size: 1.4rem;
+		letter-spacing: -.0125rem;
+
+		&.year {
+			font-size: 1rem;
+			letter-spacing: .25rem;
+		}
+	}
+
+	h5 {
+		font-size: 1.2rem;
+		letter-spacing: -.0125rem;
+	}
+
+	picture {
+		display: inline-block;
+		border: 1px solid var(--black-25);
+
+		img {
+			display: block;
+			// Save print toner by reducing color itensity
+			opacity: .85;
+		}
+	}
+
+	ul,
+	ol {
+		margin: var(--pady) 0;
+
+		li {
+			margin: calc(var(--pady)/3) 0;
+		}
+	}
+
+	a,
+	span {
+		display: inline-block;
+	}
+
+	%hide {
+		display: none !important;
+	}
+
+	%no-animation {
+		position: relative !important;
+		top: initial !important;
+		left: initial !important;
+		right: initial !important;
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+
+	header .right,
 	.support {
+		@extend %hide;
+	}
+
+	.footer>div,
+	header .left a {
+		@extend %no-animation;
+	}
+
+	main {
+		position: relative !important;
+		opacity: 1;
+
+		hr {
+			border: none;
+			border-top: dashed 1px var(--black-50);
+			margin: calc(1.5 * var(--pady)) 0;
+		}
+
+		.flares,
+		.arrow-small,
+		.arrow-big {
+			@extend %hide;
+		}
+
+		.main-text,
+		.padding,
+		.arrow-small,
+		.arrow-big,
+		.middle,
+		.text,
+		.meta,
+		.continue,
+		.prototype,
+		.titles {
+			@extend %no-animation;
+
+			>*,
+			ul li,
+			ol li,
+			picture {
+				@extend %no-animation;
+			}
+		}
+
+		.text {
+			margin: var(--pady) 0;
+
+			>* {
+				margin: 0 var(--padx) var(--pady) 0;
+			}
+		}
+
+		.thumbs {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: var(--pady);
+		}
+
+		.style-column {
+			margin: var(--pady) 0;
+			display: flex;
+			flex-flow: row;
+			align-items: center;
+			align-content: center;
+
+			>* {
+				margin: 0 var(--padx) 0 0;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+
+		.meta[hidden] {
+			display: block;
+		}
+
+		.flat,
+		.bland {
+			list-style: none;
+			display: flex;
+			flex-flow: row;
+			margin: 0;
+			padding: 0;
+			gap: calc(var(--pady) / 2);
+
+			li {
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		.color {
+			li {
+				display: block;
+				width: var(--pady);
+				height: var(--pady);
+				border: 1px solid var(--black-50);
+
+				&:last-child {
+					width: auto;
+					height: auto;
+					border: none;
+					font-size: .8rem;
+				}
+			}
+		}
+
+		.bland {
+			flex-flow: column;
+
+			li {
+				width: calc(3 *var(--padx));
+				height: var(--pady);
+				border-radius: 0 0 var(--pady) 0;
+			}
+		}
+
+		.style-row {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pady);
+		}
+
+		.style-column {
+			display: flex;
+			flex-direction: row;
+			gap: calc(var(--pady) / 2);
+			margin: 0 !important;
+
+			ul,
+			ol {
+				margin: 0 !important;
+
+				li {
+					margin: 0 !important;
+				}
+			}
+		}
+
+		.style-flex {
+			.meta {
+				display: flex;
+				flex-direction: column;
+				gap: calc(var(--pady) / 2);
+			}
+		}
+
+		.style-slideshow {
+
+			ol,
+			ul,
+			.thumbs {
+				display: flex;
+				flex-direction: row;
+				width: 100% !important;
+				height: initial !important;
+				flex-wrap: wrap;
+
+				li {
+					width: initial !important;
+					height: initial !important;
+					margin: 0;
+					padding: 0;
+
+					picture {
+						display: block;
+					}
+				}
+			}
+		}
+
+		.style-bottom-logo {
+			picture {
+				border: none;
+			}
+		}
+
+
+		&.me {
+
+			picture,
+			img {
+				border: none;
+			}
+
+			.intro,
+			.title {
+				>* {
+					@extend %no-animation;
+				}
+
+				span {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+
+					hr {
+						width: var(--padx);
+						border-top: 1px solid var(--black-50);
+						margin: 0 var(--padx);
+					}
+				}
+			}
+		}
+
+		.mrgoat {
+			img {
+				opacity: 1 !important;
+			}
+
+			.text {
+				display: flex;
+				flex-direction: column;
+				gap: var(--pady);
+
+				>div {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 5px;
+
+					.dot {
+						background-color: var(--black-gray);
+						width: 5px;
+						height: 5px;
+						border-radius: 100%;
+					}
+
+					.line {
+						width: var(--padx);
+						border-top: 1px solid var(--black-50);
+					}
+
+					&,
+					& p,
+					& a {
+						padding: 0;
+						margin: 0;
+						opacity: 1 !important;
+						transform: none !important;
+					}
+				}
+			}
+		}
+
+		&.hi {
+			.print {
+				display: block;
+			}
+
+			h1 {
+				display: none;
+			}
+		}
+
+		>hr:first-child+section {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+
+	main+main {
 		display: none;
+	}
+
+	#loader {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 99999;
+		background-color: var(--white);
+		display: flex;
+		align-content: center;
+		justify-content: center;
+		transition: opacity .5s ease, transform .5s ease;
+
+		p {
+			display: flex;
+			flex-flow: row;
+			align-items: center;
+			justify-content: center;
+			position: fixed;
+			@include mixins.positions(initial, var(--padx), var(--pady));
+			@include mixins.typography(.7rem, 400, false, .05rem);
+			text-transform: uppercase;
+			color: inherit;
+		}
+
+		span {
+			&:nth-child(2) {
+				display: block;
+				margin: 0 0 0 20px;
+				padding: 1px;
+				width: 200px;
+				height: var(--pads);
+				border: 1px solid var(--black);
+				background-color: transparent;
+				appearance: none;
+				border-radius: calc(var(--pads) / 2);
+			}
+
+			i {
+				display: block;
+				height: 100%;
+				background-color: var(--black);
+				border-radius: calc((var(--pads) / 2) - 2px);
+			}
+		}
+
+		.simple {
+			@include mixins.block(fixed, initial, initial);
+			bottom: var(--pady);
+
+			span {
+				left: initial;
+				height: calc(var(--pads) - 4px);
+				border-radius: calc((var(--pads) - 4px) / 2);
+				width: 100px;
+				background-color: var(--gray-light);
+			}
+		}
+	}
+
+	.prototype,
+	.continue {
+		margin: var(--pady) 0;
+
+		>a:first-child {
+			color: var(--black) !important;
+			font-weight: 600;
+		}
+
+		>a {
+			margin-right: var(--padx);
+		}
+	}
+
+	.reading {
+		font-size: .8rem;
+		letter-spacing: .1rem;
+	}
+
+	svg,
+	img {
+		opacity: .85;
 	}
 }

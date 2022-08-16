@@ -34,7 +34,7 @@
                 <div class="text">
                     <div class="titles">
                         <h4>Concept and Design</h4>
-                        <h1>Music<br />Royalty</h1>
+                        <h1>Music&nbsp;<br hidden />Royalty</h1>
                     </div>
                     <p>Musiku was an internal codename for this design concept of music royalty system. As a new concept in Indonesia, it need to teach visitors about the system itself. The project launched at of 2021, but the concept already started since 2019.</p>
                 </div>
@@ -94,7 +94,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="auto" height="150" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="auto" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -105,7 +105,7 @@
         <section class="middle auto style-plain style-plain-single snap">
             <div class="text">
                 <div class="titles">
-                    <h1>Stock<br />Vectors</h1>
+                    <h2>Stock&nbsp;<br hidden />Vectors</h2>
                 </div>
                 <p>The usage of stock vectors and icons from <a href="https://icons8.com" target="BLANK">icons8.com</a> speed up the design process. They also give the overal freshness and cheerfulness of the design.</p>
             </div>
@@ -113,7 +113,7 @@
                 <picture class="pic-1 plain">
                     <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/vector@3x.webp">
                     <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/vector@2x.webp">
-                    <img src="/dwaan/img/musiku/vector.webp" width="auto" height="150" alt="Musiku Concept and Design - Vector - by icons8.com" />
+                    <img src="/dwaan/img/musiku/vector.webp" width="auto" height="200" alt="Musiku Concept and Design - Vector - by icons8.com" />
                 </picture>
             </div>
         </section>
@@ -122,7 +122,7 @@
 
         <section class="middle auto style-plain style-plain-scroll clip snap-bottom">
             <div class="text">
-                <h3>The<br />Simplicity<br />of Complexity</h3>
+                <h3>The&nbsp;<br hidden />Simplicity&nbsp;<br hidden />of Complexity</h3>
                 <p>While the homepage provide a very simple explanation of the service, the user page provide expansive tools that was made with great consistency to provide easy operation.</p>
             </div>
             <div class="scroll">
@@ -131,7 +131,7 @@
                         <picture class="pic-<?php echo $i ?>">
                             <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
                             <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
-                            <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="auto" height="150" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                            <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="auto" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                         </picture>
                     <?php } ?>
                 </div>
