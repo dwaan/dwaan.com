@@ -16,7 +16,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		";
 	</script>
 
-	<script type="text/javascript" src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>"></script>
+	<script type="text/javascript" src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script>
 	<style type="text/css">
 		.no-js #loader,
 		.no-js #mode {
@@ -30,7 +30,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		}
 	</style>
 
-	<link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>">
+	<link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>" defer async>
 <?php
 }
 ?>

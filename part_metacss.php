@@ -1,7 +1,7 @@
 <meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><!-- Primary Meta Tags --> <?php if ($title != "Dwan 😙") $title .= " - Dwan 😙"; ?> <title><?php echo $title; ?></title><meta name="title" content="<?php echo $title; ?>"><meta name="description" content="<?php echo $description; ?>"> <?php
 // check for the server side x-barba request header
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
-?> <link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>"><link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>"><link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>"><script type="text/javascript">var classcollection = "no-js";
+?> <link rel="stylesheet" media="screen" href="/dwaan/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>" defer="defer" async><link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/dwaan/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>" defer="defer" async><link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/dwaan/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>" defer="defer" async><script type="text/javascript">var classcollection = "no-js";
 		/* See if it's in dark mode */
 		h = document.querySelector("html");
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection = "dark";

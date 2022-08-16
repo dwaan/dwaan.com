@@ -8,7 +8,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 				<p>I think your screen is just to small for me to support it.</p>\
 				<p>Please rotate your 📱 screen or resize your 💻 browser for better looking layout.</p>\
 			</div>\
-		";</script><script type="text/javascript" src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>"></script><style type="text/css">.no-js #loader,
+		";</script><script type="text/javascript" src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script><style type="text/css">.no-js #loader,
 		.no-js #mode {
 			display: none;
 		}
@@ -17,6 +17,6 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		.no-js header,
 		.no-js .footer {
 			opacity: 1;
-		}</style><link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>"> <?php
+		}</style><link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>" defer="defer" async> <?php
 }
 ?>
