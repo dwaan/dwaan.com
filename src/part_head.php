@@ -15,8 +15,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 	<header>
 		<div class="left">
 			<a href="./" class="logo" aria-label="Dwan">
-				<svg class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<g fill="white">
+				<svg width="33" height="51" class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g fill="black">
 						<g class="right-hand">
 							<rect x="25.4991" y="39.1853" width="16" height="3.35392" rx="1.67696" transform="rotate(-135 25.4991 39.1853)" />
 						</g>
@@ -34,8 +34,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		</div>
 
 		<div class="right">
-			<a class="size" aria-label="Text Size" href="#textsize">Aa</a>
-			<a class="lamp" aria-label="Dark or light mode" href="#mode">
+			<a class="size" aria-label="Text Size" href="#textsize" hidden>Aa</a>
+			<a class="lamp" aria-label="Dark or light mode" href="#mode" hidden>
 				<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 					<g id="sun" stroke="#fff" stroke-width="2">
 						<circle cx="22" cy="22.2218" r="5.5" fill="blue" />
@@ -57,8 +57,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 			</a>
 
 			<nav class="menu">
-				<a class="switch" href="./menu" data-barba-prevent aria-label="Menu">
-					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+				<a class="switch" href="./menu" data-barba-prevent aria-label="Menu" hidden>
+					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 						<line class="menu-1" x1="26" y1="8.25" x2="6" y2="8.25" />
 						<line class="menu-2" x1="20" y1="16.25" x2="6" y2="16.25" />
 						<line class="menu-3" x1="26" y1="24.25" x2="6" y2="24.25" />
@@ -66,16 +66,30 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 					<span>menu</span>
 				</a>
 				<div class="overlay">
-					<div class="items">
-						<a href="#" data-barba-prevent class="close spring"><span>x</span>close</a>
-						<ol>
-							<li><a class="spring" href="./">Home</a></li>
-							<li><a class="spring" href="./me">About Me</a></li>
-							<li class="hr"></li>
-							<li><a class="spring" href="./say-hi">Say, Hi!</a></li>
-							<li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and tracking cookies inside my website.</p></li>
-						</ol>
+					<div id="menu-items" class="items">
+						<noscript>
+							<ol>
+								<li><a href="./">Home</a></li>
+								<li><a href="./me">About Me</a></li>
+								<li><a href="./say-hi">Say, Hi!</a></li>
+							</ol>
+							<p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and tracking cookies inside my website.</p>
+						</noscript>
 					</div>
+					<script>
+						document.getElementById("menu-items").innerHTML = "\
+						<a href=\"#\" data-barba-prevent class=\"close spring\"><span>x</span>close</a>\
+						<ol>\
+							<li><a class=\"spring\" href=\"./\">Home</a></li>\
+							<li><a class=\"spring\" href=\"./me\">About Me</a></li>\
+							<li class=\"hr\"></li>\
+							<li><a class=\"spring\" href=\"./say-hi\">Say, Hi!</a></li>\
+							<li>\
+								<p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and tracking cookies inside my website.</p>\
+							</li>\
+						</ol>\
+						";
+					</script>
 				</div>
 			</nav>
 		</div>

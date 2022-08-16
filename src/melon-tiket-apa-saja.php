@@ -3,9 +3,9 @@
 
 <head>
 	<?php
-		$title = "Tiket Apa Saja - Melon Indonesia";
-		$description = "A short study case of Tiket Apa Saja website redesign";
-		include_once "part_metacss.php";
+	$title = "Tiket Apa Saja - Melon Indonesia";
+	$description = "A short study case of Tiket Apa Saja website redesign";
+	include_once "part_metacss.php";
 	?>
 </head>
 
@@ -13,6 +13,8 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail tas">
+		<hr />
+
 		<section class="middle full snap">
 			<div class="padding">
 				<img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
@@ -24,6 +26,8 @@
 				</a>
 			</div>
 		</section>
+
+		<hr />
 
 		<section id="more" class="middle style-spread-left snap">
 			<div class="text">
@@ -37,20 +41,22 @@
 				<picture class="horizontal">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/hero@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/hero@2x.webp">
-					<img src="/dwaan/img/tas/hero.webp" width="" height="" alt="Tiket Apa Saja - Dekstop- Homepage" />
+					<img src="/dwaan/img/tas/hero.webp" width="auto" height="150" alt="Tiket Apa Saja - Dekstop- Homepage" />
 				</picture>
 				<picture class="vertical">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-1@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-1@2x.webp">
-					<img src="/dwaan/img/tas/mobile-final-1.webp" width="" height="" alt="Tiket Apa Saja - Mobile - Homepage" />
+					<img src="/dwaan/img/tas/mobile-final-1.webp" width="auto" height="150" alt="Tiket Apa Saja - Mobile - Homepage" />
 				</picture>
 				<picture class="vertical">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-2@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-2@2x.webp">
-					<img src="/dwaan/img/tas/mobile-final-2.webp" width="" height="" alt="Tiket Apa Saja - Mobile - Listing" />
+					<img src="/dwaan/img/tas/mobile-final-2.webp" width="auto" height="150" alt="Tiket Apa Saja - Mobile - Listing" />
 				</picture>
 			</div>
 		</section>
+
+		<hr />
 
 		<section class="middle auto style-top-text snap">
 			<div class="text">
@@ -62,53 +68,66 @@
 			</div>
 		</section>
 
+		<hr />
+
 		<section class="middle auto style-bottom-logo forcebright snap">
 			<div class="text">
 				<h3>The Solution</h3>
 				<p>The old and new logo contain too manu information and it purely business decision. Simplification of their logo into something more memorable, fun, and with less distraction.</p>
 			</div>
+
+			<noscript class="hidden">
+				<h4>Evolution of Tiket Apa Saja's Logo</h4>
+			</noscript>
 			<div class="thumbs">
 				<ul class="flat">
 					<li>
 						<picture>
 							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/oldlogo@3x.webp">
 							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/oldlogo@2x.webp">
-							<img src="/dwaan/img/tas/oldlogo.webp" width="" height="" alt="Tiket Apa Saja" />
+							<img src="/dwaan/img/tas/oldlogo.webp" width="auto" height="100" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
 							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/newlogo@3x.webp">
 							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/newlogo@2x.webp">
-							<img src="/dwaan/img/tas/newlogo.webp" width="" height="" alt="Tiket Apa Saja" />
+							<img src="/dwaan/img/tas/newlogo.webp" width="auto" height="100" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
 							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/pitching-mobile@3x.webp">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/pitching-mobile@2x.webp">
-							<img src="/dwaan/img/tas/pitching-mobile.webp" width="" height="" alt="Tiket Apa Saja" />
+							<source media="(-webkit-min-150device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/pitching-mobile@2x.webp">
+							<img src="/dwaan/img/tas/pitching-mobile.webp" width="auto" height="200" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 				</ul>
 			</div>
 		</section>
 
+		<hr />
+
 		<section class="middle style-slideshow snap">
+			<noscript class="hidden">
+				<h4>Initial Design</h4>
+			</noscript>
 			<div class="thumbs">
-				<ul class="flat">
-					<?php for ($i=1; $i <= 3; $i++) { ?>
+				<ol class="flat">
+					<?php for ($i = 1; $i <= 3; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.webp" width="" height="" alt="Tiket Apa Saja" />
+								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja" />
 							</picture>
 						</li>
 					<?php } ?>
-				</ul>
+				</ol>
 			</div>
 		</section>
+
+		<hr />
 
 		<section class="middle style-trunc snap">
 			<div class="wrap">
@@ -116,7 +135,7 @@
 					<h3>The New New Logo</h3>
 					<p>They agree that they need to simplified their logo resulting simplier logo. So the new the final design will reflect with the new logo and color scheme.</p>
 				</div>
-				<div class="meta color">
+				<div class="meta color" hidden>
 					<ul class="flat">
 						<li style="background: #EE2F26"></li>
 						<li style="background: #fff"></li>
@@ -127,37 +146,49 @@
 			</div>
 		</section>
 
+		<hr />
+
 		<section class="middle style-slideshow snap">
+			<noscript class="hidden">
+				<h4>Desktop Website</h4>
+			</noscript>
 			<div class="thumbs">
-				<ul class="flat">
-					<?php for ($i=1; $i <= 6; $i++) { ?>
+				<ol class="flat">
+					<?php for ($i = 1; $i <= 6; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.webp" width="" height="" alt="Tiket Apa Saja" />
+								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja" />
 							</picture>
 						</li>
 					<?php } ?>
-				</ul>
+				</ol>
 			</div>
 		</section>
 
+		<hr />
+
 		<section class="middle style-slideshow style-slideshow-small snap-bottom">
+			<noscript class="hidden">
+				<h4>Mobile Website</h4>
+			</noscript>
 			<div class="thumbs">
-				<ul class="flat">
-					<?php for ($i=1; $i <= 6; $i++) { ?>
+				<ol class="flat">
+					<?php for ($i = 1; $i <= 6; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.webp" width="" height="" alt="Tiket Apa Saja" />
+								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja" />
 							</picture>
 						</li>
 					<?php } ?>
-				</ul>
+				</ol>
 			</div>
 		</section>
+
+		<hr />
 
 		<section class="links snap-bottom">
 			<nav>
@@ -168,11 +199,13 @@
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
 				</div>
 				<div class="continue">
-				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching" class="title"><span><strong>next case study</strong></span></a>
-				<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><i>Suzuki Indonesia Website Redesign Pitching</i></span></a>
+					<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching" class="title"><span><strong>next case study</strong></span></a>
+					<a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><i>Suzuki Indonesia Website Redesign Pitching</i></span></a>
 				</div>
 			</nav>
 		</section>
+
+		<hr />
 
 		<section class="footer">
 			<p class="reading">Reading time: 50 seconds</p>
@@ -181,4 +214,5 @@
 
 	<?php include_once "part_script.php"; ?>
 </body>
+
 </html>

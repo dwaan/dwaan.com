@@ -13,9 +13,11 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
+        <hr />
+
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/dwaan/img/logo/suzuki.svg" width="147" height="180" class="logo" alt="Suzuki's Logo" /></span>
+                <span><img src="/dwaan/img/logo/suzuki.svg" width="73.5" height="90" class="logo" alt="Suzuki's Logo" /></span>
             </div>
             <h4 class="year">/2020</h4>
             <div class="arrow-big">
@@ -24,6 +26,8 @@
                 </a>
             </div>
         </section>
+
+        <hr />
 
         <section id="more" class="middle style-spread clip snap">
             <div class="text">
@@ -39,11 +43,13 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
         </section>
+
+        <hr />
 
         <section class="middle style-top snap">
             <div class="text">
@@ -61,11 +67,13 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
         </section>
+
+        <hr />
 
         <section class="middle style-flex auto snap">
             <div class="style-row">
@@ -81,12 +89,12 @@
                 </div>
                 <div class="style-column">
                     <div class="meta color">
-                        <ul class="flat">
+                        <ul class="flat" hidden>
                             <li style="background: #E20A17"></li>
                             <li style="background: #003399"></li>
                             <li>Primary</li>
                         </ul>
-                        <ul class="flat">
+                        <ul class="flat" hidden>
                             <li style="background: #FFD700"></li>
                             <li style="background: #fff"></li>
                             <li style="background: #000"></li>
@@ -99,7 +107,7 @@
                     </div>
                 </div>
                 <div class="style-column">
-                    <div class="meta">
+                    <div class="meta" hidden>
                         <ul class="bland">
                             <li style="background: #E20A17"></li>
                             <li style="background: #003399"></li>
@@ -111,6 +119,8 @@
                 </div>
             </div>
         </section>
+
+        <hr />
 
         <section class="middle style-masonry snap-center">
             <div class="thumbs">
@@ -124,12 +134,14 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
             <div class="shade"></div>
         </section>
+
+        <hr />
 
         <section class="middle style-angled snap-bottom clip">
             <div class="text">
@@ -142,11 +154,13 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="" height="" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="150" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
         </section>
+
+        <hr />
 
         <section class="links snap-bottom">
             <nav>
@@ -160,6 +174,8 @@
                 </div>
             </nav>
         </section>
+
+        <hr />
 
         <section class="footer">
             <p class="reading">Reading time: 50 seconds</p>

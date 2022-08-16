@@ -3,9 +3,9 @@
 
 <head>
 	<?php
-		$title = "oh 🦀, me think you lost! 😢";
-		$description = "please go back to dwaan.com if you went to this accidentally";
-		include_once "part_metacss.php";
+	$title = "oh 🦀, me think you lost! 😢";
+	$description = "please go back to dwaan.com if you went to this accidentally";
+	include_once "part_metacss.php";
 	?>
 </head>
 
@@ -32,6 +32,7 @@
 		</section>
 	</main>
 
-<?php include_once "part_script.php"; ?>
+	<?php include_once "part_script.php"; ?>
 </body>
+
 </html>

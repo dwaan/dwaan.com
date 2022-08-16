@@ -22,7 +22,7 @@ import views from "./views/views";
 
 ////////// Initial
 
-removeClass(_q("html"),"no-js");
+removeClass(_q("html"), "no-js");
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 

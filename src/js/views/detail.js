@@ -824,15 +824,17 @@ var detailview = {
 			el.insertAdjacentHTML('beforeend', "<div class='before'></div><div class='after'></div>");
 			// Variables
 			var that = el;
-			that.slideshowScroll = that.children[0];
-			that.slideshowParent = that.querySelector("ul");
+			that.slideshowScroll = that.querySelector("div");
+			that.slideshowParent = that.querySelector("ol");
 			that.slideshowChild = that.slideshowScroll.querySelectorAll("li");
+			console.log(that.slideshowScroll, that.slideshowScroll.querySelectorAll("li"));
+
 			that.l = gsap.utils.toArray(that.slideshowChild).length;
 			that.pos = 0;
 			that.pos_start = true;
 			that.pos_end = false;
-			that.before = that.children[1];
-			that.after = that.children[2];
+			that.before = that.querySelector(".before");
+			that.after = that.querySelector(".after");
 			// Fixed size
 			that.fixedSize = function () {
 				var width = 0;
@@ -894,9 +896,7 @@ var detailview = {
 						horizontal: true,
 						start: "0 0",
 						end: "100% 0",
-						onUpdate: function (value) {
-							this.progress = value.progress;
-							this.direction = value.direction;
+						onUpdate: function () {
 							that.navigationHide();
 						},
 						animation: tl

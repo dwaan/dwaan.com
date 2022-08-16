@@ -134,7 +134,13 @@ main {
 	display: block;
 	position: relative;
 	opacity: 0;
-	overflow: hidden
+	overflow: hidden;
+
+	>hr {
+		display: none;
+	}
+
+
 }
 
 h1 {
@@ -315,9 +321,13 @@ picture img {
 	.support {
 		display: flex;
 
-		h1 {
+		h2 {
 			margin: 0 var(--padl) 0 0;
 			@include mixins.typography(20vh, false, 20vh);
+		}
+
+		h3 {
+			margin: 0 var(--padl) 0 0;
 		}
 
 		p,
@@ -339,7 +349,7 @@ picture img {
 
 @media (min-aspect-ratio: 5/1) {
 	.support {
-		h1 {
+		h2 {
 			@include mixins.typography(30vh, false, 30vh);
 		}
 
@@ -643,6 +653,9 @@ header {
 	}
 }
 
+[hidden] {
+	display: block;
+}
 
 /* Common styles between items */
 .size,
@@ -1591,7 +1604,8 @@ header {
 		height: 100%;
 	}
 
-	ul {
+	ul,
+	ol {
 		white-space: nowrap;
 		height: 100%;
 
@@ -1635,12 +1649,15 @@ header {
 		transform: rotate(-3deg);
 	}
 
-	ul li {
-		width: auto;
-		padding: 0 0 0 20vw;
+	ul,
+	ol {
+		li {
+			width: auto;
+			padding: 0 0 0 20vw;
 
-		&:last-child {
-			padding-right: 20vw;
+			&:last-child {
+				padding-right: 20vw;
+			}
 		}
 	}
 
@@ -1649,11 +1666,14 @@ header {
 			width: 27.5vw;
 		}
 
-		ul li {
-			padding-left: 15vw;
+		ul,
+		ol {
+			li {
+				padding-left: 15vw;
 
-			&:last-child {
-				padding-right: 15vw;
+				&:last-child {
+					padding-right: 15vw;
+				}
 			}
 		}
 	}
@@ -1663,11 +1683,14 @@ header {
 			width: 20vw;
 		}
 
-		ul li {
-			padding-left: 10vw;
+		ul,
+		ol {
+			li {
+				padding-left: 10vw;
 
-			&:last-child {
-				padding-right: 10vw;
+				&:last-child {
+					padding-right: 10vw;
+				}
 			}
 		}
 	}

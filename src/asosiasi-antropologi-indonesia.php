@@ -13,6 +13,8 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail aai">
+		<hr />
+
         <section class="middle full snap">
             <div class="padding">
                 <span><img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" /></span>
@@ -25,6 +27,8 @@
             </div>
         </section>
 
+        <hr />
+
         <section id="more" class="middle style-spread style-spread-big clip snap">
             <div class="text">
                 <div class="titles">
@@ -35,14 +39,16 @@
             </div>
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>">
+                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
         </section>
+
+        <hr />
 
         <section class="middle style-top style-top-auto snap">
             <div class="text">
@@ -56,14 +62,16 @@
             </div>
             <div class="thumbs">
                 <?php for ($i = 4; $i <= 7; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>">
+                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="auto" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
         </section>
+
+        <hr />
 
         <section class="middle style-flex style-flex-swap auto snap">
             <div class="style-row">
@@ -77,7 +85,7 @@
                     </div>
                 </div>
                 <div class="style-column">
-                    <div class="meta color">
+                    <div class="meta color" hidden>
                         <ul class="flat">
                             <li style="background: #A0290B"></li>
                             <li style="background: #2E1415"></li>
@@ -101,6 +109,8 @@
             </div>
         </section>
 
+        <hr />
+
         <section class="middle style-masonry style-masonry-2 snap-center">
             <div class="thumbs">
                 <?php for ($i = 8; $i <= 18; $i++) { ?>
@@ -110,15 +120,17 @@
                             <p>Providing thematic photos as visual guide to break from monotonous wordy content.</p>
                         </div>
                     <?php } ?>
-                    <picture class="pic-<?php echo $i ?>">
+                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="auto" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
             <div class="shade"></div>
         </section>
+
+        <hr />
 
         <section class="middle style-background clip snap-bottom">
             <div class="text">
@@ -127,9 +139,11 @@
                 </p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/aai/guideline.svg" width="" height="" alt="AAI Website Redesign - Guideline - by Dwan" />
+                <img src="/dwaan/img/aai/guideline.svg" width="auto" height="150" alt="AAI Website Redesign - Guideline - by Dwan" />
             </div>
         </section>
+
+        <hr />
 
         <section class="links snap-bottom">
             <nav>
@@ -144,6 +158,8 @@
                 </div>
             </nav>
         </section>
+
+        <hr />
 
         <section class="footer">
             <p class="reading">Reading time: 40 seconds</p>

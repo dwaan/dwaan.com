@@ -15,16 +15,21 @@
     <main data-barba="container" data-barba-namespace="home" class="home">
         <div id="flarestart"></div>
 
+        <hr />
+
         <section class="middle full">
             <div class="main-text">
                 <h1>Hello, my name is <a href="./me" arial-title="About Dwan" id="to-about">Dwan</a></h1>
+                <p class="hidden">I'm an UI/UX Designer and Strategist. Here are some of my design portfolio 😙.</p>
             </div>
-            <div class="arrow-big">
+            <div class="arrow-big" hidden>
                 <a href="#casestudy" title="Scroll Down" class="arrow scrollto">
                     <span>case studies</span>
                 </a>
             </div>
         </section>
+
+        <hr />
 
         <section id="casestudy" class="middle full home-aai">
             <div class="padding">
@@ -39,6 +44,8 @@
             </div>
         </section>
 
+        <hr />
+
         <section class="middle full home-musiku">
             <div class="padding">
                 <a href="./musiku" aria-label="Musiku Website Concept and Design">
@@ -52,10 +59,13 @@
             </div>
         </section>
 
+        <hr />
+
         <section class="middle full home-replurk">
             <div class="padding">
-                <p class="plurktitle">RePlurk</p>
-                <p class="plurksubtitle"><a href="./replurk2021">2021</a> / <a href="./replurk2020">2020</a></p>
+                <h2 class="plurktitle">RePlurk</h2>
+                <h3 class="plurksubtitle"><a href="./replurk2021">2021</a> / <a href="./replurk2020">2020</a></h3>
+                <noscript><p>You need to enable javascript to open these pages</p></noscript>
             </div>
             <div class="arrow-small">
                 <a href="./replurk2021" class="arrow">
@@ -64,10 +74,13 @@
             </div>
         </section>
 
+        <hr />
+
+
         <section class="middle full home-suzuki">
             <div class="padding">
                 <a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
-                    <img src="/dwaan/img/logo/suzuki.svg" width="147" height="180" class="logo" alt="Logo Suzuki" />
+                    <img src="/dwaan/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo Suzuki" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -76,6 +89,8 @@
                 </a>
             </div>
         </section>
+
+        <hr />
 
         <section class="middle full home-tas">
             <div class="padding">
@@ -90,11 +105,13 @@
             </div>
         </section>
 
+        <hr />
+
         <section class="middle full home-old">
             <div class="padding">
                 <a href="https://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
-                    <svg class="diff" viewBox="0 0 33 51" fill="none" xmlns="https://www.w3.org/2000/svg">
-                        <g fill="white">
+                    <svg widt="66" height="102" class="diff" viewBox="0 0 33 51" fill="none" xmlns="https://www.w3.org/2000/svg">
+                        <g fill="black">
                             <g class="right-hand">
                                 <rect x="25.4991" y="39.1853" width="16" height="3.35392" rx="1.67696" transform="rotate(-135 25.4991 39.1853)"></rect>
                             </g>
@@ -121,21 +138,23 @@
             </div>
         </section>
 
+        <hr />
+
         <div id="flareend"></div>
 
-        <section class="flares">
-            <?php
-            for ($i = 1; $i <= 5; $i++) {
-                echo '<img src="/dwaan/img/flares/flare' . $i . '.webp" width="" height="" alt="Dwan\'s flare number' . $i . '" class="flare flare' . $i . '" />';
+        <section id="flares" class="flares"></section>
+        <script>
+            // Insert flares
+            for (var i = 1; i <= 5; i++) {
+                document.getElementById("flares").innerHTML += '<img src="/dwaan/img/flares/flare' + i + '.webp" width="" height="" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
             }
-            ?>
-        </section>
+        </script>
 
         <section class="footer">
             <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
             <div class="location">
                 <span>Jakarta</span>
-                <svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="white" xmlns="https://www.w3.org/2000/svg">
+                <svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="black" xmlns="https://www.w3.org/2000/svg">
                     <path d="M4.79998 1.59998L6.25415 6.93331H2.88019L1.59998 4.79998H1.06665V7.46664V9.06664V11.2H1.59998L2.88019 9.06664H6.25415L4.79998 14.4H5.86665L9.74582 9.06664H13.8666C14.456 9.06664 14.9333 8.58931 14.9333 7.99998C14.9333 7.41064 14.456 6.93331 13.8666 6.93331H9.74582L5.86665 1.59998H4.79998Z" />
                 </svg>
                 <span>Tel Aviv-Yafo</span>

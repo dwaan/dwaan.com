@@ -1,3 +1,1 @@
-<?php
-header("Location: ./asosiasi-antropologi-indonesia");
-?>
+<?php header("Location: ./asosiasi-antropologi-indonesia"); ?>

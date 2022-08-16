@@ -3,9 +3,9 @@
 
 <head>
 	<?php
-		$title = "Menu";
-		$description = "This Menu Page Fallback";
-		include_once "part_metacss.php";
+	$title = "Menu";
+	$description = "This Menu Page Fallback";
+	include_once "part_metacss.php";
 	?>
 </head>
 
@@ -20,12 +20,15 @@
 					<li><a class="spring" href="./me">About Me</a></li>
 					<li class="hr"></li>
 					<li><a class="spring" href="./say-hi">Say, Hi!</a></li>
-					<li><p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p></li>
+					<li>
+						<p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and or cookies inside my website. Feel free to browse around.</p>
+					</li>
 				</ol>
 			</div>
 		</nav>
 	</main>
 
-<?php include_once "part_script.php"; ?>
+	<?php include_once "part_script.php"; ?>
 </body>
+
 </html>

@@ -527,7 +527,7 @@ header {
 
 /* Style text on top without image */
 .style-trunc {
-	padding: calc(2 * var(--padxl)) calc(2 * var(--padl)) 0;
+	padding: calc(2 * var(--padxl)) calc(2 * var(--padl)); // bottom 0
 	margin-bottom: calc(-1 * var(--padxl));
 	min-height: auto;
 
@@ -792,8 +792,11 @@ header {
 		right: var(--padx);
 	}
 
-	ul li {
-		padding: 0 var(--padx);
+	ul,
+	ol {
+		li {
+			padding: 0 var(--padx);
+		}
 	}
 
 	picture {
@@ -807,11 +810,14 @@ header {
 		/*transform: none;*/
 	}
 
-	ul li {
-		padding: 0 0 0 var(--padx);
+	ul,
+	ol {
+		li {
+			padding: 0 0 0 var(--padx);
 
-		&:last-child {
-			padding-right: var(--padx);
+			&:last-child {
+				padding-right: var(--padx);
+			}
 		}
 	}
 }
@@ -820,6 +826,7 @@ header {
 /* Me page */
 
 .me {
+
 	h2,
 	h3 {
 		font-size: 3rem;
@@ -836,6 +843,7 @@ header {
 	}
 
 	@media screen and (min-width: mixins.$screen-verysmall) {
+
 		h2,
 		h3 {
 			font-size: 12vw;

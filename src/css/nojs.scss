@@ -25,6 +25,10 @@ html.no-js {
 		border-bottom: 1px dashed var(--gray-light);
 	}
 
+	.arrow-big {
+		margin-top: var(--padm);
+	}
+
 	.size,
 	.lamp {
 		display: none;
@@ -53,8 +57,35 @@ html.no-js {
 			transition: transform .16s ease-in;
 			pointer-events: all;
 
+			noscript {
+				display: flex;
+				flex-direction: column;
+			}
+
+			ul,
+			ol {
+				margin-top: auto;
+
+				li {
+					margin-bottom: var(--padm);
+				}
+			}
+
 			&:hover {
 				transform: translate3d(0, 0, 0);
+			}
+
+			a {
+				margin: 0;
+				padding-left: 0;
+
+				&:hover {
+					color: var(--red);
+				}
+			}
+
+			p {
+				margin-top: auto;
 			}
 		}
 

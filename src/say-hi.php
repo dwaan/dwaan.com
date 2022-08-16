@@ -1,3 +1,1 @@
-<?php
-header("Location: ./hi");
-?>
+<?php header("Location: ./hi"); ?>
