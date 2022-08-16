@@ -76,7 +76,6 @@
 
         <hr />
 
-
         <section class="middle full home-suzuki">
             <div class="padding">
                 <a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
@@ -143,12 +142,6 @@
         <div id="flareend"></div>
 
         <section id="flares" class="flares"></section>
-        <script>
-            // Insert flares
-            for (var i = 1; i <= 5; i++) {
-                document.getElementById("flares").innerHTML += '<img src="/dwaan/img/flares/flare' + i + '.webp" width="" height="" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
-            }
-        </script>
 
         <section class="footer">
             <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>

@@ -14,6 +14,11 @@ let homeview = {
 	afterEnter: data => {
 		var next = data.next.container;
 
+		// Insert flares
+		for (var i = 1; i <= 5; i++) {
+			data.next.container.querySelector("#flares").innerHTML += '<img src="/dwaan/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
+		}
+
 		// Scroll text
 		var els = next.querySelectorAll("section.middle");
 		els.forEach((el, idx) => {
