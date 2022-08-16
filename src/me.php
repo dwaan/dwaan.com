@@ -13,88 +13,100 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
+		<hr />
+
 		<section id="about" class="about middle">
 			<div class="main-text">
 				<h1>Hello, my name is <strong>Dwan</strong></h1>
 			</div>
-			<div class="arrow-big">
+			<div class="arrow-big" hidden>
 				<a href="#usedto" class="arrow scrollto">
 					<span>scroll down</span>
 				</a>
 			</div>
 		</section>
 
+		<hr />
+
 		<section id="usedto" class="intro middle">
 			<div class="anim middle">
 				<div class="text">
-					<h2>I'm a UI/UX <br /> Designer and <br /> Strategist</h2>
+					<h2>I'm a UI/UX&nbsp;<br hidden />Designer and&nbsp;<br hidden />Strategist</h2>
 					<p>a.k.a. Web Designer in Steroid</p>
 				</div>
 			</div>
-			<div class="arrow-big">
+			<div class="arrow-big" hidden>
 				<a href="#now" class="arrow scrollto">
 					<span>and now</span>
 				</a>
 			</div>
 		</section>
 
+		<hr />
+
 		<section id="now" class="intro middle">
 			<div class="text">
-				<span>1
+				<span hidden>1
 					<hr /> 3
 				</span>
-				<h3>Now I'm <br /> <strong>a Freelancer</strong> <br /> in Tel Aviv</h3>
+				<h3>Now I'm&nbsp;<br hidden /><strong>a Freelancer</strong>&nbsp;<br hidden />in Tel Aviv</h3>
 				<p>doing mostly interface design consultation and various hobbist <a href="https://github.com/dwaan" data-barba-prevent target="BLANK" rel='noopener noreferrer'>open source projects</a></p>
 			</div>
 			<div class="thumbs">
-				<picture>
-					<img src="/dwaan/img/notpictured.webp" width="" height="" alt="Dwan riding canoe" />
+				<picture hidden>
+					<img src="/dwaan/img/notpictured.webp" width="auto" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
-			<div class="arrow-big">
+			<div class="arrow-big" hidden>
 				<a href="#webdesigner" class="arrow scrollto">
 					<span>before</span>
 				</a>
 			</div>
 		</section>
 
+		<hr />
+
 		<section id="webdesigner" class="intro middle">
 			<div class="text">
-				<span>2
+				<span hidden>2
 					<hr /> 3
 				</span>
-				<h3>&amp; <br /> Before <br /> <strong>Web Designer</strong></h3>
+				<h3>&amp;&nbsp;<br hidden />Before&nbsp;<br hidden /><strong>Web Designer</strong></h3>
 				<p>I did many of things in the past, like becoming Macromedia Flash Expert, Database Programmer, Creative Director, Chief Creative Officer, and Chief Information Officer among others.</p>
 				<p><em>- Not pictured</em></p>
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured.webp" width="" height="" alt="Dwan riding canoe" />
+					<img src="/dwaan/img/notpictured.webp" width="auto" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
-			<div class="arrow-big">
+			<div class="arrow-big" hidden>
 				<a href="#sayhi" class="arrow scrollto">
 					<span>would you?</span>
 				</a>
 			</div>
 		</section>
 
+		<hr />
+
 		<section id="sayhi" class="intro middle">
 			<div class="text">
-				<div class="title">
+				<div class="title" hidden>
 					<span>3
 						<hr /> 3
 					</span>
-					<h3>Would <br /> You <br /> Like To <br /> <strong>Say Hi!</strong>?</h3>
+					<h3>Would&nbsp;<br hidden />You&nbsp;<br hidden />Like To&nbsp;<br hidden /><strong>Say Hi!</strong>?</h3>
 				</div>
 				<p>I happen to live in in Tel Aviv-Yafo right now. If you happened to know any Indonesian living in Tel Aviv-Yafo, Mr. Goat wants to meet them. Other then that, if you wanted to work with me feel free to <a href="./say-hi" class="spring big">say hi</a>.</p>
 			</div>
-			<div class="arrow-big">
+			<div class="arrow-big" hidden>
 				<a href="#startmrgoat" class="arrow scrollto">
 					<span>mr. goat?</span>
 				</a>
 			</div>
 		</section>
+
+		<hr />
 
 		<section id="startmrgoat" class="mrgoat middle hidden"></section>
 		<section class="mrgoat middle hidden"></section>
@@ -109,37 +121,45 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-					<img class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="" height="" alt="Mr. Goat" />
+					<img <?php if($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="auto" height="200" alt="Mr. Goat" />
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">
-				<div id="viet" class="float"><span class="dot">
-						<hr /><i></i>
-					</span><span class="line">
-						<hr />
+				<div id="viet" class="float">
+					<span class="dot">
+						<hr hidden /><i></i>
 					</span>
-					<p>He's a vietnamese</p>
+					<span class="line">
+						<hr hidden />
+					</span>
+					<p><noscript>1.&nbsp;</noscript>He's a vietnamese</p>
 				</div>
-				<div id="nyc" class="float"><span class="dot">
-						<hr /><i></i>
-					</span><span class="line">
-						<hr />
+				<div id="nyc" class="float">
+					<span class="dot">
+						<hr hidden /><i></i>
 					</span>
-					<p>He got this neckles in NYC</p>
+					<span class="line">
+						<hr hidden />
+					</span>
+					<p><noscript>2.&nbsp;</noscript>He got this neckles in NYC</p>
 				</div>
-				<div id="food" class="float"><span class="dot">
-						<hr /><i></i>
-					</span><span class="line">
-						<hr />
+				<div id="food" class="float">
+					<span class="dot">
+						<hr hidden /><i></i>
 					</span>
-					<p>He likes to eat fancy food</p>
+					<span class="line">
+						<hr hidden />
+					</span>
+					<p><noscript>3.&nbsp;</noscript>He likes to eat fancy food</p>
 				</div>
-				<div id="travel" class="float"><span class="dot">
-						<hr /><i></i>
-					</span><span class="line">
-						<hr />
+				<div id="travel" class="float">
+					<span class="dot">
+						<hr hidden /><i></i>
 					</span>
-					<p>He travel all over the world</p>
+					<span class="line">
+						<hr hidden />
+					</span>
+					<p><noscript>4.&nbsp;</noscript>He travel all over the world</p>
 				</div>
 				<div id="post" class="float">
 					<a href="https://www.instagram.com/mrgoatofficial/" data-barba-prevent target="BLANK" rel='noopener noreferrer'>
@@ -153,19 +173,23 @@
 		</section>
 		<section id="endmrgoat" class="mrgoat middle hidden"></section>
 
+		<hr />
+
 		<section id="cofound" class="cofound middle clip snap-bottom">
 			<div class="text">
 				<h2>and <?php echo date("Y") - 2010; ?> Years Ago</h2>
 				<p>My friend and I decide to create Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner right now.</p>
 				<a href="http://sagara.id" class="spring" data-barba-prevent target="BLANK" rel='noopener noreferrer'>More about sagara.id</a>
 			</div>
-			<div class="thumbs">
+			<div class="thumbs" hidden>
 				<picture>
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/sagara/sagara@2x.webp">
-					<img src="/dwaan/img/sagara/sagara.webp" width="" height="" alt="Sagara" />
+					<img src="/dwaan/img/sagara/sagara.webp" width="auto" height="200" alt="Sagara" />
 				</picture>
 			</div>
 		</section>
+
+		<hr />
 
 		<section class="links snap-bottom">
 			<nav>
