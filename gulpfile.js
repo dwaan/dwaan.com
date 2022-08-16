@@ -71,6 +71,20 @@ function css_horizontal() {
 		.pipe(browserSync.stream());
 }
 
+function css_vertical() {
+	return gulp.src([
+		'src/css/print.scss'
+	])
+		.pipe(sourcemaps.init({
+			loadMaps: true
+		}))
+		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(concat("print.css"))
+		.pipe(sourcemaps.write("."))
+		.pipe(gulp.dest('./css/'))
+		.pipe(browserSync.stream());
+}
+
 function php() {
 	return gulp.src(['src/*.php'])
 		.pipe(htmlmin({

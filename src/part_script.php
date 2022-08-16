@@ -6,7 +6,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 
 	<div id="support" class="support"></div>
 	<script>
-		document.getElementById("support").innerHTML= "\
+		document.getElementById("support").innerHTML = "\
 			<div class=\"content\">\
 				<h2>😭</h2>\
 				<h3>Please don't squeeze me 😱.</h3>\
@@ -29,6 +29,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 			opacity: 1;
 		}
 	</style>
+
+	<link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>">
 <?php
 }
 ?>
