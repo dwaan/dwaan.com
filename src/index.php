@@ -4,7 +4,7 @@
 <head>
     <?php
     $title = "Dwan 😙";
-    $description = "🙋🏾‍♂️ Hello! my name is Dwan, I'm an UI/UX Designer and Strategist. Visit my website to see and learn about my design portfolio 😙.";
+    $description = "🙋🏽‍♂️ Hello! my name is Dwan, I'm a UI/UX Designer and Strategist. Visit my website to see and learn about my design portfolio 😙. And if you're lucky, some of the website above and below are about me also.";
     include_once "part_metacss.php";
     ?>
 </head>
