@@ -35,7 +35,7 @@ var lostview = {
 
 		next.querySelectorAll("#nomokeybusiness p").forEach(function (el) {
 			splitText(el);
-			ScrollTrigger.matchMedia({
+			gsap.matchMedia({
 				"(min-aspect-ratio: 1/1)": function () {
 					var text = {
 						speed: 1

@@ -7,227 +7,220 @@ import { addClass, removeClass, hoverEvents } from "../helpers/helper";
 
 var meview = {
 	namespace: 'me',
-	beforeLeave: function (data) {
+	beforeLeave: data => {
 		var current = data.current.container;
 		removeClass(current.querySelector(".main-text h1 strong"), "emphasis");
 	},
-	beforeEnter: function (data) {
+	beforeEnter: data => {
 		var next = data.next.container;
 
 		// Main text
-		next.querySelectorAll("#about").forEach(function (element) {
+		next.querySelectorAll("#about").forEach(element => {
 			var text = element.querySelectorAll(".main-text");
+			var screen = gsap.matchMedia();
 
-			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": () => {
-					gsap.set(text, {
-						position: "relative",
-						pointerEvents: "auto",
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				gsap.set(text, {
+					position: "relative",
+					pointerEvents: "auto",
+					opacity: 1,
+					top: 0,
+					y: 0
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				// Stick on pos y
+				gsap.set(text, {
+					position: "fixed",
+					top: "50%",
+					y: "-50%"
+				}, 0);
+
+				scroll.push(tl => {
+					tl.fromTo(text, {
+						pointerEvents: "auto"
+					}, {
+						pointerEvents: "none",
+						duration: 1
+					}, 0);
+
+					tl.fromTo(text, {
 						opacity: 1
+					}, {
+						opacity: 0,
+						ease: 'expo.out',
+						duration: .5
+					}, 0);
+
+					tl.set(text, {
+						position: "relative"
+					}, 1);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "0 0",
+						end: "100% 0",
+						animation: tl,
+						scrub: true
 					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						// Stick on pos y
-						tl.set(text, {
-							position: "fixed",
-							top: "50%",
-							y: "-50%"
-						}, 0);
-
-						tl.fromTo(text, {
-							pointerEvents: "auto"
-						}, {
-							pointerEvents: "none",
-							duration: 1
-						}, 0);
-
-						tl.fromTo(text, {
-							opacity: 1
-						}, {
-							opacity: 0,
-							ease: 'expo.out',
-							duration: .5
-						}, 0);
-
-						tl.set(text, {
-							position: "relative"
-						}, 1);
-
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: element,
-							start: "0 0",
-							end: "100% 0",
-							animation: tl,
-							scrub: true
-						});
-					});
-				}
+				});
 			});
 		});
 
 		// Big red dot
-		next.querySelectorAll("#usedto").forEach(function (element) {
+		next.querySelectorAll("#usedto").forEach(element => {
 			var middle = element.querySelectorAll(".middle");
+			var screen = gsap.matchMedia();
 
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					gsap.set(middle, {
-						display: "flex",
-						pointerEvents: "auto",
-						x: 0,
-						y: 0,
-						opacity: 1,
-						scale: 1
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				// Stick on pos y when showing and hiding
+				scroll.push(tl => {
+					tl.set(middle, {
+						position: "fixed",
+						top: "50%",
+						y: "-50%",
+						pointerEvents: "none"
+					}, 0);
+
+					tl.set(middle, {
+						pointerEvents: "auto"
+					}, 1);
+
+					tl.set(middle, {
+						position: "absolute",
+						pointerEvents: "none"
+					}, 4);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "0 100%",
+						end: "400% 100%",
+						animation: tl,
+						scrub: true
 					});
+				});
+
+				gsap.set(middle, {
+					display: "none",
+					opacity: 0,
+					x: 0,
+					scale: 3
+				});
+				// Fade in and scale down
+				scroll.push(tl => {
+					// Red dot - fade in
+					tl.to(middle, {
+						display: "flex",
+						opacity: 1,
+						ease: 'expo.in',
+						duration: .25
+					}, 0);
+
+					// Red dot - scale down in
+					tl.to(middle, {
+						x: 0,
+						scale: 1,
+						duration: .75
+					}, 0);
+
+					// Text - move in, fade in, and fade out
 					middle.forEach(function (el) {
 						// Move in
-						gsap.set(el.querySelectorAll(".text > *"), {
+						tl.fromTo(el.querySelectorAll(".text > *"), {
+							y: 200,
+						}, {
 							y: 0,
-							opacity: 1
-						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					// Stick on pos y when showing and hiding
-					scroll.push(tl => {
-						tl.set(middle, {
-							position: "fixed",
-							top: "50%",
-							y: "-50%",
-							pointerEvents: "none"
-						}, 0);
-
-						tl.set(middle, {
-							pointerEvents: "auto"
-						}, 1);
-
-						tl.set(middle, {
-							position: "absolute",
-							pointerEvents: "none"
-						}, 4);
-
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: element,
-							start: "0 100%",
-							end: "400% 100%",
-							animation: tl,
-							scrub: true
-						});
-					});
-
-					// Fade in and scale down
-					scroll.push(tl => {
-						// Red dot - fade in
-						tl.fromTo(middle, {
-							display: "none",
-							opacity: 0,
-						}, {
-							display: "flex",
-							opacity: 1,
-							ease: 'expo.in',
-							duration: .25
-						}, 0);
-
-						// Red dot - scale down in
-						tl.fromTo(middle, {
-							x: 0,
-							scale: 3,
-						}, {
-							x: 0,
-							scale: 1,
-							duration: .75
-						}, 0);
-
-						// Text - move in, fade in, and fade out
-						middle.forEach(function (el) {
-							// Move in
-							tl.fromTo(el.querySelectorAll(".text > *"), {
-								y: 200,
-							}, {
-								y: 0,
-								ease: 'expo.out',
-								duration: 1
-							}, 0);
-
-							// Fade in
-							tl.fromTo(el.querySelectorAll(".text > *"), {
-								opacity: 0,
-							}, {
-								opacity: 1,
-								ease: 'expo.out',
-								duration: .5
-							}, .125);
-						});
-
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: element,
-							start: "0 100%",
-							end: "75% 100%",
-							animation: tl,
-							scrub: 1
-						});
-					});
-
-					// Move to left and scale down
-					scroll.push(tl => {
-						// Red dot - Move left
-						tl.fromTo(middle, {
-							x: 0,
-							scale: 1,
-						}, {
-							x: window.innerWidth * -1 / 2,
-							scale: .15,
+							ease: 'expo.out',
 							duration: 1
 						}, 0);
 
-						// Text - fade out
-						middle.forEach(function (el) {
-							// Fade out
-							tl.fromTo(el.querySelectorAll(".text > *"), {
-								opacity: 1,
-							}, {
-								opacity: 0,
-								ease: 'expo.out',
-								duration: .5
-							}, .5);
-						});
-
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: element,
-							start: "100% 100%",
-							end: "175% 100%",
-							animation: tl,
-							scrub: 1
-						});
+						// Fade in
+						tl.fromTo(el.querySelectorAll(".text > *"), {
+							opacity: 0,
+						}, {
+							opacity: 1,
+							ease: 'expo.out',
+							duration: .5
+						}, .125);
 					});
 
-					// Fade out dot
-					scroll.push(tl => {
-						// Red dot - fade out
-						tl.fromTo(middle, {
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "0 100%",
+						end: "75% 100%",
+						animation: tl,
+						scrub: 1
+					});
+				});
+
+				// Move to left and scale down
+				scroll.push(tl => {
+					// Red dot - Move left
+					tl.fromTo(middle, {
+						x: 0,
+						scale: 1,
+					}, {
+						x: window.innerWidth * -1 / 2,
+						scale: .15,
+						duration: 1
+					}, 0);
+
+					// Text - fade out
+					middle.forEach(function (el) {
+						// Fade out
+						tl.fromTo(el.querySelectorAll(".text > *"), {
 							opacity: 1,
 						}, {
 							opacity: 0,
 							ease: 'expo.out',
-						});
+							duration: .5
+						}, .5);
+					});
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: element,
-							start: "300% 100%",
-							end: "375% 100%",
-							animation: tl,
-							scrub: true
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "100% 100%",
+						end: "175% 100%",
+						animation: tl,
+						scrub: 1
+					});
+				});
+
+				// Fade out dot
+				scroll.push(tl => {
+					// Red dot - fade out
+					tl.fromTo(middle, {
+						opacity: 1,
+					}, {
+						opacity: 0,
+						ease: 'expo.out',
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: element,
+						start: "300% 100%",
+						end: "375% 100%",
+						animation: tl,
+						scrub: true
+					});
+				});
+
+				// Reset
+				return () => {
+					middle.forEach(els => {
+						els.style = "";
+						els.querySelectorAll(".text > *").forEach(el => {
+							el.style = "";
 						});
 					});
 				}
@@ -235,7 +228,7 @@ var meview = {
 		});
 
 		// Photo of me on canoe
-		next.querySelectorAll("#now").forEach(function (element) {
+		next.querySelectorAll("#now").forEach(element => {
 			scroll.push(tl => {
 				tl.fromTo(element.querySelectorAll('.thumbs'), {
 					opacity: 0,
@@ -305,7 +298,7 @@ var meview = {
 		});
 
 		// Now, Webdesigner, and Sayhi sections
-		next.querySelectorAll("#now, #webdesigner, #sayhi").forEach(function (element) {
+		next.querySelectorAll("#now, #webdesigner, #sayhi").forEach(element => {
 			var isSayHi = element.getAttribute('id') == "sayhi";
 			var el = isSayHi ? element.querySelectorAll('.text > div > *, .text > p') : element.querySelectorAll('.text > *');
 			var animation = function (horizontal = true) {
@@ -382,14 +375,13 @@ var meview = {
 					});
 				});
 			}
+			var screen = gsap.matchMedia();
 
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					animation(false);
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					animation();
-				}
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				animation(false);
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				animation();
 			});
 		});
 

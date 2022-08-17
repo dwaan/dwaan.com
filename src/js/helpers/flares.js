@@ -9,7 +9,6 @@ var flare = {
     show: function (elements) {
         if (elements) this.elements = _qAll(elements);
 
-        console.log(this.elements);
         gsap.killTweensOf(this.elements);
         if (elements) {
             gsap.to(this.elements, {

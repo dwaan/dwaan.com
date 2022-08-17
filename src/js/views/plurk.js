@@ -1,13 +1,12 @@
 "use strict";
 
 import gsap from "gsap";
-import html2canvas from "html2canvas";
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import api from "../helpers/api";
 import scroll from "../helpers/scroll";
 import darkmode from "../helpers/darkmode";
 import animate from "../helpers/animate";
-import { _q, _qAll, hasClass, plural, monthNames, animateNumber, removeClass, addClass, datediff, pluralinwords } from '../helpers/helper';
+import { _q, _qAll, hasClass, plural, monthNames, animateNumber, datediff, pluralinwords } from '../helpers/helper';
 
 /*
 	Simple span element object:
@@ -332,7 +331,7 @@ class replurk {
 				}, 0);
 
 				// Scroll animation wrap section
-				ScrollTrigger.matchMedia({
+				gsap.matchMedia({
 					"(min-aspect-ratio: 1/1)": () => {
 						scroll.push(tl => {
 							tl.fromTo(el.children, {
@@ -486,7 +485,9 @@ class replurk {
 							}
 						});
 
-						setTimeout(() => {
+						setTimeout(async () => {
+							const html2canvas = await import('html2canvas');
+
 							html2canvas(el.querySelector(".anim"), {
 								backgroundColor: null,
 								logging: false

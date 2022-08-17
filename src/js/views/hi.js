@@ -74,29 +74,29 @@ var hiview = {
 			scale: "random(1,2,.5)"
 		});
 
-		hoverEvents(next.querySelectorAll(".email"), function (el) {
+		hoverEvents(next.querySelectorAll(".email"), () => {
 			if (screenhorizontal) textanim.show(".email span", ".email small");
 			flare.show("img.yellow, img.red");
-		}, function (el) {
+		}, () => {
 			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
-		hoverEvents(next.querySelectorAll(".social"), function (el) {
+		hoverEvents(next.querySelectorAll(".social"), () => {
 			if (screenhorizontal) textanim.show([".website span", ".email span"], ".social span:first-child small");
 			flare.show("img.blue, img.red");
-		}, function (el) {
+		}, () => {
 			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
-		hoverEvents(next.querySelectorAll(".website"), function (el) {
+		hoverEvents(next.querySelectorAll(".website"), () => {
 			if (screenhorizontal) textanim.show(".social span:nth-child(2), .website span", ".social span:nth-child(2) small", true);
 			flare.show("img.blue, img.green");
-		}, function (el) {
+		}, () => {
 			if (screenhorizontal) textanim.hide();
 			flare.hide();
 		});
 	},
-	afterEnter: () => console.info("me@dwaan.com")
+	afterEnter: () => console.info("Say hi at me@dwaan.com")
 }
 
 export default hiview;

@@ -1050,6 +1050,7 @@ header {
 		letter-spacing: -.24rem;
 		text-align: center;
 		font-weight: 700;
+		margin-bottom: var(--pads);
 	}
 
 	.plurksubtitle {
@@ -1128,11 +1129,13 @@ header {
 	position: fixed;
 	z-index: 1;
 	overflow: hidden;
+	pointer-events: none;
 
 	img {
 		opacity: 0;
 		position: absolute;
 		transform: scale3d(1.25, 1.25, 1);
+		pointer-events: none;
 	}
 
 	/* Purple */

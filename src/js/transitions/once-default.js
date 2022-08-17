@@ -4,7 +4,7 @@ import animate from '../helpers/animate';
 import loader from '../helpers/loader';
 import header from '../helpers/header';
 
-let transition_once = {
+let transition_once_default = {
     name: 'default-transition',
     once: function (data) {
         // Define async and next container
@@ -14,20 +14,20 @@ let transition_once = {
         // Display loading
         loader.init();
         // Loading logic
-        loader.show(next, function () {
+        loader.show(next, () => {
             // Animate current view and header
             if (data.next.namespace == "lost") {
-                animate.show404(next, function () {
+                animate.show404(next, () => {
                     loader.empty();
                     done();
                 });
             } else if (data.next.namespace == "replurk2020" || data.next.namespace == "replurk2021") {
-                animate.showinstant(next, function () {
+                animate.showinstant(next, () => {
                     loader.empty();
                     done();
                 });
             } else {
-                animate.show(next, function () {
+                animate.show(next, () => {
                     loader.empty();
                     done();
                 });
@@ -59,10 +59,9 @@ let transition_once = {
         // Animate current view
         animate.show(data.next.container, () => done());
     },
-    after: function () {
+    after: () => {
         loader.empty();
-        return true;
     },
 }
 
-export default transition_once;
+export default transition_once_default;

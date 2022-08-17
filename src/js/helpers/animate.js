@@ -46,6 +46,7 @@ var animate = {
 		var els = next.querySelectorAll(".flares:not(.side)")
 		if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
 		if (!nonsticky) nonsticky = next.querySelector("section.middle > *:not(.arrow-big, .year)");
+
 		// Animate text
 		tl.fromTo([nonsticky, els], {
 			y: "+=200px",

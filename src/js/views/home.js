@@ -1,10 +1,9 @@
 "use strict";
 
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import gsap from 'gsap';
+import { gsap, ScrollTrigger } from 'gsap/all';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
-import { hoverEvents } from '../helpers/helper.js';
+import { hoverEvents, _qAll } from '../helpers/helper.js';
 
 let homeview = {
 	namespace: 'home',
@@ -24,99 +23,100 @@ let homeview = {
 		els.forEach((el, idx) => {
 			var maintext = el.querySelectorAll(".main-text, .padding");
 			var maintextchild = el.querySelectorAll(".main-text > *, .padding > *");
+			var screen = gsap.matchMedia();
 
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					gsap.set(maintext, {
-						position: "relative",
-						pointerEvents: "auto",
-						opacity: 1,
-						top: "0%",
-						y: "0%"
-					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.to(maintext, {
-							duration: 3
-						}, 0)
-
-						tl.set(maintext, {
-							position: "relative",
-							pointerEvents: "none",
-							top: "0%",
-							y: "0%"
-						}, 0);
-
-						tl.set(maintext, {
-							position: "fixed",
-							top: "50%",
-							y: "-50%",
-						}, 1);
-
-						tl.fromTo(maintextchild, {
-							y: window.innerHeight * 1 / 6
-						}, {
-							y: 0,
-							ease: "linear",
-							duration: 1
-						}, 1);
-
-						tl.fromTo(maintext, {
-							opacity: idx == 0 ? 1 : 0
-						}, {
-							opacity: 1,
-							ease: "expo.out",
-							duration: .5
-						}, 1.5);
-
-						tl.set(maintext, {
-							pointerEvents: "auto",
-						}, 2);
-
-						tl.fromTo(maintextchild, {
-							opacity: 1
-						}, {
-							opacity: 0,
-							ease: "expo.out",
-							duration: .5
-						}, 2.5);
-
-						tl.fromTo(maintextchild, {
-							y: 0
-						}, {
-							y: window.innerHeight * -1 / 6,
-							ease: "linear",
-							duration: 1
-						}, 2);
-
-						tl.set(maintext, {
-							position: "relative",
-							pointerEvents: "none",
-							top: "0%",
-							y: "0%"
-						}, 3);
-
-						return tl;
-					}, tl => ScrollTrigger.create({
-						trigger: el,
-						start: "-100% 100%",
-						end: "200% 100%",
-						scrub: true,
-						animation: tl
-					}));
-				}
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				console.log("Scroll");
+				gsap.set(maintext, {
+					position: "relative",
+					pointerEvents: "auto",
+					opacity: 1,
+					top: "0%",
+					y: "0%"
+				});
 			});
 
-			// Hover
-			hoverEvents(next.querySelectorAll("#to-about"), () => {
-				flare.show(".flares .flare");
-			}, () => {
-				flare.hide();
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.to(maintext, {
+						duration: 3
+					}, 0)
+
+					tl.set(maintext, {
+						position: "relative",
+						pointerEvents: "none",
+						top: "0%",
+						y: "0%"
+					}, 0);
+
+					tl.set(maintext, {
+						position: "fixed",
+						top: "50%",
+						y: "-50%",
+					}, 1);
+
+					tl.fromTo(maintextchild, {
+						y: window.innerHeight * 1 / 6
+					}, {
+						y: 0,
+						ease: "linear",
+						duration: 1
+					}, 1);
+
+					tl.fromTo(maintext, {
+						opacity: idx == 0 ? 1 : 0
+					}, {
+						opacity: 1,
+						ease: "expo.out",
+						duration: .5
+					}, 1.5);
+
+					tl.set(maintext, {
+						pointerEvents: "auto",
+					}, 2);
+
+					tl.fromTo(maintextchild, {
+						opacity: 1
+					}, {
+						opacity: 0,
+						ease: "expo.out",
+						duration: .5
+					}, 2.5);
+
+					tl.fromTo(maintextchild, {
+						y: 0
+					}, {
+						y: window.innerHeight * -1 / 6,
+						ease: "linear",
+						duration: 1
+					}, 2);
+
+					tl.set(maintext, {
+						position: "relative",
+						pointerEvents: "none",
+						top: "0%",
+						y: "0%"
+					}, 3);
+
+					return tl;
+				}, tl => ScrollTrigger.create({
+					trigger: el,
+					start: "-100% 100%",
+					end: "200% 100%",
+					scrub: true,
+					animation: tl
+				}));
 			});
 
 			// Snap
 			scroll.snap(el);
+		});
+
+		// Hover
+		hoverEvents(next.querySelectorAll("#to-about"), () => {
+			flare.show(".flares .flare");
+		}, () => {
+			flare.hide();
 		});
 
 		document.body.style.overflow = "";

@@ -1,8 +1,7 @@
 "use strict";
 
-import gsap from "gsap";
+import { gsap, ScrollTrigger } from 'gsap/all';
 import scroll from "../helpers/scroll";
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import { _q, _qAll, hoverEvents } from '../helpers/helper';
 
 var detailview = {
@@ -20,50 +19,50 @@ var detailview = {
 		});
 
 		next.querySelectorAll(".style-plain-single").forEach(el => {
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
-							y: "50%",
-							opacity: 0
-						}, {
-							y: "0%",
-							opacity: 1,
-							ease: "expo"
-						});
+			var screen = gsap.matchMedia();
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el.querySelectorAll(".thumbs"),
-							start: "0 100%",
-							end: "50% 100%",
-							scrub: 5,
-							animation: tl
-						});
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
+						y: "50%",
+						opacity: 0
+					}, {
+						y: "0%",
+						opacity: 1,
+						ease: "expo"
 					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
-							opacity: 1,
-							y: "25%"
-						}, {
-							y: "-25%",
-							ease: "linear"
-						});
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "0 100%",
-							end: "100% 0",
-							scrub: 1,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelectorAll(".thumbs"),
+						start: "0 100%",
+						end: "50% 100%",
+						scrub: 5,
+						animation: tl
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
+						opacity: 1,
+						y: "25%"
+					}, {
+						y: "-25%",
+						ease: "linear"
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: 1,
+						animation: tl
+					});
+				});
 			});
 		});
 
@@ -71,86 +70,86 @@ var detailview = {
 			var pictures = el.querySelectorAll("picture");
 
 			// Scroll animation
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						pictures.forEach((picture, index) => {
-							tl.fromTo(picture, {
-								rotation: 0,
-								x: (index + 1) * 50 + "%",
-								y: (index + 1) * 30 + "%",
-								zIndex: pictures.length - index
-							}, {
-								x: index * 20 + "%",
-								y: index * 20 + "%",
-								ease: "power1.out",
-								duration: 1
-							}, 0);
+			var screen = gsap.matchMedia();
 
-							tl.to(picture, {
-								rotation: 0,
-								x: (index + 1) * -30 + "%",
-								y: (index + 1) * 7.5 + "%",
-								ease: "power1.in",
-								duration: 1
-							}, 1);
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					pictures.forEach((picture, index) => {
+						tl.fromTo(picture, {
+							rotation: 0,
+							x: (index + 1) * 50 + "%",
+							y: (index + 1) * 30 + "%",
+							zIndex: pictures.length - index
+						}, {
+							x: index * 20 + "%",
+							y: index * 20 + "%",
+							ease: "power1.out",
+							duration: 1
+						}, 0);
 
-							tl.fromTo(picture, {
-								opacity: 0,
-								ease: "expo.in"
-							}, {
-								opacity: 1,
-								duration: .1
-							}, .05);
-						});
+						tl.to(picture, {
+							rotation: 0,
+							x: (index + 1) * -30 + "%",
+							y: (index + 1) * 7.5 + "%",
+							ease: "power1.in",
+							duration: 1
+						}, 1);
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "0 100%",
-							end: "100% 0",
-							scrub: 1,
-							animation: tl
-						});
+						tl.fromTo(picture, {
+							opacity: 0,
+							ease: "expo.in"
+						}, {
+							opacity: 1,
+							duration: .1
+						}, .05);
 					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						pictures.forEach((picture, index) => {
-							tl.fromTo(picture, {
-								rotation: (pictures.length - index - 1) * 5,
-								x: ((pictures.length - index - 1) * 7.5) + "%",
-								y: ((pictures.length - index - 1) * 40) + "%",
-								zIndex: pictures.length - index
-							}, {
-								rotation: index * -5,
-								x: index * -10 + "%",
-								y: index * -80 + "%",
-								ease: "power1.inOut",
-								duration: 1
-							}, 0);
 
-							tl.fromTo(picture, {
-								opacity: 0,
-								ease: "expo.in"
-							}, {
-								opacity: 1,
-								duration: .1
-							}, .05);
-						});
-
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "0 100%",
-							end: "100% 0",
-							scrub: 1,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: 1,
+						animation: tl
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					pictures.forEach((picture, index) => {
+						tl.fromTo(picture, {
+							rotation: (pictures.length - index - 1) * 5,
+							x: ((pictures.length - index - 1) * 7.5) + "%",
+							y: ((pictures.length - index - 1) * 40) + "%",
+							zIndex: pictures.length - index
+						}, {
+							rotation: index * -5,
+							x: index * -10 + "%",
+							y: index * -80 + "%",
+							ease: "power1.inOut",
+							duration: 1
+						}, 0);
+
+						tl.fromTo(picture, {
+							opacity: 0,
+							ease: "expo.in"
+						}, {
+							opacity: 1,
+							duration: .1
+						}, .05);
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: 1,
+						animation: tl
+					});
+				});
 			});
 		});
 
@@ -158,47 +157,47 @@ var detailview = {
 			// Move thumbnail again
 			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"), null);
 
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelector(".thumbs"), {
-							x: 0
-						}, {
-							x: (el.querySelector(".thumbs").offsetWidth - el.querySelector(".scroll").offsetWidth) * -1,
-							ease: "ease.in"
-						});
+			var screen = gsap.matchMedia();
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el.querySelector(".thumbs"),
-							start: "0 80%",
-							end: "100% 80%",
-							scrub: 3,
-							animation: tl
-						});
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelector(".thumbs"), {
+						x: 0
+					}, {
+						x: (el.querySelector(".thumbs").offsetWidth - el.querySelector(".scroll").offsetWidth) * -1,
+						ease: "ease.in"
 					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelector(".thumbs"), {
-							x: (el.querySelector(".thumbs").offsetWidth - el.querySelector(".scroll").offsetWidth) * -1
-						}, {
-							x: 0,
-							ease: "ease.in"
-						});
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "50% 100%",
-							end: "100% 100%",
-							scrub: 3,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelector(".thumbs"),
+						start: "0 80%",
+						end: "100% 80%",
+						scrub: 3,
+						animation: tl
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelector(".thumbs"), {
+						x: (el.querySelector(".thumbs").offsetWidth - el.querySelector(".scroll").offsetWidth) * -1
+					}, {
+						x: 0,
+						ease: "ease.in"
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "50% 100%",
+						end: "100% 100%",
+						scrub: 3,
+						animation: tl
+					});
+				});
 			});
 		});
 
@@ -210,139 +209,139 @@ var detailview = {
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".pic-4"), {
-							top: "random(250, 500, 5)px",
-							left: "50%",
-							rotation: 0
-						}, {
-							top: 0,
-							left: "50%",
-							rotation: 7.5,
-							ease: "expo.out"
-						}, 0);
+			var screen = gsap.matchMedia();
 
-						tl.fromTo(el.querySelectorAll(".pic-5"), {
-							top: "random(250, 500, 5)px",
-							left: "initial",
-							right: "50%",
-							rotation: 0
-						}, {
-							top: 0,
-							right: "50%",
-							rotation: -7.5,
-							ease: "expo.out"
-						}, 0);
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelectorAll(".pic-4"), {
+						top: "random(250, 500, 5)px",
+						left: "50%",
+						rotation: 0
+					}, {
+						top: 0,
+						left: "50%",
+						rotation: 7.5,
+						ease: "expo.out"
+					}, 0);
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "50% 75%",
-							end: "100% 75%",
-							animation: tl,
-							scrub: 1
-						});
+					tl.fromTo(el.querySelectorAll(".pic-5"), {
+						top: "random(250, 500, 5)px",
+						left: "initial",
+						right: "50%",
+						rotation: 0
+					}, {
+						top: 0,
+						right: "50%",
+						rotation: -7.5,
+						ease: "expo.out"
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "50% 75%",
+						end: "100% 75%",
+						animation: tl,
+						scrub: 1
 					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".pic-5"), {
-							top: "75%",
-							left: "350%",
-							right: "initial",
-							rotation: 0
-						}, {
-							top: "40%",
-							left: "10%",
-							rotation: -30,
-							duration: 1,
-							ease: "expo.out"
-						}, 0);
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelectorAll(".pic-5"), {
+						top: "75%",
+						left: "350%",
+						right: "initial",
+						rotation: 0
+					}, {
+						top: "40%",
+						left: "10%",
+						rotation: -30,
+						duration: 1,
+						ease: "expo.out"
+					}, 0);
 
-						tl.fromTo(el.querySelectorAll(".pic-4"), {
-							top: "75%",
-							left: "350%",
-							rotation: 0
-						}, {
-							top: "25%",
-							left: "50%",
-							rotation: -10,
-							duration: 1,
-							ease: "expo.out"
-						}, .064);
+					tl.fromTo(el.querySelectorAll(".pic-4"), {
+						top: "75%",
+						left: "350%",
+						rotation: 0
+					}, {
+						top: "25%",
+						left: "50%",
+						rotation: -10,
+						duration: 1,
+						ease: "expo.out"
+					}, .064);
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "-25% 50%",
-							end: "50% 50%",
-							scrub: 1,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "-25% 50%",
+						end: "50% 50%",
+						scrub: 1,
+						animation: tl
 					});
-				}
+				});
 			});
 		});
 		next.querySelectorAll(".style-spread-big").forEach(el => {
 			// Scroll animation
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						for (let idx = 1; idx <= 3; idx++) {
-							tl.fromTo(el.querySelectorAll(".pic-" + idx), {
-								y: "30%",
-								x: -100,
-								rotation: 0
-							}, {
-								y: idx == 1 ? 0 : "10%",
-								x: idx == 1 ? "-50%" : idx == 2 ? "-55%" : "-45%",
-								rotation: idx == 1 ? 0 : idx == 2 ? -12.5 : 12.5,
-								duration: 1
-							}, (idx - 1) * .064);
-						}
+			var screen = gsap.matchMedia();
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el.querySelectorAll(".thumbs"),
-							start: "50% 100%",
-							end: "100% 100%",
-							animation: tl,
-							scrub: 1.25
-						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						for (let idx = 1; idx <= 3; idx++) {
-							tl.fromTo(el.querySelectorAll(".pic-" + idx), {
-								top: (9.5 - (idx * 5 / 6)) * 10 + "%",
-								left: (12.25 + (idx * 5 / 4)) * 10 + "%",
-								rotation: (idx + 2) * 5
-							}, {
-								top: (4.5 - (idx * 5 / 6)) * 10 + "%",
-								left: (2.25 + (idx * 5 / 4)) * 10 + "%",
-								rotation: (idx - 2) * 5,
-								duration: 1,
-								ease: "expo"
-							}, (idx - 1) * .064);
-						}
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					for (let idx = 1; idx <= 3; idx++) {
+						tl.fromTo(el.querySelectorAll(".pic-" + idx), {
+							y: "30%",
+							x: -100,
+							rotation: 0
+						}, {
+							y: idx == 1 ? 0 : "10%",
+							x: idx == 1 ? "-50%" : idx == 2 ? "-55%" : "-45%",
+							rotation: idx == 1 ? 0 : idx == 2 ? -12.5 : 12.5,
+							duration: 1
+						}, (idx - 1) * .064);
+					}
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el.querySelectorAll(".thumbs"),
-							start: "-25% 50%",
-							end: "50% 50%",
-							scrub: 2,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelectorAll(".thumbs"),
+						start: "50% 100%",
+						end: "100% 100%",
+						animation: tl,
+						scrub: 1.25
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					for (let idx = 1; idx <= 3; idx++) {
+						tl.fromTo(el.querySelectorAll(".pic-" + idx), {
+							top: (9.5 - (idx * 5 / 6)) * 10 + "%",
+							left: (12.25 + (idx * 5 / 4)) * 10 + "%",
+							rotation: (idx + 2) * 5
+						}, {
+							top: (4.5 - (idx * 5 / 6)) * 10 + "%",
+							left: (2.25 + (idx * 5 / 4)) * 10 + "%",
+							rotation: (idx - 2) * 5,
+							duration: 1,
+							ease: "expo"
+						}, (idx - 1) * .064);
+					}
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelectorAll(".thumbs"),
+						start: "-25% 50%",
+						end: "50% 50%",
+						scrub: 2,
+						animation: tl
+					});
+				});
 			});
 		});
 
@@ -353,57 +352,57 @@ var detailview = {
 				elements: el.querySelectorAll(".titles > *, p")
 			});
 			// Scroll animation
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
-							opacity: 0,
-							y: 300,
-							x: 0,
-							rotation: 0
-						}, {
-							opacity: 1,
-							y: 0,
-							ease: "expo.out"
-						}, 0);
+			var screen = gsap.matchMedia();
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el.querySelectorAll(".thumbs"),
-							start: "0 100%-=100px",
-							end: "100% 100%-=100px",
-							animation: tl,
-							scrub: 1
-						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					// Move the pictures
-					scroll.push(tl => {
-						tl.fromTo(el.querySelectorAll(".thumbs picture"), {
-							y: 0,
-							x: "-325px",
-							opacity: 0,
-							rotation: "7.5deg"
-						}, {
-							x: 0,
-							opacity: 1,
-							rotation: -5,
-							ease: "expo.out"
-						}, 0);
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelectorAll(".thumbs picture"), {
+						opacity: 0,
+						y: 300,
+						x: 0,
+						rotation: 0
+					}, {
+						opacity: 1,
+						y: 0,
+						ease: "expo.out"
+					}, 0);
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el.querySelectorAll(".thumbs"),
-							start: "-50% 50%",
-							end: "50% 50%",
-							scrub: 1,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelectorAll(".thumbs"),
+						start: "0 100%-=100px",
+						end: "100% 100%-=100px",
+						animation: tl,
+						scrub: 1
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				// Move the pictures
+				scroll.push(tl => {
+					tl.fromTo(el.querySelectorAll(".thumbs picture"), {
+						y: 0,
+						x: "-325px",
+						opacity: 0,
+						rotation: "7.5deg"
+					}, {
+						x: 0,
+						opacity: 1,
+						rotation: -5,
+						ease: "expo.out"
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelectorAll(".thumbs"),
+						start: "-50% 50%",
+						end: "50% 50%",
+						scrub: 1,
+						animation: tl
+					});
+				});
 			});
 		});
 
@@ -420,42 +419,42 @@ var detailview = {
 				scrub: .75
 			});
 			// Move thumbnails
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(thumbs, {
-							x: 0
-						}, {
-							x: (el.offsetWidth - thumbs.offsetWidth),
-							ease: "linear"
-						}, 0);
+			var screen = gsap.matchMedia();
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							animation: tl
-						});
-					});
-				},
-				"(min-aspect-ratio: 1/1)": () => {
-					scroll.push(tl => {
-						tl.fromTo(thumbs, {
-							x: 0
-						}, {
-							x: (el.offsetWidth - thumbs.offsetWidth),
-							ease: "linear",
-							duration: 5,
-						}, 0);
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(thumbs, {
+						x: 0
+					}, {
+						x: (el.offsetWidth - thumbs.offsetWidth),
+						ease: "linear"
+					}, 0);
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						animation: tl
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(thumbs, {
+						x: 0
+					}, {
+						x: (el.offsetWidth - thumbs.offsetWidth),
+						ease: "linear",
+						duration: 5,
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						animation: tl
+					});
+				});
 			});
 			// Reset
 			ScrollTrigger.defaults({});
@@ -527,27 +526,27 @@ var detailview = {
 		// Style - Trunc
 		next.querySelectorAll(".style-trunc").forEach(el => {
 			// Move text
-			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": () => {
-					gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
-						y: 0,
-						opacity: 1
-					});
-					scroll.moveText({
-						elements: el.querySelectorAll(".text > *, .color ul > *"),
-						position: "100%",
-						horizontal: true
-					});
-				},
-				"(max-aspect-ratio: 1/1)": () => {
-					gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
-						x: 0,
-						opacity: 1
-					});
-					scroll.moveText({
-						elements: el.querySelectorAll(".text > *, .color")
-					});
-				}
+			var screen = gsap.matchMedia();
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
+					y: 0,
+					opacity: 1
+				});
+				scroll.moveText({
+					elements: el.querySelectorAll(".text > *, .color ul > *"),
+					position: "100%",
+					horizontal: true
+				});
+			});
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				gsap.set(el.querySelectorAll(".text > *, .color, .color ul > *"), {
+					x: 0,
+					opacity: 1
+				});
+				scroll.moveText({
+					elements: el.querySelectorAll(".text > *, .color")
+				});
 			});
 		});
 
@@ -556,119 +555,119 @@ var detailview = {
 			var thumbs = el.querySelectorAll(".thumbs");
 			var alltext = el.querySelectorAll(".text > *");
 
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function () {
-					// Rotate masonry
-					gsap.set(thumbs, {
-						opacity: 1,
-						rotation: -5
-					});
+			var screen = gsap.matchMedia();
 
-					// Scroll up
-					scroll.push(tl => {
-						for (var index = 1; index <= 4; index++) {
-							var yplus = gsap.utils.random(250, 750, 25),
-								y = 25;
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				// Rotate masonry
+				gsap.set(thumbs, {
+					opacity: 1,
+					rotation: -5
+				});
 
-							if (index == 3) yplus = 0;
-							if (index % 2 == 0) y = -25;
+				// Scroll up
+				scroll.push(tl => {
+					for (var index = 1; index <= 4; index++) {
+						var yplus = gsap.utils.random(250, 750, 25),
+							y = 25;
 
-							tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
-								y: y + yplus,
-							}, {
-								y: y,
-								ease: "ease"
-							}, 0);
-						}
+						if (index == 3) yplus = 0;
+						if (index % 2 == 0) y = -25;
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "-25% 100%",
-							end: "100% 50%",
-							scrub: .75,
-							animation: tl
-						});
-					});
-
-					// Scroll left
-					scroll.push(tl => {
-						tl.fromTo(thumbs, {
-							x: 0,
+						tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
+							y: y + yplus,
 						}, {
-							x: -50,
-							ease: "linear"
+							y: y,
+							ease: "ease"
 						}, 0);
+					}
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "-25% 100%",
-							end: "100% 50%",
-							scrub: true,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "-25% 100%",
+						end: "100% 50%",
+						scrub: .75,
+						animation: tl
 					});
+				});
 
-					// Move text
-					scroll.moveText({
-						delta: 25,
-						elements: alltext,
-						position: "75%"
+				// Scroll left
+				scroll.push(tl => {
+					tl.fromTo(thumbs, {
+						x: 0,
+					}, {
+						x: -50,
+						ease: "linear"
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "-25% 100%",
+						end: "100% 50%",
+						scrub: true,
+						animation: tl
 					});
+				});
 
-					// Move masonry
-					scroll.moveText({
-						elements: thumbs
+				// Move text
+				scroll.moveText({
+					delta: 25,
+					elements: alltext,
+					position: "75%"
+				});
+
+				// Move masonry
+				scroll.moveText({
+					elements: thumbs
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				// Rotate masonry
+				gsap.set(thumbs, {
+					rotation: 0
+				});
+
+				// Scroll
+				scroll.push(tl => {
+					for (var index = 1; index <= 4; index++) {
+						var yplus = gsap.utils.random(250, 1000, 25),
+							y = 50;
+
+						if (index == 3) yplus = 0;
+						if (index % 2 == 0) y = -50;
+
+						tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
+							y: y + yplus,
+						}, {
+							y: y,
+							ease: "ease"
+						}, 0);
+					}
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "-25% 100%",
+						end: "100% 50%",
+						scrub: gsap.utils.random(75, 125, 5) / 100,
+						animation: tl
 					});
-				},
-				"(min-aspect-ratio: 1/1)": function () {
-					// Rotate masonry
-					gsap.set(thumbs, {
-						rotation: 0
-					});
+				});
 
-					// Scroll
-					scroll.push(tl => {
-						for (var index = 1; index <= 4; index++) {
-							var yplus = gsap.utils.random(250, 1000, 25),
-								y = 50;
+				// Move text
+				scroll.moveText({
+					elements: alltext,
+					position: "75%"
+				});
 
-							if (index == 3) yplus = 0;
-							if (index % 2 == 0) y = -50;
-
-							tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
-								y: y + yplus,
-							}, {
-								y: y,
-								ease: "ease"
-							}, 0);
-						}
-
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							start: "-25% 100%",
-							end: "100% 50%",
-							scrub: gsap.utils.random(75, 125, 5) / 100,
-							animation: tl
-						});
-					});
-
-					// Move text
-					scroll.moveText({
-						elements: alltext,
-						position: "75%"
-					});
-
-					// Move masonry
-					scroll.moveText({
-						elements: thumbs
-					});
-				}
+				// Move masonry
+				scroll.moveText({
+					elements: thumbs
+				});
 			});
 		});
 
@@ -678,56 +677,56 @@ var detailview = {
 			// Move pictures
 			scroll.moveThumbs(elPicture, "75%");
 			// Scroll pictures
-			ScrollTrigger.matchMedia({
-				"(max-aspect-ratio: 1/1)": function () {
-					scroll.push(tl => {
-						gsap.utils.toArray(elPicture).forEach(function (picture) {
-							tl.fromTo(picture, {
-								rotation: -5,
-								x: 650,
-							}, {
-								rotation: -5,
-								x: -150
-							}, 0);
-						});
+			var screen = gsap.matchMedia();
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							endTrigger: ".links",
-							start: "0 100%",
-							end: "100% 100%",
-							scrub: .75,
-							animation: tl
-						});
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					gsap.utils.toArray(elPicture).forEach(function (picture) {
+						tl.fromTo(picture, {
+							rotation: -5,
+							x: 650,
+						}, {
+							rotation: -5,
+							x: -150
+						}, 0);
 					});
-				},
-				"(min-aspect-ratio: 1/1)": function () {
-					scroll.push(tl => {
-						elPicture.forEach(function (picture) {
-							tl.fromTo(picture, {
-								rotation: 0,
-								x: 500,
-							}, {
-								rotation: 0,
-								x: -500,
-								ease: "linear"
-							}, 0);
-						});
 
-						return tl;
-					}, tl => {
-						return ScrollTrigger.create({
-							trigger: el,
-							endTrigger: ".links",
-							start: "0 100%",
-							end: "100% 100%",
-							scrub: .75,
-							animation: tl
-						});
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						endTrigger: ".links",
+						start: "0 100%",
+						end: "100% 100%",
+						scrub: .75,
+						animation: tl
 					});
-				}
+				});
+			});
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					elPicture.forEach(function (picture) {
+						tl.fromTo(picture, {
+							rotation: 0,
+							x: 500,
+						}, {
+							rotation: 0,
+							x: -500,
+							ease: "linear"
+						}, 0);
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						endTrigger: ".links",
+						start: "0 100%",
+						end: "100% 100%",
+						scrub: .75,
+						animation: tl
+					});
+				});
 			});
 			// Move text
 			scroll.moveText({
@@ -931,18 +930,18 @@ var detailview = {
 				});
 				that.moveScroll(that.pos - 1);
 			});
-			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": function () {
-					hoverEvents([that.before], function (e) {
-						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
-							x: 20
-						});
-					}, function (e) {
-						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
-							x: 0
-						});
+			var screen = gsap.matchMedia();
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				hoverEvents([that.before], function (e) {
+					gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
+						x: 20
 					});
-				}
+				}, function (e) {
+					gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
+						x: 0
+					});
+				});
 			});
 			//
 			that.after.addEventListener("click", function (e) {
@@ -959,18 +958,18 @@ var detailview = {
 				});
 				that.moveScroll(that.pos + 1);
 			});
-			ScrollTrigger.matchMedia({
-				"(min-aspect-ratio: 1/1)": function () {
-					hoverEvents([that.after], function (e) {
-						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
-							x: -20
-						});
-					}, function (e) {
-						gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
-							x: 0
-						});
+			var screen = gsap.matchMedia();
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				hoverEvents([that.after], function (e) {
+					gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
+						x: -20
 					});
-				}
+				}, function (e) {
+					gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
+						x: 0
+					});
+				});
 			});
 			// Scroll animation
 			scroll.push(tl => {

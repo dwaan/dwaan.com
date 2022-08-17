@@ -1,7 +1,5 @@
 "use strict";
 
-import LZString from "lz-string";
-
 // API call helper
 var api = {
 	url: "./plurk-api",
@@ -15,7 +13,9 @@ var api = {
 
 			if (storage && !(url == "?fetch=logout" || url == "?request=token" || url == "?")) {
 				// Give sometime out to allow browser to process
-				setTimeout(() => {
+				setTimeout(async() => {
+					const LZString = await import('lz-string');
+
 					resolve({
 						success: true,
 						error: false,
@@ -28,9 +28,11 @@ var api = {
 
 				request = this.request[this.request.length - 1];
 				request.open('GET', this.url + url + "&include_plurks=false&minimal_user=true");
-				request.onload = () => {
+				request.onload = async () => {
 					if (request.status == 200 || request.status == 304) {
 						var result = JSON.parse(request.response);
+						const LZString = await import('lz-string');
+
 						try {
 							sessionStorage.setItem(url, LZString.compressToUTF16(JSON.stringify(result.message)));
 						} catch {

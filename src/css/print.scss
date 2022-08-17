@@ -1,8 +1,4 @@
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   https://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
+@use "sass:math";
 
 @use 'fonts';
 @use 'mixins';
@@ -106,7 +102,7 @@ $red: #FF0F1E;
 	p {
 		display: block;
 		padding: 0;
-		margin: ($pady / 2) 0 ($padx / 4);
+		margin: math.div($pady, 2) 0 math.div($padx, 4);
 	}
 
 	p,
@@ -174,7 +170,7 @@ $red: #FF0F1E;
 		margin: $pady 0;
 
 		li {
-			margin: ($pady / 3) 0;
+			margin: math.div($pady, 3) 0;
 		}
 	}
 
@@ -219,7 +215,7 @@ $red: #FF0F1E;
 
 		.print {
 			display: block;
-			transform: initial!important;
+			transform: initial !important;
 		}
 
 		.qr {
@@ -296,7 +292,7 @@ $red: #FF0F1E;
 			flex-flow: row;
 			margin: 0;
 			padding: 0;
-			gap: ($pady / 2);
+			gap: math.div($pady, 2);
 
 			li {
 				margin: 0;
@@ -339,7 +335,7 @@ $red: #FF0F1E;
 		.style-column {
 			display: flex;
 			flex-direction: row;
-			gap: ($pady / 2);
+			gap: math.div($pady, 2);
 			margin: 0 !important;
 
 			ul,
@@ -356,7 +352,7 @@ $red: #FF0F1E;
 			.meta {
 				display: flex;
 				flex-direction: column;
-				gap: ($pady / 2);
+				gap: math.div($pady, 2);
 			}
 		}
 
@@ -518,14 +514,14 @@ $red: #FF0F1E;
 				border: 1px solid $black;
 				background-color: transparent;
 				appearance: none;
-				border-radius: ($pads / 2);
+				border-radius: math.div($pads, 2);
 			}
 
 			i {
 				display: block;
 				height: 100%;
 				background-color: $black;
-				border-radius: (($pads / 2) - 2px);
+				border-radius: math.div($pads, 2) - 2px;
 			}
 		}
 
@@ -535,8 +531,8 @@ $red: #FF0F1E;
 
 			span {
 				left: initial;
-				height: ($pads - 4px);
-				border-radius: (($pads - 4px) / 2);
+				height: $pads - 4px;
+				border-radius: math.div($pads - 4px, 2);
 				width: 100px;
 				background-color: $black-gray;
 			}

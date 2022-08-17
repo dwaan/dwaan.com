@@ -1,7 +1,6 @@
 "use strict";
 
-import gsap from "gsap";
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from 'gsap/all';
 
 // Predefined scroll animation
 var scroll = {
@@ -94,7 +93,7 @@ var scroll = {
 		type = type.toLowerCase();
 		if (type == "bottom") {
 			start = "0 100%";
-			end = "100% 100%"
+			end = "100% 100%";
 		}
 
 		// Snap
