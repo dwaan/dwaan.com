@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
-		<img src="img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
+		<img src="/dwaan/img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
 		<hr />
 
 		<section id="about" class="about middle">

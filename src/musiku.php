@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail musiku">
-        <img src="img/qr/musiku.svg" width="64" height="64" alt="Dwan - Musiku Concept and Design" class="print qr" hidden />
+        <img src="/dwaan/img/qr/musiku.svg" width="64" height="64" alt="Dwan - Musiku Concept and Design" class="print qr" hidden />
         <hr />
 
         <section class="middle full snap">

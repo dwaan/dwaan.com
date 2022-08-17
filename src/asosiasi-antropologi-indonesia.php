@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail aai">
-        <img src="img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Redesign" class="print qr" hidden />
+        <img src="/dwaan/img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Redesign" class="print qr" hidden />
 
 		<hr />
 

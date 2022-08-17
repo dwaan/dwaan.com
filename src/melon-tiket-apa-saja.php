@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail tas">
-		<img src="img/qr/tas.svg" width="64" height="64" alt="Dwan - Tiket Apa Saja - Melon Indonesia" class="print qr" hidden />
+		<img src="/dwaan/img/qr/tas.svg" width="64" height="64" alt="Dwan - Tiket Apa Saja - Melon Indonesia" class="print qr" hidden />
 		<hr />
 
 		<section class="middle full snap">
