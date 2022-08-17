@@ -24,6 +24,7 @@ import views from "./views/views";
 
 removeClass(_q("html"), "no-js");
 
+gsap.config({ nullTargetWarn: false });
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Default barba hooks
@@ -50,7 +51,8 @@ barba.hooks.afterEnter(function (data) {
 
 // Initialized barba.js
 barba.init({
-	debug: true,
+	debug: false,
+	logLevel: 0,
 	transitions: transitions,
 	views: views
 });
