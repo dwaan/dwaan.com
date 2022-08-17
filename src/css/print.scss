@@ -7,25 +7,16 @@
 @use 'fonts';
 @use 'mixins';
 
-:root {
-	--padx: 20px;
-	--pady: 17.5px;
+$padx: 20px;
+$pady: 17.5px;
+$pads: 7.5px;
 
-	/* Color Schemes */
-	--black: #222;
-	--white: #fff;
-	--dark-white: #E8EAEB;
-	--yellow: #FFD700;
-	--black-75: rgba(0, 0, 0, 0.5);
-	--black-50: rgba(0, 0, 0, 0.25);
-	--black-25: rgba(0, 0, 0, 0.15);
-	--black-15: rgba(0, 0, 0, 0.05);
-	--black-gray: #111111;
-	--black-gray-light: #131313;
-	--gray-light: #C4C4C4;
-	--red: #FF0F1E;
-	--lime: #60e670;
-}
+$white: #fff;
+$black: #222;
+$black-25: rgba(0, 0, 0, 0.15);
+$black-50: rgba(0, 0, 0, 0.25);
+$black-gray: #111111;
+$red: #FF0F1E;
 
 @media print {
 
@@ -38,11 +29,11 @@
 		margin: 0;
 		padding: 0;
 		line-height: 100%;
-		color: var(--black-gray);
+		color: $black-gray;
 	}
 
 	body {
-		padding: var(--pady) var(--padx);
+		padding: $pady $padx;
 	}
 
 	*,
@@ -115,7 +106,7 @@
 	p {
 		display: block;
 		padding: 0;
-		margin: calc(var(--pady) / 2) 0 calc(var(--pady) / 4);
+		margin: ($pady / 2) 0 ($padx / 4);
 	}
 
 	p,
@@ -131,19 +122,19 @@
 	a {
 		display: inline-block;
 		text-decoration: none;
-		color: var(--red) !important;
+		color: $red  !important;
 		pointer-events: all;
 	}
 
 	h1 {
-		font-size: 4rem;
-		letter-spacing: -.2rem;
+		font-size: 2.75rem;
+		letter-spacing: -.125rem;
 		line-height: 90%;
 	}
 
 	h2 {
-		font-size: 3rem;
-		letter-spacing: -.125rem;
+		font-size: 2.25rem;
+		letter-spacing: -.05rem;
 		line-height: 95%;
 	}
 
@@ -169,7 +160,7 @@
 
 	picture {
 		display: inline-block;
-		border: 1px solid var(--black-25);
+		border: 1px solid $black-25;
 
 		img {
 			display: block;
@@ -180,10 +171,10 @@
 
 	ul,
 	ol {
-		margin: var(--pady) 0;
+		margin: $pady 0;
 
 		li {
-			margin: calc(var(--pady)/3) 0;
+			margin: ($pady / 3) 0;
 		}
 	}
 
@@ -222,8 +213,19 @@
 
 		hr {
 			border: none;
-			border-top: dashed 1px var(--black-50);
-			margin: calc(1.5 * var(--pady)) 0;
+			border-top: dashed 1px $black-50;
+			margin: (1.5 * $pady) 0;
+		}
+
+		.print {
+			display: block;
+			transform: initial!important;
+		}
+
+		.qr {
+			position: absolute;
+			top: (-64px - $pady);
+			right: 0;
 		}
 
 		.flares,
@@ -253,10 +255,10 @@
 		}
 
 		.text {
-			margin: var(--pady) 0;
+			margin: $pady 0;
 
 			>* {
-				margin: 0 var(--padx) var(--pady) 0;
+				margin: 0 $padx $pady 0;
 			}
 		}
 
@@ -264,18 +266,18 @@
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-			gap: var(--pady);
+			gap: $pady;
 		}
 
 		.style-column {
-			margin: var(--pady) 0;
+			margin: $pady 0;
 			display: flex;
 			flex-flow: row;
 			align-items: center;
 			align-content: center;
 
 			>* {
-				margin: 0 var(--padx) 0 0;
+				margin: 0 $padx 0 0;
 
 				&:last-child {
 					margin-right: 0;
@@ -294,7 +296,7 @@
 			flex-flow: row;
 			margin: 0;
 			padding: 0;
-			gap: calc(var(--pady) / 2);
+			gap: ($pady / 2);
 
 			li {
 				margin: 0;
@@ -305,9 +307,9 @@
 		.color {
 			li {
 				display: block;
-				width: var(--pady);
-				height: var(--pady);
-				border: 1px solid var(--black-50);
+				width: $pady;
+				height: $pady;
+				border: 1px solid $black-50;
 
 				&:last-child {
 					width: auto;
@@ -322,22 +324,22 @@
 			flex-flow: column;
 
 			li {
-				width: calc(3 *var(--padx));
-				height: var(--pady);
-				border-radius: 0 0 var(--pady) 0;
+				width: (3 *$padx);
+				height: $pady;
+				border-radius: 0 0 $pady 0;
 			}
 		}
 
 		.style-row {
 			display: flex;
 			flex-direction: column;
-			gap: var(--pady);
+			gap: $pady;
 		}
 
 		.style-column {
 			display: flex;
 			flex-direction: row;
-			gap: calc(var(--pady) / 2);
+			gap: ($pady / 2);
 			margin: 0 !important;
 
 			ul,
@@ -354,7 +356,7 @@
 			.meta {
 				display: flex;
 				flex-direction: column;
-				gap: calc(var(--pady) / 2);
+				gap: ($pady / 2);
 			}
 		}
 
@@ -388,6 +390,12 @@
 			}
 		}
 
+		.style-masonry {
+			>.thumbs div {
+				flex: 100%;
+			}
+		}
+
 
 		&.me {
 
@@ -408,9 +416,9 @@
 					align-items: center;
 
 					hr {
-						width: var(--padx);
-						border-top: 1px solid var(--black-50);
-						margin: 0 var(--padx);
+						width: $padx;
+						border-top: 1px solid $black-50;
+						margin: 0 $padx;
 					}
 				}
 			}
@@ -424,7 +432,7 @@
 			.text {
 				display: flex;
 				flex-direction: column;
-				gap: var(--pady);
+				gap: $pady;
 
 				>div {
 					display: flex;
@@ -433,15 +441,15 @@
 					gap: 5px;
 
 					.dot {
-						background-color: var(--black-gray);
+						background-color: $black-gray;
 						width: 5px;
 						height: 5px;
 						border-radius: 100%;
 					}
 
 					.line {
-						width: var(--padx);
-						border-top: 1px solid var(--black-50);
+						width: $padx;
+						border-top: 1px solid $black-50;
 					}
 
 					&,
@@ -457,16 +465,13 @@
 		}
 
 		&.hi {
-			.print {
-				display: block;
-			}
-
 			h1 {
 				display: none;
 			}
 		}
 
-		>hr:first-child+section {
+		>hr:first-child+section,
+		>hr:nth-child(2)+section {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
@@ -485,7 +490,7 @@
 		left: 0;
 		right: 0;
 		z-index: 99999;
-		background-color: var(--white);
+		background-color: $white;
 		display: flex;
 		align-content: center;
 		justify-content: center;
@@ -497,7 +502,7 @@
 			align-items: center;
 			justify-content: center;
 			position: fixed;
-			@include mixins.positions(initial, var(--padx), var(--pady));
+			@include mixins.positions(initial, $padx, $pady);
 			@include mixins.typography(.7rem, 400, false, .05rem);
 			text-transform: uppercase;
 			color: inherit;
@@ -509,46 +514,46 @@
 				margin: 0 0 0 20px;
 				padding: 1px;
 				width: 200px;
-				height: var(--pads);
-				border: 1px solid var(--black);
+				height: $pads;
+				border: 1px solid $black;
 				background-color: transparent;
 				appearance: none;
-				border-radius: calc(var(--pads) / 2);
+				border-radius: ($pads / 2);
 			}
 
 			i {
 				display: block;
 				height: 100%;
-				background-color: var(--black);
-				border-radius: calc((var(--pads) / 2) - 2px);
+				background-color: $black;
+				border-radius: (($pads / 2) - 2px);
 			}
 		}
 
 		.simple {
 			@include mixins.block(fixed, initial, initial);
-			bottom: var(--pady);
+			bottom: $pady;
 
 			span {
 				left: initial;
-				height: calc(var(--pads) - 4px);
-				border-radius: calc((var(--pads) - 4px) / 2);
+				height: ($pads - 4px);
+				border-radius: (($pads - 4px) / 2);
 				width: 100px;
-				background-color: var(--gray-light);
+				background-color: $black-gray;
 			}
 		}
 	}
 
 	.prototype,
 	.continue {
-		margin: var(--pady) 0;
+		margin: $pady 0;
 
 		>a:first-child {
-			color: var(--black) !important;
+			color: $black  !important;
 			font-weight: 600;
 		}
 
 		>a {
-			margin-right: var(--padx);
+			margin-right: $padx;
 		}
 	}
 

@@ -13,6 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
+        <img src="img/qr/suzuki.svg" width="64" height="64" alt="Dwan - Suzuki Website Redesign" class="print qr" hidden />
         <hr />
 
         <section class="middle full snap">

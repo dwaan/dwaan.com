@@ -13,6 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
+		<img src="img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
 		<hr />
 
 		<section id="about" class="about middle">
@@ -121,7 +122,7 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-					<img <?php if($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="auto" height="200" alt="Mr. Goat" />
+					<img <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="auto" height="200" alt="Mr. Goat" />
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">

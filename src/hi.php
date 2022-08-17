@@ -13,11 +13,12 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="hi" class="hi">
+		<img src="img/qr/say-hi.svg" width="64" height="64" alt="Dwan - Say hi!" class="print qr" hidden />
 		<hr />
 
 		<section class="middle">
 			<div class="main-text">
-				<p class="hidden print">You can email me at <u>me@dwaan.com</u> or find me in your favourite search engine with this keyword <u>@dwaan</u>.</p>
+				<h3 class="hidden print">You can email me at <u>me@dwaan.com</u> or find me in your favourite search engine with this keyword <u>@dwaan</u>.</h3>
 				<noscript>
 					<h2>Email me: <a href="mailto:me@dwaan.com?subject=Hi%20Dwan">me@dwaan.com</a></h2>
 					<h2>Find me: <a href="https://duckduckgo.com/?q=%40dwaan">@dwaan</a></h2>

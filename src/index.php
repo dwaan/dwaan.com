@@ -13,6 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="home" class="home">
+        <img src="img/qr/home.svg" width="64" height="64" alt="Dwan - Homepage" class="print qr" hidden />
         <div id="flarestart"></div>
 
         <hr />
@@ -65,7 +66,9 @@
             <div class="padding">
                 <h2 class="plurktitle">RePlurk</h2>
                 <h3 class="plurksubtitle"><a href="./replurk2021">2021</a> / <a href="./replurk2020">2020</a></h3>
-                <noscript><p>You need to enable javascript to open these pages</p></noscript>
+                <noscript>
+                    <p>You need to enable javascript to open these pages</p>
+                </noscript>
             </div>
             <div class="arrow-small">
                 <a href="./replurk2021" class="arrow">

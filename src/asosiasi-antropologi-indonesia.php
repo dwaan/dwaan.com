@@ -13,6 +13,8 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail aai">
+        <img src="img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Redesign" class="print qr" hidden />
+
 		<hr />
 
         <section class="middle full snap">
@@ -42,7 +44,7 @@
                     <picture class="pic-<?php echo $i ?>" width="auto" height="150">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="200" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>

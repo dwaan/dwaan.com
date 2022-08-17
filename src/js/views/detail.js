@@ -827,7 +827,6 @@ var detailview = {
 			that.slideshowScroll = that.querySelector("div");
 			that.slideshowParent = that.querySelector("ol");
 			that.slideshowChild = that.slideshowScroll.querySelectorAll("li");
-			console.log(that.slideshowScroll, that.slideshowScroll.querySelectorAll("li"));
 
 			that.l = gsap.utils.toArray(that.slideshowChild).length;
 			that.pos = 0;
