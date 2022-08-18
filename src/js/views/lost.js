@@ -7,89 +7,99 @@ var lostview = {
 	namespace: 'lost',
 	beforeEnter: function (data) {
 		var next = data.next.container;
-		var speed = 10,
+		var speed = reduceMotionFilter() ? 60 : 10,
 			tween = [];
 
+		// Background text
 		for (var i = 0; i < 5; i++) {
 			if (i % 2 == 0) {
 				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
 					xPercent: -50
 				}, {
-					duration: reduceMotionFilter(speed + (i * 2)),
-					repeat: -1,
+					xPercent: 0,
+					duration: speed + (i * 2),
 					ease: "linear",
-					xPercent: 0
+					repeat: -1,
 				})
 			} else {
 				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
 					xPercent: 0
 				}, {
-					duration: reduceMotionFilter(speed + (i * 2)),
-					repeat: -1,
+					xPercent: -50,
+					duration: speed + (i * 2),
 					ease: "linear",
-					xPercent: -50
+					repeat: -1,
 				})
 			}
 		}
 
 		next.querySelectorAll("#nomokeybusiness p").forEach(function (el) {
+			var screen = gsap.matchMedia();
+
 			splitText(el);
-			gsap.matchMedia({
-				"(min-aspect-ratio: 1/1)": function () {
-					var text = {
-						speed: 1
-					};
 
-					gsap.set(el.querySelectorAll(".splext"), {
-						y: 0,
-						rotation: "random(-180,180,180)"
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				var text = {
+					speed: 1
+				};
+
+				gsap.set(el.querySelectorAll(".splext"), {
+					y: 0,
+					rotation: "random(-180,180,180)"
+				});
+
+				hoverEvents([el], () => {
+					gsap.killTweensOf(text);
+
+					gsap.to(el.querySelectorAll(".splext"), {
+						rotation: 0,
+						duration: .5,
+						ease: "expo",
+						stagger: .005
 					});
 
-					hoverEvents([el], function () {
-						gsap.killTweensOf(text);
-						gsap.to(text, {
-							speed: 5,
-							duration: reduceMotionFilter(10),
-							ease: "linear",
-							onUpdate: function () {
-								for (var i = 0; i < 5; i++) {
-									tween[i].timeScale(text.speed);
-								}
+					if (reduceMotionFilter()) return;
+
+					gsap.to(text, {
+						speed: 5,
+						duration: 10,
+						ease: "linear",
+						onUpdate: () => {
+							for (var i = 0; i < 5; i++) {
+								tween[i].timeScale(text.speed);
 							}
-						});
+						}
+					});
+				}, () => {
+					gsap.killTweensOf(text);
 
-						gsap.to(el.querySelectorAll(".splext"), {
-							rotation: 0,
-							duration: reduceMotionFilter(.5),
-							ease: "expo",
-							stagger: .005
-						});
-					}, function () {
-						gsap.killTweensOf(text);
-						gsap.to(text, {
-							speed: 1,
-							duration: reduceMotionFilter(2),
-							ease: "back.out",
-							onUpdate: function () {
-								for (var i = 0; i < 5; i++) {
-									tween[i].timeScale(text.speed);
-								}
+					gsap.to(el.querySelectorAll(".splext"), {
+						rotation: "random(-180,180,180)",
+						duration: .5,
+						ease: "expo",
+						stagger: .005
+					});
+
+					if (reduceMotionFilter()) return;
+
+					gsap.to(text, {
+						speed: 1,
+						duration: 2,
+						ease: "back.out",
+						onUpdate: () => {
+							for (var i = 0; i < 5; i++) {
+								tween[i].timeScale(text.speed);
 							}
-						});
+						}
+					});
+				});
+			});
 
-						gsap.to(el.querySelectorAll(".splext"), {
-							rotation: "random(-180,180,180)",
-							duration: reduceMotionFilter(.5),
-							ease: "expo",
-							stagger: .005
-						});
-					});
-				}, "(max-aspect-ratio: 1/1)": function () {
-					gsap.set(el.querySelectorAll(".splext"), {
-						y: "random(-1,1,1)",
-						rotation: "random(-5,5,1)"
-					});
-				}
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				gsap.set(el.querySelectorAll(".splext"), {
+					y: "random(-1,1,1)",
+					rotation: "random(-5,5,1)"
+				});
 			});
 		});
 	}

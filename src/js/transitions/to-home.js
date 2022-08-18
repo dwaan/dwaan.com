@@ -17,8 +17,10 @@ let transition_to_home = {
         this.async();
     },
     enter: async function (data) {
+        var next = data.next.container;
+
         // Animate current view
-        await animate.show(data.next.container, next.querySelectorAll(".main-text, .padding, .arrow"));
+        await animate.show(next, next.querySelectorAll(".main-text > *, .padding > *, .arrow"));
 
         this.async();
     },

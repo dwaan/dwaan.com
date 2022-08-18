@@ -12,11 +12,12 @@ let transition_hi_to_home = {
         var done = this.async();
         var current = data.current.container;
         var next = data.next.container;
+        var length = reduceMotionFilter(1);
 
         var tl = gsap.timeline({
             defaults: {
-                duration: reduceMotionFilter(.75),
-                stagger: .1,
+                duration: length * 3 / 4,
+                stagger: length / 10,
                 ease: "power3.out"
             }
         });
@@ -43,7 +44,7 @@ let transition_hi_to_home = {
             fontSize: "0.8rem",
             fontWeight: 600,
             letterSpacing: "0.1em",
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "expo.inOut",
             onComplete: function () {
                 // Selectively show next elements
@@ -61,8 +62,8 @@ let transition_hi_to_home = {
             }, {
                 x: -100,
                 opacity: 0,
-                duration: reduceMotionFilter(.25),
-                stagger: .1,
+                duration: length / 4,
+                stagger: length / 10,
                 ease: "power3.in"
             }, 0);
         } else tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);

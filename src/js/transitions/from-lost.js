@@ -16,9 +16,12 @@ let transition_from_lost = {
 
         this.async();
     },
-    // Animate current view
     enter: async function (data) {
-        await animate.show(data.next.container);
+        var next = data.next.container;
+
+        // Animate current view
+        await animate.show(next, next.querySelectorAll(".main-text > *, .padding > *, .arrow"));
+
         this.async();
     },
     after: () => loader.empty(),

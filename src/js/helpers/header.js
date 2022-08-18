@@ -43,17 +43,19 @@ let header = {
 
     // Logo events animations - waving
     waving: () => {
+        var length = 1;
+
         gsap.utils.toArray('header .logo').forEach(el => {
             // Waving animation
             var lefthand = el.querySelector(".left-hand");
-            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 } });
+            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: length / 4, ease: "linear", yPercent: 20 } });
 
             waving
                 .set(lefthand, { yPercent: 0, rotation: 0 })
-                .to(lefthand, { duration: .25, rotation: 70 })
+                .to(lefthand, { duration: length / 4, rotation: 70 })
                 .fromTo(lefthand, { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
-                .to(lefthand, { duration: .25, yPercent: 0, rotation: 0 })
-                .to(lefthand, { yPercent: 0, duration: 10 });
+                .to(lefthand, { duration: length / 4, yPercent: 0, rotation: 0 })
+                .to(lefthand, { yPercent: 0, duration: length * 10 });
 
             // Hat move on hover
             var hat = el.querySelector(".hat");
@@ -63,7 +65,7 @@ let header = {
                     yPercent: -3,
                     xPercent: -1,
                     rotation: 5,
-                    duration: 1,
+                    duration: length,
                     ease: "elastic.out"
                 });
                 waving.restart();
@@ -73,17 +75,19 @@ let header = {
                     yPercent: 0,
                     xPercent: 0,
                     rotation: 0,
-                    duration: 1,
+                    duration: length,
                     ease: "elastic.out"
                 });
             });
         });
     },
 
-    // Menu events - slide
+    // Menu menu - hamburger slide
     slide: () => {
+        var length = 1;
+
         gsap.utils.toArray('header .switch').forEach(el => {
-            // Hat move on hover
+            // Menu icon move on hover
             var menu = el.querySelectorAll("svg line");
             var tl = gsap.timeline();
             tl.set(menu, {
@@ -91,27 +95,27 @@ let header = {
             });
             tl.to(menu, {
                 x: -32,
-                duration: .25,
+                duration: length / 4,
                 ease: "expo.in",
-                stagger: .1
+                stagger: length / 10
             });
             tl.fromTo(menu, {
                 x: 32
             }, {
                 x: 0,
-                duration: .25,
+                duration: length / 4,
                 ease: "expo.out",
-                stagger: .1
+                stagger: length / 10
             });
             tl.to(menu, {
-                duration: 1,
+                duration: length,
             });
-            tl.pause(.1);
+            tl.pause(length / 10);
             hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
         });
     },
 
-    // Main menu - hamburger slide
+    // Main menu - menu actions
     hamburger: () => {
         gsap.utils.toArray("header .menu").forEach(el => {
             var overlay = el.querySelector(".overlay");
@@ -212,10 +216,12 @@ let header = {
 
     moonsun: () => {
         var el = _q('.lamp');
+        var length = 1;
+
         gsap.set(el.querySelector("#ray"), { transformOrigin: "center center" })
         hoverEvents([el],
-            () => gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: 1.28, ease: "elastic.out" }),
-            () => gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: 1.28, ease: "elastic.out" })
+            () => gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: length, ease: "elastic.out" }),
+            () => gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: length, ease: "elastic.out" })
         );
     },
 
@@ -231,24 +237,26 @@ let header = {
 
     // Text switcher event
     textswitch: () => {
+        var length = 1;
+
         gsap.utils.toArray("header .size").forEach(el => {
             var tl = gsap.timeline();
             tl.to(el, {
                 scale: 1.25,
                 ease: "elastic.out",
-                duration: .5
+                duration: length / 2
             });
             tl.to(el, {
                 scale: 1.5,
                 ease: "elastic.out",
-                duration: .5
+                duration: length / 2
             });
             tl.to(el, {
                 scale: 1,
-                duration: 1
+                duration: length
             });
             tl.to(el, {
-                duration: 5
+                duration: length * 5
             });
             tl.pause();
             hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
@@ -259,7 +267,7 @@ let header = {
                     _q("html").style.fontSize = "";
                 });
             }
-            el.addEventListener("click", _ => {
+            el.addEventListener("click", () => {
                 var delta = 1;
                 var howmany = 3;
                 var fontSize = Number(window.getComputedStyle(_q("html"))['font-size'].replace('px', ''))

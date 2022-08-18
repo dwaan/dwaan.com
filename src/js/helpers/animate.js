@@ -15,7 +15,7 @@ var animate = {
 			removeClass(_q("html"), "snap");
 			tl.to(el, {
 				scrollTo: 0,
-				duration: reduceMotionFilter((scroll > 2) ? 2 : scroll),
+				duration: (scroll > 2) ? 2 : scroll,
 				ease: "expo.inOut",
 				onComplete: function () {
 					addClass(_q("html"), "snap");
@@ -90,7 +90,7 @@ var animate = {
 				// Default gsap timeline value
 				var tl = gsap.timeline({
 					defaults: {
-						duration: reduceMotionFilter(1),
+						duration: 1,
 						stagger: .1,
 						ease: "expo.out"
 					}
@@ -118,7 +118,7 @@ var animate = {
 					}
 				}, 0);
 				tl.fromTo(next.querySelectorAll("#lost h2"), {
-					x: "-=300",
+					x: reduceMotionFilter() ? 0 : "-=300",
 					opacity: 0
 				}, {
 					x: 0,
@@ -133,30 +133,30 @@ var animate = {
 				}, {
 					y: "-50%",
 					rotation: 5,
-					duration: reduceMotionFilter(4),
+					duration: 4,
 					ease: "elastic"
 				}, .5);
 				tl.to(mrmonkey, {
 					y: "-32.5%",
 					rotation: -2.5,
-					duration: reduceMotionFilter(5),
+					duration: 5,
 					ease: "expo"
 				});
 				tl.to(mrmonkey, {
 					y: "-10%",
 					rotation: 0,
-					duration: reduceMotionFilter(5),
+					duration: 5,
 					ease: "elastic.out"
 				});
 				tl.to(mrmonkey, {
 					y: "-5%",
 					rotation: 0,
-					duration: reduceMotionFilter(5),
+					duration: 5,
 					ease: "expo"
 				});
 				tl.to(mrmonkey, {
 					y: "0%",
-					duration: reduceMotionFilter(5),
+					duration: 5,
 					repeat: -1,
 					yoyo: true,
 					ease: "back.out"
@@ -213,16 +213,18 @@ var animate = {
 	},
 	hide404: function (current) {
 		return new Promise(resolve => {
+			let length = reduceMotionFilter(1);
+
 			if (current == undefined) resolve(false);
 			else {
 				// Default gsap timeline value
 				var tl = gsap.timeline({
 					defaults: {
-						duration: reduceMotionFilter(.75),
+						duration: length * 3 / 4,
 						ease: "power3.in",
 						stagger: {
 							from: "end",
-							amount: .1
+							amount: length / 10
 						}
 					}
 				});
@@ -230,16 +232,19 @@ var animate = {
 				// Hide current view
 				tl.to(current.querySelectorAll(".thumbs"), {
 					y: "-80%",
-					opacity: 0
+					opacity: 0,
+					duration: length,
 				}, ">");
 				tl.to(current.querySelectorAll("#lost h2"), {
 					x: 0,
 					opacity: 0,
-					stagger: .1
+					stagger: length / 10,
+					duration: length,
 				}, "<");
 				tl.to(current.querySelectorAll(".text"), {
 					y: "+=300",
-					opacity: 0
+					opacity: 0,
+					duration: length,
 				}, "<");
 
 				// Run loading after all animation

@@ -9,6 +9,7 @@ var hiview = {
 	beforeEnter: function (data) {
 		var next = data.next.container;
 		var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
+		var length = reduceMotionFilter(1);
 
 		var textanim = {
 			el: "",
@@ -26,19 +27,19 @@ var hiview = {
 					gsap.to(next.querySelectorAll(this.el[0]), {
 						x: split * -1,
 						ease: "power3.out",
-						duration: reduceMotionFilter(.5)
+						duration: length / 2
 					});
 					gsap.to(next.querySelectorAll(this.el[1]), {
 						x: split,
 						ease: "power3.out",
-						duration: reduceMotionFilter(.5)
+						duration: length / 2
 					});
 				} else {
 					gsap.killTweensOf(next.querySelectorAll(this.el));
 					gsap.to(next.querySelectorAll(this.el), {
 						x: split,
 						ease: "power3.out",
-						duration: reduceMotionFilter(.5)
+						duration: length / 2
 					});
 				}
 
@@ -48,21 +49,21 @@ var hiview = {
 					y: 0,
 					opacity: 1,
 					ease: "power3.out",
-					duration: reduceMotionFilter(.5)
+					duration: length / 2
 				});
 			},
 			hide: function () {
 				gsap.to(next.querySelectorAll(this.el), {
 					x: 0,
 					ease: "power3.out",
-					delay: .1,
-					duration: reduceMotionFilter(.5)
+					delay: length / 10,
+					duration: length / 2
 				});
 				gsap.to(next.querySelectorAll(this.hint), {
 					y: 50,
 					opacity: 0,
 					ease: "power3.out",
-					duration: reduceMotionFilter(.5)
+					duration: length / 2
 				});
 			}
 		}

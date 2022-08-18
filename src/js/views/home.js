@@ -61,7 +61,7 @@ let homeview = {
 					}, length / 3);
 
 					tl.fromTo(maintextchild, {
-						y: idx == 0 ? 0 : window.innerHeight * 1 / 6
+						y: idx == 0 || reduceMotionFilter() ? 0 : window.innerHeight * 1 / 6
 					}, {
 						y: 0,
 						duration: length / 3,
@@ -73,7 +73,7 @@ let homeview = {
 					}, {
 						opacity: 1,
 						ease: "expo.out",
-						duration: reduceMotionFilter(.5)
+						duration: length / 6,
 					}, (length / 3) + (length / 6));
 
 					tl.set(maintext, {
@@ -91,7 +91,7 @@ let homeview = {
 					tl.fromTo(maintextchild, {
 						y: 0
 					}, {
-						y: window.innerHeight * -1 / 6,
+						y: reduceMotionFilter() ? 0 :window.innerHeight * -1 / 6,
 						duration: length / 3,
 						ease: "linear",
 					}, length * 2 / 3);

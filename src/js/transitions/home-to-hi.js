@@ -11,6 +11,7 @@ let transition_home_to_hi = {
         var done = this.async();
         var current = data.current.container;
         var next = data.next.container;
+        var length = reduceMotionFilter(1);
 
         // Display loading
         await loader.init(true);
@@ -18,8 +19,8 @@ let transition_home_to_hi = {
 
         var tl = gsap.timeline({
             defaults: {
-                duration: reduceMotionFilter(.75),
-                stagger: .1,
+                duration: length * 3 / 4,
+                stagger: length / 10,
                 ease: "power3.out"
             }
         });
@@ -46,7 +47,7 @@ let transition_home_to_hi = {
             fontSize: "5.75rem",
             fontWeight: 700,
             letterSpacing: "-0.06em",
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "expo.inOut",
             onComplete: function () {
                 // Show next container
@@ -95,11 +96,11 @@ let transition_home_to_hi = {
             }, {
                 x: 0,
                 opacity: 1,
-                duration: reduceMotionFilter(.5),
+                duration: length / 2,
                 ease: "power3.out",
                 stagger: {
                     from: "start",
-                    amount: .1
+                    amount: length / 10
                 },
                 onComplete: () => done()
             });
