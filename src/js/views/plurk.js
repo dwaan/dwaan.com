@@ -1,12 +1,11 @@
 "use strict";
 
-import gsap from "gsap";
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from "gsap/all";
 import api from "../helpers/api";
 import scroll from "../helpers/scroll";
 import darkmode from "../helpers/darkmode";
 import animate from "../helpers/animate";
-import { _q, _qAll, hasClass, plural, monthNames, animateNumber, datediff, pluralinwords } from '../helpers/helper';
+import { _q, _qAll, hasClass, plural, monthNames, animateNumber, datediff, pluralinwords, reduceMotionFilter } from '../helpers/helper';
 
 /*
 	Simple span element object:

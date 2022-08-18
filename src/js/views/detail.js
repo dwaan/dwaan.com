@@ -2,7 +2,7 @@
 
 import { gsap, ScrollTrigger } from 'gsap/all';
 import scroll from "../helpers/scroll";
-import { _q, _qAll, hoverEvents } from '../helpers/helper';
+import { _q, _qAll, hoverEvents, reduceMotionFilter } from '../helpers/helper';
 
 var detailview = {
 	namespace: 'detail',

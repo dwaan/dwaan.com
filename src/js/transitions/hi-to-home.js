@@ -3,6 +3,7 @@
 import gsap from 'gsap';
 import loader from '../helpers/loader';
 import animate from '../helpers/animate';
+import { reduceMotionFilter } from './helpers/helper';
 
 let transition_hi_to_home = {
     name: 'hi-to-home',

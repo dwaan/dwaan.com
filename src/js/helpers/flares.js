@@ -1,7 +1,7 @@
 "use strict";
 
 import gsap from "gsap";
-import { _qAll } from "./helper";
+import { _qAll, reduceMotionFilter } from "./helper";
 
 var screenhorizontal = window.matchMedia('(min-aspect-ratio: 1/1)').matches;
 var flare = {

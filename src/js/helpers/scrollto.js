@@ -1,7 +1,7 @@
 "use strict";
 
 import gsap from "gsap";
-import { _q, addClass, removeClass } from "./helper.js";
+import { _q, addClass, removeClass, reduceMotionFilter } from "./helper";
 
 /**
  * A script to scroll to hash address from element href attribute

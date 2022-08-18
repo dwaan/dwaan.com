@@ -1,9 +1,8 @@
 "use strict";
 
-import gsap from "gsap";
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from "gsap/all";
 import scroll from "../helpers/scroll";
-import { addClass, removeClass, hoverEvents } from "../helpers/helper";
+import { addClass, removeClass, hoverEvents, reduceMotionFilter } from "../helpers/helper";
 
 var meview = {
 	namespace: 'me',
