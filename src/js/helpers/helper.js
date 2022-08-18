@@ -469,7 +469,7 @@ function parallax(callback) {
 }
 
 // Reduce motion
-var reduceMotion = true;
+var reduceMotion = false;
 function reduceMotionFilter(number) {
 	if (number == undefined) return reduceMotion;
 	else return reduceMotion ? .125 : number;
@@ -531,6 +531,7 @@ export {
 	isTouchSupported,
 	parallax,
 	konami,
+	reduceMotion,
 	reduceMotionFilter,
 	toggleReduceMotion
 };

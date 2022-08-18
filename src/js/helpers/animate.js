@@ -26,15 +26,20 @@ var animate = {
 
 		return tl;
 	},
-	show: function (next, nonsticky = false, footer = true) {
+	show: function (next, nonsticky, footer) {
 		return new Promise(resolve => {
 			if (next == undefined) resolve(false);
 			else {
+				var length = reduceMotionFilter(1);
+
+				if (footer === undefined) footer = true;
+				if (nonsticky === undefined) nonsticky = false;
+
 				// Default gsap timeline value
 				var tl = gsap.timeline({
 					defaults: {
-						duration: reduceMotionFilter(1.28),
-						stagger: .16,
+						duration: length * 5 / 4,
+						stagger: length / 8,
 						ease: "expo.out"
 					}
 				});
@@ -45,10 +50,11 @@ var animate = {
 				// Show current view
 				var els = next.querySelectorAll(".flares:not(.side)")
 				if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
-				if (!nonsticky) nonsticky = next.querySelector("section.middle > *:not(.arrow-big, .year)");
+				if (!nonsticky) nonsticky = next.querySelectorAll(".main-text > *:not(.hidden), .arrow-big .arrow");
+				console.log(nonsticky);
 
 				// Animate text
-				tl.fromTo([nonsticky, els], {
+				tl.fromTo(nonsticky, {
 					y: "+=200px",
 					opacity: 0
 				}, {
@@ -58,7 +64,15 @@ var animate = {
 						if (nonsticky) { removeStyle(nonsticky) }
 					}
 				}, 0);
-				// Animate flare
+				// Animate footer or flares
+				tl.fromTo(els, {
+					y: "+=200px",
+					opacity: 0
+				}, {
+					y: "-=200px",
+					opacity: 1
+				}, "<+=" + length / 8);
+				// Animate flares
 				tl.fromTo(next.querySelectorAll(".flares.side > img"), {
 					x: "+=" + (window.innerWidth * 1 / 2) + "px",
 					opacity: 0
@@ -69,7 +83,7 @@ var animate = {
 				// Run done after all all animation complete
 				tl.set(next, {
 					onComplete: () => resolve(true)
-				});
+				}, ">-" + length / 8);
 			}
 		});
 	},

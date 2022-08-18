@@ -28,7 +28,6 @@ let transition_once_default = {
         loader.empty();
         this.async();
     },
-    // leave: () => true,
     before: async function (data) {
         // Hide current view
         await animate.hide(data.current.container);
@@ -49,7 +48,7 @@ let transition_once_default = {
         if (current.querySelector(".arrow-big")) current.querySelector(".arrow-big").style.opacity = 0;
 
         // Animate current view
-        await animate.show(next, next.querySelectorAll(".main-text > *, .padding > *, .arrow"));
+        await animate.show(next);
 
         this.async();
     },

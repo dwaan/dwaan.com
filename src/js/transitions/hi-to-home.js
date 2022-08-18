@@ -95,7 +95,7 @@ let transition_hi_to_home = {
         var next = data.next.container;
 
         // Animate current view
-        await animate.show(next, next.querySelectorAll(".main-text > *, .arrow"), false);
+        await animate.show(next, false, false);
 
         this.async();
     },
