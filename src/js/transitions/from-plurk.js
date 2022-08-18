@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import loader from '../helpers/loader';
 import animate from '../helpers/animate';
 import darkmode from '../helpers/darkmode';
-import { reduceMotionFilter } from './helpers/helper';
+import { reduceMotionFilter } from '../helpers/helper';
 
 let transition_from_plurk = {
     name: 'from-plurk',

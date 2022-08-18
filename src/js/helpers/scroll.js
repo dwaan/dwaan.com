@@ -1,6 +1,7 @@
 "use strict";
 
-import { gsap, ScrollTrigger, reduceMotionFilter } from 'gsap/all';
+import { gsap, ScrollTrigger } from 'gsap/all';
+import { reduceMotionFilter } from './helper';
 
 // Predefined scroll animation
 var scroll = {
