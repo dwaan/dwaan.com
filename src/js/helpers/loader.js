@@ -1,7 +1,7 @@
 "use strict";
 
 import gsap from 'gsap';
-import { _q, _qAll, waitForImg, reduceMotionFilter } from './helper.js';
+import { _q, _qAll, waitForImg, reduceMotionFilter } from './helper';
 
 // Loader functions
 var loader = {
