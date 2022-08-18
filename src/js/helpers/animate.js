@@ -11,11 +11,12 @@ var animate = {
 
 		// Scroll to top
 		var scroll = top / (window.outerHeight * 2);
+		var speed = reduceMotionFilter() ? .5 : 2;
 		if (scroll > 0) {
 			removeClass(_q("html"), "snap");
 			tl.to(el, {
 				scrollTo: 0,
-				duration: (scroll > 2) ? 2 : scroll,
+				duration: (scroll > speed) ? speed : scroll,
 				ease: "expo.inOut",
 				onComplete: function () {
 					addClass(_q("html"), "snap");

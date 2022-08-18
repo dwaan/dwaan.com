@@ -33,6 +33,7 @@ var loader = {
 	show: async function (els) {
 		// Wait for all images to be loaded
 		let _percent = { score: 0 };
+		let length = reduceMotionFilter(1);
 
 		// Animate the loading
 		gsap.fromTo(this.el.children, {
@@ -40,8 +41,7 @@ var loader = {
 		}, {
 			opacity: 1,
 			ease: "expo",
-			delay: .25,
-			duration: reduceMotionFilter(.5),
+			duration: length / 2,
 		});
 
 		// Calling loading images function
@@ -50,7 +50,7 @@ var loader = {
 				gsap.to(_percent, {
 					score: percent,
 					roundProps: "score",
-					duration: reduceMotionFilter(.1),
+					duration: length / 10,
 					onUpdate: () => {
 						this.update(_percent.score);
 					}

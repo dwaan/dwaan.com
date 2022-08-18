@@ -27,7 +27,12 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 // Global default barba hooks, abort any plurk api calls
 barba.hooks.before(_ => api.abort());
 // Destroy prev scroll
-barba.hooks.beforeEnter(_ => scroll.destroy());
+barba.hooks.beforeEnter(() => {
+	scroll.destroy();
+
+	// Scroll to top
+	window.scrollTo(0, 0);
+});
 barba.hooks.afterEnter(data => {
 	// Read more
 	data.next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));

@@ -11,12 +11,12 @@ let transition_home_to_detail = {
         var current = data.current.container;
         var next = data.next.container;
 
-        // Hide current view
-        await animate.hide(current);
+        // Hide current view but don't scroll up
+        await animate.hide(current, current.querySelectorAll(".arrow"), false);
 
         // Image loading logic
         await loader.init(true);
-        await loader.show(next, current.querySelectorAll(".arrow"), false);
+        await loader.show(next);
 
         this.async();
     },
@@ -27,8 +27,8 @@ let transition_home_to_detail = {
         // Reset current element values
         next.style.position = "fixed";
         next.style.opacity = 1;
-        current.style.position = "fixed";
-        current.style.opacity = 0;
+        // Hide current only after next view appear
+        current.style.display = "none";
 
         // Animate Next view
         await animate.show(next, next.querySelectorAll(".arrow, .year"));

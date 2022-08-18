@@ -22,7 +22,7 @@ var scroll = {
 		var that = this;
 
 		gsap.utils.toArray(elements).forEach(function (element, index) {
-			var y = delta + (15 * index);
+			var y = reduceMotionFilter() ? 0 : delta + (15 * index);
 			var trigger = (params.trigger) ? params.trigger : element.parentNode;
 			if (!move) y = 0;
 
@@ -54,7 +54,7 @@ var scroll = {
 				trigger: trigger,
 				start: "0 " + position,
 				end: "+=175 " + position,
-				scrub: 2,
+				scrub: reduceMotionFilter() ? true : 2,
 				animation: that.tl[that.l]
 			}));
 		});
@@ -67,14 +67,13 @@ var scroll = {
 
 		if (!position) position = "85%";
 		gsap.utils.toArray(elements).forEach(function (element) {
-			var y = gsap.utils.random(250, 500, 5) + "px";
+			var y = reduceMotionFilter() ? 0 : gsap.utils.random(250, 500, 5) + "px";
 
 			that.l = that.tl.push(gsap.timeline()) - 1;
 			that.tl[that.l].fromTo(element, {
 				y: y
 			}, {
-				y: 0,
-				duration: reduceMotionFilter(.75),
+				y: 0
 			}, 0);
 
 			that.st.push(ScrollTrigger.create({
@@ -113,7 +112,7 @@ var scroll = {
 					duration = value / 2;
 					return final;
 				},
-				duration: reduceMotionFilter(duration),
+				duration: duration,
 				delay: 0,
 				ease: "expo.inOut"
 			}
@@ -152,9 +151,6 @@ var scroll = {
 		this.st = [];
 		//
 		this.l = 0;
-
-		// Scroll to top
-		window.scrollTo(0, 0);
 	}
 }
 

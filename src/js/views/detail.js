@@ -38,7 +38,7 @@ var detailview = {
 						trigger: el.querySelectorAll(".thumbs"),
 						start: "0 100%",
 						end: "50% 100%",
-						scrub: 5,
+						scrub: reduceMotionFilter() ? true :5,
 						animation: tl
 					});
 				});
@@ -59,7 +59,7 @@ var detailview = {
 						trigger: el,
 						start: "0 100%",
 						end: "100% 0",
-						scrub: 1,
+						scrub: reduceMotionFilter() ? true :1,
 						animation: tl
 					});
 				});
@@ -84,7 +84,7 @@ var detailview = {
 							x: index * 20 + "%",
 							y: index * 20 + "%",
 							ease: "power1.out",
-							duration: reduceMotionFilter(1)
+							duration: 1
 						}, 0);
 
 						tl.to(picture, {
@@ -92,7 +92,7 @@ var detailview = {
 							x: (index + 1) * -30 + "%",
 							y: (index + 1) * 7.5 + "%",
 							ease: "power1.in",
-							duration: reduceMotionFilter(1)
+							duration: 1
 						}, 1);
 
 						tl.fromTo(picture, {
@@ -100,7 +100,7 @@ var detailview = {
 							ease: "expo.in"
 						}, {
 							opacity: 1,
-							duration: reduceMotionFilter(.1)
+							duration: .1
 						}, .05);
 					});
 
@@ -110,7 +110,7 @@ var detailview = {
 						trigger: el,
 						start: "0 100%",
 						end: "100% 0",
-						scrub: 1,
+						scrub: reduceMotionFilter() ? true : 1,
 						animation: tl
 					});
 				});
@@ -128,7 +128,7 @@ var detailview = {
 							x: index * -10 + "%",
 							y: index * -80 + "%",
 							ease: "power1.inOut",
-							duration: reduceMotionFilter(1)
+							duration: 1
 						}, 0);
 
 						tl.fromTo(picture, {
@@ -136,7 +136,7 @@ var detailview = {
 							ease: "expo.in"
 						}, {
 							opacity: 1,
-							duration: reduceMotionFilter(.1)
+							duration: .1
 						}, .05);
 					});
 
@@ -146,7 +146,7 @@ var detailview = {
 						trigger: el,
 						start: "0 100%",
 						end: "100% 0",
-						scrub: 1,
+						scrub: reduceMotionFilter() ? true : 1,
 						animation: tl
 					});
 				});
@@ -174,7 +174,7 @@ var detailview = {
 						trigger: el.querySelector(".thumbs"),
 						start: "0 80%",
 						end: "100% 80%",
-						scrub: 3,
+						scrub: reduceMotionFilter() ? true : 3,
 						animation: tl
 					});
 				});
@@ -194,7 +194,7 @@ var detailview = {
 						trigger: el,
 						start: "50% 100%",
 						end: "100% 100%",
-						scrub: 3,
+						scrub: reduceMotionFilter() ? true : 3,
 						animation: tl
 					});
 				});
@@ -243,7 +243,7 @@ var detailview = {
 						start: "50% 75%",
 						end: "100% 75%",
 						animation: tl,
-						scrub: 1
+						scrub: reduceMotionFilter() ? true : 1
 					});
 				});
 			});
@@ -258,7 +258,7 @@ var detailview = {
 						top: "40%",
 						left: "10%",
 						rotation: -30,
-						duration: reduceMotionFilter(1),
+						duration: 1,
 						ease: "expo.out"
 					}, 0);
 
@@ -270,7 +270,7 @@ var detailview = {
 						top: "25%",
 						left: "50%",
 						rotation: -10,
-						duration: reduceMotionFilter(1),
+						duration: 1,
 						ease: "expo.out"
 					}, .064);
 
@@ -280,7 +280,7 @@ var detailview = {
 						trigger: el,
 						start: "-25% 50%",
 						end: "50% 50%",
-						scrub: 1,
+						scrub: reduceMotionFilter() ? true : 1,
 						animation: tl
 					});
 				});
@@ -301,7 +301,7 @@ var detailview = {
 							y: idx == 1 ? 0 : "10%",
 							x: idx == 1 ? "-50%" : idx == 2 ? "-55%" : "-45%",
 							rotation: idx == 1 ? 0 : idx == 2 ? -12.5 : 12.5,
-							duration: reduceMotionFilter(1)
+							duration: 1
 						}, (idx - 1) * .064);
 					}
 
@@ -312,7 +312,7 @@ var detailview = {
 						start: "50% 100%",
 						end: "100% 100%",
 						animation: tl,
-						scrub: 1.25
+						scrub: reduceMotionFilter() ? true : 1.25
 					});
 				});
 			});
@@ -327,7 +327,7 @@ var detailview = {
 							top: (4.5 - (idx * 5 / 6)) * 10 + "%",
 							left: (2.25 + (idx * 5 / 4)) * 10 + "%",
 							rotation: (idx - 2) * 5,
-							duration: reduceMotionFilter(1),
+							duration: 1,
 							ease: "expo"
 						}, (idx - 1) * .064);
 					}
@@ -338,7 +338,7 @@ var detailview = {
 						trigger: el.querySelectorAll(".thumbs"),
 						start: "-25% 50%",
 						end: "50% 50%",
-						scrub: 2,
+						scrub: reduceMotionFilter() ? true : 2,
 						animation: tl
 					});
 				});
@@ -374,7 +374,7 @@ var detailview = {
 						start: "0 100%-=100px",
 						end: "100% 100%-=100px",
 						animation: tl,
-						scrub: 1
+						scrub: reduceMotionFilter() ? true : 1
 					});
 				});
 			});
@@ -399,7 +399,7 @@ var detailview = {
 						trigger: el.querySelectorAll(".thumbs"),
 						start: "-50% 50%",
 						end: "50% 50%",
-						scrub: 1,
+						scrub: reduceMotionFilter() ? true : 1,
 						animation: tl
 					});
 				});
@@ -416,7 +416,7 @@ var detailview = {
 			ScrollTrigger.defaults({
 				start: "0 100%",
 				end: "100% 0",
-				scrub: .75
+				scrub: reduceMotionFilter() ? true : .75
 			});
 			// Move thumbnails
 			var screen = gsap.matchMedia();
@@ -445,7 +445,7 @@ var detailview = {
 					}, {
 						x: (el.offsetWidth - thumbs.offsetWidth),
 						ease: "linear",
-						duration: reduceMotionFilter(5),
+						duration: 5,
 					}, 0);
 
 					return tl;
@@ -486,7 +486,7 @@ var detailview = {
 					x: 0,
 					y: 0,
 					rotation: 0,
-					duration: reduceMotionFilter(1),
+					duration: 1,
 					ease: "expo.out"
 				}, 0);
 
@@ -498,7 +498,7 @@ var detailview = {
 						from: "start",
 						amount: .2
 					},
-					duration: reduceMotionFilter(.5),
+					duration: .5,
 					ease: "expo.out"
 				}, 0);
 
@@ -508,7 +508,7 @@ var detailview = {
 					trigger: el,
 					start: (window.innerHeight * 1 / 4) + " " + (window.innerHeight * 3 / 4),
 					end: (window.innerHeight * 3 / 4) + " " + (window.innerHeight * 3 / 4),
-					scrub: 1,
+					scrub: reduceMotionFilter() ? true : 1,
 					animation: tl
 				});
 			});
@@ -587,7 +587,7 @@ var detailview = {
 						trigger: el,
 						start: "-25% 100%",
 						end: "100% 50%",
-						scrub: .75,
+						scrub: reduceMotionFilter() ? true : .75,
 						animation: tl
 					});
 				});
@@ -607,7 +607,7 @@ var detailview = {
 						trigger: el,
 						start: "-25% 100%",
 						end: "100% 50%",
-						scrub: true,
+						scrub: reduceMotionFilter() ? true : true,
 						animation: tl
 					});
 				});
@@ -653,7 +653,7 @@ var detailview = {
 						trigger: el,
 						start: "-25% 100%",
 						end: "100% 50%",
-						scrub: gsap.utils.random(75, 125, 5) / 100,
+						scrub: reduceMotionFilter() ? true : gsap.utils.random(75, 125, 5) / 100,
 						animation: tl
 					});
 				});
@@ -698,7 +698,7 @@ var detailview = {
 						endTrigger: ".links",
 						start: "0 100%",
 						end: "100% 100%",
-						scrub: .75,
+						scrub: reduceMotionFilter() ? true : .75,
 						animation: tl
 					});
 				});
@@ -723,7 +723,7 @@ var detailview = {
 						endTrigger: ".links",
 						start: "0 100%",
 						end: "100% 100%",
-						scrub: .75,
+						scrub: reduceMotionFilter() ? true : .75,
 						animation: tl
 					});
 				});
@@ -756,7 +756,7 @@ var detailview = {
 					trigger: el,
 					start: "0 100%",
 					end: "100% 0",
-					scrub: .75,
+					scrub: reduceMotionFilter() ? true : .75,
 					animation: tl
 				});
 			});
@@ -789,7 +789,7 @@ var detailview = {
 					trigger: el,
 					start: "0 100%",
 					end: "100% 0",
-					scrub: true,
+					scrub: reduceMotionFilter() ? true : true,
 					animation: tl
 				});
 			});
@@ -809,7 +809,7 @@ var detailview = {
 						trigger: el,
 						start: "0 100%",
 						end: "100% 0",
-						scrub: .5,
+						scrub: reduceMotionFilter() ? true : .5,
 						animation: tl
 					});
 				});
@@ -874,11 +874,11 @@ var detailview = {
 			that.navigationHide = function () {
 				that.checkPos();
 				gsap.to(that.before, {
-					duration: reduceMotionFilter(.25),
+					duration: .25,
 					opacity: (that.pos_start) ? .15 : 1
 				});
 				gsap.to(that.after, {
-					duration: reduceMotionFilter(.25),
+					duration: .25,
 					opacity: (that.pos_end) ? .15 : 1
 				});
 			}
@@ -908,7 +908,7 @@ var detailview = {
 				else this.pos = _pos;
 
 				gsap.to(this.slideshowScroll, {
-					duration: reduceMotionFilter(2),
+					duration: 2,
 					scrollTo: {
 						x: this.pos * this.slideshowChild[this.pos].offsetWidth
 					},
@@ -922,10 +922,10 @@ var detailview = {
 						ease: "expo"
 					}
 				}).to(this, {
-					duration: reduceMotionFilter(.25),
+					duration: .25,
 					marginLeft: -25
 				}).to(this, {
-					duration: reduceMotionFilter(.25),
+					duration: .25,
 					marginLeft: 0
 				});
 				that.moveScroll(that.pos - 1);
@@ -950,10 +950,10 @@ var detailview = {
 						ease: "expo"
 					}
 				}).to(this, {
-					duration: reduceMotionFilter(.25),
+					duration: .25,
 					marginRight: -25
 				}).to(this, {
-					duration: reduceMotionFilter(.25),
+					duration: .25,
 					marginRight: 0
 				});
 				that.moveScroll(that.pos + 1);
@@ -988,7 +988,7 @@ var detailview = {
 					trigger: that,
 					start: "12.5% 90%",
 					end: "50% 90%",
-					scrub: 1,
+					scrub: reduceMotionFilter() ? true : 1,
 					animation: tl
 				});
 			});
@@ -1013,7 +1013,7 @@ var detailview = {
 					trigger: that.before,
 					start: "0 90%",
 					end: (window.innerHeight / 5) + " 90%",
-					scrub: 1,
+					scrub: reduceMotionFilter() ? true :1,
 					animation: tl
 				});
 			});
@@ -1034,7 +1034,7 @@ var detailview = {
 					trigger: el,
 					start: "0 90%",
 					end: "50% 90%",
-					scrub: .75,
+					scrub: reduceMotionFilter() ? true :.75,
 					animation: tl
 				});
 			});
@@ -1063,6 +1063,7 @@ var detailview = {
 		});
 	},
 	beforeLeave: () => {
+		// Remove event listener from slideshow
 		gsap.utils.toArray(".style-slideshow").forEach(slideshow => {
 			window.removeEventListener("resize", slideshow.fixedSize);
 		});

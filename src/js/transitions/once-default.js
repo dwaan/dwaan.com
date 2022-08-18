@@ -41,6 +41,7 @@ let transition_once_default = {
     },
     enter: async function (data) {
         var current = data.current.container;
+        var next = data.next.container;
 
         // Reset current element values
         current.style.position = "fixed";
@@ -48,7 +49,8 @@ let transition_once_default = {
         if (current.querySelector(".arrow-big")) current.querySelector(".arrow-big").style.opacity = 0;
 
         // Animate current view
-        await animate.show(data.next.container);
+        await animate.show(next, next.querySelectorAll(".main-text > *, .padding > *, .arrow"));
+
         this.async();
     },
     after: () => loader.empty()
