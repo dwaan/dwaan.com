@@ -18,16 +18,11 @@ let transition_to_home = {
     },
     enter: async function (data) {
         // Animate current view
-        animate.show(data.next.container, next.querySelectorAll(".main-text, .padding, .arrow"));
+        await animate.show(data.next.container, next.querySelectorAll(".main-text, .padding, .arrow"));
 
         this.async();
     },
-    after: function () {
-        // Remove loading
-        loader.empty();
-
-        return true;
-    },
+    after: () => loader.empty(),
     to: {
         namespace: ['home']
     }

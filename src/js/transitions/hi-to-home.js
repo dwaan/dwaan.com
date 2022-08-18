@@ -65,9 +65,8 @@ let transition_hi_to_home = {
                 stagger: .1,
                 ease: "power3.in"
             }, 0);
-        } else {
-            tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);
-        }
+        } else tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);
+
         // Show next container
         tl.set(current, {
             position: "fixed",
@@ -95,7 +94,7 @@ let transition_hi_to_home = {
         var next = data.next.container;
 
         // Animate current view
-        await animate.show(next, next.querySelectorAll(".main-text, .arrow"), false);
+        await animate.show(next, next.querySelectorAll(".main-text > *, .arrow"), false);
 
         this.async();
     },

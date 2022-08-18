@@ -16,13 +16,13 @@ let transition_once_default = {
         // Loading logic
         await loader.show(next);
 
+        // Initialized header
+        header.init();
+
         // Animate current view and header
         if (data.next.namespace == "lost") await animate.show404(next);
         else if (data.next.namespace.includes("replurk")) await animate.showinstant(next);
         else await animate.show(next);
-
-        // Initialized header
-        header.init();
 
         // Empty loading
         loader.empty();

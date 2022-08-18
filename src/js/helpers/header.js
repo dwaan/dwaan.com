@@ -18,8 +18,11 @@ let header = {
 
     // Animate header showing
     show: () => {
+        var length = reduceMotionFilter(1.28);
+
         gsap.set("header", {
-            opacity: 1
+            opacity: 1,
+            pointerEvents: "none"
         });
 
         gsap.fromTo("header .logo, header .size, header .lamp, header .switch", {
@@ -28,10 +31,13 @@ let header = {
         }, {
             y: 0,
             opacity: 1,
-            duration: reduceMotionFilter(1.28),
+            duration: length,
             ease: "expo.out",
-            delay: .24,
-            stagger: .16
+            delay: length / 5,
+            stagger: length / 5,
+            onComplete: () => gsap.set("header", {
+                pointerEvents: ""
+            })
         });
     },
 
@@ -40,14 +46,14 @@ let header = {
         gsap.utils.toArray('header .logo').forEach(el => {
             // Waving animation
             var lefthand = el.querySelector(".left-hand");
-            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: reduceMotionFilter(.25), ease: "linear", yPercent: 20 } });
+            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 } });
 
             waving
                 .set(lefthand, { yPercent: 0, rotation: 0 })
-                .to(lefthand, { duration: reduceMotionFilter(.25), rotation: 70 })
+                .to(lefthand, { duration: .25, rotation: 70 })
                 .fromTo(lefthand, { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
-                .to(lefthand, { duration: reduceMotionFilter(.25), yPercent: 0, rotation: 0 })
-                .to(lefthand, { yPercent: 0, duration: reduceMotionFilter(10) });
+                .to(lefthand, { duration: .25, yPercent: 0, rotation: 0 })
+                .to(lefthand, { yPercent: 0, duration: 10 });
 
             // Hat move on hover
             var hat = el.querySelector(".hat");
@@ -57,7 +63,7 @@ let header = {
                     yPercent: -3,
                     xPercent: -1,
                     rotation: 5,
-                    duration: reduceMotionFilter(1),
+                    duration: 1,
                     ease: "elastic.out"
                 });
                 waving.restart();
@@ -67,7 +73,7 @@ let header = {
                     yPercent: 0,
                     xPercent: 0,
                     rotation: 0,
-                    duration: reduceMotionFilter(1),
+                    duration: 1,
                     ease: "elastic.out"
                 });
             });
@@ -85,7 +91,7 @@ let header = {
             });
             tl.to(menu, {
                 x: -32,
-                duration: reduceMotionFilter(.25),
+                duration: .25,
                 ease: "expo.in",
                 stagger: .1
             });
@@ -93,12 +99,12 @@ let header = {
                 x: 32
             }, {
                 x: 0,
-                duration: reduceMotionFilter(.25),
+                duration: .25,
                 ease: "expo.out",
                 stagger: .1
             });
             tl.to(menu, {
-                duration: reduceMotionFilter(1)
+                duration: 1,
             });
             tl.pause(.1);
             hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
@@ -110,95 +116,95 @@ let header = {
         gsap.utils.toArray("header .menu").forEach(el => {
             var overlay = el.querySelector(".overlay");
             var items = el.querySelector(".items");
+            var length = reduceMotionFilter(1);
 
             // Show menu animation
             el.querySelector(".switch").addEventListener("click", e => {
                 e.preventDefault();
 
-                if (!gsap.isTweening(items)) {
-                    // Animate main element
-                    gsap.to("main .middle", {
-                        left: "-=100",
-                        duration: reduceMotionFilter(.75),
-                        ease: "power3.out"
-                    });
-                    gsap.to("main .middle > .text", {
-                        left: "-=50",
-                        duration: reduceMotionFilter(.75),
-                        ease: "power3.out"
-                    });
-                    gsap.to("main .links, main .flares", {
-                        left: "-=25",
-                        duration: reduceMotionFilter(.75),
-                        ease: "power3.out"
-                    });
-                    // Animate overlay background
-                    gsap.to(overlay, {
-                        backgroundColor: "rgba(0,0,0,.5)",
-                        duration: reduceMotionFilter(1),
-                        ease: "power3.out"
-                    });
-                    // Animate menu showing
-                    gsap.set(overlay, {
-                        display: "flex",
-                        onComplete: () => {
-                            gsap.fromTo(items.querySelectorAll("li"), {
-                                x: 50,
-                                opacity: 0
-                            }, {
-                                x: 0,
-                                opacity: 1,
-                                ease: "expo.out",
-                                delay: .25,
-                                stagger: .1,
-                                duration: reduceMotionFilter(.65)
-                            });
+                // Don't animate when it still animating
+                if (gsap.isTweening(items)) return;
 
-                            gsap.fromTo(items, {
-                                x: "100%"
-                            }, {
-                                x: 0,
-                                ease: "power3.out",
-                                duration: reduceMotionFilter(.75)
-                            });
-                        }
-                    });
-                }
+                // Animate main element
+                gsap.to("main .middle", {
+                    left: "-=100",
+                    ease: "power3.out",
+                    duration: length * 3 / 4
+                });
+                gsap.to("main .middle > .text", {
+                    left: "-=50",
+                    ease: "power3.out",
+                    duration: length * 3 / 4
+                });
+                gsap.to("main .links, main .flares", {
+                    left: "-=25",
+                    ease: "power3.out",
+                    duration: length * 3 / 4
+                });
+                // Animate overlay background
+                gsap.to(overlay, {
+                    backgroundColor: "rgba(0,0,0,.5)",
+                    ease: "power3.out",
+                    duration: length
+                });
+                // Animate menu showing
+                gsap.set(overlay, {
+                    display: "flex",
+                    onComplete: () => {
+                        gsap.fromTo(items.querySelectorAll("li"), {
+                            x: 50,
+                            opacity: 0
+                        }, {
+                            x: 0,
+                            opacity: 1,
+                            ease: "expo.out",
+                            delay: length / 4,
+                            stagger: length / 10,
+                            duration: length * 13 / 20
+                        });
+
+                        gsap.fromTo(items, {
+                            x: "100%"
+                        }, {
+                            x: 0,
+                            ease: "power3.out",
+                            duration: length * 3 / 4
+                        });
+                    }
+                });
             });
 
             // Hide menu animation
             el.querySelectorAll(".overlay, li a, .close").forEach(link => {
                 link.addEventListener("click", function (e) {
                     e.preventDefault();
-                    if (this != e.target) return false;
 
-                    if (!gsap.isTweening(items)) {
-                        // Animate main element
-                        gsap.to("main .middle, main .middle > .text, main .links, main .flares", {
-                            left: 0,
-                            duration: reduceMotionFilter(.75),
-                            ease: "power3.out"
-                        });
-                        // Animate overlay background
-                        gsap.to(overlay, {
-                            backgroundColor: "rgba(0,0,0,0)",
-                            duration: reduceMotionFilter(1),
-                            ease: "power3.out"
-                        });
-                        // Animate menu
-                        gsap.fromTo(items, {
-                            x: 0
-                        }, {
-                            x: "100%",
-                            ease: "power3.out",
-                            duration: reduceMotionFilter(.75),
-                            onComplete: () => {
-                                gsap.set(overlay, {
-                                    display: "none"
-                                });
-                            }
-                        });
-                    }
+                    // Don't animate when it still animating or not target
+                    if (this != e.target || gsap.isTweening(items)) return;
+
+                    // Animate main element
+                    gsap.to("main .middle, main .middle > .text, main .links, main .flares", {
+                        left: 0,
+                        duration: length * 3 / 4,
+                        ease: "power3.out"
+                    });
+                    // Animate overlay background
+                    gsap.to(overlay, {
+                        backgroundColor: "rgba(0,0,0,0)",
+                        duration: length,
+                        ease: "power3.out"
+                    });
+                    // Animate menu
+                    gsap.fromTo(items, {
+                        x: 0
+                    }, {
+                        x: "100%",
+                        ease: "power3.out",
+                        duration: length * 3 / 4,
+                        onComplete: () => gsap.set(overlay, {
+                            display: "none"
+                        })
+                    });
                 });
             });
         });
@@ -208,8 +214,8 @@ let header = {
         var el = _q('.lamp');
         gsap.set(el.querySelector("#ray"), { transformOrigin: "center center" })
         hoverEvents([el],
-            () => gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: reduceMotionFilter(1.28), ease: "elastic.out" }),
-            () => gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: reduceMotionFilter(1.28), ease: "elastic.out" })
+            () => gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: 1.28, ease: "elastic.out" }),
+            () => gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: 1.28, ease: "elastic.out" })
         );
     },
 
@@ -229,20 +235,20 @@ let header = {
             var tl = gsap.timeline();
             tl.to(el, {
                 scale: 1.25,
-                duration: reduceMotionFilter(.5),
-                ease: "elastic.out"
+                ease: "elastic.out",
+                duration: .5
             });
             tl.to(el, {
                 scale: 1.5,
-                duration: reduceMotionFilter(.5),
-                ease: "elastic.out"
+                ease: "elastic.out",
+                duration: .5
             });
             tl.to(el, {
                 scale: 1,
-                duration: reduceMotionFilter(1)
+                duration: 1
             });
             tl.to(el, {
-                duration: reduceMotionFilter(5)
+                duration: 5
             });
             tl.pause();
             hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));

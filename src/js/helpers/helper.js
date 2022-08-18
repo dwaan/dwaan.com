@@ -469,12 +469,13 @@ function parallax(callback) {
 }
 
 // Reduce motion
-var _reduceMotionFilter = false
+var reduceMotion = false;
 function reduceMotionFilter(number) {
-	return _reduceMotionFilter ? 0 : number;
+	if (number == undefined) return reduceMotion;
+	else return reduceMotion ? .5 : number;
 }
 function toggleReduceMotion() {
-	_reduceMotionFilter != _reduceMotionFilter;
+	reduceMotion != reduceMotion;
 }
 
 

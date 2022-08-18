@@ -7,16 +7,21 @@ import { hoverEvents, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 
 let homeview = {
 	namespace: 'home',
-	beforeEnter: () => {
-		document.body.style.overflow = "hidden";
-	},
-	afterEnter: data => {
+	beforeEnter: data => {
 		var next = data.next.container;
+
+		document.body.style.overflow = "hidden";
 
 		// Insert flares
 		for (var i = 1; i <= 5; i++) {
 			data.next.container.querySelector("#flares").innerHTML += '<img src="/dwaan/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
 		}
+		// Hover "Dwan" in main text
+		hoverEvents(next.querySelectorAll("#to-about"), () => {
+			flare.show(".flares .flare");
+		}, () => {
+			flare.hide();
+		});
 
 		// Scroll text
 		var els = next.querySelectorAll("section.middle");
@@ -26,7 +31,6 @@ let homeview = {
 			var screen = gsap.matchMedia();
 
 			screen.add("(max-aspect-ratio: 1/1)", () => {
-				console.log("Scroll");
 				gsap.set(maintext, {
 					position: "relative",
 					pointerEvents: "auto",
@@ -35,33 +39,34 @@ let homeview = {
 					y: "0%"
 				});
 			});
-
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				scroll.push(tl => {
+					var length = reduceMotionFilter(3);
+
 					tl.to(maintext, {
-						duration: reduceMotionFilter(3)
+						duration: length,
 					}, 0)
 
 					tl.set(maintext, {
 						position: "relative",
 						pointerEvents: "none",
 						top: "0%",
-						y: "0%"
+						y: "0%",
 					}, 0);
 
 					tl.set(maintext, {
 						position: "fixed",
 						top: "50%",
 						y: "-50%",
-					}, 1);
+					}, length / 3);
 
 					tl.fromTo(maintextchild, {
-						y: window.innerHeight * 1 / 6
+						y: idx == 0 ? 0 : window.innerHeight * 1 / 6
 					}, {
 						y: 0,
+						duration: length / 3,
 						ease: "linear",
-						duration: reduceMotionFilter(1)
-					}, 1);
+					}, length / 3);
 
 					tl.fromTo(maintext, {
 						opacity: idx == 0 ? 1 : 0
@@ -69,34 +74,34 @@ let homeview = {
 						opacity: 1,
 						ease: "expo.out",
 						duration: reduceMotionFilter(.5)
-					}, 1.5);
+					}, (length / 3) + (length / 6));
 
 					tl.set(maintext, {
 						pointerEvents: "auto",
-					}, 2);
+					}, length * 2 / 3);
 
 					tl.fromTo(maintextchild, {
 						opacity: 1
 					}, {
 						opacity: 0,
+						duration: length / 6,
 						ease: "expo.out",
-						duration: reduceMotionFilter(.5)
-					}, 2.5);
+					}, (length * 2 / 3) + (length / 6));
 
 					tl.fromTo(maintextchild, {
 						y: 0
 					}, {
 						y: window.innerHeight * -1 / 6,
+						duration: length / 3,
 						ease: "linear",
-						duration: reduceMotionFilter(1)
-					}, 2);
+					}, length * 2 / 3);
 
 					tl.set(maintext, {
 						position: "relative",
 						pointerEvents: "none",
 						top: "0%",
 						y: "0%"
-					}, 3);
+					}, length);
 
 					return tl;
 				}, tl => ScrollTrigger.create({
@@ -111,16 +116,9 @@ let homeview = {
 			// Snap
 			scroll.snap(el);
 		});
-
-		// Hover
-		hoverEvents(next.querySelectorAll("#to-about"), () => {
-			flare.show(".flares .flare");
-		}, () => {
-			flare.hide();
-		});
-
+	},
+	afterEnter: () => {
 		document.body.style.overflow = "";
-
 		console.info("Hello, my name is Dwan!");
 	}
 }
