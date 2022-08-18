@@ -326,49 +326,48 @@ class replurk {
 					opacity: 0
 				}, {
 					opacity: 1,
-					duration: 0.5,
+					duration: reduceMotionFilter(0.5),
 					ease: "power3.out"
 				}, 0);
 
 				// Scroll animation wrap section
-				gsap.matchMedia({
-					"(min-aspect-ratio: 1/1)": () => {
-						scroll.push(tl => {
-							tl.fromTo(el.children, {
-								y: window.innerHeight * 1 / 5
-							}, {
-								y: 0,
-								ease: "ease.out"
-							}, 0);
-							return tl;
-						}, tl => {
-							return ScrollTrigger.create({
-								trigger: el,
-								start: "0 100%-=100px",
-								end: "0 100%-=100px",
-								animation: tl,
-								scrub: 2
-							});
+				var screen = gsap.matchMedia();
+				screen.add("(min-aspect-ratio: 1/1)", () => {
+					scroll.push(tl => {
+						tl.fromTo(el.children, {
+							y: window.innerHeight * 1 / 5
+						}, {
+							y: 0,
+							ease: "ease.out"
+						}, 0);
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "0 100%-=100px",
+							end: "0 100%-=100px",
+							animation: tl,
+							scrub: 2
 						});
-					},
-					"(max-aspect-ratio: 1/1)": () => {
-						scroll.push(tl => {
-							tl.fromTo(el.children, {
-								y: 0
-							}, {
-								y: 0
-							}, 0);
-							return tl;
-						}, tl => {
-							return ScrollTrigger.create({
-								trigger: el,
-								start: "0 100%-=100px",
-								end: "100px 100%-=100px",
-								animation: tl,
-								scrub: 1
-							});
+					});
+				});
+				screen.add("(max-aspect-ratio: 1/1)", () => {
+					scroll.push(tl => {
+						tl.fromTo(el.children, {
+							y: 0
+						}, {
+							y: 0
+						}, 0);
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							start: "0 100%-=100px",
+							end: "100px 100%-=100px",
+							animation: tl,
+							scrub: 1
 						});
-					}
+					});
 				});
 
 				scroll.push(function (tl) {
@@ -384,7 +383,7 @@ class replurk {
 								progress: number,
 								snap: "progress",
 								ease: "power3.out",
-								duration: duration,
+								duration: reduceMotionFilter(duration),
 								onUpdate: () => {
 									el.querySelector(".big").textContent = plural(load.progress);
 								}
@@ -623,7 +622,7 @@ class replurk {
 						scale: 1,
 						opacity: 1,
 						ease: "elastic.out(1.2, 0.5)",
-						duration: .75,
+						duration: reduceMotionFilter(.75),
 						stagger: {
 							amount: .3,
 							from: "end"
@@ -648,7 +647,7 @@ class replurk {
 					}, {
 						y: 0,
 						opacity: 1,
-						duration: 1,
+						duration: reduceMotionFilter(1),
 						ease: "power3.out",
 						stagger: .3
 					}, 0);
@@ -739,7 +738,7 @@ class replurk {
 					top: currentTop + "%",
 					opacity: opacity,
 					zIndex: zIndex,
-					duration: .5,
+					duration: reduceMotionFilter(.5),
 					ease: "power3.out",
 					onComplete: function () {
 						if (hidden) {
@@ -1249,7 +1248,7 @@ class replurk {
 					progress: Math.round(item),
 					snap: "progress",
 					ease: "linear",
-					duration: .24,
+					duration: reduceMotionFilter(.24),
 					onUpdate: () => {
 						var el = this.next.querySelector(".loading .big");
 						if (el) el.innerHTML = load.progress + "%";
@@ -1299,7 +1298,7 @@ class replurk {
 						padding: 0,
 						margin: 0,
 						overflow: "hidden",
-						duration: .5,
+						duration: reduceMotionFilter(.5),
 						ease: "power3.out",
 						onComplete: () => {
 							el.remove();
@@ -1322,7 +1321,7 @@ class replurk {
 			}, {
 				y: 0,
 				ease: "linear",
-				duration: 2
+				duration: reduceMotionFilter(2),
 			}, 0);
 			tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
 				opacity: 0
@@ -1332,14 +1331,14 @@ class replurk {
 					from: 'end',
 					amount: .1
 				},
-				duration: 1,
+				duration: reduceMotionFilter(1),
 				ease: "power3.in"
 			}, 0);
 			tl.fromTo(next.querySelectorAll("#credits .made"), {
 				opacity: 0
 			}, {
 				opacity: 1,
-				duration: 1,
+				duration: reduceMotionFilter(1),
 				ease: "power3.in"
 			}, .3);
 
@@ -1554,7 +1553,7 @@ class replurk {
 			top: 0
 		}, {
 			opacity: 1,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.in"
 		});
 		tl.fromTo(next.querySelectorAll("#permission .bgtext *"), {
@@ -1565,7 +1564,7 @@ class replurk {
 			y: 0,
 			opacity: 1,
 			stagger: .2,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.out",
 			onComplete: () => {
 				gsap.set(next.querySelectorAll("#permission"), {
@@ -1594,7 +1593,7 @@ class replurk {
 				from: "end",
 				amount: .2
 			},
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.in",
 			onComplete: () => {
 				this.browserColor("yellow");
@@ -1604,7 +1603,7 @@ class replurk {
 			opacity: 1
 		}, {
 			opacity: 0,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.in",
 			onComplete: () => {
 				gsap.set(next.querySelectorAll("#permission"), {
@@ -1627,7 +1626,7 @@ class replurk {
 		}, {
 			opacity: 1,
 			ease: "power3.in",
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			onStart: () => {
 				this.browserColor("green", .5);
 			}
@@ -1639,7 +1638,7 @@ class replurk {
 		}, {
 			opacity: 1,
 			y: 0,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			stagger: .2,
 			ease: "power3.out"
 		}, ">-.5");
@@ -1650,7 +1649,7 @@ class replurk {
 		}, {
 			opacity: 1,
 			y: 0,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			stagger: .2,
 			ease: "power3.out"
 		}, ">-.5");
@@ -1659,7 +1658,7 @@ class replurk {
 			opacity: 0
 		}, {
 			opacity: 1,
-			duration: .5
+			duration: reduceMotionFilter(.5),
 		}, ">-.5");
 
 		return tl;
@@ -1674,7 +1673,7 @@ class replurk {
 		}, {
 			opacity: 0,
 			y: 200,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			stagger: {
 				from: "end",
 				amount: .2
@@ -1688,7 +1687,7 @@ class replurk {
 			opacity: 1
 		}, {
 			opacity: 0,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.in",
 			onComplete: () => {
 				gsap.set(next.querySelectorAll(".grant"), { display: "none" });
@@ -1752,7 +1751,7 @@ class replurk {
 		}, {
 			y: 0,
 			opacity: 1,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.out"
 		}, 1);
 		tl.fromTo(next.querySelectorAll("#permission h1, #permission li"), {
@@ -1763,7 +1762,7 @@ class replurk {
 			y: 0,
 			opacity: 1,
 			stagger: .1,
-			duration: 1,
+			duration: reduceMotionFilter(1),
 			ease: "power3.out"
 		}, 1);
 
@@ -1821,7 +1820,7 @@ class replurk {
 			}, {
 				y: window.innerHeight * -3 / 4,
 				ease: "linear",
-				duration: 1
+				duration: reduceMotionFilter(1),
 			}, 0);
 			tl.fromTo(next.querySelectorAll("#hello .bgtext sup"), {
 				y: 0,
@@ -1832,7 +1831,7 @@ class replurk {
 				x: window.innerHeight * -1 / 10,
 				rotation: -10,
 				ease: "linear",
-				duration: 1
+				duration: reduceMotionFilter(1),
 			}, 0);
 			tl.fromTo(next.querySelectorAll("#hello .bgtext sub"), {
 				y: 0,
@@ -1843,7 +1842,7 @@ class replurk {
 				x: window.innerHeight * 1 / 10,
 				rotation: 10,
 				ease: "linear",
-				duration: 1
+				duration: reduceMotionFilter(1),
 			}, 0);
 			tl.fromTo(next.querySelectorAll("#hello .arrow-big"), {
 				y: 0,
@@ -1852,7 +1851,7 @@ class replurk {
 				y: window.innerHeight * 1 / 4,
 				opacity: 0,
 				ease: "linear",
-				duration: .25
+				duration: reduceMotionFilter(.25),
 			}, 0);
 			return tl;
 		}, function (tl) {
@@ -2119,7 +2118,7 @@ class replurk {
 			opacity: 0
 		}, {
 			opacity: 1,
-			duration: .5,
+			duration: reduceMotionFilter(.5),
 			ease: "power3.in",
 			onComplete: () => {
 				this.browserColor("yellow", 0);
@@ -2161,7 +2160,7 @@ var replurkview = {
 
 			next.querySelector("#backtotop").onclick = () => {
 				gsap.to(window, {
-					duration: 2,
+					duration: reduceMotionFilter(2),
 					ease: "expo.inOut",
 					scrollTo: "#statistics"
 				});

@@ -14,33 +14,25 @@ var loader = {
 	clean: function () {
 		this.el.innerHTML = "";
 	},
-	init: function (done) {
-		document.body.style.cursor = "wait";
-		if (done === true) {
-			// Simple style
-			this.el.innerHTML = '<p class="simple" style="opacity: 0;"><span><i class="loading" style="width:0%"></i></span></p>';
-		} else {
-			// Progress bar type
-			this.el.innerHTML = '<p class="normal" style="opacity: 0;"><span>Downloading</span> <span><i class="loading" style="width:0%"></i></span></p>';
-		}
-		gsap.set(this.el, {
-			y: 0,
-			opacity: 1
+	init: function (simplestyle) {
+		return new Promise(resolve => {
+			document.body.style.cursor = "wait";
+
+			// Simple or progress bar style
+			if (simplestyle) this.el.innerHTML = '<p class="simple" style="opacity: 0;"><span><i class="loading" style="width:0%"></i></span></p>';
+			else this.el.innerHTML = '<p class="normal" style="opacity: 0;"><span>Downloading</span> <span><i class="loading" style="width:0%"></i></span></p>';
+
+			gsap.set(this.el, {
+				y: 0,
+				opacity: 1
+			});
+
+			resolve();
 		});
-
-		if (typeof done === "function") done();
 	},
-	show: function (els, done) {
-		if (typeof done != "function") return;
-
+	show: async function (els) {
 		// Wait for all images to be loaded
 		let _percent = { score: 0 };
-		let _hide = () => {
-			this.hide(() => {
-				this.clean();
-				done();
-			});
-		}
 
 		// Animate the loading
 		gsap.fromTo(this.el.children, {
@@ -49,37 +41,36 @@ var loader = {
 			opacity: 1,
 			ease: "expo",
 			delay: .25,
-			duration: .5
+			duration: reduceMotionFilter(.5),
 		});
 
 		// Calling loading images function
-		if (!els) {
-			_hide();
-			return;
+		if (els) {
+			await waitForImg(els.querySelectorAll("img"), (_, percent) => {
+				gsap.to(_percent, {
+					score: percent,
+					roundProps: "score",
+					duration: reduceMotionFilter(.1),
+					onUpdate: () => {
+						this.update(_percent.score);
+					}
+				});
+			});
 		}
-
-		waitForImg(els.querySelectorAll("img"), (_, percent) => {
-			gsap.to(_percent, {
-				score: percent,
-				roundProps: "score",
-				duration: .1,
-				onUpdate: () => {
-					this.update(_percent.score);
+		await this.hide();
+		this.clean();
+	},
+	hide: function () {
+		return new Promise(resolve => {
+			gsap.killTweensOf(this.el.children);
+			gsap.to(this.el.children, {
+				opacity: 0,
+				ease: "expo.in",
+				duration: reduceMotionFilter(.25),
+				onComplete: function () {
+					resolve();
 				}
 			});
-		}, () => _hide());
-	},
-	hide: function (done) {
-		if (typeof done !== "function") return false;
-
-		gsap.killTweensOf(this.el.children);
-		gsap.to(this.el.children, {
-			opacity: 0,
-			ease: "expo.in",
-			duration: .25,
-			onComplete: function () {
-				done();
-			}
 		});
 	},
 	empty: function () {
@@ -89,6 +80,8 @@ var loader = {
 			y: "-100%",
 			opacity: 0
 		});
+
+		return true;
 	}
 }
 

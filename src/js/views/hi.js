@@ -26,19 +26,19 @@ var hiview = {
 					gsap.to(next.querySelectorAll(this.el[0]), {
 						x: split * -1,
 						ease: "power3.out",
-						duration: .5
+						duration: reduceMotionFilter(.5)
 					});
 					gsap.to(next.querySelectorAll(this.el[1]), {
 						x: split,
 						ease: "power3.out",
-						duration: .5
+						duration: reduceMotionFilter(.5)
 					});
 				} else {
 					gsap.killTweensOf(next.querySelectorAll(this.el));
 					gsap.to(next.querySelectorAll(this.el), {
 						x: split,
 						ease: "power3.out",
-						duration: .5
+						duration: reduceMotionFilter(.5)
 					});
 				}
 
@@ -48,7 +48,7 @@ var hiview = {
 					y: 0,
 					opacity: 1,
 					ease: "power3.out",
-					duration: .5
+					duration: reduceMotionFilter(.5)
 				});
 			},
 			hide: function () {
@@ -56,13 +56,13 @@ var hiview = {
 					x: 0,
 					ease: "power3.out",
 					delay: .1,
-					duration: .5
+					duration: reduceMotionFilter(.5)
 				});
 				gsap.to(next.querySelectorAll(this.hint), {
 					y: 50,
 					opacity: 0,
 					ease: "power3.out",
-					duration: .5
+					duration: reduceMotionFilter(.5)
 				});
 			}
 		}

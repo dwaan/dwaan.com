@@ -1,8 +1,8 @@
 "use strict";
 
 import { gsap, ScrollTrigger } from 'gsap/all';
-import scroll from "./scroll";
 import { _q, hoverEvents } from "./helper";
+import scroll from "./scroll";
 import darkmode from "./darkmode";
 
 let header = {
@@ -15,8 +15,9 @@ let header = {
         this.darkmodeswitch();
         this.textswitch();
     },
+
     // Animate header showing
-    show: function () {
+    show: () => {
         gsap.set("header", {
             opacity: 1
         });
@@ -27,7 +28,7 @@ let header = {
         }, {
             y: 0,
             opacity: 1,
-            duration: 1.28,
+            duration: reduceMotionFilter(1.28),
             ease: "expo.out",
             delay: .24,
             stagger: .16
@@ -35,18 +36,18 @@ let header = {
     },
 
     // Logo events animations - waving
-    waving: function () {
+    waving: () => {
         gsap.utils.toArray('header .logo').forEach(el => {
             // Waving animation
             var lefthand = el.querySelector(".left-hand");
-            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: .25, ease: "linear", yPercent: 20 } });
+            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: reduceMotionFilter(.25), ease: "linear", yPercent: 20 } });
 
             waving
                 .set(lefthand, { yPercent: 0, rotation: 0 })
-                .to(lefthand, { duration: .25, rotation: 70 })
+                .to(lefthand, { duration: reduceMotionFilter(.25), rotation: 70 })
                 .fromTo(lefthand, { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
-                .to(lefthand, { duration: .25, yPercent: 0, rotation: 0 })
-                .to(lefthand, { yPercent: 0, duration: 10 });
+                .to(lefthand, { duration: reduceMotionFilter(.25), yPercent: 0, rotation: 0 })
+                .to(lefthand, { yPercent: 0, duration: reduceMotionFilter(10) });
 
             // Hat move on hover
             var hat = el.querySelector(".hat");
@@ -56,7 +57,7 @@ let header = {
                     yPercent: -3,
                     xPercent: -1,
                     rotation: 5,
-                    duration: 1,
+                    duration: reduceMotionFilter(1),
                     ease: "elastic.out"
                 });
                 waving.restart();
@@ -66,7 +67,7 @@ let header = {
                     yPercent: 0,
                     xPercent: 0,
                     rotation: 0,
-                    duration: 1,
+                    duration: reduceMotionFilter(1),
                     ease: "elastic.out"
                 });
             });
@@ -74,7 +75,7 @@ let header = {
     },
 
     // Menu events - slide
-    slide: function () {
+    slide: () => {
         gsap.utils.toArray('header .switch').forEach(el => {
             // Hat move on hover
             var menu = el.querySelectorAll("svg line");
@@ -84,7 +85,7 @@ let header = {
             });
             tl.to(menu, {
                 x: -32,
-                duration: .25,
+                duration: reduceMotionFilter(.25),
                 ease: "expo.in",
                 stagger: .1
             });
@@ -92,59 +93,55 @@ let header = {
                 x: 32
             }, {
                 x: 0,
-                duration: .25,
+                duration: reduceMotionFilter(.25),
                 ease: "expo.out",
                 stagger: .1
             });
             tl.to(menu, {
-                duration: 1
+                duration: reduceMotionFilter(1)
             });
             tl.pause(.1);
-            hoverEvents([el], function () {
-                tl.repeat(-1).restart();
-            }, function () {
-                tl.repeat(0);
-            });
+            hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
         });
     },
 
     // Main menu - hamburger slide
-    hamburger: function () {
+    hamburger: () => {
         gsap.utils.toArray("header .menu").forEach(el => {
             var overlay = el.querySelector(".overlay");
             var items = el.querySelector(".items");
 
             // Show menu animation
-            el.querySelector(".switch").addEventListener("click", function (e) {
+            el.querySelector(".switch").addEventListener("click", e => {
                 e.preventDefault();
 
                 if (!gsap.isTweening(items)) {
                     // Animate main element
                     gsap.to("main .middle", {
                         left: "-=100",
-                        duration: .75,
+                        duration: reduceMotionFilter(.75),
                         ease: "power3.out"
                     });
                     gsap.to("main .middle > .text", {
                         left: "-=50",
-                        duration: .75,
+                        duration: reduceMotionFilter(.75),
                         ease: "power3.out"
                     });
                     gsap.to("main .links, main .flares", {
                         left: "-=25",
-                        duration: .75,
+                        duration: reduceMotionFilter(.75),
                         ease: "power3.out"
                     });
                     // Animate overlay background
                     gsap.to(overlay, {
                         backgroundColor: "rgba(0,0,0,.5)",
-                        duration: 1,
+                        duration: reduceMotionFilter(1),
                         ease: "power3.out"
                     });
                     // Animate menu showing
                     gsap.set(overlay, {
                         display: "flex",
-                        onComplete: function () {
+                        onComplete: () => {
                             gsap.fromTo(items.querySelectorAll("li"), {
                                 x: 50,
                                 opacity: 0
@@ -154,7 +151,7 @@ let header = {
                                 ease: "expo.out",
                                 delay: .25,
                                 stagger: .1,
-                                duration: .65
+                                duration: reduceMotionFilter(.65)
                             });
 
                             gsap.fromTo(items, {
@@ -162,14 +159,15 @@ let header = {
                             }, {
                                 x: 0,
                                 ease: "power3.out",
-                                duration: .75
+                                duration: reduceMotionFilter(.75)
                             });
                         }
                     });
                 }
             });
+
             // Hide menu animation
-            el.querySelectorAll(".overlay, li a, .close").forEach(function (link) {
+            el.querySelectorAll(".overlay, li a, .close").forEach(link => {
                 link.addEventListener("click", function (e) {
                     e.preventDefault();
                     if (this != e.target) return false;
@@ -178,13 +176,13 @@ let header = {
                         // Animate main element
                         gsap.to("main .middle, main .middle > .text, main .links, main .flares", {
                             left: 0,
-                            duration: .75,
+                            duration: reduceMotionFilter(.75),
                             ease: "power3.out"
                         });
                         // Animate overlay background
                         gsap.to(overlay, {
                             backgroundColor: "rgba(0,0,0,0)",
-                            duration: 1,
+                            duration: reduceMotionFilter(1),
                             ease: "power3.out"
                         });
                         // Animate menu
@@ -193,8 +191,8 @@ let header = {
                         }, {
                             x: "100%",
                             ease: "power3.out",
-                            duration: .75,
-                            onComplete: function () {
+                            duration: reduceMotionFilter(.75),
+                            onComplete: () => {
                                 gsap.set(overlay, {
                                     display: "none"
                                 });
@@ -206,18 +204,17 @@ let header = {
         });
     },
 
-    moonsun: function () {
+    moonsun: () => {
         var el = _q('.lamp');
         gsap.set(el.querySelector("#ray"), { transformOrigin: "center center" })
-        hoverEvents([el], () => {
-            gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: 1.28, ease: "elastic.out" });
-        }, () => {
-            gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: 1.28, ease: "elastic.out" });
-        });
+        hoverEvents([el],
+            () => gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: reduceMotionFilter(1.28), ease: "elastic.out" }),
+            () => gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: reduceMotionFilter(1.28), ease: "elastic.out" })
+        );
     },
 
     // Dark mode switcher event
-    darkmodeswitch: function () {
+    darkmodeswitch: () => {
         gsap.utils.toArray("header .lamp").forEach(el => {
             el.addEventListener("click", e => {
                 e.preventDefault();
@@ -227,41 +224,36 @@ let header = {
     },
 
     // Text switcher event
-    textswitch: function () {
+    textswitch: () => {
         gsap.utils.toArray("header .size").forEach(el => {
             var tl = gsap.timeline();
             tl.to(el, {
                 scale: 1.25,
-                duration: .5,
+                duration: reduceMotionFilter(.5),
                 ease: "elastic.out"
             });
             tl.to(el, {
                 scale: 1.5,
-                duration: .5,
+                duration: reduceMotionFilter(.5),
                 ease: "elastic.out"
             });
             tl.to(el, {
                 scale: 1,
-                duration: 1
+                duration: reduceMotionFilter(1)
             });
             tl.to(el, {
-                duration: 5
+                duration: reduceMotionFilter(5)
             });
             tl.pause();
-            hoverEvents([el], function () {
-                tl.repeat(-1).restart();
-            },
-                function () {
-                    tl.repeat(0);
-                });
+            hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
             if (!window.resizefontevent) {
                 window.resizefontevent = true;
-                window.addEventListener("resize", function () {
+                window.addEventListener("resize", () => {
                     window.fontSize = false;
                     _q("html").style.fontSize = "";
                 });
             }
-            el.addEventListener("click", function (e) {
+            el.addEventListener("click", _ => {
                 var delta = 1;
                 var howmany = 3;
                 var fontSize = Number(window.getComputedStyle(_q("html"))['font-size'].replace('px', ''))
@@ -356,7 +348,7 @@ let header = {
                         y: (idx == 0) ? window.innerHeight * -1 / 10 : 0,
                         opacity: (idx < middle.length - 1) ? 0 : 1,
                         ease: "power3.in",
-                        duration: 3
+                        duration: reduceMotionFilter(3)
                     }, "<");
                     tl.set(year, {
                         position: "absolute"
@@ -396,12 +388,12 @@ let header = {
                         x: 0,
                         y: 0,
                         opacity: 1,
-                        duration: 3,
+                        duration: reduceMotionFilter(3),
                         ease: "power3.out"
                     });
                     // Delay
                     tl.to(arrow, {
-                        duration: 2
+                        duration: reduceMotionFilter(2)
                     });
                     // Hide
                     tl.fromTo(arrow, {
@@ -414,7 +406,7 @@ let header = {
                         y: (idx == 0) ? window.innerHeight * -1 / 5 : 0,
                         opacity: (idx < middle.length - 1) ? 0 : 1,
                         ease: "power3.in",
-                        duration: 3
+                        duration: reduceMotionFilter(3)
                     });
                     tl.set(arrow, {
                         position: "absolute"

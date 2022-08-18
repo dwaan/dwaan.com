@@ -24,24 +24,15 @@ removeClass(_q("html"), "no-js");
 gsap.config({ nullTargetWarn: false });
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// Global default barba hooks
-barba.hooks.before(() => {
-	api.abort();
-	return true;
-});
-barba.hooks.beforeEnter(_ => {
-	// Destroy prev scroll
-	scroll.destroy();
-	window.scrollTo(0, 0);
-});
+// Global default barba hooks, abort any plurk api calls
+barba.hooks.before(_ => api.abort());
+// Destroy prev scroll
+barba.hooks.beforeEnter(_ => scroll.destroy());
 barba.hooks.afterEnter(data => {
 	// Read more
-	data.next.container.querySelectorAll("a.scrollto").forEach(function (el) {
-		scrollto(el);
-	});
+	data.next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
 
-	var namespace = data.next.namespace;
-	if (namespace != "replurk2020" && namespace != "replurk2021") header.arrow(data.next.container);
+	if (!data.next.namespace.includes("replurk")) header.arrow(data.next.container);
 
 	ScrollTrigger.refresh();
 	gsap.matchMediaRefresh();
@@ -49,15 +40,14 @@ barba.hooks.afterEnter(data => {
 
 // Initialized barba.js
 barba.init({
-	// debug: false,
-	// logLevel: 0,
+	debug: true,
+	logLevel: 0,
 	transitions: transitions,
 	views: views
 });
 
 displayRoundedCorner();
 konami();
-
 
 // Prevent error in older browser for console
 (function () {

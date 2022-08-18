@@ -12,12 +12,9 @@ let transition_hi_to_home = {
         var current = data.current.container;
         var next = data.next.container;
 
-        // Display loading
-        loader.init();
-
         var tl = gsap.timeline({
             defaults: {
-                duration: .75,
+                duration: reduceMotionFilter(.75),
                 stagger: .1,
                 ease: "power3.out"
             }
@@ -45,7 +42,7 @@ let transition_hi_to_home = {
             fontSize: "0.8rem",
             fontWeight: 600,
             letterSpacing: "0.1em",
-            duration: 1,
+            duration: reduceMotionFilter(1),
             ease: "expo.inOut",
             onComplete: function () {
                 // Selectively show next elements
@@ -63,7 +60,7 @@ let transition_hi_to_home = {
             }, {
                 x: -100,
                 opacity: 0,
-                duration: .25,
+                duration: reduceMotionFilter(.25),
                 stagger: .1,
                 ease: "power3.in"
             }, 0);
@@ -84,26 +81,24 @@ let transition_hi_to_home = {
         tl.set(next.querySelectorAll(".footer"), { opacity: 1 }, 0);
         tl.set(next.querySelectorAll(".footer .email"), { opacity: 0 }, 0);
         tl.set(next, {
-            onComplete: function () {
+            onComplete: async () => {
                 // Image loading logic
-                loader.show(next, () => done());
+                await loader.init();
+                await loader.show(next);
+
+                done();
             }
         }, .25);
     },
-    enter: function (data) {
-        var done = this.async();
+    enter: async function (data) {
         var next = data.next.container;
-        var elements = ".main-text, .arrow";
 
         // Animate current view
-        animate.show(next, () => done(), next.querySelectorAll(elements), false);
-    },
-    after: function () {
-        // Remove loading
-        loader.empty();
+        await animate.show(next, next.querySelectorAll(".main-text, .arrow"), false);
 
-        return true;
+        this.async();
     },
+    after: () => loader.empty(),
     from: {
         namespace: ['hi']
     },

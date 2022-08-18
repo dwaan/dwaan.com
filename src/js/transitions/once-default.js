@@ -6,49 +6,40 @@ import header from '../helpers/header';
 
 let transition_once_default = {
     name: 'default-transition',
-    once: function (data) {
+    once: async function (data) {
         // Define async and next container
-        var done = this.async();
         var next = data.next.container;
 
         // Display loading
         loader.init();
-        // Loading logic
-        loader.show(next, () => {
-            // Animate current view and header
-            if (data.next.namespace == "lost") {
-                animate.show404(next, () => {
-                    loader.empty();
-                    done();
-                });
-            } else if (data.next.namespace == "replurk2020" || data.next.namespace == "replurk2021") {
-                animate.showinstant(next, () => {
-                    loader.empty();
-                    done();
-                });
-            } else {
-                animate.show(next, () => {
-                    loader.empty();
-                    done();
-                });
-            }
-        });
 
+        // Loading logic
+        await loader.show(next);
+
+        // Animate current view and header
+        if (data.next.namespace == "lost") await animate.show404(next);
+        else if (data.next.namespace.includes("replurk")) await animate.showinstant(next);
+        else await animate.show(next);
+
+        // Initialized header
         header.init();
+
+        // Empty loading
+        loader.empty();
+        this.async();
     },
     // leave: () => true,
-    before: function (data) {
-        var done = this.async();
-
-        // Display loading
-        loader.init();
-
+    before: async function (data) {
         // Hide current view
+        await animate.hide(data.current.container);
+
         // Image loading logic
-        animate.hide(data.current.container, () => loader.show(data.next.container, () => done()));
+        loader.init();
+        await loader.show(data.next.container);
+
+        this.async();
     },
-    enter: function (data) {
-        var done = this.async();
+    enter: async function (data) {
         var current = data.current.container;
 
         // Reset current element values
@@ -57,11 +48,10 @@ let transition_once_default = {
         if (current.querySelector(".arrow-big")) current.querySelector(".arrow-big").style.opacity = 0;
 
         // Animate current view
-        animate.show(data.next.container, () => done());
+        await animate.show(data.next.container);
+        this.async();
     },
-    after: () => {
-        loader.empty();
-    },
+    after: () => loader.empty()
 }
 
 export default transition_once_default;

@@ -39,7 +39,7 @@ let homeview = {
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				scroll.push(tl => {
 					tl.to(maintext, {
-						duration: 3
+						duration: reduceMotionFilter(3)
 					}, 0)
 
 					tl.set(maintext, {
@@ -60,7 +60,7 @@ let homeview = {
 					}, {
 						y: 0,
 						ease: "linear",
-						duration: 1
+						duration: reduceMotionFilter(1)
 					}, 1);
 
 					tl.fromTo(maintext, {
@@ -68,7 +68,7 @@ let homeview = {
 					}, {
 						opacity: 1,
 						ease: "expo.out",
-						duration: .5
+						duration: reduceMotionFilter(.5)
 					}, 1.5);
 
 					tl.set(maintext, {
@@ -80,7 +80,7 @@ let homeview = {
 					}, {
 						opacity: 0,
 						ease: "expo.out",
-						duration: .5
+						duration: reduceMotionFilter(.5)
 					}, 2.5);
 
 					tl.fromTo(maintextchild, {
@@ -88,7 +88,7 @@ let homeview = {
 					}, {
 						y: window.innerHeight * -1 / 6,
 						ease: "linear",
-						duration: 1
+						duration: reduceMotionFilter(1)
 					}, 2);
 
 					tl.set(maintext, {

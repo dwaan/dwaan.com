@@ -14,7 +14,7 @@ var flare = {
             gsap.to(this.elements, {
                 opacity: 1,
                 ease: "ease.out",
-                duration: 1
+                duration: reduceMotionFilter(1)
             });
             gsap.to(this.elements, {
                 x: "random(-100,100,10)%",
@@ -22,7 +22,7 @@ var flare = {
                 rotation: "random(-5,5,1)deg",
                 scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
                 ease: "ease.out",
-                duration: .5
+                duration: reduceMotionFilter(.5)
             });
         }
 
@@ -33,7 +33,7 @@ var flare = {
                 rotation: "random(-5,5,1)deg",
                 scale: screenhorizontal ? "random(1,2.5,.5)" : "random(.5,1.5,.5)",
                 opacity: gsap.utils.random(5, 10, 1) / 10,
-                duration: gsap.utils.random(5, 10, 1),
+                duration: reduceMotionFilter(gsap.utils.random(5, 10, 1)),
                 ease: "ease.inOut",
                 onComplete: function () {
                     repeatanimation(element);

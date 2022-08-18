@@ -41,7 +41,7 @@ var meview = {
 						pointerEvents: "auto"
 					}, {
 						pointerEvents: "none",
-						duration: 1
+						duration: reduceMotionFilter(1)
 					}, 0);
 
 					tl.fromTo(text, {
@@ -49,7 +49,7 @@ var meview = {
 					}, {
 						opacity: 0,
 						ease: 'expo.out',
-						duration: .5
+						duration: reduceMotionFilter(.5)
 					}, 0);
 
 					tl.set(text, {
@@ -117,14 +117,14 @@ var meview = {
 						display: "flex",
 						opacity: 1,
 						ease: 'expo.in',
-						duration: .25
+						duration: reduceMotionFilter(.25)
 					}, 0);
 
 					// Red dot - scale down in
 					tl.to(middle, {
 						x: 0,
 						scale: 1,
-						duration: .75
+						duration: reduceMotionFilter(.75)
 					}, 0);
 
 					// Text - move in, fade in, and fade out
@@ -135,7 +135,7 @@ var meview = {
 						}, {
 							y: 0,
 							ease: 'expo.out',
-							duration: 1
+							duration: reduceMotionFilter(1)
 						}, 0);
 
 						// Fade in
@@ -144,7 +144,7 @@ var meview = {
 						}, {
 							opacity: 1,
 							ease: 'expo.out',
-							duration: .5
+							duration: reduceMotionFilter(.5)
 						}, .125);
 					});
 
@@ -168,7 +168,7 @@ var meview = {
 					}, {
 						x: window.innerWidth * -1 / 2,
 						scale: .15,
-						duration: 1
+						duration: reduceMotionFilter(1)
 					}, 0);
 
 					// Text - fade out
@@ -179,7 +179,7 @@ var meview = {
 						}, {
 							opacity: 0,
 							ease: 'expo.out',
-							duration: .5
+							duration: reduceMotionFilter(.5)
 						}, .5);
 					});
 
@@ -312,7 +312,7 @@ var meview = {
 						}, {
 							opacity: 0,
 							ease: 'linear',
-							duration: .25
+							duration: reduceMotionFilter(.25)
 						}, idx / 5);
 					});
 
@@ -448,7 +448,6 @@ var meview = {
 					snap: "frame",
 					repeat: repeat + 2,
 					ease: "linear",
-					duration: (repeat + 2) * duration,
 					onUpdate: () => {
 						var frame = mrgoat.frame + 4;
 						var el;
@@ -460,7 +459,8 @@ var meview = {
 						el.style.opacity = 1;
 
 						prev = el;
-					}
+					},
+					duration: reduceMotionFilter((repeat + 2) * duration)
 				}, 0);
 
 				return tl;
@@ -484,14 +484,14 @@ var meview = {
 					}, {
 						opacity: 1,
 						ease: "power3.in",
-						duration: dur
+						duration: reduceMotionFilter(dur)
 					});
 					els.forEach(function (el) {
 						tl.fromTo(el.querySelectorAll(".dot hr"), {
 							width: "0%"
 						}, {
 							width: "100%",
-							duration: dur
+							duration: reduceMotionFilter(dur)
 						});
 					});
 					els.forEach(function (el) {
@@ -499,7 +499,7 @@ var meview = {
 							width: "0%"
 						}, {
 							width: "100%",
-							duration: dur
+							duration: reduceMotionFilter(dur)
 						});
 					});
 					els.forEach(function (el) {
@@ -507,7 +507,7 @@ var meview = {
 							opacity: 0
 						}, {
 							opacity: 1,
-							duration: dur
+							duration: reduceMotionFilter(dur)
 						});
 					});
 					tl.fromTo(els, {
@@ -515,12 +515,12 @@ var meview = {
 					}, {
 						y: -100,
 						ease: "linear",
-						duration: (dur * 10)
+						duration: reduceMotionFilter((dur * 10))
 					}, 0);
 					tl.to(els, {
 						opacity: 0,
 						ease: "power3.out",
-						duration: dur
+						duration: reduceMotionFilter(dur)
 					}, (dur * 9));
 
 					return tl;
@@ -534,7 +534,7 @@ var meview = {
 				tl.add(facts(element.querySelectorAll("#travel")), (duration * array[3]));
 
 				tl.to(el, {
-					duration: repeat * duration
+					duration: reduceMotionFilter(repeat * duration)
 				}, 0);
 
 				return tl;
@@ -556,21 +556,21 @@ var meview = {
 				}, {
 					opacity: 1,
 					ease: "power3.out",
-					duration: duration
+					duration: reduceMotionFilter(duration)
 				}, (duration * 4));
 				tl.fromTo(element.querySelectorAll("#post > *"), {
 					y: window.innerHeight
 				}, {
 					y: 0,
 					ease: "linear",
-					duration: duration
+					duration: reduceMotionFilter(duration)
 				}, (duration * 4));
 				tl.fromTo(element.querySelectorAll(".text .h2"), {
 					opacity: 1
 				}, {
 					opacity: 0,
 					ease: "power3.in",
-					duration: duration
+					duration: reduceMotionFilter(duration)
 				}, (duration * 4));
 
 				return tl;
@@ -595,15 +595,15 @@ var meview = {
 				gsap.killTweensOf(picture);
 				gsap.to(picture, {
 					scale: 2,
-					duration: 120,
-					ease: "linear"
+					ease: "linear",
+					duration: reduceMotionFilter(120)
 				});
 			}, () => {
 				gsap.killTweensOf(picture);
 				gsap.to(picture, {
 					scale: 1,
-					duration: 1,
-					ease: "expo.out"
+					ease: "expo.out",
+					duration: reduceMotionFilter(1)
 				});
 			});
 			// Animate
@@ -614,21 +614,21 @@ var meview = {
 				}, {
 					y: window.innerHeight * -1 / 10,
 					ease: "linear",
-					duration: 4
+					duration: reduceMotionFilter(4)
 				}, 0);
 				tl.fromTo(eltext, {
 					opacity: 0
 				}, {
 					opacity: 1,
 					ease: "linear",
-					duration: 1
+					duration: reduceMotionFilter(1)
 				}, 0);
 				tl.fromTo(eltext, {
 					opacity: 1
 				}, {
 					opacity: 0,
 					ease: "linear",
-					duration: 1
+					duration: reduceMotionFilter(1)
 				}, 3);
 
 				tl.fromTo(el.querySelectorAll(".thumbs"), {
@@ -636,7 +636,7 @@ var meview = {
 				}, {
 					y: window.innerHeight * 1 / 4,
 					ease: "linear",
-					duration: 4
+					duration: reduceMotionFilter(4)
 				}, 0);
 				return tl;
 			}, tl => ScrollTrigger.create({

@@ -57,12 +57,12 @@ class darkMode {
 
         gsap.to(document.querySelector("meta[name=theme-color]"), {
             attr: { "content": color },
-            duration: duration,
+            duration: reduceMotionFilter(duration),
             ease: ease
         });
         gsap.to(document.querySelector("html"), {
             backgroundColor: color,
-            duration: duration,
+            duration: reduceMotionFilter(duration),
             ease: ease
         });
     }

@@ -7,20 +7,20 @@ import { removeStyle } from '../helpers/helper';
 let transition_home_to_detail = {
     name: 'home-to-detail',
     leave: () => true,
-    before: function (data) {
-        var done = this.async();
+    before: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
 
-        // Display loading
-        loader.init(true);
-
         // Hide current view
+        await animate.hide(current);
+
         // Image loading logic
-        animate.hide(current, () => loader.show(next, () => done()), current.querySelectorAll(".arrow"), false);
+        await loader.init(true);
+        await loader.show(next, current.querySelectorAll(".arrow"), false);
+
+        this.async();
     },
-    enter: function (data) {
-        var done = this.async();
+    enter: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
 
@@ -31,7 +31,9 @@ let transition_home_to_detail = {
         current.style.opacity = 0;
 
         // Animate Next view
-        animate.show(next, () => done(), next.querySelectorAll(".arrow, .year"));
+        await animate.show(next, next.querySelectorAll(".arrow, .year"));
+
+        this.async();
     },
     after: function (data) {
         var next = data.next.container;
@@ -41,9 +43,7 @@ let transition_home_to_detail = {
         next.style.opacity = 1;
 
         // Remove loading
-        loader.empty();
-
-        return true;
+        return loader.empty();
     },
     from: {
         namespace: ['home']

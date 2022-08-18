@@ -8,34 +8,32 @@ import { removeStyle } from '../helpers/helper';
 let transition_home_to_me = {
     name: 'home-to-me',
     leave: () => true,
-    before: function (data) {
-        var done = this.async();
+    before: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
 
-        // Display loading
-        loader.init(true);
-
         // Hide current view
-        animate.hide(current, () => {
-            // Kill scrollbar
-            gsap.set(current, {
-                position: "fixed",
-                top: 0,
-                zIndex: 2
-            })
-            gsap.set(next, {
-                position: "fixed",
-                top: 0,
-                zIndex: 1
-            });
+        await animate.hide(current, current.querySelectorAll(".arrow"));
 
-            // Image loading logic
-            loader.show(next, () => done());
-        }, current.querySelectorAll(".arrow"));
+        // Kill scrollbar
+        gsap.set(current, {
+            position: "fixed",
+            top: 0,
+            zIndex: 2
+        })
+        gsap.set(next, {
+            position: "fixed",
+            top: 0,
+            zIndex: 1
+        });
+
+        // Image loading logic
+        await loader.init(true);
+        await loader.show(next);
+
+        this.async();
     },
-    enter: function (data) {
-        var done = this.async();
+    enter: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
 
@@ -43,7 +41,9 @@ let transition_home_to_me = {
         removeStyle(current.querySelectorAll(".main-text, .main-text > h1"));
 
         // Animate Next view
-        animate.show(next, () => done(), next.querySelectorAll(".arrow"));
+        await animate.show(next, next.querySelectorAll(".arrow"));
+
+        this.async();
     },
     after: function (data) {
         var next = data.next.container;
@@ -53,9 +53,7 @@ let transition_home_to_me = {
         next.style.opacity = 1;
 
         // Remove loading
-        loader.empty();
-
-        return true;
+        return loader.empty();
     },
     from: {
         namespace: ['home', "me"]

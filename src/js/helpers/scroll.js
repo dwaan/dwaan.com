@@ -73,7 +73,7 @@ var scroll = {
 				y: y
 			}, {
 				y: 0,
-				duration: .75,
+				duration: reduceMotionFilter(.75),
 			}, 0);
 
 			that.st.push(ScrollTrigger.create({
@@ -112,7 +112,7 @@ var scroll = {
 					duration = value / 2;
 					return final;
 				},
-				duration: duration,
+				duration: reduceMotionFilter(duration),
 				delay: 0,
 				ease: "expo.inOut"
 			}
@@ -151,6 +151,9 @@ var scroll = {
 		this.st = [];
 		//
 		this.l = 0;
+
+		// Scroll to top
+		window.scrollTo(0, 0);
 	}
 }
 

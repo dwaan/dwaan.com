@@ -84,7 +84,7 @@ var detailview = {
 							x: index * 20 + "%",
 							y: index * 20 + "%",
 							ease: "power1.out",
-							duration: 1
+							duration: reduceMotionFilter(1)
 						}, 0);
 
 						tl.to(picture, {
@@ -92,7 +92,7 @@ var detailview = {
 							x: (index + 1) * -30 + "%",
 							y: (index + 1) * 7.5 + "%",
 							ease: "power1.in",
-							duration: 1
+							duration: reduceMotionFilter(1)
 						}, 1);
 
 						tl.fromTo(picture, {
@@ -100,7 +100,7 @@ var detailview = {
 							ease: "expo.in"
 						}, {
 							opacity: 1,
-							duration: .1
+							duration: reduceMotionFilter(.1)
 						}, .05);
 					});
 
@@ -128,7 +128,7 @@ var detailview = {
 							x: index * -10 + "%",
 							y: index * -80 + "%",
 							ease: "power1.inOut",
-							duration: 1
+							duration: reduceMotionFilter(1)
 						}, 0);
 
 						tl.fromTo(picture, {
@@ -136,7 +136,7 @@ var detailview = {
 							ease: "expo.in"
 						}, {
 							opacity: 1,
-							duration: .1
+							duration: reduceMotionFilter(.1)
 						}, .05);
 					});
 
@@ -258,7 +258,7 @@ var detailview = {
 						top: "40%",
 						left: "10%",
 						rotation: -30,
-						duration: 1,
+						duration: reduceMotionFilter(1),
 						ease: "expo.out"
 					}, 0);
 
@@ -270,7 +270,7 @@ var detailview = {
 						top: "25%",
 						left: "50%",
 						rotation: -10,
-						duration: 1,
+						duration: reduceMotionFilter(1),
 						ease: "expo.out"
 					}, .064);
 
@@ -301,7 +301,7 @@ var detailview = {
 							y: idx == 1 ? 0 : "10%",
 							x: idx == 1 ? "-50%" : idx == 2 ? "-55%" : "-45%",
 							rotation: idx == 1 ? 0 : idx == 2 ? -12.5 : 12.5,
-							duration: 1
+							duration: reduceMotionFilter(1)
 						}, (idx - 1) * .064);
 					}
 
@@ -327,7 +327,7 @@ var detailview = {
 							top: (4.5 - (idx * 5 / 6)) * 10 + "%",
 							left: (2.25 + (idx * 5 / 4)) * 10 + "%",
 							rotation: (idx - 2) * 5,
-							duration: 1,
+							duration: reduceMotionFilter(1),
 							ease: "expo"
 						}, (idx - 1) * .064);
 					}
@@ -445,7 +445,7 @@ var detailview = {
 					}, {
 						x: (el.offsetWidth - thumbs.offsetWidth),
 						ease: "linear",
-						duration: 5,
+						duration: reduceMotionFilter(5),
 					}, 0);
 
 					return tl;
@@ -486,7 +486,7 @@ var detailview = {
 					x: 0,
 					y: 0,
 					rotation: 0,
-					duration: 1,
+					duration: reduceMotionFilter(1),
 					ease: "expo.out"
 				}, 0);
 
@@ -498,7 +498,7 @@ var detailview = {
 						from: "start",
 						amount: .2
 					},
-					duration: .5,
+					duration: reduceMotionFilter(.5),
 					ease: "expo.out"
 				}, 0);
 
@@ -874,11 +874,11 @@ var detailview = {
 			that.navigationHide = function () {
 				that.checkPos();
 				gsap.to(that.before, {
-					duration: .25,
+					duration: reduceMotionFilter(.25),
 					opacity: (that.pos_start) ? .15 : 1
 				});
 				gsap.to(that.after, {
-					duration: .25,
+					duration: reduceMotionFilter(.25),
 					opacity: (that.pos_end) ? .15 : 1
 				});
 			}
@@ -908,7 +908,7 @@ var detailview = {
 				else this.pos = _pos;
 
 				gsap.to(this.slideshowScroll, {
-					duration: 2,
+					duration: reduceMotionFilter(2),
 					scrollTo: {
 						x: this.pos * this.slideshowChild[this.pos].offsetWidth
 					},
@@ -922,10 +922,10 @@ var detailview = {
 						ease: "expo"
 					}
 				}).to(this, {
-					duration: .25,
+					duration: reduceMotionFilter(.25),
 					marginLeft: -25
 				}).to(this, {
-					duration: .25,
+					duration: reduceMotionFilter(.25),
 					marginLeft: 0
 				});
 				that.moveScroll(that.pos - 1);
@@ -950,10 +950,10 @@ var detailview = {
 						ease: "expo"
 					}
 				}).to(this, {
-					duration: .25,
+					duration: reduceMotionFilter(.25),
 					marginRight: -25
 				}).to(this, {
-					duration: .25,
+					duration: reduceMotionFilter(.25),
 					marginRight: 0
 				});
 				that.moveScroll(that.pos + 1);

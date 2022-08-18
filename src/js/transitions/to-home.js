@@ -6,20 +6,21 @@ import loader from '../helpers/loader';
 let transition_to_home = {
     name: 'to-home',
     leave: () => true,
-    before: function (data) {
-        let done = this.async();
+    before: async function (data) {
+        // Hide current view
+        await animate.hide(data.current.container);
 
         // Display loading
-        loader.init();
+        await loader.init();
+        await loader.show(data.next.container);
 
-        // Hide current view
-        animate.hide(data.current.container, () => loader.show(data.next.container, () => done()));
+        this.async();
     },
-    enter: function (data) {
-        let done = this.async();
-
+    enter: async function (data) {
         // Animate current view
-        animate.show(data.next.container, () => done(), next.querySelectorAll(".main-text, .padding, .arrow"));
+        animate.show(data.next.container, next.querySelectorAll(".main-text, .padding, .arrow"));
+
+        this.async();
     },
     after: function () {
         // Remove loading

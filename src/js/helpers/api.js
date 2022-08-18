@@ -57,6 +57,8 @@ var api = {
 			this.request[i].abort();
 		}
 		this.request = [];
+
+		return true;
 	}
 }
 

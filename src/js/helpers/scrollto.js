@@ -13,7 +13,7 @@ function scrollto(el) {
         removeClass(_q("html"), "snap");
 
         gsap.to(window, {
-            duration: .75,
+            duration: reduceMotionFilter(.75),
             ease: "expo.inOut",
             scrollTo: e.target.getAttribute("href"),
             onComplete: function () {

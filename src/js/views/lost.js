@@ -16,7 +16,7 @@ var lostview = {
 				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
 					xPercent: -50
 				}, {
-					duration: speed + (i * 2),
+					duration: reduceMotionFilter(speed + (i * 2)),
 					repeat: -1,
 					ease: "linear",
 					xPercent: 0
@@ -25,7 +25,7 @@ var lostview = {
 				tween[i] = gsap.fromTo("#lost h2:nth-child(" + (i + 1) + ") span", {
 					xPercent: 0
 				}, {
-					duration: speed + (i * 2),
+					duration: reduceMotionFilter(speed + (i * 2)),
 					repeat: -1,
 					ease: "linear",
 					xPercent: -50
@@ -50,7 +50,7 @@ var lostview = {
 						gsap.killTweensOf(text);
 						gsap.to(text, {
 							speed: 5,
-							duration: 10,
+							duration: reduceMotionFilter(10),
 							ease: "linear",
 							onUpdate: function () {
 								for (var i = 0; i < 5; i++) {
@@ -61,7 +61,7 @@ var lostview = {
 
 						gsap.to(el.querySelectorAll(".splext"), {
 							rotation: 0,
-							duration: .5,
+							duration: reduceMotionFilter(.5),
 							ease: "expo",
 							stagger: .005
 						});
@@ -69,7 +69,7 @@ var lostview = {
 						gsap.killTweensOf(text);
 						gsap.to(text, {
 							speed: 1,
-							duration: 2,
+							duration: reduceMotionFilter(2),
 							ease: "back.out",
 							onUpdate: function () {
 								for (var i = 0; i < 5; i++) {
@@ -80,7 +80,7 @@ var lostview = {
 
 						gsap.to(el.querySelectorAll(".splext"), {
 							rotation: "random(-180,180,180)",
-							duration: .5,
+							duration: reduceMotionFilter(.5),
 							ease: "expo",
 							stagger: .005
 						});

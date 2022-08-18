@@ -8,13 +8,13 @@ import darkmode from '../helpers/darkmode';
 let transition_from_plurk = {
     name: 'from-plurk',
     leave: () => true,
-    before: function (data) {
+    before: async function (data) {
         var done = this.async();
         var current = data.current.container;
         var tl = gsap.timeline();
 
         // Display loading
-        loader.init();
+        await loader.init();
 
         // Hide current view
         tl = animate.top(window, tl);
@@ -24,24 +24,24 @@ let transition_from_plurk = {
         tl.to(current.querySelectorAll("#hello .bgtext sub, #permission .bgtext sub"), {
             y: 100,
             opacity: 0,
-            duration: 1,
+            duration: reduceMotionFilter(1),
             ease: "power3.in"
         }, "hide");
         tl.to(current.querySelectorAll("#hello .bgtext sup, #permission .bgtext sup"), {
             y: -100,
             opacity: 0,
-            duration: 1,
+            duration: reduceMotionFilter(1),
             ease: "power3.in"
         }, "hide");
         tl.to(current.querySelectorAll("#hello .text, #hello .thumbs, #hello .arrow-big, .footer,  #permission form"), {
             y: 500,
             opacity: 0,
-            duration: 1,
+            duration: reduceMotionFilter(1),
             ease: "power3.in"
         }, "hide+=.2");
         tl.to(current.querySelectorAll("#hello, #permission"), {
             opacity: 0,
-            duration: 1,
+            duration: reduceMotionFilter(1),
             ease: "power3.in",
             onStart: () => {
                 darkmode.browserColorLight = "";
@@ -58,8 +58,7 @@ let transition_from_plurk = {
             }
         });
     },
-    enter: function (data) {
-        var done = this.async();
+    enter: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
 
@@ -69,14 +68,10 @@ let transition_from_plurk = {
         if (current.querySelector(".arrow-big")) current.querySelector(".arrow-big").style.opacity = 0;
 
         // Animate current view
-        animate.show(next, () => done());
+        await animate.show(next);
+        this.async();
     },
-    after: function () {
-        // Remove loading
-        loader.empty();
-
-        return true;
-    },
+    after: () => loader.empty(),
     from: {
         namespace: ['replurk2020', 'replurk2021']
     }

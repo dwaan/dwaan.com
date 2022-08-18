@@ -6,27 +6,22 @@ import loader from '../helpers/loader';
 let transition_to_lost = {
     name: 'to-lost',
     leave: () => true,
-    before: function (data) {
-        let done = this.async();
+    before: async function (data) {
+        // Hide current view
+        await animate.hide(data.current.container);
 
         // Display loading
-        loader.init();
+        await loader.init();
+        await loader.show(data.next.container);
 
-        // Hide current view
-        animate.hide(data.current.container, () => loader.show(data.next.container, () => done()));
+        this.async();
     },
-    enter: function (data) {
-        let done = this.async();
-
+    enter: async function (data) {
         // Animate current view
-        animate.show404(data.next.container, () => done());
+        await animate.show404(data.next.container);
+        this.async();
     },
-    after: function () {
-        // Remove loading
-        loader.empty();
-
-        return true;
-    },
+    after: () => loader.empty(),
     to: {
         namespace: ['lost']
     }
