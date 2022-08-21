@@ -4,7 +4,7 @@
 <head>
 	<?php
 	$title = "RePlurk 2021";
-	$description = "Unofficial Plurk year end recap";
+	$description = "Unofficial Plurk Year End Recap for 2021";
 	include_once "part_metacss.php";
 	?>
 </head>

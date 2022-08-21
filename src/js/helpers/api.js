@@ -13,7 +13,7 @@ var api = {
 
 			if (storage && !(url == "?fetch=logout" || url == "?request=token" || url == "?")) {
 				// Give sometime out to allow browser to process
-				setTimeout(async() => {
+				setTimeout(async () => {
 					const LZString = await import('lz-string');
 
 					resolve({
@@ -49,13 +49,9 @@ var api = {
 			}
 		});
 	},
-	clear: function () {
-		sessionStorage.clear();
-	},
-	abort: function () {
-		for (var i = 0; i < this.request.length; i++) {
-			this.request[i].abort();
-		}
+	clear: () => sessionStorage.clear(),
+	abort: () => {
+		for (var i = 0; i < this.request.length; i++) this.request[i].abort();
 		this.request = [];
 
 		return true;

@@ -4,7 +4,7 @@
 <head>
 	<?php
 	$title = "RePlurk 2020";
-	$description = "Unofficial Plurk year end recap";
+	$description = "Unofficial Plurk Year End Recap for 2020";
 	include_once "part_metacss.php";
 	?>
 </head>
@@ -75,12 +75,14 @@
 			</div>
 		</section>
 
-		<section id="nojs" class="middle">
-			<div class="text">
-				<h3>Javascript</h3>
-				<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
-			</div>
-		</section>
+		<noscript>
+			<section id="nojs" class="middle">
+				<div class="text">
+					<h3>Javascript</h3>
+					<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
+				</div>
+			</section>
+		</noscript>
 	</main>
 
 	<?php include_once "part_script.php"; ?>
