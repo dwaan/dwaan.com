@@ -50,7 +50,7 @@ var api = {
 		});
 	},
 	clear: () => sessionStorage.clear(),
-	abort: () => {
+	abort: function () {
 		for (var i = 0; i < this.request.length; i++) this.request[i].abort();
 		this.request = [];
 

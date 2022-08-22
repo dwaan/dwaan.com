@@ -18,8 +18,7 @@ var replurkview = {
 		afterEnter: async function (data) {
 			await replurkview.replurk2020.run(data.next.container);
 			this.async();
-		},
-		beforeLeave: () => gsap.killTweensOf(_qAll("header, .footer"))
+		}
 	},
 
 	// Replurk page 2021
@@ -41,8 +40,7 @@ var replurkview = {
 		afterEnter: async function (data) {
 			await replurkview.replurk2021.run(data.next.container);
 			this.async();
-		},
-		beforeLeave: () => gsap.killTweensOf(_qAll("header, .footer, #backtotop"))
+		}
 	}
 }
 

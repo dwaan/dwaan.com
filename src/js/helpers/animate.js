@@ -5,26 +5,28 @@ import { _q, removeStyle, addClass, removeClass, reduceMotionFilter } from './he
 
 // Animate functions
 var animate = {
-	top: function (el, tl) {
-		var top = el == window ? el.pageYOffset : el.scrollTop;
-		if (tl == null) tl = gsap;
+	top: function (el) {
+		return new Promise(resolve => {
+			var top = el == window ? el.pageYOffset : el.scrollTop;
 
-		// Scroll to top
-		var scroll = top / (window.outerHeight * 2);
-		var speed = reduceMotionFilter() ? .5 : 2;
-		if (scroll > 0) {
-			removeClass(_q("html"), "snap");
-			tl.to(el, {
-				scrollTo: 0,
-				duration: (scroll > speed) ? speed : scroll,
-				ease: "expo.inOut",
-				onComplete: function () {
-					addClass(_q("html"), "snap");
-				}
-			}, 0);
-		}
-
-		return tl;
+			// Scroll to top
+			var scroll = top / (window.outerHeight * 2);
+			var speed = reduceMotionFilter() ? .5 : 2;
+			if (scroll > 0) {
+				removeClass(_q("html"), "snap");
+				gsap.to(el, {
+					scrollTo: 0,
+					duration: (scroll > speed) ? speed : scroll,
+					ease: "expo.inOut",
+					onComplete: function () {
+						addClass(_q("html"), "snap");
+						resolve();
+					}
+				});
+			} else {
+				resolve();
+			}
+		});
 	},
 	show: function (next, nonsticky, footer) {
 		return new Promise(resolve => {
@@ -51,7 +53,6 @@ var animate = {
 				var els = next.querySelectorAll(".flares:not(.side)")
 				if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
 				if (!nonsticky) nonsticky = next.querySelectorAll(".main-text > *:not(.hidden), .arrow-big .arrow");
-				console.log(nonsticky);
 
 				// Animate text
 				tl.fromTo(nonsticky, {
@@ -82,7 +83,7 @@ var animate = {
 				}, 0);
 				// Run done after all all animation complete
 				tl.set(next, {
-					onComplete: () => resolve(true)
+					onComplete: () => resolve()
 				}, ">-" + length / 8);
 			}
 		});
@@ -180,7 +181,7 @@ var animate = {
 		});
 	},
 	hide: function (current, nonsticky, scrolltop) {
-		return new Promise(resolve => {
+		return new Promise(async resolve => {
 			if (current == undefined) resolve(false);
 			else {
 				if (nonsticky == undefined) nonsticky = false;
@@ -199,8 +200,7 @@ var animate = {
 				});
 
 				// Scroll to top
-				// if (scrolltop) tl = this.top(current, tl);
-				if (scrolltop) tl = this.top(window, tl);
+				if (scrolltop) await this.top(window);
 
 				// Hide current view
 				tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {

@@ -12,6 +12,15 @@ import transition_to_lost from './to-lost';
 /**
  * Collections of Barba.js Transitions
  */
-var transitions = [transition_once_default, transition_home_to_detail, transition_home_to_me, transition_home_to_hi, transition_hi_to_home, transition_from_lost, transition_to_lost, transition_from_plurk];
+var transitions = [
+    transition_once_default,
+    transition_home_to_detail,
+    transition_home_to_me,
+    transition_home_to_hi,
+    transition_hi_to_home,
+    transition_from_lost,
+    transition_to_lost,
+    transition_from_plurk
+];
 
 export default transitions;

@@ -1,7 +1,6 @@
 /* Plurk Statistics */
 
 .plurk {
-
     sub,
     sup {
         font-size: inherit;
@@ -1409,7 +1408,7 @@
 }
 
 
-/* Blocks order */
+/* Manually, Blocks order */
 .statistics {
 
     &.alltime {
@@ -1515,51 +1514,51 @@
         order: 200;
     }
 
-    .digdeeperloading {
+    &.digdeeperloading {
         order: 201;
     }
 
-    .mostmentionedbyme {
+    &.mostmentionedbyme {
         order: 202;
     }
 
-    .mostresponders {
+    &.mostresponders {
         order: 203;
     }
 
-    .sharedlinks {
+    &.sharedlinks {
         order: 204;
     }
 
-    .previewlinks {
+    &.previewlinks {
         order: 205;
     }
 
-    .sharedpictures {
+    &.sharedpictures {
         order: 206;
     }
 
-    .previewpics {
+    &.previewpics {
         order: 207;
     }
 
-    .mostinteraction {
+    &.mostinteraction {
         order: 208;
     }
 
-    .hashtags {
+    &.hashtags {
         order: 209;
     }
 
-    .emoticons {
+    &.emoticons {
         order: 210;
     }
 
-    .mediumnumber {
+    &.mediumnumber {
         order: 211;
     }
 
-    .mvp {
+    &.mvp {
         order: 212;
     }
 

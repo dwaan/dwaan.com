@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import loader from '../helpers/loader';
 import animate from '../helpers/animate';
 import darkmode from '../helpers/darkmode';
-import { reduceMotionFilter } from '../helpers/helper';
+import { _qAll, reduceMotionFilter } from '../helpers/helper';
 
 let transition_from_plurk = {
     name: 'from-plurk',
@@ -12,46 +12,51 @@ let transition_from_plurk = {
     before: async function (data) {
         var done = this.async();
         var current = data.current.container;
-        var tl = gsap.timeline();
+        var length = reduceMotionFilter(1);
+
+        gsap.killTweensOf(_qAll("header, .footer"));
 
         // Display loading
         await loader.init();
 
+        // Scroll top
+        await animate.top(window);
+
         // Hide current view
-        tl = animate.top(window, tl);
+        var tl = gsap.timeline();
         tl.set(current.querySelectorAll("#credits, #statistics"), {
             opacity: 0
-        }, "hide");
+        }, 0);
         tl.to(current.querySelectorAll("#hello .bgtext sub, #permission .bgtext sub"), {
             y: 100,
             opacity: 0,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in"
-        }, "hide");
+        }, 0);
         tl.to(current.querySelectorAll("#hello .bgtext sup, #permission .bgtext sup"), {
             y: -100,
             opacity: 0,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in"
-        }, "hide");
+        }, 0);
         tl.to(current.querySelectorAll("#hello .text, #hello .thumbs, #hello .arrow-big, .footer,  #permission form"), {
             y: 500,
             opacity: 0,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in"
-        }, "hide+=.2");
+        }, length / 5);
         tl.to(current.querySelectorAll("#hello, #permission"), {
             opacity: 0,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in",
             onStart: () => {
                 darkmode.browserColorLight = "";
                 darkmode.browserColorDark = "";
                 darkmode.setDarkMode(1);
             }
-        }, "hide+=.4");
+        }, length * 2 / 5);
         tl.set(current, {
-            onComplete: function () {
+            onComplete: () => {
                 done();
                 gsap.set(current.querySelectorAll("#credits"), {
                     opacity: 1
@@ -70,6 +75,7 @@ let transition_from_plurk = {
 
         // Animate current view
         await animate.show(next);
+
         this.async();
     },
     after: () => loader.empty(),

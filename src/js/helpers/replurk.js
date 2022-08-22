@@ -316,6 +316,8 @@ class replurk {
             else this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="line"><i/></span></h3></div>');
         },
         afterDraw: function (el) {
+            var length = reduceMotionFilter(1);
+
             if (hasClass(el, 'wrap')) {
                 var color = new colors();
                 var randomcolors = [color.getRandomColor(), color.getRandomColor()]
@@ -329,7 +331,7 @@ class replurk {
                     opacity: 0
                 }, {
                     opacity: 1,
-                    duration: reduceMotionFilter(0.5),
+                    duration: length / 2,
                     ease: "power3.out"
                 }, 0);
 
@@ -386,7 +388,7 @@ class replurk {
                                 progress: number,
                                 snap: "progress",
                                 ease: "power3.out",
-                                duration: reduceMotionFilter(duration),
+                                duration: duration,
                                 onUpdate: () => {
                                     el.querySelector(".big").textContent = plural(load.progress);
                                 }
@@ -476,26 +478,30 @@ class replurk {
             if (capture) {
                 capture.onclick = async () => {
                     if (!capture.generating) {
+                        var imgs = el.querySelectorAll("img");
+
                         capture.innerHTML = "Downloading images...";
                         capture.generating = true;
                         document.body.style.cursor = "wait";
 
-                        el.querySelectorAll("img").forEach(img => {
-                            if (!img.localUrl) {
-                                img.localUrl = true;
-                                img.setAttribute("src", api.url + "?img=" + img.getAttribute("src"));
-                            }
-                        });
+                        if (imgs.length > 0) {
+                            imgs.forEach(img => {
+                                if (!img.localUrl) {
+                                    img.localUrl = true;
+                                    img.setAttribute("src", api.url + "?img=" + img.getAttribute("src"));
+                                }
+                            });
 
-                        // Load and cache image
-                        await waitForImg(el.querySelectorAll("img"), (_, progress) => {
-                            capture.innerHTML = "Downloading images... (" + Math.round(progress) + "%)";
-                        });
+                            // Load and cache image
+                            await waitForImg(imgs, (_, progress) => {
+                                capture.innerHTML = "Downloading images... (" + Math.round(progress) + "%)";
+                            });
+                        }
                         capture.innerHTML = "Processing...";
 
                         html2canvas(el.querySelector(".anim"), {
                             backgroundColor: null,
-                            logging: false
+                            logging: false,
                         }).then(canvas => {
                             // Download the output
                             var link = document.createElement("a");
@@ -589,6 +595,7 @@ class replurk {
         drawUserList: async function (style, id, title, list) {
             var html = "";
             var max = list.length >= 5 ? 5 : list.length;
+            var length = reduceMotionFilter(1);
 
             this.drawHTML(style + " drawuserlist movetitle " + id, title, "<span class='info'>Downloading user data</span>");
             for (var index = 0; index < max; index++) {
@@ -625,9 +632,9 @@ class replurk {
                         scale: 1,
                         opacity: 1,
                         ease: "elastic.out(1.2, 0.5)",
-                        duration: reduceMotionFilter(.75),
+                        duration: length * 3 / 4,
                         stagger: {
-                            amount: .3,
+                            amount: length / 3,
                             from: "end"
                         }
                     }, 0);
@@ -650,9 +657,9 @@ class replurk {
                     }, {
                         y: 0,
                         opacity: 1,
-                        duration: reduceMotionFilter(1),
+                        duration: length,
                         ease: "power3.out",
-                        stagger: .3
+                        stagger: length / 3
                     }, 0);
 
                     return tl;
@@ -735,13 +742,14 @@ class replurk {
             // Update position
             if (!hidden || !node.hidden) {
                 var currentTop = position / (max - 1) * 100;
+                var length = reduceMotionFilter(1);
 
                 gsap.killTweensOf(node.el);
                 gsap.to(node.el, {
                     top: currentTop + "%",
                     opacity: opacity,
                     zIndex: zIndex,
-                    duration: reduceMotionFilter(.5),
+                    duration: length / 2,
                     ease: "power3.out",
                     onComplete: function () {
                         if (hidden) {
@@ -1215,6 +1223,7 @@ class replurk {
         },
         draw: function (item) {
             return new Promise(resolve => {
+                var length = reduceMotionFilter(1);
                 this.prev_count = item;
 
                 if (!this.next.querySelector(".statistics.loading")) {
@@ -1227,7 +1236,7 @@ class replurk {
                     progress: Math.round(item),
                     snap: "progress",
                     ease: "linear",
-                    duration: reduceMotionFilter(.24),
+                    duration: length / 4,
                     onUpdate: () => {
                         var el = this.next.querySelector(".loading .big");
                         if (el) el.innerHTML = load.progress + "%";
@@ -1266,6 +1275,8 @@ class replurk {
         },
         done: function () {
             return new Promise(resolve => {
+                var length = reduceMotionFilter(1);
+
                 if (this.isComplete()) {
                     var el = this.next.querySelector(".statistics.loading");
 
@@ -1277,15 +1288,15 @@ class replurk {
                         padding: 0,
                         margin: 0,
                         overflow: "hidden",
-                        duration: reduceMotionFilter(.5),
+                        duration: length / 2,
                         ease: "power3.out",
                         onComplete: () => {
                             el.remove();
                             scroll.refresh();
                             resolve();
                         }
-                    })
-                }
+                    });
+                } else resolve();
             });
         }
     }
@@ -1294,13 +1305,14 @@ class replurk {
     scrollAnimate = {
         credits: (tl) => {
             var next = this.next;
+            var length = reduceMotionFilter(1);
 
             tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
                 y: window.innerHeight * 1 / 8
             }, {
                 y: 0,
                 ease: "linear",
-                duration: reduceMotionFilter(2),
+                duration: length * 2,
             }, 0);
             tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
                 opacity: 0
@@ -1308,18 +1320,18 @@ class replurk {
                 opacity: 1,
                 stagger: {
                     from: 'end',
-                    amount: .1
+                    amount: length / 10
                 },
-                duration: reduceMotionFilter(1),
+                duration: length,
                 ease: "power3.in"
             }, 0);
             tl.fromTo(next.querySelectorAll("#credits .made"), {
                 opacity: 0
             }, {
                 opacity: 1,
-                duration: reduceMotionFilter(1),
+                duration: length,
                 ease: "power3.in"
-            }, .3);
+            }, length * 3 / 10);
 
             return tl;
         },
@@ -1327,18 +1339,13 @@ class replurk {
             var next = this.next;
 
             // Scroll animate statistics
-            scroll.push((tl) => {
-                tl = this.scrollAnimate.credits(tl);
-                return tl;
-            }, (tl) => {
-                return ScrollTrigger.create({
-                    trigger: next.querySelectorAll("#statistics"),
-                    start: "100%-=" + window.innerHeight + " 0",
-                    end: "100% 0",
-                    animation: tl,
-                    scrub: .5
-                });
-            });
+            scroll.push(tl => this.scrollAnimate.credits(tl), tl => ScrollTrigger.create({
+                trigger: next.querySelectorAll("#statistics"),
+                start: "100%-=" + window.innerHeight + " 0",
+                end: "100% 0",
+                animation: tl,
+                scrub: .5
+            }));
         },
         permisions: () => {
             var next = this.next;
@@ -1395,18 +1402,14 @@ class replurk {
             });
         },
         menu: () => {
-            var next = this.next;
-
             // Scroll animation menu and logout
-            scroll.push((tl) => {
-                return tl;
-            }, (tl) => {
+            scroll.push(tl => tl, tl => {
                 return ScrollTrigger.create({
                     trigger: 'main',
                     start: "0 0",
                     end: "100% 0",
                     animation: tl,
-                    onUpdate: (update) => {
+                    onUpdate: update => {
                         var el1 = '.logo, .size, .lamp, .switch';
                         var el2 = el1 + ", .footer > *";
 
@@ -1523,6 +1526,7 @@ class replurk {
     // Login Pages
     showLoginPage(tl) {
         var next = this.next;
+        var length = reduceMotionFilter(1);
 
         this.browserColor("green", 1);
         tl.fromTo(next.querySelectorAll("#permission"), {
@@ -1532,7 +1536,7 @@ class replurk {
             top: 0
         }, {
             opacity: 1,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in"
         });
         tl.fromTo(next.querySelectorAll("#permission .bgtext *"), {
@@ -1542,8 +1546,8 @@ class replurk {
         }, {
             y: 0,
             opacity: 1,
-            stagger: .2,
-            duration: reduceMotionFilter(1),
+            stagger: length / 5,
+            duration: length,
             ease: "power3.out",
             onComplete: () => {
                 gsap.set(next.querySelectorAll("#permission"), {
@@ -1551,12 +1555,13 @@ class replurk {
                     top: ""
                 });
             }
-        }, ">-.5");
+        }, ">-" + (length / 2));
 
         return tl;
     }
     hideLoginPage(tl) {
         var next = this.next;
+        var length = reduceMotionFilter(1);
 
         tl.set(next.querySelectorAll("#permission"), {
             position: "fixed",
@@ -1570,9 +1575,9 @@ class replurk {
             opacity: 0,
             stagger: {
                 from: "end",
-                amount: .2
+                amount: length / 5
             },
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in",
             onComplete: () => {
                 this.browserColor("yellow");
@@ -1582,7 +1587,7 @@ class replurk {
             opacity: 1
         }, {
             opacity: 0,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.in",
             onComplete: () => {
                 gsap.set(next.querySelectorAll("#permission"), {
@@ -1591,89 +1596,94 @@ class replurk {
                     top: ""
                 }, ">");
             }
-        }, ">-.2");
+        }, ">-" + (length / 4));
 
         return tl;
     }
     // Statistic Pages
-    showStatisticPages(tl) {
-        var next = this.next;
+    showStatisticPages() {
+        return new Promise(resolve => {
+            var next = this.next;
+            var length = reduceMotionFilter(1);
+            var tl = gsap.timeline();
 
-        tl.fromTo(next.querySelectorAll("#hello"), {
-            display: "",
-            opacity: 0
-        }, {
-            opacity: 1,
-            ease: "power3.in",
-            duration: reduceMotionFilter(1),
-            onStart: () => {
-                this.browserColor("green", .5);
-            }
-        }, ">-.25");
-        tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
-            display: "",
-            opacity: 0,
-            y: 200
-        }, {
-            opacity: 1,
-            y: 0,
-            duration: reduceMotionFilter(1),
-            stagger: .2,
-            ease: "power3.out"
-        }, ">-.5");
-        tl.fromTo(next.querySelectorAll(" #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
-            display: "",
-            opacity: 0,
-            y: 200
-        }, {
-            opacity: 1,
-            y: 0,
-            duration: reduceMotionFilter(1),
-            stagger: .2,
-            ease: "power3.out"
-        }, ">-.5");
-        tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
-            display: "",
-            opacity: 0
-        }, {
-            opacity: 1,
-            duration: reduceMotionFilter(.5),
-        }, ">-.5");
-
-        return tl;
+            tl.fromTo(next.querySelectorAll("#hello"), {
+                display: "",
+                opacity: 0
+            }, {
+                opacity: 1,
+                ease: "power3.in",
+                duration: length,
+                onStart: () => this.browserColor("green", .5)
+            }, length / 4);
+            tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
+                display: "",
+                opacity: 0,
+                y: 200
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: length,
+                stagger: length / 5,
+                ease: "power3.out"
+            }, length / 2);
+            tl.fromTo(next.querySelectorAll(" #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
+                display: "",
+                opacity: 0,
+                y: 200
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: length,
+                stagger: length / 5,
+                ease: "power3.out"
+            }, length / 2);
+            tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
+                display: "",
+                opacity: 0
+            }, {
+                opacity: 1,
+                duration: length / 2,
+                onComplete: () => resolve()
+            }, length / 2);
+        });
     }
-    hideStatisticPages(tl) {
-        var next = this.next;
+    hideStatisticPages() {
+        return new Promise(async resolve => {
+            var next = this.next;
+            var length = reduceMotionFilter(1);
+            var tl = gsap.timeline();
 
-        tl = animate.top(next, tl);
-        tl.fromTo(next.querySelectorAll(".footer > *, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
-            opacity: 1,
-            y: 0
-        }, {
-            opacity: 0,
-            y: 200,
-            duration: reduceMotionFilter(1),
-            stagger: {
-                from: "end",
-                amount: .2
-            },
-            ease: "power3.in"
-        }, ">-.2");
-        tl.set(next.querySelectorAll(".grant:not(#hello), .statistics"), {
-            opacity: 0
-        }, ">-.5");
-        tl.fromTo(next.querySelectorAll("#hello"), {
-            opacity: 1
-        }, {
-            opacity: 0,
-            duration: reduceMotionFilter(1),
-            ease: "power3.in",
-            onComplete: () => {
-                gsap.set(next.querySelectorAll(".grant"), { display: "none" });
-            }
-        }, ">-.5");
+            await animate.top(next);
 
-        return tl;
+            tl.fromTo(next.querySelectorAll(".footer > *, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
+                opacity: 1,
+                y: 0
+            }, {
+                opacity: 0,
+                y: 200,
+                duration: length,
+                stagger: {
+                    from: "end",
+                    amount: length / 5
+                },
+                ease: "power3.in"
+            }, length / 5);
+            tl.set(next.querySelectorAll(".grant:not(#hello), .statistics"), {
+                opacity: 0
+            }, length / 2);
+            tl.fromTo(next.querySelectorAll("#hello"), {
+                opacity: 1
+            }, {
+                opacity: 0,
+                duration: length,
+                ease: "power3.in",
+                onComplete: () => {
+                    gsap.set(next.querySelectorAll(".grant"), { display: "none" });
+                    resolve();
+                }
+            }, length / 2);
+        });
     }
 
     // Login messages
@@ -1698,27 +1708,27 @@ class replurk {
     }
 
     // Logout
-    requestLogout() {
+    async requestLogout() {
         var tl = gsap.timeline();
 
         api.abort();
 
         // Hide statistic pages
-        tl = this.hideStatisticPages(tl);
-        tl.set(this.next, {
-            onComplete: async () => {
-                await api.call("?fetch=logout");
-                this.statistics.clear();
-                api.clear();
-                this.login();
-                scroll.refresh();
-            }
-        });
+        await this.hideStatisticPages(tl);
+
+        // Logout
+        await api.call("?fetch=logout");
+        this.statistics.clear();
+        api.clear();
+        this.login();
+
+        scroll.refresh();
     }
 
     // Request token
     async requestToken(text) {
         var next = this.next;
+        var length = reduceMotionFilter(1);
         var tokenlink = next.querySelector("#tokenurl");
         tokenlink.textContent = "Connecting Plurk...";
 
@@ -1730,9 +1740,9 @@ class replurk {
         }, {
             y: 0,
             opacity: 1,
-            duration: reduceMotionFilter(1),
+            duration: length,
             ease: "power3.out"
-        }, 1);
+        }, length);
         tl.fromTo(next.querySelectorAll("#permission h1, #permission li"), {
             display: "",
             y: 50,
@@ -1740,10 +1750,10 @@ class replurk {
         }, {
             y: 0,
             opacity: 1,
-            stagger: .1,
-            duration: reduceMotionFilter(1),
+            stagger: length / 10,
+            duration: length,
             ease: "power3.out"
-        }, 1);
+        }, length);
 
         api.call("?request=token").then(data => {
             if (text) {
@@ -1764,6 +1774,7 @@ class replurk {
         var plurker = this.me;
         var next = this.next;
         var extra = "";
+        var length = reduceMotionFilter(1);
 
         // plurks_count
         var days = (plurker.anniversary.years * 365) + plurker.anniversary.days;
@@ -1799,7 +1810,7 @@ class replurk {
             }, {
                 y: window.innerHeight * -3 / 4,
                 ease: "linear",
-                duration: reduceMotionFilter(1),
+                duration: length,
             }, 0);
             tl.fromTo(next.querySelectorAll("#hello .bgtext sup"), {
                 y: 0,
@@ -1810,7 +1821,7 @@ class replurk {
                 x: window.innerHeight * -1 / 10,
                 rotation: -10,
                 ease: "linear",
-                duration: reduceMotionFilter(1),
+                duration: length,
             }, 0);
             tl.fromTo(next.querySelectorAll("#hello .bgtext sub"), {
                 y: 0,
@@ -1821,7 +1832,7 @@ class replurk {
                 x: window.innerHeight * 1 / 10,
                 rotation: 10,
                 ease: "linear",
-                duration: reduceMotionFilter(1),
+                duration: length,
             }, 0);
             tl.fromTo(next.querySelectorAll("#hello .arrow-big"), {
                 y: 0,
@@ -1830,7 +1841,7 @@ class replurk {
                 y: window.innerHeight * 1 / 4,
                 opacity: 0,
                 ease: "linear",
-                duration: reduceMotionFilter(.25),
+                duration: length / 4,
             }, 0);
             return tl;
         }, tl => ScrollTrigger.create({
@@ -1936,7 +1947,6 @@ class replurk {
         this.loading.loop(this.plurks.length);
 
         // Get the responses for each plurks in parallel
-        var index = 0;
         this.plurks.sort((a, b) => new Date(a.posted) < new Date(b.posted));
         for (var plurk of this.plurks) {
             var date = new Date(plurk.posted);
@@ -2032,21 +2042,20 @@ class replurk {
             this.me = data.message;
 
             await this.displayPlurkerData();
+            this.displayStatistics();
 
             // Scroll top top
-            tl = animate.top(next, tl);
+            await animate.top(next);
 
             // Hide login page
             if (clear) next.querySelector("#permission").style.display = "none";
             else tl = this.hideLoginPage(tl);
 
             // Show statistic pages
-            this.showStatisticPages(tl);
+            await this.showStatisticPages(tl);
 
             // Add logout event
-            next.querySelector("#logout").onclick = () => {
-                this.requestLogout();
-            }
+            next.querySelector("#logout").onclick = () => this.requestLogout();
 
             // Scroll animate statistics
             this.scrollAnimate.statistics();
@@ -2054,8 +2063,6 @@ class replurk {
             this.scrollAnimate.browserBar();
 
             scroll.refresh();
-
-            this.displayStatistics();
         } else {
             // Hide statistic pages
             if (clear) next.querySelectorAll(".grant").forEach(function (el) { el.style.display = "none"; });
@@ -2073,17 +2080,14 @@ class replurk {
         }
 
         // Snap
-        next.querySelectorAll("section.snap").forEach(el => {
-            scroll.snap(el);
-        });
-        next.querySelectorAll("section.snap-bottom").forEach(el => {
-            scroll.snap(el, "bottom");
-        });
+        next.querySelectorAll("section.snap").forEach(el => scroll.snap(el));
+        next.querySelectorAll("section.snap-bottom").forEach(el => scroll.snap(el, "bottom"));
     }
 
     // Run the API call
     run(el) {
         return new Promise(resolve => {
+            var length = reduceMotionFilter(1);
             this.next = el;
             this.browserColor("yellow");
 
@@ -2092,7 +2096,7 @@ class replurk {
                 opacity: 0
             }, {
                 opacity: 1,
-                duration: reduceMotionFilter(.5),
+                duration: length,
                 ease: "power3.in",
                 onComplete: async () => {
                     // Change color
@@ -2107,6 +2111,5 @@ class replurk {
         });
     }
 }
-
 
 export default replurk;

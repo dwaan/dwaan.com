@@ -34,10 +34,12 @@ barba.hooks.beforeEnter(() => {
 	window.scrollTo(0, 0);
 });
 barba.hooks.afterEnter(data => {
-	// Read more
-	data.next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
+	var next = data.next;
 
-	if (!data.next.namespace.includes("replurk")) header.arrow(data.next.container);
+	// Read more
+	next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
+
+	if (!next.namespace.includes("replurk")) header.arrow(next.container);
 
 	ScrollTrigger.refresh();
 	gsap.matchMediaRefresh();
