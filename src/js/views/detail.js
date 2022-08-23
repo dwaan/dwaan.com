@@ -6,7 +6,7 @@ import { _q, _qAll, hoverEvents, reduceMotionFilter } from '../helpers/helper';
 
 var detailview = {
 	namespace: 'detail',
-	beforeEnter: data => {
+	afterEnter: async function (data) {
 		var next = data.next.container;
 
 		// Style - Plain
@@ -38,7 +38,7 @@ var detailview = {
 						trigger: el.querySelectorAll(".thumbs"),
 						start: "0 100%",
 						end: "50% 100%",
-						scrub: reduceMotionFilter() ? true :5,
+						scrub: reduceMotionFilter() ? true : 5,
 						animation: tl
 					});
 				});
@@ -59,7 +59,7 @@ var detailview = {
 						trigger: el,
 						start: "0 100%",
 						end: "100% 0",
-						scrub: reduceMotionFilter() ? true :1,
+						scrub: reduceMotionFilter() ? true : 1,
 						animation: tl
 					});
 				});
@@ -1013,7 +1013,7 @@ var detailview = {
 					trigger: that.before,
 					start: "0 90%",
 					end: (window.innerHeight / 5) + " 90%",
-					scrub: reduceMotionFilter() ? true :1,
+					scrub: reduceMotionFilter() ? true : 1,
 					animation: tl
 				});
 			});
@@ -1034,7 +1034,7 @@ var detailview = {
 					trigger: el,
 					start: "0 90%",
 					end: "50% 90%",
-					scrub: reduceMotionFilter() ? true :.75,
+					scrub: reduceMotionFilter() ? true : .75,
 					animation: tl
 				});
 			});
@@ -1050,7 +1050,6 @@ var detailview = {
 			});
 		});
 
-
 		// Snap
 		next.querySelectorAll("section.snap").forEach(el => {
 			scroll.snap(el);
@@ -1061,14 +1060,17 @@ var detailview = {
 		next.querySelectorAll("section.snap-center").forEach(el => {
 			scroll.snap(el, "center");
 		});
+
+		// ;)
+		console.info("Right now, you're reading one of my portfolio. Enjoy!");
+		this.async();
 	},
 	beforeLeave: () => {
 		// Remove event listener from slideshow
 		gsap.utils.toArray(".style-slideshow").forEach(slideshow => {
 			window.removeEventListener("resize", slideshow.fixedSize);
 		});
-	},
-	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!")
+	}
 }
 
 export default detailview;

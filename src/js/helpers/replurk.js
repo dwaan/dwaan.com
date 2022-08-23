@@ -474,57 +474,60 @@ class replurk {
             }
 
             // Capture function
-            var capture = el.querySelector(".capture small");
-            if (capture) {
-                capture.onclick = async () => {
-                    if (!capture.generating) {
-                        var imgs = el.querySelectorAll("img");
-
-                        capture.innerHTML = "Downloading images...";
-                        capture.generating = true;
-                        document.body.style.cursor = "wait";
-
-                        if (imgs.length > 0) {
-                            imgs.forEach(img => {
-                                if (!img.localUrl) {
-                                    img.localUrl = true;
-                                    img.setAttribute("src", api.url + "?img=" + img.getAttribute("src"));
-                                }
-                            });
-
-                            // Load and cache image
-                            await waitForImg(imgs, (_, progress) => {
-                                capture.innerHTML = "Downloading images... (" + Math.round(progress) + "%)";
-                            });
-                        }
-                        capture.innerHTML = "Processing...";
-
-                        html2canvas(el.querySelector(".anim"), {
-                            backgroundColor: null,
-                            logging: false,
-                        }).then(canvas => {
-                            // Download the output
-                            var link = document.createElement("a");
-                            link.style.display = "none";
-                            link.download = "replurk" + this.parent.year + "-" + Date.now() + ".webp";
-                            link.href = canvas.toDataURL();
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            link.remove();
-
-                            capture.innerHTML = "Done";
-                            document.body.style.cursor = "default";
-                            setTimeout(() => {
-                                capture.innerHTML = "Redownload";
-                                capture.generating = false;
-                            }, 3000);
-                        });
-                    }
-                }
-            }
+            this.capture(el);
 
             scroll.refresh();
+        },
+        capture: (el) => {
+            var capture = el.querySelector(".capture small");
+            if (!capture) return;
+
+            capture.onclick = async () => {
+                if (capture.generating) return;
+
+                var imgs = el.querySelectorAll("img");
+
+                // Informing user the process is starting
+                capture.generating = true;
+                document.body.style.cursor = "wait";
+
+                // Proxying images
+                imgs.forEach(img => {
+                    if (!img.getAttribute("src").includes("http") || img.localUrl) return;
+
+                    img.localUrl = true;
+                    img.setAttribute("src", api.url + "?img=" + img.getAttribute("src"));
+                });
+                // Load and cache image
+                await waitForImg(imgs, (_, progress) => {
+                    capture.innerHTML = "Downloading images... (" + Math.round(progress) + "%)";
+                });
+
+                // HTML to Canvas magic
+                capture.innerHTML = "Processing...";
+                var canvas = await html2canvas(el.querySelector(".anim"), {
+                    backgroundColor: null,
+                    logging: false,
+                });
+
+                // Download the output
+                var link = document.createElement("a");
+                link.style.display = "none";
+                link.download = "replurk" + this.year + "-" + Date.now() + ".png";
+                link.href = canvas.toDataURL();
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                link.remove();
+
+                // Reset button after 3s
+                capture.innerHTML = "Done";
+                document.body.style.cursor = "default";
+                setTimeout(() => {
+                    capture.innerHTML = "Redownload";
+                    capture.generating = false;
+                }, 3000);
+            }
         },
         wrapper: function (style, text, background) {
             if (background) return '<div class="statistics middle wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
@@ -2041,7 +2044,10 @@ class replurk {
         if (data.success) {
             this.me = data.message;
 
+            // Initial Plurk statistics
             await this.displayPlurkerData();
+
+            // Display the rest of the statistics
             this.displayStatistics();
 
             // Scroll top top

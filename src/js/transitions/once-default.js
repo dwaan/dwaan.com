@@ -39,6 +39,7 @@ let transition_once_default = {
         this.async();
     },
     enter: async function (data) {
+        var done = this.async();
         var current = data.current.container;
         var next = data.next.container;
 
@@ -50,7 +51,7 @@ let transition_once_default = {
         // Animate current view
         await animate.show(next);
 
-        this.async();
+        done();
     },
     after: () => loader.empty()
 }

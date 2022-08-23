@@ -64,14 +64,10 @@
 
         <section class="middle full home-replurk">
             <div class="padding">
-                <h2 class="plurktitle">RePlurk</h2>
-                <h3 class="plurksubtitle"><a href="./replurk2021">2021</a> / <a href="./replurk2020">2020</a></h3>
-                <noscript>
-                    <p>You need to enable javascript to open these pages</p>
-                </noscript>
+                <h2 class="plurktitle"><a href="./replurk" aria-label="RePlurk">RePlurk</a></h2>
             </div>
             <div class="arrow-small">
-                <a href="./replurk2021" class="arrow">
+                <a href="./replurk" class="arrow">
                     <span>Weekend Project</span>
                 </a>
             </div>

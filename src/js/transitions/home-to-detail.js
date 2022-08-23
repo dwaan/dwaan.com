@@ -33,18 +33,15 @@ let transition_home_to_detail = {
         // Animate Next view
         await animate.show(next, next.querySelectorAll(".arrow, .year"));
 
-        this.async();
-    },
-    after: function (data) {
-        var next = data.next.container;
-
         // Reset current element values
         removeStyle(next);
         next.style.opacity = 1;
 
-        // Remove loading
-        return loader.empty();
+        loader.empty();
+        this.async();
     },
+    // Somehow this event doesn't work in this page
+    // after: () => loader.empty(),
     from: {
         namespace: ['home']
     },

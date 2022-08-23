@@ -139,8 +139,6 @@ main {
 	>hr {
 		display: none;
 	}
-
-
 }
 
 h1 {
@@ -250,16 +248,21 @@ textarea {
 
 /* make img inside picture tag follow picture size */
 img {
-	display: block;
+	// Do not change to non inline
+	// or it will messed up html2canvas rendering
+	display: inline-block;
 
 	&.rounded {
 		border-radius: var(--pads);
 	}
 }
 
-picture img {
-	width: 100% !important;
-	height: auto !important;
+picture {
+	img {
+		display: block;
+		width: 100% !important;
+		height: auto !important;
+	}
 }
 
 /* Browser Upgrade Prompt */
@@ -1201,6 +1204,20 @@ header {
 	&.aai .color li {
 		border-radius: 100%;
 	}
+
+	.cta {
+		background-color: var(--black);
+		color: var(--white);
+		padding: var(--pads) var(--padl);
+		border-radius: calc(var(--pads) / 2);
+		margin-top: var(--padm);
+		text-decoration: none;
+		transition: background-color .125s ease-in;
+
+		&:hover {
+			background-color: var(--red);
+		}
+	}
 }
 
 
@@ -1418,14 +1435,41 @@ header {
 		position: absolute;
 		width: 100vw;
 		height: 100vh;
-		display: flex;
+		display: block;
 		justify-content: center;
 		align-items: center;
+		pointer-events: none;
 
 		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
 			opacity: .35;
-			transform-origin: center;
-			transform: rotate(-5deg);
+			transform: translate(-50%, -50%) rotate(-5deg);
+		}
+	}
+
+	&.style-background-cover {
+		.text {
+			width: calc(var(--pic-w) * 4/3);
+		}
+
+		.thumbs img {
+			opacity: .75;
+		}
+	}
+
+	&.style-background-basic {
+		background-color: transparent;
+
+		.text {
+			display: flex;
+			width: initial;
+		}
+
+		.thumbs img {
+			opacity: 1;
+			transform: translate(-50%, -50%) rotate(0deg);
 		}
 	}
 }
@@ -1496,7 +1540,6 @@ header {
 		order: 3
 	}
 
-
 	&.style-angled-individual {
 		height: auto;
 		background-color: transparent;
@@ -1526,6 +1569,12 @@ header {
 
 		.color li {
 			border-radius: 100px;
+		}
+	}
+
+	&.style-angled-straight {
+		.thumbs picture {
+			border-radius: var(--padl);
 		}
 	}
 }

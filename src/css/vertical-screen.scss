@@ -693,13 +693,13 @@ header {
 
 	picture {
 		width: var(--pic-w);
-		height: var(--pic-h);
+		height: auto;
 		margin: 0;
 		transform: rotate(-5deg);
 
 		@media screen and (min-height: mixins.$screen-small) {
 			width: calc(1.5 * var(--pic-w));
-			height: calc(1.5 * var(--pic-h));
+			height: auto;
 		}
 	}
 

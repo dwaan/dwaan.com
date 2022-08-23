@@ -30,7 +30,7 @@ var animate = {
 	},
 	show: function (next, nonsticky, footer) {
 		return new Promise(resolve => {
-			if (next == undefined) resolve(false);
+			if (next == undefined) resolve();
 			else {
 				var length = reduceMotionFilter(1);
 
