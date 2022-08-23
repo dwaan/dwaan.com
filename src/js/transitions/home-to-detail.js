@@ -37,11 +37,9 @@ let transition_home_to_detail = {
         removeStyle(next);
         next.style.opacity = 1;
 
-        loader.empty();
         this.async();
     },
-    // Somehow this event doesn't work in this page
-    // after: () => loader.empty(),
+    after: () => loader.empty(),
     from: {
         namespace: ['home']
     },

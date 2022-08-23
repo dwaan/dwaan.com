@@ -6,7 +6,7 @@ import { _q, _qAll, hoverEvents, reduceMotionFilter } from '../helpers/helper';
 
 var detailview = {
 	namespace: 'detail',
-	afterEnter: async function (data) {
+	afterEnter: data => {
 		var next = data.next.container;
 
 		// Style - Plain
@@ -200,7 +200,6 @@ var detailview = {
 				});
 			});
 		});
-
 
 		// Style - Spread
 		next.querySelectorAll(".style-spread:not(.style-spread-big)").forEach(el => {
@@ -1063,7 +1062,6 @@ var detailview = {
 
 		// ;)
 		console.info("Right now, you're reading one of my portfolio. Enjoy!");
-		this.async();
 	},
 	beforeLeave: () => {
 		// Remove event listener from slideshow
