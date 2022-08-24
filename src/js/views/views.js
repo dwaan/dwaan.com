@@ -12,4 +12,7 @@ import plurkview from './plurk';
  */
 var views = [homeview, detailview, meview, hiview, lostview, plurkview.replurk2020view, plurkview.replurk2021view];
 
+// Make accesable
+window.plurkview = plurkview;
+
 export default views;

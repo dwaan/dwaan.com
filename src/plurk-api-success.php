@@ -10,10 +10,10 @@
             var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
 
             if (namespace == "replurk2021") {
-                window.opener.replurkview.replurk2020.login();
+                window.opener.plurkview.replurk2020.login();
                 namespace = "";
             } else if (namespace == "replurk2020") {
-                window.opener.replurkview.replurk2020.login();
+                window.opener.plurkview.replurk2020.login();
                 namespace = "";
             } else if (namespace == "replurk") {
                 window.opener.replurk.login();
@@ -22,7 +22,6 @@
 
             if (namespace == "") window.close();
         } catch (e) {
-            console.log(window.opener);
             console.log(e);
         }
     </script>
