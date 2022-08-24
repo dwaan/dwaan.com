@@ -19,43 +19,40 @@ var scroll = {
 		var markers = (params.markers) ? params.markers : false;
 		var horizontal = (params.horizontal) ? params.horizontal : false;
 		var scroller = (params.scroller) ? params.scroller : window;
-		var that = this;
 
-		gsap.utils.toArray(elements).forEach(function (element, index) {
+		gsap.utils.toArray(elements).forEach((element, index) => {
 			var y = reduceMotionFilter() ? 0 : delta + (15 * index);
 			var trigger = (params.trigger) ? params.trigger : element.parentNode;
 			if (!move) y = 0;
 
-			that.l = that.tl.push(gsap.timeline()) - 1;
+			this.l = this.tl.push(gsap.timeline()) - 1;
 
-			if (horizontal) {
-				that.tl[that.l].fromTo(element, {
-					x: y,
-					opacity: 0,
-				}, {
-					x: 0,
-					opacity: 1,
-					ease: "ease.out"
-				}, 0);
-			} else {
-				that.tl[that.l].fromTo(element, {
-					y: y,
-					opacity: 0,
-				}, {
-					y: 0,
-					opacity: 1,
-					ease: "ease.out"
-				}, 0);
-			}
+			// Don't remove, fixing bug in beforeEnter
+			gsap.set(element, {
+				x: horizontal ? y : 0,
+				y: horizontal ? 0 : y,
+				opacity: 0,
+			});
 
-			that.st.push(ScrollTrigger.create({
+			this.tl[this.l].fromTo(element, {
+				x: horizontal ? y : 0,
+				y: horizontal ? 0 : y,
+				opacity: 0,
+			}, {
+				x: 0,
+				y: 0,
+				opacity: 1,
+				ease: "ease.out"
+			}, 0);
+
+			this.st.push(ScrollTrigger.create({
 				scroller: scroller,
 				markers: markers,
 				trigger: trigger,
 				start: "0 " + position,
 				end: "+=175 " + position,
 				scrub: reduceMotionFilter() ? true : 2,
-				animation: that.tl[that.l]
+				animation: this.tl[this.l]
 			}));
 		});
 	},
@@ -68,6 +65,11 @@ var scroll = {
 		if (!position) position = "85%";
 		gsap.utils.toArray(elements).forEach(function (element) {
 			var y = reduceMotionFilter() ? 0 : gsap.utils.random(250, 500, 5) + "px";
+
+			// Don't remove, fixing bug in beforeEnter
+			gsap.set(element, {
+				y: y
+			});
 
 			that.l = that.tl.push(gsap.timeline()) - 1;
 			that.tl[that.l].fromTo(element, {

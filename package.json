@@ -20,7 +20,6 @@
 	},
 	"homepage": "https://github.com/dwaan/dwaan#readme",
 	"devDependencies": {
-		"autoprefixer": "^10.4.8",
 		"browser-sync": "^2.27.10",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
@@ -45,7 +44,7 @@
 	"browserslist": [
 		"last 100 version",
 		"> 100%",
-		"IE 8"
+		"IE 10"
 	],
 	"cssnano": {
 		"preset": [

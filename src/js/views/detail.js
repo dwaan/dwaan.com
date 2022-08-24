@@ -6,7 +6,7 @@ import { _q, _qAll, hoverEvents, reduceMotionFilter, hasClass } from '../helpers
 
 var detailview = {
 	namespace: 'detail',
-	afterEnter: data => {
+	beforeEnter: data => {
 		var next = data.next.container;
 
 		// Style - Plain
@@ -286,6 +286,10 @@ var detailview = {
 			});
 		});
 		next.querySelectorAll(".style-spread-big").forEach(el => {
+			// Move the text
+			scroll.moveText({
+				elements: el.querySelectorAll(".titles > *, p")
+			});
 			// Scroll animation
 			var screen = gsap.matchMedia();
 
@@ -347,7 +351,6 @@ var detailview = {
 				});
 			});
 		});
-
 		// Style - Spread Left
 		next.querySelectorAll(".style-spread-left").forEach(el => {
 			// Move the text
@@ -1110,10 +1113,8 @@ var detailview = {
 		next.querySelectorAll("section.snap-center").forEach(el => {
 			scroll.snap(el, "center");
 		});
-
-		// ;)
-		console.info("Right now, you're reading one of my portfolio. Enjoy!");
 	},
+	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!"),
 	beforeLeave: () => {
 		// Remove event listener from slideshow
 		gsap.utils.toArray(".style-slideshow").forEach(slideshow => {

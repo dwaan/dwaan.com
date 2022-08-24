@@ -15,19 +15,14 @@ const
 function js() {
 	return gulp.src(['src/js/main.js'])
 		.pipe(webpack({
-			// watch: true,
 			devtool: 'source-map',
-			mode: 'development',
-			// mode: 'production',
+			mode: 'production',
 			output: {
 				filename: 'bundle.js',
 				clean: true
 			}
 		}))
-		.pipe(gulp.dest('./js/'));
-}
-function js_refresh() {
-	return gulp.src(['js/*.js'])
+		.pipe(gulp.dest('./js/'))
 		.pipe(browserSync.stream());
 }
 
@@ -121,7 +116,6 @@ exports.default = function () {
 	});
 	gulp.watch('gulpfile.js', process.exit);
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js);
-	gulp.watch(['js/*.js'], { ignoreInitial: false }, js_refresh);
 	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/plurk.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
 	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);

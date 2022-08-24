@@ -22,6 +22,7 @@ let transition_once_default = {
         // Animate current view and header
         if (data.next.namespace == "lost") await animate.show404(next);
         else if (data.next.namespace.includes("replurk")) await animate.showinstant(next);
+        else if (data.next.namespace.includes("detail")) animate.show(next, next.querySelector("#nothing"));
         else await animate.show(next);
 
         // Empty loading
@@ -39,7 +40,6 @@ let transition_once_default = {
         this.async();
     },
     enter: async function (data) {
-        var done = this.async();
         var current = data.current.container;
         var next = data.next.container;
 
@@ -51,7 +51,7 @@ let transition_once_default = {
         // Animate current view
         await animate.show(next);
 
-        done();
+        this.async();
     },
     after: () => loader.empty()
 }
