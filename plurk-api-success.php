@@ -1,17 +1,22 @@
-<!doctype html><html lang="en"><head><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login Success</title><script>var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
+<!doctype html><html lang="en"><head><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login Success</title><script>try {
+            var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
 
-        if (namespace == "replurk2021") {
-            window.opener.replurk2021.login();
-            namespace = "";
-        } else if (namespace == "replurk2020") {
-            window.opener.replurk2020.login();
-            namespace = "";
-        } else if (namespace == "replurk") {
-            window.opener.replurk.login();
-            namespace = "";
-        }
+            if (namespace == "replurk2021") {
+                window.opener.replurkview.replurk2020.login();
+                namespace = "";
+            } else if (namespace == "replurk2020") {
+                window.opener.replurkview.replurk2020.login();
+                namespace = "";
+            } else if (namespace == "replurk") {
+                window.opener.replurk.login();
+                namespace = "";
+            }
 
-        if (namespace == "") window.close();</script><meta name="theme-color" content="#ffffff"><style>* {
+            if (namespace == "") window.close();
+        } catch (e) {
+            console.log(window.opener);
+            console.log(e);
+        }</script><meta name="theme-color" content="#ffffff"><style>* {
             line-height: 1.2;
             margin: 0;
         }
