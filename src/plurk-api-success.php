@@ -16,7 +16,7 @@
                 window.opener.plurkview.replurk2020.login();
                 namespace = "";
             } else if (namespace == "replurk") {
-                window.opener.replurk.login();
+                window.opener.plurkview.replurk.login();
                 namespace = "";
             }
 
