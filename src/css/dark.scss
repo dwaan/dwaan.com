@@ -44,6 +44,7 @@
     }
 
     .logo {
+
         &.musiku,
         &.tas {
             filter: invert(100%);
@@ -100,9 +101,20 @@
     }
 
     .style-slideshow {
+
         .before,
         .after {
             background-image: url(../img/arrow-white.svg);
+        }
+    }
+
+
+    .style-background {
+        &.style-background-cover,
+        &.style-background-basic {
+            .text {
+                background-color: rgba(0, 0, 0, .9);
+            }
         }
     }
 
@@ -125,7 +137,6 @@
             }
         }
     }
-
 }
 
 .dark {

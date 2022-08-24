@@ -494,8 +494,6 @@ header {
 	}
 
 	picture {
-		width: var(--pic-w);
-		height: var(--pic-h);
 		margin: 0 var(--pic-m);
 
 		&:nth-child(2n+1) {

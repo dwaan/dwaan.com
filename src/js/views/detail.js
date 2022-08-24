@@ -2,7 +2,7 @@
 
 import { gsap, ScrollTrigger } from 'gsap/all';
 import scroll from "../helpers/scroll";
-import { _q, _qAll, hoverEvents, reduceMotionFilter } from '../helpers/helper';
+import { _q, _qAll, hoverEvents, reduceMotionFilter, hasClass } from '../helpers/helper';
 
 var detailview = {
 	namespace: 'detail',
@@ -318,17 +318,21 @@ var detailview = {
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				scroll.push(tl => {
 					for (let idx = 1; idx <= 3; idx++) {
-						tl.fromTo(el.querySelectorAll(".pic-" + idx), {
-							top: (9.5 - (idx * 5 / 6)) * 10 + "%",
-							left: (12.25 + (idx * 5 / 4)) * 10 + "%",
-							rotation: (idx + 2) * 5
-						}, {
-							top: (4.5 - (idx * 5 / 6)) * 10 + "%",
-							left: (2.25 + (idx * 5 / 4)) * 10 + "%",
-							rotation: (idx - 2) * 5,
-							duration: 1,
-							ease: "expo"
-						}, (idx - 1) * .064);
+						var pic = el.querySelector(".pic-" + idx);
+
+						if (pic) {
+							tl.fromTo(pic, {
+								top: (9.5 - (idx * 5 / 6)) * 10 + "%",
+								left: (12.25 + (idx * 5 / 4)) * 10 + "%",
+								rotation: (idx + 2) * 5
+							}, {
+								top: hasClass(pic, "top") ? "5%" : (4.5 - (idx * 5 / 6)) * 10 + "%",
+								left: hasClass(pic, "top") ? "15%" : (2.25 + (idx * 5 / 4)) * 10 + "%",
+								rotation: (idx - 2) * 5,
+								duration: 1,
+								ease: "expo"
+							}, (idx - 1) * .064);
+						}
 					}
 
 					return tl;
@@ -410,7 +414,7 @@ var detailview = {
 			var thumbs = el.querySelector(".thumbs");
 			// Move text
 			scroll.moveText({
-				elements: el.querySelectorAll(".text h2, .text li")
+				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p")
 			});
 			ScrollTrigger.defaults({
 				start: "0 100%",
@@ -767,14 +771,14 @@ var detailview = {
 		});
 
 		// Style - Background
-		next.querySelectorAll(".style-background").forEach(el => {
+		next.querySelectorAll(".style-background:not(.style-background-basic)").forEach(el => {
 			var elPicture = el.querySelectorAll(".thumbs");
 			// Scroll pictures
 			scroll.push(tl => {
 				elPicture.forEach(function (picture) {
 					tl.fromTo(picture, {
 						x: "1%",
-						y: "-50%"
+						y: "-50%",
 					}, {
 						x: "-1%",
 						y: "50%",
@@ -799,6 +803,53 @@ var detailview = {
 						y: "100%"
 					}, {
 						y: "-100%",
+						ease: "linear"
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: reduceMotionFilter() ? true : .5,
+						animation: tl
+					});
+				});
+			});
+		});
+		next.querySelectorAll(".style-background-basic").forEach(el => {
+			var elPicture = el.querySelectorAll(".thumbs");
+			// Scroll pictures
+			scroll.push(tl => {
+				elPicture.forEach(function (picture) {
+					tl.fromTo(picture, {
+						x: "0",
+						y: "-50%"
+					}, {
+						x: "0",
+						y: "50%",
+						ease: "linear"
+					}, 0);
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 0",
+					scrub: reduceMotionFilter() ? true : true,
+					animation: tl
+				});
+			});
+			// Scroll text
+			el.querySelectorAll(".text").forEach(text => {
+				scroll.push(tl => {
+					tl.fromTo(text, {
+						y: "50%"
+					}, {
+						y: "-50%",
 						ease: "linear"
 					}, 0);
 
