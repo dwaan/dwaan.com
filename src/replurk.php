@@ -12,7 +12,7 @@
 <body data-barba="wrapper">
     <?php include_once "part_head.php" ?>
 
-    <main data-barba="container" data-barba-namespace="detail" class="detail aai">
+    <main data-barba="container" data-barba-namespace="detail" class="detail replurk">
         <!-- <img src="/dwaan/img/qr/aai.svg" width="64" height="64" alt="Dwan - RePlurk" class="print qr" hidden /> -->
 
         <hr />
@@ -65,7 +65,7 @@
                 <div class="titles">
                     <h2>Hand Coded&nbsp;<br hidden />From Scratch</h2>
                 </div>
-                <p>The web app contain pure JavaScript code I created from scratch. With no framework and also with minimum overhead library, so it should run fast.</p>
+                <p>Just like a cat who like to scratch, I created this web app using pure JavaScript code. I use no framework and also with minimum overhead library. Same like this website actually. With that, the web app should run fast.</p>
                 <!-- <ol class="zero">
                     <li>The web app contain pure JavaScript code I created from scratch. With no framework and also with minimum overhead library, so it should run fast.</li>
                     <li>Designs were concepted inside my mind and implemented right away into the code. It's vibrant in color with simple layouting.</li>
