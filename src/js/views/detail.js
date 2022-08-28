@@ -1074,7 +1074,7 @@ var detailview = {
 		// Smaller one
 		next.querySelectorAll(".style-slideshow-small").forEach(el => {
 			scroll.push(tl => {
-				tl.fromTo(el.children[0].querySelectorAll("picture"), {
+				tl.fromTo(el.querySelectorAll("picture"), {
 					x: "200%"
 				}, {
 					x: 0,
@@ -1091,7 +1091,36 @@ var detailview = {
 					animation: tl
 				});
 			});
-			//
+		});
+
+		// Style - Reveal
+		next.querySelectorAll(".style-reveal").forEach(el => {
+			var length = reduceMotionFilter(1);
+			var screen = gsap.matchMedia();
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					var thumb = el.querySelector(".thumbs");
+
+					tl.fromTo(thumb, {
+						y: thumb.offsetHeight * -1
+					}, {
+						y: 0,
+						ease: "linear",
+						duration: length
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 100%",
+						scrub: true,
+						animation: tl
+					});
+				});
+			});
 		});
 
 		// Links

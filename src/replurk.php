@@ -118,9 +118,11 @@
 
         <hr />
 
-        <section class="middle style-single-image style-reveal snap-bottom">
+        <section class="middle style-single-image style-reveal clip snap-bottom">
             <div class="thumbs">
-                <img src="/dwaan/img/replurk/replurk-3.webp" width="100%" height="" alt="RePlurk - Page Thank Your - by Dwan" />
+                <picture class="pic-3">
+                    <img src="/dwaan/img/replurk/replurk-3.webp" width="100%" height="" alt="RePlurk - Page Thank Your - by Dwan" />
+                </picture>
             </div>
         </section>
 
