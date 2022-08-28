@@ -35,7 +35,7 @@
             <div class="text">
                 <div class="titles">
                     <h4>Weekend Project</h4>
-                    <h1>Waterpark is RePlurk?</h1>
+                    <h1>Waterpark is <strong>RePlurk</strong> 🤷‍♂️</h1>
                 </div>
                 <p>RePlurk is a web app that I created to review my plurk account in graphical and interesting way. You can also use it if you have plurk account. Long story short it's a Dashboard.</p>
                 <p><a href="./replurk2021" class="cta">Visit RePlurk 2021</a></p>
@@ -47,7 +47,7 @@
             <div class="text">
                 <div class="titles">
                     <h4>I bet you're wondering</h4>
-                    <h2>What is Plurk?</h2>
+                    <h2>What is&nbsp;<br hidden />Plurk? 👀</h2>
                 </div>
                 <p>A very long time ago, when human started creating web 2.0, there were several social media born at that time. Plurk is one of them.</p>
                 <p>Plurk have all the fun of timeline based update and emoticons and responses long before other social media did that. But it didn't reach mass addoption like other, but instead it grew into a niche.</p>
@@ -63,7 +63,8 @@
         <section class="middle style-spread style-spread-big clip snap">
             <div class="text">
                 <div class="titles">
-                    <h2>Hand Coded&nbsp;<br hidden />From Scratch</h2>
+                    <h4>Just like a cat</h4>
+                    <h2>Hand Coded&nbsp;<br hidden />From <strong>Scratch</strong> 🐈</h2>
                 </div>
                 <p>Just like a cat who like to scratch, I created this web app using pure JavaScript code. I use no framework and also with minimum overhead library. Same like this website actually. With that, the web app should run fast.</p>
                 <!-- <ol class="zero">
@@ -86,7 +87,7 @@
             <div class="text">
                 <div class="titles">
                     <h4>Design Concept</h4>
-                    <h2>Controlled Randomness</h2>
+                    <h2>Controlled Randomness 🎰</h2>
                 </div>
                 <p>A wise man (me) said that universes were created randomly, but it was a controlled randomness. Therefore the colors of each blocks of this web app were randomly choosen, but the randomness were controlled to prevent unreadable text.</p>
             </div>
@@ -105,7 +106,7 @@
             <div class="text">
                 <div class="titles">
                     <h4>Well, It's Not Actually</h4>
-                    <h2>A Weekend Project</h2>
+                    <h2>A Weekend Project 👷</h2>
                 </div>
                 <p>I dedicated my free time to create this app. This is a labour of love from me to the Plurk community that have been with me over the past <?php echo date("Y") - 2008; ?> years. Enjoy the screenshoot of my Plurk statistics if you didn't have plurk account.</p>
             </div>

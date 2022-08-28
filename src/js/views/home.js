@@ -3,7 +3,9 @@
 import { gsap, ScrollTrigger } from 'gsap/all';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
-import { hoverEvents, _qAll, reduceMotionFilter } from '../helpers/helper.js';
+import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
+import animate from '../helpers/animate.js';
+import header from '../helpers/header.js';
 
 let homeview = {
 	namespace: 'home',
@@ -17,11 +19,7 @@ let homeview = {
 			data.next.container.querySelector("#flares").innerHTML += '<img src="/dwaan/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
 		}
 		// Hover "Dwan" in main text
-		hoverEvents(next.querySelectorAll("#to-about"), () => {
-			flare.show(".flares .flare");
-		}, () => {
-			flare.hide();
-		});
+		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
 
 		// Scroll text
 		var els = next.querySelectorAll("section.middle");
@@ -91,7 +89,7 @@ let homeview = {
 					tl.fromTo(maintextchild, {
 						y: 0
 					}, {
-						y: reduceMotionFilter() ? 0 :window.innerHeight * -1 / 6,
+						y: reduceMotionFilter() ? 0 : window.innerHeight * -1 / 6,
 						duration: length / 3,
 						ease: "linear",
 					}, length * 2 / 3);
@@ -116,6 +114,24 @@ let homeview = {
 			// Snap
 			scroll.snap(el);
 		});
+
+		// Disable for now
+		var links = next.querySelectorAll(".home-older a");
+		links.forEach(el => {
+			el.addEventListener("click", async e => {
+				e.preventDefault();
+
+				header.hide()
+				await animate.hide(next, next.querySelectorAll(".home-old .dwantitle, .arrow"), false);
+				gsap.to(_q("body"), {
+					backgroundColor: "#2a3233",
+					duration: .5,
+					onComplete: () => {
+						window.location = el.href;
+					}
+				});
+			});
+		})
 	},
 	afterEnter: () => {
 		document.body.style.overflow = "";

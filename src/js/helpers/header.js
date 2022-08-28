@@ -18,26 +18,50 @@ let header = {
 
     // Animate header showing
     show: () => {
-        var length = reduceMotionFilter(1.28);
+        return new Promise(resolve => {
+            var length = reduceMotionFilter(1.28);
 
-        gsap.set("header", {
-            opacity: 1,
-            pointerEvents: "none"
+            gsap.set("header", {
+                opacity: 1,
+                pointerEvents: "none"
+            });
+
+            gsap.fromTo("header .logo, header .size, header .lamp, header .switch", {
+                y: -200,
+                opacity: 0
+            }, {
+                y: 0,
+                opacity: 1,
+                duration: length,
+                ease: "expo.out",
+                delay: length / 5,
+                stagger: length / 5,
+                onComplete: () => {
+                    gsap.set("header", {
+                        pointerEvents: ""
+                    });
+                    resolve();
+                }
+            });
         });
+    },
+    // Animate header hiding
+    hide: () => {
+        return new Promise(resolve => {
+            var length = reduceMotionFilter(1.28);
 
-        gsap.fromTo("header .logo, header .size, header .lamp, header .switch", {
-            y: -200,
-            opacity: 0
-        }, {
-            y: 0,
-            opacity: 1,
-            duration: length,
-            ease: "expo.out",
-            delay: length / 5,
-            stagger: length / 5,
-            onComplete: () => gsap.set("header", {
-                pointerEvents: ""
-            })
+            gsap.fromTo("header .logo, header .size, header .lamp, header .switch", {
+                y: 0,
+                opacity: 1,
+            }, {
+                y: -200,
+                opacity: 0,
+                duration: length,
+                ease: "expo.out",
+                delay: length / 5,
+                stagger: length / 5,
+                onComplete: () => resolve()
+            });
         });
     },
 
