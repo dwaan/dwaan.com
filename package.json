@@ -3,11 +3,9 @@
 	"version": "2.3.4",
 	"description": "dwaan.com source code",
 	"main": "js/main.js",
-	"directories": {
-		"doc": "doc"
-	},
 	"scripts": {
-		"test": "gulp"
+		"test": "gulp",
+		"update": "npm update"
 	},
 	"repository": {
 		"type": "git",
@@ -45,15 +43,5 @@
 		"last 100 version",
 		"> 100%",
 		"IE 10"
-	],
-	"cssnano": {
-		"preset": [
-			"default",
-			{
-				"discardComments": {
-					"removeAll": true
-				}
-			}
-		]
-	}
+	]
 }
