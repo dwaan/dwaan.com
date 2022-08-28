@@ -960,24 +960,6 @@ header {
 	}
 }
 
-.home2 {
-	&-replurk {
-		background-color: darken($color: white, $amount: 2);
-	}
-
-	&-suzuki {
-		background-color: darken($color: white, $amount: 4);
-	}
-
-	&-tas {
-		background-color: darken($color: white, $amount: 6);
-	}
-
-	&-old {
-		background-color: darken($color: white, $amount: 8);
-	}
-}
-
 
 /* Homepage footer */
 .footer {
@@ -1800,6 +1782,45 @@ header {
 		margin-right: var(--padxl);
 	}
 }
+
+
+/* Style single image full */
+.style-single-image {
+	padding: 0 !important;
+	height: auto !important;
+
+	.text {
+		padding: calc(3 * var(--pady)) var(--padx) var(--pady);
+		max-width: 35vw;
+	}
+
+	picture {
+
+		&,
+		img {
+			border-radius: 0;
+			box-shadow: none !important;
+		}
+	}
+}
+
+
+/* Replurk page */
+
+.replurk {
+
+	.style-top {
+		picture {
+
+			&,
+			img {
+				border-radius: 32px;
+			}
+		}
+	}
+}
+
+
 
 /* Footer links in every detail page */
 .links {

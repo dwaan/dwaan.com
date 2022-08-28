@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail replurk">
-        <!-- <img src="/dwaan/img/qr/aai.svg" width="64" height="64" alt="Dwan - RePlurk" class="print qr" hidden /> -->
+        <img src="/dwaan/img/qr/replurk.svg" width="64" height="64" alt="Dwan - RePlurk" class="print qr" hidden />
 
         <hr />
 
@@ -54,13 +54,13 @@
                 <p><a href="https://plurk.com/dwan/" target="_BLANK">Visit My Plurk Profile</a></p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/replurk/replurk-14.webp" width="" height="" alt="RePlurk - Page 14 - by Dwan" />
+                <img src="/dwaan/img/replurk/replurk-14.webp" width="100%" height="" alt="RePlurk - Page 14 - by Dwan" />
             </div>
         </section>
 
         <hr />
 
-        <section class="middle style-spread style-spread-big  clip snap">
+        <section class="middle style-spread style-spread-big clip snap">
             <div class="text">
                 <div class="titles">
                     <h2>Hand Coded&nbsp;<br hidden />From Scratch</h2>
@@ -74,9 +74,7 @@
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 1; $i++) { ?>
                     <picture class="pic-<?php echo $i ?> top">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/replurk/replurk-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/replurk/replurk-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" width="" height="250" alt="RePlurk - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" width="100%" height="" alt="RePlurk - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -95,8 +93,6 @@
             <div class="thumbs">
                 <?php for ($i = 8; $i <= 13; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/replurk/replurk-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/replurk/replurk-<?php echo $i ?>@2x.webp">
                         <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" width="auto" height="250" alt="RePlurk - Controlled Randomness - <?php echo $i - 7 ?> - by Dwan" />
                     </picture>
                 <?php } ?>
@@ -105,15 +101,26 @@
 
         <hr />
 
-        <section class="middle style-background style-background-cover style-background-right clip snap-bottom">
-            <!-- <div class="text">
+        <section class="middle style-single-image snap">
+            <div class="text">
                 <div class="titles">
-                    <h3>Well, It's Not Actually A Weekend Project</h3>
+                    <h4>Well, It's Not Actually</h4>
+                    <h2>A Weekend Project</h2>
                 </div>
-                <p>I dedicated my free time to create this app. This is a labour of love from me to the Plurk community that have been with me over the past <?php echo date("Y") - 2008; ?> years.</p>
-            </div> -->
+                <p>I dedicated my free time to create this app. This is a labour of love from me to the Plurk community that have been with me over the past <?php echo date("Y") - 2008; ?> years. Enjoy the screenshoot of my Plurk statistics if you didn't have plurk account.</p>
+            </div>
             <div class="thumbs">
-                <img src="/dwaan/img/replurk/replurk-3.webp" width="" height="" alt="RePlurk - Page 3 - by Dwan" />
+                <picture class="pic-15 top">
+                    <img src="/dwaan/img/replurk/replurk-15.webp" width="100%" height="" alt="RePlurk - All Block - by Dwan" />
+                </picture>
+            </div>
+        </section>
+
+        <hr />
+
+        <section class="middle style-single-image style-reveal snap-bottom">
+            <div class="thumbs">
+                <img src="/dwaan/img/replurk/replurk-3.webp" width="100%" height="" alt="RePlurk - Page Thank Your - by Dwan" />
             </div>
         </section>
 
