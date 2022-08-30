@@ -38,6 +38,49 @@ let homeview = {
 				});
 			});
 			screen.add("(min-aspect-ratio: 1/1)", () => {
+				// Background slide version
+				gsap.set(el, {
+					zIndex: els.length - idx - 1
+				});
+
+				scroll.push(tl => {
+					var length = reduceMotionFilter(1);
+					var content = el.querySelectorAll(".main-text, .padding");
+					var cover = el.querySelectorAll(".cover");
+
+					tl.fromTo(content, {
+						y: idx == 0 ? 0 : window.innerHeight * -5 / 6
+					}, {
+						y: 0,
+						ease: "linear",
+						duration: length
+					}, 0);
+
+					tl.fromTo(cover, {
+						opacity: idx == 0 ? 0 : 1,
+					}, {
+						opacity: 0,
+						ease: "expo.in",
+						duration: length
+					}, 0);
+
+					tl.to([content, cover], {
+						y: idx == els.length ? 0 : window.innerHeight * 1 / 6,
+						ease: "linear",
+						duration: length
+					}, length);
+
+					return tl;
+				}, tl => ScrollTrigger.create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 0",
+					scrub: true,
+					animation: tl
+				}));
+
+				// Slot version
+				/*
 				scroll.push(tl => {
 					var length = reduceMotionFilter(3);
 
@@ -109,6 +152,7 @@ let homeview = {
 					scrub: true,
 					animation: tl
 				}));
+				*/
 			});
 
 			// Snap

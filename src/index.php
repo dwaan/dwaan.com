@@ -19,6 +19,7 @@
         <hr />
 
         <section class="middle full">
+            <div id="flares" class="flares"></div>
             <div class="main-text">
                 <h1>Hello, my name is <a href="./me" arial-title="About Dwan" id="to-about">Dwan</a></h1>
                 <p class="hidden">I'm an UI/UX Designer and Strategist. Here are some of my design portfolio 😙.</p>
@@ -28,6 +29,7 @@
                     <span>case studies</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
@@ -43,6 +45,7 @@
                     <span>Website Redesign</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
@@ -58,6 +61,7 @@
                     <span>Design Concept</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
@@ -71,6 +75,7 @@
                     <span>Weekend Project</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
@@ -86,6 +91,7 @@
                     <span>Concept Pitching</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
@@ -101,6 +107,7 @@
                     <span>Design Solutions</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
@@ -134,13 +141,10 @@
                     <span>Previous version</span>
                 </a>
             </div>
+            <div class="cover"></div>
         </section>
 
         <hr />
-
-        <div id="flareend"></div>
-
-        <section id="flares" class="flares"></section>
 
         <section class="footer">
             <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>

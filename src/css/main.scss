@@ -621,7 +621,7 @@ picture {
 header {
 	opacity: 0;
 	position: fixed;
-	z-index: 3;
+	z-index: 101;
 	height: 45px;
 
 	.left,
@@ -967,7 +967,7 @@ header {
 
 /* Homepage footer */
 .footer {
-	@include mixins.block(fixed, initial, 0, 100%, $zindex: 2);
+	@include mixins.block(fixed, initial, 0, 100%, $zindex: 101);
 	bottom: 0;
 	display: flex;
 	flex-flow: row nowrap;
@@ -2026,6 +2026,7 @@ ol {
 		display: inline-block;
 		font-weight: inherit;
 		transition: color .5s ease;
+		text-decoration: none;
 
 		&:after {
 			@include mixins.make-it-block();

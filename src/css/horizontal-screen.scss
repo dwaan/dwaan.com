@@ -235,6 +235,39 @@ header {
 }
 
 
+/* Home style */
+.home {
+	.middle {
+		&:before,
+		.cover {
+			content: "";
+			display: block;
+			position: absolute;
+			top: initial;
+			left: 0;
+			bottom: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: var(--white);
+		}
+
+		.flares {
+			position: absolute;
+			z-index: 1;
+		}
+
+		.main-text,
+		.padding {
+			z-index: 2;
+		}
+
+		.cover {
+			background-color: var(--black-25);
+		}
+	}
+}
+
+
 /* Detail page common style */
 .detail {
 	picture {

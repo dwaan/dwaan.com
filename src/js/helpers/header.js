@@ -463,6 +463,9 @@ let header = {
                 return () => {
                     arrow.forEach(el => {
                         el.style = "";
+                        el.querySelectorAll(".arrow").forEach(child => {
+                            child.style = "";
+                        })
                     });
                 }
             });
