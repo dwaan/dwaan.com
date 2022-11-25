@@ -70,8 +70,14 @@
 		<section id="credits" class="middle">
 			<div class="text">
 				<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
-				<p class="like">If you like this web app, say hi to me in <a href="https://plurk.com/dwan" target="_BLANK">plurk profile</a>. Or even better, <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK">buy me an ice cream</a> or send me <a href="https://www.plurk.com/help/en/plurk-coins" target="_BLANK">plurk coins</a> ;).</p>
-				<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this website, feel free to <a href="./say-hi">contact me</a> for removal.</p>
+				<p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
+				<p class="like likeandsupport">
+					<a href="https://www.plurk.com/p/p2nx0u" target="_BLANK"><img src="/dwaan/img/emojis/bow.webp" width="64" height="64" alt="" /> <i>Say Hi! to me in Plurk</i></a>
+					<a href="https://www.plurk.com/Premium/gift?plurk_id=1516129518" target="_BLANK"><img src="/dwaan/img/emojis/full_moon.webp" width="64" height="64" alt="" /> <i>Send me a Plurk Coin</i></a>
+					<a href="https://www.buymeacoffee.com/dwaan" target="_BLANK"><img src="/dwaan/img/emojis/icecream.webp" width="64" height="64" alt="" /> <i>Buy me an Ice Cream</i></a>
+				</p>
+				<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" data-barba-prevent target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="./say-hi">contact me</a> for removal</p>
+				<p class="noaffiliation">You can clone this web app source code from <a href="https://github.com/dwaan/replurk" target="_BLANK">GitHub</a></p>
 			</div>
 		</section>
 

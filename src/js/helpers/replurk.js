@@ -255,6 +255,16 @@ class replurk {
         responded_other_count: 0,
         responded_other_list: [],
         plurks_count: 0,
+        poll_count: 0,
+        poll_responder_count: 0,
+        poll_popular_plurk: {},
+        redditor_count: 0,
+        tiktoker_count: 0,
+        instagrammer_count: 0,
+        imgurer_count: 0,
+        facebooker_count: 0,
+        twitterer_count: 0,
+        youtuber_count: 0,
         id: 0,
         // Other
         next: document.createElement('div'),
@@ -1801,7 +1811,7 @@ class replurk {
 
             var join = new Date(plurker.join_date)
             this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-            this.statistics.draw('spansmall center badges', "9", "I have <i>🛡 " + plural(plurker.badges.length, "badge") + "</i> right now");
+            this.statistics.draw('spansmall center badges', plurker.badges.length, "I have <i>🛡 " + plural(plurker.badges.length, "badge") + "</i> right now");
         } else {
             this.statistics.draw('', '-', "There is no data in my timeline");
             this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
@@ -1899,6 +1909,7 @@ class replurk {
         await getTimeline(this.startDate);
 
         // When loading done
+        var largest_poll_result = 0;
         if (this.plurks.length > 1) {
             // Count user statistics
             this.statistics.plurks_count = 0;
@@ -1917,6 +1928,27 @@ class replurk {
                     if (!plurk.response_count) this.statistics.noresponse_count++;
                     if (plurk.plurk_type == 3) this.statistics.private_count++;
                     this.statistics.response_count += plurk.response_count;
+
+                    if (plurk.content_raw.includes("instagram.com")) this.statistics.instagrammer_count++;
+                    if (plurk.content_raw.includes("facebook.com")) this.statistics.facebooker_count++;
+                    else if (plurk.content_raw.includes("fb.watch")) this.statistics.facebooker_count++;
+                    if (plurk.content_raw.includes("twitter.com")) this.statistics.twitterer_count++;
+                    if (plurk.content_raw.includes("reddit.com")) this.statistics.redditor_count++;
+                    if (plurk.content_raw.includes("tiktok.com")) this.statistics.tiktoker_count++;
+                    if (plurk.content_raw.includes("imgur.com")) this.statistics.imgurer_count++;
+                    if (plurk.content_raw.includes("youtube.com")) this.statistics.youtuber_count++;
+
+                    // Calculate polls
+                    if (plurk.with_poll) {
+                        var response_count = plurk.poll.response.response_count;
+                        this.statistics.poll_count++;
+                        this.statistics.poll_responder_count += response_count;
+
+                        if (largest_poll_result < response_count) {
+                            largest_poll_result = response_count;
+                            this.statistics.poll_popular_plurk = plurk;
+                        }
+                    }
                 } else if (plurk.responded) this.statistics.responded_other_count++;
             });
 
@@ -2015,6 +2047,41 @@ class replurk {
         });
         this.most.mvp.draw();
 
+        // Replurk Badges
+        var gender = "👑 Leader";
+        if (this.me.gender == 1) gender = "👑 King";
+        if (this.me.gender == 0) gender = "👑 Queen";
+
+        var tiktok = "🪩";
+        if (this.me.gender == 1) tiktok = "🕺";
+        if (this.me.gender == 0) tiktok = "💃";
+
+        var facebook = "🧓";
+        if (this.me.gender == 1) facebook = "👴";
+        if (this.me.gender == 0) facebook = "👵";
+
+        var plurker = "🙇";
+        if (this.me.gender == 1) plurker = "🙇‍♂️";
+        if (this.me.gender == 0) plurker = "🙇‍♀️";
+
+        this.statistics.title('RePlurk Badges', 'replurkbadges');
+        // console.log(this.statistics.poll_responder_count, this.statistics.poll_popular_plurk);
+        if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "🗳️", "<strong>Polling " + gender + "</strong>");
+        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "🪙", "<strong>Plurker Coins Billionaire</strong>");
+        if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "📓", "<strong>Novelist</strong>");
+        if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall center badges keyboardbadges', "⌨️", "<strong>Keyboard Warrior</strong>");
+        if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall center badges memebadges', "🐈", "<strong>Meme Lord</strong>");
+        if (this.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall center badges missingbadges', "🦧", "<strong>The Missing Link</strong>");
+        if (this.statistics.instagrammer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "📷", "<strong>Instagrammer</strong>");
+        if (this.statistics.facebooker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', facebook, "<strong>Facebooker</strong>");
+        if (this.statistics.twitterer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🐣", "<strong>The Real Chief Twit</strong>");
+        if (this.statistics.redditor_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🤖", "<strong>/r</strong>");
+        if (this.statistics.tiktoker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', tiktok, "<strong>Tiktoker</strong>");
+        if (this.statistics.imgurer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎆", "<strong>Imgur-er</strong>");
+        if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎥", "<strong>Youtuber 😮‍💨</strong>");
+        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "🫣", "<strong>Adult-er</strong>");
+        if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "🏆", "<strong>Trendsetter</strong>");
+        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "🎖️", "<strong>Plurker " + plurker + "</strong>");
     }
 
     // Check login status

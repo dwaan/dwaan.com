@@ -1,6 +1,7 @@
 /* Plurk Statistics */
 
 .plurk {
+
     sub,
     sup {
         font-size: inherit;
@@ -1441,7 +1442,19 @@
 
     &.badges {
         order: 7;
+
+        .big {
+            transition: transform .5s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        &:hover .big {
+            transition: transform .75s ease-in-out;
+            transform: rotateY(360deg);
+        }
     }
+
+
 
 
     /* This year */
@@ -1562,6 +1575,46 @@
         order: 212;
     }
 
+    /* Badges */
+    &.replurkbadges {
+        order: 300;
+    }
+
+    &.pollbadges {
+        order: 301;
+    }
+
+    &.coinbadges {
+        order: 302;
+    }
+
+    &.novelistbadges {
+        order: 303;
+    }
+
+    &.keyboardbadges {
+        order: 304;
+    }
+
+    &.memebadges {
+        order: 305;
+    }
+
+    &.missingbadges {
+        order: 306;
+    }
+
+    &.socmedbadges {
+        order: 307;
+    }
+
+    &.adultbadges {
+        order: 308;
+    }
+
+    &.plurkerbadges {
+        order: 309;
+    }
 }
 
 /* Back to top */
