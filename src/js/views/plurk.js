@@ -41,6 +41,28 @@ var replurkview = {
 			await replurkview.replurk2021.run(data.next.container);
 			this.async();
 		}
+	},
+
+	// Replurk page 2022
+	replurk2022: false,
+	replurk2022view: {
+		namespace: 'replurk2022',
+		beforeEnter: async data => {
+			const replurk = await import('../helpers/replurk');
+			replurkview.replurk2022 = new replurk.default(2022);
+
+			var next = data.next.container;
+			next.querySelector("#backtotop").onclick = () => gsap.to(window, {
+				duration: reduceMotionFilter(2),
+				ease: "expo.inOut",
+				scrollTo: "#statistics"
+			});
+			next.querySelectorAll("#permission, .grant").forEach(el => el.style.display = "none");
+		},
+		afterEnter: async function (data) {
+			await replurkview.replurk2022.run(data.next.container);
+			this.async();
+		}
 	}
 }
 

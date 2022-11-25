@@ -1785,6 +1785,7 @@ class replurk {
 
         next.querySelector("#hello .thumbs").innerHTML = "<img src='" + plurker.avatar_big + "' />";
         if (this.year == 2021) next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>If " + this.year + " have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories</p>";
+        else if (this.year == 2022) next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>It's 2020 v2, and this is your year end RePlurk recap. Hopefully it will bring lots of good memories.</p>";
         else next.querySelector("#hello .text").innerHTML = "<h1>Hello " + plurker.display_name + "</h1><p style='max-width: 500px; margin: 0 auto'>This is your year end RePlurk recap. Hopefully it will bring lots of good memories.</p>";
 
         // Draw statistic

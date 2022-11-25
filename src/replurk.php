@@ -38,7 +38,7 @@
                     <h1>Waterpark is <strong>RePlurk</strong> 🤷‍♂️</h1>
                 </div>
                 <p>RePlurk is a web app that I created to review my plurk account in graphical and interesting way. You can also use it if you have plurk account. Long story short it's a Dashboard.</p>
-                <p><a href="./replurk2021" class="cta">Visit RePlurk 2021</a></p>
+                <p><a href="./replurk2022" class="cta">Visit RePlurk 2022</a></p>
             </div>
         </section>
 
@@ -132,7 +132,8 @@
         <section class="links snap-bottom">
             <nav>
                 <div class="prototype">
-                    <a href="./replurk2021" aria-label="RePlurk 2021 - Web App" target="_BLANK" class="title"><span>visit the web app</span></a>
+                    <a href="./replurk2022" aria-label="RePlurk 2022 - Web App" target="_BLANK" class="title"><span>visit the web app</span></a>
+                    <a href="./replurk2022" aria-label="RePlurk 2022 - Web App" target="_BLANK"><span>2022</span></a>
                     <a href="./replurk2021" aria-label="RePlurk 2021 - Web App" target="_BLANK"><span>2021</span></a>
                     <a href="./replurk2020" aria-label="RePlurk 2020 - Web App" target="_BLANK"><span>2020</span></a>
                 </div>
