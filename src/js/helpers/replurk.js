@@ -2067,7 +2067,7 @@ class replurk {
         this.statistics.title('RePlurk Badges', 'replurkbadges');
         // console.log(this.statistics.poll_responder_count, this.statistics.poll_popular_plurk);
         if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "🗳️", "<strong>Polling " + gender + "</strong>");
-        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "🪙", "<strong>Plurker Coins Billionaire</strong>");
+        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "🪙", "<strong>Plurk Coins Billionaire</strong>");
         if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "📓", "<strong>Novelist</strong>");
         if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall center badges keyboardbadges', "⌨️", "<strong>Keyboard Warrior</strong>");
         if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall center badges memebadges', "🐈", "<strong>Meme Lord</strong>");
@@ -2081,7 +2081,7 @@ class replurk {
         if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎥", "<strong>Youtuber 😮‍💨</strong>");
         if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "🫣", "<strong>Adult-er</strong>");
         if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "🏆", "<strong>Trendsetter</strong>");
-        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "🎖️", "<strong>Plurker " + plurker + "</strong>");
+        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "🎖️", "<strong>Active Plurker " + plurker + "</strong>");
     }
 
     // Check login status
