@@ -9,11 +9,14 @@
         try {
             var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
 
-            if (namespace == "replurk2021") {
+            if (namespace == "replurk2020") {
+                window.opener.plurkview.replurk2020.login();
+                namespace = "";
+            } else if (namespace == "replurk2021") {
                 window.opener.plurkview.replurk2021.login();
                 namespace = "";
-            } else if (namespace == "replurk2020") {
-                window.opener.plurkview.replurk2020.login();
+            } else if (namespace == "replurk2022") {
+                window.opener.plurkview.replurk2022.login();
                 namespace = "";
             } else if (namespace == "replurk") {
                 window.opener.plurkview.replurk.login();

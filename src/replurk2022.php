@@ -51,15 +51,16 @@
 					<h1>RePlurk<br /><sup>20</sup><sub>22</sub></h1>
 					<ol>
 						<li>
-							<p>Grant <strong>RePlurk</strong> access to your Plurk timeline <br /><a href="#" id="tokenurl" data-barba-prevent target="_BLANK" rel="opener">Loading...</a></p>
+							<p>Grant <strong>RePlurk</strong> access to your timeline <br /><a href="#" id="tokenurl" data-barba-prevent target="BLANK" rel="opener">Loading...</a></p>
 						</li>
 						<li>
-							<p>If you got an error message from Plurk app, reopen this web app in a new browser tab. Or, best to open this web app in Desktop browser.</p>
+							<p>It's best to open this web app in desktop browser.</p>
 						</li>
 						<li>
-							<p>Sit back an relax, your data will be processed locally. It will took approximately 10 minutes to download your timeline.
+							<p>It will took approx. 10 minutes to download your timeline and your data will be processed locally.</p>
 						</li>
 						<li class="small">
+							<p><strong>Note for mobile user!</strong> An authorization error may occur when opening this web app in mobile phone with official Plurk app installed. When it happens, please refresh this page and manually open "Grant Access" in new tab.</p>
 							<p><strong>IMPORTANT!</strong> It's advisable to <u>logout after you finish</u> using this web app. Other than session data, this web app didn't store any of your Plurk data in the server.</p>
 						</li>
 					</ol>

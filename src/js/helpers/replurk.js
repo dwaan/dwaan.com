@@ -2109,6 +2109,7 @@ class replurk {
         });
 
         var data = await api.call("?");
+        var interval = null;
         if (data.success) {
             this.me = data.message;
 
@@ -2151,6 +2152,16 @@ class replurk {
             this.scrollAnimate.browserBar(false);
 
             scroll.refresh();
+
+            // Automatic login
+            interval = setInterval(async () => {
+                var data = await api.call("?");
+
+                if (data.success) {
+                    clearInterval(interval);
+                    this.login();
+                }
+            }, 3000);
         }
 
         // Snap
