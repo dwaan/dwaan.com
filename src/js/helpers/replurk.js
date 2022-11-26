@@ -2065,7 +2065,7 @@ class replurk {
         if (this.me.gender == 0) plurker = "🙇‍♀️";
 
         this.statistics.title('RePlurk Badges', 'replurkbadges');
-        // console.log(this.statistics.poll_responder_count, this.statistics.poll_popular_plurk);
+        this.statistics.title('What are RePlurk Badges consisit of? They are badges based on your activities in Plurk, currently there are 16 badges in total for activities such as: creating lots of polls (Polling ' + gender + '), receiving lots of coins (Plurk Coins Billionaire), writing lots of posts (Novelist and Keyboard Warrior), sharing lots of pictures and links (Meme Lord & Mising Link), sharing social medias urls (there are 7 badges), posting lots of adult posts (Adult-er), getting lots of replurks (Trendsetter), and constantly posting in Plurk almost everyday (Active Plurker).', 'replurkbadges description');
         if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "🗳️", "<strong>Polling " + gender + "</strong>");
         if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "🪙", "<strong>Plurk Coins Billionaire</strong>");
         if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "📓", "<strong>Novelist</strong>");
@@ -2079,7 +2079,7 @@ class replurk {
         if (this.statistics.tiktoker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', tiktok, "<strong>Tiktoker</strong>");
         if (this.statistics.imgurer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎆", "<strong>Imgur-er</strong>");
         if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎥", "<strong>Youtuber 😮‍💨</strong>");
-        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "🫣", "<strong>Adult-er</strong>");
+        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "😍", "<strong>Adult-er</strong>");
         if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "🏆", "<strong>Trendsetter</strong>");
         if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "🎖️", "<strong>Active Plurker " + plurker + "</strong>");
     }

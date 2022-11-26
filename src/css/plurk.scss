@@ -1452,6 +1452,11 @@
             transition: transform .75s ease-in-out;
             transform: rotateY(360deg);
         }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
 
 
@@ -1578,6 +1583,17 @@
     /* Badges */
     &.replurkbadges {
         order: 300;
+
+        &.description {
+            order: 400;
+            padding-top: 0;
+
+            h3 {
+                font-size: .9rem;
+                font-weight: normal;
+                line-height: 140%;
+            }
+        }
     }
 
     &.pollbadges {
