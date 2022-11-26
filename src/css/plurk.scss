@@ -420,6 +420,16 @@
             line-height: 135%;
             opacity: .75;
         }
+
+        .text,
+        .post > .meta {
+            img {
+                display: inline-block;
+                border-radius: 0;
+                width: auto;
+                height: 1rem;
+            }
+        }
     }
 
     .chart a,
@@ -499,6 +509,13 @@
             letter-spacing: .02em;
             text-align: left;
             margin-top: auto;
+
+            img {
+                display: inline-block;
+                border-radius: 0;
+                width: auto;
+                height: 1rem;
+            }
         }
 
         .htmlcontent {
@@ -1002,12 +1019,16 @@
         }
 
         &:after {
-            content: "🏅";
+            content: "";
             display: block;
             position: absolute;
             bottom: calc(-1 * var(--pads));
             right: calc(-1 * var(--pads));
             line-height: 100%;
+            background: url(https://api.iconify.design/noto:sports-medal.svg) 0 0 no-repeat;
+            background-size: 1.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
             font-size: 1.5rem;
             padding: 0;
             border-radius: 100%;
@@ -1015,17 +1036,29 @@
     }
 
     a:nth-child(1) .avatar:after {
-        content: "🥇";
+        content: "";
+        background: url(https://api.iconify.design/noto:1st-place-medal.svg) 0 0 no-repeat;
+        background-size: 3rem;
+        width: 3rem;
+        height: 3rem;
         font-size: 3rem;
     }
 
     a:nth-child(2) .avatar:after {
-        content: "🥈";
+        content: "";
+        background: url(https://api.iconify.design/noto:2nd-place-medal.svg) 0 0 no-repeat;
+        background-size: 2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
         font-size: 2.5rem;
     }
 
     a:nth-child(3) .avatar:after {
-        content: "🥉";
+        content: "";
+        background: url(https://api.iconify.design/noto:3rd-place-medal.svg) 0 0 no-repeat;
+        background-size: 2rem;
+        width: 2rem;
+        height: 2rem;
         font-size: 2rem;
     }
 }
@@ -1412,6 +1445,12 @@
 /* Manually, Blocks order */
 .statistics {
 
+    .title img {
+        border-radius: 0;
+        width: auto;
+        height: 1rem;
+    }
+
     &.alltime {
         order: 0;
     }
@@ -1443,19 +1482,24 @@
     &.badges {
         order: 7;
 
+        img {
+            display: inline-block;
+            width: 1rem;
+        }
+
         .big {
             transition: transform .5s ease-in-out;
             transform-style: preserve-3d;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
 
         &:hover .big {
             transition: transform .75s ease-in-out;
             transform: rotateY(360deg);
-        }
-
-        img {
-            width: 100%;
-            height: auto;
         }
     }
 
@@ -1592,6 +1636,15 @@
                 font-size: .9rem;
                 font-weight: normal;
                 line-height: 140%;
+            }
+
+            span {
+                display: block;
+
+                img {
+                    display: inline-block;
+                    width: 1rem;
+                }
             }
         }
     }

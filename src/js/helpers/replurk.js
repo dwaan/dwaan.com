@@ -779,23 +779,23 @@ class replurk {
             var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
 
             this.parent.most.responses.draw(plurks);
-            this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got 💬 responses ' + ((response_percentage <= 50) ? '😢' : '🤩'));
+            this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got <img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> responses ' + ((response_percentage <= 50) ? '<img src="https://api.iconify.design/noto:crying-face.svg" />' : '<img src="https://api.iconify.design/noto:star-struck.svg" />'));
 
-            this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i>📢 ' + plural(this.replurker_count, 'replurk') + '</i>');
+            this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i><img src="https://api.iconify.design/noto:megaphone.svg" /> ' + plural(this.replurker_count, 'replurk') + '</i>');
             this.parent.most.replurk.draw(plurks);
 
             this.parent.most.favorite.draw(plurks);
-            this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i>❤️ ' + plural(this.favourite_count, 'love') + '</i>');
+            this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i><img src="https://api.iconify.design/noto:red-heart.svg" /> ' + plural(this.favourite_count, 'love') + '</i>');
 
-            this.draw('spansmall privateplurk', this.private_count, 'I posted <i>💋 ' + plural(this.private_count, 'private plurk') + '</i>');
-            this.draw('spansmall whisper', this.whispers_count, 'I posted <i>🤫 ' + plural(this.whispers_count, 'whisper') + '</i>');
-            this.draw('spansmall porn', this.porn_count, 'I posted <i>🤤 ' + plural(this.porn_count, 'adult plurk') + '</i>');
+            this.draw('spansmall privateplurk', this.private_count, 'I posted <i><img src="https://api.iconify.design/noto:lip.svg" /> ' + plural(this.private_count, 'private plurk') + '</i>');
+            this.draw('spansmall whisper', this.whispers_count, 'I posted <i><img src="https://api.iconify.design/noto:face-in-clouds.svg" /> ' + plural(this.whispers_count, 'whisper') + '</i>');
+            this.draw('spansmall porn', this.porn_count, 'I posted <i><img src="https://api.iconify.design/noto:face-with-peeking-eye.svg" /> ' + plural(this.porn_count, 'adult plurk') + '</i>');
 
-            this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i>💬 ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
-            this.draw('spansmall center coins', this.coins_count, 'I recieved <i>🪙 ' + plural(this.coins_count, 'coin') + '</i>');
+            this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
+            this.draw('spansmall center coins', this.coins_count, 'I recieved <i><img src="https://api.iconify.design/noto:coin.svg" /> ' + plural(this.coins_count, 'coin') + '</i>');
 
-            if (this.favorite_list.length > 0) this.drawUserList("avatar", "loved", "These Plurkers <i>❤️ Loved</i> My Posts", this.favorite_list.sort(this.parent.most.sort));
-            if (this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", "These Plurkers likes to <i>📢 Replurked</i> My Posts", this.replurker_list.sort(this.parent.most.sort));
+            if (this.favorite_list.length > 0) this.drawUserList("avatar", "loved", 'These Plurkers <i><img src="https://api.iconify.design/noto:red-heart.svg" /> Loved</i> My Posts', this.favorite_list.sort(this.parent.most.sort));
+            if (this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", 'These Plurkers likes to <i><img src="https://api.iconify.design/noto:megaphone.svg" /> Replurked</i> My Posts', this.replurker_list.sort(this.parent.most.sort));
         }
     };
 
@@ -872,7 +872,7 @@ class replurk {
                     this.data[i].position = this.data.length;
                     if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
                         this.data[i].position = index++;
-                        this.parent.statistics.attach('<i>Top 💬 Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
+                        this.parent.statistics.attach('<i>Top <img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
                     }
                 }
             },
@@ -916,11 +916,11 @@ class replurk {
 
                             if (user.id != this.parent.me.id && user.id != 99999) {
                                 this.data[idx].position = index++;
-                                this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+                                this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/noto:person-raising-hand-medium-dark-skin-tone.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
                             }
                         }
 
-                        if (this.data[idx].el) this.parent.statistics.attach('<i>Most 🙋 Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+                        if (this.data[idx].el) this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/noto:person-raising-hand-medium-dark-skin-tone.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
                     }
                 }
             },
@@ -1029,7 +1029,7 @@ class replurk {
                     if (this.data[index].links.length > 0) {
                         var link = this.data[index].links[0];
                         var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
-                        result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response">💬 ' + link.response + '</span><span class="replurk">📢 ' + link.replurk + '</span><span class="loved">❤️ ' + link.loved + '</span>' + url + '</div></div>';
+                        result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response"><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + link.response + '</span><span class="replurk"><img src="https://api.iconify.design/noto:megaphone.svg" /> ' + link.replurk + '</span><span class="loved"><img src="https://api.iconify.design/noto:red-heart.svg" /> ' + link.loved + '</span>' + url + '</div></div>';
                         max--;
                     }
                     index++;
@@ -1045,7 +1045,7 @@ class replurk {
                     if (this.data[index].pics.length > 0) {
                         var pics = this.data[index].pics[0];
                         var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
-                        result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response">💬 ' + pics.response + '</span><span class="replurk">📢 ' + pics.replurk + '</span><span class="loved">❤️ ' + pics.loved + '</span>' + url + '</div></div></div>';
+                        result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response"><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + pics.response + '</span><span class="replurk"><img src="https://api.iconify.design/noto:megaphone.svg" /> ' + pics.replurk + '</span><span class="loved"><img src="https://api.iconify.design/noto:red-heart.svg" /> ' + pics.loved + '</span>' + url + '</div></div></div>';
                         max--;
                     }
                     index++;
@@ -1079,7 +1079,7 @@ class replurk {
                 for (var index in data) {
                     var value = data[index];
                     if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i>💬 Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);
+                        this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);
                         return;
                     }
                 }
@@ -1095,7 +1095,7 @@ class replurk {
                 for (var index in data) {
                     var value = data[index];
                     if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i>📢 Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
+                        this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i><img src="https://api.iconify.design/noto:megaphone.svg" /> Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
                         return;
                     }
                 }
@@ -1111,7 +1111,7 @@ class replurk {
                 for (var index in data) {
                     var value = data[index];
                     if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i>❤️ Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
+                        this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i><img src="https://api.iconify.design/noto:red-heart.svg" /> Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
                         return;
                     }
                 }
@@ -1152,7 +1152,7 @@ class replurk {
                 }
 
                 try {
-                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i>🗣 interact</i> with me", result);
+                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i><img src='https://api.iconify.design/noto:speaking-head.svg' /> interact</i> with me", result);
                 } catch {
                     console.info("Error while counting most interacted plurker");
                 }
@@ -1199,7 +1199,7 @@ class replurk {
                 }
 
                 try {
-                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i>👄 MVP</i>", result);
+                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i><img src='https://api.iconify.design/noto:biting-lip.svg' /> MVP</i>", result);
                 } catch (error) {
                     console.info("Error while counting my mvp", error);
                 }
@@ -1801,17 +1801,17 @@ class replurk {
         // Draw statistic
         this.statistics.title('All Time', 'alltime');
         if (plurker.anniversary.years && plurker.anniversary.days) {
-            this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), "I posted around <i>💬 " + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+            this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), 'I posted around <i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
 
             // Responses
             var oneday = 16;
             if (responses <= oneday) extra = "That's almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>';
             else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>';
-            this.statistics.draw('span2 center responded', responses, "I responded around <i>💬 " + plural(responses, "time") + "</i> per day. " + extra + " when I'm not asleep");
+            this.statistics.draw('span2 center responded', responses, 'I responded around <i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + plural(responses, "time") + "</i> per day. " + extra + " when I'm not asleep");
 
             var join = new Date(plurker.join_date)
             this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-            this.statistics.draw('spansmall center badges', plurker.badges.length, "I have <i>🛡 " + plural(plurker.badges.length, "badge") + "</i> right now");
+            this.statistics.draw('spansmall center badges', plurker.badges.length, "I have <i><img src='https://api.iconify.design/noto:shield.svg' /> " + plural(plurker.badges.length, "badge") + "</i> right now");
         } else {
             this.statistics.draw('', '-', "There is no data in my timeline");
             this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
@@ -2048,40 +2048,40 @@ class replurk {
         this.most.mvp.draw();
 
         // Replurk Badges
-        var gender = "👑 Leader";
-        if (this.me.gender == 1) gender = "👑 King";
-        if (this.me.gender == 0) gender = "👑 Queen";
+        var gender = "<img src='https://api.iconify.design/noto:crown.svg' /> Leader";
+        if (this.me.gender == 1) gender = "<img src='https://api.iconify.design/noto:crown.svg' /> King";
+        if (this.me.gender == 0) gender = "<img src='https://api.iconify.design/noto:crown.svg' /> Queen";
 
-        var tiktok = "🪩";
-        if (this.me.gender == 1) tiktok = "🕺";
-        if (this.me.gender == 0) tiktok = "💃";
+        var tiktok = "<img src='https://api.iconify.design/noto:mirror-ball.svg' />";
+        if (this.me.gender == 1) tiktok = "<img src='https://api.iconify.design/noto:man-dancing-medium-dark-skin-tone.svg' />";
+        if (this.me.gender == 0) tiktok = "<img src='https://api.iconify.design/noto:woman-dancing-medium-dark-skin-tone.svg' />";
 
-        var facebook = "🧓";
-        if (this.me.gender == 1) facebook = "👴";
-        if (this.me.gender == 0) facebook = "👵";
+        var facebook = "<img src='https://api.iconify.design/noto:older-person.svg' />";
+        if (this.me.gender == 1) facebook = "<img src='https://api.iconify.design/noto:old-man.svg' />";
+        if (this.me.gender == 0) facebook = "<img src='https://api.iconify.design/noto:old-woman.svg' />";
 
-        var plurker = "🙇";
-        if (this.me.gender == 1) plurker = "🙇‍♂️";
-        if (this.me.gender == 0) plurker = "🙇‍♀️";
+        var plurker = "<img src='https://api.iconify.design/noto:person-bowing.svg' />";
+        if (this.me.gender == 1) plurker = "<img src='https://api.iconify.design/noto:man-bowing.svg' />";
+        if (this.me.gender == 0) plurker = "<img src='https://api.iconify.design/noto:woman-bowing.svg' />";
 
         this.statistics.title('RePlurk Badges', 'replurkbadges');
         this.statistics.title('What are RePlurk Badges consist of? They are badges based on your activities in Plurk. Currently there are 16 badges in total, for activities such as: creating lots of polls (Polling ' + gender + '), receiving lots of coins (Plurk Coins Billionaire), writing lots of posts (Novelist and Keyboard Warrior), sharing lots of pictures and links (Meme Lord & Missing Link), sharing social medias urls (there are 7 badges), posting lots of adult posts (Adult-er), getting lots of replurks (Trendsetter), and constantly posting in Plurk almost everyday (Active Plurker).', 'replurkbadges description');
-        if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "🗳️", "<strong>Polling " + gender + "</strong>");
-        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "🪙", "<strong>Plurk Coins Billionaire</strong>");
-        if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "📓", "<strong>Novelist</strong>");
-        if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall center badges keyboardbadges', "⌨️", "<strong>Keyboard Warrior</strong>");
-        if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall center badges memebadges', "🐈", "<strong>Meme Lord</strong>");
-        if (this.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall center badges missingbadges', "🦧", "<strong>The Missing Link</strong>");
-        if (this.statistics.instagrammer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "📷", "<strong>Instagrammer</strong>");
+        if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "<img src='https://api.iconify.design/noto:ballot-box-with-ballot.svg' />", "<strong>Polling " + gender + "</strong>");
+        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "<img src='https://api.iconify.design/noto:coin.svg' />", "<strong>Plurk Coins Billionaire</strong>");
+        if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "<img src='https://api.iconify.design/noto:book.svg' />", "<strong>Novelist</strong>");
+        if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall center badges keyboardbadges', "<img src='https://api.iconify.design/noto:keyboard.svg' />", "<strong>Keyboard Warrior</strong>");
+        if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall center badges memebadges', "<img src='https://api.iconify.design/noto:cat.svg' />", "<strong>Meme Lord</strong>");
+        if (this.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall center badges missingbadges', "<img src='https://api.iconify.design/noto:orangutan.svg' />", "<strong>The Missing Link</strong>");
+        if (this.statistics.instagrammer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:camera.svg' />", "<strong>Instagrammer</strong>");
         if (this.statistics.facebooker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', facebook, "<strong>Facebooker</strong>");
-        if (this.statistics.twitterer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🐣", "<strong>The Real Chief Twit</strong>");
-        if (this.statistics.redditor_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🤖", "<strong>/r</strong>");
+        if (this.statistics.twitterer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:hatching-chick.svg' />", "<strong>The Real Chief Twit</strong>");
+        if (this.statistics.redditor_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:robot.svg' />", "<strong>/r</strong>");
         if (this.statistics.tiktoker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', tiktok, "<strong>Tiktoker</strong>");
-        if (this.statistics.imgurer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎆", "<strong>Imgur-er</strong>");
-        if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "🎥", "<strong>Youtuber 😮‍💨</strong>");
-        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "😍", "<strong>Adult-er</strong>");
-        if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "🏆", "<strong>Trendsetter</strong>");
-        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "🎖️", "<strong>Active Plurker " + plurker + "</strong>");
+        if (this.statistics.imgurer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:framed-picture.svg' />", "<strong>Imgur-er</strong>");
+        if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:movie-camera.svg' />", "<strong>Youtuber <img src='https://api.iconify.design/noto:sleepy-face.svg' /></strong>");
+        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "<img src='https://api.iconify.design/noto:face-with-peeking-eye.svg' />", "<strong>Adult-er</strong>");
+        if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/noto:trophy.svg' />", "<strong>Trendsetter</strong>");
+        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/noto:military-medal.svg' />", "<strong>Active Plurker " + plurker + "</strong>");
     }
 
     // Check login status
