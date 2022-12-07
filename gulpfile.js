@@ -22,7 +22,7 @@ function js() {
 				clean: true
 			}
 		}))
-		.pipe(gulp.dest('./js/'))
+		.pipe(gulp.dest('js/'))
 		.pipe(browserSync.stream());
 }
 
@@ -32,7 +32,7 @@ function css() {
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('./src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function css_vertical() {
@@ -40,7 +40,7 @@ function css_vertical() {
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('./src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function css_horizontal() {
@@ -48,7 +48,7 @@ function css_horizontal() {
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('./src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function print() {
@@ -59,15 +59,15 @@ function print() {
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("print.css"))
 		.pipe(sourcemaps.write("."))
-		.pipe(gulp.dest('./src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function css_prefix() {
-	return gulp.src(['./src/css/cache/*.css'])
+	return gulp.src(['src/css/cache/*.css'])
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(autoprefixer())
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('./css/'))
+		.pipe(gulp.dest('css/'))
 		.pipe(browserSync.stream());
 }
 
@@ -104,7 +104,7 @@ exports.default = function () {
 		hostname: "0.0.0.0",
 		port: 8080,
 		base: "../",
-		router: "./router.php",
+		router: "router.php",
 		keepalive: true,
 		stdio: "ignore",
 		debug: false
