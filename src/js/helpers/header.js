@@ -154,7 +154,7 @@ let header = {
                 if (gsap.isTweening(items)) return;
 
                 // Animate main element
-                gsap.to("main .middle", {
+                gsap.to("main > .middle", {
                     left: "-=100",
                     ease: "power3.out",
                     duration: length * 3 / 4
@@ -211,7 +211,7 @@ let header = {
                     if (this != e.target || gsap.isTweening(items)) return;
 
                     // Animate main element
-                    gsap.to("main .middle, main .middle > .text, main .links, main .flares", {
+                    gsap.to("main > .middle, main .middle > .text, main .links, main .flares", {
                         left: 0,
                         duration: length * 3 / 4,
                         ease: "power3.out"
