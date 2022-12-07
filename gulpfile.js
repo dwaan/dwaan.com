@@ -9,45 +9,53 @@ const
 	webpack = require('webpack-stream'),
 	webp = require('gulp-webp'),
 	svgmin = require('gulp-svgmin'),
-	autoprefixer = require('gulp-autoprefixer');
+	autoprefixer = require('gulp-autoprefixer'),
+	mode = require('gulp-mode')();
 
 
 function js() {
 	return gulp.src(['src/js/main.js'])
-		.pipe(webpack({
+		.pipe(mode.development(webpack({
 			devtool: 'source-map',
 			mode: 'production',
 			output: {
 				filename: 'bundle.js',
 				clean: true
 			}
-		}))
+		})))
+		.pipe(mode.production(webpack({
+			mode: 'production',
+			output: {
+				filename: 'bundle.js',
+				clean: true
+			}
+		})))
 		.pipe(gulp.dest('js/'))
 		.pipe(browserSync.stream());
 }
 
 function css() {
 	return gulp.src(['node_modules/normalize.css/normalize.css', 'src/css/main.scss'])
-		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
-		.pipe(sourcemaps.write('.'))
+		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function css_vertical() {
 	return gulp.src(['src/css/vertical-screen.scss'])
-		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
-		.pipe(sourcemaps.write('.'))
+		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function css_horizontal() {
 	return gulp.src(['src/css/horizontal-screen.scss'])
-		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
-		.pipe(sourcemaps.write('.'))
+		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'));
 }
 
@@ -55,18 +63,18 @@ function print() {
 	return gulp.src([
 		'src/css/print.scss'
 	])
-		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("print.css"))
-		.pipe(sourcemaps.write("."))
+		.pipe(mode.development(sourcemaps.write(".")))
 		.pipe(gulp.dest('src/css/cache/'));
 }
 
 function css_prefix() {
 	return gulp.src(['src/css/cache/*.css'])
-		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(autoprefixer())
-		.pipe(sourcemaps.write('.'))
+		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('css/'))
 		.pipe(browserSync.stream());
 }
