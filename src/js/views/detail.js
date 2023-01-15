@@ -207,6 +207,7 @@ var detailview = {
 			scroll.moveText({
 				elements: el.querySelectorAll(".titles > *, p")
 			});
+
 			// Scroll animation
 			var screen = gsap.matchMedia();
 
@@ -1117,6 +1118,52 @@ var detailview = {
 						start: "0 100%",
 						end: "100% 100%",
 						scrub: true,
+						animation: tl
+					});
+				});
+			});
+		});
+
+
+		// Style - Staggered
+		next.querySelectorAll(".style-staggered").forEach(el => {
+			// Move the text
+			scroll.moveText({
+				elements: el.querySelectorAll(".titles > *, p")
+			});
+
+			// Move image
+			var screen = gsap.matchMedia();
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					var pictures = el.querySelectorAll(".thumbs > picture");
+
+					pictures.forEach(picture => {
+						tl.fromTo(picture, {
+							y: "50%"
+						}, {
+							y: 0,
+							ease: "linear",
+							duration: 1
+						}, 0);
+
+						tl.fromTo(picture, {
+							y: 0
+						}, {
+							y: "50%",
+							ease: "linear",
+							duration: 1
+						}, 1);
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "200% 100%",
+						scrub: reduceMotionFilter(1),
 						animation: tl
 					});
 				});

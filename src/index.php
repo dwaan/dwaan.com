@@ -34,6 +34,22 @@
 
         <hr />
 
+        <section id="casestudy" class="middle full home-bkpm">
+            <div class="padding">
+                <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
+                    <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" class="logo" alt="Logo Ministry of Investment/BKPM" />
+                </a>
+            </div>
+            <div class="arrow-small">
+                <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="arrow">
+                    <span>Website Redesign</span>
+                </a>
+            </div>
+            <div class="cover"></div>
+        </section>
+
+        <hr />
+
         <section id="casestudy" class="middle full home-aai">
             <div class="padding">
                 <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Redesign">

@@ -238,6 +238,7 @@ header {
 /* Home style */
 .home {
 	.middle {
+
 		&:before,
 		.cover {
 			content: "";
@@ -664,6 +665,14 @@ header {
 	}
 }
 
+.bkpm .style-background {
+	.thumbs {
+		img {
+			width: 170vw;
+		}
+	}
+}
+
 /* Style that look like table */
 .style-row {
 	margin: calc(-1 * var(--padl)) 0;
@@ -855,6 +864,24 @@ header {
 			margin: -5px 0 0 -5px;
 			background-color: var(--black);
 		}
+	}
+}
+
+/* Style staggered content */
+.style-staggered {
+	@extend %style-spread;
+	gap: var(--padxxl);
+
+	.text {
+		width: 37.5vw;
+
+		@media (min-width: 900px) {
+			width: 550px;
+		}
+	}
+
+	.thumbs {
+		height: 100vh;
 	}
 }
 
