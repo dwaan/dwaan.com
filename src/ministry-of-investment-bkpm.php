@@ -52,11 +52,24 @@
 
         <hr />
 
-        <section id="more" class="middle style-top style-top-auto snap">
+        <section id="more" class="middle style-top style-top-coverflow snap">
             <div class="text">
                 <h2>The Concept</h2>
                 <p>When talking about investment, the word growth came into my mind.</p>
                 <p>The word growth were than extracted and combine with their corporate identity to produce color scheme and simple graphics.</p>
+
+                <div class="meta">
+                    <img src="/dwaan/img/bkpm/bkpm-logo.svg" width="62" height="48" alt="BKPM Logo" />
+                    <div>
+                        <img src="/dwaan/img/bkpm/bkpm-grow.svg" width="24" height="24" alt="BKPM Growth" />
+                        Growth
+                    </div>
+                    <ul class="flat color">
+                        <li><span style="background: #49A85E"></span> Seed</li>
+                        <li><span style="background: #263D93"></span> Water</li>
+                        <li><span style="background: #E3D553"></span> Sun</li>
+                    </ul>
+                </div>
             </div>
             <div class="thumbs">
                 <?php for ($i = 6; $i <= 8; $i++) { ?>
@@ -69,6 +82,36 @@
             </div>
         </section>
 
+        <hr />
+
+        <section class="middle style-center snap">
+            <div class="text">
+                <h2>Inspired by<br hidden />Growth</h2>
+                <div class="meta">
+                    <ul class="flat color">
+                        <li style="background: #49A85E"></li>
+                        <li style="background: #263D93"></li>
+                        <li style="background: #E3D553"></li>
+                    </ul>
+                </div>
+                <ol class="zero">
+                    <li>Extracted the meaning of growth into the word <strong>seed</strong> which symbolized as the color of green.</li>
+                    <li>For the seed to grow, it need <strong>water</strong> and <strong>sun</strong>, both were symbolize as the color of blue and yellow.</li>
+                    <li>The <strong>growth</strong> itself was symbolize by a simple arrow pointing upward.</li>
+                </ol>
+            </div>
+            <div class="thumbs">
+                <?php for ($i = 10; $i <= 12; $i++) { ?>
+                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" width="auto" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
+                <?php } ?>
+            </div>
+        </section>
+
+        <hr />
         <hr />
         <section class="middle style-background clip snap-bottom">
             <div class="text">

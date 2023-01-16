@@ -578,8 +578,15 @@ header {
 			}
 		}
 	}
-}
 
+	&.style-top-coverflow {
+		picture {
+			&:nth-child(2n) {
+				margin-top: 0;
+			}
+		}
+	}
+}
 
 /* Style text on top without image */
 .style-top-text {
@@ -870,20 +877,83 @@ header {
 /* Style staggered content */
 .style-staggered {
 	@extend %style-spread;
-	gap: var(--padxxl);
+	gap: var(--padl);
+
+	@media (min-width: 1200px) {
+		gap: var(--padxl);
+	}
 
 	.text {
 		width: 37.5vw;
 
 		@media (min-width: 900px) {
-			width: 550px;
+			width: 400px;
+		}
+
+		@media (min-width: 1200px) {
+			width: 500px;
 		}
 	}
 
 	.thumbs {
-		height: 100vh;
+		picture {
+			@media (min-width: 1200px) {
+				margin-left: -50%;
+			}
+		}
 	}
 }
+
+/* Style with everything in the center */
+.style-center {
+	padding: calc(4 * var(--pady)) calc(2 * var(--padx));
+
+	.thumbs {
+		gap: var(--padl);
+
+		picture {
+			flex: 0 0 50vw;
+
+			&:nth-child(2) {
+				flex: 0 0 15vw;
+			}
+
+			&:nth-child(3) {
+				flex: 0 0 7.5vw;
+			}
+		}
+	}
+}
+
+/* BKPM Page */
+.bkpm {
+	.color {
+
+		li,
+		li:last-child {
+			width: 24px;
+			height: 24px;
+			line-height: 24px;
+
+			span {
+				width: 24px;
+				height: 24px;
+				flex: 0 0 24px;
+				display: block;
+			}
+		}
+	}
+
+	.style-top {
+		li {
+			width: 24px;
+			height: 24px;
+			line-height: 24px;
+		}
+	}
+
+}
+
 
 /* Footer links in every detail page */
 .links {

@@ -414,7 +414,7 @@ var detailview = {
 		});
 
 		// Style - Top
-		next.querySelectorAll(".style-top").forEach(el => {
+		next.querySelectorAll(".style-top:not(.style-top-coverflow").forEach(el => {
 			var thumbs = el.querySelector(".thumbs");
 			// Move text
 			scroll.moveText({
@@ -519,6 +519,52 @@ var detailview = {
 					animation: tl
 				});
 			});
+		});
+
+		// Style - Top
+		next.querySelectorAll(".style-top-coverflow").forEach(el => {
+			// Move text
+			scroll.moveText({
+				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text .meta > *, .text p")
+			});
+			ScrollTrigger.defaults({
+				start: "0 100%",
+				end: "100% 0",
+				scrub: reduceMotionFilter() ? true : .75
+			});
+
+			// Move image
+			var screen = gsap.matchMedia();
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					var pictures = el.querySelectorAll(".thumbs > picture");
+
+					pictures.forEach(picture => {
+						tl.fromTo(picture, {
+							y: "50%"
+						}, {
+							y: 0,
+							ease: "linear",
+							duration: 1
+						}, 0);
+
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "50% 100%",
+						scrub: reduceMotionFilter(1),
+						animation: tl
+					});
+				});
+			});
+
+			// Reset
+			ScrollTrigger.defaults({});
 		});
 
 		// Style - Flex
@@ -1148,13 +1194,6 @@ var detailview = {
 							duration: 1
 						}, 0);
 
-						tl.fromTo(picture, {
-							y: 0
-						}, {
-							y: "50%",
-							ease: "linear",
-							duration: 1
-						}, 1);
 					});
 
 					return tl;
@@ -1162,11 +1201,19 @@ var detailview = {
 					return ScrollTrigger.create({
 						trigger: el,
 						start: "0 100%",
-						end: "200% 100%",
+						end: "100% 100%",
 						scrub: reduceMotionFilter(1),
 						animation: tl
 					});
 				});
+			});
+		});
+
+		// Style - Center
+		next.querySelectorAll(".style-center").forEach(el => {
+			// Move the text
+			scroll.moveText({
+				elements: el.querySelectorAll(".text > h2, .text > .meta, .text .zero > li")
 			});
 		});
 

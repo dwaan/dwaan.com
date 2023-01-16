@@ -821,6 +821,49 @@ header {
 }
 
 
+/* Style with everything in the center */
+.style-center {
+	padding: var(--pady) 0;
+
+	.text {
+		.zero {
+			li:before {
+				margin-bottom: var(--padm);
+			}
+		}
+
+		.color {
+			li {
+				flex: 16px !important;
+				width: 16px !important;
+				height: 16px !important;
+			}
+		}
+	}
+
+	@media (min-width: mixins.$screen-verysmall) {
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx));
+	}
+
+	.thumbs {
+		gap: var(--padm);
+
+		picture {
+			flex: 0 0 65vw;
+
+			&:nth-child(2) {
+				flex: 0 0 22vw;
+			}
+
+			&:nth-child(3) {
+				flex: 0 0 12vw;
+			}
+		}
+
+	}
+}
+
+
 /* Me page */
 
 .me {
