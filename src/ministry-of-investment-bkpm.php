@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail bkpm">
-        <!-- <img src="/dwaan/img/qr/bkpm.svg" width="64" height="64" alt="Dwan - Ministry of Investment/BKPM Website Redesign" class="print qr" hidden /> -->
+        <img src="/dwaan/img/qr/bkpm.svg" width="64" height="64" alt="Dwan - Ministry of Investment/BKPM Website Redesign" class="print qr" hidden />
 
         <hr />
 
@@ -112,7 +112,25 @@
         </section>
 
         <hr />
+
+        <section class="middle style-center style-center-small snap">
+            <div class="text">
+                <h3>Pushing<br hidden />Ecological Agenda</h3>
+                <p>A small touch that I added is to remind my client about investment that are about climate change issue, I added sublime messages into the design prototype that I made.</p>
+            </div>
+            <div class="thumbs">
+                <?php for ($i = 17; $i <= 19; $i++) { ?>
+                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
+                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" width="auto" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                    </picture>
+                <?php } ?>
+            </div>
+        </section>
+
         <hr />
+
         <section class="middle style-background clip snap-bottom">
             <div class="text">
                 <h3>The&nbsp;<br hidden />Interface&nbsp;<br hidden />Guideline</h3>

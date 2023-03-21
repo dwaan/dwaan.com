@@ -1903,9 +1903,14 @@ header {
 		padding: 0 var(--padxl);
 		margin: 0 0 var(--padxl);
 
+		h2,
+		h3,
+		p {
+			text-align: center;
+		}
+
 		h2 {
 			margin-bottom: var(--padm);
-			text-align: center;
 		}
 
 		.meta {
@@ -1934,6 +1939,19 @@ header {
 
 			&:nth-child(3) {
 				order: 1;
+			}
+		}
+	}
+
+	&.style-center-small {
+		.text {
+			max-width: 530px;
+			padding: 0;
+		}
+
+		.thumbs {
+			picture {
+				order: initial;
 			}
 		}
 	}
@@ -1979,7 +1997,7 @@ header {
 			}
 
 			>div,
-			li, {
+			li {
 				display: flex;
 				flex-flow: column nowrap;
 				justify-content: center;
