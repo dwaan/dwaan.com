@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    $title = "Asosiasi Antropologi Indonesia | AAI Website Redesign";
+    $title = "Asosiasi Antropologi Indonesia | AAI Website Solution";
     $description = "A short study case of website redesign for Asosiasi Antropologi Indonesia | AAI";
     include_once "part_metacss.php";
     ?>
@@ -13,15 +13,15 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail aai">
-        <img src="/dwaan/img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Redesign" class="print qr" hidden />
+        <img src="/dwaan/img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Solution" class="print qr" hidden />
 
-		<hr />
+        <hr />
 
         <section class="middle full snap">
             <div class="padding">
                 <span><img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" /></span>
             </div>
-            <h4 class="year">/2022</h4>
+            <h4 class="year">/2023</h4>
             <div class="arrow-big">
                 <a href="#more" class="arrow scrollto">
                     <span>read more</span>
@@ -134,11 +134,10 @@
 
         <hr />
 
-        <section class="middle style-background clip snap-bottom">
+        <section class="middle style-background clip snap-center">
             <div class="text">
                 <h3>The&nbsp;<br hidden />Interface&nbsp;<br hidden />Guideline</h3>
-                <p>The newly created interface guideline will provide consistent interface development in the future.
-                </p>
+                <p>The newly created interface guideline will provide consistent interface development in the future.</p>
             </div>
             <div class="thumbs">
                 <img src="/dwaan/img/aai/guideline.svg" width="auto" height="500" alt="AAI Website Redesign - Guideline - by Dwan" />
@@ -147,12 +146,20 @@
 
         <hr />
 
+        <section class="middle snap-bottom">
+            <div class="text">
+                <h3>And The&nbsp;<br hidden />Development</h3>
+                <p>It was develop using WordPress for&nbsp;<br hidden />fast development and easy to use CMS.</p>
+            </div>
+        </section>
+
+        <hr />
+
         <section class="links snap-bottom">
             <nav>
                 <div class="prototype">
-                    <a href="https://www.figma.com/proto/L4qTK2ufFdy5i0K0TxryVf/AAI---Desktop?page-id=0%3A1&node-id=0%3A1&viewport=229%2C187%2C0.04&scaling=scale-down-width&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" aria-label="Figma Prototype - AAI - Website Redesign" target="_BLANK" class="title"><span>visit the prototype</span></a>
-                    <a href="https://www.figma.com/proto/L4qTK2ufFdy5i0K0TxryVf/AAI---Desktop?page-id=0%3A1&node-id=0%3A1&viewport=229%2C187%2C0.04&scaling=scale-down-width&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" aria-label="Figma Prototype - AAI - Website Redesign" target="_BLANK"><span>desktop</span></a>
-                    <a href="https://www.figma.com/proto/adzmnbh8sUFWV8G9vdB28Q/AAI---Mobile?page-id=0%3A1&node-id=1%3A2&viewport=385%2C26%2C0.06&scaling=contain&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" aria-label="Figma Prototype - AAI - Website Redesign" target="_BLANK"><span>mobile</span></a>
+                <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK" class="title"><span>visit the website</span></a>
+                <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK"><span>click here</span></a>
                 </div>
                 <div class="continue">
                     <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="title"><span>next case study</span></a>

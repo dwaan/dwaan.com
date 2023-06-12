@@ -175,7 +175,7 @@ let homeview = {
 					}
 				});
 			});
-		})
+		});
 	},
 	afterEnter: () => {
 		document.body.style.overflow = "";

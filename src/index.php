@@ -34,6 +34,22 @@
 
         <hr />
 
+        <section id="casestudy" class="middle full home-aai">
+            <div class="padding">
+                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution">
+                    <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" />
+                </a>
+            </div>
+            <div class="arrow-small">
+                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution" class="arrow">
+                    <span>Website Solution</span>
+                </a>
+            </div>
+            <div class="cover"></div>
+        </section>
+
+        <hr />
+
         <section id="casestudy" class="middle full home-bkpm">
             <div class="padding">
                 <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
@@ -42,22 +58,6 @@
             </div>
             <div class="arrow-small">
                 <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="arrow">
-                    <span>Website Redesign</span>
-                </a>
-            </div>
-            <div class="cover"></div>
-        </section>
-
-        <hr />
-
-        <section id="casestudy" class="middle full home-aai">
-            <div class="padding">
-                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Redesign">
-                    <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" />
-                </a>
-            </div>
-            <div class="arrow-small">
-                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Redesign" class="arrow">
                     <span>Website Redesign</span>
                 </a>
             </div>
