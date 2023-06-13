@@ -1958,6 +1958,21 @@ header {
 }
 
 
+/* Style 3D thumbs */
+.style-3d {
+	display: flex;
+	position: relative;
+
+	.text {
+		order: 2;
+	}
+
+	.thumbs {
+		order: 1;
+	}
+}
+
+
 /* BKPM Page */
 
 .bkpm {

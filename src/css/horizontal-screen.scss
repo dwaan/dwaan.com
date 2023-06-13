@@ -963,6 +963,43 @@ header {
 	}
 }
 
+/* Style 3D thumbs */
+.style-3d {
+	flex-direction: row;
+
+	.text {
+		padding-left: var(--padxl);
+	}
+
+	.thumbs {
+		width: 30vw;
+		height: 100%;
+		perspective: 1000px;
+
+		div {
+			width: 100%;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: initial;
+			right: 0;
+			transform: perspective(600px);
+
+			&:nth-child(1) {
+				transform: translateX(-50%) translateY(-30%) rotateY(20deg);
+			}
+
+			&:nth-child(2) {
+				transform: translateX(-25%) translateY(-50%) rotateY(20deg);
+			}
+
+			&:nth-child(3) {
+				transform: translateX(0%) translateY(-70%) rotateY(20deg);
+			}
+		}
+	}
+}
+
 /* BKPM Page */
 .bkpm {
 	.color {

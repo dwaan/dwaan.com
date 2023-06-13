@@ -146,7 +146,18 @@
 
         <hr />
 
-        <section class="middle snap-bottom">
+        <section class="middle style-3d snap-bottom">
+            <div class="thumbs">
+                <?php for ($i = 3; $i >= 1; $i--) { ?>
+                    <div>
+                        <picture class="pic-<?php echo $i ?>">
+                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai-wp/aai-<?php echo $i ?>@4x.webp">
+                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai-wp/aai-<?php echo $i ?>@3x.webp">
+                            <img src="/dwaan/img/aai-wp/aai-<?php echo $i ?>@2x.webp" width="auto" height="250" alt="AAI Website Redesign - WordPress Page <?php echo $i ?> - by Dwan" />
+                        </picture>
+                    </div>
+                <?php } ?>
+            </div>
             <div class="text">
                 <h3>And The&nbsp;<br hidden />Development</h3>
                 <p>It was develop using WordPress for&nbsp;<br hidden />fast development and easy to use CMS.</p>
@@ -158,8 +169,8 @@
         <section class="links snap-bottom">
             <nav>
                 <div class="prototype">
-                <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK" class="title"><span>visit the website</span></a>
-                <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK"><span>click here</span></a>
+                    <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK" class="title"><span>visit the website</span></a>
+                    <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK"><span>click here</span></a>
                 </div>
                 <div class="continue">
                     <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="title"><span>next case study</span></a>

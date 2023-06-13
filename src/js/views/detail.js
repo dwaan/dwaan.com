@@ -1217,6 +1217,83 @@ var detailview = {
 			});
 		});
 
+		// Style - 3D
+		next.querySelectorAll(".style-3d").forEach(el => {
+			var length = reduceMotionFilter(1);
+			var screen = gsap.matchMedia();
+			var pictures = el.querySelectorAll(".thumbs picture");
+
+			screen.add("(min-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					pictures.forEach((picture, index) => {
+						tl.fromTo(picture, {
+							y: (index + 1) + "0%"
+						}, {
+							y: "-" + (index + 1) + "0%",
+							ease: "linear",
+							duration: length
+						}, 0);
+					})
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: .5,
+						animation: tl
+					});
+				});
+
+				scroll.push(tl => {
+					pictures.forEach((picture, index) => {
+						tl.fromTo(picture, {
+							x: "-" + ((index + 1) * 1.5) + "0%"
+						}, {
+							x: 0,
+							ease: "linear",
+							duration: length
+						}, 0);
+					})
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 50%",
+						end: "50% 50%",
+						scrub: 1,
+						animation: tl
+					});
+				});
+			});
+
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					pictures.forEach((picture, index) => {
+						tl.fromTo(picture, {
+							y: (index + 1) + "0%"
+						}, {
+							y: "-" + (index + 1) + "0%",
+							ease: "linear",
+							duration: length
+						}, 0);
+					})
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 0",
+						scrub: .5,
+						animation: tl
+					});
+				});
+			});
+		});
+
 		// Links
 		next.querySelectorAll(".links").forEach(el => {
 			// Move text
