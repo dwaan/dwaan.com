@@ -159,8 +159,8 @@
                 <?php } ?>
             </div>
             <div class="text">
-                <h3>And The&nbsp;<br hidden />Development</h3>
-                <p>It was develop using WordPress for&nbsp;<br hidden />fast development and easy to use CMS.</p>
+                <h3>And The CMS&nbsp;<br hidden />Development</h3>
+                <p>It was develop using WordPress for&nbsp;<br hidden />fast development, which just under 2 weeks.&nbsp;<br hidden />And most importanly the familiarity of&nbsp;<br hidden />the platform from the website editorial.</p>
             </div>
         </section>
 
@@ -170,7 +170,7 @@
             <nav>
                 <div class="prototype">
                     <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK" class="title"><span>visit the website</span></a>
-                    <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK"><span>click here</span></a>
+                    <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK"><span>Asosiasi Antropologi Indonesia</span></a>
                 </div>
                 <div class="continue">
                     <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="title"><span>next case study</span></a>
