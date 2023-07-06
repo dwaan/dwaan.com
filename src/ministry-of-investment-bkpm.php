@@ -19,7 +19,12 @@
 
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" class="logo" alt="Logo Ministry of Investment/BKPM" /></span>
+                <span>
+                    <picture width="540" height="74" class="logo">
+                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/dwaan/img/logo/bkpm-square.svg">
+                        <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
+                    </picture>
+                </span>
             </div>
             <h4 class="year">/2022</h4>
             <div class="arrow-big">
@@ -35,7 +40,7 @@
             <div class="text">
                 <div class="titles">
                     <h4>Website Redesign</h4>
-                    <h1>Ministry of Investment<br />/BKPM</h1>
+                    <h1>Ministry of Investment/<br />BKPM</h1>
                 </div>
                 <p>As I was informed by my company that they wanted to give BKPM another round of design idea, I was gladly to help them. They submitted 3 designs, so I aimed my design to be very simple that quite a contrast to the designs that my company proposed.</p>
             </div>
@@ -113,9 +118,9 @@
 
         <hr />
 
-        <section class="middle style-center style-center-small snap">
+        <section class="middle style-center style-center-small style-picture-parallax snap">
             <div class="text">
-                <h3>Pushing<br hidden />Ecological Agenda</h3>
+                <h3>Pursuing<br hidden />Ecological Agenda</h3>
                 <p>A small touch that I added is to remind my client about investment that are about climate change issue, I added sublime messages into the design prototype that I made.</p>
             </div>
             <div class="thumbs">

@@ -523,20 +523,51 @@ var detailview = {
 
 		// Style - Top
 		next.querySelectorAll(".style-top-coverflow").forEach(el => {
-			// Move text
-			scroll.moveText({
-				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text .meta > *, .text p")
-			});
-			ScrollTrigger.defaults({
-				start: "0 100%",
-				end: "100% 0",
-				scrub: reduceMotionFilter() ? true : .75
-			});
-
-			// Move image
 			var screen = gsap.matchMedia();
 
+			// Vertical screen
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text p, .text .meta")
+				});
+
+				// Move image
+				scroll.push(tl => {
+					var pictures = el.querySelectorAll(".thumbs > picture");
+
+					pictures.forEach((picture, index) => {
+						tl.fromTo(picture, {
+							y: "20vh",
+							opacity: 0
+						}, {
+							y: 0,
+							opacity: 1,
+							ease: "ease.out",
+							duration: pictures.length
+						}, (pictures.length / 2) - ((index + 1) / 2));
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelector(".thumbs"),
+						start: "-25% 100%-=50px",
+						end: "100% 100%-=50px",
+						scrub: reduceMotionFilter(2),
+						animation: tl
+					});
+				});
+			});
+
+			// Horizontal screen
 			screen.add("(min-aspect-ratio: 1/1)", () => {
+				// Move text
+				scroll.moveText({
+					elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text .meta > *, .text p")
+				});
+
+				// Move image
 				scroll.push(tl => {
 					var pictures = el.querySelectorAll(".thumbs > picture");
 
@@ -1173,6 +1204,8 @@ var detailview = {
 
 		// Style - Staggered
 		next.querySelectorAll(".style-staggered").forEach(el => {
+			var pictures = el.querySelectorAll(".thumbs > picture");
+
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".titles > *, p")
@@ -1180,11 +1213,33 @@ var detailview = {
 
 			// Move image
 			var screen = gsap.matchMedia();
+			// Vertical screen
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				scroll.push(tl => {
+					tl.fromTo(pictures, {
+						y: "20vh",
+						opacity: 0
+					}, {
+						y: 0,
+						opacity: 1,
+						ease: "ease.out",
+						stagger: .2
+					});
 
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el.querySelector(".thumbs"),
+						start: "-25% 100%-=50px",
+						end: "50% 100%-=50px",
+						scrub: reduceMotionFilter(2),
+						animation: tl
+					});
+				});
+			});
+			// Horizontal Screen
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				scroll.push(tl => {
-					var pictures = el.querySelectorAll(".thumbs > picture");
-
 					pictures.forEach(picture => {
 						tl.fromTo(picture, {
 							y: "50%"
@@ -1193,7 +1248,6 @@ var detailview = {
 							ease: "linear",
 							duration: 1
 						}, 0);
-
 					});
 
 					return tl;
@@ -1210,10 +1264,78 @@ var detailview = {
 		});
 
 		// Style - Center
-		next.querySelectorAll(".style-center").forEach(el => {
+		next.querySelectorAll(".style-center:not(.style-picture-parallax)").forEach(el => {
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text > h2, .text > .meta, .text .zero > li")
+			});
+
+			// Move the thumbnials
+			scroll.push(tl => {
+				var pictures = el.querySelectorAll(".thumbs > picture");
+
+				tl.fromTo(pictures, {
+					y: "20vh",
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1,
+					ease: "ease.out",
+					duration: 2,
+					stagger: {
+						position: "end",
+						amount: .5
+					}
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el.querySelector(".thumbs"),
+					start: "-25% 100%-=50px",
+					end: "100% 100%-=50px",
+					scrub: reduceMotionFilter() ? true : 2,
+					animation: tl
+				});
+			});
+		});
+		next.querySelectorAll(".style-picture-parallax").forEach(el => {
+			// Move the text
+			scroll.moveText({
+				elements: el.querySelectorAll(".text > h3, .text > p")
+			});
+
+			// Move the thumbnials
+			scroll.push(tl => {
+				var pictures = el.querySelectorAll(".thumbs > picture");
+
+				tl.fromTo(pictures, {
+					opacity: 0
+				}, {
+					opacity: 1,
+					ease: "ease.out",
+					stagger: .2,
+					duration: .5
+				}, 0);
+
+				tl.fromTo(pictures, {
+					y: "25vh"
+				}, {
+					y: 0,
+					ease: "ease.out",
+					stagger: .2,
+					duration: 1
+				}, 0);
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el.querySelector(".thumbs"),
+					start: "-25% 100%-=50px",
+					end: "100% 100%-=50px",
+					scrub: reduceMotionFilter(2),
+					animation: tl
+				});
 			});
 		});
 

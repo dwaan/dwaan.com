@@ -39,7 +39,7 @@
                 </div>
                 <p>Asosiasi Antropologi Indonesia (AAI) website was due to redesign. They have a clear idea on how their website should look like and I'm helping them to create it.</p>
             </div>
-            <div class="thumbs">
+            <div class="thumbs wide">
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>" width="auto" height="150">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
@@ -62,7 +62,7 @@
                         current available resources.</li>
                 </ol>
             </div>
-            <div class="thumbs">
+            <div class="thumbs wide">
                 <?php for ($i = 4; $i <= 7; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>" width="auto" height="150">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">

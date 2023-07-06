@@ -26,7 +26,8 @@ h1 {
 	line-height: 90%;
 
 	@media (min-width: mixins.$screen-verysmall) {
-		font-size: 4rem;
+		letter-spacing: -.05rem;
+		font-size: 3rem;
 	}
 
 	@media screen and (min-height: mixins.$screen-small) {
@@ -38,6 +39,11 @@ h1 {
 h2 {
 	font-size: 2.5rem;
 
+	@media (min-width: mixins.$screen-verysmall) {
+		letter-spacing: 0;
+		font-size: 2.25rem;
+	}
+
 	@media screen and (min-height: mixins.$screen-small) {
 		margin-bottom: calc(var(--padl) * 2/3);
 	}
@@ -47,7 +53,8 @@ h3 {
 	font-size: 1.75rem;
 
 	@media screen and (min-height: mixins.$screen-small) {
-		font-size: 2.25rem;
+		font-size: 2rem;
+		line-height: 110%;
 	}
 }
 
@@ -122,10 +129,16 @@ header {
 		}
 	}
 
-	img.logo {
+	.logo {
 		width: auto;
-		max-width: 100%;
+		max-width: 75vw;
 		max-height: 15vh;
+
+		img {
+			margin: 0 auto;
+			width: auto !important;
+			height: 100% !important;
+		}
 	}
 }
 
@@ -240,6 +253,10 @@ header {
 	height: calc(5 * var(--pady));
 }
 
+.detail .arrow-big {
+	padding-top: calc(2 * var(--pady));
+}
+
 .arrow:after {
 	width: var(--padxl);
 	height: var(--padxl);
@@ -291,6 +308,10 @@ header {
 /* Detail page common style */
 .detail picture {
 	box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.25);
+
+	&.logo {
+		box-shadow: none;
+	}
 
 	&,
 	img {
@@ -363,6 +384,14 @@ header {
 
 			@media (min-width: mixins.$screen-verysmall) {
 				width: calc(2 * var(--pic-w));
+			}
+		}
+
+		.wide {
+			picture {
+				@media (min-width: mixins.$screen-verysmall) {
+					width: calc(1.5 * var(--pic-w));
+				}
 			}
 		}
 	}
@@ -476,7 +505,7 @@ header {
 
 /* Style text on the and Images in the bottom */
 .style-top {
-	padding: 100px 30px;
+	padding: calc(6 * var(--pady)) var(--padx);
 	justify-content: flex-start;
 
 	@media screen and (min-height: mixins.$screen-medium) {
@@ -505,6 +534,12 @@ header {
 		picture {
 			width: calc(1.5 * var(--pic-w));
 			height: auto;
+		}
+
+		.wide {
+			picture {
+				width: calc(1 * var(--pic-w));
+			}
 		}
 	}
 }
@@ -573,6 +608,27 @@ header {
 
 	.text {
 		padding: var(--pic-m);
+	}
+}
+
+/* Style staggered */
+.style-staggered {
+	flex-direction: column;
+	height: auto;
+	gap: calc(2 * var(--pady));
+	padding-top: calc(6 * var(--pady));
+
+	.text {
+		padding: 0;
+	}
+
+	.thumbs {
+		width: 110vw;
+		height: auto;
+
+		picture {
+			flex: 0 0 50vw;
+		}
 	}
 }
 
@@ -899,6 +955,118 @@ header {
 	}
 }
 
+
+/* BKPM Page */
+.bkpm {
+	.style-top {
+		.meta {
+			justify-content: flex-start;
+			gap: var(--padxl);
+
+			div,
+			li {
+				display: flex;
+				gap: 4px;
+				line-height: 100%;
+			}
+
+			div img,
+			li span {
+				width: 24px;
+				height: 24px;
+				margin: 0;
+			}
+		}
+
+		&.style-top-coverflow {
+			picture {
+				margin-top: calc(var(--pic-m) * 1);
+				flex: 0 0 50vw;
+
+				&:nth-child(2) {
+					margin-top: 0;
+					flex: 0 0 75vw;
+				}
+			}
+		}
+	}
+
+	.style-center {
+		padding: calc(6 * var(--pady)) var(--padx);
+
+		.text {
+			padding: 0 var(--padx);
+		}
+
+		.zero {
+			li {
+				padding-left: var(--padxxl);
+
+				&::before {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: var(--padxxl);
+				}
+			}
+		}
+
+		picture {
+			flex: 0 0 70vw;
+
+			&:nth-child(2) {
+				flex: 0 0 25vw;
+			}
+
+			&:nth-child(3) {
+				flex: 0 0 15vw;
+			}
+		}
+	}
+
+	.style-center-small {
+		.text {
+			padding: 0 var(--padx);
+		}
+
+		.thumbs {
+			height: auto;
+			flex-direction: column;
+			justify-content: flex-start;
+			margin-top: 12.5vh;
+
+			picture {
+				margin-top: -12.5vh;
+				flex: 1;
+				width: 80vw;
+				margin-left: -50vw;
+
+				&:nth-child(2) {
+					margin-left: 0;
+				}
+
+				&:nth-child(3) {
+					margin-left: 50vw;
+				}
+			}
+		}
+	}
+
+	.style-background {
+		.text {
+			padding: var(--padxl) var(--padl);
+		}
+
+		.thumbs {
+			img {
+				top: 70%;
+				left: 205%;
+				height: 170vh;
+			}
+		}
+	}
+}
+
 /* Me page */
 
 .me {
@@ -1108,8 +1276,25 @@ header {
 	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(6 * var(--pady));
 
 	div {
+		display: block;
+
 		&:before {
 			border-width: 1px;
+			top: calc(var(--pads) + 5px);
+			transform: none;
+		}
+	}
+
+	a {
+		display: inline-block;
+		margin-top: var(--pads);
+
+		&:first-child {
+			display: block;
+		}
+
+		&:last-child:after {
+			display: none;
 		}
 	}
 }

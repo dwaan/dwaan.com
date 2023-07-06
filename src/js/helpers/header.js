@@ -307,39 +307,18 @@ let header = {
 
     arrow: next => {
         // Scroll animate arrow
-        var middle = next.querySelectorAll("section.middle:not(.hidearrow)");
+        var middle = next.querySelectorAll("section.middle");
         if (!middle) return;
         middle.forEach((el, idx) => {
             // Animate arrow
             var screen = gsap.matchMedia();
+            // Vertical Screen
             screen.add("(max-aspect-ratio: 1/1)", () => {
                 var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
                 var year = el.querySelectorAll(".year");
 
-                // Animate text
-                scroll.push(tl => {
-                    tl.set(arrow, {
-                        x: 0,
-                        opacity: 1,
-                        position: "relative"
-                    });
-                    tl.fromTo(arrow, {
-                        y: window.innerHeight * 1 / 3
-                    }, {
-                        y: 0,
-                        ease: "power3.out"
-                    });
-
-                    return tl;
-                }, tl => ScrollTrigger.create({
-                    trigger: el,
-                    start: "0 50%",
-                    end: "50% 50%",
-                    scrub: 4,
-                    animation: tl
-                }));
-
-                // Animate text
+                // Animate arrow
+                // Middle, disappear
                 scroll.push(tl => {
                     tl.fromTo(arrow, {
                         opacity: 1
@@ -357,24 +336,8 @@ let header = {
                     animation: tl
                 }));
 
-                scroll.push(tl => {
-                    tl.fromTo(arrow, {
-                        y: 0
-                    }, {
-                        y: window.innerHeight * 1 / 20,
-                        ease: "power3.out"
-                    });
-
-                    return tl;
-                }, tl => ScrollTrigger.create({
-                    trigger: el,
-                    start: "50% 50%",
-                    end: "100% 50%",
-                    scrub: 1,
-                    animation: tl
-                }));
-
-                // Year
+                // Animate year in detail page
+                // Slide down an disappear with fix position
                 scroll.push(tl => {
                     tl.fromTo(year, {
                         position: "fixed",
@@ -411,6 +374,7 @@ let header = {
                     });
                 }
             });
+            // Horizontal Screen
             screen.add("(min-aspect-ratio: 1/1)", () => {
                 var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
 
@@ -469,16 +433,6 @@ let header = {
                     });
                 }
             });
-        });
-
-        var middlehidearrow = next.querySelectorAll("section.middle.hidearrow");
-        middlehidearrow.forEach(el => {
-            var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
-            gsap.set(arrow, {
-                display: 'none',
-                opacity: 0,
-                pointerEvents: 'none'
-            })
         });
     }
 }

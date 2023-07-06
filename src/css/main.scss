@@ -1221,7 +1221,7 @@ header {
 %style-cover {
 	&:after {
 		@include mixins.make-it-block();
-		@include mixins.positions(90%, 0, -1%);
+		@include mixins.positions(90%, 0, 0);
 		z-index: 3;
 		position: absolute;
 		background: transparent;
@@ -1509,15 +1509,6 @@ header {
 	&.style-background-right {
 		.text {
 			align-self: flex-end;
-		}
-	}
-}
-
-.bkpm .style-background {
-	.thumbs {
-		img {
-			top: 80%;
-			left: 85%;
 		}
 	}
 }
@@ -2025,8 +2016,17 @@ header {
 				li {
 					width: auto;
 					height: auto;
-					line-height: auto;
+					line-height: initial;
 				}
+			}
+		}
+	}
+
+	.style-background {
+		.thumbs {
+			img {
+				top: 80%;
+				left: 85%;
 			}
 		}
 	}

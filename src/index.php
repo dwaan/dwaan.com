@@ -33,11 +33,12 @@
         </section>
 
         <hr />
+        <section id="casestudy"></section>
 
-        <section id="casestudy" class="middle full home-aai">
+        <section class="middle full home-aai">
             <div class="padding">
                 <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution">
-                    <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" />
+                    <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo of AAI" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -50,10 +51,13 @@
 
         <hr />
 
-        <section id="casestudy" class="middle full home-bkpm">
+        <section class="middle full home-bkpm">
             <div class="padding">
                 <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
-                    <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" class="logo" alt="Logo Ministry of Investment/BKPM" />
+                    <picture width="540" height="74" class="logo">
+                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/dwaan/img/logo/bkpm-square.svg">
+                        <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
+                    </picture>
                 </a>
             </div>
             <div class="arrow-small">
@@ -69,7 +73,7 @@
         <section class="middle full home-musiku">
             <div class="padding">
                 <a href="./musiku" aria-label="Musiku Website Concept and Design">
-                    <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo Musiku" />
+                    <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo of Musiku" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -99,7 +103,7 @@
         <section class="middle full home-suzuki">
             <div class="padding">
                 <a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
-                    <img src="/dwaan/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo Suzuki" />
+                    <img src="/dwaan/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo of Suzuki" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -115,7 +119,7 @@
         <section class="middle full home-tas">
             <div class="padding">
                 <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
-                    <img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo Tiket Apa Saja" />
+                    <img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo of Tiket Apa Saja" />
                 </a>
             </div>
             <div class="arrow-small">

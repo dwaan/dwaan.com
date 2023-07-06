@@ -25,9 +25,9 @@ let homeview = {
 		var els = next.querySelectorAll("section.middle");
 		els.forEach((el, idx) => {
 			var maintext = el.querySelectorAll(".main-text, .padding");
-			var maintextchild = el.querySelectorAll(".main-text > *, .padding > *");
 			var screen = gsap.matchMedia();
 
+			// Vertical screen
 			screen.add("(max-aspect-ratio: 1/1)", () => {
 				gsap.set(maintext, {
 					position: "relative",
@@ -37,6 +37,7 @@ let homeview = {
 					y: "0%"
 				});
 			});
+			// Horizontal screen
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				// Background slide version
 				gsap.set(el, {
@@ -78,81 +79,6 @@ let homeview = {
 					scrub: true,
 					animation: tl
 				}));
-
-				// Slot version
-				/*
-				scroll.push(tl => {
-					var length = reduceMotionFilter(3);
-
-					tl.to(maintext, {
-						duration: length,
-					}, 0)
-
-					tl.set(maintext, {
-						position: "relative",
-						pointerEvents: "none",
-						top: "0%",
-						y: "0%",
-					}, 0);
-
-					tl.set(maintext, {
-						position: "fixed",
-						top: "50%",
-						y: "-50%",
-					}, length / 3);
-
-					tl.fromTo(maintextchild, {
-						y: idx == 0 || reduceMotionFilter() ? 0 : window.innerHeight * 1 / 6
-					}, {
-						y: 0,
-						duration: length / 3,
-						ease: "linear",
-					}, length / 3);
-
-					tl.fromTo(maintext, {
-						opacity: idx == 0 ? 1 : 0
-					}, {
-						opacity: 1,
-						ease: "expo.out",
-						duration: length / 6,
-					}, (length / 3) + (length / 6));
-
-					tl.set(maintext, {
-						pointerEvents: "auto",
-					}, length * 2 / 3);
-
-					tl.fromTo(maintextchild, {
-						opacity: 1
-					}, {
-						opacity: 0,
-						duration: length / 6,
-						ease: "expo.out",
-					}, (length * 2 / 3) + (length / 6));
-
-					tl.fromTo(maintextchild, {
-						y: 0
-					}, {
-						y: reduceMotionFilter() ? 0 : window.innerHeight * -1 / 6,
-						duration: length / 3,
-						ease: "linear",
-					}, length * 2 / 3);
-
-					tl.set(maintext, {
-						position: "relative",
-						pointerEvents: "none",
-						top: "0%",
-						y: "0%"
-					}, length);
-
-					return tl;
-				}, tl => ScrollTrigger.create({
-					trigger: el,
-					start: "-100% 100%",
-					end: "200% 100%",
-					scrub: true,
-					animation: tl
-				}));
-				*/
 			});
 
 			// Snap
@@ -160,7 +86,7 @@ let homeview = {
 		});
 
 		// Disable for now
-		var links = next.querySelectorAll(".home-older a");
+		var links = next.querySelectorAll(".home-disable a");
 		links.forEach(el => {
 			el.addEventListener("click", async e => {
 				e.preventDefault();
