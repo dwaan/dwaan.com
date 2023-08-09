@@ -144,10 +144,10 @@
         <section class="links snap-bottom">
             <nav>
                 <div class="prototype group">
-                    <a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A786&viewport=136%2C2470%2C0.6&scaling=scale-down&starting-point-node-id=251%3A0" target="_BLANK" class="title"><span>visit the prototype</span></a>
-                    <a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A786&viewport=136%2C2470%2C0.6&scaling=scale-down&starting-point-node-id=251%3A0" target="_BLANK"><span>desktop</span></a>
-                    <a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=3076%3A0&viewport=232%2C40%2C0.64&scaling=scale-down&starting-point-node-id=3076%3A21" target="_BLANK"><span>tablet</span></a>
-                    <a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
+                    <a href="https://www.figma.com/proto/RINChQyewiFcUftHKn4he7/Sagara---Musiku?page-id=0%3A1&type=design&node-id=1-2&viewport=25%2C278%2C0.03&t=ZUqml7RfXpGs0izm-8&scaling=contain&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" target="_BLANK" class="title"><span>visit the prototype</span></a>
+                    <a href="https://www.figma.com/proto/RINChQyewiFcUftHKn4he7/Sagara---Musiku?page-id=0%3A1&type=design&node-id=1-2&viewport=25%2C278%2C0.03&t=ZUqml7RfXpGs0izm-8&scaling=contain&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" target="_BLANK"><span>desktop</span></a>
+                    <a href="https://www.figma.com/proto/RINChQyewiFcUftHKn4he7/Sagara---Musiku?page-id=605%3A0&type=design&node-id=375-198&viewport=25%2C230%2C0.05&t=2jU3xvz2tHqPSfK1-8&scaling=contain&starting-point-node-id=375%3A198&hotspot-hints=0&hide-ui=1" target="_BLANK"><span>tablet</span></a>
+                    <a href="https://www.figma.com/proto/RINChQyewiFcUftHKn4he7/Sagara---Musiku?page-id=605%3A1&type=design&node-id=452-187&viewport=62%2C25%2C0.05&t=MIvAUOVGSheY724h-8&scaling=contain&starting-point-node-id=452%3A187&hotspot-hints=0&hide-ui=1" target="_BLANK"><span>mobile</span></a>
                 </div>
                 <div class="continue">
                     <a href="./aai" class="title"><span>next case study</span></a>
