@@ -31,6 +31,7 @@
 		"gulp-sourcemaps": "^3.0.0",
 		"gulp-svgmin": "^4.1.0",
 		"gulp-webp": "^4.0.1",
+		"pako": "^2.1.0",
 		"sass": "^1.54.4",
 		"webpack-stream": "^7.0.0"
 	},

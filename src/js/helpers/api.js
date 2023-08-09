@@ -6,21 +6,30 @@ var api = {
 	request: [],
 	storageExceeded: false,
 	call: function (url, wait = 2.5) {
+		function sortenUrl(url = "") {
+			url = url.replace("?fetch=response&plurk_ids=", "pid=");
+			url = url.replace("?fetch=plurk&filter=my&offset=", "off=");
+			url = url.replace("?fetch=APP&url=/Profile/getPublicProfile&user_id=", "pud=");
+			return url;
+		}
+
 		return new Promise(resolve => {
 			var request;
-			var storage = sessionStorage.getItem(url);
-			if (storage == null) storage = sessionStorage[url];
+			var storage = sessionStorage.getItem(sortenUrl(url));
+			if (storage == null) storage = sessionStorage[sortenUrl(url)];
 
 			if (storage && !(url == "?fetch=logout" || url == "?request=token" || url == "?")) {
 				// Give sometime out to allow browser to process
 				setTimeout(async () => {
 					const LZString = await import('lz-string');
 
-					resolve({
-						success: true,
-						error: false,
-						message: JSON.parse(LZString.decompressFromUTF16(storage))
-					});
+					try {
+						resolve({
+							success: true,
+							error: false,
+							message: JSON.parse(LZString.decompressFromUTF16(storage))
+						});
+					} catch { }
 				}, wait);
 			} else {
 				// Save it in array so it can be aborted later
@@ -34,7 +43,8 @@ var api = {
 						const LZString = await import('lz-string');
 
 						try {
-							sessionStorage.setItem(url, LZString.compressToUTF16(JSON.stringify(result.message)));
+							var data = LZString.compressToUTF16(JSON.stringify(result.message));
+							sessionStorage.setItem(sortenUrl(url), data);
 						} catch {
 							if (!this.storageExceeded) {
 								console.info("Exceeding maximum session storage. Data will be downloaded directly from Plurk, if you recently open other RePlurk year in the same browser tab, you can try close this tab and open a new one to avoid downloading too much when reloading this page.");

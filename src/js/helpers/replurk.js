@@ -2082,6 +2082,31 @@ class replurk {
         if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "<img src='https://api.iconify.design/noto:face-with-peeking-eye.svg' />", "<strong>Adult-er</strong>");
         if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/noto:trophy.svg' />", "<strong>Trendsetter</strong>");
         if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/noto:military-medal.svg' />", "<strong>Active Plurker " + plurker + "</strong>");
+
+        this.logSessionStrorageSize();
+    }
+
+    // Display LocalStorage stats
+    logSessionStrorageSize() {
+        function getSessionStorageSize() {
+            var totalBytes = 0;
+
+            for (var key in sessionStorage) {
+                if (sessionStorage.hasOwnProperty(key)) {
+                    var itemValue = sessionStorage.getItem(key);
+                    totalBytes += itemValue.length;
+                }
+            }
+
+            // Convert bytes to Megabytes
+            var totalMegabytes = Math.round((totalBytes / 1024 / 1024) * 100) / 100;
+
+            return totalMegabytes;
+        }
+
+        // Usage
+        var sessionStorageSize = getSessionStorageSize();
+        console.info('SessionStorage Size: ' + sessionStorageSize + ' MB');
     }
 
     // Check login status
