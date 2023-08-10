@@ -57,6 +57,17 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 			</a>
 
 			<nav class="menu">
+				<div class="overlay">
+					<div id="menu-items" class="items">
+						<noscript>
+							<?php include "part_menu.php"; ?>
+						</noscript>
+					</div>
+					<script>
+						document.getElementById("menu-items").innerHTML = `<a href="#" data-barba-prevent class="close spring"><span>x</span>close</a>`;
+						document.getElementById("menu-items").innerHTML += `<?php include "part_menu.php"; ?>`;
+					</script>
+				</div>
 				<a class="switch" href="./menu" data-barba-prevent aria-label="Menu" hidden>
 					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 						<line class="menu-1" x1="26" y1="8.25" x2="6" y2="8.25" />
@@ -65,32 +76,6 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 					</svg>
 					<span>menu</span>
 				</a>
-				<div class="overlay">
-					<div id="menu-items" class="items">
-						<noscript>
-							<ol>
-								<li><a href="./">Home</a></li>
-								<li><a href="./me">About Me</a></li>
-								<li><a href="./say-hi">Say, Hi!</a></li>
-							</ol>
-							<p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and tracking cookies inside my website.</p>
-						</noscript>
-					</div>
-					<script>
-						document.getElementById("menu-items").innerHTML = "\
-						<a href=\"#\" data-barba-prevent class=\"close spring\"><span>x</span>close</a>\
-						<ol>\
-							<li><a class=\"spring\" href=\"./\">Home</a></li>\
-							<li><a class=\"spring\" href=\"./me\">About Me</a></li>\
-							<li class=\"hr\"></li>\
-							<li><a class=\"spring\" href=\"./say-hi\">Say, Hi!</a></li>\
-							<li>\
-								<p>Thank you for visiting my website. To respect your privacy, I didn't install any tracking scripts and tracking cookies inside my website.</p>\
-							</li>\
-						</ol>\
-						";
-					</script>
-				</div>
 			</nav>
 		</div>
 	</header>
