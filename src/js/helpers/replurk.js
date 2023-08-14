@@ -337,9 +337,7 @@ class replurk {
                     background: 'radial-gradient(at 10% 10%, ' + randomcolors[0] + ' 0%, ' + randomcolors[1] + ' 100%)'
                 });
 
-                gsap.fromTo(anim, {
-                    opacity: 0
-                }, {
+                gsap.to(anim, {
                     opacity: 1,
                     duration: length / 2,
                     ease: "power3.out"
