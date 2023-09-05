@@ -34,8 +34,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		</div>
 
 		<div class="right">
-			<a class="size" aria-label="Text Size" href="#textsize" hidden>Aa</a>
-			<a class="lamp" aria-label="Dark or light mode" href="#mode" hidden>
+			<a id="textsize" class="size" aria-label="Text Size" href="#textsize" hidden>Aa</a>
+			<a id="mode" class="lamp" aria-label="Dark or light mode" href="#mode" hidden>
 				<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 					<g id="sun" stroke="#fff" stroke-width="2">
 						<circle cx="22" cy="22.2218" r="5.5" fill="blue" />

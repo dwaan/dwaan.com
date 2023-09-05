@@ -4,6 +4,7 @@
 	"description": "dwaan.com source code",
 	"main": "js/main.js",
 	"scripts": {
+		"sitemap": "node src/sitemap.js",
 		"test": "gulp --development",
 		"build": "gulp --production",
 		"update": "npm update"
@@ -19,7 +20,9 @@
 	},
 	"homepage": "https://github.com/dwaan/dwaan#readme",
 	"devDependencies": {
+		"axios": "^1.5.0",
 		"browser-sync": "^2.27.10",
+		"cheerio": "^1.0.0-rc.12",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-concat": "^2.6.1",
@@ -40,7 +43,8 @@
 		"gsap": "^3.11.0",
 		"html2canvas": "^1.4.1",
 		"lz-string": "^1.4.4",
-		"normalize.css": "^8.0.1"
+		"normalize.css": "^8.0.1",
+		"sitemap": "^7.1.1"
 	},
 	"browserslist": [
 		"last 100 version",

@@ -51,7 +51,7 @@
                 </div>
                 <p>A very long time ago, when human started creating web 2.0, there were several social media born at that time. Plurk is one of them.</p>
                 <p>Plurk have all the fun of timeline based update and emoticons and responses long before other social media did that. But it didn't reach mass addoption like other, but instead it grew into a niche.</p>
-                <p><a href="https://plurk.com/dwan/" target="_BLANK">Visit My Plurk Profile</a></p>
+                <p><a href="https://www.plurk.com/dwan/" target="_BLANK">Visit My Plurk Profile</a></p>
             </div>
             <div class="thumbs">
                 <img src="/dwaan/img/replurk/replurk-14.webp" width="100%" height="" alt="RePlurk - Page 14 - by Dwan" />

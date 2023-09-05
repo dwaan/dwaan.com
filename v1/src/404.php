@@ -29,7 +29,7 @@
 					</div>
 					<p>me dad said he was too lazy to bring up some old pages, so you might end up here because of him.</p>
 					<div class="clear"></div>
-					<a href="./"><span>click here to continue</span></a>
+					<a href="/"><span>click here to continue</span></a>
 				</div>
 			</main>
 		</div>

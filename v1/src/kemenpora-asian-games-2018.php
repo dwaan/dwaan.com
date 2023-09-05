@@ -16,7 +16,7 @@
 			<main class="block__clear">
 				<div class="work">
 					<div class="work__container">
-						<a href="./work" class="back header__height transition">Back</a>
+						<a href="/work" class="back header__height transition">Back</a>
 						<div class="work__list work__detail">
 							<div class="block block__clear">
 								<div class="block__left">
