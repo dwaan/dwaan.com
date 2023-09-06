@@ -43,7 +43,7 @@
         </section>
 
         <hr />
-        <section id="more" class="middle style-background style-background-basic style-background-left clip snap">
+        <section id="i-bet-you-are" class="middle style-background style-background-basic style-background-left clip snap">
             <div class="text">
                 <div class="titles">
                     <h4>I bet you're wondering</h4>
@@ -54,7 +54,7 @@
                 <p><a href="https://www.plurk.com/dwan/" target="_BLANK">Visit My Plurk Profile</a></p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/replurk/replurk-14.webp" width="100%" height="" alt="RePlurk - Page 14 - by Dwan" />
+                <img src="/dwaan/img/replurk/replurk-14.webp" style="width: 100%" alt="RePlurk - Page 14 - by Dwan" />
             </div>
         </section>
 
@@ -75,7 +75,7 @@
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 1; $i++) { ?>
                     <picture class="pic-<?php echo $i ?> top">
-                        <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" width="100%" height="" alt="RePlurk - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" style="width: 100%" alt="RePlurk - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -112,7 +112,7 @@
             </div>
             <div class="thumbs">
                 <picture class="pic-15 top">
-                    <img src="/dwaan/img/replurk/replurk-15.webp" width="100%" height="" alt="RePlurk - All Block - by Dwan" />
+                    <img src="/dwaan/img/replurk/replurk-15.webp" style="width: 100%" alt="RePlurk - All Block - by Dwan" />
                 </picture>
             </div>
         </section>
@@ -122,7 +122,7 @@
         <section class="middle style-single-image style-reveal clip snap-bottom">
             <div class="thumbs">
                 <picture class="pic-3">
-                    <img src="/dwaan/img/replurk/replurk-3.webp" width="100%" height="" alt="RePlurk - Page Thank Your - by Dwan" />
+                    <img src="/dwaan/img/replurk/replurk-3.webp" style="width: 100%" alt="RePlurk - Page Thank Your - by Dwan" />
                 </picture>
             </div>
         </section>
