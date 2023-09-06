@@ -20,7 +20,7 @@
         <section class="middle full snap">
             <div class="padding">
                 <span>
-                    <picture width="540" height="74" class="logo">
+                    <picture class="logo">
                         <source media="screen and (max-aspect-ratio: 1/1)" srcset="/dwaan/img/logo/bkpm-square.svg">
                         <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
                     </picture>
@@ -57,7 +57,7 @@
 
         <hr />
 
-        <section id="more" class="middle style-top style-top-coverflow snap">
+        <section id="the-concept" class="middle style-top style-top-coverflow snap">
             <div class="text">
                 <h2>The Concept</h2>
                 <p>When talking about investment, the word growth came into my mind.</p>
