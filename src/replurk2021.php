@@ -45,7 +45,7 @@
 
 		<section id="permission" class="middle first snap-bottom">
 			<div class="text">
-				<form action="" method="GET">
+				<form action="./replurk2021" method="GET">
 					<h1>RePlurk<br /><sup>20</sup><sub>21</sub></h1>
 					<ol>
 						<li>
