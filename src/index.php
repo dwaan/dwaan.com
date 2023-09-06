@@ -21,7 +21,7 @@
         <section class="middle full">
             <div id="flares" class="flares"></div>
             <div class="main-text">
-                <h1>Hello, my name is <a href="./me" arial-title="About Dwan" id="to-about">Dwan</a></h1>
+                <h1>Hello, my name is <a href="./me" id="to-about">Dwan</a></h1>
                 <p class="hidden">I'm an UI/UX Designer and Strategist. Here are some of my design portfolio 😙.</p>
             </div>
             <div class="arrow-big" hidden>
@@ -33,9 +33,10 @@
         </section>
 
         <hr />
-        <section id="casestudy"></section>
+        <div id="casestudy"></div>
 
         <section class="middle full home-aai">
+            <h2 class="hidden">Asosiasi Antropologi Indonesia Website Solution</h2>
             <div class="padding">
                 <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution">
                     <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo of AAI" />
@@ -52,9 +53,10 @@
         <hr />
 
         <section class="middle full home-bkpm">
+            <h2 class="hidden">Ministry of Investment/BKPM Website Redesign</h2>
             <div class="padding">
                 <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
-                    <picture width="540" height="74" class="logo">
+                    <picture class="logo">
                         <source media="screen and (max-aspect-ratio: 1/1)" srcset="/dwaan/img/logo/bkpm-square.svg">
                         <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
                     </picture>
@@ -71,6 +73,7 @@
         <hr />
 
         <section class="middle full home-musiku">
+            <h2 class="hidden">Musiku Website Concept and Design</h2>
             <div class="padding">
                 <a href="./musiku" aria-label="Musiku Website Concept and Design">
                     <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo of Musiku" />
@@ -101,6 +104,7 @@
         <hr />
 
         <section class="middle full home-suzuki">
+            <h2 class="hidden">Suzuki Website Redesign</h2>
             <div class="padding">
                 <a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
                     <img src="/dwaan/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo of Suzuki" />
@@ -117,6 +121,7 @@
         <hr />
 
         <section class="middle full home-tas">
+            <h2 class="hidden">Melon - Tiket Apa Saja Website Redesign</h2>
             <div class="padding">
                 <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
                     <img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo of Tiket Apa Saja" />
@@ -133,9 +138,10 @@
         <hr />
 
         <section class="middle full home-old">
+        <h2 class="hidden">Dwan v1</h2>
             <div class="padding">
                 <a href="https://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
-                    <svg width="66" height="102" class="diff" viewBox="0 0 33 51" fill="none" xmlns="https://www.w3.org/2000/svg">
+                    <svg width="66" height="102" class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g fill="black">
                             <g class="right-hand">
                                 <rect x="25.4991" y="39.1853" width="16" height="3.35392" rx="1.67696" transform="rotate(-135 25.4991 39.1853)"></rect>
