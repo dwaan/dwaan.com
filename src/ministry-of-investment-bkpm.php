@@ -46,10 +46,10 @@
             </div>
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="200">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" width="auto" height="200" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="200" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -78,10 +78,10 @@
             </div>
             <div class="thumbs">
                 <?php for ($i = 6; $i <= 8; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" width="auto" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -107,10 +107,10 @@
             </div>
             <div class="thumbs">
                 <?php for ($i = 10; $i <= 12; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" width="auto" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -125,10 +125,10 @@
             </div>
             <div class="thumbs">
                 <?php for ($i = 17; $i <= 19; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" width="auto" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -143,13 +143,13 @@
                 </p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/bkpm/guideline.webp" width="auto" height="500" alt="Ministry of Investment/BKPM Website Redesign - Guideline - by Dwan" />
+                <img src="/dwaan/img/bkpm/guideline.webp" height="500" alt="Ministry of Investment/BKPM Website Redesign - Guideline - by Dwan" />
             </div>
         </section>
 
         <hr />
 
-        <section class="links snap-bottom">
+        <div class="links snap-bottom">
             <nav>
                 <div class="prototype">
                     <a href="https://www.figma.com/proto/PTAR9ug8mQjXEhy2M1E1Mx/BKPM---Large?page-id=0%3A1&node-id=1%3A2&viewport=25%2C55%2C0.02&scaling=scale-down-width&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" aria-label="Figma Prototype - Ministry of Investment/BKPM - Website Redesign" target="_BLANK" class="title"><span>visit the prototype</span></a>
@@ -162,13 +162,13 @@
                     <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign"><span>Melon - Tiket Apa Saja Website Redesign</span></a>
                 </div>
             </nav>
-        </section>
+        </div>
 
         <hr />
 
-        <section class="footer">
+        <div class="footer">
             <p class="reading">Reading time: 40 seconds</p>
-        </section>
+        </div>
     </main>
 
     <?php include_once "part_footer.php"; ?>
