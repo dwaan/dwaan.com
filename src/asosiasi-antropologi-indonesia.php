@@ -41,10 +41,10 @@
             </div>
             <div class="thumbs wide">
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="" height="200" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" height="200" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -64,10 +64,10 @@
             </div>
             <div class="thumbs wide">
                 <?php for ($i = 4; $i <= 7; $i++) { ?>
-                    <picture class="pic-<?php echo $i ?>" width="auto" height="150">
+                    <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="auto" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -125,7 +125,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" width="auto" height="250" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/aai/aai-<?php echo $i ?>.webp" height="250" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -140,7 +140,7 @@
                 <p>The newly created interface guideline will provide consistent interface development in the future.</p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/aai/guideline.svg" width="auto" height="500" alt="AAI Website Redesign - Guideline - by Dwan" />
+                <img src="/dwaan/img/aai/guideline.svg" height="500" alt="AAI Website Redesign - Guideline - by Dwan" />
             </div>
         </section>
 
@@ -153,7 +153,7 @@
                         <picture class="pic-<?php echo $i ?>">
                             <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/aai-wp/aai-<?php echo $i ?>@4x.webp">
                             <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/aai-wp/aai-<?php echo $i ?>@3x.webp">
-                            <img src="/dwaan/img/aai-wp/aai-<?php echo $i ?>@2x.webp" width="auto" height="250" alt="AAI Website Redesign - WordPress Page <?php echo $i ?> - by Dwan" />
+                            <img src="/dwaan/img/aai-wp/aai-<?php echo $i ?>@2x.webp" height="250" alt="AAI Website Redesign - WordPress Page <?php echo $i ?> - by Dwan" />
                         </picture>
                     </div>
                 <?php } ?>
@@ -166,7 +166,7 @@
 
         <hr />
 
-        <section class="links snap-bottom">
+        <div class="links snap-bottom">
             <nav>
                 <div class="prototype">
                     <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK" class="title"><span>visit the website</span></a>
@@ -177,13 +177,13 @@
                     <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign"><span>Ministry of Investment/BKPM Website Redesign</span></a>
                 </div>
             </nav>
-        </section>
+        </div>
 
         <hr />
 
-        <section class="footer">
+        <div class="footer">
             <p class="reading">Reading time: 40 seconds</p>
-        </section>
+        </div>
     </main>
 
     <?php include_once "part_footer.php"; ?>
