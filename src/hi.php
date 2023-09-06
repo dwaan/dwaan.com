@@ -33,7 +33,7 @@
 
 		<hr />
 
-		<section class="footer">
+		<div class="footer">
 			<div class="location">
 				<span>Jakarta</span>
 				<svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -41,9 +41,9 @@
 				</svg>
 				<span>Tel Aviv-Yafo</span>
 			</div>
-		</section>
+		</div>
 
-		<section class="flares" hidden>
+		<div class="flares" hidden>
 			<?php
 			for ($j = 1; $j <= 3; $j++) {
 				for ($i = 1; $i <= 5; $i++) {
@@ -52,11 +52,11 @@
 					else if ($i % 3 == 0) $class = "purple";
 					else if ($i % 2 == 0) $class = "red";
 					else $class = "blue";
-					echo '<img src="/dwaan/img/flares/flare' . $i . '.webp" width="" height="" alt="" class="flare' . $j . ' ' . $class . '" />';
+					echo '<img src="/dwaan/img/flares/flare' . $i . '.webp" alt="Flare" class="flare' . $j . ' ' . $class . '">';
 				}
 			}
 			?>
-		</section>
+		</div>
 	</main>
 
 	<?php include_once "part_footer.php"; ?>
