@@ -18,7 +18,7 @@
 
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/dwaan/img/logo/suzuki.svg" width="73.5" height="90" class="logo" alt="Suzuki's Logo" /></span>
+                <span><img src="/dwaan/img/logo/suzuki.svg" width="73" height="90" class="logo" alt="Suzuki's Logo" /></span>
             </div>
             <h4 class="year">/2020</h4>
             <div class="arrow-big">
