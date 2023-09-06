@@ -685,7 +685,7 @@ header {
 
 	.meta {
 		width: 114px;
-		gap: cal(var(--pady) / 2);
+		gap: calc(var(--pady) / 2);
 
 		@media screen and (min-width: mixins.$screen-verysmall) {
 			width: unset;

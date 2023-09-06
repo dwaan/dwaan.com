@@ -1383,7 +1383,7 @@ header {
 /* Style text on top and Images in the bottom */
 %style-top {
 	display: flex;
-	flex-flow: column nowrap;
+	flex-flow: column;
 	align-items: flex-start;
 	justify-content: flex-start;
 
@@ -2518,7 +2518,7 @@ ol {
 		&,
 		.dot {
 			display: flex;
-			flex: column nowrap;
+			flex: column;
 			align-items: center;
 			justify-content: center;
 			position: absolute;
