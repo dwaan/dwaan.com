@@ -1,1 +1,1 @@
-<?php header("Location: ./melon-tiket-apa-saja");
+<?php header("Location: ./melon-tiket-apa-saja"); ?>
