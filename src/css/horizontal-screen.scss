@@ -755,7 +755,7 @@ header {
 	}
 
 	.thumbs {
-		margin: 0 (-(var(--pic-m)));
+		margin: 0 calc(-1 * (var(--pic-m)));
 		transform-origin: 50% 0;
 		transform: rotate(-5deg);
 	}

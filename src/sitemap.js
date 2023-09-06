@@ -1,21 +1,17 @@
 const fs = require('fs');
-const { SitemapStream, streamToPromise } = require('sitemap');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 // Define your website's base URL
-const baseUrls = ['https://dwaan.com/', 'https://v1.dwaan.com'];
+const baseUrls = ['https://dwaan.com', 'https://v1.dwaan.com'];
 
 async function crawlAndGenerateSitemap() {
-    // const mergedSitemapStream = new SitemapStream({ hostname: '' }); // Initialize an empty merged sitemap
-
     async function crawlPage(baseUrl) {
         const visited = new Set();
 
         async function crawlInternalPage(url) {
-            if (visited.has(url)) return;
+            if (visited.has(url) || visited.has(url + '/')) return;
             visited.add(url);
-            console.log(url);
 
             const response = await axios.get(url);
             const $ = cheerio.load(response.data);
@@ -24,8 +20,8 @@ async function crawlAndGenerateSitemap() {
             const internalLinks = [];
             $('a').each((_, element) => {
                 const href = $(element).attr('href');
-                if (href && href.startsWith('./') && !href.includes('./menu')) internalLinks.push(baseUrl + href.replace('./', ''));
-                else if (href && href.startsWith('/') && !href.includes('/menu')) internalLinks.push(baseUrl + href);
+                if (href && href.startsWith('./') && !href.includes('./menu')) internalLinks.push(baseUrl + href.replace('./', '/'));
+                else if (href && href.startsWith('/') && !href.includes('/menu') && !href.includes('/img')) internalLinks.push(baseUrl + href);
             });
 
             for (const link of internalLinks) {
@@ -42,17 +38,22 @@ async function crawlAndGenerateSitemap() {
     }
 
     // Crawl and merge pages from each base URL
+    let urls = new Set();
     for (const baseUrl of baseUrls) {
-        console.log(await crawlPage(baseUrl));
+        const result = await crawlPage(baseUrl);
+        urls = new Set([...urls, ...result]);
     }
 
-    // mergedSitemapStream.end();
+    // Create sitemap
+    const maps = [];
+    for (const url of urls) {
+        maps.push(`<url><loc>${url}</loc><changefreq>daily</changefreq><priority>0.7</priority></url>`);
+    }
+    // Create an XML string manually
+    const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${maps.join('')}</urlset>`;
 
-    // // Convert the stream to a string
-    // const sitemapXML = await streamToPromise(mergedSitemapStream).then(data => data.toString());
-
-    // // Write the sitemap.xml file
-    // fs.writeFileSync('sitemap.xml', sitemapXML);
+    // Write the sitemap.xml file
+    fs.writeFileSync('sitemap.xml', xml, "utf8");
 }
 
 crawlAndGenerateSitemap()

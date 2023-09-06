@@ -814,7 +814,7 @@ header {
 	li {
 		position: relative;
 		display: block;
-		flex-direction: row nowrap;
+		flex-direction: row;
 		margin: 0 0 var(--padl);
 		padding: 0;
 		list-style: none;
@@ -2239,7 +2239,7 @@ ol {
 			display: flex;
 			align-items: center;
 			border: 1px solid var(--black-50);
-			@include mixins.typography(1rem, false, 15p, .05em);
+			@include mixins.typography(1rem, false, 15px, .05em);
 			border-radius: 4px;
 
 			&:last-child {
@@ -2708,7 +2708,7 @@ ol {
 		height: 48px;
 		fill: var(--black);
 		margin-bottom: var(--pads);
-		transition: .5 fill ease;
+		transition: .5s fill ease;
 	}
 
 	p {
@@ -2764,7 +2764,7 @@ ol {
 
 			img {
 				pointer-events: none;
-				transition: box-shadow .5 ease;
+				transition: box-shadow .5s ease;
 			}
 		}
 
@@ -2858,7 +2858,7 @@ ol {
 		span,
 		small {
 			display: flex;
-			flex-direction: row nowrap;
+			flex-direction: row;
 		}
 
 		a {
