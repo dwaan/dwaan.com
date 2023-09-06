@@ -172,8 +172,7 @@
 
         <hr />
 
-        <section class="footer">
-            <h2 class="hidden">Contact me</h2>
+        <div class="footer">
             <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
             <div class="location">
                 <span>Jakarta</span>
@@ -182,11 +181,12 @@
                 </svg>
                 <span>Tel Aviv-Yafo</span>
             </div>
-        </section>
+        </div>
     </main>
 
     <?php include_once "part_footer.php"; ?>
 </body>
 
-</html>
 <?php include_once "part_script.php"; ?>
+
+</html>
