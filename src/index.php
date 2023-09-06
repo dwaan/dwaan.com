@@ -138,7 +138,7 @@
         <hr />
 
         <section class="middle full home-old">
-        <h2 class="hidden">Dwan v1</h2>
+            <h2 class="hidden">Dwan v1</h2>
             <div class="padding">
                 <a href="https://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
                     <svg width="66" height="102" class="diff" viewBox="0 0 33 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,6 +173,7 @@
         <hr />
 
         <section class="footer">
+            <h2 class="hidden">Contact me</h2>
             <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
             <div class="location">
                 <span>Jakarta</span>
