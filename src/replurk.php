@@ -120,9 +120,10 @@
         <hr />
 
         <section class="middle style-single-image style-reveal clip snap-bottom">
+            <h2 class="hidden">Thank You</h2>
             <div class="thumbs">
                 <picture class="pic-3">
-                    <img src="/dwaan/img/replurk/replurk-3.webp" style="width: 100%" alt="RePlurk - Page Thank Your - by Dwan" />
+                    <img src="/dwaan/img/replurk/replurk-3.webp" style="width: 100%" alt="RePlurk - Page Thank You - by Dwan" />
                 </picture>
             </div>
         </section>
