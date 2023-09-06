@@ -2,7 +2,7 @@
 // check for the server side x-barba request header
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
 ?>
-	<script type="text/javascript" src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script>
+	<script src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script>
 	<style>
 		.no-js #loader,
 		.no-js #mode {
