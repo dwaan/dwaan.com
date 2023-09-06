@@ -13,4 +13,4 @@
 					echo '<img src="/dwaan/img/flares/flare' . $i . '.webp" width="" height="" alt="" class="flare' . $j . ' ' . $class . '" />';
 				}
 			}
-			?> </section></main> <?php include_once "part_script.php"; ?> </body></html>
+			?> </section></main> <?php include_once "part_footer.php"; ?> </body> <?php include_once "part_script.php"; ?> </html>

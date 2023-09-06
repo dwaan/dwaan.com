@@ -2,9 +2,6 @@
 // check for the server side x-barba request header
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
 ?>
-	<div id="back"></div>
-
-	<div id="support" class="support"></div>
 	<script>
 		document.getElementById("support").innerHTML = "\
 			<div class=\"content\">\
@@ -30,7 +27,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		}
 	</style>
 
-	<link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>" defer async>
+	<link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>">
 <?php
 }
 ?>

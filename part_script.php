@@ -1,7 +1,7 @@
 <?php
 // check for the server side x-barba request header
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
-?> <div id="back"></div><div id="support" class="support"></div><script>document.getElementById("support").innerHTML = "\
+?> <script>document.getElementById("support").innerHTML = "\
 			<div class=\"content\">\
 				<h2>😭</h2>\
 				<h3>Please don't squeeze me 😱.</h3>\
@@ -17,6 +17,6 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		.no-js header,
 		.no-js .footer {
 			opacity: 1;
-		}</style><link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>" defer="defer" async> <?php
+		}</style><link rel="stylesheet" media="print" href="/dwaan/css/print.css?<?php echo filemtime('css/print.css') ?>"> <?php
 }
 ?>

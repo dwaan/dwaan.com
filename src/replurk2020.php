@@ -91,7 +91,9 @@
 		</noscript>
 	</main>
 
-	<?php include_once "part_script.php"; ?>
+    <?php include_once "part_footer.php"; ?>
 </body>
+
+<?php include_once "part_script.php"; ?>
 
 </html>
