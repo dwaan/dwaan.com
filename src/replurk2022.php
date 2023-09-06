@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="replurk2022" class="plurk plurk2022">
-		<section id="hello" class="grant middle first snap">
+		<div id="hello" class="grant middle first snap">
 			<div class="animate middle">
 				<div class="thumbs"></div>
 				<div class="text">
@@ -24,13 +24,13 @@
 					<a href="#statistics" class="arrow scrollto">scroll</a>
 				</div>
 			</div>
-		</section>
+		</div>
 
-		<section id="statistics" class="grant middle">
-			<section id="backtotop" class="grant middle">&uarr;</section>
-		</section>
+		<div id="statistics" class="grant middle">
+			<div id="backtotop" class="grant middle">&uarr;</div>
+		</div>
 
-		<section class="grant footer">
+		<div class="grant footer">
 			<div id="logout" class="logout">
 				<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<rect x="5" y="4" width="14" height="24" rx="2" stroke="black" stroke-width="2" />
@@ -43,11 +43,11 @@
 			<a href="./replurk2021">2021</a>
 			<span>&bull;</span>
 			<a href="./replurk2022" class="now">2022</a>
-		</section>
+		</div>
 
 		<section id="permission" class="middle first snap-bottom">
 			<div class="text">
-				<form action="" method="GET">
+				<form action="./replurk" method="GET">
 					<h1>RePlurk<br /><sup>20</sup><sub>22</sub></h1>
 					<ol>
 						<li>
@@ -69,9 +69,10 @@
 			<div class="bgtext"><sup>20</sup><sub>22</sub></div>
 		</section>
 
-		<section id="spacer" class="middle"></section>
+		<div id="spacer" class="middle"></div>
 		<section id="credits" class="middle">
 			<div class="text">
+			<h2 class="hidden">Made with &hearts;</h2>
 				<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
 				<p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
 				<p class="like likeandsupport">
@@ -84,15 +85,17 @@
 			</div>
 		</section>
 
-		<section id="nojs" class="middle">
-			<div class="text">
-				<h3>Javascript</h3>
-				<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
-			</div>
-		</section>
+		<noscript>
+			<section id="nojs" class="middle">
+				<div class="text">
+					<h3>Javascript</h3>
+					<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
+				</div>
+			</section>
+		</noscript>
 	</main>
 
-    <?php include_once "part_footer.php"; ?>
+	<?php include_once "part_footer.php"; ?>
 </body>
 
 <?php include_once "part_script.php"; ?>
