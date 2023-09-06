@@ -1008,7 +1008,7 @@ header {
 
 /* Homepage footer */
 .footer {
-	@include mixins.block(fixed, initial, 0, 100%, $zindex: 101);
+	@include mixins.block(fixed, initial, 0, 100%, $zindex: 100);
 	bottom: 0;
 	display: flex;
 	flex-flow: row nowrap;
