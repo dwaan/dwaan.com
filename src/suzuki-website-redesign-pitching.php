@@ -44,7 +44,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -68,7 +68,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -135,7 +135,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -155,7 +155,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" width="auto" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -163,7 +163,7 @@
 
         <hr />
 
-        <section class="links snap-bottom">
+        <div class="links snap-bottom">
             <nav>
                 <div class="prototype">
                     <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK" class="title"><span>visit the prototype</span></a>
@@ -174,13 +174,13 @@
                     <a href="./replurk"><span><i>RePlurk</i></span></a>
                 </div>
             </nav>
-        </section>
+        </div>
 
         <hr />
 
-        <section class="footer">
+        <div class="footer">
             <p class="reading">Reading time: 50 seconds</p>
-        </section>
+        </div>
     </main>
 
     <?php include_once "part_footer.php"; ?>

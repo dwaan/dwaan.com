@@ -106,12 +106,12 @@
         <section class="middle full home-suzuki">
             <h2 class="hidden">Suzuki Website Redesign</h2>
             <div class="padding">
-                <a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign">
+                <a href="./suzuki" aria-label="Suzuki Website Redesign">
                     <img src="/dwaan/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo of Suzuki" />
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./suzuki-website-redesign-pitching" aria-label="Suzuki Website Redesign" class="arrow">
+                <a href="./suzuki" aria-label="Suzuki Website Redesign" class="arrow">
                     <span>Concept Pitching</span>
                 </a>
             </div>
