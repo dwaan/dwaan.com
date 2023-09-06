@@ -2518,7 +2518,8 @@ ol {
 		&,
 		.dot {
 			display: flex;
-			flex: column;
+			flex-direction: column;
+			flex-wrap: nowrap;
 			align-items: center;
 			justify-content: center;
 			position: absolute;
