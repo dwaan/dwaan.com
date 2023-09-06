@@ -212,7 +212,7 @@ var animate = {
 					opacity: 0,
 					delay: .1
 				}, "<");
-				if (!nonsticky) nonsticky = current.querySelector("section.middle").children;
+				if (!nonsticky) nonsticky = current.querySelector("section.middle, div.middle").children;
 				tl.to(nonsticky, {
 					y: "+=200",
 					opacity: 0,

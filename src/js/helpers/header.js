@@ -307,7 +307,7 @@ let header = {
 
     arrow: next => {
         // Scroll animate arrow
-        var middle = next.querySelectorAll("section.middle");
+        var middle = next.querySelectorAll("section.middle, div.middle");
         if (!middle) return;
         middle.forEach((el, idx) => {
             // Animate arrow

@@ -172,7 +172,7 @@
 				</div>
 			</div>
 		</section>
-		<section id="endmrgoat" class="mrgoat middle hidden"></section>
+		<div id="endmrgoat" class="mrgoat middle hidden"></div>
 
 		<hr />
 
@@ -192,7 +192,7 @@
 
 		<hr />
 
-		<section class="links snap-bottom">
+		<div class="links snap-bottom">
 			<nav>
 				<div class="prototype">
 					<a href="./say-hi"><span>say hi</span></a>
@@ -201,11 +201,11 @@
 					<a href="./aai"><span><strong>recent case study</strong> <i>- Asosiasi Antropologi Indonesia</i></span></a>
 				</div>
 			</nav>
-		</section>
+		</div>
 
-		<section class="footer">
+		<div class="footer">
 			<p class="reading">Reading time: 120 seconds</p>
-		</section>
+		</div>
 	</main>
 
 	<?php include_once "part_footer.php"; ?>
