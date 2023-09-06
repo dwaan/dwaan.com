@@ -44,7 +44,7 @@
                         <picture class="pic-1-<?php echo $i ?>">
                             <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-1-<?php echo $i ?>@3x.webp">
                             <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-1-<?php echo $i ?>@2x.webp">
-                            <img src="/dwaan/img/musiku/musiku-1-<?php echo $i ?>.webp" width="auto" height="150" alt="Musiku Concept and Design - Page 1 - <?php echo $i ?> - by Dwan" />
+                            <img src="/dwaan/img/musiku/musiku-1-<?php echo $i ?>.webp" height="150" alt="Musiku Concept and Design - Page 1 - <?php echo $i ?> - by Dwan" />
                         </picture>
                     <?php } ?>
                 </div>
@@ -95,7 +95,7 @@
                     <picture class="pic-<?php echo $i ?>">
                         <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
                         <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="auto" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                        <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -114,7 +114,7 @@
                 <picture class="pic-1 plain">
                     <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/vector@3x.webp">
                     <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/vector@2x.webp">
-                    <img src="/dwaan/img/musiku/vector.webp" width="auto" height="200" alt="Musiku Concept and Design - Vector - by icons8.com" />
+                    <img src="/dwaan/img/musiku/vector.webp" height="200" alt="Musiku Concept and Design - Vector - by icons8.com" />
                 </picture>
             </div>
         </section>
@@ -132,7 +132,7 @@
                         <picture class="pic-<?php echo $i ?>">
                             <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
                             <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
-                            <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" width="auto" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                            <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                         </picture>
                     <?php } ?>
                 </div>
@@ -141,7 +141,7 @@
 
         <hr />
 
-        <section class="links snap-bottom">
+        <div class="links snap-bottom">
             <nav>
                 <div class="prototype group">
                     <a href="https://www.figma.com/proto/RINChQyewiFcUftHKn4he7/Sagara---Musiku?page-id=0%3A1&type=design&node-id=1-2&viewport=25%2C278%2C0.03&t=ZUqml7RfXpGs0izm-8&scaling=contain&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" target="_BLANK" class="title"><span>visit the prototype</span></a>
@@ -154,13 +154,13 @@
                     <a href="./aai"><span><i>Asosiasi Antropologi Indonesia</i></span></a>
                 </div>
             </nav>
-        </section>
+        </div>
 
         <hr />
 
-        <section class="footer">
+        <div class="footer">
             <p class="reading">Reading time: 40 seconds</p>
-        </section>
+        </div>
     </main>
 
     <?php include_once "part_footer.php"; ?>
