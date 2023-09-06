@@ -94,7 +94,7 @@
             <div class="thumbs">
                 <?php for ($i = 8; $i <= 13; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" width="auto" height="250" alt="RePlurk - Controlled Randomness - <?php echo $i - 7 ?> - by Dwan" />
+                        <img src="/dwaan/img/replurk/replurk-<?php echo $i ?>.webp" height="250" alt="RePlurk - Controlled Randomness - <?php echo $i - 7 ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -129,7 +129,7 @@
 
         <hr />
 
-        <section class="links snap-bottom">
+        <div class="links snap-bottom">
             <nav>
                 <div class="prototype">
                     <a href="./replurk2022" aria-label="RePlurk 2022 - Web App" target="_BLANK" class="title"><span>visit the web app</span></a>
@@ -142,13 +142,13 @@
                     <a href="./musiku"><span><i>Musiku</i></span></a>
                 </div>
             </nav>
-        </section>
+        </div>
 
         <hr />
 
-        <section class="footer">
+        <div class="footer">
             <p class="reading">Reading time: 30 seconds</p>
-        </section>
+        </div>
     </main>
 
     <?php include_once "part_footer.php"; ?>
