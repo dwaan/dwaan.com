@@ -656,7 +656,7 @@ var meview = {
 		});
 
 		// Snap
-		next.querySelectorAll("section.middle, .links").forEach(el => {
+		next.querySelectorAll("section.middle, div.middle, .links").forEach(el => {
 			scroll.snap(el);
 		});
 

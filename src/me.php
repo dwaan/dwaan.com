@@ -47,15 +47,15 @@
 
 		<section id="now" class="intro middle">
 			<div class="text">
-				<span hidden>1
+				<div hidden>1
 					<hr /> 3
-				</span>
+				</div>
 				<h3>Now I'm&nbsp;<br hidden /><strong>a Freelancer</strong>&nbsp;<br hidden />in Tel Aviv</h3>
 				<p>doing mostly interface design consultation and various hobbist <a href="https://github.com/dwaan" data-barba-prevent target="BLANK" rel='noopener noreferrer'>open source projects</a></p>
 			</div>
 			<div class="thumbs">
 				<picture hidden>
-					<img src="/dwaan/img/notpictured.webp" width="auto" height="300" alt="Dwan riding canoe" />
+					<img src="/dwaan/img/notpictured.webp" width="" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big" hidden>
@@ -69,16 +69,16 @@
 
 		<section id="webdesigner" class="intro middle">
 			<div class="text">
-				<span hidden>2
+				<div hidden>2
 					<hr /> 3
-				</span>
+				</div>
 				<h3>&amp;&nbsp;<br hidden />Before&nbsp;<br hidden /><strong>Web Designer</strong></h3>
 				<p>I did many of things in the past, like becoming Macromedia Flash Expert, Database Programmer, Creative Director, Chief Creative Officer, and Chief Information Officer among others.</p>
 				<p><em>- Not pictured</em></p>
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured.webp" width="auto" height="300" alt="Dwan riding canoe" />
+					<img src="/dwaan/img/notpictured.webp" width="" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big" hidden>
@@ -93,9 +93,9 @@
 		<section id="sayhi" class="intro middle">
 			<div class="text">
 				<div class="title">
-					<span hidden>3
+					<div hidden>3
 						<hr /> 3
-					</span>
+					</div>
 					<h3>Would&nbsp;<br hidden />You&nbsp;<br hidden />Like To&nbsp;<br hidden /><strong>Say Hi!</strong>?</h3>
 				</div>
 				<p>I happen to live in in Tel Aviv-Yafo right now. If you happened to know any Indonesian living in Tel Aviv-Yafo, Mr. Goat wants to meet them. Other then that, if you wanted to work with me feel free to <a href="./say-hi" class="spring big">say hi</a>.</p>
@@ -109,11 +109,11 @@
 
 		<hr />
 
-		<section id="startmrgoat" class="mrgoat middle hidden"></section>
-		<section class="mrgoat middle hidden"></section>
-		<section class="mrgoat middle hidden"></section>
-		<section class="mrgoat middle hidden"></section>
-		<section class="mrgoat middle hidden"></section>
+		<div id="startmrgoat" class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
+		<div class="mrgoat middle hidden"></div>
 		<section id="mrgoat" class="mrgoat middle">
 			<div class="text">
 				<div class="h2">
@@ -122,44 +122,44 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-					<img <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="auto" height="200" alt="Mr. Goat" />
+					<img <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="" height="200" alt="Mr. Goat" />
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">
 				<div id="viet" class="float">
-					<span class="dot">
+					<div class="dot">
 						<hr hidden /><i></i>
-					</span>
-					<span class="line">
+					</div>
+					<div class="line">
 						<hr hidden />
-					</span>
+					</div>
 					<p><noscript>1.&nbsp;</noscript>He's a vietnamese</p>
 				</div>
 				<div id="nyc" class="float">
-					<span class="dot">
+					<div class="dot">
 						<hr hidden /><i></i>
-					</span>
-					<span class="line">
+					</div>
+					<div class="line">
 						<hr hidden />
-					</span>
+					</div>
 					<p><noscript>2.&nbsp;</noscript>He got this neckles in NYC</p>
 				</div>
 				<div id="food" class="float">
-					<span class="dot">
+					<div class="dot">
 						<hr hidden /><i></i>
-					</span>
-					<span class="line">
+					</div>
+					<div class="line">
 						<hr hidden />
-					</span>
+					</div>
 					<p><noscript>3.&nbsp;</noscript>He likes to eat fancy food</p>
 				</div>
 				<div id="travel" class="float">
-					<span class="dot">
+					<div class="dot">
 						<hr hidden /><i></i>
-					</span>
-					<span class="line">
+					</div>
+					<div class="line">
 						<hr hidden />
-					</span>
+					</div>
 					<p><noscript>4.&nbsp;</noscript>He travel all over the world</p>
 				</div>
 				<div id="post" class="float">
@@ -185,7 +185,7 @@
 			<div class="thumbs" hidden>
 				<picture>
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/sagara/sagara@2x.webp">
-					<img src="/dwaan/img/sagara/sagara.webp" width="auto" height="200" alt="Sagara" />
+					<img src="/dwaan/img/sagara/sagara.webp" width="" height="200" alt="Sagara" />
 				</picture>
 			</div>
 		</section>
