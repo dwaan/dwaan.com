@@ -123,12 +123,12 @@
         <section class="middle full home-tas">
             <h2 class="hidden">Melon - Tiket Apa Saja Website Redesign</h2>
             <div class="padding">
-                <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
+                <a href="./tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
                     <img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo of Tiket Apa Saja" />
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./melon-tiket-apa-saja" class="arrow">
+                <a href="./tiket-apa-saja" class="arrow">
                     <span>Design Solutions</span>
                 </a>
             </div>

@@ -115,7 +115,7 @@
 								<div class="scroller__trigger"></div>
 								<div class="block scroller">
 									<div class="block gallery block__clear">
-										<a href="/melon-tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
+										<a href="/tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a>
 										<a href="/ppatk-e-learning-for-bank-frontliner"><span><img src="/img/ss1.webp" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a>
 										<a href="/angkasa-pura-1-performace-dashboard"><span><img src="/img/ss2.webp" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a>
 										<a href="/work">See All</a>

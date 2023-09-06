@@ -88,7 +88,7 @@
 						<div class="work__list">
 							<h5><small>if you haven’t seen</small> my latest works</h5>
 							<ul class="block block__clear flat">
-								<li><a href="/melon-tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a></li>
+								<li><a href="/tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>Melon - Tiket Apa Saja</span></a></li>
 								<li><a href="/ppatk-e-learning-for-bank-frontliner"><span><img src="/img/ss1.webp" width="" height="" alt="PPATK - E-Learning for Banking Frontliner" /></span><span>PPATK - E-Learning for Banking Frontliner</span></a></li>
 								<li><a href="/angkasa-pura-services"><span><img src="/img/ss3.webp" width="" height="" alt="Angkasa Pura 1 - Airports of Indonesia" /></span><span>Angkasa Pura 1 - Airports of Indonesia</span></a></li>
 								<li><a href="/loket-point-of-sales"><span><img src="/img/ss4.webp" width="" height="" alt="Loket - Point of Sales System" /></span><span>Loket - Point of Sales System</span></a></li>

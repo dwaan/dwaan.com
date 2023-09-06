@@ -42,17 +42,17 @@
 				<picture class="horizontal">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/hero@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/hero@2x.webp">
-					<img src="/dwaan/img/tas/hero.webp" width="auto" height="250" alt="Tiket Apa Saja - Dekstop- Homepage" />
+					<img src="/dwaan/img/tas/hero.webp" height="250" alt="Tiket Apa Saja - Dekstop- Homepage" />
 				</picture>
 				<picture class="vertical">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-1@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-1@2x.webp">
-					<img src="/dwaan/img/tas/mobile-final-1.webp" width="auto" height="250" alt="Tiket Apa Saja - Mobile - Homepage" />
+					<img src="/dwaan/img/tas/mobile-final-1.webp" height="250" alt="Tiket Apa Saja - Mobile - Homepage" />
 				</picture>
 				<picture class="vertical">
 					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-2@3x.webp">
 					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-2@2x.webp">
-					<img src="/dwaan/img/tas/mobile-final-2.webp" width="auto" height="250" alt="Tiket Apa Saja - Mobile - Listing" />
+					<img src="/dwaan/img/tas/mobile-final-2.webp" height="250" alt="Tiket Apa Saja - Mobile - Listing" />
 				</picture>
 			</div>
 		</section>
@@ -86,21 +86,21 @@
 						<picture>
 							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/oldlogo@3x.webp">
 							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/oldlogo@2x.webp">
-							<img src="/dwaan/img/tas/oldlogo.webp" width="auto" height="100" alt="Tiket Apa Saja" />
+							<img src="/dwaan/img/tas/oldlogo.webp" height="100" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
 							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/newlogo@3x.webp">
 							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/newlogo@2x.webp">
-							<img src="/dwaan/img/tas/newlogo.webp" width="auto" height="100" alt="Tiket Apa Saja" />
+							<img src="/dwaan/img/tas/newlogo.webp" height="100" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
 							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/pitching-mobile@3x.webp">
 							<source media="(-webkit-min-150device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/pitching-mobile@2x.webp">
-							<img src="/dwaan/img/tas/pitching-mobile.webp" width="auto" height="200" alt="Tiket Apa Saja" />
+							<img src="/dwaan/img/tas/pitching-mobile.webp" height="200" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 				</ul>
@@ -120,7 +120,7 @@
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja - Proposed Desktop Website - Page <?php echo $i ?>" />
+								<img src="/dwaan/img/tas/desktop-<?php echo $i ?>.webp" height="150" alt="Tiket Apa Saja - Proposed Desktop Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -160,7 +160,7 @@
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/desktop-final-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.webp" width="auto" height="150" alt="Tiket Apa Saja - Desktop Website - Page <?php echo $i ?>" />
+								<img src="/dwaan/img/tas/desktop-final-<?php echo $i ?>.webp" height="150" alt="Tiket Apa Saja - Desktop Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -181,7 +181,7 @@
 							<picture class="pic-<?php echo $i ?>">
 								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@3x.webp">
 								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/tas/mobile-final-<?php echo $i ?>@2x.webp">
-								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.webp" width="auto" height="250" alt="Tiket Apa Saja - Mobile Website - Page <?php echo $i ?>" />
+								<img src="/dwaan/img/tas/mobile-final-<?php echo $i ?>.webp" height="250" alt="Tiket Apa Saja - Mobile Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -191,7 +191,7 @@
 
 		<hr />
 
-		<section class="links snap-bottom">
+		<div class="links snap-bottom">
 			<nav>
 				<div class="prototype group">
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A786&viewport=136%2C2470%2C0.6&scaling=scale-down&starting-point-node-id=251%3A0" target="_BLANK" class="title"><span>visit the prototype</span></a>
@@ -204,13 +204,13 @@
 					<a href="./suzuki" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><i>Suzuki Indonesia Website Redesign Pitching</i></span></a>
 				</div>
 			</nav>
-		</section>
+		</div>
 
 		<hr />
 
-		<section class="footer">
+		<div class="footer">
 			<p class="reading">Reading time: 50 seconds</p>
-		</section>
+		</div>
 	</main>
 
 	<?php include_once "part_footer.php"; ?>

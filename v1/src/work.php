@@ -39,7 +39,7 @@
 							</div>
 
 							<ul class="works block block__clear flat">
-								<li><a href="/melon-tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a></li>
+								<li><a href="/tiket-apa-saja"><span><img src="/img/ss-tiketapasaja/tiket-apa-saja.webp" width="" height="" alt="Melon - Tiket Apa Saja - Online Ticketing System" /></span><span>Melon - Tiket Apa Saja - Online Ticketing System</span></a></li>
 								<li><a href="/ppatk-e-learning-for-bank-frontliner"><span><img src="/img/ss1.webp" width="" height="" alt="PPATK - E-Learning for Bank Frontliner" /></span><span>PPATK - E-Learning for Bank Frontliner</span></a></li>
 								<li><a href="/angkasa-pura-1-performace-dashboard"><span><img src="/img/ss2.webp" width="" height="" alt="Angkasa Pura 1 - Performance Dashboard" /></span><span>Angkasa Pura 1 - Performance Dashboard</span></a></li>
 								<li><a href="/loket-point-of-sales"><span><img src="/img/ss4.webp" width="" height="" alt="Loket - Point of Sales System" /></span><span>Loket - Point of Sales System</span></a></li>

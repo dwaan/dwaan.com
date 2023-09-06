@@ -158,8 +158,8 @@
                     <a href="https://www.figma.com/proto/P4m2h3YrYGM02AvSoBmNOm/BKPM---Small?page-id=0%3A1&node-id=1%3A2&scaling=scale-down&starting-point-node-id=1%3A2&hotspot-hints=0&hide-ui=1" aria-label="Figma Prototype - Ministry of Investment/BKPM - Website Redesign" target="_BLANK"><span>small</span></a>
                 </div>
                 <div class="continue">
-                    <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign" class="title"><span>next case study</span></a>
-                    <a href="./melon-tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign"><span>Melon - Tiket Apa Saja Website Redesign</span></a>
+                    <a href="./tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign" class="title"><span>next case study</span></a>
+                    <a href="./tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign"><span>Melon - Tiket Apa Saja Website Redesign</span></a>
                 </div>
             </nav>
         </div>
