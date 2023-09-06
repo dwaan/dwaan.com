@@ -28,6 +28,20 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		// Set the class
 		h.setAttribute('class', classcollection);
 	</script>
+	<script src="/dwaan/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script>
+
+	<style>
+		.no-js #loader,
+		.no-js #mode {
+			display: none;
+		}
+
+		.no-js main,
+		.no-js header,
+		.no-js .footer {
+			opacity: 1;
+		}
+	</style>
 
 	<?php
 	$protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https') === FALSE ? 'http' : 'https';
