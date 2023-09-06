@@ -4,7 +4,7 @@
 <head>
 	<?php
 	$title = "oh 🦀, me think you lost! 😢";
-	$description = "please go back to dwaan.com if you went to this accidentally";
+	$description = "please go back to dwaan.com, not not sure why is here.";
 	include_once "part_metacss.php";
 	?>
 </head>
@@ -15,20 +15,20 @@
 	<main data-barba="container" data-barba-namespace="lost" class="lost">
 		<section class="middle clip full">
 			<div class="thumbs fromtop">
-				<img id="mrmonkey" src="/dwaan/img/mr.monkey.webp" width="" height="" alt="Me are Mr. Monkey" />
+				<img id="mrmonkey" src="/dwaan/img/mr.monkey.webp" alt="Me are Mr. 🐵" />
 			</div>
 			<div id="nomokeybusiness" class="text">
 				<h1>me here to halp</h1>
-				<h4>no monkey business, me promise!</h4>
-				<p>me dad said he was too lazy to bring up some old pages, so you might end up here because of him. <a href="./" class="spring">click here to continue</a></p>
+				<h4>no 🐵 business, me promise!</h4>
+				<p>me dad said he lazy bring old pages, you come here because him, not me. <a href="./" class="spring">click here continue</a></p>
 			</div>
 		</section>
 		<section id="lost">
-			<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
-			<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
-			<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
-			<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
-			<h2><span><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i><i>are you lost?</i></span></h2>
+			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
+			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
+			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
+			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
+			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
 		</section>
 	</main>
 
