@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
-		<img src="/dwaan/img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
+		<img src="/img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
 		<hr />
 
 		<section id="about" class="about middle">
@@ -55,7 +55,7 @@
 			</div>
 			<div class="thumbs">
 				<picture hidden>
-					<img src="/dwaan/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
+					<img src="/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big" hidden>
@@ -78,7 +78,7 @@
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/dwaan/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
+					<img src="/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big" hidden>
@@ -122,7 +122,7 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-					<img <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/dwaan/img/mrgoat/mrgoat<?php echo $x; ?>.webp" height="200" alt="Mr. Goat" />
+					<img <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" height="200" alt="Mr. Goat" />
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">
@@ -184,8 +184,8 @@
 			</div>
 			<div class="thumbs" hidden>
 				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/sagara/sagara@2x.webp">
-					<img src="/dwaan/img/sagara/sagara.webp" height="200" alt="Sagara" />
+					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/sagara/sagara@2x.webp">
+					<img src="/img/sagara/sagara.webp" height="200" alt="Sagara" />
 				</picture>
 			</div>
 		</section>

@@ -16,7 +16,7 @@ let homeview = {
 
 		// Insert flares
 		for (var i = 1; i <= 5; i++) {
-			data.next.container.querySelector("#flares").innerHTML += '<img src="/dwaan/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
+			data.next.container.querySelector("#flares").innerHTML += '<img src="/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
 		}
 		// Hover "Dwan" in main text
 		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());

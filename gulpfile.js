@@ -12,7 +12,7 @@ const
 	autoprefixer = require('gulp-autoprefixer'),
 	mode = require('gulp-mode')();
 
-const siteUrl = 'http://localhost:8080/dwaan/';
+const siteUrl = 'http://localhost:8080/';
 
 function js() {
 	return gulp.src(['src/js/main.js'])
@@ -120,8 +120,8 @@ exports.default = function () {
 	connect.server({
 		hostname: "0.0.0.0",
 		port: 8080,
-		base: "../",
-		router: "router.php",
+		base: "./",
+		router: "../router.php",
 		keepalive: true,
 		stdio: "ignore",
 		debug: false

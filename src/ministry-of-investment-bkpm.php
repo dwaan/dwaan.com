@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail bkpm">
-        <img src="/dwaan/img/qr/bkpm.svg" width="64" height="64" alt="Dwan - Ministry of Investment/BKPM Website Redesign" class="print qr" hidden />
+        <img src="/img/qr/bkpm.svg" width="64" height="64" alt="Dwan - Ministry of Investment/BKPM Website Redesign" class="print qr" hidden />
 
         <hr />
 
@@ -21,8 +21,8 @@
             <div class="padding">
                 <span>
                     <picture class="logo">
-                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/dwaan/img/logo/bkpm-square.svg">
-                        <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
+                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/img/logo/bkpm-square.svg">
+                        <img src="/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
                     </picture>
                 </span>
             </div>
@@ -47,9 +47,9 @@
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="200" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
+                        <img src="/img/bkpm/bkpm-<?php echo $i ?>.webp" height="200" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -64,9 +64,9 @@
                 <p>The word growth were than extracted and combine with their corporate identity to produce color scheme and simple graphics.</p>
 
                 <div class="meta">
-                    <img src="/dwaan/img/bkpm/bkpm-logo.svg" width="62" height="48" alt="BKPM Logo" />
+                    <img src="/img/bkpm/bkpm-logo.svg" width="62" height="48" alt="BKPM Logo" />
                     <div>
-                        <img src="/dwaan/img/bkpm/bkpm-grow.svg" width="24" height="24" alt="BKPM Growth" />
+                        <img src="/img/bkpm/bkpm-grow.svg" width="24" height="24" alt="BKPM Growth" />
                         Growth
                     </div>
                     <ul class="flat color">
@@ -79,9 +79,9 @@
             <div class="thumbs">
                 <?php for ($i = 6; $i <= 8; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
+                        <img src="/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -108,9 +108,9 @@
             <div class="thumbs">
                 <?php for ($i = 10; $i <= 12; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
+                        <img src="/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -126,9 +126,9 @@
             <div class="thumbs">
                 <?php for ($i = 17; $i <= 19; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/bkpm/bkpm-<?php echo $i ?>@2x.webp">
+                        <img src="/img/bkpm/bkpm-<?php echo $i ?>.webp" height="150" alt="Ministry of Investment/BKPM - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -143,7 +143,7 @@
                 </p>
             </div>
             <div class="thumbs">
-                <img src="/dwaan/img/bkpm/guideline.webp" height="500" alt="Ministry of Investment/BKPM Website Redesign - Guideline - by Dwan" />
+                <img src="/img/bkpm/guideline.webp" height="500" alt="Ministry of Investment/BKPM Website Redesign - Guideline - by Dwan" />
             </div>
         </section>
 

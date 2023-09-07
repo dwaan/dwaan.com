@@ -13,12 +13,12 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail musiku">
-        <img src="/dwaan/img/qr/musiku.svg" width="64" height="64" alt="Dwan - Musiku Concept and Design" class="print qr" hidden />
+        <img src="/img/qr/musiku.svg" width="64" height="64" alt="Dwan - Musiku Concept and Design" class="print qr" hidden />
         <hr />
 
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/dwaan/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" /></span>
+                <span><img src="/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" /></span>
             </div>
             <h4 class="year">/2021</h4>
             <div class="arrow-big">
@@ -42,9 +42,9 @@
                 <div class="thumbs">
                     <?php for ($i = 1; $i <= 5; $i++) { ?>
                         <picture class="pic-1-<?php echo $i ?>">
-                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-1-<?php echo $i ?>@3x.webp">
-                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-1-<?php echo $i ?>@2x.webp">
-                            <img src="/dwaan/img/musiku/musiku-1-<?php echo $i ?>.webp" height="150" alt="Musiku Concept and Design - Page 1 - <?php echo $i ?> - by Dwan" />
+                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/musiku/musiku-1-<?php echo $i ?>@3x.webp">
+                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/musiku/musiku-1-<?php echo $i ?>@2x.webp">
+                            <img src="/img/musiku/musiku-1-<?php echo $i ?>.webp" height="150" alt="Musiku Concept and Design - Page 1 - <?php echo $i ?> - by Dwan" />
                         </picture>
                     <?php } ?>
                 </div>
@@ -57,11 +57,11 @@
             <div class="style-row">
                 <div class="style-column big">
                     <div class="meta musiku">
-                        <img src="/dwaan/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" />
+                        <img src="/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" />
                         <picture>
-                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/icon@3x.webp">
-                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/icon@2x.webp">
-                            <img src="/dwaan/img/musiku/icon.webp" width="184" height="106" alt="Musiku Concept and Design - Icon 8 - by Dwan" />
+                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/musiku/icon@3x.webp">
+                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/musiku/icon@2x.webp">
+                            <img src="/img/musiku/icon.webp" width="184" height="106" alt="Musiku Concept and Design - Icon 8 - by Dwan" />
                         </picture>
                     </div>
                     <div class="text">
@@ -93,9 +93,9 @@
             <div class="thumbs">
                 <?php for ($i = 2; $i <= 6; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
-                        <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/musiku/musiku-<?php echo $i ?>@3x.webp">
+                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/musiku/musiku-<?php echo $i ?>@2x.webp">
+                        <img src="/img/musiku/musiku-<?php echo $i ?>.webp" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -112,9 +112,9 @@
             </div>
             <div class="thumbs">
                 <picture class="pic-1 plain">
-                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/vector@3x.webp">
-                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/vector@2x.webp">
-                    <img src="/dwaan/img/musiku/vector.webp" height="200" alt="Musiku Concept and Design - Vector - by icons8.com" />
+                    <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/musiku/vector@3x.webp">
+                    <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/musiku/vector@2x.webp">
+                    <img src="/img/musiku/vector.webp" height="200" alt="Musiku Concept and Design - Vector - by icons8.com" />
                 </picture>
             </div>
         </section>
@@ -130,9 +130,9 @@
                 <div class="thumbs">
                     <?php for ($i = 7; $i <= 12; $i++) { ?>
                         <picture class="pic-<?php echo $i ?>">
-                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@3x.webp">
-                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/dwaan/img/musiku/musiku-<?php echo $i ?>@2x.webp">
-                            <img src="/dwaan/img/musiku/musiku-<?php echo $i ?>.webp" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
+                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/musiku/musiku-<?php echo $i ?>@3x.webp">
+                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/musiku/musiku-<?php echo $i ?>@2x.webp">
+                            <img src="/img/musiku/musiku-<?php echo $i ?>.webp" height="250" alt="Musiku Design and Concept - Page <?php echo $i ?> - by Dwan" />
                         </picture>
                     <?php } ?>
                 </div>

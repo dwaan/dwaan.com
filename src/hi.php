@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="hi" class="hi">
-		<img src="/dwaan/img/qr/say-hi.svg" width="64" height="64" alt="Dwan - Say hi!" class="print qr" hidden />
+		<img src="/img/qr/say-hi.svg" width="64" height="64" alt="Dwan - Say hi!" class="print qr" hidden />
 		<hr />
 
 		<section class="middle">
@@ -52,7 +52,7 @@
 					else if ($i % 3 == 0) $class = "purple";
 					else if ($i % 2 == 0) $class = "red";
 					else $class = "blue";
-					echo '<img src="/dwaan/img/flares/flare' . $i . '.webp" alt="Flare" class="flare' . $j . ' ' . $class . '">';
+					echo '<img src="/img/flares/flare' . $i . '.webp" alt="Flare" class="flare' . $j . ' ' . $class . '">';
 				}
 			}
 			?>

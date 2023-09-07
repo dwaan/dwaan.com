@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="home" class="home">
-        <img src="/dwaan/img/qr/home.svg" width="64" height="64" alt="Dwan - Homepage" class="print qr" hidden />
+        <img src="/img/qr/home.svg" width="64" height="64" alt="Dwan - Homepage" class="print qr" hidden />
         <div id="flarestart"></div>
 
         <hr />
@@ -39,7 +39,7 @@
             <h2 class="hidden">Asosiasi Antropologi Indonesia Website Solution</h2>
             <div class="padding">
                 <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution">
-                    <img src="/dwaan/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo of AAI" />
+                    <img src="/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo of AAI" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -57,8 +57,8 @@
             <div class="padding">
                 <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
                     <picture class="logo">
-                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/dwaan/img/logo/bkpm-square.svg">
-                        <img src="/dwaan/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
+                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/img/logo/bkpm-square.svg">
+                        <img src="/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
                     </picture>
                 </a>
             </div>
@@ -76,7 +76,7 @@
             <h2 class="hidden">Musiku Website Concept and Design</h2>
             <div class="padding">
                 <a href="./musiku" aria-label="Musiku Website Concept and Design">
-                    <img src="/dwaan/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo of Musiku" />
+                    <img src="/img/logo/musiku.svg" width="335" height="45" class="logo musiku" alt="Logo of Musiku" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -107,7 +107,7 @@
             <h2 class="hidden">Suzuki Website Redesign</h2>
             <div class="padding">
                 <a href="./suzuki" aria-label="Suzuki Website Redesign">
-                    <img src="/dwaan/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo of Suzuki" />
+                    <img src="/img/logo/suzuki.svg" width="98" height="120" class="logo" alt="Logo of Suzuki" />
                 </a>
             </div>
             <div class="arrow-small">
@@ -124,7 +124,7 @@
             <h2 class="hidden">Melon - Tiket Apa Saja Website Redesign</h2>
             <div class="padding">
                 <a href="./tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
-                    <img src="/dwaan/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo of Tiket Apa Saja" />
+                    <img src="/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Logo of Tiket Apa Saja" />
                 </a>
             </div>
             <div class="arrow-small">
