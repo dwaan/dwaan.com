@@ -2,7 +2,7 @@
     <li><a class="spring" href="./">Home</a></li>
     <li><a class="spring" href="./me">About Me</a></li>
     <li class="hr"></li>
-    <li><a class="spring" href="./say-hi">Say, Hi!</a></li>
+    <li><a class="spring" href="./hi">Say, Hi!</a></li>
     <li>
         <p class="social">
             <a href="https://www.plurk.com/dwan" rel="me" target="_blank" data-barba-prevent><svg width="229" height="192" viewBox="0 0 229 192" fill="black" xmlns="http://www.w3.org/2000/svg">
