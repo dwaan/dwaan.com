@@ -173,7 +173,7 @@
         <hr />
 
         <div class="footer">
-            <a href="./say-hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
+            <a href="./hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
             <div class="location">
                 <span>Jakarta</span>
                 <svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg">
