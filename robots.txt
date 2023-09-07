@@ -3,6 +3,7 @@
 # Allow crawling of all content
 User-agent: *
 Disallow: /menu
+Disallow: /plurk-api
 Disallow: /dwaan/src/
 Disallow: /dwaan/v1/src/
 Disallow: /demo/
