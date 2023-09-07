@@ -4,6 +4,8 @@
 User-agent: *
 Disallow: /menu
 Disallow: /plurk-api
+Disallow: /dwaan/
 Disallow: /dwaan/src/
+Disallow: /dwaan/v1/
 Disallow: /dwaan/v1/src/
 Disallow: /demo/

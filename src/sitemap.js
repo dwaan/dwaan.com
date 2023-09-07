@@ -20,8 +20,8 @@ async function crawlAndGenerateSitemap() {
             const internalLinks = [];
             $('a').each((_, element) => {
                 const href = $(element).attr('href');
-                if (href && href.startsWith('./') && !href.includes('./menu')) internalLinks.push(baseUrl + href.replace('./', '/'));
-                else if (href && href.startsWith('/') && !href.includes('/menu') && !href.includes('/img')) internalLinks.push(baseUrl + href);
+                if (href && href.startsWith('./') && !href.includes('./menu') && !href.includes('./plurk-api')) internalLinks.push(baseUrl + href.replace('./', '/'));
+                else if (href && href.startsWith('/') && !href.includes('/menu'&& !href.includes('./plurk-api')) && !href.includes('/img')) internalLinks.push(baseUrl + href);
             });
 
             for (const link of internalLinks) {
