@@ -44,7 +44,79 @@ class colors {
     constructor() {
         this.oldcolor = "";
         this.randomcolors = [];
-        this.colors = ['rgb(63,94,251)', 'rgb(252,70,107)', 'rgb(34,193,195)', 'rgb(253,187,45)', 'rgb(195,34,190)', 'rgb(219,158,0)', 'rgb(75,231,152)', 'rgb(195,34,103)', 'rgb(45,182,253)'];
+
+        const allColorArrays = [
+            [
+                'rgb(63,94,251)',     // Dodger Blue
+                'rgb(252,70,107)',    // Radical Red
+                'rgb(34,193,195)',    // Light Sea Green
+                'rgb(253,187,45)',    // Goldenrod
+                'rgb(195,34,190)',    // Deep Pink
+                'rgb(219,158,0)',     // Golden Yellow
+                'rgb(75,231,152)',    // Medium Spring Green
+                'rgb(195,34,103)',    // Cerise
+                'rgb(45,182,253)'     // Dodger Blue (Lighter)
+            ],
+            [
+                "rgb(0, 0, 139)",     // Dark Blue
+                "rgb(0, 128, 128)",   // Teal
+                "rgb(0, 100, 0)",     // Dark Green
+                "rgb(139, 0, 0)",     // Dark Red
+                "rgb(128, 0, 128)",   // Purple
+                "rgb(255, 140, 0)",   // Dark Orange
+                "rgb(75, 0, 130)",    // Indigo
+                "rgb(128, 128, 0)",   // Olive
+                "rgb(106, 90, 205)"   // Slate Blue
+            ],
+            [
+                "rgb(60, 60, 160)",    // Dark Pastel Blue
+                "rgb(0, 120, 120)",    // Dark Pastel Teal
+                "rgb(60, 80, 60)",     // Dark Pastel Green
+                "rgb(120, 60, 60)",    // Dark Pastel Red
+                "rgb(100, 60, 100)",   // Dark Pastel Purple
+                "rgb(180, 100, 0)",    // Dark Pastel Orange
+                "rgb(50, 30, 80)",     // Dark Pastel Indigo
+                "rgb(90, 90, 0)",      // Dark Pastel Olive
+                "rgb(80, 70, 140)"     // Dark Pastel Slate Blue
+            ],
+            [
+                "rgb(70, 70, 170)",    // Darker Pastel Blue
+                "rgb(170, 70, 90)",    // Darker Pastel Red
+                "rgb(40, 170, 170)",   // Darker Pastel Cyan
+                "rgb(170, 130, 40)",   // Darker Pastel Yellow
+                "rgb(140, 40, 140)",   // Darker Pastel Magenta
+                "rgb(200, 120, 0)",    // Darker Pastel Orange
+                "rgb(50, 200, 120)",   // Darker Pastel Green
+                "rgb(140, 40, 90)",    // Darker Pastel Purple
+                "rgb(70, 160, 210)"    // Darker Pastel Blue-Green
+            ],
+            [
+                "rgb(0, 200, 0)",     // Darker Contrast Neon Green
+                "rgb(255, 255, 70)",  // Darker Contrast Yellow
+                "rgb(0, 150, 200)",    // Darker Contrast Neon Blue
+                "rgb(0, 200, 150)",    // Darker Contrast Cyan
+                "rgb(200, 0, 200)",    // Darker Contrast Neon Purple
+                "rgb(120, 200, 0)",    // Darker Contrast Neon Yellow-Green
+                "rgb(200, 120, 0)",    // Darker Contrast Neon Orange
+                "rgb(0, 80, 200)",     // Darker Contrast Light Neon Blue
+                "rgb(200, 0, 80)"      // Darker Contrast Neon Pink
+            ],
+            [
+                "rgb(51, 51, 51)",     // Dark Gray
+                "rgb(153, 153, 0)",    // Olive
+                "rgb(0, 51, 102)",     // Dark Blue
+                "rgb(102, 0, 0)",      // Dark Red
+                "rgb(0, 0, 0)",        // Black
+                "rgb(128, 64, 0)",     // Brown
+                "rgb(51, 0, 51)",      // Dark Purple
+                "rgb(0, 102, 102)",    // Dark Cyan
+                "rgb(77, 77, 77)"      // Charcoal Gray
+            ]
+        ];
+
+        const seconds = Math.floor(Date.now() / 1000); // Get current time in seconds
+        const arrayIndex = seconds % allColorArrays.length; // Use seconds to determine the index
+        this.colors = allColorArrays[arrayIndex];
     }
 
     getRandomColor() {

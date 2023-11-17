@@ -38,9 +38,11 @@
 				</svg>
 				Logout
 			</div>
-			<a href="./replurk2020">2020</a>
+			<a href="./replurk2020">Prev</a>
 			<span>&bull;</span>
 			<a href="./replurk2021" class="now">2021</a>
+			<span>&bull;</span>
+			<a href="./replurk2022">Next</a>
 		</div>
 
 		<section id="permission" class="middle first snap-bottom">

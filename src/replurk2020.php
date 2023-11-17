@@ -38,7 +38,7 @@
 			</div>
 			<a href="./replurk2020" class="now">2020</a>
 			<span>&bull;</span>
-			<a href="./replurk2021">2021</a>
+			<a href="./replurk2021">Next</a>
 		</div>
 
 		<!-- Login -->

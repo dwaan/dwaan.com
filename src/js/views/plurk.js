@@ -63,6 +63,28 @@ var replurkview = {
 			await replurkview.replurk2022.run(data.next.container);
 			this.async();
 		}
+	},
+
+	// Replurk page 2023
+	replurk2023: false,
+	replurk2023view: {
+		namespace: 'replurk2023',
+		beforeEnter: async data => {
+			const replurk = await import('../helpers/replurk');
+			replurkview.replurk2023 = new replurk.default(2023);
+
+			var next = data.next.container;
+			next.querySelector("#backtotop").onclick = () => gsap.to(window, {
+				duration: reduceMotionFilter(2),
+				ease: "expo.inOut",
+				scrollTo: "#statistics"
+			});
+			next.querySelectorAll("#permission, .grant").forEach(el => el.style.display = "none");
+		},
+		afterEnter: async function (data) {
+			await replurkview.replurk2023.run(data.next.container);
+			this.async();
+		}
 	}
 }
 
