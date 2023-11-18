@@ -18,7 +18,11 @@
 
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" /></span>
+                <span>
+                    <svg width="335" height="45" viewBox="0 0 411 55" aria-label="Musiku's Logo" class="logo musiku">
+                        <use href="/img/logo.svg#logo/musiku"></use>
+                    </svg>
+                </span>
             </div>
             <h4 class="year">/2021</h4>
             <div class="arrow-big">

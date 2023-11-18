@@ -18,7 +18,11 @@
 
 		<section class="middle full snap">
 			<div class="padding">
-				<img src="/img/logo/tiketapasaja.svg" width="489" height="59" class="tas logo" alt="Suzuki's Logo" />
+				<span>
+					<svg width="489" height="55" viewBox="0 0 489 55" class="logo tas" aria-label="Tiket Apa Saja's Logo">
+						<use href="/img/logo.svg#logo/tiketapasaja"></use>
+					</svg>
+				</span>
 			</div>
 			<h4 class="year">/2019</h4>
 			<div class="arrow-big">

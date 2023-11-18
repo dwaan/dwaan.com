@@ -18,7 +18,11 @@
 
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/img/logo/suzuki.svg" width="73" height="90" class="logo" alt="Suzuki's Logo" /></span>
+                <span>
+                    <svg width="98" height="120" viewBox="0 0 147 180" aria-label="Suzuki's Logo">
+                        <use href="/img/logo.svg#logo/suzuki"></use>
+                    </svg>
+                </span>
             </div>
             <h4 class="year">/2020</h4>
             <div class="arrow-big">
@@ -80,7 +84,9 @@
             <div class="style-row">
                 <div class="style-column">
                     <div class="meta">
-                        <img src="/img/logo/suzuki.svg" width="70" height="85" alt="Suzuki's Logo" />
+                        <svg width="70" height="85" viewBox="0 0 147 180" aria-label="Suzuki's Logo">
+                            <use href="/img/logo.svg#logo/suzuki"></use>
+                        </svg>
                     </div>
                     <div class="text">
                         <h3>Corporate Identity</h3>

@@ -19,7 +19,11 @@
 
         <section class="middle full snap">
             <div class="padding">
-                <span><img src="/img/logo/aai.svg" width="160" height="55" class="logo" alt="Logo AAI" /></span>
+                <span>
+                    <svg width="160" height="55" viewBox="0 0 199 68" class="logo aai" aria-label="Asosiasi Antropologi Indonesia's Logo">
+                        <use href="/img/logo.svg#logo/aai"></use>
+                    </svg>
+                </span>
             </div>
             <h4 class="year">/2023</h4>
             <div class="arrow-big">
@@ -79,7 +83,9 @@
             <div class="style-row">
                 <div class="style-column big">
                     <div class="meta">
-                        <img src="/img/logo/aai.svg" width="140" height="48" alt="AAI's Logo" />
+                        <svg width="140" height="48" viewBox="0 0 199 68" class="logo aai" aria-label="Asosiasi Antropologi Indonesia's Logo">
+                            <use href="/img/logo.svg#logo/aai"></use>
+                        </svg>
                     </div>
                     <div class="text">
                         <h3>Brand Identity</h3>

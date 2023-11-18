@@ -647,17 +647,26 @@ header {
 
 /* Logo item */
 .logo {
-	transition: filter 1s ease;
+	fill: var(--black);
+	transition: fill 1s ease;
 
-	svg {
+	.dwan-logo {
+		transition: filter 1s ease;
+	}
+
+	svg,
+	object {
 		width: 25.6px;
 		height: 40px;
 		pointer-events: none;
+	}
 
-		g {
-			fill: var(--black);
-			transition: fill 1s ease;
-		}
+	&.horizontal {
+		display: none;
+	}
+
+	&.vertical {
+		display: block;
 	}
 }
 
@@ -697,23 +706,24 @@ header {
 		height: 44px;
 		mix-blend-mode: normal;
 	}
-}
 
-#sun,
-#moon {
-	display: block;
-	opacity: 0;
-	transition: opacity .5s ease;
-}
+	#sun,
+	#moon {
+		display: block;
+		opacity: 0;
+		transition: opacity .5s ease;
+	}
 
-#sun {
-	stroke: var(--black);
-	opacity: 1;
+	#sun {
+		stroke: var(--black);
+		opacity: 1;
 
-	circle {
-		fill: var(--yellow);
+		circle {
+			fill: var(--yellow);
+		}
 	}
 }
+
 
 /* Menu item and switch */
 .menu {

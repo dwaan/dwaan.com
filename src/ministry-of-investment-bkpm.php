@@ -20,10 +20,12 @@
         <section class="middle full snap">
             <div class="padding">
                 <span>
-                    <picture class="logo">
-                        <source media="screen and (max-aspect-ratio: 1/1)" srcset="/img/logo/bkpm-square.svg">
-                        <img src="/img/logo/bkpm.svg" width="540" height="74" alt="Logo Ministry of Investment/BKPM" />
-                    </picture>
+                    <svg width="231" height="139" viewBox="0 0 231 139" class="logo bkpm vertical" aria-label="Ministry of Investment/BKPM's Logo">
+                        <use href="/img/logo.svg#logo/bkpm-square"></use>
+                    </svg>
+                    <svg width="540" height="74" viewBox="0 0 548 76" class="logo bkpm horizontal" aria-label="Ministry of Investment/BKPM's Logo">
+                        <use href="/img/logo.svg#logo/bkpm"></use>
+                    </svg>
                 </span>
             </div>
             <h4 class="year">/2022</h4>

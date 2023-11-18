@@ -71,7 +71,8 @@ let header = {
 
         gsap.utils.toArray('header .logo').forEach(el => {
             // Waving animation
-            var lefthand = el.querySelector(".left-hand");
+            var svg = el.querySelector('.dwan-logo').contentDocument;
+            var lefthand = svg.querySelector(".left-hand");
             var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: length / 4, ease: "linear", yPercent: 20 } });
 
             waving
@@ -82,7 +83,7 @@ let header = {
                 .to(lefthand, { yPercent: 0, duration: length * 10 });
 
             // Hat move on hover
-            var hat = el.querySelector(".hat");
+            var hat = svg.querySelector(".hat");
             hoverEvents([el], () => {
                 gsap.to(hat, {
                     transformOrigin: "50% 75%",

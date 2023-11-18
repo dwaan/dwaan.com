@@ -8,7 +8,6 @@ const
 	htmlmin = require('gulp-htmlmin'),
 	webpack = require('webpack-stream'),
 	webp = require('gulp-webp'),
-	svgmin = require('gulp-svgmin'),
 	autoprefixer = require('gulp-autoprefixer'),
 	mode = require('gulp-mode')();
 
@@ -111,7 +110,9 @@ function png() {
 
 function svg() {
 	return gulp.src(['src/img/*.svg', 'src/img/*/*.svg'])
-		.pipe(svgmin())
+		.pipe(htmlmin({
+			collapseWhitespace: true
+		}))
 		.pipe(gulp.dest('img/'))
 		.pipe(browserSync.stream());
 }
