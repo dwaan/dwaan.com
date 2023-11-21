@@ -61,7 +61,9 @@
             <div class="style-row">
                 <div class="style-column big">
                     <div class="meta musiku">
-                        <img src="/img/logo/musiku.svg" width="160" height="55" class="logo" alt="Logo Musiku" />
+                        <svg width="160" height="55" viewBox="0 0 411 55" aria-label="Musiku's Logo" class="logo musiku">
+                            <use href="/img/logo.svg#logo/musiku"></use>
+                        </svg>
                         <picture>
                             <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/musiku/icon@3x.webp">
                             <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/musiku/icon@2x.webp">
