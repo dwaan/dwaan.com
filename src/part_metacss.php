@@ -70,12 +70,13 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 	<meta property="og:url" content="<?php echo $url; ?>">
 	<meta property="og:title" content="<?php echo $title; ?>">
 	<meta property="og:description" content="<?php echo $description; ?>">
-	<meta property="og:image" content="https://dwaan.com/meta1200×628.jpg">
+	<meta property="og:image" content="https://dwaan.com/sharepic.jpg">
 
 	<!-- Twitter -->
-	<meta property="twitter:card" content="summary_large_image">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:domain" content="dwaan.com">
 	<meta property="twitter:url" content="<?php echo $url; ?>">
-	<meta property="twitter:title" content="<?php echo $title; ?>">
-	<meta property="twitter:description" content="<?php echo $description; ?>">
-	<meta property="twitter:image" content="https://dwaan.com/meta1200×628.jpg">
+	<meta name="twitter:title" content="<?php echo $title; ?>">
+	<meta name="twitter:description" content="<?php echo $description; ?>">
+	<meta name="twitter:image" content="https://dwaan.com/sharepic.jpg">
 <?php } ?>
