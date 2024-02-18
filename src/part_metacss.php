@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Primary Meta Tags -->
-<?php if ($title != "Dwan 😙") $title .= " - Dwan 😙"; ?>
+<?php if ($title != "Hello, my name is Dwan 😙") $title .= " - Dwan 😙"; ?>
 <title><?php echo $title; ?></title>
 <meta name="title" content="<?php echo $title; ?>">
 <meta name="description" content="<?php echo $description; ?>">
@@ -74,8 +74,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image">
-	<meta property="twitter:domain" content="dwaan.com">
-	<meta property="twitter:url" content="<?php echo $url; ?>">
+	<meta name="twitter:site" content="<?php echo $url; ?>">
+	<meta name="twitter:creator" content="@dwaan">
 	<meta name="twitter:title" content="<?php echo $title; ?>">
 	<meta name="twitter:description" content="<?php echo $description; ?>">
 	<meta name="twitter:image" content="https://dwaan.com/sharepic.jpg">
