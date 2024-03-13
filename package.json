@@ -1,6 +1,6 @@
 {
 	"name": "dwaan",
-	"version": "2.5.1",
+	"version": "2.5.7",
 	"description": "dwaan.com source code",
 	"main": "js/main.js",
 	"scripts": {
