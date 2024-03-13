@@ -1,7 +1,7 @@
 /* For those who disable js */
 
 html.no-js {
-	overflow-x: hidden;
+	overflow-x: clip;
 	overflow-y: scroll;
 	scroll-snap-type: y mandatory;
 	scroll-snap-stop: always;
@@ -65,6 +65,7 @@ html.no-js {
 			ul,
 			ol {
 				margin-top: auto;
+				height: 100%;
 
 				li {
 					margin-bottom: var(--padm);
@@ -77,11 +78,6 @@ html.no-js {
 
 			a {
 				margin: 0;
-				padding-left: 0;
-
-				&:hover {
-					color: var(--red);
-				}
 			}
 
 			p {
@@ -101,6 +97,14 @@ html.no-js {
 		}
 	}
 
+
+	.home {
+		.middle {
+			.cover {
+				display: none;
+			}
+		}
+	}
 
 	.me {
 		.middle {

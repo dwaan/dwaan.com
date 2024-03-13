@@ -242,6 +242,13 @@ function waitForImg() {
 
 			if (els_count > 0) {
 				for (var i = 0; i < els.length; i++) {
+					// If loading is not progressing for example because network problem
+					// or user disable image, the progress bar will close after .5 second
+					setTimeout(() => {
+						if (progress) progress(els_count--, 100 - (els_count / els.length * 100));
+						if (els_count == 0) resolve(true);
+					}, 500);
+
 					// When loaded report it as a progress
 					if (els[i].complete) {
 						if (progress) progress(els_count--, 100 - (els_count / els.length * 100));

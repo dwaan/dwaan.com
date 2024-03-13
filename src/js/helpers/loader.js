@@ -57,6 +57,7 @@ var loader = {
 				});
 			});
 		}
+
 		await this.hide();
 		this.clean();
 	},
