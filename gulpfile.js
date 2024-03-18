@@ -8,7 +8,6 @@ const
 	htmlmin = require('gulp-htmlmin'),
 	webpack = require('webpack-stream'),
 	webp = require('gulp-webp'),
-	autoprefixer = require('gulp-autoprefixer'),
 	mode = require('gulp-mode')();
 
 const siteUrl = 'http://localhost:8080/';
@@ -73,7 +72,6 @@ function print() {
 function css_prefix() {
 	return gulp.src(['src/css/cache/*.css'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(autoprefixer())
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('css/'))
 		.pipe(browserSync.stream());

@@ -15,6 +15,10 @@ $screen-verysmall: 400px;
 	display: $display;
 }
 
+@mixin make-it-exist() {
+	content: "";
+}
+
 @mixin zero-box() {
 	margin: 0;
 	padding: 0;
