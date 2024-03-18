@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail replurk">
-        <img src="/img/qr/replurk.svg" width="64" height="64" alt="Dwan - RePlurk" class="print qr" hidden />
+        <img loading="lazy" src="/img/qr/replurk.svg" width="64" height="64" alt="Dwan - RePlurk" class="print qr" hidden />
 
         <hr />
 
@@ -54,7 +54,7 @@
                 <p><a href="https://www.plurk.com/dwan/" target="_BLANK">Visit My Plurk Profile</a></p>
             </div>
             <div class="thumbs">
-                <img src="/img/replurk/replurk-14.webp" style="width: 100%" alt="RePlurk - Page 14 - by Dwan" />
+                <img loading="lazy" src="/img/replurk/replurk-14.webp" style="width: 100%" alt="RePlurk - Page 14 - by Dwan" />
             </div>
         </section>
 
@@ -75,7 +75,7 @@
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 1; $i++) { ?>
                     <picture class="pic-<?php echo $i ?> top">
-                        <img src="/img/replurk/replurk-<?php echo $i ?>.webp" style="width: 100%" alt="RePlurk - Page <?php echo $i ?> - by Dwan" />
+                        <img loading="lazy" src="/img/replurk/replurk-<?php echo $i ?>.webp" style="width: 100%" alt="RePlurk - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -94,7 +94,7 @@
             <div class="thumbs">
                 <?php for ($i = 8; $i <= 13; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <img src="/img/replurk/replurk-<?php echo $i ?>.webp" height="250" alt="RePlurk - Controlled Randomness - <?php echo $i - 7 ?> - by Dwan" />
+                        <img loading="lazy" src="/img/replurk/replurk-<?php echo $i ?>.webp" height="250" alt="RePlurk - Controlled Randomness - <?php echo $i - 7 ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -112,7 +112,7 @@
             </div>
             <div class="thumbs">
                 <picture class="pic-15 top">
-                    <img src="/img/replurk/replurk-15.webp" style="width: 100%" alt="RePlurk - All Block - by Dwan" />
+                    <img loading="lazy" src="/img/replurk/replurk-15.webp" style="width: 100%" alt="RePlurk - All Block - by Dwan" />
                 </picture>
             </div>
         </section>
@@ -123,7 +123,7 @@
             <h2 class="hidden">Thank You</h2>
             <div class="thumbs">
                 <picture class="pic-3">
-                    <img src="/img/replurk/replurk-3.webp" style="width: 100%" alt="RePlurk - Page Thank You - by Dwan" />
+                    <img loading="lazy" src="/img/replurk/replurk-3.webp" style="width: 100%" alt="RePlurk - Page Thank You - by Dwan" />
                 </picture>
             </div>
         </section>

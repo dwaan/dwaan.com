@@ -3,6 +3,7 @@
 import animate from '../helpers/animate';
 import loader from '../helpers/loader';
 import header from '../helpers/header';
+import { delay } from '../helpers/helper';
 
 let transition_once_default = {
     name: 'default-transition',
@@ -11,7 +12,11 @@ let transition_once_default = {
         var next = data.next.container;
 
         // Display loading
+        loader.disableLoading = true;
         loader.init();
+
+        // Delay animation to ease resource
+        await delay(750);
 
         // Loading logic
         await loader.show(next);

@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail aai">
-        <img src="/img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Solution" class="print qr" hidden />
+        <img loading="lazy" src="/img/qr/aai.svg" width="64" height="64" alt="Dwan - Asosiasi Antropologi Indonesia | AAI Website Solution" class="print qr" hidden />
 
         <hr />
 
@@ -46,9 +46,8 @@
             <div class="thumbs wide">
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/aai/aai-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/img/aai/aai-<?php echo $i ?>.webp" height="200" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px) and (min-device-pixel-ratio: 2)" srcset="/img/aai/aai-<?php echo $i ?>@2x.webp 2x, /img/aai/aai-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/aai/aai-<?php echo $i ?>.webp" height="200" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -69,9 +68,8 @@
             <div class="thumbs wide">
                 <?php for ($i = 4; $i <= 7; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/aai/aai-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/img/aai/aai-<?php echo $i ?>.webp" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px) and (min-device-pixel-ratio: 2)" srcset="/img/aai/aai-<?php echo $i ?>@2x.webp 2x, /img/aai/aai-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/aai/aai-<?php echo $i ?>.webp" height="150" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -108,7 +106,7 @@
                 </div>
                 <div class="style-column">
                     <div class="meta">
-                        <img src="/img/aai/slant.svg" width="46" height="32" alt="AAI's Slant Identity" />
+                        <img loading="lazy" src="/img/aai/slant.svg" width="46" height="32" alt="AAI's Slant Identity" />
                     </div>
                     <div class="text">
                         <small>The slant on the A in the logo was use extensively as decoration and brand identity.</small>
@@ -129,9 +127,8 @@
                         </div>
                     <?php } ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/aai/aai-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/aai/aai-<?php echo $i ?>@2x.webp">
-                        <img src="/img/aai/aai-<?php echo $i ?>.webp" height="250" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px) and (min-device-pixel-ratio: 2)" srcset="/img/aai/aai-<?php echo $i ?>@2x.webp 2x, /img/aai/aai-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/aai/aai-<?php echo $i ?>.webp" height="250" alt="AAI Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -146,7 +143,7 @@
                 <p>The newly created interface guideline will provide consistent interface development in the future.</p>
             </div>
             <div class="thumbs">
-                <img src="/img/aai/guideline.svg" height="500" alt="AAI Website Redesign - Guideline - by Dwan" />
+                <img loading="lazy" src="/img/aai/guideline.svg" height="500" alt="AAI Website Redesign - Guideline - by Dwan" />
             </div>
         </section>
 
@@ -157,9 +154,8 @@
                 <?php for ($i = 3; $i >= 1; $i--) { ?>
                     <div>
                         <picture class="pic-<?php echo $i ?>">
-                            <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/aai-wp/aai-<?php echo $i ?>@4x.webp">
-                            <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/aai-wp/aai-<?php echo $i ?>@3x.webp">
-                            <img src="/img/aai-wp/aai-<?php echo $i ?>@2x.webp" height="250" alt="AAI Website Redesign - WordPress Page <?php echo $i ?> - by Dwan" />
+                            <source media="(min-width: 1024px) and (min-device-pixel-ratio: 2)" srcset="/img/aai-wp/aai-<?php echo $i ?>@2x.webp 2x, /aai-wp/aai-<?php echo $i ?>@3x.webp 3x">
+                            <img loading="lazy" src="/img/aai-wp/aai-<?php echo $i ?>@2x.webp" height="250" alt="AAI Website Redesign - WordPress Page <?php echo $i ?> - by Dwan" />
                         </picture>
                     </div>
                 <?php } ?>

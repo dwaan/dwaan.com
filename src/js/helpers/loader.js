@@ -6,8 +6,14 @@ import { _q, _qAll, waitForImg, reduceMotionFilter } from './helper';
 // Loader functions
 var loader = {
 	el: _q("#loader"),
+	els: false,
+	disableLoading: false,
 	update: function (percent) {
-		gsap.to(this.el.querySelectorAll(".loading"), {
+		if (this.disableLoading) return;
+
+		if (!this.els) return;
+
+		gsap.to(this.els, {
 			width: percent + "%"
 		})
 	},
@@ -15,6 +21,10 @@ var loader = {
 		this.el.innerHTML = "";
 	},
 	init: function (simplestyle) {
+		if (this.disableLoading) return;
+
+		this.els = this.el.querySelectorAll(".loading");
+
 		return new Promise(resolve => {
 			document.body.style.cursor = "wait";
 
@@ -31,6 +41,8 @@ var loader = {
 		});
 	},
 	show: async function (els) {
+		if (this.disableLoading) return;
+
 		// Wait for all images to be loaded
 		let _percent = { score: 0 };
 		let length = reduceMotionFilter(1);
@@ -59,9 +71,12 @@ var loader = {
 		}
 
 		await this.hide();
+
 		this.clean();
 	},
 	hide: function () {
+		if (this.disableLoading) return;
+
 		return new Promise(resolve => {
 			gsap.killTweensOf(this.el.children);
 			gsap.to(this.el.children, {

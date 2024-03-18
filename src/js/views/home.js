@@ -15,28 +15,29 @@ let homeview = {
 		document.body.style.overflow = "hidden";
 
 		// Insert flares
+		var htmls = "";
 		for (var i = 1; i <= 5; i++) {
-			data.next.container.querySelector("#flares").innerHTML += '<img src="/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
+			htmls += '<img src="/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
 		}
+		data.next.container.querySelector("#flares").innerHTML = htmls;
 		// Hover "Dwan" in main text
 		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
 
 		// Scroll text
+		var screen = gsap.matchMedia();
 		var els = next.querySelectorAll("section.middle");
-		els.forEach((el, idx) => {
-			var maintext = el.querySelectorAll(".main-text, .padding");
-			var screen = gsap.matchMedia();
-
-			// Vertical screen
-			screen.add("(max-aspect-ratio: 1/1)", () => {
-				gsap.set(maintext, {
-					position: "relative",
-					pointerEvents: "auto",
-					opacity: 1,
-					top: "0%",
-					y: "0%"
-				});
+		var elsMainText = next.querySelectorAll("section.middle .main-text, .padding");
+		// Vertical screen
+		screen.add("(max-aspect-ratio: 1/1)", () => {
+			gsap.set(elsMainText, {
+				position: "relative",
+				pointerEvents: "auto",
+				opacity: 1,
+				top: "0%",
+				y: "0%"
 			});
+		});
+		els.forEach((el, idx) => {
 			// Horizontal screen
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				// Background slide version
@@ -80,7 +81,6 @@ let homeview = {
 					animation: tl
 				}));
 			});
-
 			// Snap
 			scroll.snap(el);
 		});

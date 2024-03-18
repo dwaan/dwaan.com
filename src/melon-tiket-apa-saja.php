@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="detail" class="detail tas">
-		<img src="/img/qr/tas.svg" width="64" height="64" alt="Dwan - Tiket Apa Saja - Melon Indonesia" class="print qr" hidden />
+		<img loading="lazy" src="/img/qr/tas.svg" width="64" height="64" alt="Dwan - Tiket Apa Saja - Melon Indonesia" class="print qr" hidden />
 		<hr />
 
 		<section class="middle full snap">
@@ -44,19 +44,16 @@
 			</div>
 			<div class="thumbs">
 				<picture class="horizontal">
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/hero@3x.webp">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/hero@2x.webp">
-					<img src="/img/tas/hero.webp" height="250" alt="Tiket Apa Saja - Dekstop- Homepage" />
+					<source media="(min-width: 1024px)" srcset="/img/tas/hero@2x.webp 2x, /img/tas/hero@3x.webp 3x">
+					<img loading="lazy" src="/img/tas/hero.webp" height="250" alt="Tiket Apa Saja - Dekstop- Homepage" />
 				</picture>
 				<picture class="vertical">
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/mobile-final-1@3x.webp">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/mobile-final-1@2x.webp">
-					<img src="/img/tas/mobile-final-1.webp" height="250" alt="Tiket Apa Saja - Mobile - Homepage" />
+					<source media="(min-width: 1024px)" srcset="/img/tas/mobile-final-1@2x.webp 2x, /img/tas/mobile-final-1@3x.webp 3x">
+					<img loading="lazy" src="/img/tas/mobile-final-1.webp" height="250" alt="Tiket Apa Saja - Mobile - Homepage" />
 				</picture>
 				<picture class="vertical">
-					<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/mobile-final-2@3x.webp">
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/mobile-final-2@2x.webp">
-					<img src="/img/tas/mobile-final-2.webp" height="250" alt="Tiket Apa Saja - Mobile - Listing" />
+					<source media="(min-width: 1024px)" srcset="/img/tas/mobile-final-2@2x.webp 2x, /img/tas/mobile-final-2@3x.webp 3x">
+					<img loading="lazy" src="/img/tas/mobile-final-2.webp" height="250" alt="Tiket Apa Saja - Mobile - Listing" />
 				</picture>
 			</div>
 		</section>
@@ -88,23 +85,20 @@
 				<ul class="flat">
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/oldlogo@3x.webp">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/oldlogo@2x.webp">
-							<img src="/img/tas/oldlogo.webp" height="100" alt="Tiket Apa Saja" />
+							<source media="(min-width: 1024px)" srcset="/img/tas/oldlogo@2x.webp 2x, /img/tas/oldlogo@3x.webp 3x">
+							<img loading="lazy" src="/img/tas/oldlogo.webp" height="100" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/newlogo@3x.webp">
-							<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/newlogo@2x.webp">
-							<img src="/img/tas/newlogo.webp" height="100" alt="Tiket Apa Saja" />
+							<source media="(min-width: 1024px)" srcset="/img/tas/newlogo@2x.webp 2x, /img/tas/newlogo@3x.webp 3x">
+							<img loading="lazy" src="/img/tas/newlogo.webp" height="100" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 					<li>
 						<picture>
-							<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/pitching-mobile@3x.webp">
-							<source media="(-webkit-min-150device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/pitching-mobile@2x.webp">
-							<img src="/img/tas/pitching-mobile.webp" height="200" alt="Tiket Apa Saja" />
+							<source media="(min-width: 1024px)" srcset="/img/tas/pitching-mobile@2x.webp 2x, /img/tas/pitching-mobile@3x.webp 3x">
+							<img loading="lazy" src="/img/tas/pitching-mobile.webp" height="200" alt="Tiket Apa Saja" />
 						</picture>
 					</li>
 				</ul>
@@ -122,9 +116,8 @@
 					<?php for ($i = 1; $i <= 3; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
-								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/desktop-<?php echo $i ?>@3x.webp">
-								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/desktop-<?php echo $i ?>@2x.webp">
-								<img src="/img/tas/desktop-<?php echo $i ?>.webp" height="150" alt="Tiket Apa Saja - Proposed Desktop Website - Page <?php echo $i ?>" />
+								<source media="(min-width: 1024px)" srcset="/img/tas/desktop-<?php echo $i ?>@2x.webp 2x, /img/tas/desktop-<?php echo $i ?>@3x.webp 3x">
+								<img loading="lazy" src="/img/tas/desktop-<?php echo $i ?>.webp" height="150" alt="Tiket Apa Saja - Proposed Desktop Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -162,9 +155,8 @@
 					<?php for ($i = 1; $i <= 6; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
-								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/desktop-final-<?php echo $i ?>@3x.webp">
-								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/desktop-final-<?php echo $i ?>@2x.webp">
-								<img src="/img/tas/desktop-final-<?php echo $i ?>.webp" height="150" alt="Tiket Apa Saja - Desktop Website - Page <?php echo $i ?>" />
+								<source media="(-webkit-mi(min-width: 1024px)" srcset="/img/tas/desktop-final-<?php echo $i ?>@2x.webp 2x, /img/tas/desktop-final-<?php echo $i ?>@3x.webp 3x">
+								<img loading="lazy" src="/img/tas/desktop-final-<?php echo $i ?>.webp" height="150" alt="Tiket Apa Saja - Desktop Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>
@@ -183,9 +175,8 @@
 					<?php for ($i = 1; $i <= 6; $i++) { ?>
 						<li>
 							<picture class="pic-<?php echo $i ?>">
-								<source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/tas/mobile-final-<?php echo $i ?>@3x.webp">
-								<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/tas/mobile-final-<?php echo $i ?>@2x.webp">
-								<img src="/img/tas/mobile-final-<?php echo $i ?>.webp" height="250" alt="Tiket Apa Saja - Mobile Website - Page <?php echo $i ?>" />
+								<source media="min-width: 1024px)" srcset="/img/tas/mobile-final-<?php echo $i ?>@2x.webp 2x, /img/tas/mobile-final-<?php echo $i ?>@3x.webp 3x">
+								<img loading="lazy" src="/img/tas/mobile-final-<?php echo $i ?>.webp" height="250" alt="Tiket Apa Saja - Mobile Website - Page <?php echo $i ?>" />
 							</picture>
 						</li>
 					<?php } ?>

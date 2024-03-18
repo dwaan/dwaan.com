@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="detail" class="detail suzuki">
-        <img src="/img/qr/suzuki.svg" width="64" height="64" alt="Dwan - Suzuki Website Redesign" class="print qr" hidden />
+        <img loading="lazy" src="/img/qr/suzuki.svg" width="64" height="64" alt="Dwan - Suzuki Website Redesign" class="print qr" hidden />
         <hr />
 
         <section class="middle full snap">
@@ -46,9 +46,8 @@
             <div class="thumbs">
                 <?php for ($i = 4; $i <= 5; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp 2x, /img/suzuki/suzuki-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -70,9 +69,8 @@
             <div class="thumbs">
                 <?php for ($i = 2; $i <= 9; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp 2x, /img/suzuki/suzuki-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -139,9 +137,8 @@
                         </div>
                     <?php } ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp 2x, /img/suzuki/suzuki-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>
@@ -159,9 +156,8 @@
             <div class="thumbs">
                 <?php for ($i = 1; $i <= 11; $i++) { ?>
                     <picture class="pic-<?php echo $i ?>">
-                        <source media="(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 216dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@3x.webp">
-                        <source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp">
-                        <img src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
+                        <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-<?php echo $i ?>@2x.webp 2x, /img/suzuki/suzuki-<?php echo $i ?>@3x.webp 3x">
+                        <img loading="lazy" src="/img/suzuki/suzuki-<?php echo $i ?>.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page <?php echo $i ?> - by Dwan" />
                     </picture>
                 <?php } ?>
             </div>

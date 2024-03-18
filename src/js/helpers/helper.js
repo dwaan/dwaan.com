@@ -267,6 +267,16 @@ function waitForImg() {
 		}
 	});
 }
+// Async delaiy
+// Parameter:
+// 1. ms: miliseconds to wait
+function delay(ms) {
+	return new Promise(resolve => {
+		setTimeout(async _ => {
+			resolve(true);
+		}, ms);
+	});
+}
 // Splitting text
 function splitText(els) {
 	var addTags = function (el, idx) {
@@ -531,6 +541,7 @@ export {
 	animateNumber,
 	distributeByPosition,
 	waitForImg,
+	delay,
 	splitText,
 	hugeText,
 	animateNumbers,
