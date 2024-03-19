@@ -21,6 +21,6 @@ Information regarding directories structure
 
 ## Side notes
 
-1. Webfont generated from: hhttps://webfont.yabe.land/en/misc/convert-ttf-woff2/
+1. Webfont generated from: https://webfont.yabe.land/en/misc/convert-ttf-woff2/
 2. Article to include webfont: https://css-tricks.com/one-file-many-options-using-variable-fonts-web/
 3. Article for web metadatas: https://css-tricks.com/newsletter/259-how-to-use-variable-fonts/
