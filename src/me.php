@@ -124,8 +124,10 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-					<source media="(min-width: 1024px)" srcset="/img/mrgoat/mrgoat<?php echo $x; ?>@2x.webp 2x">
-					<img loading="lazy" <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" height="200" alt="Mr. Goat" />
+					<picture <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>">
+						<source media="(min-width: 1024px)" srcset="/img/mrgoat/mrgoat<?php echo $x; ?>@2x.webp 2x">
+						<img loading="lazy" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" height="200" alt="Mr. Goat" />
+					</picture>
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">

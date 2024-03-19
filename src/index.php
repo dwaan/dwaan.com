@@ -152,7 +152,7 @@
             <h2 class="hidden">Dwan v1</h2>
             <div class="padding">
                 <a href="https://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
-                    <svg width="66" height="102" viewBox="0 0 33 51" aria-label="Dwan's Logo" class="logo dwan" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="66" height="102" viewBox="0 0 33 51" aria-label="Dwan's Logo" class="logo dwan" xmlns="http://www.w3.org/2000/svg">
                         <use href="/img/dwan-logo.svg#logo"></use>
                     </svg>
                     <small>v1</small>

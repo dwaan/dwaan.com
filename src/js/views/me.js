@@ -393,7 +393,7 @@ var meview = {
 		next.querySelectorAll("#mrgoat").forEach(element => {
 			// Statics
 			var duration = 1;
-			var imgs = element.querySelectorAll(".thumbs > img");
+			var imgs = element.querySelectorAll(".thumbs > picture");
 			var mrgoat = {
 				frame: 1
 			};

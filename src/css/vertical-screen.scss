@@ -1208,10 +1208,11 @@ header {
 		}
 	}
 
+	picture,
 	img {
-		width: 400px;
-		max-width: 65vw;
-		height: auto;
+		width: 400px!important;
+		max-width: 65vw!important;
+		height: auto!important;
 	}
 
 	.thumbs {

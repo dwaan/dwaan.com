@@ -1212,10 +1212,11 @@ header {
 		padding: 0 var(--padx);
 	}
 
+	picture,
 	img {
-		width: auto;
-		height: 400px;
-		max-height: 90vh;
+		width: auto!important;
+		height: 400px!important;
+		max-height: 90vh!important;
 	}
 
 	.arrow {

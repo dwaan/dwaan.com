@@ -980,6 +980,10 @@ header {
 			@include mixins.typography(5.75rem, false, 80%, false, var(--black));
 		}
 
+		&.hidden {
+			display: none;
+		}
+
 		a {
 			display: inline-block;
 			background: inherit;
@@ -2474,13 +2478,13 @@ ol {
 	}
 
 	h2,
-	img {
+	picture {
 		@include mixins.zero-box;
 		position: relative;
 		z-index: 1;
 	}
 
-	img {
+	picture {
 		position: absolute;
 		opacity: 0;
 

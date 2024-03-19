@@ -18,8 +18,8 @@
 
 		<section class="middle">
 			<div class="main-text">
-				<h3 class="hidden print">You can email me at <u>me@dwaan.com</u> or find me in your favourite search engine with this keyword <u>@dwaan</u>.</h3>
-				<h1 hidden>
+				<h1 class="hidden print">You can email me at <u>me@dwaan.com</u> or find me in your favourite search engine with this keyword <u>@dwaan</u>.</h1>
+				<h1 class="text" hidden>
 					<a href="mailto:me@dwaan.com?subject=Hi%20Dwan" data-barba-prevent class="email"><span><small>My email</small>me</span></a>
 					<a href="https://duckduckgo.com/?q=%40dwaan" data-barba-prevent target="BLANK" class="social"><span><small>My social media</small>@</span><span><small>You're here</small>dwaan</span></a>
 					<a href="#" class="website"><span>.com</span></a>
