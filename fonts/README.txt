@@ -1,8 +1,6 @@
 Quicksand Variable Font
 =======================
 
-Webfont generated from: https://fontie.pixelsvsbytes.com/webfont-generator
-
 This download contains Quicksand as both a variable font and static fonts.
 
 Quicksand is a variable font with this axis:

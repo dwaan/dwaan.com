@@ -128,7 +128,7 @@ html {
 
 body,
 html {
-	font-family: fonts.$fontname, sans-serif;
+	font-family: fonts.$fontname, system-ui, -apple-system, sans-serif;
 	letter-spacing: .065rem;
 	font-weight: 500;
 }

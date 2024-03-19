@@ -4,31 +4,10 @@
 
 $fontname: 'Quicksand';
 
-@mixin font($weight, $local1, $local2, $url) {
+@font-face {
 	font-family: $fontname;
-	src: local($local1), local($local2), url($url) format('woff2');
-	font-weight: $weight;
+	src: url(../fonts/Quicksand-VariableFont_wght.woff2) format("woff2 supports variations"),
+		url(../fonts/Quicksand-VariableFont_wght.woff2) format("woff2-variations");
+	font-weight: 100 1000;
 	font-style: normal;
-   font-stretch: normal;
-    unicode-range: U+0020-FB02;
-}
-
-@font-face {
-	@include font(300, $fontname + ' Light', 'Quicksand-Light', "../fonts/Quicksand-Light.woff2");
-}
-
-@font-face {
-	@include font(400, $fontname, 'Quicksand-Regular', "../fonts/Quicksand-Regular.woff2");
-}
-
-@font-face {
-	@include font(500, $fontname + ' Medium', 'Quicksand-Medium', "../fonts/Quicksand-Medium.woff2");
-}
-
-@font-face {
-	@include font(600, $fontname + ' SemiBold', 'Quicksand-SemiBold', "../fonts/Quicksand-SemiBold.woff2");
-}
-
-@font-face {
-	@include font(700, $fontname + ' Bold', 'Quicksand-Bold', "../fonts/Quicksand-Bold.woff2");
 }
