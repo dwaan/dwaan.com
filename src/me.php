@@ -13,7 +13,7 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="me" class="me">
-		<img src="/img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
+		<img loading="lazy" src="/img/qr/me.svg" width="64" height="64" alt="Dwan - About me!" class="print qr" hidden />
 		<hr />
 
 		<section id="about" class="about middle">
@@ -55,7 +55,8 @@
 			</div>
 			<div class="thumbs">
 				<picture hidden>
-					<img src="/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
+					<source media="(min-width: 1024px)" srcset="/img/notpictured@2x.webp 2x">
+					<img loading="lazy" src="/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big" hidden>
@@ -74,11 +75,12 @@
 				</div>
 				<h3>&amp;&nbsp;<br hidden />Before&nbsp;<br hidden /><strong>Web Designer</strong></h3>
 				<p>I did many of things in the past, like becoming Macromedia Flash Expert, Database Programmer, Creative Director, Chief Creative Officer, and Chief Information Officer among others.</p>
-				<p><em>- Not pictured</em></p>
+				<p><em> - Not pictured</em></p>
 			</div>
 			<div class="thumbs">
 				<picture>
-					<img src="/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
+					<source media="(min-width: 1024px)" srcset="/img/notpictured@2x.webp 2x">
+					<img loading="lazy" src="/img/notpictured.webp" height="300" alt="Dwan riding canoe" />
 				</picture>
 			</div>
 			<div class="arrow-big" hidden>
@@ -122,7 +124,8 @@
 			</div>
 			<div class="thumbs">
 				<?php for ($x = 1; $x <= 26; $x++) { ?>
-					<img <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" height="200" alt="Mr. Goat" />
+					<source media="(min-width: 1024px)" srcset="/img/mrgoat/mrgoat<?php echo $x; ?>@2x.webp 2x">
+					<img loading="lazy" <?php if ($x != 6) echo "hidden"; ?> class="mrgoat<?php echo $x; ?>" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" height="200" alt="Mr. Goat" />
 				<?php } ?>
 			</div>
 			<div class="text textoverlay">
@@ -184,8 +187,8 @@
 			</div>
 			<div class="thumbs" hidden>
 				<picture>
-					<source media="(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)" srcset="/img/sagara/sagara@2x.webp">
-					<img src="/img/sagara/sagara.webp" height="200" alt="Sagara" />
+					<source media="(min-width: 1024px)" srcset="/img/sagara/sagara@2x.webp 2x">
+					<img loading="lazy" src="/img/sagara/sagara.webp" height="200" alt="Sagara" />
 				</picture>
 			</div>
 		</section>
