@@ -5,6 +5,7 @@
 	<?php
 	$title = "oh 🦀, me think you lost! 😢";
 	$description = "please go back to dwaan.com, not not sure why is here.";
+	$notfound = true;
 	include_once "part_metacss.php";
 	?>
 </head>

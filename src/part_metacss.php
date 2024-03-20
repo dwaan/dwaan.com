@@ -1,5 +1,7 @@
 <?php if ($title != "Dwan 😙") $title .= " - Dwan 😙"; ?>
 <?php if (!isset($sharepic)) $sharepic = "https://dwaan.com/sharepic.jpg"; ?>
+<?php if (!isset($notfound)) $notfound = false; ?>
+<?php if (!isset($replurk)) $replurk = false; ?>
 
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,6 +17,12 @@
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
 ?>
 	<link rel="stylesheet" media="screen" href="/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
+	<?php if ($notfound) { ?>
+		<link rel="stylesheet" media="screen" href="/css/404.css?<?php echo filemtime('css/404.css') ?>">
+	<?php } ?>
+	<?php if ($replurk) { ?>
+		<link rel="stylesheet" media="screen" href="/css/plurk.css?<?php echo filemtime('css/plurk.css') ?>">
+	<?php } ?>
 	<link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
 	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 	<link rel="stylesheet" media="print" href="/css/print.css?<?php echo filemtime('css/print.css') ?>">

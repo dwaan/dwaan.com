@@ -12,6 +12,7 @@
 
     $title = "RePlurk " . $now;
     $description = "Unofficial Plurk Year End Recap for " . $now;
+	$replurk = true;
     include_once "part_metacss.php";
     ?>
 </head>

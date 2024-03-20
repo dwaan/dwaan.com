@@ -118,7 +118,7 @@ $red: #FF0F1E;
 	a {
 		display: inline-block;
 		text-decoration: none;
-		color: $red  !important;
+		color: $red !important;
 		pointer-events: all;
 	}
 
@@ -168,10 +168,10 @@ $red: #FF0F1E;
 	ul,
 	ol {
 		margin: $pady 0;
+	}
 
-		li {
-			margin: math.div($pady, 3) 0;
-		}
+	li {
+		margin: math.div($pady, 3) 0;
 	}
 
 	a,
@@ -241,9 +241,18 @@ $red: #FF0F1E;
 		.titles {
 			@extend %no-animation;
 
-			>*,
-			ul li,
-			ol li,
+			> h1,
+			> h2,
+			> h3,
+			> h4,
+			> h5,
+			> p,
+			> a,
+			> div,
+			> span,
+			> section,
+			> article,
+			li,
 			picture {
 				@extend %no-animation;
 			}
@@ -252,7 +261,17 @@ $red: #FF0F1E;
 		.text {
 			margin: $pady 0;
 
-			>* {
+			> h1,
+			> h2,
+			> h3,
+			> h4,
+			> h5,
+			> p,
+			> a,
+			> div,
+			> span,
+			> section,
+			> article {
 				margin: 0 $padx $pady 0;
 			}
 		}
@@ -391,80 +410,6 @@ $red: #FF0F1E;
 			}
 		}
 
-
-		&.me {
-
-			picture,
-			img {
-				border: none;
-			}
-
-			.intro,
-			.title {
-				>* {
-					@extend %no-animation;
-				}
-
-				span {
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-
-					hr {
-						width: $padx;
-						border-top: 1px solid $black-50;
-						margin: 0 $padx;
-					}
-				}
-			}
-		}
-
-		.mrgoat {
-			img {
-				opacity: 1 !important;
-			}
-
-			.text {
-				display: flex;
-				flex-direction: column;
-				gap: $pady;
-
-				>div {
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					gap: 5px;
-
-					.dot {
-						background-color: $black-gray;
-						width: 5px;
-						height: 5px;
-						border-radius: 100%;
-					}
-
-					.line {
-						width: $padx;
-						border-top: 1px solid $black-50;
-					}
-
-					&,
-					& p,
-					& a {
-						padding: 0;
-						margin: 0;
-						opacity: 1 !important;
-						transform: none !important;
-					}
-				}
-			}
-		}
-
-		&.hi {
-			h1 {
-				display: none;
-			}
-		}
-
 		>hr:first-child+section,
 		>hr:nth-child(2)+section {
 			display: flex;
@@ -473,6 +418,80 @@ $red: #FF0F1E;
 			justify-content: space-between;
 		}
 	}
+
+	.me {
+
+		picture,
+		img {
+			border: none;
+		}
+
+		.intro,
+		.title {
+			>* {
+				@extend %no-animation;
+			}
+
+			span {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+
+				hr {
+					width: $padx;
+					border-top: 1px solid $black-50;
+					margin: 0 $padx;
+				}
+			}
+		}
+	}
+
+	.mrgoat {
+		img {
+			opacity: 1 !important;
+		}
+
+		.text {
+			display: flex;
+			flex-direction: column;
+			gap: $pady;
+
+			>div {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 5px;
+
+				.dot {
+					background-color: $black-gray;
+					width: 5px;
+					height: 5px;
+					border-radius: 100%;
+				}
+
+				.line {
+					width: $padx;
+					border-top: 1px solid $black-50;
+				}
+
+				&,
+				& p,
+				& a {
+					padding: 0;
+					margin: 0;
+					opacity: 1 !important;
+					transform: none !important;
+				}
+			}
+		}
+	}
+
+	.hi {
+		h1 {
+			display: none;
+		}
+	}
+
 
 	main+main {
 		display: none;
@@ -542,7 +561,7 @@ $red: #FF0F1E;
 		margin: $pady 0;
 
 		>a:first-child {
-			color: $black  !important;
+			color: $black !important;
 			font-weight: 600;
 		}
 

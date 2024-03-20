@@ -394,8 +394,8 @@ class replurk {
             return list;
         },
         title: function (text, style = "", loading = false) {
-            if (loading) this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="loading"><i/></span></h3></div>');
-            else this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle title ' + style + '"><h3><span>' + text + '</span><span class="line"><i/></span></h3></div>');
+            if (loading) this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle statistics-title ' + style + '"><h3><span>' + text + '</span><span class="loading"><i/></span></h3></div>');
+            else this.el.insertAdjacentHTML('beforeend', '<div class="statistics middle statistics-title ' + style + '"><h3><span>' + text + '</span><span class="line"><i/></span></h3></div>');
         },
         afterDraw: function (el) {
             var length = reduceMotionFilter(1);
@@ -610,8 +610,8 @@ class replurk {
             }
         },
         wrapper: function (style, text, background) {
-            if (background) return '<div class="statistics middle wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
-            else return '<div class="statistics middle wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Download</small></div></div>';
+            if (background) return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
+            else return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Download</small></div></div>';
         },
         draw: function (style, number, text, background) {
             if (typeof number == "string" || (typeof number == "number" && number > 0)) {
@@ -803,7 +803,7 @@ class replurk {
                 capture.appendChild(text);
 
                 wrapper = document.createElement('div');
-                wrapper.setAttribute('class', 'statistics middle wrap attach ' + id);
+                wrapper.setAttribute('class', 'statistics middle statistics-wrap attach ' + id);
                 wrapper.appendChild(anim);
                 wrapper.appendChild(capture);
 
@@ -1309,7 +1309,7 @@ class replurk {
                 var length = reduceMotionFilter(1);
                 this.prev_count = item;
 
-                if (!this.next.querySelector(".statistics.loading")) {
+                if (!this.next.querySelector(".statistics.statistics-loading")) {
                     this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>");
                 }
 
@@ -1361,7 +1361,7 @@ class replurk {
                 var length = reduceMotionFilter(1);
 
                 if (this.isComplete()) {
-                    var el = this.next.querySelector(".statistics.loading");
+                    var el = this.next.querySelector(".statistics.statistics-loading");
 
                     this.clean = false;
                     gsap.to(el, {

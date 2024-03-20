@@ -8,7 +8,8 @@ const
 	htmlmin = require('gulp-htmlmin'),
 	webpack = require('webpack-stream'),
 	webp = require('gulp-webp'),
-	mode = require('gulp-mode')();
+	mode = require('gulp-mode')(),
+	validator = require('gulp-html');
 
 const siteUrl = 'http://localhost:8080/';
 
@@ -42,6 +43,24 @@ function css() {
 		.pipe(gulp.dest('src/css/cache/'));
 }
 
+function fofcss() {
+	return gulp.src(['src/css/404.scss'])
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
+		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(concat("404.css"))
+		.pipe(mode.development(sourcemaps.write('.')))
+		.pipe(gulp.dest('src/css/cache/'));
+}
+
+function plurkcss() {
+	return gulp.src(['src/css/404.scss'])
+		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
+		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(concat("plurk.css"))
+		.pipe(mode.development(sourcemaps.write('.')))
+		.pipe(gulp.dest('src/css/cache/'));
+}
+
 function css_vertical() {
 	return gulp.src(['src/css/vertical-screen.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
@@ -59,9 +78,7 @@ function css_horizontal() {
 }
 
 function print() {
-	return gulp.src([
-		'src/css/print.scss'
-	])
+	return gulp.src(['src/css/print.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("print.css"))
@@ -133,7 +150,9 @@ exports.default = function () {
 	gulp.watch('gulpfile.js', process.exit);
 
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js);
-	gulp.watch(['src/css/main.scss', 'src/css/404.scss', 'src/css/nojs.scss', 'src/css/plurk.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/main.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/404.scss'], { ignoreInitial: false }, fofcss);
+	gulp.watch(['src/css/plurk.scss'], { ignoreInitial: false }, plurkcss);
 	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print);

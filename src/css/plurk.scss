@@ -273,6 +273,7 @@
     scroll-snap-align: end;
 }
 
+// Start .statistics
 .statistics {
     display: flex;
     padding: calc(2.5 * var(--padl)) 0 calc(5 * var(--padl));
@@ -282,69 +283,6 @@
     min-height: initial;
     transition: background-color .5s ease;
 
-    &.title,
-    &.wrap {
-        padding: 0;
-        margin: calc(var(--padl) / 2);
-    }
-
-    &.wrap {
-        width: var(--box);
-        height: calc(3/2 * var(--box));
-        transition: background-color .5s ease;
-        scroll-snap-align: center;
-    }
-
-    &.title {
-        position: relative;
-        display: flex;
-        height: auto;
-        flex-flow: row;
-        align-items: baseline;
-        font-size: 2rem;
-        color: var(--black);
-        padding-top: var(--padxl);
-        width: calc((var(--box) * var(--repeat)) + (var(--padl) * (var(--repeat) - 1)));
-        scroll-snap-align: none;
-
-        h3 {
-            display: flex;
-            flex-flow: row;
-            align-items: center;
-        }
-
-        span {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .line {
-            flex: 1;
-            height: 1px;
-            margin-left: var(--pads);
-            overflow: hidden;
-            background-color: transparent;
-            border-radius: 1px;
-
-            i {
-                opacity: .5;
-                display: flex;
-                width: 100%;
-                height: 100%;
-                background-color: var(--black-25);
-                border-radius: 1px;
-                transition: background-color .5s ease;
-            }
-        }
-    }
-
-    &.span2 {
-        width: calc((var(--box) * 2) + (var(--padl) * 1));
-    }
-
-    &.span3 {
-        width: calc((var(--box) * 3) + (var(--padl) * 2));
-    }
 
     .anim {
         z-index: 2;
@@ -422,7 +360,7 @@
         }
 
         .text,
-        .post > .meta {
+        .post>.meta {
             img {
                 display: inline-block;
                 border-radius: 0;
@@ -550,6 +488,72 @@
     }
 }
 
+.statistics-title,
+.statistics-wrap {
+    padding: 0;
+    margin: calc(var(--padl) / 2);
+}
+
+.statistics-wrap {
+    width: var(--box);
+    height: calc(3/2 * var(--box));
+    transition: background-color .5s ease;
+    scroll-snap-align: center;
+}
+
+.statistics-title {
+    position: relative;
+    display: flex;
+    height: auto;
+    flex-flow: row;
+    align-items: baseline;
+    font-size: 2rem;
+    color: var(--black);
+    padding-top: var(--padxl);
+    width: calc((var(--box) * var(--repeat)) + (var(--padl) * (var(--repeat) - 1)));
+    scroll-snap-align: none;
+
+    h3 {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+    }
+
+    span {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .line {
+        flex: 1;
+        height: 1px;
+        margin-left: var(--pads);
+        overflow: hidden;
+        background-color: transparent;
+        border-radius: 1px;
+
+        i {
+            opacity: .5;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: var(--black-25);
+            border-radius: 1px;
+            transition: background-color .5s ease;
+        }
+    }
+}
+
+.span2 {
+    width: calc((var(--box) * 2) + (var(--padl) * 1));
+}
+
+.span3 {
+    width: calc((var(--box) * 3) + (var(--padl) * 2));
+}
+
+// End .statistics
+
 .grid {
     .htmlcontent {
         display: flex;
@@ -559,7 +563,7 @@
         justify-content: center;
         margin: auto calc(-1 * var(--padm));
 
-        @media (min-width: 375px) {
+        @media (min-width: mixins.$screen-verysmall) {
             & {
                 margin: auto calc(-.75 * var(--padm));
             }
@@ -590,7 +594,7 @@
     &.emoticons .htmlcontent div:nth-child(10) {
         display: none;
 
-        @media (min-width: 600px) {
+        @media (min-width: mixins.$screen-small) {
             & {
                 display: flex;
             }
@@ -607,52 +611,15 @@
 }
 
 /* Plurk - Statistics - Loading */
+// Start .statistics
 .statistics {
-
-    &.title,
-    &.loading i {
-        display: flex;
-        line-height: 140%;
-        font-size: .6rem;
-        letter-spacing: .1rem;
-    }
-
-    &.loading {
-
-        &,
-        .big {
-            color: var(--white);
-        }
-
-        .big {
-            font-size: 4.5rem;
-        }
-
-        i.month {
-            display: table;
-            margin-bottom: var(--pads);
-        }
-
-        i {
-            text-transform: uppercase;
-        }
-    }
-
-
-    &.title {
-        display: block;
-        align-items: center;
-        text-align: left;
-        color: var(--white);
-    }
 
     .chart {
         flex: 1;
         margin-bottom: var(--padl);
     }
 
-    i,
-    &.loading i {
+    i {
         display: inline-block;
         padding: 4px 8px 2px;
         font-style: normal;
@@ -683,6 +650,44 @@
         }
     }
 }
+
+.statistics-title,
+.statistics-loading i {
+    display: flex;
+    line-height: 140%;
+    font-size: .6rem;
+    letter-spacing: .1rem;
+}
+
+.statistics-loading {
+
+    &,
+    .big {
+        color: var(--white);
+    }
+
+    .big {
+        font-size: 4.5rem;
+    }
+
+    i.month {
+        display: table;
+        margin-bottom: var(--pads);
+    }
+
+    i {
+        text-transform: uppercase;
+    }
+}
+
+.statistics-title {
+    display: block;
+    align-items: center;
+    text-align: left;
+    color: var(--white);
+}
+
+// End .statistics
 
 /* Plurk - Statistics - Spesific Style */
 .postcontent {
@@ -1703,12 +1708,12 @@
         --repeat: 2;
         --box: 40vw;
 
-        @media (min-width: 500px) {
+        @media (min-width: mixins.$screen-small) {
             --repeat: 2;
             --box: 38.5vw;
         }
 
-        @media (min-width: 1000px) {
+        @media (min-width: mixins.$screen-abitwide) {
             --repeat: 3;
             --box: 25vw;
         }
@@ -1752,7 +1757,7 @@
         font-size: 4rem;
         letter-spacing: -.4rem;
 
-        @media (min-width: 1440px) {
+        @media (min-width: mixins.$screen-verywide) {
             font-size: 5rem;
             letter-spacing: -.5rem;
         }
@@ -1808,7 +1813,7 @@
         }
     }
 
-    @media (min-width: 1800px) {
+    @media (min-width: mixins.$screen-ultrawide) {
         .statistics .chart {
             margin-bottom: var(--padxl);
         }
@@ -1826,7 +1831,7 @@
         }
     }
 
-    @media (max-width: 790px) {
+    @media (max-width: mixins.$screen-medium) {
         #credits {
             padding: var(--pady) var(--padx) !important;
 
@@ -1859,7 +1864,7 @@
         }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: mixins.$screen-small) {
         #credits p {
             margin: 4px 0;
 
@@ -1880,32 +1885,32 @@
     }
 
     /* order */
-    @media (min-width: 500px) {
-        .statistics.posted {
+    @media (min-width: mixins.$screen-small) {
+        .posted {
             order: 5;
         }
 
-        .statistics.responded {
+        .responded {
             order: 3;
         }
     }
 
-    @media (min-width: 1000px) {
-        .statistics.posted {
+    @media (min-width: mixins.$screen-abitwide) {
+        .posted {
             order: 3;
         }
 
-        .statistics.responded {
+        .responded {
             order: 5;
         }
     }
 
     @media (max-width: 1100px) {
-        .statistics.wrap {
+        .wrap {
             height: calc(var(--box) * 1.85);
         }
 
-        .statistics.sharedlinks .post {
+        .sharedlinks .post {
             font-size: .65rem;
         }
     }
@@ -1918,7 +1923,7 @@
         --repeat: 1;
         --box: 80vw;
 
-        @media (min-width: 600px) {
+        @media (min-width: mixins.$screen-small) {
             --repeat: 2;
             --box: 40vw;
         }
@@ -1950,7 +1955,7 @@
     #hello {
         justify-content: flex-end;
 
-        @media (min-width: 600px) {
+        @media (min-width: mixins.$screen-small) {
             justify-content: center;
         }
 
@@ -1964,7 +1969,7 @@
             font-size: 3rem;
             line-height: 100%;
 
-            @media (min-width: 600px) {
+            @media (min-width: mixins.$screen-small) {
                 font-size: 4rem;
             }
 
@@ -1972,7 +1977,7 @@
                 font-size: 2.5rem;
             }
 
-            @media (max-width: 360px) {
+            @media (max-width: 375px) {
                 font-size: 2rem;
             }
         }
@@ -1984,7 +1989,7 @@
                 margin-bottom: calc(-1 * var(--padxxl));
             }
 
-            @media (max-width: 360px) {
+            @media (max-width: 375px) {
                 margin-top: var(--padm);
             }
         }
@@ -2008,16 +2013,16 @@
                 line-height: 100%;
             }
 
-            @media (max-width: 370px) {
+            @media (max-width: 375px) {
                 font-size: 2.5rem;
             }
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: mixins.$screen-small) {
             padding: calc(2 * var(--pady)) var(--padx) var(--pady);
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: mixins.$screen-verysmall) {
 
             li {
                 padding-top: var(--pads);
@@ -2037,7 +2042,7 @@
             }
         }
 
-        @media (max-width: 370px) {
+        @media (max-width: 375px) {
 
             form {
                 padding: var(--padm);
@@ -2046,52 +2051,53 @@
 
     }
 
-    .statistics {
-        &.wrap {
-            height: calc(1.35 * var(--box));
+    // statistics
+    .wrap {
+        height: calc(1.35 * var(--box));
 
-            &.span2 {
-                height: calc(1.5 * var(--box));
-            }
+        &.span2 {
+            height: calc(1.5 * var(--box));
+        }
 
-            &.bubble,
+        &.bubble,
+        &.hashtags {
+            height: calc(1.5 * var(--box));
+        }
+
+        &.mediumnumber {
+            height: calc(1.25 * var(--box));
+        }
+
+        @media (max-width: 600px) {
             &.hashtags {
-                height: calc(1.5 * var(--box));
-            }
-
-            &.mediumnumber {
                 height: calc(1.25 * var(--box));
             }
+        }
 
-            @media (max-width: 600px) {
-                &.hashtags {
-                    height: calc(1.25 * var(--box));
-                }
+        @media (max-width: 375px) {
+            &.bubble {
+                height: calc(1.75 * var(--box));
             }
 
-            @media (max-width: 375px) {
-                &.bubble {
-                    height: calc(1.75 * var(--box));
-                }
-
-                &.sharedlinks {
-                    height: calc(1.5 * var(--box));
-                }
+            &.sharedlinks {
+                height: calc(1.5 * var(--box));
             }
         }
+    }
 
-        &.center .big {
-            margin-top: var(--padm);
-        }
+    .center .big {
+        margin-top: var(--padm);
+    }
 
-        &.mediumnumber .big {
-            font-size: 14vw;
-        }
+    .mediumnumber .big {
+        font-size: 14vw;
+    }
 
-        &.largenumber .big {
-            font-size: 12vw;
-        }
+    .largenumber .big {
+        font-size: 12vw;
+    }
 
+    .statistics {
         .big {
             font-size: 20vw;
             letter-spacing: -.05rem;
@@ -2110,7 +2116,7 @@
             margin: var(--padm) 0;
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: mixins.$screen-small) {
 
             .big,
             &.span2.mediumnumber .big,
@@ -2163,7 +2169,6 @@
                 display: flex;
                 margin-right: var(--pads);
             }
-
         }
 
     }
@@ -2244,15 +2249,13 @@
     }
 
     /* order */
-    @media (min-width: 600px) {
-        .statistics {
-            &.posted {
-                order: 5;
-            }
+    @media (min-width: mixins.$screen-small) {
+        .posted {
+            order: 5;
+        }
 
-            &.responded {
-                order: 3;
-            }
+        .responded {
+            order: 3;
         }
     }
 }
