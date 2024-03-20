@@ -1429,14 +1429,21 @@ header {
 		margin: 0;
 	}
 
+	// aspect ratio 144:90
 	picture {
 		flex: 0 0 30vw;
 		align-self: auto;
 		z-index: 1;
+		overflow: clip;
 
 		&:nth-child(2) {
 			z-index: 2;
 			flex: 0 0 70vw;
+		}
+
+		img {
+			object-fit: cover;
+			object-position: center top;
 		}
 	}
 }

@@ -267,6 +267,22 @@ function waitForImg() {
 		}
 	});
 }
+// Detect if image is loaded
+function imgLoadedEvent(callback) {
+	var els = document.querySelectorAll("img");
+
+	els.forEach(el => {
+		// When loaded report it as a progress
+		if (el.complete) {
+			if (callback) callback(el);
+		} else {
+			el.addEventListener("load", _ => {
+				if (callback) callback(el);
+			});
+		}
+
+	});
+}
 // Async delaiy
 // Parameter:
 // 1. ms: miliseconds to wait
@@ -541,6 +557,7 @@ export {
 	animateNumber,
 	distributeByPosition,
 	waitForImg,
+	imgLoadedEvent,
 	delay,
 	splitText,
 	hugeText,

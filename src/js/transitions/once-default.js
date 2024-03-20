@@ -16,7 +16,7 @@ let transition_once_default = {
         loader.init();
 
         // Delay animation to ease resource
-        // await delay(750);
+        await delay(500);
 
         // Loading logic
         await loader.show(next);

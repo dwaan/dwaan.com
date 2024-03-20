@@ -1,7 +1,7 @@
 "use strict";
 
-import gsap from 'gsap';
-import { _q, _qAll, waitForImg, reduceMotionFilter } from './helper';
+import { gsap, ScrollTrigger } from 'gsap/all';
+import { _q, _qAll, waitForImg, reduceMotionFilter, imgLoadedEvent } from './helper';
 
 // Loader functions
 var loader = {
@@ -41,7 +41,18 @@ var loader = {
 		});
 	},
 	show: async function (els) {
-		if (this.disableLoading) return;
+		if (this.disableLoading) {
+			var timeoutfinal;
+			imgLoadedEvent(obj => {
+				// console.log(obj);
+				// No need to do it often, only at the end
+				timeoutfinal = setTimeout(_ => {
+					ScrollTrigger.refresh();
+				}, 1000);
+			});
+
+			return;
+		}
 
 		// Wait for all images to be loaded
 		let _percent = { score: 0 };
