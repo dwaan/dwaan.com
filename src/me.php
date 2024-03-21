@@ -184,7 +184,7 @@
 		<section id="cofound" class="cofound middle clip snap-bottom">
 			<div class="text">
 				<h2>and <?php echo date("Y") - 2010; ?> Years Ago</h2>
-				<p>My friend and I decide to create Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner right now.</p>
+				<p>My friend and I decide to build Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner and mentor.</p>
 				<a href="http://sagara.id" class="spring" data-barba-prevent target="BLANK" rel='noopener noreferrer'>More about sagara.id</a>
 			</div>
 			<div class="thumbs" hidden>

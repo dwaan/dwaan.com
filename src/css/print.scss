@@ -241,17 +241,17 @@ $red: #FF0F1E;
 		.titles {
 			@extend %no-animation;
 
-			> h1,
-			> h2,
-			> h3,
-			> h4,
-			> h5,
-			> p,
-			> a,
-			> div,
-			> span,
-			> section,
-			> article,
+			>h1,
+			>h2,
+			>h3,
+			>h4,
+			>h5,
+			>p,
+			>a,
+			>div,
+			>span,
+			>section,
+			>article,
 			li,
 			picture {
 				@extend %no-animation;
@@ -261,17 +261,17 @@ $red: #FF0F1E;
 		.text {
 			margin: $pady 0;
 
-			> h1,
-			> h2,
-			> h3,
-			> h4,
-			> h5,
-			> p,
-			> a,
-			> div,
-			> span,
-			> section,
-			> article {
+			>h1,
+			>h2,
+			>h3,
+			>h4,
+			>h5,
+			>p,
+			>a,
+			>div,
+			>span,
+			>section,
+			>article {
 				margin: 0 $padx $pady 0;
 			}
 		}
@@ -281,6 +281,10 @@ $red: #FF0F1E;
 			flex-direction: row;
 			flex-wrap: wrap;
 			gap: $pady;
+
+			img {
+				max-width: calc(100vw - (2 * $padx));
+			}
 		}
 
 		.style-column {

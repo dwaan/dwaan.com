@@ -900,6 +900,11 @@ header {
 	}
 }
 
+/* Style slideshow */
+.style-slideshow {
+	padding: 0
+}
+
 /* Style staggered content */
 .style-staggered {
 	@extend %style-spread;
@@ -1235,10 +1240,10 @@ header {
 	}
 
 	picture,
-	img {
-		width: auto !important;
-		height: 400px !important;
-		max-height: 90vh !important;
+	picture img {
+		width: auto;
+		height: 400px;
+		max-height: 90vh;
 	}
 
 	.arrow {

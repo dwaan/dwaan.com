@@ -43,8 +43,7 @@ var loader = {
 	show: async function (els) {
 		if (this.disableLoading) {
 			var timeoutfinal;
-			imgLoadedEvent(obj => {
-				// console.log(obj);
+			imgLoadedEvent(_ => {
 				// No need to do it often, only at the end
 				timeoutfinal = setTimeout(_ => {
 					ScrollTrigger.refresh();

@@ -580,12 +580,16 @@ header {
 			width: 20px;
 		}
 
-		>* {
-			margin: 0 !important;
+		>a,
+		>div,
+		>span,
+		>section,
+		>article {
+			margin: 0;
 		}
 
 		>.meta {
-			margin: var(--padm) 0 0 !important;
+			margin-left: var(--padm);
 		}
 
 	}
@@ -603,6 +607,7 @@ header {
 		flex-flow: row wrap;
 		width: calc((var(--pic-w) * 4) + (var(--pic-m) * 8));
 		padding-bottom: calc(var(--pic-m) * 4);
+		margin-left: -50vw;
 		transform: rotate(-5deg);
 	}
 
@@ -614,6 +619,7 @@ header {
 	}
 
 	.text {
+		justify-content: center;
 		padding: var(--pic-m);
 	}
 }
@@ -703,7 +709,6 @@ header {
 		gap: calc(var(--pady) / 2);
 
 		@media screen and (min-width: mixins.$screen-verysmall) {
-			width: unset;
 			flex: 1;
 		}
 
@@ -761,14 +766,17 @@ header {
 	}
 
 	picture {
-		width: var(--pic-w);
+		transform: rotate(-5deg);
+	}
+
+	picture,
+	picture img {
+		width: calc(.65 * var(--pic-w));
 		height: auto;
 		margin: 0;
-		transform: rotate(-5deg);
 
-		@media screen and (min-height: mixins.$screen-small) {
+		@media screen and (min-height: mixins.$screen-medium) {
 			width: calc(1.5 * var(--pic-w));
-			height: auto;
 		}
 	}
 }
@@ -828,6 +836,7 @@ header {
 
 /* Style slideshow */
 .style-slideshow {
+	padding: 0;
 
 	&,
 	.thumbs,
@@ -874,9 +883,10 @@ header {
 }
 
 .style-slideshow-small {
-	picture {
+
+	picture,
+	picture img {
 		width: calc((100vw - (3 * var(--padx))) / 2);
-		/*transform: none;*/
 	}
 
 	li {
@@ -1231,10 +1241,10 @@ header {
 	}
 
 	picture,
-	img {
-		width: 400px !important;
-		max-width: 65vw !important;
-		height: auto !important;
+	picture img {
+		width: 400px;
+		max-width: 65vw;
+		height: auto;
 	}
 
 	.thumbs {

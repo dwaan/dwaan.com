@@ -120,19 +120,15 @@
 }
 
 
-/* Defining the font size based on aspect ratio */
-html {
-	line-height: 150%;
-	letter-spacing: 0.02em;
-	color: var(--black);
-	background-color: var(--white);
-}
-
 body,
 html {
 	font-family: fonts.$fontname, system-ui, -apple-system, sans-serif;
 	letter-spacing: .065rem;
 	font-weight: 500;
+	line-height: 150%;
+	letter-spacing: 0.02em;
+	color: var(--black);
+	background-color: var(--white);
 }
 
 /* Common styles */
@@ -267,8 +263,8 @@ img {
 picture {
 	img {
 		display: block;
-		width: 100% !important;
-		height: auto !important;
+		width: 100%;
+		height: auto;
 	}
 }
 
@@ -302,7 +298,7 @@ picture {
 	header,
 	main,
 	#barba-wrapper {
-		display: none !important;
+		display: none;
 	}
 
 	.support {
@@ -407,6 +403,7 @@ picture {
 .empty {
 	display: none;
 }
+
 // 3nd .middle
 
 .spring {
@@ -1716,7 +1713,6 @@ header {
 .style-slideshow {
 	display: block;
 	height: 100vh;
-	padding: 0 !important;
 	justify-content: flex-start;
 	overflow: clip;
 
@@ -1741,7 +1737,8 @@ header {
 		right: calc(50vw - 32.5vw - 100px);
 	}
 
-	picture {
+	picture,
+	picture img {
 		width: 65vw;
 	}
 
@@ -2367,7 +2364,7 @@ ol {
 
 #usedto {
 	z-index: 2;
-	padding: 0 !important;
+	padding: 0;
 
 	.anim {
 		min-width: initial;
@@ -2428,7 +2425,7 @@ ol {
 	}
 
 	img {
-		@include mixins.block(absolute, 50%, 50%, auto !important, 100% !important);
+		@include mixins.block(absolute, 50%, 50%, auto, 100%);
 		transform: translate(-50%, -50%);
 	}
 }
@@ -2746,10 +2743,10 @@ ol {
 
 		&,
 		img {
-			width: auto !important;
-			height: auto !important;
-			min-width: 100% !important;
-			min-height: 100% !important;
+			width: auto;
+			height: auto;
+			min-width: 100%;
+			min-height: 100%;
 		}
 	}
 

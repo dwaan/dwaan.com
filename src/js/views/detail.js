@@ -654,7 +654,6 @@ var detailview = {
 						var yplus = gsap.utils.random(250, 750, 25),
 							y = 25;
 
-						if (index == 3) yplus = 0;
 						if (index % 2 == 0) y = -25;
 
 						tl.fromTo(el.querySelectorAll(".thumbs > *:nth-child(4n+" + index + ")"), {
@@ -674,38 +673,6 @@ var detailview = {
 						scrub: reduceMotionFilter() ? true : .75,
 						animation: tl
 					});
-				});
-
-				// Scroll left
-				scroll.push(tl => {
-					tl.fromTo(thumbs, {
-						x: 0,
-					}, {
-						x: -50,
-						ease: "linear"
-					}, 0);
-
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "-25% 100%",
-						end: "100% 50%",
-						scrub: reduceMotionFilter() ? true : true,
-						animation: tl
-					});
-				});
-
-				// Move text
-				scroll.moveText({
-					delta: 25,
-					elements: alltext,
-					position: "75%"
-				});
-
-				// Move masonry
-				scroll.moveText({
-					elements: thumbs
 				});
 			});
 			screen.add("(min-aspect-ratio: 1/1)", () => {
