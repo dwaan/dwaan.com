@@ -16,13 +16,16 @@ let transition_once_default = {
         loader.init();
 
         // Delay animation to ease resource
-        await delay(500);
+        await delay(250);
 
         // Loading logic
         await loader.show(next);
 
         // Initialized header
         header.init();
+
+        // Delay animation to ease resource
+        await delay(500);
 
         // Animate current view and header
         if (data.next.namespace == "lost") await animate.show404(next);

@@ -13,7 +13,7 @@
     <?php include_once "part_head.php" ?>
 
     <main data-barba="container" data-barba-namespace="home" class="home">
-        <img src="/img/qr/home.svg" width="64" height="64" alt="Dwan - Homepage" class="print qr" hidden />
+        <img src="/img/qr/home.svg" width="64" height="64" alt="Dwan - Homepage QR Code" class="print qr" hidden />
         <div id="flarestart"></div>
 
         <hr />

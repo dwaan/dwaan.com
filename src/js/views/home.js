@@ -16,20 +16,18 @@ let homeview = {
 
 		// Insert flares
 		var htmls = "";
-		for (var i = 1; i <= 5; i++) {
-			htmls += '<img src="/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
-		}
+		for (var i = 1; i <= 5; i++) htmls += '<img src="/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
 		data.next.container.querySelector("#flares").innerHTML = htmls;
-		// Hover "Dwan" in main text
+		// Hover "Dwan" to show flare in main text
 		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
 
 		// Scroll text
 		var screen = gsap.matchMedia();
 		var els = next.querySelectorAll("section.middle");
-		var elsMainText = next.querySelectorAll("section.middle .main-text, .padding");
 		// Vertical screen
+		var contentHeroText = next.querySelectorAll("section.middle .main-text, .padding");
 		screen.add("(max-aspect-ratio: 1/1)", () => {
-			gsap.set(elsMainText, {
+			gsap.set(contentHeroText, {
 				position: "relative",
 				pointerEvents: "auto",
 				opacity: 1,
@@ -37,8 +35,8 @@ let homeview = {
 				y: "0%"
 			});
 		});
+		// Horizontal screen
 		els.forEach((el, idx) => {
-			// Horizontal screen
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				// Background slide version
 				gsap.set(el, {
@@ -47,18 +45,18 @@ let homeview = {
 
 				scroll.push(tl => {
 					var length = reduceMotionFilter(1);
-					var content = el.querySelectorAll(".main-text, .padding");
-					var cover = el.querySelectorAll(".cover");
+					var contentLogos = el.querySelectorAll(".main-text, .padding");
+					var contentShade = el.querySelectorAll(".cover");
 
-					tl.fromTo(content, {
-						y: idx == 0 ? 0 : window.innerHeight * -5 / 6
+					tl.fromTo(contentLogos, {
+						marginTop: idx == 0 ? 0 : window.innerHeight * -1.25
 					}, {
-						y: 0,
+						marginTop: 0,
 						ease: "linear",
 						duration: length
 					}, 0);
 
-					tl.fromTo(cover, {
+					tl.fromTo(contentShade, {
 						opacity: idx == 0 ? 0 : 1,
 					}, {
 						opacity: 0,
@@ -66,8 +64,8 @@ let homeview = {
 						duration: length
 					}, 0);
 
-					tl.to([content, cover], {
-						y: idx == els.length ? 0 : window.innerHeight * 1 / 6,
+					tl.to(contentShade, {
+						marginTop: idx == els.length ? 0 : window.innerHeight * 1 / 6,
 						ease: "linear",
 						duration: length
 					}, length);
@@ -83,24 +81,6 @@ let homeview = {
 			});
 			// Snap
 			scroll.snap(el);
-		});
-
-		// Disable for now
-		var links = next.querySelectorAll(".home-disable a");
-		links.forEach(el => {
-			el.addEventListener("click", async e => {
-				e.preventDefault();
-
-				header.hide()
-				await animate.hide(next, next.querySelectorAll(".home-old .dwantitle, .arrow"), false);
-				gsap.to(_q("body"), {
-					backgroundColor: "#2a3233",
-					duration: .5,
-					onComplete: () => {
-						window.location = el.href;
-					}
-				});
-			});
 		});
 	},
 	afterEnter: () => {

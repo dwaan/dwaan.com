@@ -42,7 +42,7 @@ var loader = {
 	},
 	show: async function (els) {
 		if (this.disableLoading) {
-			var timeoutfinal;
+			var timeoutfinal = false;
 			imgLoadedEvent(_ => {
 				// No need to do it often, only at the end
 				timeoutfinal = setTimeout(_ => {
