@@ -47,17 +47,9 @@ let homeview = {
 						top: 0,
 						y: window.innerHeight * 1 / 3
 					}, {
-						position: "fixed",
-						top: 0,
 						y: 0,
 						ease: "linear",
-						duration: length,
-						onComplete: _ => {
-							gsap.set(contentLogos, {
-								position: "",
-								top: 0
-							});
-						}
+						duration: length
 					}, 0);
 
 					tl.fromTo(contentShade, {
@@ -67,6 +59,10 @@ let homeview = {
 						ease: "expo.in",
 						duration: length
 					}, 0);
+
+					tl.set(contentLogos, {
+						position: "relative"
+					}, length);
 
 					tl.to(contentShade, {
 						y: idx == els.length ? 0 : window.innerHeight * 1 / 6,

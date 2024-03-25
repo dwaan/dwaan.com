@@ -144,46 +144,46 @@ header {
 
 // end .middle
 
-.home-aai.middle,
+.home-aai,
 .aai .middle {
 	img.logo {
 		max-height: 6vh;
 	}
 }
 
-.home-musiku.middle,
+.home-musiku,
 .musiku .middle {
 	img.logo {
 		max-height: 3.5vh;
 	}
 }
 
-.home-suzuki.middle,
+.home-suzuki,
 .suzuki .middle {
 	img.logo {
 		max-height: 14vh;
 	}
 }
 
-.home-tas.middle,
+.home-tas,
 .tas .middle {
 	img.logo {
 		max-height: 6vh;
 	}
 }
 
-.home-old.middle {
+.home-v1 {
 	svg {
 		max-height: 10vh;
 	}
 }
 
 .horizontal {
-	display: none !important;
+	display: none;
 }
 
 .vertical {
-	display: block !important;
+	display: block;
 }
 
 
@@ -296,10 +296,8 @@ header {
 
 /* Background flare */
 .flares {
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
+	@include mixins.make-it-full-size;
+	@include mixins.position;
 
 	img {
 		height: 75vh;

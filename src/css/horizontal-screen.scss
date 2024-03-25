@@ -92,11 +92,11 @@ header {
 
 
 .horizontal {
-	display: block !important;
+	display: block;
 }
 
 .vertical {
-	display: none !important;
+	display: none;
 }
 
 
@@ -128,9 +128,8 @@ header {
 
 /* Homepage listing item */
 .padding {
+	@include mixins.make-it-full-size;
 	padding: 0 calc(2 * var(--padx));
-	width: 100vw;
-	height: 100vh;
 
 	a,
 	span,
@@ -242,10 +241,9 @@ header {
 
 /* Background flare */
 .flares {
+	@include mixins.make-it-full-size;
 	top: 0;
 	left: 0;
-	width: 100vw;
-	height: 100vh;
 
 	img {
 		width: 100vw;
@@ -256,35 +254,31 @@ header {
 
 /* Home style */
 .home {
-	.middle {
 
-		&:before,
-		.cover {
-			content: "";
-			display: block;
-			position: absolute;
-			top: initial;
-			left: 0;
-			bottom: 0;
-			width: 100vw;
-			height: 100vh;
-			background-color: var(--white);
-			pointer-events: none;
-		}
+	.cover,
+	.middle:before {
+		@include mixins.make-it-block;
+		@include mixins.make-it-full-size;
+		position: absolute;
+		top: initial;
+		left: 0;
+		bottom: 0;
+		background-color: var(--white);
+		pointer-events: none;
+	}
 
-		.flares {
-			position: absolute;
-			z-index: 1;
-		}
+	.cover {
+		background-color: var(--black-25);
+	}
 
-		.main-text,
-		.padding {
-			z-index: 2;
-		}
+	.flares {
+		position: absolute;
+		z-index: 1;
+	}
 
-		.cover {
-			background-color: var(--black-25);
-		}
+	.main-text,
+	.padding {
+		z-index: 2;
 	}
 }
 

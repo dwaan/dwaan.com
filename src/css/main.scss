@@ -374,9 +374,8 @@ picture {
 
 
 .middle {
+	@include mixins.make-it-full-size;
 	display: block;
-	width: 100vw;
-	height: 100vh;
 	scroll-snap-align: center;
 }
 
@@ -1509,18 +1508,16 @@ header {
 	}
 
 	.thumbs {
+		@include mixins.make-it-full-size;
 		z-index: 1;
 		position: absolute;
-		width: 100vw;
-		height: 100vh;
 		display: block;
 		justify-content: center;
 		align-items: center;
 		pointer-events: none;
 
 		img {
-			width: 100vw;
-			height: 100vh;
+			@include mixins.make-it-full-size;
 			object-fit: cover;
 			opacity: .35;
 		}

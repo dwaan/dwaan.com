@@ -154,7 +154,7 @@
 
         <hr />
 
-        <section class="middle full home-old">
+        <section class="middle full home-v1">
             <h2 class="hidden">Dwan v1</h2>
             <div class="padding">
                 <a href="https://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
