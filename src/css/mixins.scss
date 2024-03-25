@@ -19,7 +19,7 @@ $screen-verysmall: 400px;
 	content: "";
 }
 
-@mixin zero-box() {
+@mixin zero-margin-padding() {
 	margin: 0;
 	padding: 0;
 }

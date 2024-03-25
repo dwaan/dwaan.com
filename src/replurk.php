@@ -19,7 +19,7 @@
 
         <section class="middle full snap">
             <div class="padding">
-                <h2 class="plurktitle">RePlurk</h2>
+                <h2 class="replurktitle">RePlurk</h2>
             </div>
             <h4 class="year">/2022</h4>
             <div class="arrow-big">

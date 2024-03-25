@@ -4,8 +4,6 @@ import { gsap, ScrollTrigger } from 'gsap/all';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
 import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
-import animate from '../helpers/animate.js';
-import header from '../helpers/header.js';
 
 let homeview = {
 	namespace: 'home',
@@ -14,10 +12,6 @@ let homeview = {
 
 		document.body.style.overflow = "hidden";
 
-		// Insert flares
-		var htmls = "";
-		for (var i = 1; i <= 5; i++) htmls += '<img src="/img/flares/flare' + i + '.webp" width="auto" height="auto" alt="Dwan\'s flare number' + i + '" class="flare flare' + i + '" />';
-		data.next.container.querySelector("#flares").innerHTML = htmls;
 		// Hover "Dwan" to show flare in main text
 		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
 
@@ -45,19 +39,29 @@ let homeview = {
 
 				scroll.push(tl => {
 					var length = reduceMotionFilter(1);
-					var contentLogos = el.querySelectorAll(".main-text, .padding");
+					var contentLogos = el.querySelectorAll(".padding");
 					var contentShade = el.querySelectorAll(".cover");
 
 					tl.fromTo(contentLogos, {
-						marginTop: idx == 0 ? 0 : window.innerHeight * -1.25
+						position: "fixed",
+						top: 0,
+						y: window.innerHeight * 1 / 3
 					}, {
-						marginTop: 0,
+						position: "fixed",
+						top: 0,
+						y: 0,
 						ease: "linear",
-						duration: length
+						duration: length,
+						onComplete: _ => {
+							gsap.set(contentLogos, {
+								position: "",
+								top: 0
+							});
+						}
 					}, 0);
 
 					tl.fromTo(contentShade, {
-						opacity: idx == 0 ? 0 : 1,
+						opacity: 1,
 					}, {
 						opacity: 0,
 						ease: "expo.in",
@@ -65,7 +69,7 @@ let homeview = {
 					}, 0);
 
 					tl.to(contentShade, {
-						marginTop: idx == els.length ? 0 : window.innerHeight * 1 / 6,
+						y: idx == els.length ? 0 : window.innerHeight * 1 / 6,
 						ease: "linear",
 						duration: length
 					}, length);

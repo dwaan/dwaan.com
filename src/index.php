@@ -19,7 +19,13 @@
         <hr />
 
         <section class="middle full">
-            <div id="flares" class="flares"></div>
+            <div id="flares" class="flares" hidden>
+                <img src="/img/flares/flare1.webp" width="auto" height="auto" alt="Dwan\'s flare number1" class="flare flare1" />
+                <img src="/img/flares/flare2.webp" width="auto" height="auto" alt="Dwan\'s flare number2" class="flare flare2" />
+                <img src="/img/flares/flare3.webp" width="auto" height="auto" alt="Dwan\'s flare number3" class="flare flare3" />
+                <img src="/img/flares/flare4.webp" width="auto" height="auto" alt="Dwan\'s flare number4" class="flare flare4" />
+                <img src="/img/flares/flare5.webp" width="auto" height="auto" alt="Dwan\'s flare number5" class="flare flare5" />
+            </div>
             <div class="main-text">
                 <h1>Hello, my name is <a href="./me" id="to-about">Dwan</a></h1>
                 <p class="hidden">I'm an UI/UX Designer and Strategist. Here are some of my design portfolio 😙.</p>
@@ -97,7 +103,7 @@
 
         <section class="middle full home-replurk">
             <div class="padding">
-                <h2 class="plurktitle"><a href="./replurk" aria-label="RePlurk">RePlurk</a></h2>
+                <h2 class="replurktitle"><a href="./replurk" aria-label="RePlurk">RePlurk</a></h2>
             </div>
             <div class="arrow-small">
                 <a href="./replurk" class="arrow">

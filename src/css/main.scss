@@ -9,8 +9,8 @@
 	transition: color .5s ease;
 }
 
-%zero-box-will-change {
-	@include mixins.zero-box;
+%zero-margin-padding-will-change {
+	@include mixins.zero-margin-padding;
 	will-change: opacity, transform;
 }
 
@@ -145,7 +145,7 @@ main {
 }
 
 h1 {
-	@extend %zero-box-will-change;
+	@extend %zero-margin-padding-will-change;
 	@extend %transition;
 	@extend %bold-child-initial-transiton;
 	margin: 0 0 var(--padl) 0;
@@ -153,7 +153,7 @@ h1 {
 }
 
 h2 {
-	@extend %zero-box-will-change;
+	@extend %zero-margin-padding-will-change;
 	@extend %transition;
 	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
@@ -162,7 +162,7 @@ h2 {
 }
 
 h3 {
-	@extend %zero-box-will-change;
+	@extend %zero-margin-padding-will-change;
 	@extend %transition;
 	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
@@ -171,7 +171,7 @@ h3 {
 }
 
 h4 {
-	@extend %zero-box-will-change;
+	@extend %zero-margin-padding-will-change;
 	@extend %transition;
 	@extend %bold-child-initial-transiton;
 	@extend %gray-color;
@@ -180,7 +180,7 @@ h4 {
 }
 
 p {
-	@extend %zero-box-will-change;
+	@extend %zero-margin-padding-will-change;
 	@extend %transition;
 	@extend %gray-color;
 	@include mixins.typography(1rem, 500, 175%, .02em);
@@ -241,7 +241,7 @@ video {
 /* Remove default fieldset styles */
 fieldset {
 	border: 0;
-	@include mixins.zero-box;
+	@include mixins.zero-margin-padding;
 }
 
 /* Allow only vertical resizing of textareas. */
@@ -611,7 +611,7 @@ picture {
 .year {
 	position: fixed;
 	display: flex;
-	@include mixins.zero-box;
+	@include mixins.zero-margin-padding;
 	align-items: flex-end;
 	text-align: right;
 	color: var(--black);
@@ -817,7 +817,7 @@ header {
 	}
 
 	ol {
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 		display: flex;
 		width: 100%;
 		flex-direction: column;
@@ -863,7 +863,7 @@ header {
 		}
 
 		&:last-child {
-			@include mixins.zero-box;
+			@include mixins.zero-margin-padding;
 			height: auto;
 
 			p {
@@ -963,7 +963,7 @@ header {
 /* Split text style */
 .splord,
 .splext {
-	@include mixins.zero-box;
+	@include mixins.zero-margin-padding;
 	display: inline-block;
 }
 
@@ -1072,6 +1072,9 @@ header {
 
 /* Homepage listing item */
 .padding {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	a,
 	span {
@@ -1079,8 +1082,8 @@ header {
 		justify-content: center;
 	}
 
-	.plurktitle {
-		height: auto !important;
+	.replurktitle {
+		height: auto;
 		line-height: 90%;
 		letter-spacing: -.24rem;
 		text-align: center;
@@ -1088,8 +1091,8 @@ header {
 		margin-bottom: var(--pads);
 	}
 
-	.plurksubtitle {
-		height: auto !important;
+	.replurksubtitle {
+		height: auto;
 		@include mixins.typography(1.6rem, 300);
 		text-align: center;
 
@@ -1104,7 +1107,7 @@ header {
 	sub,
 	sup {
 		@include mixins.typography(5rem, 600);
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 	}
 
 	sub,
@@ -2186,7 +2189,7 @@ ol {
 	&.zero {
 		display: flex;
 		width: 100%;
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 
 		li {
 			position: relative;
@@ -2216,7 +2219,7 @@ ol {
 	&.flat {
 		display: flex;
 		list-style: none;
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 		flex-flow: row nowrap;
 	}
 
@@ -2224,7 +2227,7 @@ ol {
 	&.bland {
 		display: flex;
 		list-style: none;
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 		flex-flow: column nowrap;
 	}
 
@@ -2253,7 +2256,7 @@ ol {
 
 .menu-page {
 	.menu {
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 		height: 100vh;
 		border-bottom: none !important;
 
@@ -2463,7 +2466,7 @@ ol {
 
 	h2,
 	picture {
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 		position: relative;
 		z-index: 1;
 	}
@@ -2550,7 +2553,7 @@ ol {
 	.dot i,
 	.dot hr {
 		@include mixins.block(absolute, 50%, initial, 100%);
-		@include mixins.zero-box;
+		@include mixins.zero-margin-padding;
 		display: block;
 		border: none;
 		background-color: var(--black);
