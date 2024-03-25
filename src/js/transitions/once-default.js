@@ -9,6 +9,7 @@ let transition_once_default = {
     name: 'default-transition',
     once: async function (data) {
         // Define async and next container
+        var done = this.async();
         var next = data.next.container;
 
         // Display loading
@@ -35,9 +36,11 @@ let transition_once_default = {
 
         // Empty loading
         loader.empty();
-        this.async();
+        done();
     },
     before: async function (data) {
+        var done = this.async();
+
         // Hide current view
         await animate.hide(data.current.container);
 
@@ -45,9 +48,10 @@ let transition_once_default = {
         loader.init();
         await loader.show(data.next.container);
 
-        this.async();
+        done();
     },
     enter: async function (data) {
+        var done = this.async();
         var current = data.current.container;
         var next = data.next.container;
 
@@ -59,7 +63,7 @@ let transition_once_default = {
         // Animate current view
         await animate.show(next);
 
-        this.async();
+        done();
     },
     after: () => loader.empty()
 }

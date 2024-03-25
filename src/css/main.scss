@@ -555,6 +555,7 @@ picture {
 /* Arrow links */
 .arrow-big,
 .arrow {
+	z-index: 2;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
@@ -589,6 +590,7 @@ picture {
 }
 
 .arrow-small {
+	z-index: 2;
 
 	.arrow {
 		flex-flow: row nowrap;
@@ -1074,6 +1076,7 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 1;
 
 	a,
 	span {

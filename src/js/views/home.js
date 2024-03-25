@@ -11,8 +11,6 @@ let homeview = {
 	beforeEnter: data => {
 		var next = data.next.container;
 
-		document.body.style.overflow = "hidden";
-
 		// Hover "Dwan" to show flare in main text
 		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
 
@@ -85,8 +83,9 @@ let homeview = {
 		});
 	},
 	afterEnter: () => {
-		header.waving(".middle .v1title");
-		document.body.style.overflow = "";
+		// document.querySelector(".middle.home-v1").innerHTML = '<object data="/img/dwan-logo.svg#logo" width="66" height="102" aria-label="Dwan\'s Logo" class="dwan logo dwan-logo" type="image/svg+xml"></object><small>v1</small>';
+		// header.waving(".middle.home-v1");
+
 		console.info("Hello, my name is Dwan!");
 	}
 }

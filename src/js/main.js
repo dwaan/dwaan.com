@@ -28,6 +28,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 barba.hooks.before(_ => api.abort());
 // Destroy prev scroll
 barba.hooks.beforeEnter(() => {
+	document.body.style.overflow = "hidden";
+
 	scroll.destroy();
 
 	// Scroll to top
@@ -43,12 +45,14 @@ barba.hooks.afterEnter(data => {
 
 	ScrollTrigger.refresh();
 	gsap.matchMediaRefresh();
+
+	document.body.style.overflow = "";
 });
 
 // Initialized barba.js
 barba.init({
 	debug: false,
-	logLevel: 0,
+	logLevel: "off",
 	transitions: transitions,
 	views: views
 });

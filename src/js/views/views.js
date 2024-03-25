@@ -10,7 +10,17 @@ import plurkview from './plurk';
 /**
  * Collections of Barba.js Views
  */
-var views = [homeview, detailview, meview, hiview, lostview, plurkview.replurk2020view, plurkview.replurk2021view, plurkview.replurk2022view, plurkview.replurk2023view];
+var views = [
+	homeview,
+	detailview,
+	meview,
+	hiview,
+	lostview,
+	plurkview.replurk2020view,
+	plurkview.replurk2021view,
+	plurkview.replurk2022view,
+	plurkview.replurk2023view
+];
 
 // Make accesable
 window.plurkview = plurkview;

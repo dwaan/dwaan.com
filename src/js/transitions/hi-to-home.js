@@ -3,7 +3,7 @@
 import gsap from 'gsap';
 import loader from '../helpers/loader';
 import animate from '../helpers/animate';
-import { reduceMotionFilter } from '../helpers/helper';
+import { delay, reduceMotionFilter } from '../helpers/helper';
 
 let transition_hi_to_home = {
     name: 'hi-to-home',
@@ -56,7 +56,7 @@ let transition_hi_to_home = {
 
         // For vertical screen, just fade in.
         if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
-            tl.fromTo(current.querySelectorAll(".main-text h1 > *"), {
+            tl.fromTo(current.querySelectorAll(".main-text h1.text > *"), {
                 x: 0,
                 opacity: 1
             }, {
@@ -66,7 +66,7 @@ let transition_hi_to_home = {
                 stagger: length / 10,
                 ease: "power3.in"
             }, 0);
-        } else tl.fromTo(current.querySelector(".main-text h1"), from, to, 0);
+        } else tl.fromTo(current.querySelector(".main-text h1.text"), from, to, 0);
 
         // Show next container
         tl.set(current, {
@@ -87,17 +87,20 @@ let transition_hi_to_home = {
                 await loader.init();
                 await loader.show(next);
 
+                await delay(250);
+
                 done();
             }
         }, .25);
     },
     enter: async function (data) {
+        var done = this.async();
         var next = data.next.container;
 
         // Animate current view
         await animate.show(next, false, false);
 
-        this.async();
+        done();
     },
     after: () => loader.empty(),
     from: {
