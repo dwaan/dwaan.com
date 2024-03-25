@@ -66,10 +66,11 @@ let header = {
     },
 
     // Logo events animations - waving
-    waving: () => {
+    waving: (logo = 'header .logo') => {
         var length = 1;
 
-        gsap.utils.toArray('header .logo').forEach(el => {
+
+        gsap.utils.toArray(logo).forEach(el => {
             // Waving animation
             var svg = el.querySelector('.dwan-logo').contentDocument;
             var lefthand = svg.querySelector(".left-hand");

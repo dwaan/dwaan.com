@@ -1125,9 +1125,14 @@ header {
 	}
 }
 
-.dwantitle {
+.v1title {
 	position: relative;
 	display: flex;
+
+	svg,
+	object {
+		pointer-events: none;
+	}
 
 	svg {
 		height: 100%;
@@ -1141,8 +1146,8 @@ header {
 
 	small {
 		@include mixins.block(absolute, 0, initial);
-		right: 0;
 		@include mixins.typography(.6rem, $color: var(--black));
+		right: 0;
 		background-color: var(--yellow);
 		padding: calc(var(--pads) / 2) var(--pads);
 		border-radius: 8px;

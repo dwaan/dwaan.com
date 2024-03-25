@@ -1,9 +1,10 @@
 "use strict";
 
 import { gsap, ScrollTrigger } from 'gsap/all';
+import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
-import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
+import header from '../helpers/header.js';
 
 let homeview = {
 	namespace: 'home',
@@ -84,6 +85,7 @@ let homeview = {
 		});
 	},
 	afterEnter: () => {
+		header.waving(".middle .v1title");
 		document.body.style.overflow = "";
 		console.info("Hello, my name is Dwan!");
 	}

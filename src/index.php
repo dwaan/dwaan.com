@@ -157,10 +157,8 @@
         <section class="middle full home-v1">
             <h2 class="hidden">Dwan v1</h2>
             <div class="padding">
-                <a href="https://v1.dwaan.com" class="dwantitle" aria-label="Dwan logo" data-barba-prevent>
-                    <svg width="66" height="102" viewBox="0 0 33 51" aria-label="Dwan's Logo" class="logo dwan" xmlns="http://www.w3.org/2000/svg">
-                        <use href="/img/dwan-logo.svg#logo"></use>
-                    </svg>
+                <a href="https://v1.dwaan.com" class="v1title" aria-label="Dwan logo" data-barba-prevent>
+                    <object data="/img/dwan-logo.svg#logo" width="66" height="102" aria-label="Dwan's Logo" class="dwan logo dwan-logo" type="image/svg+xml"></object>
                     <small>v1</small>
                 </a>
             </div>
