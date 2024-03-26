@@ -47,7 +47,7 @@ var loader = {
 				// No need to do it often, only at the end
 				timeoutfinal = setTimeout(_ => {
 					ScrollTrigger.refresh();
-				}, 1000);
+				}, 1500);
 			});
 
 			return;
