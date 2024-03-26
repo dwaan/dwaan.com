@@ -281,7 +281,7 @@ var meview = {
 					start: "0% 50%",
 					end: "200% 50%",
 					animation: tl,
-					scrub: .5
+					scrub: true
 				});
 			});
 		});

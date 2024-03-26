@@ -1115,7 +1115,7 @@ div>.vertical {
 	}
 
 	.textoverlay {
-		padding: 0; // !important;
+		padding: 0;
 	}
 
 	@media screen and (min-width: mixins.$screen-verysmall) {
@@ -1133,7 +1133,7 @@ div>.vertical {
 }
 
 .intro {
-	.text p {
+	p {
 		font-size: 1rem;
 	}
 
@@ -1142,8 +1142,10 @@ div>.vertical {
 	}
 }
 
-#now .thumbs picture {
-	opacity: .24;
+#now {
+	.thumbs picture {
+		opacity: .24;
+	}
 }
 
 #usedto {
@@ -1165,8 +1167,10 @@ div>.vertical {
 	}
 }
 
-#webdesigner p {
-	max-width: 400px;
+#webdesigner {
+	p {
+		max-width: 400px;
+	}
 }
 
 #sayhi {

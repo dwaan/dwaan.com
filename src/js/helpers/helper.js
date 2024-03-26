@@ -283,7 +283,7 @@ function imgLoadedEvent(callback) {
 
 	});
 }
-// Async delaiy
+// Async delay
 // Parameter:
 // 1. ms: miliseconds to wait
 function delay(ms) {

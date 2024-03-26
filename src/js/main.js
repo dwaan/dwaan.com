@@ -41,6 +41,7 @@ barba.hooks.afterEnter(data => {
 	// Read more
 	next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
 
+	// Scroll animation for arrows
 	if (!next.namespace.includes("replurk")) header.arrow(next.container);
 
 	ScrollTrigger.refresh();

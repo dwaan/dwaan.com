@@ -2306,6 +2306,14 @@ ol {
 		z-index: 2;
 	}
 
+	.text {
+		position: relative;
+		width: 100%;
+		max-width: 700px;
+		text-align: center;
+		will-change: transform, background;
+	}
+
 	h1 strong {
 		position: relative;
 		display: inline-block;
@@ -2333,14 +2341,6 @@ ol {
 		}
 	}
 
-	.text {
-		position: relative;
-		width: 100%;
-		max-width: 700px;
-		text-align: center;
-		will-change: transform, background;
-	}
-
 	h2,
 	h3 {
 		line-height: 90%;
@@ -2360,13 +2360,15 @@ ol {
 	}
 }
 
-.intro .text {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	@include mixins.typography(.8rem, $color: var(--gray-light));
+.intro {
+	.text {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		@include mixins.typography(.8rem, $color: var(--gray-light));
+	}
 
-	& hr {
+	hr {
 		display: inline-block;
 		width: 50px;
 		margin: auto var(--pads);
@@ -2435,8 +2437,8 @@ ol {
 	}
 
 	.thumbs {
-		position: absolute;
 		@include mixins.positions(var(--pady), var(--padx), var(--pady), 50vw);
+		position: absolute;
 		z-index: 1;
 	}
 

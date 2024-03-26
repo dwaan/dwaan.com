@@ -1140,14 +1140,18 @@ div>.vertical {
 	}
 }
 
-.intro .text p {
-	font-size: .9rem;
+.intro {
+	p {
+		font-size: .9rem;
+	}
 }
 
-#sayhi .title {
-	width: 350px;
-	transform-origin: 100% 100%;
-	transform: translate(0, -350px) rotate(-90deg);
+#sayhi {
+	.title {
+		width: 350px;
+		transform-origin: 100% 100%;
+		transform: translate(0, -350px) rotate(-90deg);
+	}
 }
 
 #now,
@@ -1169,8 +1173,10 @@ div>.vertical {
 	}
 }
 
-#webdesigner p {
-	max-width: 450px;
+#webdesigner {
+	p {
+		max-width: 450px;
+	}
 }
 
 #sayhi {

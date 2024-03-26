@@ -36,14 +36,20 @@ let transition_home_to_me = {
     enter: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
+        var done = this.async();
+
+        current.style.zIndex = 1;
+        current.style.position = "fixed";
+        next.style.zIndex = 2;
+        next.style.position = "fixed";
 
         // Reset current element values
         removeStyle(current.querySelectorAll(".main-text, .main-text > h1"));
 
         // Animate Next view
-        await animate.show(next, next.querySelectorAll(".arrow"));
+        await animate.show(next, next.querySelectorAll(".arrow, .arrow-big"));
 
-        this.async();
+        done();
     },
     after: function (data) {
         var next = data.next.container;

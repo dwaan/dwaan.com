@@ -307,10 +307,11 @@ let header = {
         });
     },
 
+    // Scroll animate arrow
+    // Parameter:
+    // 1. el: main element
     arrow: next => {
-        // Scroll animate arrow
         var middle = next.querySelectorAll("section.middle, div.middle");
-        if (!middle) return;
         middle.forEach((el, idx) => {
             // Animate arrow
             var screen = gsap.matchMedia();

@@ -4,7 +4,6 @@ import { gsap, ScrollTrigger } from 'gsap/all';
 import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
-// import header from '../helpers/header.js';
 
 let homeview = {
 	namespace: 'home',
@@ -83,9 +82,6 @@ let homeview = {
 		});
 	},
 	afterEnter: () => {
-		// document.querySelector(".middle.home-v1").innerHTML = '<object data="/img/dwan-logo.svg#logo" width="66" height="102" aria-label="Dwan\'s Logo" class="dwan logo dwan-logo" type="image/svg+xml"></object><small>v1</small>';
-		// header.waving(".middle.home-v1");
-
 		console.info("Hello, my name is Dwan!");
 	}
 }
