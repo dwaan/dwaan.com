@@ -624,10 +624,8 @@ div>.vertical {
 }
 
 .style-top-coverflow {
-	picture {
-		&:nth-child(2n) {
-			margin-top: 0;
-		}
+	.thumbs {
+		height: 40vw;
 	}
 }
 
@@ -986,13 +984,10 @@ div>.vertical {
 
 	.thumbs {
 		gap: var(--padl);
-		height: 35vmax;
+		height: 35vw;
 	}
 
 	picture {
-		flex: 0 0 auto;
-		height: 100%;
-
 		&:nth-child(2) {
 			height: 85%;
 		}
@@ -1001,27 +996,21 @@ div>.vertical {
 			height: 70%;
 		}
 	}
-
-	img {
-		width: auto;
-	}
 }
 
 .style-center-small {
 	.thumbs {
 		gap: 0;
-		height: 20vmax;
+		height: 20vw;
 	}
 
 	picture {
 		order: 2;
-		flex: 0 0 auto;
-		margin: 0 -5vmax;
-		height: 100%;
+		margin: 0 -5vw;
 
 		&:nth-child(1) {
 			order: 1;
-			margin-top: -5vmax;
+			margin-top: -5vw;
 		}
 
 		&:nth-child(2) {
@@ -1031,13 +1020,9 @@ div>.vertical {
 
 		&:nth-child(3) {
 			order: 3;
-			margin-top: 5vmax;
+			margin-top: 5vw;
 			height: 100%;
 		}
-	}
-
-	img {
-		width: auto;
 	}
 }
 

@@ -911,9 +911,9 @@ div>.vertical {
 
 		.color {
 			li {
-				flex: 16px; // !important;
-				width: 16px; // !important;
-				height: 16px; // !important;
+				flex: 16px !important;
+				width: 16px !important;
+				height: 16px !important;
 			}
 		}
 	}
@@ -924,20 +924,19 @@ div>.vertical {
 
 	.thumbs {
 		gap: var(--padm);
-
-		picture {
-			flex: 0 0 65vw;
-
-			&:nth-child(2) {
-				flex: 0 0 22vw;
-			}
-
-			&:nth-child(3) {
-				flex: 0 0 12vw;
-			}
-		}
-
 	}
+
+	// picture {
+	// 	flex: 0 0 65vw;
+
+	// 	&:nth-child(2) {
+	// 		flex: 0 0 22vw;
+	// 	}
+
+	// 	&:nth-child(3) {
+	// 		flex: 0 0 12vw;
+	// 	}
+	// }
 }
 
 /* Style 3D thumbs */
@@ -1012,14 +1011,8 @@ div>.vertical {
 	}
 
 	.style-top-coverflow {
-		picture {
-			margin-top: calc(var(--pic-m) * 1);
-			flex: 0 0 50vw;
-
-			&:nth-child(2) {
-				margin-top: 0;
-				flex: 0 0 75vw;
-			}
+		.thumbs {
+			height: 40vw;
 		}
 	}
 
@@ -1043,15 +1036,17 @@ div>.vertical {
 			}
 		}
 
-		picture {
-			flex: 0 0 70vw;
+		.thumbs {
+			height: 40vw;
+		}
 
+		picture {
 			&:nth-child(2) {
-				flex: 0 0 25vw;
+				height: 85%;
 			}
 
 			&:nth-child(3) {
-				flex: 0 0 15vw;
+				height: 70%;
 			}
 		}
 	}
@@ -1062,24 +1057,22 @@ div>.vertical {
 		}
 
 		.thumbs {
-			height: auto;
-			flex-direction: column;
-			justify-content: flex-start;
-			margin-top: 12.5vh;
+			height: 45vw;
+			margin: 30vw 0;
+		}
 
-			picture {
-				margin-top: -12.5vh;
-				flex: 1;
-				width: 80vw;
-				margin-left: -50vw;
+		picture {
+			order: initial;
+			margin: -30vw -35vw 0;
 
-				&:nth-child(2) {
-					margin-left: 0;
-				}
+			&:nth-child(2) {
+				margin-top: 0;
+				height: 100%;
+			}
 
-				&:nth-child(3) {
-					margin-left: 50vw;
-				}
+			&:nth-child(3) {
+				margin-top: 30vw;
+				height: 100%;
 			}
 		}
 	}
