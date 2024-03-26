@@ -678,7 +678,7 @@ var detailview = {
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				// Rotate masonry
 				gsap.set(thumbs, {
-					rotation: 0
+					rotation: -2.5
 				});
 
 				// Scroll
@@ -703,7 +703,7 @@ var detailview = {
 					return ScrollTrigger.create({
 						trigger: el,
 						start: "-25% 100%",
-						end: "100% 50%",
+						end: "100% 0",
 						scrub: reduceMotionFilter() ? true : gsap.utils.random(75, 125, 5) / 100,
 						animation: tl
 					});
