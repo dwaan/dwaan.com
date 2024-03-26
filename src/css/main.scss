@@ -1235,16 +1235,14 @@ header {
 		box-shadow: none;
 	}
 
-	.color li {
-		border: 1px solid var(--black-25);
+	.color {
+		li {
+			border: 1px solid var(--black-25);
 
-		&:last-child {
-			border: none;
+			&:last-child {
+				border: none;
+			}
 		}
-	}
-
-	&.aai .color li {
-		border-radius: 100%;
 	}
 
 	.cta {
@@ -1258,6 +1256,14 @@ header {
 
 		&:hover {
 			background-color: var(--red);
+		}
+	}
+}
+
+.detail-aai {
+	.color {
+		li {
+			border-radius: 100%;
 		}
 	}
 }
@@ -1280,8 +1286,6 @@ header {
 		z-index: 3;
 		position: absolute;
 		background: transparent;
-		background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, .75) 30%, rgba(255, 255, 255, 0) 80%);
-		background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, .75) 30%, rgba(255, 255, 255, 0) 80%);
 		background: linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, .75) 30%, rgba(255, 255, 255, 0) 80%);
 	}
 }
@@ -1798,6 +1802,10 @@ header {
 	picture {
 		width: 60vw;
 		transform: rotate(-3deg);
+
+		img {
+			width: 100%;
+		}
 	}
 
 	li {

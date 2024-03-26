@@ -226,72 +226,62 @@ var meview = {
 			});
 		});
 
-		// Photo of me on canoe
+		// Photo of me on a canoe
 		next.querySelectorAll("#now").forEach(element => {
+			let thumbs = element.querySelectorAll('.thumbs');
+
 			scroll.push(tl => {
-				tl.fromTo(element.querySelectorAll('.thumbs'), {
+				// Appearing
+				tl.fromTo(thumbs, {
+					position: "fixed",
 					opacity: 0,
 					x: -40,
-					y: (window.innerHeight * -2 / 3),
+					y: (window.innerHeight * - 1/4),
 				}, {
 					opacity: 1,
 					x: -10,
 					y: 0,
-					ease: 'linear'
-				});
+					ease: 'linear',
+					duration: 1
+				}, 0);
 
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: element,
-					start: "0 50%",
-					end: "50% 50%",
-					animation: tl,
-					scrub: true
-				});
-			});
-
-			scroll.push(tl => {
-				tl.fromTo(element.querySelectorAll('.thumbs'), {
+				// Staying in the view
+				tl.fromTo(thumbs, {
 					x: -10,
 					y: 0,
 				}, {
 					x: 0,
-					y: (window.innerHeight * 1) + 25,
-					ease: 'linear'
+					y: 25,
+					ease: 'linear',
+					duration: 2
 				});
 
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: element,
-					start: "50% 50%",
-					end: "150% 50%",
-					animation: tl,
-					scrub: true
-				});
-			});
-
-			scroll.push(tl => {
-				tl.fromTo(element.querySelectorAll('.thumbs'), {
+				// Disappearing
+				tl.fromTo(thumbs, {
 					opacity: 1,
 					x: 0,
-					y: (window.innerHeight * 1) + 25
+					y: 25
 				}, {
 					opacity: 0,
 					x: 20,
-					y: (window.innerHeight * 1.75) + 25,
-					ease: 'linear'
+					y: (window.innerHeight * 1/4) + 25,
+					ease: 'linear',
+					duration: 1
+				});
+
+				// Set to normal
+				tl.set(thumbs, {
+					position: ""
 				});
 
 				return tl;
 			}, tl => {
 				return ScrollTrigger.create({
 					trigger: element,
-					start: "150% 50%",
+					start: "0% 50%",
 					end: "200% 50%",
 					animation: tl,
-					scrub: true
+					scrub: .5
 				});
 			});
 		});

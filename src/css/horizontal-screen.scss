@@ -91,11 +91,13 @@ header {
 // end .middle
 
 
-.horizontal {
+.horizontal,
+div>.horizontal {
 	display: block;
 }
 
-.vertical {
+.vertical,
+div>.vertical {
 	display: none;
 }
 
@@ -631,7 +633,7 @@ header {
 
 /* Style text on top without image */
 .style-top-text {
-	padding: calc(var(--padxl) * 4) var(--padx) calc(var(--padxl) * 3) !important;
+	padding: calc(var(--padxl) * 4) var(--padx) calc(var(--padxl) * 3); // !important;
 
 	.text {
 		width: 100%;
@@ -683,7 +685,7 @@ header {
 
 .style-masonry-2 {
 	.thumbs {
-		transform: rotate(-2.5deg) !important;
+		transform: rotate(-2.5deg); // !important;
 	}
 
 	.text {
@@ -864,18 +866,20 @@ header {
 		width: 55vw;
 	}
 
-	.color ul {
-		margin: 0 !important;
-		width: 250px;
-		flex-wrap: wrap;
-	}
+	.color {
+		ul {
+			margin: 0; // !important;
+			width: 250px;
+			flex-wrap: wrap;
+		}
 
-	.color li {
-		margin: 0 var(--padm) var(--padm) 0 !important;
-	}
+		li {
+			margin: 0 var(--padm) var(--padm) 0; // !important;
 
-	.color ul li:last-child {
-		width: auto;
+			&:last-child {
+				width: auto;
+			}
+		}
 	}
 
 	@media (min-width: mixins.$screen-wide) {

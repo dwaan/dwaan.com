@@ -128,8 +128,8 @@ header {
 
 		img {
 			margin: 0 auto;
-			width: auto !important;
-			height: 100% !important;
+			width: auto; // !important;
+			height: 100%; // !important;
 		}
 	}
 }
@@ -178,11 +178,13 @@ header {
 	}
 }
 
-.horizontal {
+.horizontal,
+div>.horizontal {
 	display: none;
 }
 
-.vertical {
+.vertical,
+div>.vertical {
 	display: block;
 }
 
@@ -844,13 +846,13 @@ header {
 	}
 
 	ul {
-		height: 100% !important;
+		height: 100%; // !important;
 	}
 
 	.thumbs {
 		padding: calc(2.5 * var(--padxl)) 0 calc((2 * var(--padxl)) + 50px);
 		margin-bottom: -50px;
-		height: 100% !important;
+		height: 100%; // !important;
 	}
 
 	.before,
@@ -909,9 +911,9 @@ header {
 
 		.color {
 			li {
-				flex: 16px !important;
-				width: 16px !important;
-				height: 16px !important;
+				flex: 16px; // !important;
+				width: 16px; // !important;
+				height: 16px; // !important;
 			}
 		}
 	}
@@ -1113,7 +1115,7 @@ header {
 	}
 
 	.textoverlay {
-		padding: 0 !important;
+		padding: 0; // !important;
 	}
 
 	@media screen and (min-width: mixins.$screen-verysmall) {

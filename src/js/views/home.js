@@ -4,7 +4,7 @@ import { gsap, ScrollTrigger } from 'gsap/all';
 import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
-import header from '../helpers/header.js';
+// import header from '../helpers/header.js';
 
 let homeview = {
 	namespace: 'home',
