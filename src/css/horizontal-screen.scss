@@ -986,47 +986,58 @@ div>.vertical {
 
 	.thumbs {
 		gap: var(--padl);
+		height: 35vmax;
+	}
 
-		picture {
-			flex: 0 0 50vw;
+	picture {
+		flex: 0 0 auto;
+		height: 100%;
 
-			&:nth-child(2) {
-				flex: 0 0 15vw;
-			}
-
-			&:nth-child(3) {
-				flex: 0 0 7.5vw;
-			}
+		&:nth-child(2) {
+			height: 85%;
 		}
+
+		&:nth-child(3) {
+			height: 70%;
+		}
+	}
+
+	img {
+		width: auto;
 	}
 }
 
 .style-center-small {
 	.thumbs {
 		gap: 0;
+		height: 20vmax;
+	}
 
-		picture {
-			margin: 0 -5vw;
-			order: 2;
-			overflow: c;
+	picture {
+		order: 2;
+		flex: 0 0 auto;
+		margin: 0 -5vmax;
+		height: 100%;
 
-			&:nth-child(1) {
-				flex: 0 0 35vw;
-				order: 1;
-				margin-top: -10vh;
-			}
-
-			&:nth-child(2) {
-				flex: 0 0 35vw;
-				order: 2;
-			}
-
-			&:nth-child(3) {
-				order: 3;
-				flex: 0 0 35vw;
-				margin-top: 10vh;
-			}
+		&:nth-child(1) {
+			order: 1;
+			margin-top: -5vmax;
 		}
+
+		&:nth-child(2) {
+			order: 2;
+			height: 100%;
+		}
+
+		&:nth-child(3) {
+			order: 3;
+			margin-top: 5vmax;
+			height: 100%;
+		}
+	}
+
+	img {
+		width: auto;
 	}
 }
 
