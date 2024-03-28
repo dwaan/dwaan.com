@@ -612,25 +612,35 @@ div>.vertical {
 	}
 }
 
-.style-top-auto {
-	picture {
-		width: calc(1.75 * var(--pic-w));
-		height: auto;
+.style-top--auto {
+	@extend .style-top;
+
+	.thumbs {
+		height: 25vw;
+		padding-bottom: calc(var(--pic-m) * 3);
 
 		@media (min-height: mixins.$screen-small) {
-			width: calc(2 * var(--pic-w));
+			height: 35vw;
 		}
 	}
 }
 
-.style-top-coverflow {
+.style-top--coverflow {
+	@extend .style-top;
+
 	.thumbs {
 		height: 40vw;
+	}
+
+	picture {
+		&:nth-child(2n) {
+			margin-top: 0;
+		}
 	}
 }
 
 /* Style text on top without image */
-.style-top-text {
+.style-top--text {
 	padding: calc(var(--padxl) * 4) var(--padx) calc(var(--padxl) * 3); // !important;
 
 	.text {
@@ -646,7 +656,6 @@ div>.vertical {
 		width: 380px;
 		margin-right: 60px;
 	}
-
 }
 
 /* Style with mansonry like layout with text on the right */
@@ -869,6 +878,10 @@ div>.vertical {
 			margin: 0; // !important;
 			width: 250px;
 			flex-wrap: wrap;
+
+			@media (min-width: mixins.$screen-wide) {
+				flex-wrap: nowrap;
+			}
 		}
 
 		li {
@@ -880,21 +893,12 @@ div>.vertical {
 		}
 	}
 
-	@media (min-width: mixins.$screen-wide) {
-		.color ul {
-			flex-wrap: nowrap;
-		}
-	}
-
 	.wrap:before,
-	&+.style-slideshow:before,
-	&+.style-slideshow:after {
+	&+hr+.style-slideshow:before,
+	&+hr+.style-slideshow:after {
+		@include mixins.make-it-block(block);
+		@include mixins.positions(calc(var(--padxxl) + 2.25vh), initial, 0, 19vw);
 		position: absolute;
-		top: calc(var(--padxxl) + 2.25vh);
-		left: 19vw;
-		bottom: 0;
-		display: block;
-		content: "";
 		width: 1.5vw;
 		height: auto;
 		border: 1px solid var(--black);
@@ -902,7 +906,7 @@ div>.vertical {
 		border-right: 0;
 	}
 
-	&+.style-slideshow {
+	&+hr+.style-slideshow {
 
 		&:before,
 		&:after {

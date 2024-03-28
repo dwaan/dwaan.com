@@ -42,18 +42,6 @@ var loader = {
 	},
 	show: async function (els) {
 		if (this.disableLoading) {
-			var timeoutfinalfirst = false;
-			var timeoutfinalsecond = false;
-			imgLoadedEvent(_ => {
-				// No need to do it often, only at the end
-				timeoutfinalfirst = setTimeout(_ => {
-					ScrollTrigger.refresh();
-				}, 1500);
-				timeoutfinalsecond = setTimeout(_ => {
-					ScrollTrigger.refresh();
-				}, 3000);
-			});
-
 			return;
 		}
 

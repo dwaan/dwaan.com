@@ -19,6 +19,9 @@ let transition_once_default = {
         // Loading logic
         await loader.show(next);
 
+        // Delay so firefox will re
+        await delay(250);
+
         // Initialized header
         header.init();
 

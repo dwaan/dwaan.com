@@ -60,7 +60,7 @@
 
 		<hr />
 
-		<section class="middle auto style-top-text snap">
+		<section class="middle auto style-top--text snap">
 			<div class="text">
 				<h2>First Challenges</h2>
 				<ol class="zero">

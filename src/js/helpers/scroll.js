@@ -51,7 +51,7 @@ var scroll = {
 				trigger: trigger,
 				start: "0 " + position,
 				end: "+=175 " + position,
-				scrub: reduceMotionFilter() ? true : 2,
+				scrub: reduceMotionFilter(2),
 				animation: this.tl[this.l]
 			}));
 		});
@@ -138,18 +138,26 @@ var scroll = {
 		if (typeof scrollFunction === "function") {
 			this.st.push(scrollFunction(this.tl[this.l]));
 		}
+
+		return this.tl.length - 1;
+	},
+	// Call this to refresh one scroll
+	refresh: function (id) {
+		if (this.st[id]) this.st[id].refresh();
+	},
+	// Call this to kill one scroll
+	kill: function (id) {
+		if (this.tl[id]) this.tl[id].kill();
+		if (this.st[id]) this.st[id].kill();
 	},
 	// Call this to remove garbage
 	destroy: function () {
-		// Cleaning up GSAP timeline
+		// Cleaning up GSAP and ScrollTrigger timeline
 		for (var i = 0; i < this.tl.length; i++) {
-			this.tl[i].kill();
+			if (this.tl[i]) this.tl[i].kill();
+			if (this.st[i]) this.st[i].kill();
 		}
 		this.tl = [];
-		// Cleaning up ScrollTrigger
-		for (var i = 0; i < this.st.length; i++) {
-			this.st[i].kill();
-		}
 		this.st = [];
 		//
 		this.l = 0;

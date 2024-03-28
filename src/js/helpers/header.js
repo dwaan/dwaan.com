@@ -69,10 +69,11 @@ let header = {
     waving: (logo = 'header .logo') => {
         var length = 1;
 
-
         gsap.utils.toArray(logo).forEach(el => {
             // Waving animation
             var svg = el.querySelector('.dwan-logo').contentDocument;
+            if (!svg) return;
+
             var lefthand = svg.querySelector(".left-hand");
             var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: length / 4, ease: "linear", yPercent: 20 } });
 

@@ -413,8 +413,8 @@ var detailview = {
 			});
 		});
 
-		// Style - Top
-		next.querySelectorAll(".style-top:not(.style-top-coverflow").forEach(el => {
+		// Style - Top and Top Auto
+		next.querySelectorAll(".style-top, .style-top--auto").forEach(el => {
 			var thumbs = el.querySelector(".thumbs");
 			// Move text
 			scroll.moveText({
@@ -427,15 +427,14 @@ var detailview = {
 			});
 			// Move thumbnails
 			var screen = gsap.matchMedia();
-
 			screen.add("(max-aspect-ratio: 1/1)", () => {
 				scroll.push(tl => {
 					tl.fromTo(thumbs, {
 						x: 0
 					}, {
-						x: (el.offsetWidth - thumbs.offsetWidth),
+						x: "-50%",
 						ease: "linear"
-					}, 0);
+					});
 
 					return tl;
 				}, tl => {
@@ -446,22 +445,34 @@ var detailview = {
 				});
 			});
 			screen.add("(min-aspect-ratio: 1/1)", () => {
-				scroll.push(tl => {
-					tl.fromTo(thumbs, {
-						x: 0
-					}, {
-						x: (el.offsetWidth - thumbs.offsetWidth),
-						ease: "linear",
-						duration: 5,
-					}, 0);
+				var scrollid = 0;
+				function scrolling() {
+					var computedStyle = getComputedStyle(el);
+					var elWidth = el.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
 
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						animation: tl
+					scrollid = scroll.push(tl => {
+						tl.fromTo(thumbs, {
+							x: 0
+						}, {
+							x: elWidth - thumbs.offsetWidth,
+							ease: "linear"
+						});
+
+						return tl;
+					}, tl => {
+						return ScrollTrigger.create({
+							trigger: el,
+							animation: tl
+						});
 					});
+				}
+				scrolling();
+
+				const resizeObserver = new ResizeObserver(_ => {
+					scroll.kill(scrollid);
+					scrolling();
 				});
+				resizeObserver.observe(thumbs);
 			});
 			// Reset
 			ScrollTrigger.defaults({});
@@ -469,60 +480,16 @@ var detailview = {
 			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"));
 		});
 
-		// Style - Top
-		next.querySelectorAll(".style-top-text").forEach(el => {
+		// Style - Top Text
+		next.querySelectorAll(".style-top--text").forEach(el => {
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text h2, .text li")
 			});
 		});
 
-		// Style - Bottom
-		next.querySelectorAll(".style-bottom-logo").forEach(el => {
-			// Move text
-			scroll.moveText({
-				elements: el.querySelectorAll(".text > *")
-			});
-			// Move logo
-			scroll.push(tl => {
-				tl.fromTo(el.querySelectorAll(".thumbs"), {
-					x: -100,
-					y: 300,
-					rotation: 20,
-				}, {
-					x: 0,
-					y: 0,
-					rotation: 0,
-					duration: 1,
-					ease: "expo.out"
-				}, 0);
-
-				tl.fromTo(el.querySelectorAll(".thumbs li"), {
-					y: 100
-				}, {
-					y: 0,
-					stagger: {
-						from: "start",
-						amount: .2
-					},
-					duration: .5,
-					ease: "expo.out"
-				}, 0);
-
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: (window.innerHeight * 1 / 4) + " " + (window.innerHeight * 3 / 4),
-					end: (window.innerHeight * 3 / 4) + " " + (window.innerHeight * 3 / 4),
-					scrub: reduceMotionFilter() ? true : 1,
-					animation: tl
-				});
-			});
-		});
-
-		// Style - Top
-		next.querySelectorAll(".style-top-coverflow").forEach(el => {
+		// Style - Top Coverflow
+		next.querySelectorAll(".style-top--coverflow").forEach(el => {
 			var screen = gsap.matchMedia();
 
 			// Vertical screen
@@ -571,24 +538,26 @@ var detailview = {
 				scroll.push(tl => {
 					var pictures = el.querySelectorAll(".thumbs > picture");
 
-					pictures.forEach(picture => {
-						tl.fromTo(picture, {
-							y: "50%"
-						}, {
-							y: 0,
-							ease: "linear",
-							duration: 1
-						}, 0);
-
+					tl.fromTo(pictures, {
+						opacity: 0,
+						y: "100%"
+					}, {
+						opacity: 1,
+						y: 0,
+						ease: "ease.out",
+						stagger: {
+							each: .05,
+							from: "center"
+						},
 					});
 
 					return tl;
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: el,
-						start: "0 100%",
+						start: "50% 100%",
 						end: "50% 100%",
-						scrub: reduceMotionFilter(1),
+						scrub: reduceMotionFilter(2),
 						animation: tl
 					});
 				});
@@ -596,6 +565,50 @@ var detailview = {
 
 			// Reset
 			ScrollTrigger.defaults({});
+		});
+
+		// Style - Bottom
+		next.querySelectorAll(".style-bottom-logo").forEach(el => {
+			// Move text
+			scroll.moveText({
+				elements: el.querySelectorAll(".text > *")
+			});
+			// Move logo
+			scroll.push(tl => {
+				tl.fromTo(el.querySelectorAll(".thumbs"), {
+					x: -100,
+					y: 300,
+					rotation: 20,
+				}, {
+					x: 0,
+					y: 0,
+					rotation: 0,
+					duration: 1,
+					ease: "expo.out"
+				}, 0);
+
+				tl.fromTo(el.querySelectorAll(".thumbs li"), {
+					y: 100
+				}, {
+					y: 0,
+					stagger: {
+						from: "start",
+						amount: .2
+					},
+					duration: .5,
+					ease: "expo.out"
+				}, 0);
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: (window.innerHeight * 1 / 4) + " " + (window.innerHeight * 3 / 4),
+					end: (window.innerHeight * 3 / 4) + " " + (window.innerHeight * 3 / 4),
+					scrub: reduceMotionFilter() ? true : 1,
+					animation: tl
+				});
+			});
 		});
 
 		// Style - Flex

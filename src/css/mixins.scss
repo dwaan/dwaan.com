@@ -37,7 +37,7 @@ $screen-verysmall: 400px;
 @mixin positions($top: 0, $right: false, $bottom: false, $left: false) {
 	top: $top;
 
-	@if $right  !=false {
+	@if $right !=false {
 		right: $right;
 	}
 
@@ -45,7 +45,7 @@ $screen-verysmall: 400px;
 		right: $top;
 	}
 
-	@if $bottom  !=false {
+	@if $bottom !=false {
 		bottom: $bottom;
 	}
 
@@ -53,11 +53,11 @@ $screen-verysmall: 400px;
 		bottom: $top;
 	}
 
-	@if $left  !=false {
+	@if $left !=false {
 		left: $left;
 	}
 
-	@else if $right  !=false {
+	@else if $right !=false {
 		left: $right;
 	}
 
@@ -72,21 +72,21 @@ $screen-verysmall: 400px;
 	z-index: $zindex;
 	@include positions();
 
-	@if $backgroundcolor  !=false {
+	@if $backgroundcolor !=false {
 		background-color: $backgroundcolor;
 	}
 
-	@if $opacity  !=false {
+	@if $opacity !=false {
 		opacity: $opacity;
 	}
 
-	@if $borderradius  !=false {
+	@if $borderradius !=false {
 		border-radius: $borderradius;
 	}
 }
 
 @mixin block($position: absolute, $top: 0, $left: 0, $width: false, $height: false, $zindex: false, $overflow: false) {
-	@if $zindex  !=false {
+	@if $zindex !=false {
 		z-index: $zindex;
 	}
 
@@ -94,37 +94,37 @@ $screen-verysmall: 400px;
 	top: $top;
 	left: $left;
 
-	@if $width  !=false {
+	@if $width !=false {
 		width: $width;
 	}
 
-	@if $height  !=false {
+	@if $height !=false {
 		height: $height;
 	}
 
-	@if $overflow  !=false {
+	@if $overflow !=false {
 		overflow: $overflow;
 	}
 }
 
 @mixin typography($fontsize: false, $fontweight: false, $lineheight: false, $letterspacing: false, $color: false) {
-	@if $fontsize  !=false {
+	@if $fontsize !=false {
 		font-size: $fontsize;
 	}
 
-	@if $fontweight  !=false {
+	@if $fontweight !=false {
 		font-weight: $fontweight;
 	}
 
-	@if $lineheight  !=false {
+	@if $lineheight !=false {
 		line-height: $lineheight;
 	}
 
-	@if $letterspacing  !=false {
+	@if $letterspacing !=false {
 		letter-spacing: $letterspacing;
 	}
 
-	@if $color  !=false {
+	@if $color !=false {
 		color: $color;
 	}
 }

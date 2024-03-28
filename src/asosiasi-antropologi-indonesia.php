@@ -55,7 +55,7 @@
 
         <hr />
 
-        <section class="middle style-top style-top-auto snap">
+        <section class="middle style-top--auto snap">
             <div class="text">
                 <h2>From Idea&nbsp;<br hidden />to Execution</h2>
                 <ol class="zero">

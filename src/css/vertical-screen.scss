@@ -538,21 +538,23 @@ div>.vertical {
 	}
 }
 
-.style-top-auto {
-	picture {
-		width: calc(1.5 * var(--pic-w));
-		height: auto;
+.style-top--auto {
+	@extend .style-top;
+
+	.thumbs {
+		height: 40vw;
+		padding-bottom: calc(var(--pic-m) * 3);
 	}
 
 	.wide {
-		picture {
-			width: calc(1 * var(--pic-w));
+		.thumbs {
+			width: 50vw;
 		}
 	}
 }
 
 /* Style text on top without image */
-.style-top-text {
+.style-top--text {
 	.text {
 		width: 100%;
 		max-width: 400px;
@@ -561,7 +563,8 @@ div>.vertical {
 	}
 
 	h2 {
-		margin-bottom: 30px
+		margin-bottom: 30px;
+		width: auto;
 	}
 }
 
@@ -593,10 +596,6 @@ div>.vertical {
 		}
 
 	}
-}
-
-.style-top-text h2 {
-	width: auto;
 }
 
 /* Style with mansonry like layout with text on the right */
@@ -1010,7 +1009,7 @@ div>.vertical {
 		}
 	}
 
-	.style-top-coverflow {
+	.style-top--coverflow {
 		.thumbs {
 			height: 40vw;
 		}
