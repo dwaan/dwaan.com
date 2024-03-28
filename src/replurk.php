@@ -60,7 +60,7 @@
 
         <hr />
 
-        <section class="middle style-spread style-spread-big clip snap">
+        <section class="middle style-spread--big clip snap">
             <div class="text">
                 <div class="titles">
                     <h4>Just like a cat</h4>

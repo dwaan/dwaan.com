@@ -327,7 +327,6 @@ div>.vertical {
 
 /* Style text on the left and image spread like fan */
 
-
 %style-spread {
 	flex-direction: column;
 	padding: calc(2 * var(--padxl)) var(--padxl);
@@ -380,7 +379,9 @@ div>.vertical {
 	}
 }
 
-.style-spread-big {
+.style-spread--big {
+	@extend .style-spread;
+
 	picture {
 		transform-origin: bottom center;
 		width: calc(1.25 * var(--pic-w));
@@ -399,7 +400,7 @@ div>.vertical {
 	}
 }
 
-.no-js .style-spread-big {
+.no-js .style-spread--big {
 	picture {
 		&.pic-1 {
 			transform: translate(-50%, 0) rotate(0deg);
@@ -415,7 +416,8 @@ div>.vertical {
 	}
 }
 
-.style-spread-left {
+/* Style spread left */
+.style-spread--left {
 	@extend %style-spread;
 	flex-direction: column-reverse;
 
@@ -527,6 +529,11 @@ div>.vertical {
 
 	h2 {
 		max-width: 315px;
+	}
+
+
+	.thumbs {
+		height: calc(var(--pic-h) + (var(--pic-m) * 3));
 	}
 
 	picture {

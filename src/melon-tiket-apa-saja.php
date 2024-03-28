@@ -34,7 +34,7 @@
 
 		<hr />
 
-		<section id="more" class="middle style-spread-left snap">
+		<section id="more" class="middle style-spread--left snap">
 			<div class="text">
 				<div class="titles">
 					<h4>Concept and Design</h4>

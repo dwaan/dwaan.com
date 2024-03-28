@@ -202,7 +202,7 @@ var detailview = {
 		});
 
 		// Style - Spread
-		next.querySelectorAll(".style-spread:not(.style-spread-big)").forEach(el => {
+		next.querySelectorAll(".style-spread").forEach(el => {
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".titles > *, p")
@@ -286,7 +286,7 @@ var detailview = {
 				});
 			});
 		});
-		next.querySelectorAll(".style-spread-big").forEach(el => {
+		next.querySelectorAll(".style-spread--big").forEach(el => {
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".titles > *, p")
@@ -353,7 +353,7 @@ var detailview = {
 			});
 		});
 		// Style - Spread Left
-		next.querySelectorAll(".style-spread-left").forEach(el => {
+		next.querySelectorAll(".style-spread--left").forEach(el => {
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".titles > *, p")
@@ -1163,7 +1163,6 @@ var detailview = {
 
 		// Style - Reveal
 		next.querySelectorAll(".style-reveal").forEach(el => {
-			var length = reduceMotionFilter(1);
 			var screen = gsap.matchMedia();
 
 			screen.add("(min-aspect-ratio: 1/1)", () => {
@@ -1174,9 +1173,8 @@ var detailview = {
 						y: thumb.offsetHeight * -1
 					}, {
 						y: 0,
-						ease: "linear",
-						duration: length
-					}, 0);
+						ease: "linear"
+					});
 
 					return tl;
 				}, tl => {

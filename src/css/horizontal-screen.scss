@@ -415,7 +415,9 @@ div>.vertical {
 	}
 }
 
-.style-spread-big {
+.style-spread--big {
+	@extend .style-spread;
+
 	.thumbs {
 		@media (min-width: mixins.$screen-wide) {
 			flex: none;
@@ -442,6 +444,43 @@ div>.vertical {
 	}
 }
 
+/* Style spread left */
+.style-spread--left {
+	@extend %style-spread;
+
+	.text {
+		flex: none;
+		width: 380px;
+		margin-left: 50px;
+
+		@media (min-width: mixins.$screen-wide) {
+			margin-left: 100px;
+		}
+	}
+
+	.thumbs {
+		display: flex;
+		flex: 0;
+		margin-top: 125px;
+	}
+
+	picture {
+		width: 300px;
+		transform-origin: 0;
+		transform: rotate(-5deg);
+
+		@media (min-width: mixins.$screen-medium) {
+			width: 350px;
+		}
+
+		@media (min-width: mixins.$screen-abitwide) {
+			width: 428px;
+		}
+	}
+
+}
+
+/* Style plain */
 .style-plain {
 	@extend %style-spread;
 	gap: var(--padl);
@@ -537,43 +576,6 @@ div>.vertical {
 	picture {
 		max-width: calc(2.5 * var(--pic-w))
 	}
-}
-
-
-/* Style text on the left and image spread like fan */
-.style-spread-left {
-	@extend %style-spread;
-
-	.text {
-		flex: none;
-		width: 380px;
-		margin-left: 50px;
-
-		@media (min-width: mixins.$screen-wide) {
-			margin-left: 100px;
-		}
-	}
-
-	.thumbs {
-		display: flex;
-		flex: 0;
-		margin-top: 125px;
-	}
-
-	picture {
-		width: 300px;
-		transform-origin: 0;
-		transform: rotate(-5deg);
-
-		@media (min-width: mixins.$screen-medium) {
-			width: 350px;
-		}
-
-		@media (min-width: mixins.$screen-abitwide) {
-			width: 428px;
-		}
-	}
-
 }
 
 /* Style that look like table */

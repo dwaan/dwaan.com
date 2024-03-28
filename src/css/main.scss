@@ -1272,7 +1272,6 @@ header {
 
 
 /* Style text on the left and image spread like fan */
-
 %style-spread {
 	display: flex;
 	flex-direction: row;
@@ -1321,7 +1320,9 @@ header {
 	}
 }
 
-.style-spread-big {
+.style-spread--big {
+	@extend .style-spread;
+
 	picture {
 		display: block;
 
@@ -1339,7 +1340,8 @@ header {
 	}
 }
 
-.style-spread-left {
+/* Style spread left */
+.style-spread--left {
 	@extend %style-spread;
 
 	.text {
@@ -1351,6 +1353,8 @@ header {
 	}
 }
 
+
+/* Style plain */
 .style-plain {
 	@extend %style-spread;
 
@@ -1422,15 +1426,20 @@ header {
 		flex-flow: row nowrap;
 		margin: 0 -30px;
 		flex: none;
+		height: calc(var(--pic-h) + (var(--pic-m) * 3));
 	}
 
 	picture {
 		position: relative;
-		width: var(--pic-w);
-		height: auto;
+		height: var(--pic-h);
+		width: auto;
 		margin: 0 30px;
 		align-self: flex-start;
 		overflow: clip;
+	}
+
+	img {
+		width: auto;
 	}
 }
 
@@ -1892,15 +1901,12 @@ header {
 		max-width: 400px;
 	}
 
-	picture {
-
-		&,
-		img {
-			width: 100%;
-			height: auto;
-			border-radius: 0;
-			box-shadow: none !important;
-		}
+	picture,
+	img {
+		width: 100%;
+		height: auto;
+		border-radius: 0;
+		box-shadow: none!important;
 	}
 }
 
