@@ -933,6 +933,11 @@ div>.vertical {
 	padding: 0
 }
 
+/* Style slideshow small */
+.style-slideshow--small {
+	@extend .style-slideshow;
+}
+
 /* Style staggered content */
 .style-staggered {
 	@extend %style-spread;

@@ -166,7 +166,7 @@
 
 		<hr />
 
-		<section class="middle style-slideshow style-slideshow-small snap-bottom">
+		<section class="middle style-slideshow--small snap-bottom">
 			<noscript class="hidden">
 				<h4>Mobile Website</h4>
 			</noscript>

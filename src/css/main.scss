@@ -1767,8 +1767,7 @@ header {
 		right: calc(50vw - 32.5vw - 100px);
 	}
 
-	picture,
-	picture img {
+	picture {
 		width: 65vw;
 	}
 
@@ -1804,7 +1803,9 @@ header {
 	}
 }
 
-.style-slideshow-small {
+.style-slideshow--small {
+	@extend .style-slideshow;
+
 	.before {
 		left: var(--padx);
 		right: initial;
@@ -1820,10 +1821,6 @@ header {
 	picture {
 		width: 60vw;
 		transform: rotate(-3deg);
-
-		img {
-			width: 100%;
-		}
 	}
 
 	li {

@@ -929,7 +929,7 @@ var detailview = {
 
 		// Style - Slideshow
 		// Full and big
-		next.querySelectorAll(".style-slideshow").forEach(el => {
+		next.querySelectorAll(".style-slideshow, .style-slideshow--small").forEach(el => {
 			// Add navigation
 			el.insertAdjacentHTML('beforeend', "<div class='before'></div><div class='after'></div>");
 			// Variables
@@ -995,13 +995,12 @@ var detailview = {
 			}
 			that.navigationHide();
 			// Scroll events
-			gsap.utils.toArray(that.slideshowChild).forEach(function (element, index) {
+			gsap.utils.toArray(that.slideshowChild).forEach((element, _) => {
 				scroll.push(tl => {
 					return tl;
 				}, tl => {
 					return ScrollTrigger.create({
 						trigger: element,
-						// scroller: that.slideshowScroll,
 						horizontal: true,
 						start: "0 0",
 						end: "100% 0",
@@ -1027,7 +1026,7 @@ var detailview = {
 					onComplete: this.navigationHide
 				});
 			}
-			that.before.addEventListener("click", function (e) {
+			that.before.addEventListener("click", _ => {
 				gsap.timeline({
 					defaults: {
 						ease: "expo"
@@ -1044,18 +1043,18 @@ var detailview = {
 			var screen = gsap.matchMedia();
 
 			screen.add("(min-aspect-ratio: 1/1)", () => {
-				hoverEvents([that.before], function (e) {
+				hoverEvents([that.before], _ => {
 					gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
 						x: 20
 					});
-				}, function (e) {
+				}, _ => {
 					gsap.to(that.slideshowScroll.querySelectorAll('li picture'), {
 						x: 0
 					});
 				});
 			});
 			//
-			that.after.addEventListener("click", function (e) {
+			that.after.addEventListener("click", _ => {
 				gsap.timeline({
 					defaults: {
 						ease: "expo"
@@ -1083,6 +1082,7 @@ var detailview = {
 				});
 			});
 			// Scroll animation
+			// Appear animation for pictures
 			scroll.push(tl => {
 				tl.fromTo(that.slideshowScroll, {
 					opacity: 0,
@@ -1099,11 +1099,11 @@ var detailview = {
 					trigger: that,
 					start: "12.5% 90%",
 					end: "50% 90%",
-					scrub: reduceMotionFilter() ? true : 1,
+					scrub: reduceMotionFilter(2),
 					animation: tl
 				});
 			});
-			//
+			// Appear animation for arrow
 			scroll.push(tl => {
 				tl.fromTo(that.before, {
 					x: -100
@@ -1124,19 +1124,29 @@ var detailview = {
 					trigger: that.before,
 					start: "0 90%",
 					end: (window.innerHeight / 5) + " 90%",
-					scrub: reduceMotionFilter() ? true : 1,
+					scrub: reduceMotionFilter(2),
 					animation: tl
 				});
 			});
 		});
 		// Smaller one
-		next.querySelectorAll(".style-slideshow-small").forEach(el => {
+		next.querySelectorAll(".style-slideshow--small").forEach(el => {
 			scroll.push(tl => {
 				tl.fromTo(el.querySelectorAll("picture"), {
 					x: "200%"
 				}, {
 					x: 0,
-					ease: "expo.out"
+					ease: "ease.out"
+				}, 0);
+
+				tl.fromTo(el.querySelectorAll("picture"), {
+					opacity: 0,
+					y: "50%",
+				}, {
+					opacity: 1,
+					y: "0%",
+					ease: "ease.out",
+					stagger: .1
 				}, 0);
 
 				return tl;
@@ -1145,7 +1155,7 @@ var detailview = {
 					trigger: el,
 					start: "0 90%",
 					end: "50% 90%",
-					scrub: reduceMotionFilter() ? true : .75,
+					scrub: reduceMotionFilter(2),
 					animation: tl
 				});
 			});

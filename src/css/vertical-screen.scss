@@ -881,10 +881,10 @@ div>.vertical {
 	}
 }
 
-.style-slideshow-small {
+.style-slideshow--small {
+	@extend .style-slideshow;
 
-	picture,
-	picture img {
+	picture {
 		width: calc((100vw - (3 * var(--padx))) / 2);
 	}
 
