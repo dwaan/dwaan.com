@@ -4,6 +4,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import barba from '@barba/core';
 // Helper
 import { _q, _qAll, konami, removeClass } from './helpers/helper';
 import displayRoundedCorner from './helpers/roundedcorner';
