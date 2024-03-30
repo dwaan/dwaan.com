@@ -1,6 +1,6 @@
 "use strict";
 
-import { gsap } from "gsap/all";
+import { gsap } from 'gsap';
 import { _q, _qAll, reduceMotionFilter } from '../helpers/helper';
 
 var replurkview = {

@@ -1,6 +1,6 @@
 "use strict";
 
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { _q, removeStyle, addClass, removeClass, reduceMotionFilter } from './helper';
 
 // Animate functions

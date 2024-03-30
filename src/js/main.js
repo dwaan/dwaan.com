@@ -1,7 +1,10 @@
 "use strict";
 
 // Plugins
-import { gsap, ScrollTrigger, ScrollToPlugin } from 'gsap/all';
+gsa
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import barba from '@barba/core';
 // Helper
 import { _q, _qAll, konami, removeClass } from './helpers/helper';

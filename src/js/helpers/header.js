@@ -1,6 +1,7 @@
 "use strict";
 
-import { gsap, ScrollTrigger } from 'gsap/all';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { _q, _qAll, hoverEvents, reduceMotionFilter } from './helper';
 import scroll from "./scroll";
 import darkmode from "./darkmode";

@@ -1,6 +1,7 @@
 "use strict";
 
-import { gsap, ScrollTrigger } from 'gsap/all';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";
@@ -41,10 +42,11 @@ let homeview = {
 					var contentShade = el.querySelectorAll(".cover");
 
 					tl.fromTo(contentLogos, {
-						position: "fixed",
+						position: "relative",
 						top: 0,
 						y: window.innerHeight * 1 / 3
 					}, {
+						position: "fixed",
 						y: 0,
 						ease: "linear",
 						duration: length

@@ -1,6 +1,6 @@
 "use strict";
 
-import gsap from "gsap";
+import { gsap } from 'gsap';
 import flare from "../helpers/flares.js";
 import { hoverEvents, reduceMotionFilter } from "../helpers/helper";
 

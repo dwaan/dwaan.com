@@ -1,6 +1,6 @@
 "use strict";
 
-import gsap from "gsap";
+import { gsap } from 'gsap';
 import { _q, removeClass, addClass, reduceMotionFilter } from "./helper";
 
 /**

@@ -1,6 +1,6 @@
 "use strict";
 
-import { gsap, ScrollTrigger } from 'gsap/all';
+import { gsap } from 'gsap';
 import { _q, _qAll, waitForImg, reduceMotionFilter, imgLoadedEvent } from './helper';
 
 // Loader functions
