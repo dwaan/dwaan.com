@@ -1,12 +1,12 @@
 {
-  "name": "Dwan homepage",
+  "name": "Dwan",
   "short_name": "Dwan",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#fff",
   "description": "Hello, my name is Dwan!",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "icons": [
     {
       "src": "/android-icon-36x36.png",
