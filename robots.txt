@@ -8,4 +8,7 @@ Disallow: /dwaan/
 Disallow: /dwaan/src/
 Disallow: /dwaan/v1/
 Disallow: /dwaan/v1/src/
+Disallow: /src/
+Disallow: /v1/
+Disallow: /v1/src/
 Disallow: /demo/
