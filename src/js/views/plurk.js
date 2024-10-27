@@ -9,7 +9,7 @@ var replurkview = {
 	replurk2020view: {
 		namespace: 'replurk2020',
 		beforeEnter: async data => {
-			const replurk = await import('../helpers/replurk.js');
+			const replurk = await import('../replurk/main.js');
 			replurkview.replurk2020 = new replurk.default(2020);
 
 			var next = data.next.container;
@@ -26,7 +26,7 @@ var replurkview = {
 	replurk2021view: {
 		namespace: 'replurk2021',
 		beforeEnter: async data => {
-			const replurk = await import('../helpers/replurk.js');
+			const replurk = await import('../replurk/main.js');
 			replurkview.replurk2021 = new replurk.default(2021);
 
 			var next = data.next.container;
@@ -48,7 +48,7 @@ var replurkview = {
 	replurk2022view: {
 		namespace: 'replurk2022',
 		beforeEnter: async data => {
-			const replurk = await import('../helpers/replurk.js');
+			const replurk = await import('../replurk/main.js');
 			replurkview.replurk2022 = new replurk.default(2022);
 
 			var next = data.next.container;
@@ -70,7 +70,7 @@ var replurkview = {
 	replurk2023view: {
 		namespace: 'replurk2023',
 		beforeEnter: async data => {
-			const replurk = await import('../helpers/replurk.js');
+			const replurk = await import('../replurk/main.js');
 			replurkview.replurk2023 = new replurk.default(2023);
 
 			var next = data.next.container;
@@ -92,7 +92,7 @@ var replurkview = {
 	replurk2024view: {
 		namespace: 'replurk2024',
 		beforeEnter: async data => {
-			const replurk = await import('../helpers/replurk.js');
+			const replurk = await import('../replurk/main.js');
 			replurkview.replurk2024 = new replurk.default(2024);
 
 			var next = data.next.container;

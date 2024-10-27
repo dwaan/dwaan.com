@@ -9,203 +9,11 @@ import animate from "../helpers/animate.js";
 import html2canvas from "html2canvas";
 import { _q, _qAll, hasClass, plural, monthNames, animateNumber, datediff, pluralinwords, reduceMotionFilter, waitForImg } from '../helpers/helper.js';
 
-/*
-    Simple span element object:
-
-    1. update(text): update the content with text value, and animate it if it's number
-    2. updateHTML(text): update the content with html value
-*/
-
-var iconLink = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><path id="right" d="M19.188,12.001c0,1.1-0.891,2.015-1.988,2.015l-4.195-0.015C13.543,15.089,13.968,16,15.002,16h3C19.658,16,21,13.657,21,12s-1.342-4-2.998-4h-3c-1.034,0-1.459,0.911-1.998,1.999l4.195-0.015C18.297,9.984,19.188,10.901,19.188,12.001z"/><path id="center" d="M8,12c0,0.535,0.42,1,0.938,1h6.109c0.518,0,0.938-0.465,0.938-1c0-0.534-0.42-1-0.938-1H8.938C8.42,11,8,11.466,8,12z"/><path id="left" d="M4.816,11.999c0-1.1,0.891-2.015,1.988-2.015L11,9.999C10.461,8.911,10.036,8,9.002,8h-3c-1.656,0-2.998,2.343-2.998,4s1.342,4,2.998,4h3c1.034,0,1.459-0.911,1.998-1.999l-4.195,0.015C5.707,14.016,4.816,13.099,4.816,11.999z"/></svg>';
-class span {
-    constructor(classname, text) {
-        this.el = document.createElement('span');
-        this.el.setAttribute("class", classname);
-        this.el.innerHTML = text;
-    }
-
-    update(text) {
-        animateNumber(this.el.textContent, text, (text) => {
-            this.el.textContent = text;
-        });
-    }
-
-    updateHTML(text) {
-        this.el.innerHTML = text;
-    }
-}
-
-/*
-    Color randomizer
-
-    1. colors: array of colors value
-    2. getRandomColor(): get the randomized color from colors list
-*/
-class colors {
-    constructor() {
-        this.oldcolor = "";
-        this.randomcolors = [];
-
-        const allColorArrays = [
-            [
-                'rgb(63,94,251)',     // Dodger Blue
-                'rgb(252,70,107)',    // Radical Red
-                'rgb(34,193,195)',    // Light Sea Green
-                'rgb(253,187,45)',    // Goldenrod
-                'rgb(195,34,190)',    // Deep Pink
-                'rgb(219,158,0)',     // Golden Yellow
-                'rgb(75,231,152)',    // Medium Spring Green
-                'rgb(195,34,103)',    // Cerise
-                'rgb(45,182,253)'     // Dodger Blue (Lighter)
-            ]
-            // [
-            //     "rgb(0, 0, 139)",     // Dark Blue
-            //     "rgb(0, 128, 128)",   // Teal
-            //     "rgb(0, 100, 0)",     // Dark Green
-            //     "rgb(139, 0, 0)",     // Dark Red
-            //     "rgb(128, 0, 128)",   // Purple
-            //     "rgb(255, 140, 0)",   // Dark Orange
-            //     "rgb(75, 0, 130)",    // Indigo
-            //     "rgb(128, 128, 0)",   // Olive
-            //     "rgb(106, 90, 205)"   // Slate Blue
-            // ],
-            // [
-            //     "rgb(60, 60, 160)",    // Dark Pastel Blue
-            //     "rgb(0, 120, 120)",    // Dark Pastel Teal
-            //     "rgb(60, 80, 60)",     // Dark Pastel Green
-            //     "rgb(120, 60, 60)",    // Dark Pastel Red
-            //     "rgb(100, 60, 100)",   // Dark Pastel Purple
-            //     "rgb(180, 100, 0)",    // Dark Pastel Orange
-            //     "rgb(50, 30, 80)",     // Dark Pastel Indigo
-            //     "rgb(90, 90, 0)",      // Dark Pastel Olive
-            //     "rgb(80, 70, 140)"     // Dark Pastel Slate Blue
-            // ],
-            // [
-            //     "rgb(70, 70, 170)",    // Darker Pastel Blue
-            //     "rgb(170, 70, 90)",    // Darker Pastel Red
-            //     "rgb(40, 170, 170)",   // Darker Pastel Cyan
-            //     "rgb(170, 130, 40)",   // Darker Pastel Yellow
-            //     "rgb(140, 40, 140)",   // Darker Pastel Magenta
-            //     "rgb(200, 120, 0)",    // Darker Pastel Orange
-            //     "rgb(50, 200, 120)",   // Darker Pastel Green
-            //     "rgb(140, 40, 90)",    // Darker Pastel Purple
-            //     "rgb(70, 160, 210)"    // Darker Pastel Blue-Green
-            // ],
-            // [
-            //     "rgb(0, 200, 0)",     // Darker Contrast Neon Green
-            //     "rgb(255, 255, 70)",  // Darker Contrast Yellow
-            //     "rgb(0, 150, 200)",    // Darker Contrast Neon Blue
-            //     "rgb(0, 200, 150)",    // Darker Contrast Cyan
-            //     "rgb(200, 0, 200)",    // Darker Contrast Neon Purple
-            //     "rgb(120, 200, 0)",    // Darker Contrast Neon Yellow-Green
-            //     "rgb(200, 120, 0)",    // Darker Contrast Neon Orange
-            //     "rgb(0, 80, 200)",     // Darker Contrast Light Neon Blue
-            //     "rgb(200, 0, 80)"      // Darker Contrast Neon Pink
-            // ],
-            // [
-            //     "rgb(51, 51, 51)",     // Dark Gray
-            //     "rgb(153, 153, 0)",    // Olive
-            //     "rgb(0, 51, 102)",     // Dark Blue
-            //     "rgb(102, 0, 0)",      // Dark Red
-            //     "rgb(0, 0, 0)",        // Black
-            //     "rgb(128, 64, 0)",     // Brown
-            //     "rgb(51, 0, 51)",      // Dark Purple
-            //     "rgb(0, 102, 102)",    // Dark Cyan
-            //     "rgb(77, 77, 77)"      // Charcoal Gray
-            // ]
-        ];
-
-        const seconds = Math.floor(Date.now() / 1000); // Get current time in seconds
-        const arrayIndex = seconds % allColorArrays.length; // Use seconds to determine the index
-        this.colors = allColorArrays[arrayIndex];
-    }
-
-    getRandomColor() {
-        var color;
-        do {
-            this.randomcolors = gsap.utils.shuffle(this.colors).slice();
-        } while (this.oldcolor == (color = this.randomcolors.pop()));
-        this.oldcolor = color;
-        return color;
-    }
-}
-
-/*
-    Plurk element object spesification:
-
-    1. id: contain the id name
-    2. user: contain user object
-    3. attached: status of element is attached in DOM or not
-    4. create(): create the DOM element
-    4. destroy(): remove the DOM element
-    4. update(): update the DOM element based on it's current value
-    5. insertTo(element): insert DOM element to spesific element, also will check if it's already created or not
-
-*/
-class plurkerElement {
-    constructor(id, data, avatarurl, customcreate) {
-        this.id = id;
-        this.user = data;
-        this.user_id = data.id;
-        this.value = data.nick_name;
-        this.nick_name = data.nick_name;
-        this.attached = false;
-        this.hidden = true;
-        this.count = 1;
-        this.position = 0;
-        this.customcreate = customcreate;
-        this.el = document.createElement('a');
-        this.created = false;
-        this.avatarurl = avatarurl;
-        this.counts = new span('count', this.count);
-    }
-
-    create() {
-        this.created = true;
-
-        this.el.setAttribute("id", this.id + this.user_id);
-        this.el.setAttribute("class", 'plurkers');
-        this.el.setAttribute("href", 'https://plurk.com/' + this.user.nick_name);
-        this.el.setAttribute("target", '_BLANK');
-
-        if (!this.customcreate) {
-            this.avatar = new span('avatar', '<img src="' + this.avatarurl + '" />');
-            this.name = new span('name', this.user.display_name);
-            this.counts = new span('count', this.count);
-            this.el.appendChild(this.avatar.el);
-            this.el.appendChild(this.name.el);
-            this.el.appendChild(this.counts.el);
-        } else {
-            this.customcreate(this);
-        }
-    }
-
-    insertTo(element) {
-        if (!this.created) this.create();
-
-        this.attached = true;
-        element.insertAdjacentElement("beforeend", this.el);
-    }
-
-    destroy() {
-        this.attached = false;
-
-        if (this.el) {
-            this.el.remove();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    update() {
-        // Only update when it's attached
-        if (this.attached) {
-            this.counts.update(this.count);
-        }
-    }
-}
-
+import iconLink from "./icons.js";
+import span from "./span.js";
+import colors from "./colors.js";
+import element from "./element.js";
+import friends from "./friends.js";
 
 /*
     Replurk class
@@ -218,98 +26,8 @@ class replurk {
     // Plurker profile object
     me = { "id": 3203568, "has_profile_image": 1, "timeline_privacy": 0, "nick_name": "dwan", "display_name": "Dwan", "date_of_birth": "Sat, 29 Oct 1983 00:01:00 GMT", "avatar": 41917598, "gender": 1, "karma": 199.24, "premium": true, "verified_account": false, "dateformat": 3, "default_lang": "en", "friend_list_privacy": "public", "name_color": "FFA59A", "full_name": "Dwan B.", "location": "Tel Aviv-Yafo, Dan, Israel", "timezone": "Asia/Jerusalem", "phone_verified": 0, "bday_privacy": 1, "plurks_count": 14598, "response_count": 79484, "pinned_plurk_id": 0, "background_id": 0, "show_ads": false, "show_location": 0, "profile_views": 36112, "avatar_small": "https://avatars.plurk.com/3203568-small41917598.gif", "avatar_medium": "https://avatars.plurk.com/3203568-medium41917598.gif", "avatar_big": "https://avatars.plurk.com/3203568-big41917598.jpg", "about": "Mr. Goat\u2019s dad and full-time husband", "about_renderred": "Mr. Goat\u2019s dad and full-time husband", "page_title": "The world revolve around me", "recruited": 14, "relationship": "married", "friends_count": 571, "fans_count": 498, "join_date": "Wed, 15 Oct 2008 07:48:05 GMT", "privacy": "world", "accept_private_plurk_from": "all", "post_anonymous_plurk": false, "badges": ["10_invites", "14", "9", "10000_views", "10000_plurks", "50000_comments", "upload_profile_image", "50_fans", "coin"], "link_facebook": false, "setup_facebook_sync": false, "setup_twitter_sync": false, "setup_weibo_sync": false, "filter": { "porn": 2, "anonymous": 0, "keywords": null }, "anniversary": { "years": 13, "days": 27 }, "phone_number": null, "creature": 0, "creature_url": null, "creature_special": 1, "creature_special_url": null };
 
-    /*
-        Friends object spesification:
-
-        1. data: contains all the friends collection data
-        2. add(data): add friend to friends collection data
-        3. find(user_id): return friend data based on their id
-        4. findByUsername(nick_name): return friend data based on their nick name
-        5. getAvatar(user_id): return avatar url based on their id for from friends collection data
-        6. getAvatarByUsername(user_id): return avatar url based on their nick name for from friends collection data
-    */
-    friends = {
-        data: {},
-        unavailable: [],
-        parent: this,
-        init: function () {
-            this.data = {};
-        },
-        add: function (new_friends) {
-            Object.assign(this.data, new_friends);
-        },
-        find: async function (user_id) {
-            if (this.unavailable.findIndex(el => el == user_id) >= 0) return false;
-
-            if (this.data && this.data[user_id]) {
-                return this.data[user_id];
-            } else {
-                var result = await api.call("?fetch=APP&url=/Profile/getPublicProfile&user_id=" + user_id);
-
-                if (result.success) {
-                    var temp = {};
-                    temp[result.message.user_info.id] = result.message.user_info;
-                    this.add(temp);
-                    return result.message.user_info;
-                } else {
-                    this.unavailable.push(user_id);
-                    return false;
-                }
-            }
-        },
-        findByUsername: async function (nick_name) {
-            var user_id = false;
-
-            if (this.unavailable.findIndex(el => el == nick_name) >= 0) return false;
-
-            for (var index in this.data) {
-                if (this.data[index].nick_name.toLowerCase() == nick_name.toLowerCase()) {
-                    user_id = index;
-                    break;
-                }
-            }
-
-            if (user_id) {
-                return this.data[user_id];
-            } else {
-                var result = await api.call("?fetch=APP&url=/Profile/getPublicProfile&nick_name=" + nick_name);
-
-                if (result.success) {
-                    var temp = {};
-                    temp[result.message.user_info.id] = result.message.user_info;
-                    this.add(temp);
-                    return result.message.user_info;
-                } else {
-                    this.unavailable.push(nick_name);
-                    return false;
-                }
-            }
-        },
-        getAvatar: function (user_id) {
-            if (user_id && this.data && this.data[user_id]) {
-                if (this.data[user_id].has_profile_image) {
-                    var avatar = "";
-                    if (this.data[user_id].avatar) avatar = this.data[user_id].avatar;
-                    return 'https://avatars.plurk.com/' + user_id + '-big' + avatar + '.jpg';
-                }
-            }
-            return 'https://plurk.com/static/default_big.jpg';
-        },
-        getAvatarByUsername: function (user_name) {
-            var user_id = false;
-
-            if (user_name) {
-                for (var index in this.data) {
-                    if (this.data[index].nick_name.toLowerCase() == user_name.toLowerCase()) {
-                        user_id = index;
-                        break;
-                    }
-                }
-            }
-
-            return this.getAvatar(user_id);
-        }
-    }
+    // Friends object
+    friends = new friends()
 
     // Statistics plurker object renderer
     statistics = {
@@ -676,35 +394,33 @@ class replurk {
 				</div>\
 			'));
         },
-        drawUserList: async function (style, id, title, list) {
+        drawUserList: async function (style, id, title, users) {
             var html = "";
-            var max = list.length >= 5 ? 5 : list.length;
+            var max = users.length >= 5 ? 5 : users.length;
             var length = reduceMotionFilter(1);
 
-            this.drawHTML(style + " drawuserlist movetitle " + id, title, "<span class='info'>Downloading user data</span>");
+            this.drawHTML(`${style} drawuserlist movetitle ${id}`, title, "<span class='info'>Downloading user data</span>");
             for (var index = 0; index < max; index++) {
-                var value = list[index];
-                if (value) {
-                    var friends = this.parent.friends;
-                    var friend = await friends.find(value.id);
-                    if (friend) {
-                        var plurker = new plurkerElement(value.id, friend, "", plurker => {
-                            plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user.id) + '" />');
-                            plurker.name = new span('name', plurker.user.display_name);
-                            plurker.counts = new span('count', value.count);
-                            plurker.el.appendChild(plurker.avatar.el);
-                            plurker.el.appendChild(plurker.name.el);
-                            plurker.el.appendChild(plurker.counts.el);
-                            plurker.el.setAttribute("href", 'https://plurk.com/' + plurker.user.nick_name);
-                        });
-                        plurker.create();
-                        html += plurker.el.outerHTML;
-                    } else {
-                        max++;
-                    }
+                let user = users[index];
+                let friends = this.parent.friends
+                let friend = await friends.find(user.id);
+                if (friend) {
+                    var plurker = new element(user.id, friend, "", plurker => {
+                        plurker.avatar = new span('avatar', `<img src="${friends.getAvatar(plurker.user.id)}" />`);
+                        plurker.name = new span('name', plurker.user.display_name);
+                        plurker.counts = new span('count', user.count);
+                        plurker.el.appendChild(plurker.avatar.el);
+                        plurker.el.appendChild(plurker.name.el);
+                        plurker.el.appendChild(plurker.counts.el);
+                        plurker.el.setAttribute("href", `https://plurk.com/${plurker.user.nick_name}`);
+                    });
+                    plurker.create();
+                    html += plurker.el.outerHTML;
+                } else {
+                    max++;
                 }
             }
-            this.el.querySelector("." + id + " .htmlcontent").innerHTML = html;
+            this.el.querySelector(`.${id} .htmlcontent`).innerHTML = html;
 
             // Stagger animation
             if (id == 'mostinteraction' || id == 'mvp') {
@@ -873,9 +589,7 @@ class replurk {
     // Most statistics object renderer
     most = {
         parent: this,
-        sort: function (a, b) {
-            return b.count - a.count;
-        },
+        sort: (a, b) => b.count - a.count,
         // Find and count all based on regex
         findregex: function (regex, replace, content, storage) {
             var result = content.match(regex);
@@ -929,9 +643,9 @@ class replurk {
                 });
 
                 if (index < 0) {
-                    var friends = this.parent.friends;
+                    let friends = this.parent.friends
                     var user = await friends.find(response.user_id);
-                    this.data.push(new plurkerElement('mostresponders', user, friends.getAvatar(user.id)));
+                    this.data.push(new element('mostresponders', user, friends.getAvatar(user.id)));
                 } else {
                     this.data[index].count++;
                 }
@@ -948,10 +662,11 @@ class replurk {
                 }
             },
             draw: function () {
+                let friends = this.parent.friends
                 var index = 0;
                 if (this.data.length > 0) {
                     while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-                    if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
+                    if (this.data[index]) this.parent.statistics.drawImage("avatar", friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
                 }
             }
         },
@@ -971,11 +686,12 @@ class replurk {
                         this.data[idx].position = this.data.length;
 
                         if (index <= max) {
-                            var user = await this.parent.friends.findByUsername(this.data[idx].value);
+                            let friends = this.parent.friends
+                            var user = await friends.findByUsername(this.data[idx].value);
 
                             if (this.data[idx].el == undefined) {
-                                this.data[idx] = new plurkerElement('mostmentionedbyme', user, "", plurker => {
-                                    plurker.avatar = new span('avatar', '<img src="' + this.parent.friends.getAvatar(plurker.user_id) + '" />');
+                                this.data[idx] = new element('mostmentionedbyme', user, "", plurker => {
+                                    plurker.avatar = new span('avatar', '<img src="' + friends.getAvatar(plurker.user_id) + '" />');
                                     plurker.name = new span('name', "@" + plurker.nick_name);
                                     plurker.counts = new span('count', plurker.count);
                                     plurker.el.appendChild(plurker.avatar.el);
@@ -996,10 +712,11 @@ class replurk {
                 }
             },
             draw: function () {
+                let friends = this.parent.friends
                 var index = 0;
                 if (this.data.length > 0) {
                     while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-                    if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count);
+                    if (this.data[index]) this.parent.statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count);
                 }
             }
         },
@@ -1142,49 +859,34 @@ class replurk {
         },
         responses: {
             parent: this,
-            sort: function (a, b) {
-                return b.response_count - a.response_count;
-            },
-            draw: function (data) {
-                data.sort(this.sort);
-                for (var index in data) {
-                    var value = data[index];
-                    if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);
-                        return;
-                    }
+            sort: (a, b) => b.replurkers_count - a.replurkers_count,
+            draw: function (posts) {
+                var post
+                posts.sort(this.sort)
+                if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
+                    this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(post.posted), post.content, post.response_count);
                 }
             }
         },
         replurk: {
             parent: this,
-            sort: function (a, b) {
-                return b.replurkers_count - a.replurkers_count;
-            },
-            draw: function (data) {
-                data.sort(this.sort);
-                for (var index in data) {
-                    var value = data[index];
-                    if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
-                        return;
-                    }
+            sort: (a, b) => b.replurkers_count - a.replurkers_count,
+            draw: function (posts) {
+                var post
+                posts.sort(this.sort);
+                if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.replurkers_count > 0) {
+                    this.parent.statistics.drawPost('postcontent span2 mostreplurked', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Most Replurked</i> ' + datediff(post.posted), post.content, post.replurkers_count);
                 }
             }
         },
         favorite: {
             parent: this,
-            sort: function (a, b) {
-                return b.favorite_count - a.favorite_count;
-            },
-            draw: function (data) {
-                data.sort(this.sort);
-                for (var index in data) {
-                    var value = data[index];
-                    if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
-                        return;
-                    }
+            sort: (a, b) => b.favorite_count - a.favorite_count,
+            draw: function (posts) {
+                var post
+                posts.sort(this.sort);
+                if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.favorite_count > 0) {
+                    this.parent.statistics.drawPost('postcontent span2 mostfavorited', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Most Loved</i> ' + datediff(post.posted), post.content, post.favorite_count);
                 }
             }
         },
@@ -2186,7 +1888,7 @@ class replurk {
         var next = this.next;
 
         this.me = { id: 0 };
-        this.friends.init();
+        this.friends = new friends()
         this.statistics.init(next);
         this.most.init();
         this.plurks = [];

@@ -74,6 +74,12 @@
             margin: 30vh 0 0 0;
         }
     }
+
+    .links {
+        .icon {
+            background-color: red;
+        }
+    }
 }
 
 .middle.grant {
@@ -286,7 +292,6 @@
         height: initial;
         min-height: initial;
         transition: background-color .5s ease;
-
 
         .anim {
             z-index: 2;

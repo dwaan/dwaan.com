@@ -31,7 +31,7 @@ function js() {
 				clean: true
 			}
 		})))
-		.pipe(gulp.dest('js/'))
+		.pipe(gulp.dest('v2/js/'))
 		.pipe(browserSync.stream());
 }
 
@@ -91,7 +91,7 @@ function css_prefix() {
 	return gulp.src(['src/css/cache/*.css'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('css/'))
+		.pipe(gulp.dest('v2/css/'))
 		.pipe(browserSync.stream());
 }
 
@@ -100,7 +100,7 @@ function php() {
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('v2/'))
 		.pipe(browserSync.stream());
 }
 
@@ -110,7 +110,7 @@ function jpg() {
 		'src/img/*/*.jpg'
 	])
 		.pipe(webp())
-		.pipe(gulp.dest('img/'))
+		.pipe(gulp.dest('v2/img/'))
 		.pipe(browserSync.stream());
 }
 
@@ -120,7 +120,7 @@ function png() {
 		'src/img/*/*.png'
 	])
 		.pipe(webp())
-		.pipe(gulp.dest('img/'))
+		.pipe(gulp.dest('v2/img/'))
 		.pipe(browserSync.stream());
 }
 
@@ -129,15 +129,14 @@ function svg() {
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
-		.pipe(gulp.dest('img/'))
+		.pipe(gulp.dest('v2/img/'))
 		.pipe(browserSync.stream());
 }
 
 function run() {
 	connect.server({
-		hostname: "0.0.0.0",
 		port: 8080,
-		base: "./",
+		base: "v2/",
 		router: "../router.php",
 		keepalive: true,
 		stdio: "ignore",
@@ -160,6 +159,7 @@ function run() {
 	gulp.watch(['src/*.php'], { ignoreInitial: false }, php);
 
 	gulp.watch('gulpfile.js', _ => {
+		connect.closeServer()
 		process.exit(0)
 	});
 }
