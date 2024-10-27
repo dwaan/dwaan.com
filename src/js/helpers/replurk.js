@@ -57,62 +57,62 @@ class colors {
                 'rgb(75,231,152)',    // Medium Spring Green
                 'rgb(195,34,103)',    // Cerise
                 'rgb(45,182,253)'     // Dodger Blue (Lighter)
-            ],
-            [
-                "rgb(0, 0, 139)",     // Dark Blue
-                "rgb(0, 128, 128)",   // Teal
-                "rgb(0, 100, 0)",     // Dark Green
-                "rgb(139, 0, 0)",     // Dark Red
-                "rgb(128, 0, 128)",   // Purple
-                "rgb(255, 140, 0)",   // Dark Orange
-                "rgb(75, 0, 130)",    // Indigo
-                "rgb(128, 128, 0)",   // Olive
-                "rgb(106, 90, 205)"   // Slate Blue
-            ],
-            [
-                "rgb(60, 60, 160)",    // Dark Pastel Blue
-                "rgb(0, 120, 120)",    // Dark Pastel Teal
-                "rgb(60, 80, 60)",     // Dark Pastel Green
-                "rgb(120, 60, 60)",    // Dark Pastel Red
-                "rgb(100, 60, 100)",   // Dark Pastel Purple
-                "rgb(180, 100, 0)",    // Dark Pastel Orange
-                "rgb(50, 30, 80)",     // Dark Pastel Indigo
-                "rgb(90, 90, 0)",      // Dark Pastel Olive
-                "rgb(80, 70, 140)"     // Dark Pastel Slate Blue
-            ],
-            [
-                "rgb(70, 70, 170)",    // Darker Pastel Blue
-                "rgb(170, 70, 90)",    // Darker Pastel Red
-                "rgb(40, 170, 170)",   // Darker Pastel Cyan
-                "rgb(170, 130, 40)",   // Darker Pastel Yellow
-                "rgb(140, 40, 140)",   // Darker Pastel Magenta
-                "rgb(200, 120, 0)",    // Darker Pastel Orange
-                "rgb(50, 200, 120)",   // Darker Pastel Green
-                "rgb(140, 40, 90)",    // Darker Pastel Purple
-                "rgb(70, 160, 210)"    // Darker Pastel Blue-Green
-            ],
-            [
-                "rgb(0, 200, 0)",     // Darker Contrast Neon Green
-                "rgb(255, 255, 70)",  // Darker Contrast Yellow
-                "rgb(0, 150, 200)",    // Darker Contrast Neon Blue
-                "rgb(0, 200, 150)",    // Darker Contrast Cyan
-                "rgb(200, 0, 200)",    // Darker Contrast Neon Purple
-                "rgb(120, 200, 0)",    // Darker Contrast Neon Yellow-Green
-                "rgb(200, 120, 0)",    // Darker Contrast Neon Orange
-                "rgb(0, 80, 200)",     // Darker Contrast Light Neon Blue
-                "rgb(200, 0, 80)"      // Darker Contrast Neon Pink
-            ],
-            [
-                "rgb(51, 51, 51)",     // Dark Gray
-                "rgb(153, 153, 0)",    // Olive
-                "rgb(0, 51, 102)",     // Dark Blue
-                "rgb(102, 0, 0)",      // Dark Red
-                "rgb(0, 0, 0)",        // Black
-                "rgb(128, 64, 0)",     // Brown
-                "rgb(51, 0, 51)",      // Dark Purple
-                "rgb(0, 102, 102)",    // Dark Cyan
-                "rgb(77, 77, 77)"      // Charcoal Gray
             ]
+            // [
+            //     "rgb(0, 0, 139)",     // Dark Blue
+            //     "rgb(0, 128, 128)",   // Teal
+            //     "rgb(0, 100, 0)",     // Dark Green
+            //     "rgb(139, 0, 0)",     // Dark Red
+            //     "rgb(128, 0, 128)",   // Purple
+            //     "rgb(255, 140, 0)",   // Dark Orange
+            //     "rgb(75, 0, 130)",    // Indigo
+            //     "rgb(128, 128, 0)",   // Olive
+            //     "rgb(106, 90, 205)"   // Slate Blue
+            // ],
+            // [
+            //     "rgb(60, 60, 160)",    // Dark Pastel Blue
+            //     "rgb(0, 120, 120)",    // Dark Pastel Teal
+            //     "rgb(60, 80, 60)",     // Dark Pastel Green
+            //     "rgb(120, 60, 60)",    // Dark Pastel Red
+            //     "rgb(100, 60, 100)",   // Dark Pastel Purple
+            //     "rgb(180, 100, 0)",    // Dark Pastel Orange
+            //     "rgb(50, 30, 80)",     // Dark Pastel Indigo
+            //     "rgb(90, 90, 0)",      // Dark Pastel Olive
+            //     "rgb(80, 70, 140)"     // Dark Pastel Slate Blue
+            // ],
+            // [
+            //     "rgb(70, 70, 170)",    // Darker Pastel Blue
+            //     "rgb(170, 70, 90)",    // Darker Pastel Red
+            //     "rgb(40, 170, 170)",   // Darker Pastel Cyan
+            //     "rgb(170, 130, 40)",   // Darker Pastel Yellow
+            //     "rgb(140, 40, 140)",   // Darker Pastel Magenta
+            //     "rgb(200, 120, 0)",    // Darker Pastel Orange
+            //     "rgb(50, 200, 120)",   // Darker Pastel Green
+            //     "rgb(140, 40, 90)",    // Darker Pastel Purple
+            //     "rgb(70, 160, 210)"    // Darker Pastel Blue-Green
+            // ],
+            // [
+            //     "rgb(0, 200, 0)",     // Darker Contrast Neon Green
+            //     "rgb(255, 255, 70)",  // Darker Contrast Yellow
+            //     "rgb(0, 150, 200)",    // Darker Contrast Neon Blue
+            //     "rgb(0, 200, 150)",    // Darker Contrast Cyan
+            //     "rgb(200, 0, 200)",    // Darker Contrast Neon Purple
+            //     "rgb(120, 200, 0)",    // Darker Contrast Neon Yellow-Green
+            //     "rgb(200, 120, 0)",    // Darker Contrast Neon Orange
+            //     "rgb(0, 80, 200)",     // Darker Contrast Light Neon Blue
+            //     "rgb(200, 0, 80)"      // Darker Contrast Neon Pink
+            // ],
+            // [
+            //     "rgb(51, 51, 51)",     // Dark Gray
+            //     "rgb(153, 153, 0)",    // Olive
+            //     "rgb(0, 51, 102)",     // Dark Blue
+            //     "rgb(102, 0, 0)",      // Dark Red
+            //     "rgb(0, 0, 0)",        // Black
+            //     "rgb(128, 64, 0)",     // Brown
+            //     "rgb(51, 0, 51)",      // Dark Purple
+            //     "rgb(0, 102, 102)",    // Dark Cyan
+            //     "rgb(77, 77, 77)"      // Charcoal Gray
+            // ]
         ];
 
         const seconds = Math.floor(Date.now() / 1000); // Get current time in seconds
@@ -850,23 +850,23 @@ class replurk {
             var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100);
 
             this.parent.most.responses.draw(plurks);
-            this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got <img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> responses ' + ((response_percentage <= 50) ? '<img src="https://api.iconify.design/noto:crying-face.svg" />' : '<img src="https://api.iconify.design/noto:star-struck.svg" />'));
+            this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got <img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> responses ' + ((response_percentage <= 50) ? '<img src="https://api.iconify.design/fluent-emoji:crying-face.svg" />' : '<img src="https://api.iconify.design/fluent-emoji:star-struck.svg" />'));
 
-            this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i><img src="https://api.iconify.design/noto:megaphone.svg" /> ' + plural(this.replurker_count, 'replurk') + '</i>');
+            this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + plural(this.replurker_count, 'replurk') + '</i>');
             this.parent.most.replurk.draw(plurks);
 
             this.parent.most.favorite.draw(plurks);
-            this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i><img src="https://api.iconify.design/noto:red-heart.svg" /> ' + plural(this.favourite_count, 'love') + '</i>');
+            this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + plural(this.favourite_count, 'love') + '</i>');
 
-            this.draw('spansmall privateplurk', this.private_count, 'I posted <i><img src="https://api.iconify.design/noto:lip.svg" /> ' + plural(this.private_count, 'private plurk') + '</i>');
-            this.draw('spansmall whisper', this.whispers_count, 'I posted <i><img src="https://api.iconify.design/noto:face-in-clouds.svg" /> ' + plural(this.whispers_count, 'whisper') + '</i>');
-            this.draw('spansmall porn', this.porn_count, 'I posted <i><img src="https://api.iconify.design/noto:face-with-peeking-eye.svg" /> ' + plural(this.porn_count, 'adult plurk') + '</i>');
+            this.draw('spansmall privateplurk', this.private_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:lip.svg" /> ' + plural(this.private_count, 'private plurk') + '</i>');
+            this.draw('spansmall whisper', this.whispers_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:face-in-clouds.svg" /> ' + plural(this.whispers_count, 'whisper') + '</i>');
+            this.draw('spansmall porn', this.porn_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:face-with-peeking-eye.svg" /> ' + plural(this.porn_count, 'adult plurk') + '</i>');
 
-            this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
-            this.draw('spansmall center coins', this.coins_count, 'I recieved <i><img src="https://api.iconify.design/noto:coin.svg" /> ' + plural(this.coins_count, 'coin') + '</i>');
+            this.draw('span2 responsecount', this.plurks_count + " &rarr; " + this.response_count, 'I received <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>');
+            this.draw('spansmall center coins', this.coins_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:coin.svg" /> ' + plural(this.coins_count, 'coin') + '</i>');
 
-            if (this.favorite_list.length > 0) this.drawUserList("avatar", "loved", 'These Plurkers <i><img src="https://api.iconify.design/noto:red-heart.svg" /> Loved</i> My Posts', this.favorite_list.sort(this.parent.most.sort));
-            if (this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", 'These Plurkers likes to <i><img src="https://api.iconify.design/noto:megaphone.svg" /> Replurked</i> My Posts', this.replurker_list.sort(this.parent.most.sort));
+            if (this.favorite_list.length > 0) this.drawUserList("avatar", "loved", 'These Plurkers <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Loved</i> My Posts', this.favorite_list.sort(this.parent.most.sort));
+            if (this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", 'These Plurkers likes to <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Replurked</i> My Posts', this.replurker_list.sort(this.parent.most.sort));
         }
     };
 
@@ -943,7 +943,7 @@ class replurk {
                     this.data[i].position = this.data.length;
                     if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
                         this.data[i].position = index++;
-                        this.parent.statistics.attach('<i>Top <img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
+                        this.parent.statistics.attach('<i>Top <img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
                     }
                 }
             },
@@ -987,11 +987,11 @@ class replurk {
 
                             if (user.id != this.parent.me.id && user.id != 99999) {
                                 this.data[idx].position = index++;
-                                this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/noto:person-raising-hand-medium-dark-skin-tone.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+                                this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/fluent-emoji:person-raising-hand-light.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
                             }
                         }
 
-                        if (this.data[idx].el) this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/noto:person-raising-hand-medium-dark-skin-tone.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
+                        if (this.data[idx].el) this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/fluent-emoji:person-raising-hand-light.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
                     }
                 }
             },
@@ -1100,7 +1100,7 @@ class replurk {
                     if (this.data[index].links.length > 0) {
                         var link = this.data[index].links[0];
                         var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
-                        result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response"><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + link.response + '</span><span class="replurk"><img src="https://api.iconify.design/noto:megaphone.svg" /> ' + link.replurk + '</span><span class="loved"><img src="https://api.iconify.design/noto:red-heart.svg" /> ' + link.loved + '</span>' + url + '</div></div>';
+                        result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response"><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + link.response + '</span><span class="replurk"><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + link.replurk + '</span><span class="loved"><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + link.loved + '</span>' + url + '</div></div>';
                         max--;
                     }
                     index++;
@@ -1116,7 +1116,7 @@ class replurk {
                     if (this.data[index].pics.length > 0) {
                         var pics = this.data[index].pics[0];
                         var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
-                        result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response"><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + pics.response + '</span><span class="replurk"><img src="https://api.iconify.design/noto:megaphone.svg" /> ' + pics.replurk + '</span><span class="loved"><img src="https://api.iconify.design/noto:red-heart.svg" /> ' + pics.loved + '</span>' + url + '</div></div></div>';
+                        result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response"><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + pics.response + '</span><span class="replurk"><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + pics.replurk + '</span><span class="loved"><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + pics.loved + '</span>' + url + '</div></div></div>';
                         max--;
                     }
                     index++;
@@ -1150,7 +1150,7 @@ class replurk {
                 for (var index in data) {
                     var value = data[index];
                     if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.response_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);
+                        this.parent.statistics.drawPost('postcontent span2 mostresponded', value.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(value.posted), value.content, value.response_count);
                         return;
                     }
                 }
@@ -1166,7 +1166,7 @@ class replurk {
                 for (var index in data) {
                     var value = data[index];
                     if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.replurkers_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i><img src="https://api.iconify.design/noto:megaphone.svg" /> Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
+                        this.parent.statistics.drawPost('postcontent span2 mostreplurked', value.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Most Replurked</i> ' + datediff(value.posted), value.content, value.replurkers_count);
                         return;
                     }
                 }
@@ -1182,7 +1182,7 @@ class replurk {
                 for (var index in data) {
                     var value = data[index];
                     if (value.owner_id == this.parent.me.id && value.plurk_type != 3 && value.favorite_count > 0) {
-                        this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i><img src="https://api.iconify.design/noto:red-heart.svg" /> Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
+                        this.parent.statistics.drawPost('postcontent span2 mostfavorited', value.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Most Loved</i> ' + datediff(value.posted), value.content, value.favorite_count);
                         return;
                     }
                 }
@@ -1223,7 +1223,7 @@ class replurk {
                 }
 
                 try {
-                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i><img src='https://api.iconify.design/noto:speaking-head.svg' /> interact</i> with me", result);
+                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i><img src='https://api.iconify.design/fluent-emoji:speaking-head.svg' /> interact</i> with me", result);
                 } catch {
                     console.info("Error while counting most interacted plurker");
                 }
@@ -1270,7 +1270,7 @@ class replurk {
                 }
 
                 try {
-                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i><img src='https://api.iconify.design/noto:biting-lip.svg' /> MVP</i>", result);
+                    if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i><img src='https://api.iconify.design/fluent-emoji:biting-lip.svg' /> MVP</i>", result);
                 } catch (error) {
                     console.info("Error while counting my mvp", error);
                 }
@@ -1873,17 +1873,17 @@ class replurk {
         // Draw statistic
         this.statistics.title('All Time', 'alltime');
         if (plurker.anniversary.years && plurker.anniversary.days) {
-            this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), 'I posted around <i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+            this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), 'I posted around <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
 
             // Responses
             var oneday = 16;
             if (responses <= oneday) extra = "That's almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>';
             else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>';
-            this.statistics.draw('span2 center responded', responses, 'I responded around <i><img src="https://api.iconify.design/noto:left-speech-bubble.svg" /> ' + plural(responses, "time") + "</i> per day. " + extra + " when I'm not asleep");
+            this.statistics.draw('span2 center responded', responses, 'I responded around <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(responses, "time") + "</i> per day. " + extra + " when I'm not asleep");
 
             var join = new Date(plurker.join_date)
             this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-            this.statistics.draw('spansmall center badges', plurker.badges.length, "I have <i><img src='https://api.iconify.design/noto:shield.svg' /> " + plural(plurker.badges.length, "badge") + "</i> right now");
+            this.statistics.draw('spansmall center badges', plurker.badges.length, "I have <i><img src='https://api.iconify.design/fluent-emoji:shield.svg' /> " + plural(plurker.badges.length, "badge") + "</i> right now");
         } else {
             this.statistics.draw('', '-', "There is no data in my timeline");
             this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");
@@ -2120,40 +2120,40 @@ class replurk {
         this.most.mvp.draw();
 
         // Replurk Badges
-        var gender = "<img src='https://api.iconify.design/noto:crown.svg' /> Leader";
-        if (this.me.gender == 1) gender = "<img src='https://api.iconify.design/noto:crown.svg' /> King";
-        if (this.me.gender == 0) gender = "<img src='https://api.iconify.design/noto:crown.svg' /> Queen";
+        var gender = "<img src='https://api.iconify.design/fluent-emoji:crown.svg' /> Leader";
+        if (this.me.gender == 1) gender = "<img src='https://api.iconify.design/fluent-emoji:crown.svg' /> King";
+        if (this.me.gender == 0) gender = "<img src='https://api.iconify.design/fluent-emoji:crown.svg' /> Queen";
 
-        var tiktok = "<img src='https://api.iconify.design/noto:mirror-ball.svg' />";
-        if (this.me.gender == 1) tiktok = "<img src='https://api.iconify.design/noto:man-dancing-medium-dark-skin-tone.svg' />";
-        if (this.me.gender == 0) tiktok = "<img src='https://api.iconify.design/noto:woman-dancing-medium-dark-skin-tone.svg' />";
+        var tiktok = "<img src='https://api.iconify.design/fluent-emoji:mirror-ball.svg' />";
+        if (this.me.gender == 1) tiktok = "<img src='https://api.iconify.design/fluent-emoji:man-dancing-medium-dark-skin-tone.svg' />";
+        if (this.me.gender == 0) tiktok = "<img src='https://api.iconify.design/fluent-emoji:woman-dancing-medium-dark-skin-tone.svg' />";
 
-        var facebook = "<img src='https://api.iconify.design/noto:older-person.svg' />";
-        if (this.me.gender == 1) facebook = "<img src='https://api.iconify.design/noto:old-man.svg' />";
-        if (this.me.gender == 0) facebook = "<img src='https://api.iconify.design/noto:old-woman.svg' />";
+        var facebook = "<img src='https://api.iconify.design/fluent-emoji:older-person.svg' />";
+        if (this.me.gender == 1) facebook = "<img src='https://api.iconify.design/fluent-emoji:old-man.svg' />";
+        if (this.me.gender == 0) facebook = "<img src='https://api.iconify.design/fluent-emoji:old-woman.svg' />";
 
-        var plurker = "<img src='https://api.iconify.design/noto:person-bowing.svg' />";
-        if (this.me.gender == 1) plurker = "<img src='https://api.iconify.design/noto:man-bowing.svg' />";
-        if (this.me.gender == 0) plurker = "<img src='https://api.iconify.design/noto:woman-bowing.svg' />";
+        var plurker = "<img src='https://api.iconify.design/fluent-emoji:person-bowing.svg' />";
+        if (this.me.gender == 1) plurker = "<img src='https://api.iconify.design/fluent-emoji:man-bowing.svg' />";
+        if (this.me.gender == 0) plurker = "<img src='https://api.iconify.design/fluent-emoji:woman-bowing.svg' />";
 
         this.statistics.title('RePlurk Badges', 'replurkbadges');
         this.statistics.title('What are RePlurk Badges consist of? They are badges based on your activities in Plurk. Currently there are 16 badges in total, for activities such as: creating lots of polls (Polling ' + gender + '), receiving lots of coins (Plurk Coins Billionaire), writing lots of posts (Novelist and Keyboard Warrior), sharing lots of pictures and links (Meme Lord & Missing Link), sharing social medias urls (there are 7 badges), posting lots of adult posts (Adult-er), getting lots of replurks (Trendsetter), and constantly posting in Plurk almost everyday (Active Plurker).', 'replurkbadges description');
-        if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "<img src='https://api.iconify.design/noto:ballot-box-with-ballot.svg' />", "<strong>Polling " + gender + "</strong>");
-        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "<img src='https://api.iconify.design/noto:coin.svg' />", "<strong>Plurk Coins Billionaire</strong>");
-        if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "<img src='https://api.iconify.design/noto:book.svg' />", "<strong>Novelist</strong>");
-        if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall center badges keyboardbadges', "<img src='https://api.iconify.design/noto:keyboard.svg' />", "<strong>Keyboard Warrior</strong>");
-        if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall center badges memebadges', "<img src='https://api.iconify.design/noto:cat.svg' />", "<strong>Meme Lord</strong>");
-        if (this.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall center badges missingbadges', "<img src='https://api.iconify.design/noto:orangutan.svg' />", "<strong>The Missing Link</strong>");
-        if (this.statistics.instagrammer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:camera.svg' />", "<strong>Instagrammer</strong>");
+        if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall center badges pollbadges', "<img src='https://api.iconify.design/fluent-emoji:ballot-box-with-ballot.svg' />", "<strong>Polling " + gender + "</strong>");
+        if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall center badges coinbadges', "<img src='https://api.iconify.design/fluent-emoji:coin.svg' />", "<strong>Plurk Coins Billionaire</strong>");
+        if (this.most.types.words >= 50000) this.statistics.draw('spansmall center badges novelistbadges', "<img src='https://api.iconify.design/fluent-emoji:orange-book.svg' />", "<strong>Novelist</strong>");
+        if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall center badges keyboardbadges', "<img src='https://api.iconify.design/fluent-emoji:keyboard.svg' />", "<strong>Keyboard Warrior</strong>");
+        if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall center badges memebadges', "<img src='https://api.iconify.design/fluent-emoji:cat.svg' />", "<strong>Meme Lord</strong>");
+        if (this.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall center badges missingbadges', "<img src='https://api.iconify.design/fluent-emoji:orangutan.svg' />", "<strong>The Missing Link</strong>");
+        if (this.statistics.instagrammer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:camera.svg' />", "<strong>Instagrammer</strong>");
         if (this.statistics.facebooker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', facebook, "<strong>Facebooker</strong>");
-        if (this.statistics.twitterer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:hatching-chick.svg' />", "<strong>The Real Chief Twit</strong>");
-        if (this.statistics.redditor_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:robot.svg' />", "<strong>/r</strong>");
+        if (this.statistics.twitterer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:hatching-chick.svg' />", "<strong>The Real Chief Twit</strong>");
+        if (this.statistics.redditor_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:robot.svg' />", "<strong>/r</strong>");
         if (this.statistics.tiktoker_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', tiktok, "<strong>Tiktoker</strong>");
-        if (this.statistics.imgurer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:framed-picture.svg' />", "<strong>Imgur-er</strong>");
-        if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/noto:movie-camera.svg' />", "<strong>Youtuber <img src='https://api.iconify.design/noto:sleepy-face.svg' /></strong>");
-        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "<img src='https://api.iconify.design/noto:face-with-peeking-eye.svg' />", "<strong>Adult-er</strong>");
-        if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/noto:trophy.svg' />", "<strong>Trendsetter</strong>");
-        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/noto:military-medal.svg' />", "<strong>Active Plurker " + plurker + "</strong>");
+        if (this.statistics.imgurer_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:framed-picture.svg' />", "<strong>Imgur-er</strong>");
+        if (this.statistics.youtuber_count >= 10) this.statistics.draw('spansmall center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:movie-camera.svg' />", "<strong>Youtuber <img src='https://api.iconify.design/fluent-emoji:sleepy-face.svg' /></strong>");
+        if (this.statistics.porn_count >= 10) this.statistics.draw('spansmall center badges adultbadges', "<img src='https://api.iconify.design/fluent-emoji:face-with-peeking-eye.svg' />", "<strong>Adult-er</strong>");
+        if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:trophy.svg' />", "<strong>Trendsetter</strong>");
+        if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall center badges plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:military-medal.svg' />", "<strong>Active Plurker " + plurker + "</strong>");
 
         this.logSessionStrorageSize();
     }
