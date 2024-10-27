@@ -1,6 +1,6 @@
 "use strict";
 
-import { _q, addClass, removeClass } from "./helper";
+import { _q, addClass, removeClass } from "./helper.js";
 
 /**
  * Displaying rounded corner only on fullscreen

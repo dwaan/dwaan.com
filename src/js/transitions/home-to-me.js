@@ -1,9 +1,9 @@
 "use strict";
 
 import gsap from 'gsap';
-import animate from '../helpers/animate';
-import loader from '../helpers/loader';
-import { removeStyle } from '../helpers/helper';
+import animate from '../helpers/animate.js';
+import loader from '../helpers/loader.js';
+import { removeStyle } from '../helpers/helper.js';
 
 let transition_home_to_me = {
     name: 'home-to-me',

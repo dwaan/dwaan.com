@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+@use 'sass:math';
 @use 'mixins';
 
 :root {
@@ -431,8 +432,8 @@ div>.vertical {
 
 		@for $i from 1 through 3 {
 			&.pic-#{$i} {
-				top: percentage(calc((4.5 - ($i * 5/6)) / 10));
-				left: percentage(calc((2.25 + ($i * 5/4)) / 10));
+				top: math.percentage(calc((4.5 - ($i * 5/6)) / 10));
+				left: math.percentage(calc((2.25 + ($i * 5/4)) / 10));
 				transform: rotate((($i - 2) * 5) + deg);
 
 				&.top {

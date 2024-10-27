@@ -1,7 +1,7 @@
 "use strict";
 
 import { gsap } from 'gsap';
-import { _q, removeClass, addClass, reduceMotionFilter } from "./helper";
+import { _q, removeClass, addClass, reduceMotionFilter } from "./helper.js";
 
 /**
  * Call dark mode script

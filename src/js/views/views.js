@@ -1,11 +1,11 @@
 "use strict";
 
-import detailview from './detail';
-import hiview from './hi';
-import homeview from './home';
-import lostview from './lost';
-import meview from './me';
-import plurkview from './plurk';
+import detailview from './detail.js';
+import hiview from './hi.js';
+import homeview from './home.js';
+import lostview from './lost.js';
+import meview from './me.js';
+import plurkview from './plurk.js';
 
 /**
  * Collections of Barba.js Views

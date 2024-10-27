@@ -20,11 +20,11 @@
 
         <section class="middle full">
             <div id="flares" class="flares" hidden>
-                <img src="/img/flares/flare1.webp" loading="lazy" width="572" height="190" alt="Dwan\'s flare number1" class="flare flare1" />
-                <img src="/img/flares/flare2.webp" loading="lazy" width="572" height="190" alt="Dwan\'s flare number2" class="flare flare2" />
-                <img src="/img/flares/flare3.webp" loading="lazy" width="572" height="190" alt="Dwan\'s flare number3" class="flare flare3" />
-                <img src="/img/flares/flare4.webp" loading="lazy" width="572" height="190" alt="Dwan\'s flare number4" class="flare flare4" />
-                <img src="/img/flares/flare5.webp" loading="lazy" width="572" height="190" alt="Dwan\'s flare number5" class="flare flare5" />
+                <img src="/img/flares/flare1.webp" loading="lazy" width="572" height="190" alt="Flare Number 1" class="flare flare1" />
+                <img src="/img/flares/flare2.webp" loading="lazy" width="572" height="190" alt="Flare Number 2" class="flare flare2" />
+                <img src="/img/flares/flare3.webp" loading="lazy" width="572" height="190" alt="Flare Number 3" class="flare flare3" />
+                <img src="/img/flares/flare4.webp" loading="lazy" width="572" height="190" alt="Flare Number 4" class="flare flare4" />
+                <img src="/img/flares/flare5.webp" loading="lazy" width="572" height="190" alt="Flare Number 5" class="flare flare5" />
             </div>
             <div class="main-text">
                 <h1>Hello, my name is <a href="./me" id="to-about">Dwan</a></h1>

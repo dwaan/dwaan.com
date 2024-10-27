@@ -1,13 +1,13 @@
 "use strict";
 
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import api from "../helpers/api";
-import scroll from "../helpers/scroll";
-import darkmode from "../helpers/darkmode";
-import animate from "../helpers/animate";
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+import api from "../helpers/api.js";
+import scroll from "../helpers/scroll.js";
+import darkmode from "../helpers/darkmode.js";
+import animate from "../helpers/animate.js";
 import html2canvas from "html2canvas";
-import { _q, _qAll, hasClass, plural, monthNames, animateNumber, datediff, pluralinwords, reduceMotionFilter, waitForImg } from '../helpers/helper';
+import { _q, _qAll, hasClass, plural, monthNames, animateNumber, datediff, pluralinwords, reduceMotionFilter, waitForImg } from '../helpers/helper.js';
 
 /*
     Simple span element object:

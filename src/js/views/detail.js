@@ -1,9 +1,9 @@
 "use strict";
 
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import scroll from "../helpers/scroll";
-import { _q, _qAll, hoverEvents, reduceMotionFilter, hasClass } from '../helpers/helper';
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+import scroll from "../helpers/scroll.js";
+import { _q, _qAll, hoverEvents, reduceMotionFilter, hasClass } from '../helpers/helper.js';
 
 var detailview = {
 	namespace: 'detail',

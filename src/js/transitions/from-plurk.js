@@ -1,10 +1,10 @@
 "use strict";
 
 import gsap from 'gsap';
-import loader from '../helpers/loader';
-import animate from '../helpers/animate';
-import darkmode from '../helpers/darkmode';
-import { _qAll, reduceMotionFilter } from '../helpers/helper';
+import loader from '../helpers/loader.js';
+import animate from '../helpers/animate.js';
+import darkmode from '../helpers/darkmode.js';
+import { _qAll, reduceMotionFilter } from '../helpers/helper.js';
 
 let transition_from_plurk = {
     name: 'from-plurk',

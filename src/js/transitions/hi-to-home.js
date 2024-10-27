@@ -1,9 +1,9 @@
 "use strict";
 
 import gsap from 'gsap';
-import loader from '../helpers/loader';
-import animate from '../helpers/animate';
-import { delay, reduceMotionFilter } from '../helpers/helper';
+import loader from '../helpers/loader.js';
+import animate from '../helpers/animate.js';
+import { delay, reduceMotionFilter } from '../helpers/helper.js';
 
 let transition_hi_to_home = {
     name: 'hi-to-home',

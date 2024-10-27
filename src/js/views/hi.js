@@ -2,7 +2,7 @@
 
 import { gsap } from 'gsap';
 import flare from "../helpers/flares.js";
-import { hoverEvents, reduceMotionFilter } from "../helpers/helper";
+import { hoverEvents, reduceMotionFilter } from "../helpers/helper.js";
 
 var hiview = {
 	namespace: 'hi',

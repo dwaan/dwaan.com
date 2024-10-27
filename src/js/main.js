@@ -2,22 +2,22 @@
 
 // Plugins
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
 import barba from '@barba/core';
 // Helper
-import { _q, _qAll, konami, removeClass } from './helpers/helper';
-import displayRoundedCorner from './helpers/roundedcorner';
-import header from './helpers/header';
-import api from './helpers/api';
-import scroll from './helpers/scroll';
-import scrollto from './helpers/scrollto';
+import { _q, _qAll, konami, removeClass } from './helpers/helper.js';
+import displayRoundedCorner from './helpers/roundedcorner.js';
+import header from './helpers/header.js';
+import api from './helpers/api.js';
+import scroll from './helpers/scroll.js';
+import scrollto from './helpers/scrollto.js';
 
 // Transitions
-import transitions from './transitions/transitions';
+import transitions from './transitions/transitions.js';
 
 // Views
-import views from "./views/views";
+import views from "./views/views.js";
 
 ////////// Initial
 

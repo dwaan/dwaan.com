@@ -1,7 +1,7 @@
 "use strict";
 
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 import scroll from "../helpers/scroll.js";
 import flare from "../helpers/flares.js";

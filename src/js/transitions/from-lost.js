@@ -1,7 +1,7 @@
 "use strict";
 
-import loader from '../helpers/loader';
-import animate from '../helpers/animate';
+import loader from '../helpers/loader.js';
+import animate from '../helpers/animate.js';
 
 let transition_from_lost = {
     name: 'from-lost',

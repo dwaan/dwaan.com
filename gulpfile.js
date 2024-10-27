@@ -1,15 +1,17 @@
-const
-	gulp = require('gulp'),
-	sourcemaps = require('gulp-sourcemaps'),
-	concat = require('gulp-concat'),
-	connect = require('gulp-connect-php'),
-	browserSync = require('browser-sync'),
-	sass = require('gulp-sass')(require('sass')),
-	htmlmin = require('gulp-htmlmin'),
-	webpack = require('webpack-stream'),
-	webp = require('gulp-webp'),
-	mode = require('gulp-mode')(),
-	validator = require('gulp-html');
+import gulp from 'gulp';
+import sourcemaps from 'gulp-sourcemaps';
+import concat from 'gulp-concat';
+import connect from 'gulp-connect-php';
+import browserSync from 'browser-sync';
+import * as dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+import htmlmin from 'gulp-htmlmin';
+import webpack from 'webpack-stream';
+import webp from 'gulp-webp';
+import gulpMode from 'gulp-mode';
+
+const sass = gulpSass(dartSass);
+const mode = gulpMode();
 
 const siteUrl = 'http://localhost:8080/';
 
@@ -53,7 +55,7 @@ function fofcss() {
 }
 
 function plurkcss() {
-	return gulp.src(['src/css/404.scss'])
+	return gulp.src(['src/css/plurk.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("plurk.css"))
@@ -132,7 +134,7 @@ function svg() {
 		.pipe(browserSync.stream());
 }
 
-exports.default = function () {
+function run() {
 	connect.server({
 		hostname: "0.0.0.0",
 		port: 8080,
@@ -157,8 +159,11 @@ exports.default = function () {
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print);
 	gulp.watch(['src/css/cache/*.css'], { ignoreInitial: false }, css_prefix);
-	gulp.watch(['src/img/*.jpg', 'src/img/*/*.jpg'], { ignoreInitial: false }, jpg);
-	gulp.watch(['src/img/*.png', 'src/img/*/*.png'], { ignoreInitial: false }, png);
-	gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
+	// gulp.watch(['src/img/*.jpg', 'src/img/*/*.jpg'], { ignoreInitial: false }, jpg);
+	// gulp.watch(['src/img/*.png', 'src/img/*/*.png'], { ignoreInitial: false }, png);
+	// gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
 	gulp.watch(['src/*.php'], { ignoreInitial: false }, php);
 }
+
+gulp.task('image', gulp.series(jpg, png, svg));
+gulp.task('default', gulp.series(run));

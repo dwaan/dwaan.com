@@ -1,9 +1,9 @@
 "use strict";
 
-import animate from '../helpers/animate';
-import loader from '../helpers/loader';
-import header from '../helpers/header';
-import { delay } from '../helpers/helper';
+import animate from '../helpers/animate.js';
+import loader from '../helpers/loader.js';
+import header from '../helpers/header.js';
+import { delay } from '../helpers/helper.js';
 
 let transition_once_default = {
     name: 'default-transition',

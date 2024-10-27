@@ -1,8 +1,8 @@
 "use strict";
 
-import loader from '../helpers/loader';
-import animate from '../helpers/animate';
-import { removeStyle } from '../helpers/helper';
+import loader from '../helpers/loader.js';
+import animate from '../helpers/animate.js';
+import { removeStyle } from '../helpers/helper.js';
 
 let transition_home_to_detail = {
     name: 'home-to-detail',

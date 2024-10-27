@@ -1,10 +1,10 @@
 "use strict";
 
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { _q, _qAll, hoverEvents, reduceMotionFilter } from './helper';
-import scroll from "./scroll";
-import darkmode from "./darkmode";
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
+import { _q, _qAll, hoverEvents, reduceMotionFilter } from './helper.js';
+import scroll from "./scroll.js";
+import darkmode from "./darkmode.js";
 
 let header = {
     init: function () {

@@ -1,7 +1,7 @@
 "use strict";
 
 import { gsap } from 'gsap';
-import { hoverEvents, splitText, reduceMotionFilter } from "../helpers/helper";
+import { hoverEvents, splitText, reduceMotionFilter } from "../helpers/helper.js";
 
 var lostview = {
 	namespace: 'lost',

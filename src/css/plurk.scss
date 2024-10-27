@@ -1,3 +1,5 @@
+@use 'mixins';
+
 /* Plurk Statistics */
 
 .plurk {
@@ -1776,7 +1778,7 @@
     }
 
     .postcontent .post {
-        -webkit-line-clamp: 8;
+        line-clamp: 8;
     }
 
     @media (min-width: mixins.$screen-wide) {
@@ -1809,7 +1811,7 @@
         }
 
         .postcontent .post {
-            -webkit-line-clamp: 6;
+            line-clamp: 6;
         }
     }
 
@@ -2174,7 +2176,7 @@
     }
 
     .postcontent .post {
-        -webkit-line-clamp: 7;
+        line-clamp: 7;
     }
 
 
