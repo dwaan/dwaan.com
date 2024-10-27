@@ -19,7 +19,8 @@ var views = [
 	plurkview.replurk2020view,
 	plurkview.replurk2021view,
 	plurkview.replurk2022view,
-	plurkview.replurk2023view
+	plurkview.replurk2023view,
+	plurkview.replurk2024view
 ];
 
 // Make accesable

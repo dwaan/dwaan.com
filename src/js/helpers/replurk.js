@@ -401,7 +401,7 @@ class replurk {
         afterDraw: function (el) {
             var length = reduceMotionFilter(1);
 
-            if (hasClass(el, 'wrap')) {
+            if (hasClass(el, 'statistics-wrap')) {
                 var color = new colors();
                 var randomcolors = [color.getRandomColor(), color.getRandomColor()]
                 var anim = el.querySelector(".anim");
@@ -605,15 +605,14 @@ class replurk {
                 capture.innerHTML = "Done";
                 document.body.style.cursor = "default";
                 setTimeout(() => {
-                    capture.innerHTML = "Redownload";
+                    capture.innerHTML = "Recapture";
                     capture.generating = false;
                 }, 3000);
             }
         },
         wrapper: function (style, text, background) {
-            console.log(background == undefined)
             if (!background) return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
-            else return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Download</small></div></div>';
+            else return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
         },
         draw: function (style, number, text, background) {
             if (typeof number == "string" || (typeof number == "number" && number > 0)) {
@@ -799,7 +798,7 @@ class replurk {
                 anim.appendChild(text);
 
                 text = document.createElement('small');
-                text.innerHTML = "Download";
+                text.innerHTML = "Capture";
                 capture = document.createElement('div');
                 capture.setAttribute('class', 'capture');
                 capture.appendChild(text);
@@ -1312,7 +1311,7 @@ class replurk {
                 this.prev_count = item;
 
                 if (!this.next.querySelector(".statistics.statistics-loading")) {
-                    this.parent.statistics.draw("loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>");
+                    this.parent.statistics.draw("statistics-loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>");
                 }
 
                 // Animate loading
@@ -1323,7 +1322,7 @@ class replurk {
                     ease: "linear",
                     duration: length / 4,
                     onUpdate: () => {
-                        var el = this.next.querySelector(".loading .big");
+                        var el = this.next.querySelector(".statistics-loading .big");
                         if (el) el.innerHTML = load.progress + "%";
                     },
                     onComplete: async () => {
@@ -1339,7 +1338,7 @@ class replurk {
             await this.draw(0);
         },
         update: async function (month, value) {
-            var el = this.next.querySelector(".loading .month");
+            var el = this.next.querySelector(".statistics-loading .month");
             if (month && el) el.innerHTML = month;
 
             if (this.counts >= 0) {
@@ -1943,7 +1942,7 @@ class replurk {
     // Display statistics
     async displayStatistics() {
         this.statistics.title('This Year', 'thisyear');
-        this.statistics.draw("loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.");
+        this.statistics.draw("statistics-loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.");
 
         this.loading.init(this.next);
         this.loading.loop(this.fulldays);
@@ -2049,7 +2048,7 @@ class replurk {
     async displayExtendedStatistics() {
         // Deeper user statistics
         this.statistics.title('Dig Deeper', 'digdeeper');
-        this.statistics.draw("loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>");
+        this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>");
 
         // Load each post responses and calculate statistics
         this.loading.init(this.next);
@@ -2215,7 +2214,7 @@ class replurk {
             await this.displayPlurkerData();
 
             // Display the rest of the statistics
-            // this.displayStatistics();
+            this.displayStatistics();
 
             // Scroll top top
             await animate.top(next);
