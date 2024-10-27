@@ -43,7 +43,7 @@ var hiview = {
 					});
 				}
 
-				gsap.fromTo(next.querySelectorAll(this.hint), {
+				gsap.ç(next.querySelectorAll(this.hint), {
 					y: 50
 				}, {
 					y: 0,
