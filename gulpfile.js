@@ -12,7 +12,6 @@ import gulpMode from 'gulp-mode';
 
 const sass = gulpSass(dartSass);
 const mode = gulpMode();
-
 const siteUrl = 'http://localhost:8080/';
 
 function js() {
@@ -149,20 +148,20 @@ function run() {
 			proxy: siteUrl
 		});
 	});
-	gulp.watch('gulpfile.js', process.exit);
 
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js);
-	gulp.watch(['src/css/main.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
+	gulp.watch(['src/css/main.scss', 'src/css/global.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
 	gulp.watch(['src/css/404.scss'], { ignoreInitial: false }, fofcss);
 	gulp.watch(['src/css/plurk.scss'], { ignoreInitial: false }, plurkcss);
 	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
 	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print);
 	gulp.watch(['src/css/cache/*.css'], { ignoreInitial: false }, css_prefix);
-	// gulp.watch(['src/img/*.jpg', 'src/img/*/*.jpg'], { ignoreInitial: false }, jpg);
-	// gulp.watch(['src/img/*.png', 'src/img/*/*.png'], { ignoreInitial: false }, png);
-	// gulp.watch(['src/img/*.svg', 'src/img/*/*.svg'], { ignoreInitial: false }, svg);
 	gulp.watch(['src/*.php'], { ignoreInitial: false }, php);
+
+	gulp.watch('gulpfile.js', _ => {
+		process.exit(0)
+	});
 }
 
 gulp.task('image', gulp.series(jpg, png, svg));

@@ -611,7 +611,8 @@ class replurk {
             }
         },
         wrapper: function (style, text, background) {
-            if (background) return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
+            console.log(background == undefined)
+            if (!background) return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim">' + text + '</div><div class="capture"><small>Capture</small></div></div>';
             else return '<div class="statistics middle statistics-wrap ' + style + '"><div class="anim" style="background-images:url(' + background + ')">' + text + '</div><div class="capture"><small>Download</small></div></div>';
         },
         draw: function (style, number, text, background) {
@@ -1363,23 +1364,24 @@ class replurk {
 
                 if (this.isComplete()) {
                     var el = this.next.querySelector(".statistics.statistics-loading");
-
                     this.clean = false;
-                    gsap.to(el, {
-                        opacity: 0,
-                        width: 0,
-                        height: 0,
-                        padding: 0,
-                        margin: 0,
-                        overflow: "hidden",
-                        duration: length / 2,
-                        ease: "power3.out",
-                        onComplete: () => {
-                            el.remove();
-                            scroll.refresh();
-                            resolve();
-                        }
-                    });
+                    if (el) {
+                        gsap.to(el, {
+                            opacity: 0,
+                            width: 0,
+                            height: 0,
+                            padding: 0,
+                            margin: 0,
+                            overflow: "hidden",
+                            duration: length / 2,
+                            ease: "power3.out",
+                            onComplete: () => {
+                                el.remove();
+                                scroll.refresh();
+                                resolve();
+                            }
+                        });
+                    }
                 } else resolve();
             });
         }
@@ -2213,7 +2215,7 @@ class replurk {
             await this.displayPlurkerData();
 
             // Display the rest of the statistics
-            this.displayStatistics();
+            // this.displayStatistics();
 
             // Scroll top top
             await animate.top(next);
