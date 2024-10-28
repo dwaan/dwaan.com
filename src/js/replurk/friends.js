@@ -14,22 +14,22 @@ import api from "../helpers/api.js"
 */
 
 class friends {
-	constructor () {
+	constructor() {
 		this.data = {}
 		this.unavailable = []
 	}
 
-  /**
-   * Add JSON object as a friends data
-   *
-   * ```js
-   * friends.add({});
-   * ```
-   *
-   * @param {new_friends}: New friends JSON from /APP/Profile/getPublicProfile
-   * @memberof friends
-   * @link https://www.plurk.com/API/2/
-   */
+	/**
+	 * Add JSON object as a friends data
+	 *
+	 * ```js
+	 * friends.add({});
+	 * ```
+	 *
+	 * @param {new_friends}: New friends JSON from /APP/Profile/getPublicProfile
+	 * @memberof friends
+	 * @link https://www.plurk.com/API/2/
+	 */
 	add(new_friends) {
 		Object.assign(this.data, new_friends)
 	}
@@ -54,7 +54,7 @@ class friends {
 		}
 	}
 
-	async findByUsername (nick_name) {
+	async findByUsername(nick_name) {
 		var user_id = false
 
 		if (this.unavailable.findIndex(el => el == nick_name) >= 0) return false

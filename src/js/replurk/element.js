@@ -29,7 +29,7 @@ class element {
         this.el = document.createElement('a')
         this.created = false
         this.avatarurl = avatarurl
-        this.counts = new span('count', this.count)
+        this.counts = new span().class("count").html(this.count)
     }
 
     create() {
@@ -41,9 +41,15 @@ class element {
         this.el.setAttribute("target", '_BLANK')
 
         if (!this.customcreate) {
-            this.avatar = new span('avatar', '<img src="' + this.avatarurl + '" />')
-            this.name = new span('name', this.user.display_name)
-            this.counts = new span('count', this.count)
+            this.avatar = new span()
+                .class("avatar")
+                .html(`<img src="${this.avatarurl}" />`)
+            this.name = new span()
+                .class("name")
+                .html(`${this.user.display_name}`)
+            this.counts = new span()
+                .class('count')
+                .html(this.count)
             this.el.appendChild(this.avatar.el)
             this.el.appendChild(this.name.el)
             this.el.appendChild(this.counts.el)
@@ -73,7 +79,7 @@ class element {
     update() {
         // Only update when it's attached
         if (this.attached) {
-            this.counts.update(this.count)
+            this.counts.update(`${this.count}`)
         }
     }
 }
