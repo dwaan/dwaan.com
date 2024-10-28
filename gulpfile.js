@@ -1,18 +1,18 @@
-import gulp from 'gulp';
-import sourcemaps from 'gulp-sourcemaps';
-import concat from 'gulp-concat';
-import connect from 'gulp-connect-php';
-import browserSync from 'browser-sync';
-import * as dartSass from 'sass';
-import gulpSass from 'gulp-sass';
-import htmlmin from 'gulp-htmlmin';
-import webpack from 'webpack-stream';
-import webp from 'gulp-webp';
-import gulpMode from 'gulp-mode';
+import gulp from 'gulp'
+import sourcemaps from 'gulp-sourcemaps'
+import concat from 'gulp-concat'
+import connect from 'gulp-connect-php'
+import browserSync from 'browser-sync'
+import * as dartSass from 'sass'
+import gulpSass from 'gulp-sass'
+import htmlmin from 'gulp-htmlmin'
+import webpack from 'webpack-stream'
+import webp from 'gulp-webp'
+import gulpMode from 'gulp-mode'
 
-const sass = gulpSass(dartSass);
-const mode = gulpMode();
-const siteUrl = 'http://localhost:8080/';
+const sass = gulpSass(dartSass)
+const mode = gulpMode()
+const siteUrl = 'http://localhost:8080/'
 
 function js() {
 	return gulp.src(['src/js/main.js'])
@@ -32,7 +32,7 @@ function js() {
 			}
 		})))
 		.pipe(gulp.dest('v2/js/'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 }
 
 function css() {
@@ -41,7 +41,7 @@ function css() {
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'))
 }
 
 function fofcss() {
@@ -50,7 +50,7 @@ function fofcss() {
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("404.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'))
 }
 
 function plurkcss() {
@@ -59,7 +59,7 @@ function plurkcss() {
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("plurk.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'))
 }
 
 function css_vertical() {
@@ -67,7 +67,7 @@ function css_vertical() {
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'))
 }
 
 function css_horizontal() {
@@ -75,7 +75,7 @@ function css_horizontal() {
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'))
 }
 
 function print() {
@@ -84,7 +84,7 @@ function print() {
 		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat("print.css"))
 		.pipe(mode.development(sourcemaps.write(".")))
-		.pipe(gulp.dest('src/css/cache/'));
+		.pipe(gulp.dest('src/css/cache/'))
 }
 
 function css_prefix() {
@@ -92,7 +92,7 @@ function css_prefix() {
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('v2/css/'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 }
 
 function php() {
@@ -101,42 +101,35 @@ function php() {
 			collapseWhitespace: true
 		}))
 		.pipe(gulp.dest('v2/'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 }
 
 function jpg() {
-	return gulp.src([
-		'src/img/*.jpg',
-		'src/img/*/*.jpg'
-	])
+	return gulp.src(['src/img/*.jpg', 'src/img/*/*.jpg'], { encoding: false })
 		.pipe(webp())
 		.pipe(gulp.dest('v2/img/'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 }
 
 function png() {
-	return gulp.src([
-		'src/img/*.png',
-		'src/img/*/*.png'
-	])
+	return gulp.src(['src/img/*.png', 'src/img/*/*.png'], { encoding: false })
 		.pipe(webp())
 		.pipe(gulp.dest('v2/img/'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 }
 
 function svg() {
-	return gulp.src(['src/img/*.svg', 'src/img/*/*.svg'])
+	return gulp.src(['src/img/*.svg', 'src/img/*/*.svg'], { encoding: false })
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
 		.pipe(gulp.dest('v2/img/'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 }
 
 function resources() {
-	return gulp.src(['src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'])
+	return gulp.src(['src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { encoding: false })
 		.pipe(gulp.dest('v2/'))
-		.pipe(browserSync.stream());
 }
 
 function run() {
@@ -151,25 +144,25 @@ function run() {
 		browserSync.init({
 			open: false,
 			proxy: siteUrl
-		});
-	});
+		})
+	})
 
-	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js);
-	gulp.watch(['src/css/main.scss', 'src/css/global.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css);
-	gulp.watch(['src/css/404.scss'], { ignoreInitial: false }, fofcss);
-	gulp.watch(['src/css/plurk.scss'], { ignoreInitial: false }, plurkcss);
-	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical);
-	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal);
-	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print);
-	gulp.watch(['src/css/cache/*.css'], { ignoreInitial: false }, css_prefix);
-	gulp.watch(['src/*.php'], { ignoreInitial: false }, php);
-	gulp.watch(['src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { ignoreInitial: false }, resources);
+	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js)
+	gulp.watch(['src/css/main.scss', 'src/css/global.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css)
+	gulp.watch(['src/css/404.scss'], { ignoreInitial: false }, fofcss)
+	gulp.watch(['src/css/plurk.scss'], { ignoreInitial: false }, plurkcss)
+	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical)
+	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal)
+	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print)
+	gulp.watch(['src/css/cache/*.css'], { ignoreInitial: false }, css_prefix)
+	gulp.watch(['src/*.php'], { ignoreInitial: false }, php)
+	gulp.watch(['src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { ignoreInitial: false }, resources)
 
 	gulp.watch('gulpfile.js', _ => {
 		connect.closeServer()
 		process.exit(0)
-	});
+	})
 }
 
-gulp.task('image', gulp.series(jpg, png, svg));
-gulp.task('default', gulp.series(run));
+gulp.task('image', gulp.series(jpg, png, svg))
+gulp.task('default', gulp.series(run))
