@@ -1,326 +1,38 @@
 "use strict";
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
-import api from "../helpers/api.js";
-import scroll from "../helpers/scroll.js";
-import darkmode from "../helpers/darkmode.js";
-import animate from "../helpers/animate.js";
-import { _q, _qAll, plural, monthNames, datediff, reduceMotionFilter } from '../helpers/helper.js';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
+import api from "../helpers/api.js"
+import scroll from "../helpers/scroll.js"
+import animate from "../helpers/animate.js"
+import { _q, _qAll, plural, monthNames, reduceMotionFilter } from '../helpers/helper.js'
 
-import friends from "./friends.js";
-import statistics from "./statistics.js";
+import friends from "./friends.js"
+import statistics from "./statistics.js"
+import loading from './loading.js'
+import scrolls from './scrolls.js'
+import browser from './browser.js'
 
 /*
 	Replurk class
 */
 class replurk {
-	// Draw in which element?
-	next = document.createElement('div');
-	// Plurks array
-	plurks = [];
-	// Plurker profile object
-	me = {}
-
-	// Friends object
-	friends = new friends()
-
-	// Statistics plurker object renderer
-	statistics = new statistics()
-
-	// Inactive plurker object
-	inactive = {
-		draw: (data, year) => {
-			this.statistics.draw('inactive', year + " &#8617;", 'I\'ve been inactive since ' + year + ' <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
-			this.statistics.drawPost('postcontent span2 inactivemore', data.plurk_id, '<i>My last Plurk</i> ' + datediff(data.posted), data.content, data.response_count);
-		},
-		empty: () => {
-			this.statistics.draw('inactive', '-', 'I didn\'t post anything at this year <img src="https://s.plurk.com/emoticons/platinum/318416eab5a856bddb1e106a21ff557a.gif" />');
-		}
-	}
-
-	// Loading object
-	loading = {
-		count: 0,
-		prev_count: 0,
-		counts: -1,
-		clean: false,
-		next: document.createElement('div'),
-		parent: this,
-		isComplete: function () { return this.count == this.counts },
-		init: function (next) {
-			this.count = 0;
-			this.prev_count = 0;
-			this.counts = -1;
-			this.clean = false;
-			this.next = next;
-		},
-		draw: function (item) {
-			return new Promise(resolve => {
-				var length = reduceMotionFilter(1);
-				this.prev_count = item;
-
-				if (!this.next.querySelector(".statistics.statistics-loading")) {
-					this.parent.statistics.draw("statistics-loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>");
-				}
-
-				// Animate loading
-				var load = { progress: this.prev_count };
-				gsap.to(load, {
-					progress: Math.round(item),
-					snap: "progress",
-					ease: "linear",
-					duration: length / 4,
-					onUpdate: () => {
-						var el = this.next.querySelector(".statistics-loading .big");
-						if (el) el.innerHTML = load.progress + "%";
-					},
-					onComplete: async () => {
-						if (this.clean) await this.done();
-						resolve();
-					}
-				});
-			});
-		},
-		loop: async function (length) {
-			this.clean = true;
-			this.counts = length;
-			await this.draw(0);
-		},
-		update: async function (month, value) {
-			var el = this.next.querySelector(".statistics-loading .month");
-			if (month && el) el.innerHTML = month;
-
-			if (this.counts >= 0) {
-				this.count = value ? value : this.count + 1;
-				await this.draw(Math.round(100 * (this.count / this.counts)));
-			}
-		},
-		fakeupdate: async function () {
-			if (this.counts >= 0) {
-				this.count++;
-				if (this.count >= (this.counts - 10)) this.count = (this.counts - 10);
-				await this.draw(100 * (this.count / this.counts));
-			}
-		},
-		forcedone: async function () {
-			this.count = this.counts;
-			await this.draw(100);
-		},
-		done: function () {
-			return new Promise(resolve => {
-				var length = reduceMotionFilter(1);
-
-				if (this.isComplete()) {
-					var el = this.next.querySelector(".statistics.statistics-loading");
-					this.clean = false;
-					if (el) {
-						gsap.to(el, {
-							opacity: 0,
-							width: 0,
-							height: 0,
-							padding: 0,
-							margin: 0,
-							overflow: "hidden",
-							duration: length / 2,
-							ease: "power3.out",
-							onComplete: () => {
-								el.remove();
-								scroll.refresh();
-								resolve();
-							}
-						});
-					}
-				} else resolve();
-			});
-		}
-	}
-
-	// Scroll Animation
-	scrollAnimate = {
-		credits: (tl) => {
-			var next = this.next;
-			var length = reduceMotionFilter(1);
-
-			tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
-				y: window.innerHeight * 1 / 8
-			}, {
-				y: 0,
-				ease: "linear",
-				duration: length * 2,
-			}, 0);
-			tl.fromTo(next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
-				opacity: 0
-			}, {
-				opacity: 1,
-				stagger: {
-					from: 'end',
-					amount: length / 10
-				},
-				duration: length,
-				ease: "power3.in"
-			}, 0);
-			tl.fromTo(next.querySelectorAll("#credits .made"), {
-				opacity: 0
-			}, {
-				opacity: 1,
-				duration: length,
-				ease: "power3.in"
-			}, length * 3 / 10);
-
-			return tl;
-		},
-		statistics: () => {
-			var next = this.next;
-
-			// Scroll animate statistics
-			scroll.push(tl => this.scrollAnimate.credits(tl), tl => ScrollTrigger.create({
-				trigger: next.querySelectorAll("#statistics"),
-				start: "100%-=" + window.innerHeight + " 0",
-				end: "100% 0",
-				animation: tl,
-				scrub: .5
-			}));
-		},
-		permisions: () => {
-			var next = this.next;
-
-			// Scroll animation permission section
-			scroll.push((tl) => {
-				tl.fromTo(next.querySelectorAll("#permission form"), {
-					y: 0
-				}, {
-					y: window.innerHeight * -3 / 4,
-					ease: "linear"
-				}, 0);
-				tl.fromTo(next.querySelectorAll("#permission .bgtext sup"), {
-					y: 0,
-					x: 0,
-					rotation: 0
-				}, {
-					y: window.innerHeight * -1 / 4,
-					x: window.innerHeight * -1 / 10,
-					rotation: -10,
-					ease: "linear"
-				}, 0);
-				tl.fromTo(next.querySelectorAll("#permission .bgtext sub"), {
-					y: 0,
-					x: 0,
-					rotation: 0
-				}, {
-					y: window.innerHeight * -1 / 4,
-					x: window.innerHeight * 1 / 10,
-					rotation: 10,
-					ease: "linear"
-				}, 0);
-				return tl;
-			}, (tl) => {
-				return ScrollTrigger.create({
-					trigger: next.querySelectorAll("#permission"),
-					start: "0 0",
-					end: "100% 0",
-					animation: tl,
-					scrub: .5
-				});
-			});
-			scroll.push((tl) => {
-				tl = this.scrollAnimate.credits(tl);
-				return tl;
-			}, (tl) => {
-				return ScrollTrigger.create({
-					trigger: next.querySelectorAll("#permission"),
-					start: "0 0",
-					end: "100% 0",
-					animation: tl,
-					scrub: .5
-				});
-			});
-		},
-		menu: () => {
-			// Scroll animation menu and logout
-			scroll.push(tl => tl, tl => {
-				return ScrollTrigger.create({
-					trigger: 'main',
-					start: "0 0",
-					end: "100% 0",
-					animation: tl,
-					onUpdate: update => {
-						var el1 = '.logo, .size, .lamp, .switch';
-						var el2 = el1 + ", .footer > *";
-
-						if (update.direction > 0) {
-							gsap.killTweensOf(_qAll(el2));
-							gsap.to(_qAll(el1), { y: -100, opacity: 0 });
-							gsap.to(_qAll('.footer > *'), { y: 100, opacity: 0 });
-						} else {
-							gsap.to(_qAll(el2), { y: 0, opacity: 1 });
-						}
-					}
-				});
-			});
-		},
-		browserBar: (login = true) => {
-			if (login) {
-				scroll.push((tl) => {
-					return tl;
-				}, (tl) => {
-					return ScrollTrigger.create({
-						trigger: '#hello',
-						start: "0 0",
-						end: "100% 10px",
-						animation: tl,
-						scrub: true,
-						onLeave: () => {
-							this.browserColor("white");
-						},
-						onEnterBack: () => {
-							this.browserColor("green");
-						}
-					});
-				});
-				scroll.push((tl) => {
-					return tl;
-				}, (tl) => {
-					return ScrollTrigger.create({
-						trigger: '#statistics',
-						start: "0 0",
-						end: "100% 10px",
-						animation: tl,
-						scrub: true,
-						onLeave: () => {
-							this.browserColor("yellow");
-						},
-						onEnter: () => {
-							this.browserColor("white");
-						},
-						onEnterBack: () => {
-							this.browserColor("white");
-						}
-					});
-				});
-			} else {
-				scroll.push((tl) => {
-					return tl;
-				}, (tl) => {
-					return ScrollTrigger.create({
-						trigger: '#permission',
-						start: "0 0",
-						end: "100% 10px",
-						animation: tl,
-						scrub: true,
-						onLeave: () => {
-							this.browserColor("yellow");
-						},
-						onEnterBack: () => {
-							this.browserColor("green");
-						}
-					});
-				});
-			}
-		}
-	}
-
 	constructor(year) {
+		// Draw in which element?
+		this.next = document.createElement('div');
+		// Plurks array
+		this.plurks = [];
+		// Plurker profile object
+		this.me = {}
+		// Friends object
+		this.friends = new friends()
+		// Statistics plurker object renderer
+		this.statistics = new statistics()
+		// Loading object
+		this.loading = new loading()
+		// Scrolling animation
+		this.scrolls = new scrolls(this.next)
+
 		// Which year?
 		this.year = year;
 		this.startDate = this.year + '-10-29T09:00:00';
@@ -329,41 +41,13 @@ class replurk {
 		this.fulldays = 365;
 	}
 
-	// Browser color
-	getSetStateColor(state) {
-		if (typeof (state) == "object" && state.length >= 1) {
-			if (state.length == 1) {
-				darkmode.browserColorDark = state[0];
-				darkmode.browserColorLight = state[0];
-			} else {
-				darkmode.browserColorDark = state[1];
-				darkmode.browserColorLight = state[0];
-			}
-		} else if (state == "green") {
-			darkmode.browserColorDark = "#0d4f03";
-			darkmode.browserColorLight = "#60e670";
-		} else if (state == "yellow") {
-			darkmode.browserColorDark = "#705f02";
-			darkmode.browserColorLight = "#FFD700";
-		} else {
-			darkmode.browserColorDark = "#000000";
-			darkmode.browserColorLight = "#FFFFFF";
-		}
-
-		return [darkmode.browserColorLight, darkmode.browserColorDark];
-	}
-	browserColor(state, duration, ease) {
-		this.getSetStateColor(state);
-		darkmode.setDarkMode(duration, ease);
-	}
-
 	// Show/hide Animations
 	// Login Pages
 	showLoginPage(tl) {
 		var next = this.next;
 		var length = reduceMotionFilter(1);
 
-		this.browserColor("green", 1);
+		browser.set("green", 1);
 		tl.fromTo(next.querySelectorAll("#permission"), {
 			position: "fixed",
 			display: "",
@@ -415,7 +99,7 @@ class replurk {
 			duration: length,
 			ease: "power3.in",
 			onComplete: () => {
-				this.browserColor("yellow");
+				browser.set("yellow");
 			}
 		});
 		tl.fromTo(next.querySelectorAll("#permission"), {
@@ -449,7 +133,7 @@ class replurk {
 				opacity: 1,
 				ease: "power3.in",
 				duration: length,
-				onStart: () => this.browserColor("green", .5)
+				onStart: () => browser.set("green", .5)
 			}, length / 4);
 			tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
 				display: "",
@@ -554,7 +238,11 @@ class replurk {
 		// Logout
 		await api.call("?fetch=logout");
 		this.statistics.clear();
+
+		// Disconnect any api connection
 		api.clear();
+
+		// Display login
 		this.login();
 
 		scroll.refresh();
@@ -694,7 +382,7 @@ class replurk {
 		this.statistics.title('This Year', 'thisyear');
 		this.statistics.draw("statistics-loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.");
 
-		this.loading.init(this.next);
+		this.loading = new loading(this.next);
 		this.loading.loop(this.fulldays);
 
 		// Load loop timeline
@@ -789,9 +477,9 @@ class replurk {
 		} else {
 			if (this.plurks[0]) {
 				var date = new Date(plurk[0].posted);
-				inactive.draw(plurk[0], date.getFullYear());
+				this.statistics.inactive.draw(plurk[0], date.getFullYear());
 			}
-			else inactive.empty();
+			else this.statistics.inactive.empty();
 		}
 	}
 	// Display extended statistics
@@ -801,7 +489,7 @@ class replurk {
 		this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>");
 
 		// Load each post responses and calculate statistics
-		this.loading.init(this.next);
+		this.loading = new loading(this.next);
 		this.loading.loop(this.plurks.length);
 
 		// Get the responses for each plurks in parallel
@@ -954,10 +642,10 @@ class replurk {
 		scroll.destroy();
 
 		window.scrollTo(0, 0);
-		this.browserColor("yellow");
+		browser.set("yellow");
 
 		// Scroll animation menu and logout
-		this.scrollAnimate.menu();
+		this.scrolls.menu();
 
 		// Check is server have open session
 		var tl = gsap.timeline();
@@ -992,9 +680,9 @@ class replurk {
 			next.querySelector("#logout").onclick = () => this.requestLogout();
 
 			// Scroll animate statistics
-			this.scrollAnimate.statistics();
+			this.scrolls.statistics();
 			// Scroll browser bar
-			this.scrollAnimate.browserBar();
+			this.scrolls.browserBar();
 
 			scroll.refresh();
 		} else {
@@ -1006,9 +694,9 @@ class replurk {
 			this.requestToken();
 
 			// Scroll animation permission section
-			this.scrollAnimate.permisions();
+			this.scrolls.permisions();
 			// Scroll browser bar
-			this.scrollAnimate.browserBar(false);
+			this.scrolls.browserBar(false);
 
 			scroll.refresh();
 
@@ -1033,7 +721,7 @@ class replurk {
 		return new Promise(resolve => {
 			var length = reduceMotionFilter(1);
 			this.next = el;
-			this.browserColor("yellow");
+			browser.set("yellow");
 
 			// Run the login
 			gsap.fromTo(this.next.querySelectorAll('#credits'), {
@@ -1044,7 +732,7 @@ class replurk {
 				ease: "power3.in",
 				onComplete: async () => {
 					// Change color
-					this.browserColor("yellow", 0);
+					browser.set("yellow", 0);
 
 					// Display login
 					await this.login(true);

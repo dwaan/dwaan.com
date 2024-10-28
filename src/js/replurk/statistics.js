@@ -12,7 +12,8 @@ import span from "./span.js"
 import colors from "./colors.js"
 import iconLink from "./icons.js"
 import element from "./element.js"
-import most from "./most.js";
+import most from "./most.js"
+import inactive from "./inactive.js"
 
 class statistics {
 	constructor(next, me, friends, year) {
@@ -44,6 +45,9 @@ class statistics {
 
 		// Most statistics object renderer
 		this.most = new most(this)
+
+		// Inactive timeline
+		this.inactive = new inactive(this)
 
 		this.el = this.next.querySelector("#statistics")
 
