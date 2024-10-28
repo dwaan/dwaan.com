@@ -55,10 +55,7 @@ class statistics {
 		var observer = new MutationObserver((mutationsList) => {
 			mutationsList.forEach(mutation => {
 				mutation.addedNodes.forEach(el => {
-					if (hasClass(el, "statistics")) {
-						console.log(el)
-						this.afterDraw(el)
-					}
+					if (hasClass(el, "statistics")) this.afterDraw(el)
 				})
 			})
 		})
@@ -275,7 +272,6 @@ class statistics {
 			document.body.style.cursor = "wait"
 
 			// HTML to Canvas magic
-			capture.innerHTML = "Processing..."
 			var canvas = await html2canvas(capture, {
 				backgroundColor: null,
 				logging: false,
@@ -294,10 +290,8 @@ class statistics {
 			link.remove()
 
 			// Reset button after 3s
-			capture.innerHTML = "Done"
-			document.body.style.cursor = "default"
+			document.body.style.cursor = ""
 			setTimeout(() => {
-				capture.innerHTML = "Recapture"
 				capture.generating = false
 			}, 3000)
 		}
