@@ -12,10 +12,11 @@ import span from "./span.js"
 import colors from "./colors.js"
 import iconLink from "./icons.js"
 import element from "./element.js"
+import most from "./most.js";
 
 class statistics {
-	constructor(next, friends, most, year) {
-		if (!next || !friends || !most || !year) return
+	constructor(next, me, friends, year) {
+		if (!next || !me || !friends || !year) return
 
 		this.whispers_count = 0
 		this.poll_count = 0
@@ -35,10 +36,14 @@ class statistics {
 		this.plurks_count = 0
 		this.id = 0
 		this.randomcolors = []
+
 		this.next = next
+		this.me = me
 		this.friends = friends
-		this.most = most
 		this.year = year
+
+		// Most statistics object renderer
+		this.most = new most(this)
 
 		this.el = this.next.querySelector("#statistics")
 

@@ -6,11 +6,8 @@ import api from "../helpers/api.js";
 import scroll from "../helpers/scroll.js";
 import darkmode from "../helpers/darkmode.js";
 import animate from "../helpers/animate.js";
-import { _q, _qAll, plural, monthNames, datediff, pluralinwords, reduceMotionFilter } from '../helpers/helper.js';
+import { _q, _qAll, plural, monthNames, datediff, reduceMotionFilter } from '../helpers/helper.js';
 
-import iconLink from "./icons.js";
-import span from "./span.js";
-import element from "./element.js";
 import friends from "./friends.js";
 import statistics from "./statistics.js";
 
@@ -23,407 +20,13 @@ class replurk {
 	// Plurks array
 	plurks = [];
 	// Plurker profile object
-	me = { "id": 3203568, "has_profile_image": 1, "timeline_privacy": 0, "nick_name": "dwan", "display_name": "Dwan", "date_of_birth": "Sat, 29 Oct 1983 00:01:00 GMT", "avatar": 41917598, "gender": 1, "karma": 199.24, "premium": true, "verified_account": false, "dateformat": 3, "default_lang": "en", "friend_list_privacy": "public", "name_color": "FFA59A", "full_name": "Dwan B.", "location": "Tel Aviv-Yafo, Dan, Israel", "timezone": "Asia/Jerusalem", "phone_verified": 0, "bday_privacy": 1, "plurks_count": 14598, "response_count": 79484, "pinned_plurk_id": 0, "background_id": 0, "show_ads": false, "show_location": 0, "profile_views": 36112, "avatar_small": "https://avatars.plurk.com/3203568-small41917598.gif", "avatar_medium": "https://avatars.plurk.com/3203568-medium41917598.gif", "avatar_big": "https://avatars.plurk.com/3203568-big41917598.jpg", "about": "Mr. Goat\u2019s dad and full-time husband", "about_renderred": "Mr. Goat\u2019s dad and full-time husband", "page_title": "The world revolve around me", "recruited": 14, "relationship": "married", "friends_count": 571, "fans_count": 498, "join_date": "Wed, 15 Oct 2008 07:48:05 GMT", "privacy": "world", "accept_private_plurk_from": "all", "post_anonymous_plurk": false, "badges": ["10_invites", "14", "9", "10000_views", "10000_plurks", "50000_comments", "upload_profile_image", "50_fans", "coin"], "link_facebook": false, "setup_facebook_sync": false, "setup_twitter_sync": false, "setup_weibo_sync": false, "filter": { "porn": 2, "anonymous": 0, "keywords": null }, "anniversary": { "years": 13, "days": 27 }, "phone_number": null, "creature": 0, "creature_url": null, "creature_special": 1, "creature_special_url": null };
+	me = {}
 
 	// Friends object
 	friends = new friends()
 
 	// Statistics plurker object renderer
 	statistics = new statistics()
-
-	// Most statistics object renderer
-	most = {
-		parent: this,
-		sort: (a, b) => b.count - a.count,
-		// Find and count all based on regex
-		findregex: function (regex, replace, content, storage) {
-			var result = content.match(regex);
-
-			for (var index in result) {
-				var value = replace(result[index]);
-				var idx = storage.findIndex(el => el.value == value);
-
-				if (idx < 0) {
-					storage.push({
-						id: value,
-						value: value,
-						count: 1
-					});
-				} else {
-					storage[idx].count++;
-				}
-			}
-
-			return result;
-		},
-		init: function () {
-			this.responders.data = [];
-			this.mentions.data = [];
-			this.mentions.dataAll = [];
-			this.myemoticons.data = [];
-			this.hashtags.data = [];
-			this.links.links = [];
-			this.links.pics = [];
-			this.types.words = 0;
-			this.types.chars = 0;
-		},
-		countAll: async function (data) {
-			// Find and count all my emoticons from my post
-			if (data.user_id == this.parent.me.id) this.myemoticons.count(data.content);
-			// Find and count all mentions from my post
-			await this.mentions.count(data.content_raw);
-			// Find and count all hashtags from my post
-			if (data.user_id == this.parent.me.id) this.hashtags.count(data.content);
-			// Find and count all links and pictures post from my post
-			if (data.user_id == this.parent.me.id) this.links.count(data.content, data.plurk_id, data.response_count, data.replurkers_count, data.favorite_count);
-			// Find and count characther and words from my post
-			if (data.user_id == this.parent.me.id) this.types.count(data.content_raw);
-		},
-		responders: {
-			data: [],
-			parent: this,
-			count: async function (response) {
-				var index = this.data.findIndex(function (el) {
-					return el.user_id == response.user_id;
-				});
-
-				if (index < 0) {
-					let friends = this.parent.friends
-					var user = await friends.find(response.user_id);
-					this.data.push(new element('mostresponders', user, friends.getAvatar(user.id)));
-				} else {
-					this.data[index].count++;
-				}
-				this.data.sort(this.parent.most.sort);
-
-				// Update top 5
-				var index = 1;
-				for (var i = 0; i < this.data.length; i++) {
-					this.data[i].position = this.data.length;
-					if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
-						this.data[i].position = index++;
-						this.parent.statistics.attach('<i>Top <img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Responders</i> <strong>of My Timeline</strong>', this.data[i], 5);
-					}
-				}
-			},
-			draw: function () {
-				let friends = this.parent.friends
-				var index = 0;
-				if (this.data.length > 0) {
-					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-					if (this.data[index]) this.parent.statistics.drawImage("avatar", friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count);
-				}
-			}
-		},
-		mentions: {
-			data: [],
-			dataAll: [],
-			parent: this,
-			count: async function (content) {
-				var result = this.parent.most.findregex(/\@(\w{1,30})[\ |\:]/g, value => value.replace(/\@|\ |\:/g, ''), content, this.data);
-				var max = 5;
-				var index = 1;
-
-				if (result) {
-					// Update top 5
-					this.data.sort(this.parent.most.sort);
-					for (var idx = 0; idx < this.data.length; idx++) {
-						this.data[idx].position = this.data.length;
-
-						if (index <= max) {
-							let friends = this.parent.friends
-							var user = await friends.findByUsername(this.data[idx].value);
-
-							if (this.data[idx].el == undefined) {
-								this.data[idx] = new element('mostmentionedbyme', user, "", plurker => {
-									plurker.avatar = new span().class("avatar").html(`<img src="${friends.getAvatar(plurker.user_id)}" />`);
-									plurker.name = new span().class("name").html(`@${plurker.nick_name}`);
-									plurker.counts = new span().class("count").html(plurker.count);
-									plurker.el.appendChild(plurker.avatar.el);
-									plurker.el.appendChild(plurker.name.el);
-									plurker.el.appendChild(plurker.counts.el);
-									plurker.el.setAttribute("href", 'https://plurk.com/' + plurker.nick_name);
-								});
-							}
-
-							if (user.id != this.parent.me.id && user.id != 99999) {
-								this.data[idx].position = index++;
-								this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/fluent-emoji:person-raising-hand-light.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
-							}
-						}
-
-						if (this.data[idx].el) this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/fluent-emoji:person-raising-hand-light.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max);
-					}
-				}
-			},
-			draw: function () {
-				let friends = this.parent.friends
-				var index = 0;
-				if (this.data.length > 0) {
-					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++;
-					if (this.data[index]) this.parent.statistics.drawImage("avatar", friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count);
-				}
-			}
-		},
-		myemoticons: {
-			data: [],
-			parent: this,
-			count: function (content) {
-				this.parent.most.findregex(/emoticon_my\" src=\"(.*?)\"/g, function (value) {
-					return value.replace(/emoticon_my\" src=\"|\"/gi, '');
-				}, content, this.data);
-			},
-			draw: function () {
-				var html = "";
-				var max = 7;
-				this.data.sort(this.parent.most.sort);
-				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
-					if (this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>';
-				if (html != "") this.parent.statistics.drawHTML("smallspan grid emoticons", 'Most Used <i>My Emoticons</i>', html);
-			}
-		},
-		hashtags: {
-			data: [],
-			parent: this,
-			count: function (content) {
-				this.parent.most.findregex(/hashtag\"\>(.*?)\</g, function (value) {
-					return value.replace(/hashtag\"\>\#|\.\<|\</g, '');
-				}, content, this.data);
-			},
-			draw: function () {
-				var html = "";
-				var max = 5;
-				this.data.sort(this.parent.most.sort);
-				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
-					if (this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>';
-				if (html != "") {
-					html = "<strong>#</strong>" + html;
-					this.parent.statistics.drawHTML("hashtags", 'Most Used <i>Hashtags</i>', html);
-				}
-			}
-		},
-		links: {
-			data: [],
-			links: [],
-			pics: [],
-			parent: this,
-			count: function (content, id, response, replurk, loved) {
-				var result = content.match(/href\=\"(.*?)\"\ class=\"(.*?)\"\ rel/g);
-				var count = 0;
-				var pics = [];
-				var links = [];
-
-				if (result) for (var data of result) {
-					if (!this.data[id]) {
-						count = response + (replurk * 250) + (loved * 50);
-					}
-
-					if (data.includes("pictureservices")) {
-						this.pics.push(data);
-						if (count > 0) {
-							var pic = data.split('\"')
-							pics.push({
-								url: pic[1],
-								response: response,
-								replurk: replurk,
-								loved: loved
-							});
-						}
-					}
-					else {
-						this.links.push(data);
-						if (count > 0) {
-							var link = data.split('\"')
-							links.push({
-								url: link[1],
-								response: response,
-								replurk: replurk,
-								loved: loved
-							});
-						}
-
-					}
-				}
-
-				if (count) this.data.push({
-					id: id,
-					pics: pics,
-					links: links,
-					count: count,
-					content: content
-				});
-			},
-			drawLinks: function () {
-				var max = 1;
-				var index = 0;
-				var result = "";
-				this.data.sort(this.parent.most.sort);
-				while (index < this.data.length && max > 0) {
-					if (this.data[index].links.length > 0) {
-						var link = this.data[index].links[0];
-						var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
-						result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response"><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + link.response + '</span><span class="replurk"><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + link.replurk + '</span><span class="loved"><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + link.loved + '</span>' + url + '</div></div>';
-						max--;
-					}
-					index++;
-				}
-				if (this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result);
-			},
-			drawPics: function () {
-				var max = 1;
-				var index = 0;
-				var result = "";
-				this.data.sort(this.parent.most.sort);
-				while (index < this.data.length && max > 0) {
-					if (this.data[index].pics.length > 0) {
-						var pics = this.data[index].pics[0];
-						var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>';
-						result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response"><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + pics.response + '</span><span class="replurk"><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + pics.replurk + '</span><span class="loved"><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + pics.loved + '</span>' + url + '</div></div></div>';
-						max--;
-					}
-					index++;
-				}
-
-				if (this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>');
-				if (result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🖼 Most Popular Image</i>', result);
-			}
-		},
-		types: {
-			words: 0,
-			chars: 0,
-			parent: this,
-			count: function (content) {
-				var words = content.split(" ");
-
-				this.chars += content.length;
-				this.words += words.length;
-			},
-			draw: function () {
-				if (this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year');
-			}
-		},
-		responses: {
-			parent: this,
-			sort: (a, b) => b.replurkers_count - a.replurkers_count,
-			draw: function (posts) {
-				var post
-				posts.sort(this.sort)
-				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(post.posted), post.content, post.response_count);
-				}
-			}
-		},
-		replurk: {
-			parent: this,
-			sort: (a, b) => b.replurkers_count - a.replurkers_count,
-			draw: function (posts) {
-				var post
-				posts.sort(this.sort);
-				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.replurkers_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostreplurked', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Most Replurked</i> ' + datediff(post.posted), post.content, post.replurkers_count);
-				}
-			}
-		},
-		favorite: {
-			parent: this,
-			sort: (a, b) => b.favorite_count - a.favorite_count,
-			draw: function (posts) {
-				var post
-				posts.sort(this.sort);
-				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.favorite_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostfavorited', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Most Loved</i> ' + datediff(post.posted), post.content, post.favorite_count);
-				}
-			}
-		},
-		interaction: {
-			data: [],
-			parent: this,
-			count: function (response) {
-				var index = this.data.findIndex(function (el) {
-					return el.id == response.user_id;
-				});
-
-				if (index < 0) {
-					this.data.push({
-						id: response.user_id,
-						count: 1,
-						multiplier: 1,
-						plurk_id: response.plurk_id
-					});
-				} else {
-					if (this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier++;
-					else this.data[index].multiplier = 1;
-					this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
-				}
-				this.data.sort(this.parent.most.sort);
-			},
-			draw: function () {
-				var result = [];
-				var length = 0;
-				var index = 0;
-				while (this.data[index] && length <= 5) {
-					if (this.data[index].id != this.parent.me.id) {
-						result.push(this.data[index]);
-						length++;
-					}
-					index++;
-				}
-
-				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i><img src='https://api.iconify.design/fluent-emoji:speaking-head.svg' /> interact</i> with me", result);
-				} catch {
-					console.info("Error while counting most interacted plurker");
-				}
-			}
-		},
-		mvp: {
-			data: [],
-			parent: this,
-			count: function (response, type) {
-				var index = this.data.findIndex(function (el) {
-					return el.id == response.user_id;
-				});
-
-				if (index < 0) {
-					this.data.push({
-						id: response.user_id,
-						count: 1,
-						multiplier: 1,
-						plurk_id: response.plurk_id
-					});
-				} else {
-					if (type == "replurk") {
-						this.data[index].count += (response.count * 250);
-					} else if (type == "favorite") {
-						this.data[index].count += (response.count * 50);
-					} else if (response.content_raw.length > 16) {
-						if (this.data[index].plurk_id == response.plurk_id) this.data[index].multiplier += .5;
-						else this.data[index].multiplier = .5;
-						this.data[index].count += (this.data[index].multiplier * response.content_raw.length);
-					}
-				}
-				this.data.sort(this.parent.most.sort);
-			},
-			draw: function () {
-				var result = [];
-				var length = 0;
-				var index = 0;
-				while (this.data[index] && length <= 5) {
-					if (this.data[index].id != this.parent.me.id) {
-						result.push(this.data[index]);
-						length++;
-					}
-					index++;
-				}
-
-				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i><img src='https://api.iconify.design/fluent-emoji:biting-lip.svg' /> MVP</i>", result);
-				} catch (error) {
-					console.info("Error while counting my mvp", error);
-				}
-			}
-		}
-	};
 
 	// Inactive plurker object
 	inactive = {
@@ -1208,7 +811,7 @@ class replurk {
 			this.loading.update("Data from " + monthNames[date.getMonth()] + " " + date.getFullYear());
 
 			// Count all
-			await this.most.countAll(plurk);
+			await this.statistics.most.countAll(plurk);
 
 			// Count responses
 			if (plurk.response_count > 0 && (plurk.responded || plurk.owner_id == this.me.id)) {
@@ -1220,11 +823,11 @@ class replurk {
 					// Count the rest of statistics
 					for (var response of message.responses) {
 						// Find and count all responders
-						await this.most.responders.count(response);
-						this.most.interaction.count(response);
-						this.most.mvp.count(response, "response");
+						await this.statistics.most.responders.count(response);
+						this.statistics.most.interaction.count(response);
+						this.statistics.most.mvp.count(response, "response");
 						// Count all
-						await this.most.countAll(response);
+						await this.statistics.most.countAll(response);
 					}
 				} else {
 					this.requestLogout();
@@ -1234,37 +837,37 @@ class replurk {
 		}
 
 		// Display How Many Links
-		this.most.links.drawLinks();
+		this.statistics.most.links.drawLinks();
 		// Display How Many Pictures
-		this.most.links.drawPics();
+		this.statistics.most.links.drawPics();
 
 		// Draw Results
 		// Display Most Responder
-		// this.most.responders.draw();
+		// this.statistics.most.responders.draw();
 
 		// Display Most Interaction
-		this.most.interaction.draw();
+		this.statistics.most.interaction.draw();
 
 		// Display Most Mentioned by me
-		// this.most.mentions.draw();
+		// this.statistics.most.mentions.draw();
 
 		// Display How Many Words-Characters
-		this.most.types.draw();
+		this.statistics.most.types.draw();
 
 		// Display Most hashtags by me
-		this.most.hashtags.draw();
+		this.statistics.most.hashtags.draw();
 
 		// Display Most My Emoticons
-		this.most.myemoticons.draw();
+		this.statistics.most.myemoticons.draw();
 
 		// Display MVP
 		this.statistics.replurker_list.forEach(value => {
-			this.most.mvp.count({ user_id: value.id, count: value.count }, "replurk");
+			this.statistics.most.mvp.count({ user_id: value.id, count: value.count }, "replurk");
 		});
 		this.statistics.favorite_list.forEach(value => {
-			this.most.mvp.count({ user_id: value.id, count: value.count }, "favorite");
+			this.statistics.most.mvp.count({ user_id: value.id, count: value.count }, "favorite");
 		});
-		this.most.mvp.draw();
+		this.statistics.most.mvp.draw();
 
 		// Replurk Badges
 		var gender = "<img src='https://api.iconify.design/fluent-emoji:crown.svg' /> Leader";
@@ -1300,10 +903,10 @@ class replurk {
 			`, `replurkbadges description`);
 		if (this.statistics.poll_count >= 5) this.statistics.draw('spansmall spanhalf center badges pollbadges', "<img src='https://api.iconify.design/fluent-emoji:ballot-box-with-ballot.svg' />", "<strong>Polling " + gender + "</strong>");
 		if (this.statistics.coins_count >= 5) this.statistics.draw('spansmall spanhalf center badges coinbadges', "<img src='https://api.iconify.design/fluent-emoji:coin.svg' />", "<strong>Plurk Coins Billionaire</strong>");
-		if (this.most.types.words >= 50000) this.statistics.draw('spansmall spanhalf center badges novelistbadges', "<img src='https://api.iconify.design/fluent-emoji:orange-book.svg' />", "<strong>Novelist</strong>");
-		if (this.most.types.chars >= 1000000) this.statistics.draw('spansmall spanhalf center badges keyboardbadges', "<img src='https://api.iconify.design/fluent-emoji:keyboard.svg' />", "<strong>Keyboard Warrior</strong>");
-		if (this.most.links.pics.length >= 356) this.statistics.draw('spansmall spanhalf center badges memebadges', "<img src='https://api.iconify.design/fluent-emoji:cat.svg' />", "<strong>Meme Lord</strong>");
-		if (this.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall spanhalf center badges missingbadges', "<img src='https://api.iconify.design/fluent-emoji:orangutan.svg' />", "<strong>The Missing Link</strong>");
+		if (this.statistics.most.types.words >= 50000) this.statistics.draw('spansmall spanhalf center badges novelistbadges', "<img src='https://api.iconify.design/fluent-emoji:orange-book.svg' />", "<strong>Novelist</strong>");
+		if (this.statistics.most.types.chars >= 1000000) this.statistics.draw('spansmall spanhalf center badges keyboardbadges', "<img src='https://api.iconify.design/fluent-emoji:keyboard.svg' />", "<strong>Keyboard Warrior</strong>");
+		if (this.statistics.most.links.pics.length >= 356) this.statistics.draw('spansmall spanhalf center badges memebadges', "<img src='https://api.iconify.design/fluent-emoji:cat.svg' />", "<strong>Meme Lord</strong>");
+		if (this.statistics.most.links.links.length >= 356 / 2) this.statistics.draw('spansmall spanhalf center badges missingbadges', "<img src='https://api.iconify.design/fluent-emoji:orangutan.svg' />", "<strong>The Missing Link</strong>");
 		if (this.statistics.instagrammer_count >= 10) this.statistics.draw('spansmall spanhalf center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:camera.svg' />", "<strong>Instagrammer</strong>");
 		if (this.statistics.facebooker_count >= 10) this.statistics.draw('spansmall spanhalf center badges socmedbadges', facebook, "<strong>Facebooker</strong>");
 		if (this.statistics.twitterer_count >= 10) this.statistics.draw('spansmall spanhalf center badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:hatching-chick.svg' />", "<strong>The Real Chief Twit</strong>");
@@ -1345,10 +948,7 @@ class replurk {
 	async login(clear) {
 		var next = this.next;
 
-		this.me = { id: 0 };
-		this.friends = new friends()
-		this.statistics = new statistics(next, this.friends, this.most, this.year)
-		this.most.init();
+		this.me = { id: 0 }
 		this.plurks = [];
 
 		scroll.destroy();
@@ -1368,7 +968,9 @@ class replurk {
 		var data = await api.call("?");
 		var interval = null;
 		if (data.success) {
-			this.me = data.message;
+			this.me = data.message
+			this.friends = new friends()
+			this.statistics = new statistics(next, this.me, this.friends, this.year)
 
 			// Initial Plurk statistics
 			await this.displayPlurkerData();
