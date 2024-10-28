@@ -121,11 +121,6 @@ var scroll = {
 			}
 		}));
 	},
-	refresh: function () {
-		for (var i = 0; i < this.st.length; i++) {
-			this.st[i].refresh();
-		}
-	},
 	// Add custom animation
 	push: function (animationFunction, scrollFunction) {
 		if (!animationFunction || !scrollFunction) return false;
@@ -141,6 +136,12 @@ var scroll = {
 		}
 
 		return this.tl.length - 1;
+	},
+	// Refresh the whole scrolltrigger
+	refresh: function () {
+		setTimeout(_ => {
+			ScrollTrigger.refresh();
+		}, 1000)
 	},
 	// Call this to refresh one scroll
 	refresh: function (id) {

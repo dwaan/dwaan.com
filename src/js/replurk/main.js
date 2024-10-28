@@ -8,14 +8,11 @@ import animate from "../helpers/animate.js"
 import { _q, _qAll, plural, monthNames, reduceMotionFilter } from '../helpers/helper.js'
 
 import friends from "./friends.js"
-import statistics from "./statistics.js"
 import loading from './loading.js'
 import scrolls from './scrolls.js'
 import browser from './browser.js'
+import statistics from "./statistics.js"
 
-/*
-	Replurk class
-*/
 class replurk {
 	constructor(year) {
 		// Draw in which element?
@@ -205,6 +202,7 @@ class replurk {
 		});
 	}
 
+	// Access logic
 	// Login messages
 	message(message, quick) {
 		var next = this.next;
@@ -225,9 +223,89 @@ class replurk {
 			});
 		}
 	}
+	// Check login status
+	async login(clear) {
+		var next = this.next;
 
+		this.me = { id: 0 }
+		this.plurks = [];
+
+		scroll.destroy();
+
+		window.scrollTo(0, 0);
+		browser.set("yellow");
+
+		// Scroll animation menu and logout
+		this.scrolls.menu();
+
+		// Check is server have open session
+		var tl = gsap.timeline();
+		tl.set(next.querySelector("#hello .arrow-big"), {
+			opacity: 0
+		});
+
+		var data = await api.call("?");
+		var interval = null;
+		if (data.success) {
+			this.me = data.message
+			this.friends = new friends()
+			this.statistics = new statistics(next, this.me, this.friends, this.year)
+
+			// Initial Plurk statistics
+			await this.displayPlurkerData();
+
+			// Display the rest of the statistics
+			this.displayStatistics();
+
+			// Scroll top top
+			await animate.top(next);
+
+			// Hide login page
+			if (clear) next.querySelector("#permission").style.display = "none";
+			else tl = this.hideLoginPage(tl);
+
+			// Show statistic pages
+			await this.showStatisticPages(tl);
+
+			// Add logout event
+			next.querySelector("#logout").onclick = () => this.logout();
+
+			// Scroll animate statistics
+			this.scrolls.statistics();
+			// Scroll browser bar
+			this.scrolls.browserBar();
+		} else {
+			// Hide statistic pages
+			if (clear) next.querySelectorAll(".grant").forEach(function (el) { el.style.display = "none"; });
+			// Show login page
+			this.showLoginPage(tl);
+			// Request token
+			this.token();
+
+			// Scroll animation permission section
+			this.scrolls.permisions();
+			// Scroll browser bar
+			this.scrolls.browserBar(false);
+
+			// Automatic login
+			interval = setInterval(async () => {
+				var data = await api.call("?");
+
+				if (data.success) {
+					clearInterval(interval);
+					this.login();
+				}
+			}, 3000);
+		}
+
+		scroll.refresh();
+
+		// Snap
+		next.querySelectorAll("section.snap").forEach(el => scroll.snap(el));
+		next.querySelectorAll("section.snap-bottom").forEach(el => scroll.snap(el, "bottom"));
+	}
 	// Logout
-	async requestLogout() {
+	async logout() {
 		var tl = gsap.timeline();
 
 		api.abort();
@@ -247,9 +325,8 @@ class replurk {
 
 		scroll.refresh();
 	}
-
 	// Request token
-	async requestToken(text) {
+	async token(text) {
 		var next = this.next;
 		var length = reduceMotionFilter(1);
 		var tokenlink = next.querySelector("#tokenurl");
@@ -280,18 +357,41 @@ class replurk {
 
 		api.call("?request=token").then(data => {
 			if (text) {
-				message(text);
+				this.message(text);
 			} else {
 				tokenlink.textContent = "Grant Access";
 				tokenlink.setAttribute("href", api.url + "?redirect=" + data.message.url);
 			}
 		}, () => {
-			message("Error when requesting verification from Plurk, please reload your browser again.");
+			this.message("Error when requesting verification from Plurk, please reload your browser again.");
 		});
 
 		if (!text) next.querySelector("#permission form").style.display = "none";
 	}
+	// Display LocalStorage stats
+	info() {
+		function getSessionStorageSize() {
+			var totalBytes = 0;
 
+			for (var key in sessionStorage) {
+				if (sessionStorage.hasOwnProperty(key)) {
+					var itemValue = sessionStorage.getItem(key);
+					totalBytes += itemValue.length;
+				}
+			}
+
+			// Convert bytes to Megabytes
+			var totalMegabytes = Math.round((totalBytes / 1024 / 1024) * 100) / 100;
+
+			return totalMegabytes;
+		}
+
+		// Usage
+		var sessionStorageSize = getSessionStorageSize();
+		console.info('SessionStorage Size: ' + sessionStorageSize + ' MB');
+	}
+
+	// Rendering statistics
 	// Display current Plurker data
 	async displayPlurkerData() {
 		var plurker = this.me;
@@ -375,6 +475,7 @@ class replurk {
 			animation: tl,
 			scrub: true
 		}));
+
 		scroll.refresh();
 	}
 	// Display statistics
@@ -413,7 +514,7 @@ class replurk {
 					await this.loading.forcedone();
 				}
 			} else {
-				this.requestLogout();
+				this.logout();
 			}
 		}
 		await getTimeline(this.startDate);
@@ -481,6 +582,8 @@ class replurk {
 			}
 			else this.statistics.inactive.empty();
 		}
+
+		scroll.refresh();
 	}
 	// Display extended statistics
 	async displayExtendedStatistics() {
@@ -518,7 +621,7 @@ class replurk {
 						await this.statistics.most.countAll(response);
 					}
 				} else {
-					this.requestLogout();
+					this.logout();
 					break;
 				}
 			}
@@ -606,117 +709,13 @@ class replurk {
 		if (this.statistics.replurker_count >= 50) this.statistics.draw('spansmall spanhalf center badges plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:trophy.svg' />", "<strong>Trendsetter</strong>");
 		if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('spansmall spanhalf center badges plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:military-medal.svg' />", "<strong>Active Plurker " + plurker + "</strong>");
 
-		this.logSessionStrorageSize();
+		this.info();
+
+		scroll.refresh();
 	}
 
-	// Display LocalStorage stats
-	logSessionStrorageSize() {
-		function getSessionStorageSize() {
-			var totalBytes = 0;
-
-			for (var key in sessionStorage) {
-				if (sessionStorage.hasOwnProperty(key)) {
-					var itemValue = sessionStorage.getItem(key);
-					totalBytes += itemValue.length;
-				}
-			}
-
-			// Convert bytes to Megabytes
-			var totalMegabytes = Math.round((totalBytes / 1024 / 1024) * 100) / 100;
-
-			return totalMegabytes;
-		}
-
-		// Usage
-		var sessionStorageSize = getSessionStorageSize();
-		console.info('SessionStorage Size: ' + sessionStorageSize + ' MB');
-	}
-
-	// Check login status
-	async login(clear) {
-		var next = this.next;
-
-		this.me = { id: 0 }
-		this.plurks = [];
-
-		scroll.destroy();
-
-		window.scrollTo(0, 0);
-		browser.set("yellow");
-
-		// Scroll animation menu and logout
-		this.scrolls.menu();
-
-		// Check is server have open session
-		var tl = gsap.timeline();
-		tl.set(next.querySelector("#hello .arrow-big"), {
-			opacity: 0
-		});
-
-		var data = await api.call("?");
-		var interval = null;
-		if (data.success) {
-			this.me = data.message
-			this.friends = new friends()
-			this.statistics = new statistics(next, this.me, this.friends, this.year)
-
-			// Initial Plurk statistics
-			await this.displayPlurkerData();
-
-			// Display the rest of the statistics
-			this.displayStatistics();
-
-			// Scroll top top
-			await animate.top(next);
-
-			// Hide login page
-			if (clear) next.querySelector("#permission").style.display = "none";
-			else tl = this.hideLoginPage(tl);
-
-			// Show statistic pages
-			await this.showStatisticPages(tl);
-
-			// Add logout event
-			next.querySelector("#logout").onclick = () => this.requestLogout();
-
-			// Scroll animate statistics
-			this.scrolls.statistics();
-			// Scroll browser bar
-			this.scrolls.browserBar();
-
-			scroll.refresh();
-		} else {
-			// Hide statistic pages
-			if (clear) next.querySelectorAll(".grant").forEach(function (el) { el.style.display = "none"; });
-			// Show login page
-			this.showLoginPage(tl);
-			// Request token
-			this.requestToken();
-
-			// Scroll animation permission section
-			this.scrolls.permisions();
-			// Scroll browser bar
-			this.scrolls.browserBar(false);
-
-			scroll.refresh();
-
-			// Automatic login
-			interval = setInterval(async () => {
-				var data = await api.call("?");
-
-				if (data.success) {
-					clearInterval(interval);
-					this.login();
-				}
-			}, 3000);
-		}
-
-		// Snap
-		next.querySelectorAll("section.snap").forEach(el => scroll.snap(el));
-		next.querySelectorAll("section.snap-bottom").forEach(el => scroll.snap(el, "bottom"));
-	}
-
-	// Run the API call
+	// Main entry
+	// Run this to start the API
 	run(el) {
 		return new Promise(resolve => {
 			var length = reduceMotionFilter(1);

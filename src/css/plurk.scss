@@ -295,17 +295,10 @@
             opacity: 0;
             width: 100%;
             height: 100%;
+            cursor: url(../img/ss.webp) auto;
             border-radius: calc(2/3 * var(--padl));
             padding: var(--padl);
             background-color: var(--lime);
-            transform-origin: center left;
-            transition: box-shadow .24s ease-out, margin-top .24s ease-out;
-        }
-
-        &:hover .anim {
-            position: relative;
-            margin-top: calc(-2 * var(--padl));
-            box-shadow: 0 var(--padm) var(--padxl) rgba(0, 0, 0, 0.5);
         }
 
         p .text {

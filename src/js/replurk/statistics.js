@@ -55,7 +55,10 @@ class statistics {
 		var observer = new MutationObserver((mutationsList) => {
 			mutationsList.forEach(mutation => {
 				mutation.addedNodes.forEach(el => {
-					if (el.querySelector) this.afterDraw(el)
+					if (hasClass(el, "statistics")) {
+						console.log(el)
+						this.afterDraw(el)
+					}
 				})
 			})
 		})
@@ -121,7 +124,7 @@ class statistics {
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				scroll.push(tl => {
 					tl.fromTo(el.children, {
-						y: window.innerHeight * 1 / 5
+						y: 0
 					}, {
 						y: 0,
 						ease: "ease.out"
@@ -133,6 +136,7 @@ class statistics {
 						start: "0 100%-=100px",
 						end: "0 100%-=100px",
 						animation: tl,
+						markers: true,
 						scrub: 2
 					})
 				})
@@ -156,6 +160,7 @@ class statistics {
 				})
 			})
 
+			// Animate number
 			scroll.push(function (tl) {
 				if (el.querySelector(".big")) {
 					var number = Number(el.querySelector(".big").textContent)
@@ -188,7 +193,7 @@ class statistics {
 				})
 			})
 		} else {
-			// Scroll animation line section
+			// Scroll animation header line section
 			scroll.push(tl => {
 				tl.fromTo(el.querySelectorAll("i"), {
 					x: "-100%"
@@ -256,12 +261,10 @@ class statistics {
 
 		// Capture function
 		this.capture(el)
-
-		scroll.refresh()
 	}
 
 	capture(el) {
-		var capture = el.querySelector(".capture small")
+		var capture = el.querySelector(".anim")
 		if (!capture) return
 
 		capture.onclick = async () => {
@@ -273,7 +276,7 @@ class statistics {
 
 			// HTML to Canvas magic
 			capture.innerHTML = "Processing..."
-			var canvas = await html2canvas(el.querySelector(".anim"), {
+			var canvas = await html2canvas(capture, {
 				backgroundColor: null,
 				logging: false,
 				proxy: `${api.url}?img=`,
@@ -303,7 +306,6 @@ class statistics {
 	wrapper(style, text, background) {
 		return `<div class="statistics middle statistics-wrap ${style}">\
 			<div class="anim" ${background ? `style="background-images:url(${background})"` : ``}>${text}</div>\
-			<div class="capture"><small>Capture</small></div>\
 		</div>`
 	}
 
