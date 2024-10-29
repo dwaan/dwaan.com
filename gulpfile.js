@@ -150,7 +150,7 @@ function run() {
 	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js)
 	gulp.watch(['src/css/main.scss', 'src/css/global.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css)
 	gulp.watch(['src/css/404.scss'], { ignoreInitial: false }, fofcss)
-	gulp.watch(['src/css/plurk.scss'], { ignoreInitial: false }, plurkcss)
+	gulp.watch(['src/css/plurk.scss', 'src/css/replurk/*.scss'], { ignoreInitial: false }, plurkcss)
 	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical)
 	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal)
 	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print)

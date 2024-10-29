@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+@use '../mixins.scss';
+
+/* Plurk - Statistics - Costum Page Style */
+.plurk #hello {
+	padding: 0;
+	pointer-events: none;
+	background-color: transparent;
+
+	.animate {
+		pointer-events: auto;
+		background-color: var(--lime);
+		transition: background .5s ease;
+	}
+
+	img {
+		border-radius: 100%;
+	}
+
+	@media screen and (min-aspect-ratio: 1/1) {
+		img {
+			width: 100px;
+			height: 100px;
+
+			@media (min-width: mixins.$screen-small) {
+				width: 160px;
+				height: 160px;
+			}
+		}
+
+		h1 {
+			margin-top: var(--pads);
+			font-size: 3rem;
+
+			@media (min-width: mixins.$screen-small) {
+				margin-top: var(--padl);
+				font-size: 5rem;
+			}
+		}
+	}
+
+	@media screen and (max-aspect-ratio: 1/1) {
+		justify-content: flex-end;
+
+		@media (min-width: mixins.$screen-small) {
+			justify-content: center;
+		}
+
+		img {
+			width: 128px;
+			height: 128px;
+		}
+
+		h1 {
+			font-size: 2rem;
+			line-height: 100%;
+
+			@media (min-width: mixins.$screen-tiny) {
+				font-size: 2.5rem;
+			}
+
+			@media (min-width: mixins.$screen-verysmall) {
+				font-size: 3rem;
+			}
+
+			@media (min-width: mixins.$screen-small) {
+				font-size: 4rem;
+			}
+		}
+
+		.arrow-big {
+			margin: var(--padm) 0;
+
+			@media (min-width: mixins.$screen-tiny) {
+				margin: var(--padm) 0 calc(-1 * var(--padxxl));
+			}
+
+			@media (min-width: mixins.$screen-small) {
+				margin: var(--padl) 0 var(--padm);
+			}
+		}
+
+		.arrow:after {
+			margin: var(--pads) 0 0;
+		}
+	}
+}

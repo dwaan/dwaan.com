@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 $screen-ultrawide: 1900px;
 $screen-verywide: 1600px;
 $screen-wide: 1194px;
@@ -8,7 +7,7 @@ $screen-abitwide: 1024px;
 $screen-medium: 900px;
 $screen-small: 600px;
 $screen-verysmall: 400px;
-
+$screen-tiny: 375px;
 
 @mixin make-it-block($display: block) {
 	content: "";

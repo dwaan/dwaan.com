@@ -86,14 +86,14 @@ class statistics {
 	title(text, style = "", loading = false) {
 		let span = loading ? `<span class="loading"><i/>` : `<span class="line"><i/></span>`
 		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics middle statistics-title ${style}">\
+			<div class="statistics statistics-title ${style}">\
 				<h3><span>${text}</span>${span}</h3>\
 			</div>`)
 	}
 
 	body(text, style = "") {
 		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics middle statistics-title ${style}">\
+			<div class="statistics statistics-title ${style}">\
 				<div class="body">${text}</div>\
 			</div>`)
 	}
@@ -104,13 +104,13 @@ class statistics {
 		if (hasClass(el, 'statistics-wrap')) {
 			var color = new colors()
 			var randomcolors = [color.getRandomColor(), color.getRandomColor()]
-			var anim = el.querySelector(".anim")
+			var content = el.querySelector(".content")
 
-			gsap.set(anim, {
+			gsap.set(content, {
 				background: 'radial-gradient(at 10% 10%, ' + randomcolors[0] + ' 0%, ' + randomcolors[1] + ' 100%)'
 			})
 
-			gsap.to(anim, {
+			gsap.to(content, {
 				opacity: 1,
 				duration: length / 2,
 				ease: "power3.out"
@@ -133,7 +133,6 @@ class statistics {
 						start: "0 100%-=100px",
 						end: "0 100%-=100px",
 						animation: tl,
-						markers: true,
 						scrub: 2
 					})
 				})
@@ -261,7 +260,7 @@ class statistics {
 	}
 
 	capture(el) {
-		var capture = el.querySelector(".anim")
+		var capture = el.querySelector(".content")
 		if (!capture) return
 
 		capture.onclick = async () => {
@@ -298,8 +297,8 @@ class statistics {
 	}
 
 	wrapper(style, text, background) {
-		return `<div class="statistics middle statistics-wrap ${style}">\
-			<div class="anim" ${background ? `style="background-images:url(${background})"` : ``}>${text}</div>\
+		return `<div class="statistics statistics-wrap ${style}">\
+			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${text}</div>\
 		</div>`
 	}
 
@@ -320,7 +319,7 @@ class statistics {
 
 	drawGraph(style, number, text) {
 		if (typeof number == "string" || (typeof number == "number" && number > 0)) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawgraph movetitle", '\
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawgraph", '\
 				<p>\
 					<span class="graph"><i data-number="' + number + '"></i></span>\
 					<span class="info">' + text + '</span>\
@@ -377,7 +376,7 @@ class statistics {
 		var max = users.length >= 5 ? 5 : users.length
 		var length = reduceMotionFilter(1)
 
-		this.drawHTML(`${style} drawuserlist movetitle ${id}`, title, "<span class='info'>Downloading user data</span>")
+		this.drawHTML(`${style} userlist ${id}`, title, "<span class='info'>Downloading user data</span>")
 		for (var index = 0; index < max; index++) {
 			let user = users[index]
 			let friend = await this.friends.find(user.id)
@@ -459,14 +458,14 @@ class statistics {
 		}
 	}
 
+	// For animating user chart
 	attach(charttitle, node, max) {
 		var id = node.id
 		var chart
 		var title
 		var text
-		var anim
+		var content
 		var wrapper
-		var capture
 		var opacity = 0
 		var position = max
 		var zIndex = 0
@@ -492,21 +491,13 @@ class statistics {
 			text.appendChild(chart)
 			text.appendChild(title)
 
-			anim = document.createElement('div')
-			anim.classList.add('anim')
-			anim.appendChild(text)
-
-			text = document.createElement('small')
-			text.innerHTML = "Capture"
-
-			capture = document.createElement('div')
-			capture.classList.add('capture')
-			capture.appendChild(text)
+			content = document.createElement('div')
+			content.classList.add('content')
+			content.appendChild(text)
 
 			wrapper = document.createElement('div')
-			wrapper.classList.add("statistics", "middle", "statistics-wrap", "attach", id)
-			wrapper.appendChild(anim)
-			wrapper.appendChild(capture)
+			wrapper.classList.add("statistics", "statistics-wrap", "attach", id)
+			wrapper.appendChild(content)
 
 			this.el.insertAdjacentElement("beforeend", wrapper)
 		}
@@ -566,8 +557,8 @@ class statistics {
 		this.draw('span2 responsecount', `${this.plurks_count} &rarr; ${this.response_count}`, 'I received <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>')
 		this.draw('spansmall center coins', this.coins_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:coin.svg" /> ' + plural(this.coins_count, 'coin') + '</i>')
 
-		if (this.favorite_list.length > 0) this.drawUserList("avatar", "loved", 'These Plurkers <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Loved</i> My Posts', this.favorite_list.sort(this.most.sort))
-		if (this.replurker_list.length > 0) this.drawUserList("avatar", "replurked", 'These Plurkers likes to <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Replurked</i> My Posts', this.replurker_list.sort(this.most.sort))
+		if (this.favorite_list.length > 0) this.drawUserList("users", "loved", 'These Plurkers <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Loved</i> My Posts', this.favorite_list.sort(this.most.sort))
+		if (this.replurker_list.length > 0) this.drawUserList("users", "replurked", 'These Plurkers likes to <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Replurked</i> My Posts', this.replurker_list.sort(this.most.sort))
 	}
 }
 

@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/* Plurk - Logout */
+.plurk #logout {
+	background-color: var(--yellow);
+	color: var(--black);
+	padding: var(--padm) var(--pads);
+	border-radius: 8px;
+	pointer-events: auto;
+	cursor: pointer;
+	transition: background .5s ease;
+
+	svg {
+		margin-right: var(--pads);
+
+		rect {
+			stroke: var(--black);
+			transition: stroke .25s ease;
+		}
+
+		path {
+			fill: var(--black);
+			transition: fill .25s ease;
+		}
+	}
+
+	&:hover {
+		background-color: var(--black);
+		color: var(--white);
+
+		svg {
+			rect {
+				stroke: var(--white);
+			}
+
+			path {
+				fill: var(--white);
+			}
+		}
+	}
+}
