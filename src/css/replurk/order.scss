@@ -3,243 +3,241 @@
 @use '../mixins.scss';
 
 /* Manually, Blocks order */
-.plurk .statistics {
-	&.alltime {
-		order: 0;
-	}
-
-	&.alltimeloading {
-		order: 1;
-	}
-
-	&.inactive {
-		order: 2;
-	}
-
-	&.posted {
-		order: 3;
-	}
-
-	&.inactivemore {
-		order: 4;
-	}
-
-	&.responded {
-		order: 5;
-	}
-
-	&.anniversary {
-		order: 6;
-	}
-
-	&.badges {
-		order: 7;
-	}
-
-
-	/* This year */
-
-	&.thisyear {
-		order: 100;
-	}
-
-	&.thisyearloading {
-		order: 101;
-	}
-
-	&.mostresponded {
-		order: 102;
-	}
-
-	&.percentage {
-		order: 103;
-	}
-
-	&.recievereplurk {
-		order: 104;
-	}
-
-	&.mostreplurked {
-		order: 105;
-	}
-
-	&.mostfavorited {
-		order: 106;
-	}
-
-	&.recievelove {
-		order: 107;
-	}
-
-	&.privateplurk {
-		order: 108;
-	}
-
-	&.whisper {
-		order: 109;
-	}
-
-	&.porn {
-		order: 110;
-	}
-
-	&.responsecount {
-		order: 111;
-	}
-
-	&.coins {
-		order: 112;
-	}
-
-	&.loved {
-		order: 113;
-	}
-
-	&.replurked {
-		order: 114;
-	}
-
-
-	/* Dig deeper */
-
-	&.digdeeper {
-		order: 200;
-	}
-
-	&.digdeeperloading {
-		order: 201;
-	}
-
-	&.mostmentionedbyme {
-		order: 202;
-	}
-
-	&.mostresponders {
-		order: 203;
-	}
-
-	&.sharedlinks {
-		order: 204;
-	}
-
-	&.previewlinks {
-		order: 205;
-	}
-
-	&.sharedpictures {
-		order: 206;
-	}
-
-	&.previewpics {
-		order: 207;
-	}
-
-	&.mostinteraction {
-		order: 208;
-	}
-
-	&.hashtags {
-		order: 209;
-	}
-
-	&.emoticons {
-		order: 210;
-	}
-
-	&.mediumnumber {
-		order: 211;
-	}
-
-	&.mvp {
-		order: 212;
-	}
-
-	/* Badges */
-	&.replurkbadges {
-		order: 300;
-
-		&.description {
-			order: 400;
+.plurk {
+	.statistics {
+		&.alltime {
+			order: 0;
 		}
-	}
 
-	&.pollbadges {
-		order: 301;
-	}
+		&.alltimeloading {
+			order: 1;
+		}
 
-	&.coinbadges {
-		order: 302;
-	}
+		&.inactive {
+			order: 2;
+		}
 
-	&.novelistbadges {
-		order: 303;
-	}
+		&.posted {
+			order: 3;
+		}
 
-	&.keyboardbadges {
-		order: 304;
-	}
+		&.inactivemore {
+			order: 4;
+		}
 
-	&.memebadges {
-		order: 305;
-	}
+		&.responded {
+			order: 5;
+		}
 
-	&.missingbadges {
-		order: 306;
-	}
+		&.anniversary {
+			order: 6;
+		}
 
-	&.socmedbadges {
-		order: 307;
-	}
+		&.badges {
+			order: 7;
+		}
 
-	&.adultbadges {
-		order: 308;
-	}
 
-	&.plurkerbadges {
-		order: 309;
+		/* This year */
+
+		&.thisyear {
+			order: 100;
+		}
+
+		&.thisyearloading {
+			order: 101;
+		}
+
+		&.mostresponded {
+			order: 102;
+		}
+
+		&.percentage {
+			order: 103;
+		}
+
+		&.recievereplurk {
+			order: 104;
+		}
+
+		&.mostreplurked {
+			order: 105;
+		}
+
+		&.mostfavorited {
+			order: 106;
+		}
+
+		&.recievelove {
+			order: 107;
+		}
+
+		&.privateplurk {
+			order: 108;
+		}
+
+		&.whisper {
+			order: 109;
+		}
+
+		&.porn {
+			order: 110;
+		}
+
+		&.responsecount {
+			order: 111;
+		}
+
+		&.coins {
+			order: 112;
+		}
+
+		&.loved {
+			order: 113;
+		}
+
+		&.replurked {
+			order: 114;
+		}
+
+
+		/* Dig deeper */
+
+		&.digdeeper {
+			order: 200;
+		}
+
+		&.digdeeperloading {
+			order: 201;
+		}
+
+		&.mostmentionedbyme {
+			order: 202;
+		}
+
+		&.mostresponders {
+			order: 203;
+		}
+
+		&.sharedlinks {
+			order: 204;
+		}
+
+		&.previewlinks {
+			order: 205;
+		}
+
+		&.sharedpictures {
+			order: 206;
+		}
+
+		&.previewpics {
+			order: 207;
+		}
+
+		&.mostinteraction {
+			order: 208;
+		}
+
+		&.hashtags {
+			order: 209;
+		}
+
+		&.emoticons {
+			order: 210;
+		}
+
+		&.mediumnumber {
+			order: 211;
+		}
+
+		&.mvp {
+			order: 212;
+		}
+
+		/* Badges */
+		&.replurkbadges {
+			order: 300;
+
+			&.description {
+				order: 400;
+			}
+		}
+
+		&.pollbadges {
+			order: 301;
+		}
+
+		&.coinbadges {
+			order: 302;
+		}
+
+		&.novelistbadges {
+			order: 303;
+		}
+
+		&.keyboardbadges {
+			order: 304;
+		}
+
+		&.memebadges {
+			order: 305;
+		}
+
+		&.missingbadges {
+			order: 306;
+		}
+
+		&.socmedbadges {
+			order: 307;
+		}
+
+		&.adultbadges {
+			order: 308;
+		}
+
+		&.plurkerbadges {
+			order: 309;
+		}
+
+		@media screen and (min-aspect-ratio: 1/1) {
+			@media (min-width: mixins.$screen-small) {
+				&.posted {
+					order: 5;
+				}
+
+				&.responded {
+					order: 3;
+				}
+			}
+
+			@media (min-width: mixins.$screen-abitwide) {
+				&.posted {
+					order: 3;
+				}
+
+				&.responded {
+					order: 5;
+				}
+			}
+		}
+
+		@media screen and (max-aspect-ratio: 1/1) {
+			@media (min-width: mixins.$screen-abitwide) {
+				&.posted {
+					order: 5;
+				}
+
+				&.responded {
+					order: 3;
+				}
+			}
+		}
 	}
 
 	/* Back to top */
 
 	#backtotop {
 		order: 1000;
-	}
-}
-
-
-
-@media screen and (min-aspect-ratio: 1/1) {
-	/* order */
-	@media (min-width: mixins.$screen-small) {
-		.posted {
-			order: 5;
-		}
-
-		.responded {
-			order: 3;
-		}
-	}
-
-	@media (min-width: mixins.$screen-abitwide) {
-		.posted {
-			order: 3;
-		}
-
-		.responded {
-			order: 5;
-		}
-	}
-}
-
-@media screen and (max-aspect-ratio: 1/1) {
-	/* order */
-	@media (min-width: mixins.$screen-small) {
-		.posted {
-			order: 5;
-		}
-
-		.responded {
-			order: 3;
-		}
 	}
 }

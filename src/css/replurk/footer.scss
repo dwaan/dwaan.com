@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+@use '../mixins.scss';
+
+/* Plurk - Footer */
+.plurk {
+
+	/* Replurk footer */
+	.footer {
+		align-items: center;
+
+		div {
+			margin-right: auto;
+		}
+
+		a {
+			pointer-events: all;
+
+			&.now {
+				font-weight: 500;
+				pointer-events: none;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		a,
+		span {
+			font-weight: 400;
+			margin-right: var(--padm);
+		}
+	}
+
+	#logout {
+		height: auto;
+		background-color: var(--yellow);
+		color: var(--black);
+		padding: var(--pads) var(--padm);
+		border-radius: 8px;
+		pointer-events: auto;
+		cursor: pointer;
+		transition: background .25s ease;
+
+		svg {
+			margin-right: var(--pads);
+
+			rect {
+				stroke: var(--black);
+				transition: stroke .25s ease;
+			}
+
+			path {
+				fill: var(--black);
+				transition: fill .25s ease;
+			}
+		}
+
+		&:hover {
+			background-color: var(--black);
+			color: var(--white);
+
+			svg {
+				rect {
+					stroke: var(--white);
+				}
+
+				path {
+					fill: var(--white);
+				}
+			}
+		}
+	}
+}

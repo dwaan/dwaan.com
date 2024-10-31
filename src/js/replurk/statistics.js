@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import html2canvas from "html2canvas"
 
-import api from "../helpers/api.js"
+import api from "./api.js"
 import scroll from "../helpers/scroll.js"
 import { hasClass, plural, reduceMotionFilter } from '../helpers/helper.js'
 
@@ -84,7 +84,7 @@ class statistics {
 	}
 
 	title(text, style = "", loading = false) {
-		let span = loading ? `<span class="loading"><i/>` : `<span class="line"><i/></span>`
+		let span = loading ? `<span class="loading"><i/>` : `<span class="line"><i></i></span>`
 		this.el.insertAdjacentHTML('beforeend', `\
 			<div class="statistics statistics-title ${style}">\
 				<h3><span>${text}</span>${span}</h3>\
@@ -342,7 +342,7 @@ class statistics {
 	drawHTML(style, title, html) {
 		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawhtml", '\
 			<div>\
-				<div class="htmlcontent">' + html + '</div>\
+				<div class="html">' + html + '</div>\
 				<div class="title">' + title + '</div>\
 			</div>\
 		'))
@@ -403,7 +403,7 @@ class statistics {
 				max++
 			}
 		}
-		this.el.querySelector(`.${id} .htmlcontent`).innerHTML = html
+		this.el.querySelector(`.${id} .html`).innerHTML = html
 
 		// Stagger animation
 		if (id == 'mostinteraction' || id == 'mvp') {

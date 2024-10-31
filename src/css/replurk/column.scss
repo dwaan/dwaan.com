@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+@use '../mixins.scss';
+
+// Grid column size
+
+.plurk {
+	.statistics {
+		display: grid;
+		gap: var(--padl);
+		grid-template-columns: 1fr;
+
+		@media (min-width: mixins.$screen-small) {
+			grid-template-columns: repeat(12, 1fr);
+		}
+
+		@media (min-width: mixins.$screen-abitwide) {
+			grid-template-columns: repeat(20, 1fr);
+		}
+
+		&-title {
+			grid-column: span 1;
+
+			@media (min-width: mixins.$screen-small) {
+				grid-column: span 12;
+			}
+
+			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 20;
+			}
+		}
+
+		&-wrap {
+			grid-column: span 1;
+
+			@media (min-width: mixins.$screen-small) {
+				grid-column: span 6;
+			}
+
+			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 5;
+			}
+		}
+
+		&.span1 {
+			grid-column: span 1;
+
+			@media (min-width: mixins.$screen-small) {
+				grid-column: span 4;
+			}
+
+			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 4;
+			}
+		}
+
+		&.span2 {
+			grid-column: span 1;
+
+			@media (min-width: mixins.$screen-small) {
+				grid-column: span 12;
+			}
+
+			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 10;
+			}
+		}
+
+		&.span3 {
+			grid-column: span 1;
+
+			@media (min-width: mixins.$screen-small) {
+				grid-column: span 12;
+			}
+
+			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 15;
+			}
+		}
+	}
+
+	#backtotop {
+		grid-column: span 1;
+
+		@media (min-width: mixins.$screen-small) {
+			grid-column: span 12;
+		}
+
+		@media (min-width: mixins.$screen-abitwide) {
+			grid-column: span 20;
+		}
+	}
+}

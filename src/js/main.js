@@ -9,9 +9,10 @@ import barba from '@barba/core';
 import { _q, _qAll, konami, removeClass } from './helpers/helper.js';
 import displayRoundedCorner from './helpers/roundedcorner.js';
 import header from './helpers/header.js';
-import api from './helpers/api.js';
 import scroll from './helpers/scroll.js';
 import scrollto from './helpers/scrollto.js';
+
+import api from './replurk/api.js';
 
 // Transitions
 import transitions from './transitions/transitions.js';
