@@ -11,6 +11,34 @@
 
 /* Plurk Statistics */
 
+:root {
+	--box: 80vmax;
+
+	@media (min-width: mixins.$screen-small) {
+		--box: 40vmax;
+	}
+
+	@media screen and (min-aspect-ratio: 1/1) {
+		--box: 40vmax;
+
+		@media (min-width: mixins.$screen-small) {
+			--box: 38.5vmax;
+		}
+
+		@media (min-width: mixins.$screen-abitwide) {
+			--box: 30vmax;
+		}
+
+		@media (min-width: mixins.$screen-wide) {
+			--box: 27.5vmax;
+		}
+
+		@media (min-width: mixins.$screen-verywide) {
+			--box: 20vmax;
+		}
+	}
+}
+
 .plurk {
 
 	sub,
@@ -75,9 +103,11 @@
 		}
 	}
 
-	.middle.grant {
-		position: relative;
-		z-index: 1;
+	.grant {
+		&.middle {
+			position: relative;
+			z-index: 1;
+		}
 	}
 
 	// /* Plurk - Statistics */
@@ -85,8 +115,6 @@
 		position: relative;
 		z-index: 2;
 		height: initial;
-		display: grid;
-		gap: var(--padl);
 		background-color: var(--white);
 		padding: var(--pady) var(--padl);
 		transition: background-color .5s ease;
@@ -191,6 +219,7 @@
 					border-radius: 0;
 					width: auto;
 					height: 1rem;
+					vertical-align: baseline;
 				}
 			}
 
@@ -664,10 +693,6 @@
 			}
 		}
 
-		&:hover strong {
-			box-shadow: inset 0 var(--padm) var(--padxl) rgba(0, 0, 0, 0.5);
-		}
-
 		.title i {
 			text-transform: uppercase;
 		}
@@ -828,7 +853,7 @@
 			height: calc(1 * var(--box));
 
 			.text {
-				white-space: nowrap;
+				line-height: 130%;
 			}
 		}
 
@@ -1160,32 +1185,6 @@
 /* Horizontal and vertical screen */
 
 @media screen and (min-aspect-ratio: 1/1) {
-	:root {
-		--box: 40vmax;
-
-		@media (min-width: mixins.$screen-small) {
-			--box: 38.5vmax;
-		}
-
-		@media (min-width: mixins.$screen-abitwide) {
-			--box: 25vmax;
-		}
-
-		@media (min-width: mixins.$screen-wide) {
-			--box: 20vmax;
-		}
-	}
-
-	.replurktitle {
-		font-size: 4rem;
-		letter-spacing: -.25rem;
-	}
-
-	.plurk .arrow-big .arrow {
-		bottom: 40px;
-	}
-
-
 	.statistics {
 		.big {
 			font-size: 7vw;
@@ -1254,23 +1253,6 @@
 }
 
 @media screen and (max-aspect-ratio: 1/1) {
-	/* Plurk */
-
-	:root {
-		--box: 80vmax;
-
-		@media (min-width: mixins.$screen-small) {
-			--box: 40vmax;
-		}
-	}
-
-	.replurktitle {
-		font-size: 3.5rem;
-		letter-spacing: -.25rem;
-		line-height: 100%;
-		text-align: center;
-	}
-
 	.plurk {
 		.bgtext {
 			display: flex;
@@ -1287,176 +1269,213 @@
 			}
 		}
 
-	}
-
-
-	// statistics
-	.statistics-wrap {
-		height: calc(1.35 * var(--box));
-
-		&.span2 {
-			height: calc(1.5 * var(--box));
-		}
-
-		&.bubble,
-		&.hashtags {
-			height: calc(1.5 * var(--box));
-		}
-
-		&.mediumnumber {
-			height: calc(1.25 * var(--box));
-		}
-
-		@media (max-width: mixins.$screen-small) {
-			&.hashtags {
-				height: calc(1.25 * var(--box));
-			}
-		}
-
-		@media (max-width: mixins.$screen-tiny) {
-			&.bubble {
-				height: calc(1.75 * var(--box));
-			}
-
-			&.sharedlinks {
-				height: calc(1.5 * var(--box));
-			}
-		}
-	}
-
-	.center .big,
-	.badges .big {
-		margin-top: var(--padm);
-	}
-
-	.mediumnumber .big {
-		font-size: 14vw;
-	}
-
-	.largenumber .big {
-		font-size: 12vw;
-	}
-
-	.statistics {
-		.big {
-			font-size: 20vw;
-			letter-spacing: -.05rem;
-		}
-
-		.graph {
-			width: 50%;
-			margin: 0 auto var(--padm);
-		}
-
-		.title {
-			margin-top: var(--padm);
-
-			img {
-				border-radius: 0;
-				width: auto;
-				height: 1rem;
-			}
-		}
-
-		.chart {
-			margin: var(--padm) 0;
-		}
-
-		@media (min-width: mixins.$screen-small) {
-
-			.big,
-			&.span2.mediumnumber .big,
-			&.span2.largenumber .big {
-				font-size: 10vw;
-				letter-spacing: -.5vw;
-			}
-
-			&.mediumnumber .big,
-			&.largenumber .big {
-				font-size: 7.5vw;
-			}
-		}
-
-		@media (max-width: mixins.$screen-small) {
-			&.coins .big {
-				width: calc(var(--box) - var(--padxl) * 3);
-				height: calc(var(--box) - var(--padxl) * 3);
-				line-height: calc(var(--box) - var(--padxl) * 3);
-			}
-
-			&.previewpics .post,
-			&.sharedlinks .post {
-				margin-bottom: 0;
-			}
-
-			.spansmall {
-				height: calc(3/4 * var(--box));
-			}
-
-			.chart {
-				margin: var(--padl) 0 var(--padxl);
-			}
-
-			.content .post {
-				margin-bottom: auto;
-			}
-		}
-
-		@media (max-width: mixins.$screen-tiny) {
-			&.responded .text {
-				margin: auto 0;
-			}
-
-			.chart {
-				margin: var(--padm) 0 var(--padl);
-			}
-
-			div.meta span {
-				display: flex;
-				margin-right: var(--pads);
-			}
-		}
-
-	}
-
-	.postcontent .post {
-		line-clamp: 7;
-	}
-
-	@media (max-width: mixins.$screen-verysmall) {
-		.chart {
-			margin: var(--pads) 0;
-		}
-
-		.grid .html div {
-			margin: calc(var(--pads) * 2/3);
-		}
-
-		.emoticons .html div {
-			margin: var(--padm);
-		}
-
 		.statistics {
-			&.avatar .html {
-				margin-bottom: var(--padm);
+			.big {
+				font-size: 20vw;
+				letter-spacing: -.05rem;
 			}
 
-			&-wrap.span2.emoticons {
-				height: calc(var(--box) * 1.75);
+			.graph {
+				width: 50%;
+				margin: 0 auto var(--padm);
 			}
 
 			.title {
 				margin-top: var(--pads);
+
+				@media (min-width: mixins.$screen-verysmall) {
+					margin-top: var(--padm);
+				}
+
+				img {
+					border-radius: 0;
+					width: auto;
+					height: 1rem;
+				}
 			}
-		}
 
-		.bubble {
-			.plurkers {
-				max-width: 30vw;
+			.content {
+				.post {
+					@media (max-width: mixins.$screen-small) {
+						margin-bottom: auto;
+					}
+				}
+			}
 
-				@for $i from 1 through 5 {
-					&:nth-child(#{$i}) .avatar img {
-						width: calc((2.25 - (.25 * $i)) * var(--padl))
+			.chart {
+				margin: var(--padm) 0 var(--padl);
+
+				@media (min-width: mixins.$screen-tiny) {
+					margin: var(--padl) 0 var(--padxl);
+				}
+
+				@media (min-width: mixins.$screen-verysmall) {
+					margin: var(--padm) 0;
+				}
+
+				@media (min-width: mixins.$screen-small) {
+					margin: var(--pads) 0;
+				}
+			}
+
+			.meta {
+				span {
+					@media (max-width: mixins.$screen-tiny) {
+
+						display: flex;
+						margin-right: var(--pads);
+					}
+				}
+			}
+
+			.grid {
+				.html div {
+					@media (max-width: mixins.$screen-verysmall) {
+						margin: calc(var(--pads) * 2/3);
+					}
+				}
+			}
+
+			.emoticons {
+				.html div {
+					@media (max-width: mixins.$screen-verysmall) {
+						margin: var(--padm);
+					}
+				}
+			}
+
+			.bubble {
+				.plurkers {
+					@media (max-width: mixins.$screen-verysmall) {
+						max-width: 30vw;
+					}
+
+					@for $i from 1 through 5 {
+						&:nth-child(#{$i}) .avatar img {
+							@media (max-width: mixins.$screen-verysmall) {
+								width: calc((2.25 - (.25 * $i)) * var(--padl))
+							}
+						}
+					}
+				}
+			}
+
+			&-wrap {
+				height: calc(1.35 * var(--box));
+
+				&.span2 {
+					height: calc(1.5 * var(--box));
+				}
+
+				&.bubble {
+					height: calc(1.75 * var(--box));
+
+					@media (min-width: mixins.$screen-tiny) {
+						height: calc(1.5 * var(--box));
+					}
+				}
+
+				&.hashtags {
+					height: calc(1.25 * var(--box));
+
+					@media (min-width: mixins.$screen-small) {
+						height: calc(1.5 * var(--box));
+					}
+				}
+
+				&.mediumnumber {
+					height: calc(1.25 * var(--box));
+				}
+
+
+				&.sharedlinks {
+					@media (max-width: mixins.$screen-tiny) {
+						height: calc(1.5 * var(--box));
+					}
+				}
+
+				&.span2.emoticons {
+					@media (max-width: mixins.$screen-verysmall) {
+						height: calc(var(--box) * 1.75);
+					}
+				}
+			}
+
+			&.mediumnumber {
+				.big {
+					font-size: 14vw;
+				}
+			}
+
+			&.largenumber {
+				.big {
+					font-size: 12vw;
+				}
+			}
+
+			&.coins {
+				.big {
+					@media (max-width: mixins.$screen-small) {
+						width: calc(var(--box) - var(--padxl) * 3);
+						height: calc(var(--box) - var(--padxl) * 3);
+						line-height: calc(var(--box) - var(--padxl) * 3);
+					}
+				}
+			}
+
+			&.responded {
+				.text {
+					@media (max-width: mixins.$screen-tiny) {
+						margin: auto 0;
+					}
+				}
+			}
+
+			&.postcontent {
+				.post {
+					line-clamp: 7;
+				}
+			}
+
+			&.avatar {
+				.html {
+					@media (max-width: mixins.$screen-verysmall) {
+						margin-bottom: var(--padm);
+					}
+				}
+			}
+
+			&.center,
+			&.badges {
+				.big {
+					margin-top: var(--padm);
+				}
+			}
+
+			&,
+			&.mediumnumber,
+			&.largenumber {
+				.big {
+					@media (min-width: mixins.$screen-small) {
+						font-size: 7.5vw;
+					}
+				}
+
+				&.span2 {
+					.big {
+						@media (min-width: mixins.$screen-small) {
+							font-size: 10vw;
+							letter-spacing: -.5vw;
+						}
+					}
+				}
+			}
+
+			&.previewpics,
+			&.sharedlinks {
+				.post {
+					@media (max-width: mixins.$screen-small) {
+						margin-bottom: 0;
 					}
 				}
 			}

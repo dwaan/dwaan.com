@@ -114,7 +114,7 @@ class most {
 				this.data.sort(this.parent.sort)
 				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
 					if (this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>'
-				if (html != "") this.parent.statistics.drawHTML("smallspan grid emoticons", 'Most Used <i>My Emoticons</i>', html)
+				if (html != "") this.parent.statistics.drawHTML("grid emoticons", 'Most Used <i>My Emoticons</i>', html)
 			}
 		}
 
@@ -204,7 +204,7 @@ class most {
 					}
 					index++
 				}
-				if (this.links.length > 0) this.parent.statistics.drawDiv('spansmall sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result)
+				if (this.links.length > 0) this.parent.statistics.drawDiv('sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result)
 			},
 			drawPics: function () {
 				var max = 1
@@ -221,7 +221,7 @@ class most {
 					index++
 				}
 
-				if (this.pics.length > 0) this.parent.statistics.draw('spansmall sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>')
+				if (this.pics.length > 0) this.parent.statistics.draw('sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>')
 				if (result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🖼 Most Popular Image</i>', result)
 			}
 		}

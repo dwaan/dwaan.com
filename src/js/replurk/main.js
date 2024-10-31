@@ -411,7 +411,7 @@ class replurk {
 		// Draw statistic
 		this.statistics.title('All Time', 'alltime');
 		if (plurker.anniversary.years && plurker.anniversary.days) {
-			this.statistics.draw('spansmall center posted', Math.round(plurker.plurks_count / days), 'I posted around <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
+			this.statistics.draw('center posted', Math.round(plurker.plurks_count / days), 'I posted around <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(Math.round(plurker.plurks_count / days), "plurk") + " per day</i>");
 
 			// Responses
 			var oneday = 16;
@@ -420,8 +420,8 @@ class replurk {
 			this.statistics.draw('span2 center responded', responses, 'I responded around <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(responses, "time") + "</i> per day. " + extra + " when I'm not sleeping");
 
 			var join = new Date(plurker.join_date)
-			this.statistics.draw('spansmall center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
-			this.statistics.draw('spansmall center badges', plurker.badges.length, "I have <i><img src='https://api.iconify.design/fluent-emoji:shield.svg' /> " + plural(plurker.badges.length, "badge") + "</i> right now");
+			this.statistics.draw('center anniversary', "<strong><i>" + monthNames[join.getMonth()] + "</i> <i>" + join.getFullYear() + "</i></strong> <em>" + join.getDate() + "</em>", "I joined Plurk <i>" + plural(plurker.anniversary.years, "year") + "</i> and <i>" + plural(plurker.anniversary.days, "day") + "</i> ago");
+			this.statistics.draw('center badges', plurker.badges.length, "I have <i><img src='https://api.iconify.design/fluent-emoji:shield.svg' /> " + plural(plurker.badges.length, "badge") + "</i> right now");
 		} else {
 			this.statistics.draw('', '-', "There is no data in my timeline");
 			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now");

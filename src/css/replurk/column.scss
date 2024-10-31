@@ -5,7 +5,7 @@
 // Grid column size
 
 .plurk {
-	.statistics {
+	#statistics {
 		display: grid;
 		gap: var(--padl);
 		grid-template-columns: 1fr;
@@ -15,9 +15,15 @@
 		}
 
 		@media (min-width: mixins.$screen-abitwide) {
-			grid-template-columns: repeat(20, 1fr);
+			grid-template-columns: repeat(24, 1fr);
 		}
 
+		@media (min-width: mixins.$screen-verywide) {
+			grid-template-columns: repeat(20, 1fr);
+		}
+	}
+
+	.statistics {
 		&-title {
 			grid-column: span 1;
 
@@ -26,6 +32,10 @@
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 24;
+			}
+
+			@media (min-width: mixins.$screen-verywide) {
 				grid-column: span 20;
 			}
 		}
@@ -38,6 +48,10 @@
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 8;
+			}
+
+			@media (min-width: mixins.$screen-verywide) {
 				grid-column: span 5;
 			}
 		}
@@ -50,6 +64,10 @@
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 6;
+			}
+
+			@media (min-width: mixins.$screen-verywide) {
 				grid-column: span 4;
 			}
 		}
@@ -62,6 +80,10 @@
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 16;
+			}
+
+			@media (min-width: mixins.$screen-verywide) {
 				grid-column: span 10;
 			}
 		}
@@ -74,6 +96,10 @@
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
+				grid-column: span 24;
+			}
+
+			@media (min-width: mixins.$screen-verywide) {
 				grid-column: span 15;
 			}
 		}
@@ -87,6 +113,10 @@
 		}
 
 		@media (min-width: mixins.$screen-abitwide) {
+			grid-column: span 24;
+		}
+
+		@media (min-width: mixins.$screen-verywide) {
 			grid-column: span 20;
 		}
 	}

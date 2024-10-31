@@ -544,18 +544,18 @@ class statistics {
 		this.most.responses.draw(plurks)
 		this.drawGraph('center graph percentage', response_percentage, 'Around <i>' + response_percentage + '%</i> of my plurks got <img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> responses ' + ((response_percentage <= 50) ? '<img src="https://api.iconify.design/fluent-emoji:crying-face.svg" />' : '<img src="https://api.iconify.design/fluent-emoji:star-struck.svg" />'))
 
-		this.draw('spansmall recievereplurk', this.replurker_count, 'I received <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + plural(this.replurker_count, 'replurk') + '</i>')
+		this.draw('recievereplurk', this.replurker_count, 'I received <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + plural(this.replurker_count, 'replurk') + '</i>')
 		this.most.replurk.draw(plurks)
 
 		this.most.favorite.draw(plurks)
-		this.draw('spansmall recievelove', this.favourite_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + plural(this.favourite_count, 'love') + '</i>')
+		this.draw('recievelove', this.favourite_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + plural(this.favourite_count, 'love') + '</i>')
 
-		this.draw('spansmall privateplurk', this.private_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:lip.svg" /> ' + plural(this.private_count, 'private plurk') + '</i>')
-		this.draw('spansmall whisper', this.whispers_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:face-in-clouds.svg" /> ' + plural(this.whispers_count, 'whisper') + '</i>')
-		this.draw('spansmall porn', this.porn_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:face-with-peeking-eye.svg" /> ' + plural(this.porn_count, 'adult plurk') + '</i>')
+		this.draw('privateplurk', this.private_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:lip.svg" /> ' + plural(this.private_count, 'private plurk') + '</i>')
+		this.draw('whisper', this.whispers_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:face-in-clouds.svg" /> ' + plural(this.whispers_count, 'whisper') + '</i>')
+		this.draw('porn', this.porn_count, 'I posted <i><img src="https://api.iconify.design/fluent-emoji:face-with-peeking-eye.svg" /> ' + plural(this.porn_count, 'adult plurk') + '</i>')
 
 		this.draw('span2 responsecount', `${this.plurks_count} &rarr; ${this.response_count}`, 'I received <i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + plural(this.response_count, 'response') + '</i> from <i>' + plural(this.plurks_count, 'plurk') + '</i>')
-		this.draw('spansmall center coins', this.coins_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:coin.svg" /> ' + plural(this.coins_count, 'coin') + '</i>')
+		this.draw('center coins', this.coins_count, 'I recieved <i><img src="https://api.iconify.design/fluent-emoji:coin.svg" /> ' + plural(this.coins_count, 'coin') + '</i>')
 
 		if (this.favorite_list.length > 0) this.drawUserList("users", "loved", 'These Plurkers <i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Loved</i> My Posts', this.favorite_list.sort(this.most.sort))
 		if (this.replurker_list.length > 0) this.drawUserList("users", "replurked", 'These Plurkers likes to <i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Replurked</i> My Posts', this.replurker_list.sort(this.most.sort))
