@@ -13,7 +13,6 @@
 
         $title = "RePlurk " . $now;
         $description = "Unofficial Plurk Year End Recap for " . $now;
-        $replurk = true;
     } else {
         $title = "Replurk";
         $description = "A Year End Review of Your Plurk Account";
