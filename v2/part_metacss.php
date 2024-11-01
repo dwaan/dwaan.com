@@ -1,7 +1,7 @@
 <?php if ($title != "Dwan 😙") $title .= " - Dwan 😙"; ?> <?php if (!isset($sharepic)) $sharepic = "https://dwaan.com/sharepic.jpg"; ?> <?php if (!isset($notfound)) $notfound = false; ?> <?php if (!isset($replurk)) $replurk = false; ?> <meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><!-- Primary Meta Tags --><title><?php echo $title; ?></title><meta name="title" content="<?php echo $title; ?>"><meta name="description" content="<?php echo $description; ?>"> <?php
 // check for the server side x-barba request header
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
-?> <link rel="stylesheet" media="screen" href="/css/bundle.css?<?php echo filemtime('v2/css/bundle.css') ?>"><link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/css/horizontal-screen.css?<?php echo filemtime('v2/css/horizontal-screen.css') ?>"><link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/css/vertical-screen.css?<?php echo filemtime('v2/css/vertical-screen.css') ?>"> <?php if ($notfound) { ?> <link rel="stylesheet" media="screen" href="/css/404.css?<?php echo filemtime('v2/css/404.css') ?>"> <?php } ?> <?php if (isset($_GET["year"])) { ?> <link rel="stylesheet" media="screen" href="/css/plurk.css?<?php echo filemtime('v2/css/plurk.css') ?>"> <?php } ?> <link rel="stylesheet" media="print" href="/css/print.css?<?php echo filemtime('v2/css/print.css') ?>"><script>var classcollection = "no-js";
+?> <link rel="stylesheet" media="screen" href="/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>"><link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>"><link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>"><script>var classcollection = "no-js";
 		/* See if it's in dark mode */
 		h = document.querySelector("html");
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection = "dark";
@@ -10,7 +10,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		if (window.innerWidth == screen.width && window.innerHeight == screen.height) classcollection += " rounded";
 
 		// Set the class
-		h.setAttribute('class', classcollection);</script><script src="/js/bundle.js?<?php echo filemtime('v2/js/bundle.js') ?>" async></script><style>.no-js #loader,
+		h.setAttribute('class', classcollection);</script><script src="/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script><style>.no-js #loader,
 		.no-js #mode {
 			display: none;
 		}

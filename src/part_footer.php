@@ -16,6 +16,8 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 			</div>\
 		";
 	</script>
+
+	<link rel="stylesheet" media="print" href="/css/print.css?<?php echo filemtime('css/print.css') ?>">
 <?php
 }
 ?>

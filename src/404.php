@@ -4,8 +4,7 @@
 <head>
 	<?php
 	$title = "oh 🦀, me think you lost! 😢";
-	$description = "please go back to dwaan.com, not not sure why is here.";
-	$notfound = true;
+	$description = "please go back to dwaan.com, not sure why you is here.";
 	include_once "part_metacss.php";
 	?>
 </head>
@@ -14,6 +13,8 @@
 	<?php include_once "part_head.php" ?>
 
 	<main data-barba="container" data-barba-namespace="lost" class="lost">
+		<link rel="stylesheet" media="screen" href="/css/404.css?<?php echo filemtime('css/404.css') ?>">
+
 		<section class="middle clip full">
 			<div class="thumbs fromtop">
 				<img id="mrmonkey" src="/img/mr.monkey.webp" alt="Me are Mr. 🐵" />
@@ -24,6 +25,7 @@
 				<p>me dad said he lazy bring old pages, you come here because him, not me. <a href="./" class="spring">click here continue</a></p>
 			</div>
 		</section>
+
 		<section id="lost">
 			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
 			<h2><span><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i><i>is you lost?</i></span></h2>
@@ -33,7 +35,7 @@
 		</section>
 	</main>
 
-    <?php include_once "part_footer.php"; ?>
+	<?php include_once "part_footer.php"; ?>
 </body>
 
 <?php include_once "part_script.php"; ?>

@@ -8,6 +8,6 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 				<p>I think your screen is just to small for me to support it.</p>\
 				<p>Please rotate your 📱 screen or resize your 💻 browser for better looking layout.</p>\
 			</div>\
-		";</script> <?php
+		";</script><link rel="stylesheet" media="print" href="/css/print.css?<?php echo filemtime('css/print.css') ?>"> <?php
 }
 ?>

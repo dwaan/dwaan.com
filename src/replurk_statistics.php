@@ -1,5 +1,9 @@
 <?php if ($_SERVER['REQUEST_URI'] == "/replurk_statistics") header('Location: ./replurk'); ?>
+
+
 <main data-barba="container" data-barba-namespace="replurk<?php echo $now; ?>" class="plurk plurk<?php echo $now; ?>">
+	<link rel="stylesheet" media="screen" href="/css/plurk.css?<?php echo filemtime('css/plurk.css') ?>">
+
 	<div id="hello" class="grant middle first snap">
 		<div class="animate middle">
 			<div class="thumbs"></div>

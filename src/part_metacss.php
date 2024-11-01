@@ -16,18 +16,9 @@
 // check for the server side x-barba request header
 if (!isset($_SERVER['HTTP_X_BARBA'])) {
 ?>
-	<link rel="stylesheet" media="screen" href="/css/bundle.css?<?php echo filemtime('v2/css/bundle.css') ?>">
-	<link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/css/horizontal-screen.css?<?php echo filemtime('v2/css/horizontal-screen.css') ?>">
-	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/css/vertical-screen.css?<?php echo filemtime('v2/css/vertical-screen.css') ?>">
-
-	<?php if ($notfound) { ?>
-		<link rel="stylesheet" media="screen" href="/css/404.css?<?php echo filemtime('v2/css/404.css') ?>">
-	<?php } ?>
-	<?php if (isset($_GET["year"])) { ?>
-		<link rel="stylesheet" media="screen" href="/css/plurk.css?<?php echo filemtime('v2/css/plurk.css') ?>">
-	<?php } ?>
-
-	<link rel="stylesheet" media="print" href="/css/print.css?<?php echo filemtime('v2/css/print.css') ?>">
+	<link rel="stylesheet" media="screen" href="/css/bundle.css?<?php echo filemtime('css/bundle.css') ?>">
+	<link rel="stylesheet" media="screen and (min-aspect-ratio: 1/1)" href="/css/horizontal-screen.css?<?php echo filemtime('css/horizontal-screen.css') ?>">
+	<link rel="stylesheet" media="screen and (max-aspect-ratio: 1/1)" href="/css/vertical-screen.css?<?php echo filemtime('css/vertical-screen.css') ?>">
 
 	<script>
 		var classcollection = "no-js";
@@ -41,7 +32,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 		// Set the class
 		h.setAttribute('class', classcollection);
 	</script>
-	<script src="/js/bundle.js?<?php echo filemtime('v2/js/bundle.js') ?>" async></script>
+	<script src="/js/bundle.js?<?php echo filemtime('js/bundle.js') ?>" async></script>
 
 	<style>
 		.no-js #loader,
