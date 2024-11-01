@@ -1182,75 +1182,95 @@
 	}
 }
 
-/* Horizontal and vertical screen */
+/* Vertical screen */
 
 @media screen and (min-aspect-ratio: 1/1) {
 	.statistics {
-		.big {
-			font-size: 7vw;
-			letter-spacing: -.25vw;
-		}
+		.chart {
+			margin: var(--padm) 0;
 
-		&.mediumnumber.big,
-		&.largenumber .big {
-			font-size: 6vw;
-		}
-	}
-
-	.postcontent .post {
-		line-clamp: 8;
-	}
-
-	@media (min-width: mixins.$screen-wide) {
-
-		.statistics {
-
-			.big,
-			&.span2.mediumnumber .big,
-			&.span2.largenumber .big {
-				font-size: 5vw;
-			}
-
-			&.mediumnumber .big {
-				font-size: 4vw;
-			}
-
-			&.largenumber .big {
-				font-size: 3.5vw;
-			}
-
-			&.responded .text {
-				font-size: 1.15rem;
-				margin: auto;
-				line-height: 175%;
+			@media (min-width: mixins.$screen-ultrawide) {
+				margin-bottom: var(--padxl);
 			}
 		}
 
-		.postcontent .post {
-			line-clamp: 6;
-		}
-	}
-
-	@media (min-width: mixins.$screen-ultrawide) {
-		.statistics .chart {
-			margin-bottom: var(--padxl);
-		}
-	}
-
-	.chart {
-		margin: var(--padm) 0;
-	}
-
-	@media (max-width: mixins.$screen-wide) {
-		.statistics-wrap {
-			height: calc(var(--box) * 1.85);
+		&.sharedlinks {
+			.post {
+				@media (max-width: mixins.$screen-wide) {
+					font-size: .65rem;
+				}
+			}
 		}
 
-		.sharedlinks .post {
-			font-size: .65rem;
+		&.responded {
+			.text {
+				@media (min-width: mixins.$screen-wide) {
+					font-size: 1.15rem;
+					margin: auto;
+					line-height: 175%;
+				}
+			}
+		}
+
+		&.postcontent {
+			.post {
+				line-clamp: 8;
+
+				@media (min-width: mixins.$screen-wide) {
+					line-clamp: 6;
+				}
+			}
+		}
+
+		&.mediumnumber,
+		&.largenumber {
+			.big {
+				font-size: 6vw;
+			}
+		}
+
+		&,
+		&.mediumnumber,
+		&.largenumber {
+			.big {
+				font-size: 7vw;
+				letter-spacing: -.25vw;
+			}
+
+			&.span2 {
+				.big {
+					@media (min-width: mixins.$screen-wide) {
+						font-size: 5vw;
+					}
+				}
+			}
+		}
+
+		&.mediumnumber {
+			.big {
+				@media (min-width: mixins.$screen-wide) {
+					font-size: 4vw;
+				}
+			}
+		}
+
+		&.largenumber {
+			.big {
+				@media (min-width: mixins.$screen-wide) {
+					font-size: 3.5vw;
+				}
+			}
+		}
+
+		&-wrap {
+			@media (max-width: mixins.$screen-wide) {
+				height: calc(var(--box) * 1.85);
+			}
 		}
 	}
 }
+
+/* Horizontal screen */
 
 @media screen and (max-aspect-ratio: 1/1) {
 	.plurk {
