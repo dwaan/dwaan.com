@@ -28,6 +28,11 @@ let browser = {
 	set: function (state, duration, ease) {
 		this.get(state);
 		darkmode.setDarkMode(duration, ease);
+	},
+
+	reset: function () {
+		this.get();
+		darkmode.setDarkMode(1);
 	}
 }
 

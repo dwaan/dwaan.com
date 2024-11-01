@@ -4,11 +4,15 @@ import gsap from 'gsap';
 import loader from '../helpers/loader.js';
 import animate from '../helpers/animate.js';
 import darkmode from '../helpers/darkmode.js';
+import browser from '../replurk/browser.js';
 import { _qAll, reduceMotionFilter } from '../helpers/helper.js';
 
 let transition_from_plurk = {
     name: 'from-plurk',
-    leave: () => true,
+    leave: () => {
+        console.log("hello")
+		browser.reset();
+    },
     before: async function (data) {
         var done = this.async();
         var current = data.current.container;
@@ -80,7 +84,7 @@ let transition_from_plurk = {
     },
     after: () => loader.empty(),
     from: {
-        namespace: ['replurk2020', 'replurk2021', 'replurk2022', 'replurk2023']
+        namespace: ['replurk2020', 'replurk2021', 'replurk2022', 'replurk2023', 'replurk2024']
     }
 }
 
