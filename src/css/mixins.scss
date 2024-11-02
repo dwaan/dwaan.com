@@ -2,12 +2,12 @@
 
 $screen-ultrawide: 1900px;
 $screen-verywide: 1400px;
-$screen-wide: 1194px;
-$screen-abitwide: 1024px;
+$screen-wide: 1195px;
+$screen-abitwide: 1020px;
 $screen-medium: 900px;
 $screen-small: 600px;
 $screen-verysmall: 400px;
-$screen-tiny: 375px;
+$screen-tiny: 370px;
 
 @mixin make-it-block($display: block) {
 	content: "";

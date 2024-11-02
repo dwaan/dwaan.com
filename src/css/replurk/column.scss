@@ -8,7 +8,7 @@
 	#statistics {
 		display: grid;
 		gap: var(--padl);
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(2, 1fr);
 
 		@media (min-width: mixins.$screen-small) {
 			grid-template-columns: repeat(12, 1fr);
@@ -25,7 +25,7 @@
 
 	.statistics {
 		&-title {
-			grid-column: span 1;
+			grid-column: span 2;
 
 			@media (min-width: mixins.$screen-small) {
 				grid-column: span 12;
@@ -41,7 +41,7 @@
 		}
 
 		&-wrap {
-			grid-column: span 1;
+			grid-column: span 2;
 
 			@media (min-width: mixins.$screen-small) {
 				grid-column: span 6;
@@ -57,7 +57,11 @@
 		}
 
 		&.span1 {
-			grid-column: span 1;
+			grid-column: span 2;
+
+			@media (min-width: mixins.$screen-verysmall) {
+				grid-column: span 1;
+			}
 
 			@media (min-width: mixins.$screen-small) {
 				grid-column: span 4;
@@ -73,7 +77,7 @@
 		}
 
 		&.span2 {
-			grid-column: span 1;
+			grid-column: span 2;
 
 			@media (min-width: mixins.$screen-small) {
 				grid-column: span 12;
@@ -89,7 +93,7 @@
 		}
 
 		&.span3 {
-			grid-column: span 1;
+			grid-column: span 2;
 
 			@media (min-width: mixins.$screen-small) {
 				grid-column: span 12;
@@ -106,7 +110,7 @@
 	}
 
 	#backtotop {
-		grid-column: span 1;
+		grid-column: span 2;
 
 		@media (min-width: mixins.$screen-small) {
 			grid-column: span 12;

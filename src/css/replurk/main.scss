@@ -12,7 +12,7 @@
 /* Plurk Statistics */
 
 :root {
-	--box: 80vmax;
+	--box: 50vmax;
 
 	@media (min-width: mixins.$screen-small) {
 		--box: 40vmax;
@@ -852,6 +852,18 @@
 		&.span1 {
 			height: calc(1 * var(--box));
 
+			@media (min-width: mixins.$screen-tiny) {
+				height: calc(1.25 * var(--box));
+			}
+
+			@media (min-width: mixins.$screen-verysmall) {
+				height: calc(.75 * var(--box));
+			}
+
+			@media (min-width: mixins.$screen-small) {
+				height: calc(1 * var(--box));
+			}
+
 			.text {
 				line-height: 130%;
 			}
@@ -1341,7 +1353,6 @@
 			.meta {
 				span {
 					@media (max-width: mixins.$screen-tiny) {
-
 						display: flex;
 						margin-right: var(--pads);
 					}
@@ -1384,14 +1395,14 @@
 				height: calc(1.35 * var(--box));
 
 				&.span2 {
-					height: calc(1.5 * var(--box));
+					height: calc(1.4 * var(--box));
 				}
 
 				&.bubble {
-					height: calc(1.75 * var(--box));
+					height: calc(1.5 * var(--box));
 
 					@media (min-width: mixins.$screen-tiny) {
-						height: calc(1.5 * var(--box));
+						height: calc(1.4 * var(--box));
 					}
 				}
 
