@@ -7,28 +7,12 @@
     <title>Login Success</title>
     <script>
         try {
-            var namespace = window.opener.document.querySelector("main[data-barba=container]").getAttribute("data-barba-namespace");
-
-            if (namespace == "replurk2020") {
-                window.opener.plurkview.replurk2020.login();
-                namespace = "";
-            } else if (namespace == "replurk2021") {
-                window.opener.plurkview.replurk2021.login();
-                namespace = "";
-            } else if (namespace == "replurk2022") {
-                window.opener.plurkview.replurk2022.login();
-                namespace = "";
-            } else if (namespace == "replurk") {
-                window.opener.plurkview.replurk.login();
-                namespace = "";
-            }
-
-            if (namespace == "") window.close();
+            window.close();
         } catch (e) {
             console.log(e);
         }
     </script>
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#FFD700">
     <style>
         * {
             line-height: 1.2;
@@ -48,11 +32,11 @@
             display: table-cell;
             vertical-align: middle;
             margin: 2em auto;
-            background-color: #ffffff;
+            color: #000;
+            background-color: #FFD700;
         }
 
         h1 {
-            color: #000;
             font-size: 2em;
             font-weight: 400;
         }
@@ -71,7 +55,6 @@
                 font-size: 1.5em;
                 margin: 0 0 0.3em;
             }
-
         }
     </style>
 </head>

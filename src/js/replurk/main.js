@@ -44,7 +44,6 @@ class replurk {
 		var next = this.next;
 		var length = reduceMotionFilter(1);
 
-		browser.set("green", 1);
 		tl.fromTo(next.querySelectorAll("#permission"), {
 			position: "fixed",
 			display: "",
@@ -53,7 +52,8 @@ class replurk {
 		}, {
 			opacity: 1,
 			duration: length,
-			ease: "power3.in"
+			ease: "power3.in",
+			onStart: browser.set("green", length) // correct
 		});
 		tl.fromTo(next.querySelectorAll("#permission .bgtext *"), {
 			display: "",
@@ -94,10 +94,7 @@ class replurk {
 				amount: length / 5
 			},
 			duration: length,
-			ease: "power3.in",
-			onComplete: () => {
-				browser.set("yellow");
-			}
+			ease: "power3.in"
 		});
 		tl.fromTo(next.querySelectorAll("#permission"), {
 			opacity: 1
@@ -123,14 +120,15 @@ class replurk {
 			var length = reduceMotionFilter(1);
 			var tl = gsap.timeline();
 
+			browser.set("green", length);
+
 			tl.fromTo(next.querySelectorAll("#hello"), {
 				display: "",
 				opacity: 0
 			}, {
 				opacity: 1,
 				ease: "power3.in",
-				duration: length,
-				onStart: () => browser.set("green", .5)
+				duration: length
 			}, length / 4);
 			tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
 				display: "",
@@ -194,6 +192,7 @@ class replurk {
 				opacity: 0,
 				duration: length,
 				ease: "power3.in",
+				onStart: browser.set("yellow", length + (length / 2)), // correct
 				onComplete: () => {
 					gsap.set(next.querySelectorAll(".grant"), { display: "none" });
 					resolve();
@@ -233,7 +232,6 @@ class replurk {
 		scroll.destroy();
 
 		window.scrollTo(0, 0);
-		browser.set("yellow");
 
 		// Scroll animation menu and logout
 		this.scrolls.menu();
@@ -295,7 +293,7 @@ class replurk {
 					clearInterval(interval);
 					this.login();
 				}
-			}, 3000);
+			}, 1000);
 		}
 
 		scroll.refresh();
@@ -720,7 +718,6 @@ class replurk {
 		return new Promise(resolve => {
 			var length = reduceMotionFilter(1);
 			this.next = el;
-			browser.set("yellow");
 
 			// Run the login
 			gsap.fromTo(this.next.querySelectorAll('#credits'), {
@@ -729,10 +726,8 @@ class replurk {
 				opacity: 1,
 				duration: length,
 				ease: "power3.in",
+				onStart: browser.set("yellow", length), // correct
 				onComplete: async () => {
-					// Change color
-					browser.set("yellow", 0);
-
 					// Display login
 					await this.login(true);
 

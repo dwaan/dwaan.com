@@ -14,7 +14,7 @@ function html($str)
 
 	<head>
 		<title><?php echo $str; ?></title>
-		<meta name="theme-color" content="#ffffff">
+		<meta name="theme-color" content="#FFD700">
 		<style>
 			* {
 				padding: 0;
@@ -27,14 +27,13 @@ function html($str)
 				justify-content: center;
 				align-items: center;
 				font-family: sans-serif;
-				background-color: #ffffff;
+				color: #000;
+				background-color: #FFD700;
 				letter-spacing: .05em;
 			}
 		</style>
 		<script>
-			setTimeout(() => {
-				window.location = "<?php echo $_GET['redirect']; ?>"
-			}, 1000);
+			window.location = "<?php echo $_GET['redirect']; ?>"
 		</script>
 	</head>
 
