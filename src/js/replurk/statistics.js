@@ -218,8 +218,8 @@ class statistics {
 				}, {
 					scale: 1,
 					opacity: 1,
-					ease: "elastic.out(1.2, 0.5)",
-					duration: length * 3 / 4,
+					duration: length,
+					ease: "elastic(1.2, 0.5)",
 					stagger: {
 						amount: length / 3,
 						from: "end"
@@ -230,11 +230,10 @@ class statistics {
 			}, tl => {
 				return ScrollTrigger.create({
 					trigger: this.el.querySelector("." + id),
-					start: "50% 100%",
-					end: "50% 100%",
-					animation: tl,
-					markers: true,
-					toggleActions: "play none none reverse"
+					start: "0% 75%",
+					end: "100% 75%",
+					scrub: 2,
+					animation: tl
 				})
 			})
 		} else {
@@ -246,19 +245,16 @@ class statistics {
 					y: 0,
 					opacity: 1,
 					duration: length,
-					ease: "power3.out",
 					stagger: length / 3
 				}, 0)
-
 				return tl
 			}, tl => {
 				return ScrollTrigger.create({
 					trigger: this.el.querySelector("." + id),
 					start: "0% 100%",
-					end: "0% 100%",
-					animation: tl,
-					markers: true,
-					toggleActions: "play none none reverse"
+					end: "100% 100%",
+					scrub: 1,
+					animation: tl
 				})
 			})
 		}

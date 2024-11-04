@@ -180,8 +180,12 @@
 			padding: var(--padl);
 			background-color: var(--lime);
 			overflow: clip;
-			border-radius: calc(2/3 * var(--padl));
+			border-radius: var(--padl);
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
+
+			@media (min-width: mixins.$screen-abitwide) {
+				border-radius: calc(2/3 * var(--padl));
+			}
 
 			p,
 			a,
