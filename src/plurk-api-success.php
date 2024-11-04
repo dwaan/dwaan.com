@@ -12,7 +12,7 @@
             console.log(e);
         }
     </script>
-    <meta name="theme-color" content="#FFD700">
+    <meta name="theme-color" content="#fff">
     <style>
         * {
             line-height: 1.2;
@@ -33,7 +33,7 @@
             vertical-align: middle;
             margin: 2em auto;
             color: #000;
-            background-color: #FFD700;
+            background-color: #fff;
         }
 
         h1 {

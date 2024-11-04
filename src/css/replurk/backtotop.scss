@@ -8,20 +8,28 @@
 	color: var(--black);
 	font-size: 2rem;
 	text-align: center;
-	width: initial;
-	height: calc(1/3 * var(--box));
-	line-height: calc(1/3 * var(--box));
 	margin: var(--padxxl) auto 0;
 	cursor: pointer;
 	transition: color .125s ease-in-out;
 
-	&:before {
+	&,
+	&::before {
+		--size: calc(1/5 * var(--box));
+
+		width: var(--size);
+		height: var(--size);
+		line-height: var(--size);
+
+		@media (min-width: mixins.$screen-small) {
+			--size: calc(1/3 * var(--box));
+		}
+	}
+
+	&::before {
 		position: absolute;
 		content: "";
 		display: block;
 		z-index: -1;
-		width: calc(1/3 * var(--box));
-		height: calc(1/3 * var(--box));
 		border: 1px dashed var(--black-75);
 		border-radius: 100%;
 		transition: background-color .125s ease-in-out;

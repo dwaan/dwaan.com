@@ -9,7 +9,7 @@ $app_secret = 'HMQ7W2gkzECcY753BG7h4f9LWDrf1LK3';
 
 function html($str)
 {
-?> <html><head><title><?php echo $str; ?></title><meta name="theme-color" content="#FFD700"><style>* {
+?> <html><head><title><?php echo $str; ?></title><meta name="theme-color" content="#fff"><style>* {
 				padding: 0;
 				margin: 0;
 			}
@@ -21,7 +21,7 @@ function html($str)
 				align-items: center;
 				font-family: sans-serif;
 				color: #000;
-				background-color: #FFD700;
+				background-color: #fff;
 				letter-spacing: .05em;
 			}</style><script>window.location = "<?php echo $_GET['redirect']; ?>"</script></head><body> <?php echo $str; ?> </body></html> <?php
 }

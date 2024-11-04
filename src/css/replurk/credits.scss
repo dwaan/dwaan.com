@@ -12,11 +12,6 @@
 	top: initial;
 	bottom: 0;
 	justify-content: flex-end;
-	padding: var(--pady) var(--padx);
-
-	@media (min-width: mixins.$screen-medium) {
-		padding: calc(2.5 * var(--pady)) calc(2 * var(--padx));
-	}
 
 	p {
 		font-size: .9rem;
@@ -26,11 +21,9 @@
 
 	a {
 		text-decoration: none;
-		transition: color .125s ease-in-out, background-color .125s ease-in-out;
-		color: inherit;
-		border-bottom: 1px dashed var(--black-75);
-		columns: inherit;
 		color: var(--black);
+		columns: inherit;
+		transition: color .125s ease-in-out, background-color .125s ease-in-out;
 
 		&:hover {
 			color: var(--red);
@@ -60,8 +53,7 @@
 
 	.made {
 		font-size: 1.5rem;
-		font-weight: 600;
-		opacity: 1;
+		font-weight: 700;
 
 		@media (min-width: mixins.$screen-small) {
 			font-size: 1.75rem;
@@ -93,6 +85,10 @@
 			font-size: .7rem;
 			line-height: 150%;
 		}
+
+		a {
+			border-bottom: 1px dashed var(--black-75);
+		}
 	}
 
 	.likeandsupport {
@@ -115,19 +111,16 @@
 
 		a,
 		i {
-			display: block;
 			font-style: initial;
-			border: none;
-			padding: 0;
 		}
 
 		a {
 			display: flex;
+			gap: var(--padm);
 			flex-flow: row;
-			gap: var(--pads);
 			align-items: center;
-			justify-content: center;
-			padding: var(--pads);
+			justify-content: flex-start;
+			padding: var(--pads) var(--padl);
 			background-color: var(--black-15);
 			border-radius: var(--padm);
 			transition: background-color .125s ease-in-out;
@@ -145,6 +138,7 @@
 			}
 
 			i {
+				display: block;
 				text-align: left;
 				font-size: .75rem;
 				line-height: 130%;

@@ -223,7 +223,7 @@
 		}
 
 		@media screen and (max-aspect-ratio: 1/1) {
-			@media (min-width: mixins.$screen-abitwide) {
+			@media (min-width: mixins.$screen-small) {
 				&.posted {
 					order: 5;
 				}
