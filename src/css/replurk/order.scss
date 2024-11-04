@@ -10,7 +10,7 @@
 		}
 
 		&.alltimeloading {
-			order: 1;
+			order: 99;
 		}
 
 		&.inactive {
@@ -45,7 +45,7 @@
 		}
 
 		&.thisyearloading {
-			order: 101;
+			order: 199;
 		}
 
 		&.mostresponded {
@@ -108,7 +108,7 @@
 		}
 
 		&.digdeeperloading {
-			order: 201;
+			order: 299;
 		}
 
 		&.mostmentionedbyme {
