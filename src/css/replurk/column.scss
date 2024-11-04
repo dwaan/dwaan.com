@@ -57,11 +57,7 @@
 		}
 
 		&.span1 {
-			grid-column: span 2;
-
-			@media (min-width: mixins.$screen-tiny) {
-				grid-column: span 1;
-			}
+			grid-column: span 1;
 
 			@media (min-width: mixins.$screen-small) {
 				grid-column: span 4;

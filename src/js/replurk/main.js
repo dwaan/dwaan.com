@@ -671,42 +671,43 @@ class replurk {
 		if (this.me.gender == 1) facebook = "<img src='https://api.iconify.design/fluent-emoji:old-man.svg' />";
 		if (this.me.gender == 0) facebook = "<img src='https://api.iconify.design/fluent-emoji:old-woman.svg' />";
 
-		var plurker = "<img src='https://api.iconify.design/fluent-emoji:person-bowing.svg' />";
+		var plurker = "<img src='https://api.iconify.design/fluent-emoji:person-bowing-medium.svg' />";
 		if (this.me.gender == 1) plurker = "<img src='https://api.iconify.design/fluent-emoji:man-bowing.svg' />";
 		if (this.me.gender == 0) plurker = "<img src='https://api.iconify.design/fluent-emoji:woman-bowing.svg' />";
 
 		this.statistics.title('RePlurk Badges', 'replurkbadges');
 		this.statistics.body(`\
-			<h4>What are RePlurk Badges consist of?</h4>\
-			<p>They are badges based on your activities in Plurk. Currently there are 16 badges in total, for activities such as:</p>\
+			<h4>What are RePlurk Badges?</h4>\
+			<p>They’re badges based on your daily activities on Plurk. There are currently 17 badges in total, for things like:</p>\
 			<ol>\
-				<li>Creating lots of polls (Polling ${gender})</li>\
-				<li>Receiving lots of coins (Plurk Coins Billionaire)</li>\
-				<li>Writing lots of posts (Novelist and Keyboard Warrior)</li>\
-				<li>Sharing lots of pictures and links (Meme Lord & Missing Link)</li>\
-				<li>Sharing social medias urls (there are 7 badges)</li>\
-				<li>Posting lots of adult posts (Adult-er)</li>\
-				<li>Getting lots of replurks (Trendsetter)</li>\
-				<li>and, Constantly posting in Plurk almost everyday (Active Plurker)</li>\
+				<li>Creating a ton of polls (Polling ${gender})</li>\
+				<li>Getting a bunch of coins (Plurk Coins Billionaire)</li>\
+				<li>Writing a kilo of plurks (Novelist and Keyboard Warrior)</li>\
+				<li>Posting a ton of \"adult\" posts (Adult-er)</li>\
+				<li>Sharing social media URLs other than Plurk (there are 7 badges)</li>\
+				<li>Sharing an olympic size of pictures and links (Meme Lord & Missing Link)</li>\
+				<li>Getting a bunch of Replurk (Trendsetter)</li>\
+				<li>and, posting almost every day on Plurk (2 badges for Active Plurker)</li>\
 			</ol>\
 			`, `replurkbadges description`);
-		if (this.statistics.poll_count >= 5) this.statistics.draw('span1 badges pollbadges', "<img src='https://api.iconify.design/fluent-emoji:ballot-box-with-ballot.svg' />", "<strong>Polling " + gender + "</strong>");
-		if (this.statistics.coins_count >= 5) this.statistics.draw('span1 badges coinbadges', "<img src='https://api.iconify.design/fluent-emoji:coin.svg' />", "<strong>Plurk Coins Billionaire</strong>");
-		if (this.statistics.most.types.words >= 50000) this.statistics.draw('span1 badges novelistbadges', "<img src='https://api.iconify.design/fluent-emoji:orange-book.svg' />", "<strong>Novelist</strong>");
-		if (this.statistics.most.types.chars >= 1000000) this.statistics.draw('span1 badges keyboardbadges', "<img src='https://api.iconify.design/fluent-emoji:keyboard.svg' />", "<strong>Keyboard Warrior</strong>");
-		if (this.statistics.most.links.pics.length >= 356) this.statistics.draw('span1 badges memebadges', "<img src='https://api.iconify.design/fluent-emoji:cat.svg' />", "<strong>Meme Lord</strong>");
-		if (this.statistics.most.links.links.length >= 356 / 2) this.statistics.draw('span1 badges missingbadges', "<img src='https://api.iconify.design/fluent-emoji:orangutan.svg' />", "<strong>The Missing Link</strong>");
-		if (this.statistics.instagrammer_count >= 10) this.statistics.draw('span1 badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:camera.svg' />", "<strong>Instagrammer</strong>");
-		if (this.statistics.facebooker_count >= 10) this.statistics.draw('span1 badges socmedbadges', facebook, "<strong>Facebooker</strong>");
-		if (this.statistics.twitterer_count >= 10) this.statistics.draw('span1 badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:hatching-chick.svg' />", "<strong>The Real Chief Twit</strong>");
-		if (this.statistics.redditor_count >= 10) this.statistics.draw('span1 badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:robot.svg' />", "<strong>/r</strong>");
-		if (this.statistics.tiktoker_count >= 10) this.statistics.draw('span1 badges socmedbadges', tiktok, "<strong>Tiktoker</strong>");
-		if (this.statistics.imgurer_count >= 10) this.statistics.draw('span1 badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:framed-picture.svg' />", "<strong>Imgur-er</strong>");
-		if (this.statistics.youtuber_count >= 10) this.statistics.draw('span1 badges socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:movie-camera.svg' />", "<strong>Youtuber <img src='https://api.iconify.design/fluent-emoji:sleepy-face.svg' /></strong>");
-		if (this.statistics.porn_count >= 10) this.statistics.draw('span1 badges adultbadges', "<img src='https://api.iconify.design/fluent-emoji:face-with-peeking-eye.svg' />", "<strong>Adult-er</strong>");
-		if (this.statistics.replurker_count >= 50) this.statistics.draw('span1 badges plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:trophy.svg' />", "<strong>Trendsetter</strong>");
-		if (this.statistics.plurks_count >= 356 * 1.5) this.statistics.draw('span1 badges plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:military-medal.svg' />", "<strong>Active Plurker " + plurker + "</strong>");
 
+		this.statistics.drawBadge(this.statistics.poll_count >= 5, 'pollbadges', "<img src='https://api.iconify.design/fluent-emoji:ballot-box-with-ballot.svg' />", "<strong>Polling " + gender + "</strong>", "Create more pollings");
+		this.statistics.drawBadge(this.statistics.coins_count >= 5, 'coinbadges', "<img src='https://api.iconify.design/fluent-emoji:coin.svg' />", "<strong>Plurk Coins Billionaire</strong>", "Receive lots of coins");
+		this.statistics.drawBadge(this.statistics.most.types.words >= 50000, 'novelistbadges', "<img src='https://api.iconify.design/fluent-emoji:orange-book.svg' />", "<strong>Novelist</strong>", "Post more plurk");
+		this.statistics.drawBadge(this.statistics.most.types.chars >= 1000000, 'keyboardbadges', "<img src='https://api.iconify.design/fluent-emoji:keyboard.svg' />", "<strong>Keyboard Warrior</strong>", "Response more plurk");
+		this.statistics.drawBadge(this.statistics.most.links.pics.length >= 356, 'memebadges', "<img src='https://api.iconify.design/fluent-emoji:cat.svg' />", "<strong>Meme Lord</strong>", "Share more images");
+		this.statistics.drawBadge(this.statistics.most.links.links.length >= 356 / 2, 'missingbadges', "<img src='https://api.iconify.design/fluent-emoji:orangutan.svg' />", "<strong>The Missing Link</strong>", "Share more links");
+		this.statistics.drawBadge(this.statistics.instagrammer_count >= 10, 'socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:camera.svg' />", "<strong>Instagrammer</strong>", "Share more Instagram");
+		this.statistics.drawBadge(this.statistics.facebooker_count >= 10, 'socmedbadges', facebook, "<strong>Facebooker</strong>", "Share more Facebook");
+		this.statistics.drawBadge(this.statistics.twitterer_count >= 10, 'socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:hatching-chick.svg' />", "<strong>The Real Chief Twit</strong>", "Share more Twitter");
+		this.statistics.drawBadge(this.statistics.redditor_count >= 10, 'socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:robot.svg' />", "<strong>/r</strong>", "Share more Reddit");
+		this.statistics.drawBadge(this.statistics.tiktoker_count >= 10, 'socmedbadges', tiktok, "<strong>Tiktoker</strong>", "Share more TikTok");
+		this.statistics.drawBadge(this.statistics.imgurer_count >= 10, 'socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:framed-picture.svg' />", "<strong>Imgur-er</strong>", "Share more Imgur");
+		this.statistics.drawBadge(this.statistics.youtuber_count >= 10, 'socmedbadges', "<img src='https://api.iconify.design/fluent-emoji:movie-camera.svg' />", "<strong>Youtuber <img src='https://api.iconify.design/fluent-emoji:sleepy-face.svg' /></strong>", "Share more YouTube");
+		this.statistics.drawBadge(this.statistics.porn_count >= 10, 'adultbadges', "<img src='https://api.iconify.design/fluent-emoji:face-with-peeking-eye.svg' />", "<strong>Adult-er</strong>", "Plurk more \"adult\" content");
+		this.statistics.drawBadge(this.statistics.replurker_count >= 50, 'plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:trophy.svg' />", "<strong>Trendsetter</strong>", "Replurk more Plurk");
+		this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 1.5, 'plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:military-medal.svg' />", `<strong>Active Plurker ${plurker}</strong>`, "Plurk more daily");
+		this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', "<img src='https://api.iconify.design/fluent-emoji:person-superhero-medium.svg' />", `<strong>Super Active Plurker ${plurker}${plurker}</strong>`, "Plurk even more daily");
 		this.info();
 
 		scroll.refresh();

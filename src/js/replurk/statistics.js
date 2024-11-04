@@ -117,6 +117,16 @@ class statistics {
 		}
 	}
 
+	drawBadge(condition, style, number, text, textempty) {
+		style = `span1 badges badgesmall ${style}`
+
+		if (condition) {
+			this.draw(style, number, text)
+		} else {
+			this.draw(`${style} nobackground`, "<img src='https://api.iconify.design/fluent:chat-bubbles-question-28-regular.svg' />", textempty ? textempty : "")
+		}
+	}
+
 	drawDiv(style, text) {
 		this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="box">' + text + '</div>'))
 	}
