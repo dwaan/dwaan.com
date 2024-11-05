@@ -19,7 +19,7 @@
 		}
 
 		@media (min-width: mixins.$screen-verywide) {
-			grid-template-columns: repeat(20, 1fr);
+			grid-template-columns: repeat(24, 1fr);
 		}
 	}
 
@@ -36,7 +36,7 @@
 			}
 
 			@media (min-width: mixins.$screen-verywide) {
-				grid-column: span 20;
+				grid-column: span 24;
 			}
 		}
 
@@ -52,7 +52,7 @@
 			}
 
 			@media (min-width: mixins.$screen-verywide) {
-				grid-column: span 5;
+				grid-column: span 6;
 			}
 		}
 
@@ -84,7 +84,7 @@
 			}
 
 			@media (min-width: mixins.$screen-verywide) {
-				grid-column: span 10;
+				grid-column: span 12;
 			}
 		}
 
@@ -100,7 +100,7 @@
 			}
 
 			@media (min-width: mixins.$screen-verywide) {
-				grid-column: span 15;
+				grid-column: span 18;
 			}
 		}
 	}
@@ -117,7 +117,7 @@
 		}
 
 		@media (min-width: mixins.$screen-verywide) {
-			grid-column: span 20;
+			grid-column: span 24;
 		}
 	}
 }

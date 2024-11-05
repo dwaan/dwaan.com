@@ -15,8 +15,8 @@ var api = {
 
 		return new Promise(resolve => {
 			var request
-			var storage = localStorage.getItem(sortenUrl(url))
-			if (storage == null) storage = localStorage[sortenUrl(url)]
+			var storage = sessionStorage.getItem(sortenUrl(url))
+			if (storage == null) storage = sessionStorage[sortenUrl(url)]
 
 			if (storage && !(url == "?fetch=logout" || url == "?request=token" || url == "?")) {
 				// Give sometime out to allow browser to process
@@ -44,7 +44,7 @@ var api = {
 
 						try {
 							var data = LZString.compressToUTF16(JSON.stringify(result.message))
-							localStorage.setItem(sortenUrl(url), data)
+							sessionStorage.setItem(sortenUrl(url), data)
 						} catch {
 							if (!this.storageExceeded) {
 								console.info("Exceeding maximum session storage. Data will be downloaded directly from Plurk, if you recently open other RePlurk year in the same browser tab, you can try close this tab and open a new one to avoid downloading too much when reloading this page.")
@@ -59,7 +59,7 @@ var api = {
 			}
 		})
 	},
-	clear: () => localStorage.clear(),
+	clear: () => sessionStorage.clear(),
 	abort: function () {
 		this.requests.forEach(request => request.abort())
 		this.requests = []

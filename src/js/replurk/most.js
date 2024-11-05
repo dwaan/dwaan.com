@@ -4,7 +4,7 @@ import api from "./api.js"
 import { plural, datediff, pluralinwords } from '../helpers/helper.js'
 
 import span from "./span.js"
-import iconLink from "./icons.js"
+import icons from "./icons.js"
 import element from "./element.js"
 
 class most {
@@ -190,6 +190,14 @@ class most {
 					content: content
 				})
 			},
+			drawMeta: function (link, id) {
+				return `<div class="meta">\
+					<span class="response">${icons.draw("left-speech-bubble")} ${link.response}</span>\
+					<span class="replurk">${icons.draw("megaphone")} ${link.replurk}</span>\
+					<span class="loved">${icons.draw("red-heart")} ${link.loved}</span>\
+					<a href="https://plurk.com/p/${id.toString(36)}" class="link" target="_BLANK">${icons.link}</a>\
+				</div>`
+			},
 			drawLinks: function () {
 				var max = 1
 				var index = 0
@@ -198,8 +206,10 @@ class most {
 				while (index < this.data.length && max > 0) {
 					if (this.data[index].links.length > 0) {
 						var link = this.data[index].links[0]
-						var url = '<a href="https://plurk.com/p/' + this.data[index].id.toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>'
-						result += '<div class="post"><div class="info">' + this.data[index].content + '</div><div class="meta"><span class="response"><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + link.response + '</span><span class="replurk"><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + link.replurk + '</span><span class="loved"><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + link.loved + '</span>' + url + '</div></div>'
+						result += `<div class="post">\
+							<div class="info">${this.data[index].content}</div>
+							${this.drawMeta(link, this.data[index].id)}
+						</div>`
 						max--
 					}
 					index++
@@ -214,15 +224,20 @@ class most {
 				while (index < this.data.length && max > 0) {
 					if (this.data[index].pics.length > 0) {
 						var pics = this.data[index].pics[0]
-						var url = '<a href="https://plurk.com/p/' + this.data[index].toString(36) + '" class="link" target="_BLANK">' + iconLink + '</a>'
-						result += '<div class="box"><div class="image" style="background-image: url(' + api.url + "?img=" + pics.url + ')"></div><div class="post">' + this.data[index].content + '<div class="meta"><span class="response"><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> ' + pics.response + '</span><span class="replurk"><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> ' + pics.replurk + '</span><span class="loved"><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> ' + pics.loved + '</span>' + url + '</div></div></div>'
+						result += `<div class="box">\
+							<div class="image" style="background-image: url(${api.url}?img=${pics.url})"></div>\
+							<div class="post">\
+								${this.data[index].content}\
+								${this.drawMeta(pics, this.data[index].id)}
+							</div>\
+						</div>`
 						max--
 					}
 					index++
 				}
 
-				if (this.pics.length > 0) this.parent.statistics.draw('sharedpictures', this.pics.length, 'I shared <i>🖼 ' + plural(this.pics.length, 'image') + '</i>')
-				if (result != "") this.parent.statistics.drawHTML('span2 previewpics', '<i>🖼 Most Popular Image</i>', result)
+				if (this.pics.length > 0) this.parent.statistics.draw('sharedpictures', this.pics.length, `I shared <i>${icons.draw("framed-picture")} ${plural(this.pics.length, 'image')}</i>`)
+				if (result != "") this.parent.statistics.drawHTML('span2 previewpics', `<i>${icons.draw("framed-picture")} Most Popular Image</i>`, result)
 			}
 		}
 

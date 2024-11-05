@@ -217,7 +217,7 @@ try {
 			$plurker = [];
 			$offset = 0;
 			$loop = -1;
-			$year = '2020';
+			$year = '2008';
 			$filter = "";
 
 			// Filter Plurk
@@ -264,10 +264,13 @@ try {
 			$oauth->fetch("$api_url/Timeline/getPlurks", $parameters);
 			$plurks = json_decode($oauth->getLastResponse());
 
-			$postdate = date_create($plurks->plurks[sizeof($plurks->plurks) - 1]->posted);
-			$offset = date_format($postdate, "Y-m-d\TH:i:s");
-			$plurks->offset = $offset;
-
+			if (sizeof($plurks->plurks) == 0) {
+				success(json_encode($plurks));
+			} else {
+				$postdate = date_create($plurks->plurks[sizeof($plurks->plurks) - 1]->posted);
+				$offset = date_format($postdate, "Y-m-d\TH:i:s");
+				$plurks->offset = $offset;
+			}
 			success(json_encode($plurks));
 		} else if ($fetch == "response") {
 			// Get Response

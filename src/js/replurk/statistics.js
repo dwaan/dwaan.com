@@ -10,7 +10,7 @@ import { hasClass, plural, reduceMotionFilter } from '../helpers/helper.js'
 
 import span from "./span.js"
 import colors from "./colors.js"
-import iconLink from "./icons.js"
+import icons from "./icons.js"
 import element from "./element.js"
 import most from "./most.js"
 import inactive from "./inactive.js"
@@ -117,13 +117,15 @@ class statistics {
 		}
 	}
 
-	drawBadge(condition, style, number, text, textempty) {
+	drawBadge(condition, style, icon, text, textempty) {
 		style = `span1 badges badgesmall ${style}`
 
 		if (condition) {
-			this.draw(style, number, text)
+			this.draw(style, icons.draw(icon), text)
+			return 1
 		} else {
-			this.draw(`${style} nobackground`, "<img src='https://api.iconify.design/fluent:chat-bubbles-question-28-regular.svg' />", textempty ? textempty : "")
+			this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
+			return 0
 		}
 	}
 
@@ -175,14 +177,14 @@ class statistics {
 	drawPost(style, id, title, text, badge) {
 		var url = ""
 		if (id) url = 'https://plurk.com/p/' + id.toString(36)
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", '\
+		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", `\
 			<div>\
-				<a href="' + url + '" class="link" target="_BLANK">' + iconLink + '</a>\
-				<span class="big">' + badge + '</span>\
-				<p class="post">' + text + '</p>\
-				<span class="title">' + title + '</span>\
+				<a href="${url}" class="link" target="_BLANK">${icons.link}</a>\
+				<span class="big">${badge}</span>\
+				<p class="post">${text}</p>\
+				<span class="title">${title}</span>\
 			</div>\
-		'))
+		`))
 	}
 
 	async drawUserList(style, id, title, users) {

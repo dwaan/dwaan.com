@@ -133,14 +133,25 @@
 		}
 
 		i {
-			display: inline-block;
-			padding: 4px 8px 2px;
-			font-style: normal;
-			line-height: 120%;
+			display: inline-flex;
+			gap: 4px;
+			align-items: center;
+			padding: 3px 8px;
 			color: var(--black);
+			font-size: inherit;
+			font-style: normal;
+			line-height: 100%;
+			white-space: nowrap;
 			background-color: var(--white);
-			border-radius: 4px;
+			border-radius: 6px;
 			transition: background-color .5s ease;
+
+			img {
+				display: inline;
+				max-height: 1rem;
+				max-width: 1rem;
+				border-radius: 0;
+			}
 		}
 
 		img {
@@ -212,17 +223,6 @@
 				opacity: .75;
 			}
 
-			.text,
-			.post>.meta {
-				img {
-					display: inline-block;
-					border-radius: 0;
-					width: auto;
-					height: 1rem;
-					vertical-align: baseline;
-				}
-			}
-
 			.big {
 				font-weight: 600;
 				line-height: 100%;
@@ -258,10 +258,6 @@
 			font-size: .8rem;
 			line-height: 120%;
 			color: var(--white);
-
-			i {
-				display: inline-block;
-			}
 
 			strong {
 				font-weight: 500;
@@ -682,13 +678,13 @@
 
 			.text {
 				font-size: .8rem;
-				letter-spacing: 130%;
+				line-height: 130%;
 				color: var(--black-50);
 			}
 
 			.content {
-				background-image: none!important;
-				background-color: var(--black-15)!important;
+				background-image: none !important;
+				background-color: var(--black-15) !important;
 				border: 1px dashed var(--black-50);
 			}
 		}
@@ -714,6 +710,13 @@
 
 			.text {
 				line-height: 130%;
+
+				img {
+					display: inline;
+					max-width: 1.25rem;
+					max-height: 1.25rem;
+					margin-top: -.5rem;
+				}
 			}
 
 			.content {
@@ -1169,15 +1172,33 @@
 			padding-top: var(--padm);
 		}
 
-		div.meta {
-			span {
-				display: block;
-				margin-right: var(--padl);
-			}
+		.post {
+			div.meta {
+				span {
+					display: block;
+					margin-right: var(--padl);
+				}
 
-			.link {
-				position: relative;
-				margin-left: auto;
+				.link {
+					position: relative;
+					margin-left: auto;
+
+					img {
+						display: block;
+					}
+				}
+
+				>span {
+					display: flex;
+					align-items: center;
+					gap: 4px;
+
+					img {
+						display: block;
+						max-width: 1rem;
+						max-height: 1rem;
+					}
+				}
 			}
 		}
 	}

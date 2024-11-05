@@ -1,7 +1,6 @@
 <?php if ($_SERVER['REQUEST_URI'] == "/replurk_statistics") header('Location: ./replurk'); ?>
 
-
-<main data-barba="container" data-barba-namespace="replurk<?php echo $now; ?>" class="plurk plurk<?php echo $now; ?>">
+<main data-barba="container" data-barba-namespace="replurk" class="plurk plurk<?php echo $now; ?>">
 	<link rel="stylesheet" media="screen" href="/css/plurk.css?<?php echo filemtime('css/plurk.css') ?>">
 
 	<div id="hello" class="grant middle first snap">
@@ -10,7 +9,7 @@
 			<div class="text">
 				<p>Loading your plurk</p>
 			</div>
-			<div class="bgtext"><sup>20</sup><sub><?php echo $short; ?></sub></div>
+			<div class="bgtext"><sup>20</sup><sub><?php echo $shortyear; ?></sub></div>
 			<div class="arrow-big">
 				<a href="#statistics" class="arrow scrollto">scroll</a>
 			</div>
@@ -29,19 +28,21 @@
 			</svg>
 			Logout
 		</div>
-		<a href="./replurk<?php echo $prev; ?>">Prev</a>
-		<span>&bull;</span>
-		<a href="./replurk<?php echo $now; ?>" class="now"><?php echo $now; ?></a>
+		<?php if ($showprev) : ?>
+			<a href="./replurk?year=<?php echo $prevyear; ?>">Prev</a>
+			<span>&bull;</span>
+		<?php endif; ?>
+		<a href="./replurk<?php echo $year; ?>" class="now"><?php echo $year; ?></a>
 		<?php if ($shownext) : ?>
 			<span>&bull;</span>
-			<a href="./replurk<?php echo $next; ?>">Next</a>
+			<a href="./replurk?year=<?php echo $nextyear; ?>">Next</a>
 		<?php endif; ?>
 	</div>
 
 	<section id="permission" class="middle first snap-bottom">
 		<div class="text">
 			<form action="./replurk<?php echo $now; ?>" method="GET">
-				<h1>RePlurk<br /><sup>20</sup><sub><?php echo $short; ?></sub></h1>
+				<h1>RePlurk<br /><sup>20</sup><sub><?php echo $shortyear; ?></sub></h1>
 				<ol>
 					<li>
 						<p>Grant <strong>RePlurk</strong> access to your timeline <br /><a href="#" id="tokenurl" data-barba-prevent target="BLANK" rel="opener">Loading...</a></p>
@@ -59,7 +60,7 @@
 				</ol>
 			</form>
 		</div>
-		<div class="bgtext"><sup>20</sup><sub><?php echo $short; ?></sub></div>
+		<div class="bgtext"><sup>20</sup><sub><?php echo $shortyear; ?></sub></div>
 	</section>
 
 	<div id="spacer" class="middle"></div>

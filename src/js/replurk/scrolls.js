@@ -1,7 +1,7 @@
 "use strict";
 
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger.js'
 
 import scroll from "../helpers/scroll.js"
 import { _qAll, reduceMotionFilter } from '../helpers/helper.js'
@@ -58,6 +58,8 @@ class scrolls {
 	}
 
 	permisions() {
+		console.log("Scroll")
+
 		// Scroll animation permission section
 		scroll.push((tl) => {
 			tl.fromTo(this.next.querySelectorAll("#permission form"), {
@@ -66,6 +68,7 @@ class scrolls {
 				y: window.innerHeight * -3 / 4,
 				ease: "linear"
 			}, 0)
+
 			tl.fromTo(this.next.querySelectorAll("#permission .bgtext sup"), {
 				y: 0,
 				x: 0,
@@ -76,6 +79,7 @@ class scrolls {
 				rotation: -10,
 				ease: "linear"
 			}, 0)
+
 			tl.fromTo(this.next.querySelectorAll("#permission .bgtext sub"), {
 				y: 0,
 				x: 0,
@@ -86,18 +90,21 @@ class scrolls {
 				rotation: 10,
 				ease: "linear"
 			}, 0)
+
 			return tl
 		}, (tl) => {
 			return ScrollTrigger.create({
 				trigger: this.next.querySelectorAll("#permission"),
 				start: "0 0",
-				end: "100% 0",
+				end: "0 -100%",
 				animation: tl,
 				scrub: .5
 			})
 		})
+
 		scroll.push((tl) => {
 			tl = this.credits(tl)
+
 			return tl
 		}, (tl) => {
 			return ScrollTrigger.create({
