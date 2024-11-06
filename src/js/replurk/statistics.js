@@ -6,7 +6,7 @@ import html2canvas from "html2canvas"
 
 import api from "./api.js"
 import scroll from "../helpers/scroll.js"
-import { hasClass, plural, reduceMotionFilter } from '../helpers/helper.js'
+import { addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
 
 import span from "./span.js"
 import colors from "./colors.js"
@@ -498,6 +498,8 @@ class statistics {
 
 		// Capture function
 		this.capture(el)
+
+		scroll.refresh()
 	}
 
 	capture(el) {
@@ -509,14 +511,22 @@ class statistics {
 
 			// Informing user the process is starting
 			capture.generating = true
+			addClass(capture, "wait")
 			document.body.style.cursor = "wait"
+
+			// capture.querySelectorAll("img").forEach(img => {
+			// 	if (!img.src.includes("plurk-api"))
+			// 		img.src = `${api.url}?img=${img.src}`
+			// })
+			// await waitForImg(capture)
 
 			// HTML to Canvas magic
 			var canvas = await html2canvas(capture, {
 				backgroundColor: null,
-				logging: false,
+				logging: true,
 				proxy: `${api.url}?img=`,
-				useCORS: true
+				useCORS: true,
+				allowTaint: true
 			})
 
 			// Download the output
@@ -531,6 +541,7 @@ class statistics {
 
 			// Reset button after 3s
 			document.body.style.cursor = ""
+			removeClass(capture, "wait")
 			setTimeout(() => {
 				capture.generating = false
 			}, 3000)

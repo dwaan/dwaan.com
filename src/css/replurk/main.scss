@@ -9,8 +9,6 @@
 @use './column.scss';
 @use './order.scss';
 
-/* Plurk Statistics */
-
 :root {
 	--box: 50vmax;
 
@@ -35,6 +33,7 @@
 	}
 }
 
+// Plurk Statistics
 .plurk {
 
 	sub,
@@ -50,7 +49,7 @@
 		border-radius: 4px;
 	}
 
-	// /*  Plurk - First section */
+	// Plurk - First section
 	.first {
 		text-align: center;
 		background-color: var(--lime);
@@ -102,28 +101,30 @@
 	.grant {
 		&.middle {
 			position: relative;
-			z-index: 1;
+			z-index: 3;
 		}
 	}
 
 	// Plurk - Statistics
 	#statistics {
 		position: relative;
-		z-index: 2;
+		z-index: 3;
 		height: initial;
-		background-color: var(--white);
 		padding: var(--pady) var(--padl);
+		background-color: var(--white);
 		transition: background-color .5s ease;
 		scroll-snap-align: end;
 	}
 
 	// Start .statistics
 	.statistics {
+		position: relative;
 		display: flex;
 		padding: calc(2.5 * var(--padl)) 0 calc(5 * var(--padl));
 		width: initial;
 		height: initial;
 		min-height: initial;
+		overflow: hidden;
 		transition: background-color .5s ease;
 
 		p {
@@ -148,8 +149,8 @@
 
 			img {
 				display: inline;
-				max-height: 1rem;
-				max-width: 1rem;
+				height: 1rem;
+				width: 1rem;
 				border-radius: 0;
 			}
 		}
@@ -193,6 +194,10 @@
 			overflow: clip;
 			border-radius: var(--padl);
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
+
+			&.wait {
+				cursor: wait;
+			}
 
 			@media (min-width: mixins.$screen-abitwide) {
 				border-radius: calc(2/3 * var(--padl));
@@ -383,6 +388,7 @@
 					margin: 0 auto;
 					max-width: 800px;
 					background-color: var(--black-15);
+					// backdrop-filter: blur(10px);
 					opacity: .75;
 					border-radius: var(--padm);
 				}
@@ -509,6 +515,16 @@
 		}
 	}
 
+	#background {
+		position: fixed;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: #000;
+	}
+
 	// Spacer
 	#spacer {
 		pointer-events: none;
@@ -571,7 +587,7 @@
 		}
 	}
 
-	/* Plurk - Statistics - Spesific Style */
+	// Plurk - Statistics - Spesific Style
 	.postcontent {
 		img {
 			width: auto;
@@ -619,7 +635,7 @@
 		}
 	}
 
-	/* Center style */
+	// Center style
 	.statistics.center,
 	.statistics.badges {
 		text-align: center;
@@ -636,7 +652,7 @@
 		}
 	}
 
-	/* Badges */
+	// Badges
 	.statistics.badges {
 		overflow: clip;
 
@@ -669,7 +685,6 @@
 			cursor: pointer;
 			pointer-events: none;
 			user-select: none;
-			opacity: .5;
 
 			img {
 				opacity: .15;
@@ -686,6 +701,7 @@
 				background-image: none !important;
 				background-color: var(--black-15) !important;
 				border: 1px dashed var(--black-50);
+				backdrop-filter: blur(10px);
 			}
 		}
 
@@ -741,6 +757,7 @@
 
 				img {
 					display: block;
+					filter: drop-shadow(rgba(0,0,0,.24) 4px 4px 16px);
 				}
 			}
 
@@ -750,7 +767,7 @@
 		}
 	}
 
-	/* Hashtag style */
+	// Hashtag style
 	.hashtags {
 		.html {
 			display: flex;
@@ -814,7 +831,7 @@
 		}
 	}
 
-	/* Bubble style */
+	// Bubble style
 	.bubble {
 		.count {
 			display: none;
@@ -895,14 +912,14 @@
 		}
 	}
 
-	/* Listing attach style */
+	// Listing attach style
 	.statistics.attach {
 		.title i {
 			text-transform: uppercase;
 		}
 	}
 
-	/* Responsed style */
+	// Responsed style
 	.statistics.responded {
 		.big {
 			display: none;
@@ -917,7 +934,7 @@
 		}
 	}
 
-	/* Posted style */
+	// Posted style
 	.statistics.posted {
 		.text {
 			text-align: center;
@@ -957,7 +974,7 @@
 		}
 	}
 
-	/* Coins */
+	// Coins
 	.statistics.coins {
 		.big {
 			background-color: var(--yellow);
@@ -969,7 +986,7 @@
 		}
 	}
 
-	/* MVP */
+	// MVP
 	.statistics.mvp .html {
 		.avatar {
 			z-index: 1;
@@ -1026,7 +1043,7 @@
 		}
 	}
 
-	/* Anniversary */
+	// Anniversary
 	.statistics.anniversary .big {
 		display: flex;
 		flex-direction: column;
@@ -1071,7 +1088,7 @@
 		}
 	}
 
-	/* Shared links */
+	// Shared links
 	.statistics.previewlinks a {
 		display: block;
 		text-overflow: ellipsis;
@@ -1079,7 +1096,7 @@
 		white-space: nowrap;
 	}
 
-	/* Shared pics */
+	// Shared pics
 	.statistics.previewpics {
 		.content {
 			overflow: hidden;
@@ -1153,7 +1170,7 @@
 		background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .5) 75%);
 	}
 
-	/* Box and meta */
+	// Box and meta
 	.statistics {
 		.box .post {
 
@@ -1195,15 +1212,15 @@
 
 					img {
 						display: block;
-						max-width: 1rem;
-						max-height: 1rem;
+						width: 1rem;
+						height: 1rem;
 					}
 				}
 			}
 		}
 	}
 
-	/* Shared links */
+	// Shared links
 	.statistics.sharedlinks {
 		.text {
 			height: 100%;
@@ -1254,8 +1271,7 @@
 	}
 }
 
-/* Vertical screen */
-
+// Vertical screen
 @media screen and (min-aspect-ratio: 1/1) {
 	.statistics {
 		.chart {
@@ -1342,8 +1358,7 @@
 	}
 }
 
-/* Horizontal screen */
-
+// Horizontal screen
 @media screen and (max-aspect-ratio: 1/1) {
 	.plurk {
 		.bgtext {

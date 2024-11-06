@@ -105,7 +105,7 @@ try {
 		html("Redirecting, please wait...");
 		exit;
 	} else if (isset($_GET['img'])) {
-		if (preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['img']) === 0) {
+		if (preg_match('#^https?:\/\/\w*\.plurk\.com#', $_GET['img']) === 0 && preg_match('#^https?:\/\/\w*\.iconify\.design#', $_GET['img']) === 0) {
 			exit;
 		} else {
 			$url = $_GET['img'];
@@ -150,8 +150,7 @@ try {
 
 			if (array_key_exists('content-type', $headers)) {
 				$ct = $headers['content-type'];
-
-				if (preg_match('#image/png|image/.*icon|image/jpe?g|image/gif|application/octet-stream|binary/octet-stream#', strtolower($ct)) !== 1) {
+				if (preg_match('#image/png|image/svg\+xml|image/.*icon|image/jpe?g|image/gif|application/octet-stream|binary/octet-stream#', strtolower($ct)) !== 1) {
 					header('HTTP/1.1 404 Not Found');
 					exit;
 				}

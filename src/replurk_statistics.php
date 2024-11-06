@@ -1,6 +1,6 @@
 <?php if ($_SERVER['REQUEST_URI'] == "/replurk_statistics") header('Location: ./replurk'); ?>
 
-<main data-barba="container" data-barba-namespace="replurk" class="plurk plurk<?php echo $now; ?>">
+<main data-barba="container" data-barba-namespace="replurk" class="plurk plurk<?php echo $year; ?>">
 	<link rel="stylesheet" media="screen" href="/css/plurk.css?<?php echo filemtime('css/plurk.css') ?>">
 
 	<div id="hello" class="grant middle first snap">
@@ -62,6 +62,8 @@
 		</div>
 		<div class="bgtext"><sup>20</sup><sub><?php echo $shortyear; ?></sub></div>
 	</section>
+
+	<!-- <section id="background" class="grant middle"></section> -->
 
 	<div id="spacer" class="middle"></div>
 	<section id="credits" class="middle">

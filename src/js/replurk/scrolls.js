@@ -58,8 +58,6 @@ class scrolls {
 	}
 
 	permisions() {
-		console.log("Scroll")
-
 		// Scroll animation permission section
 		scroll.push((tl) => {
 			tl.fromTo(this.next.querySelectorAll("#permission form"), {
@@ -153,13 +151,14 @@ class scrolls {
 					animation: tl,
 					scrub: true,
 					onLeave: () => {
-						browser.set("white")
+						browser.set()
 					},
 					onEnterBack: () => {
 						browser.set("green")
 					}
 				})
 			})
+
 			scroll.push((tl) => {
 				return tl
 			}, (tl) => {
@@ -173,10 +172,10 @@ class scrolls {
 						browser.set("yellow")
 					},
 					onEnter: () => {
-						browser.set("white")
+						browser.set()
 					},
 					onEnterBack: () => {
-						browser.set("white")
+						browser.set()
 					}
 				})
 			})

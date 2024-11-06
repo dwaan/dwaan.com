@@ -38,7 +38,7 @@ function js() {
 function css() {
 	return gulp.src(['node_modules/normalize.css/normalize.css', 'src/css/main.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'))
@@ -47,7 +47,7 @@ function css() {
 function fofcss() {
 	return gulp.src(['src/css/404.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("404.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'))
@@ -56,7 +56,7 @@ function fofcss() {
 function replurkcss() {
 	return gulp.src(['src/css/replurk/main.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("plurk.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'))
@@ -65,7 +65,7 @@ function replurkcss() {
 function css_vertical() {
 	return gulp.src(['src/css/vertical-screen.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'))
 }
@@ -73,7 +73,7 @@ function css_vertical() {
 function css_horizontal() {
 	return gulp.src(['src/css/horizontal-screen.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('src/css/cache/'))
 }
@@ -81,7 +81,7 @@ function css_horizontal() {
 function print() {
 	return gulp.src(['src/css/print.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
-		.pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("print.css"))
 		.pipe(mode.development(sourcemaps.write(".")))
 		.pipe(gulp.dest('src/css/cache/'))

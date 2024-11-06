@@ -9,10 +9,7 @@ import { _qAll, reduceMotionFilter } from '../helpers/helper.js';
 
 let transition_from_plurk = {
     name: 'from-plurk',
-    leave: () => {
-        console.log("hello")
-		browser.reset();
-    },
+    leave: () => browser.reset(),
     before: async function (data) {
         var done = this.async();
         var current = data.current.container;

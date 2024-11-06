@@ -20,7 +20,6 @@ var replurk = {
 			if (currentmonth >= 1 && currentmonth <= 10) currentyear--
 			if (year < 2008) year = 2008
 			if (year > currentyear) year = currentyear
-			console.log(currentmonth, year)
 
 			replurk.replurk = new events.default(next, year)
 
