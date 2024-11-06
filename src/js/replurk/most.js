@@ -38,7 +38,7 @@ class most {
 					this.data[i].position = this.data.length
 					if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++
-						this.parent.statistics.attach('<i>Top <img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Responders</i> <strong>of My Timeline</strong>', this.data[i], 5)
+						this.parent.statistics.attach(`<i>Top ${icons.draw("left-speech-bubble")} Responders</i> <strong>of My Timeline</strong>`, this.data[i], 5)
 					}
 				}
 			},
@@ -83,11 +83,11 @@ class most {
 
 							if (user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++
-								this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/fluent-emoji:person-raising-hand-light.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max)
+								this.parent.statistics.attach(`<i>Most ${icons.draw("person-raising-hand-light")} Mentioned</i> <strong>in My Timeline</strong>`, this.data[idx], max)
 							}
 						}
 
-						if (this.data[idx].el) this.parent.statistics.attach('<i>Most <img src="https://api.iconify.design/fluent-emoji:person-raising-hand-light.svg" /> Mentioned</i> <strong>in My Timeline</strong>', this.data[idx], max)
+						if (this.data[idx].el) this.parent.statistics.attach(`<i>Most ${icons.draw("person-raising-hand-light")} Mentioned</i> <strong>in My Timeline</strong>`, this.data[idx], max)
 					}
 				}
 			},
@@ -252,7 +252,7 @@ class most {
 				this.words += words.length
 			},
 			draw: function () {
-				if (this.chars > 0) this.parent.statistics.draw('span2 mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year')
+				if (this.chars > 0) this.parent.statistics.draw('span2 typed mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year')
 			}
 		}
 
@@ -263,7 +263,7 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:left-speech-bubble.svg" /> Most Responded</i> ' + datediff(post.posted), post.content, post.response_count)
+					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, `<i>${icons.draw("left-speech-bubble")} Most Responded</i> ${datediff(post.posted)}`, post.content, post.response_count)
 				}
 			}
 		}
@@ -275,7 +275,7 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.replurkers_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostreplurked', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:megaphone.svg" /> Most Replurked</i> ' + datediff(post.posted), post.content, post.replurkers_count)
+					this.parent.statistics.drawPost('postcontent span2 mostreplurked', post.plurk_id, `<i>${icons.draw("megaphone")} Most Replurked</i> ${datediff(post.posted)}`, post.content, post.replurkers_count)
 				}
 			}
 		}
@@ -287,7 +287,7 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.favorite_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostfavorited', post.plurk_id, '<i><img src="https://api.iconify.design/fluent-emoji:red-heart.svg" /> Most Loved</i> ' + datediff(post.posted), post.content, post.favorite_count)
+					this.parent.statistics.drawPost('postcontent span2 mostfavorited', post.plurk_id, `<i>${icons.draw("red-heart")} Most Loved</i> ${datediff(post.posted)}`, post.content, post.favorite_count)
 				}
 			}
 		}
@@ -327,7 +327,7 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", "Plurkers who really like to <i><img src='https://api.iconify.design/fluent-emoji:speaking-head.svg' /> interact</i> with me", result)
+					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", `Plurkers who really like to <i>${icons.draw("speaking-head")} interact</i> with me`, result)
 				} catch {
 					console.info("Error while counting most interacted plurker")
 				}
@@ -375,7 +375,7 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", "My " + this.parent.year + " <i><img src='https://api.iconify.design/fluent-emoji:biting-lip.svg' /> MVP</i>", result)
+					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", `My ${this.parent.year} <i>${icons.draw("biting-lip")} MVP</i>`, result)
 				} catch (error) {
 					console.info("Error while counting my mvp", error)
 				}

@@ -72,9 +72,9 @@
 			<p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
 			<p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
 			<p class="like likeandsupport">
-				<a href="https://www.plurk.com/p/p2nx0u" target="_BLANK"><img src="/img/emojis/bow.webp" width="64" height="64" alt="" /> <i>Say Hi! to me in Plurk</i></a>
-				<a href="https://www.plurk.com/Premium/gift?plurk_id=1516129518" target="_BLANK"><img src="/img/emojis/full_moon.webp" width="64" height="64" alt="" /> <i>Send me a Plurk Coin</i></a>
-				<a href="https://www.buymeacoffee.com/dwaan" target="_BLANK"><img src="/img/emojis/icecream.webp" width="64" height="64" alt="" /> <i>Buy me an Ice Cream</i></a>
+				<a href="https://www.plurk.com/dwan" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/person-bowing-medium.svg" width="64" height="64" alt="" /> <i>Say Hi! to me in Plurk</i></a>
+				<a href="https://www.plurk.com/Premium/gift?plurk_id=1516129518" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/coin.svg" width="64" height="64" alt="" /> <i>Send me a Plurk Coin</i></a>
+				<a href="https://www.buymeacoffee.com/dwaan" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/soft-ice-cream.svg" width="64" height="64" alt="" /> <i>Buy me an Ice Cream</i></a>
 			</p>
 			<p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="./plurk-api" data-barba-prevent target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="./say-hi">contact me</a> for removal</p>
 			<p class="noaffiliation">You can clone this web app source code from <a href="https://github.com/replurk" target="_BLANK">GitHub</a></p>
