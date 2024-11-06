@@ -121,10 +121,10 @@ class statistics {
 		style = `span1 badges badgesmall ${style}`
 
 		if (condition) {
-			this.draw(style, icons.draw(icon, 128, false), text)
+			this.draw(style, icons.draw(icon, false), text)
 			return 1
 		} else {
-			this.draw(`${style} nobackground`, icons.draw(icon, 128, true), textempty ? textempty : "")
+			this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
 			return 0
 		}
 	}
@@ -515,8 +515,12 @@ class statistics {
 			document.body.style.cursor = "wait"
 
 			capture.querySelectorAll("img").forEach(img => {
-				if (!img.src.includes("plurk-api"))
-					img.src = `${api.url}?img=${img.src}`
+				if (!img.src.includes("plurk-api")) {
+					img.dataset.src = img.src
+					img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+				} else if (img.dataset.src) {
+					img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+				}
 			})
 			await waitForImg(capture)
 
