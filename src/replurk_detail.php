@@ -8,7 +8,7 @@
         <div class="padding">
             <h2 class="replurktitle">RePlurk</h2>
         </div>
-        <h4 class="year">/<?php echo $current; ?></h4>
+        <h4 class="year">/<?php echo $currentyear; ?></h4>
         <div class="arrow-big">
             <a href="#more" class="arrow scrollto">
                 <span>read more</span>
@@ -25,7 +25,7 @@
                 <h1>Waterpark is <strong>RePlurk</strong> 🤷‍♂️</h1>
             </div>
             <p>RePlurk is a web app that I created to review my plurk account in graphical and interesting way. You can also use it if you have plurk account. Long story short it's a Dashboard.</p>
-            <p><a href="./replurk?year=<?php echo $current; ?>" class="cta">Visit RePlurk <?php echo $current; ?></a></p>
+            <p><a href="./replurk?year=<?php echo $currentyear; ?>" class="cta">Visit RePlurk <?php echo $currentyear; ?></a></p>
         </div>
     </section>
 
