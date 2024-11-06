@@ -128,7 +128,7 @@ function svg() {
 }
 
 function resources() {
-	return gulp.src(['src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { encoding: false })
+	return gulp.src(['src/*.txt','src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { encoding: false })
 		.pipe(gulp.dest('v2/'))
 }
 
@@ -156,7 +156,7 @@ function run() {
 	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print)
 	gulp.watch(['src/css/cache/*.css'], { ignoreInitial: false }, css_prefix)
 	gulp.watch(['src/*.php'], { ignoreInitial: false }, php)
-	gulp.watch(['src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { ignoreInitial: false }, resources)
+	gulp.watch(['src/*.txt', 'src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { ignoreInitial: false }, resources)
 
 	gulp.watch('gulpfile.js', _ => {
 		connect.closeServer()

@@ -134,21 +134,17 @@
 		}
 
 		i {
-			// display: inline-flex;
-			// gap: 4px;
-			// align-items: center;
+			display: inline-block;
 			padding: 0 8px;
 			color: var(--black);
 			font-size: inherit;
 			font-style: normal;
-			// line-height: 100%;
 			white-space: nowrap;
 			background-color: var(--white);
 			border-radius: 6px;
 			transition: background-color .5s ease;
 
 			img {
-				display: inline;
 				height: 1rem;
 				width: 1rem;
 				border-radius: 0;
@@ -655,12 +651,6 @@
 	.statistics.badges {
 		overflow: clip;
 
-		img {
-			display: inline-block;
-			width: 75%;
-			aspect-ratio: 1;
-		}
-
 		.big {
 			padding: 0 var(--padm) calc(3/4 * var(--padxl));
 			width: calc(1/2 * var(--box));
@@ -673,6 +663,12 @@
 			border-radius: var(--padl) var(--padl) 100% 100%;
 			transition: transform .5s ease-in-out;
 			transform-style: preserve-3d;
+
+			img {
+				display: inline-block;
+				width: 75%;
+				aspect-ratio: 1;
+			}
 		}
 
 		&:hover .big {
@@ -999,48 +995,36 @@
 				margin-right: 0;
 			}
 
-			&:after {
-				content: "";
+			.medal {
 				display: block;
 				position: absolute;
 				bottom: calc(-1 * var(--pads));
 				right: calc(-1 * var(--pads));
-				line-height: 100%;
-				background: url(https://api.iconify.design/fluent-emoji:sports-medal.svg) 0 0 no-repeat;
-				background-size: 1.5rem;
 				width: 1.5rem;
 				height: 1.5rem;
-				font-size: 1.5rem;
 				padding: 0;
-				border-radius: 100%;
+
+				img {
+					display: block;
+					width: 100%;
+					height: 100%;
+				}
 			}
 		}
 
-		a:nth-child(1) .avatar:after {
-			content: "";
-			background: url(https://api.iconify.design/fluent-emoji:1st-place-medal.svg) 0 0 no-repeat;
-			background-size: 3rem;
+		a:nth-child(1) .avatar .medal {
 			width: 3rem;
 			height: 3rem;
-			font-size: 3rem;
 		}
 
-		a:nth-child(2) .avatar:after {
-			content: "";
-			background: url(https://api.iconify.design/fluent-emoji:2nd-place-medal.svg) 0 0 no-repeat;
-			background-size: 2.5rem;
+		a:nth-child(2) .avatar .medal {
 			width: 2.5rem;
 			height: 2.5rem;
-			font-size: 2.5rem;
 		}
 
-		a:nth-child(3) .avatar:after {
-			content: "";
-			background: url(https://api.iconify.design/fluent-emoji:3rd-place-medal.svg) 0 0 no-repeat;
-			background-size: 2rem;
+		a:nth-child(3) .avatar .medal {
 			width: 2rem;
 			height: 2rem;
-			font-size: 2rem;
 		}
 	}
 
