@@ -151,11 +151,3 @@
 
     @include dark();
 }
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        @include root();
-    }
-
-    @include dark();
-}
