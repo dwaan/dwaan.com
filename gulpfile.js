@@ -128,7 +128,7 @@ function svg() {
 }
 
 function resources() {
-	return gulp.src(['src/fonts/*.*', 'src/*.txt','src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { encoding: false })
+	return gulp.src(['src/fonts/*.*', 'src/*.txt', 'src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { encoding: false })
 		.pipe(gulp.dest('v2/'))
 }
 

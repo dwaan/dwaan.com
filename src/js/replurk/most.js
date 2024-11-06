@@ -110,11 +110,11 @@ class most {
 			},
 			draw: function () {
 				var html = ""
-				var max = 7
+				var max = 9
 				this.data.sort(this.parent.sort)
 				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
 					if (this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>'
-				if (html != "") this.parent.statistics.drawHTML("grid emoticons", 'Most Used <i>My Emoticons</i>', html)
+				if (html != "") this.parent.statistics.drawHTML("grid emoticons", `Most Used <i>${icons.draw("beaming-face-with-smiling-eyes")} My Emoticons</i>`, html)
 			}
 		}
 
@@ -134,7 +134,7 @@ class most {
 					if (this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>'
 				if (html != "") {
 					html = "<strong>#</strong>" + html
-					this.parent.statistics.drawHTML("hashtags", 'Most Used <i>Hashtags</i>', html)
+					this.parent.statistics.drawHTML("hashtags", `Most Used <i>${icons.draw("keycap-hashtag")} Hashtags</i>`, html)
 				}
 			}
 		}
@@ -227,7 +227,7 @@ class most {
 						result += `<div class="box">\
 							<div class="image" style="background-image: url(${api.url}?img=${pics.url})"></div>\
 							<div class="post">\
-								${this.data[index].content}\
+								<div class="text">${this.data[index].content}</div>\
 								${this.drawMeta(pics, this.data[index].id)}
 							</div>\
 						</div>`
@@ -327,7 +327,7 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", `Plurkers who really like to <i>${icons.draw("speaking-head")} interact</i> with me`, result)
+					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", `Plurkers who really like to <i>${icons.draw("handshake")} interact</i> with me`, result)
 				} catch {
 					console.info("Error while counting most interacted plurker")
 				}
