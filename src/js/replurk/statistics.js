@@ -121,10 +121,10 @@ class statistics {
 		style = `span1 badges badgesmall ${style}`
 
 		if (condition) {
-			this.draw(style, icons.draw(icon), text)
+			this.draw(style, icons.draw(icon, 128, false), text)
 			return 1
 		} else {
-			this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
+			this.draw(`${style} nobackground`, icons.draw(icon, 128, true), textempty ? textempty : "")
 			return 0
 		}
 	}

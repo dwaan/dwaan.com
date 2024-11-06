@@ -388,7 +388,6 @@
 					margin: 0 auto;
 					max-width: 800px;
 					background-color: var(--black-15);
-					// backdrop-filter: blur(10px);
 					opacity: .75;
 					border-radius: var(--padm);
 				}
@@ -681,29 +680,6 @@
 			transform: rotateY(360deg);
 		}
 
-		&.nobackground {
-			cursor: pointer;
-			pointer-events: none;
-			user-select: none;
-
-			img {
-				opacity: .15;
-				width: 35%;
-			}
-
-			.text {
-				font-size: .8rem;
-				line-height: 130%;
-				color: var(--black-50);
-			}
-
-			.content {
-				background-image: none !important;
-				background-color: var(--black-15) !important;
-				border: 1px dashed var(--black-50);
-				backdrop-filter: blur(10px);
-			}
-		}
 
 		&.badgesmall {
 			height: calc(.4 * var(--box));
@@ -757,12 +733,37 @@
 
 				img {
 					display: block;
-					filter: drop-shadow(rgba(0,0,0,.24) 4px 4px 16px);
+					filter: drop-shadow(rgba(0, 0, 0, .24) 4px 4px 16px);
 				}
 			}
 
 			:hover .big {
 				transform: none;
+			}
+		}
+
+		&.nobackground {
+			cursor: pointer;
+			pointer-events: none;
+			user-select: none;
+
+			.text {
+				font-size: .8rem;
+				line-height: 130%;
+				color: var(--black-50);
+			}
+
+			.content {
+				background-image: none !important;
+				background-color: var(--black-15) !important;
+				border: 1px dashed var(--black-50);
+			}
+
+			.big {
+				img {
+					width: 35%;
+					filter: none;
+				}
 			}
 		}
 	}
