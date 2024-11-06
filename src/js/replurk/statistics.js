@@ -514,19 +514,16 @@ class statistics {
 			addClass(capture, "wait")
 			document.body.style.cursor = "wait"
 
-			// capture.querySelectorAll("img").forEach(img => {
-			// 	if (!img.src.includes("plurk-api"))
-			// 		img.src = `${api.url}?img=${img.src}`
-			// })
-			// await waitForImg(capture)
+			capture.querySelectorAll("img").forEach(img => {
+				if (!img.src.includes("plurk-api"))
+					img.src = `${api.url}?img=${img.src}`
+			})
+			await waitForImg(capture)
 
 			// HTML to Canvas magic
 			var canvas = await html2canvas(capture, {
 				backgroundColor: null,
-				logging: true,
-				proxy: `${api.url}?img=`,
-				useCORS: true,
-				allowTaint: true
+				logging: false
 			})
 
 			// Download the output
