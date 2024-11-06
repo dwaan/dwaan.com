@@ -85,7 +85,7 @@
 		<section id="nojs" class="middle">
 			<div class="text">
 				<h3>Javascript</h3>
-				<p>Hi! you need to enable javascript to run this web app. Thank you.</p>
+				<p>Hi! this is embarrassing, please enable javascript to run this RePlurk. Thank you.</p>
 			</div>
 		</section>
 	</noscript>

@@ -210,9 +210,21 @@ html.no-js {
 
 
 #nojs {
+	position: relative;
 	display: none;
 	background: url(../img/honocoroko.webp) center top no-repeat;
 	background-size: cover;
+
+	&::before{
+		position: absolute;
+		display: block;
+		content: "";
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, .5);
+	}
 
 	.text {
 		text-align: center;
@@ -224,4 +236,8 @@ html.no-js {
 
 .no-js #nojs {
 	display: flex;
+}
+
+.no-js #statistics {
+	display: none!important;
 }

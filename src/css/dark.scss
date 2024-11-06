@@ -18,12 +18,9 @@
     --lime: #0d4f03;
 }
 
-
 @mixin style-cover {
     &:after {
         background: transparent;
-        background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
-        background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
         background: linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .75) 20%, rgba(0, 0, 0, 0) 100%);
     }
 }
@@ -123,6 +120,9 @@
         @include style-cover();
     }
 
+    .style-spread--big {
+        @include style-cover();
+    }
     .links {
         a:last-child:after {
             background-image: url(../img/arrow-white.svg);
@@ -150,4 +150,12 @@
     }
 
     @include dark();
+}
+
+@media (prefers-color-scheme: dark) {
+    .no-js {
+        @include root();
+
+        @include dark();
+    }
 }
