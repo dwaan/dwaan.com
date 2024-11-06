@@ -375,7 +375,7 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", `My ${this.parent.year} <i>${icons.draw("biting-lip")} MVP</i>, Most Valuable Plurker!`, result)
+					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", `My ${this.parent.year} <i>${icons.draw("biting-lip")} MVP</i>, Most Valuable Plurker!`, result, true)
 				} catch (error) {
 					console.info("Error while counting my mvp", error)
 				}

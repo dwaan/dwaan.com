@@ -187,7 +187,7 @@ class statistics {
 		`))
 	}
 
-	async drawUserList(style, id, title, users) {
+	async drawUserList(style, id, title, users, number = false) {
 		var html = ""
 		var max = users.length >= 5 ? 5 : users.length
 		var length = reduceMotionFilter(1)
@@ -201,6 +201,17 @@ class statistics {
 					plurker.avatar = new span()
 						.class("avatar")
 						.html(`<img src="${this.friends.getAvatar(plurker.user.id)}" />`)
+					if (number) {
+						var medal = `sports-medal`
+						if (index == 0) medal = `1st-place-medal`
+						else if (index == 1) medal = `2nd-place-medal`
+						else if (index == 2) medal = `3rd-place-medal`
+
+						plurker.badge = new span()
+							.class("medal")
+							.html(icons.draw(medal))
+						plurker.avatar.el.appendChild(plurker.badge.el)
+					}
 					plurker.name = new span()
 						.class("name")
 						.html(`${plurker.user.display_name}`)
