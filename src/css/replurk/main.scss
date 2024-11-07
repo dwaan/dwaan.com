@@ -124,7 +124,6 @@
 		width: initial;
 		height: initial;
 		min-height: initial;
-		overflow: hidden;
 		transition: background-color .5s ease;
 
 		p {
@@ -448,7 +447,7 @@
 			align-items: baseline;
 			font-size: 2rem;
 			color: var(--black);
-			padding-top: var(--padxl);
+			padding-top: var(--padl);
 			scroll-snap-align: none;
 
 			h3 {
@@ -1358,7 +1357,7 @@
 					display: block;
 					width: 50%;
 					height: 50%;
-					background: url(https://api.iconify.design/fluent-emoji:open-book.svg?width=512&height=512&box=1) center center no-repeat;
+					background: url(https://api.iconify.design/fluent-emoji/open-book.svg?width=512&height=512&box=1) center center no-repeat;
 					background-size: contain;
 					transform: translate(-50%, -50%);
 				}

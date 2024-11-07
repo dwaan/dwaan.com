@@ -394,14 +394,20 @@ class statistics {
 		var length = reduceMotionFilter(1)
 
 		if (hasClass(el, 'statistics-wrap')) {
+			// Content
 			var color = new colors()
 			var randomcolors = [color.getRandomColor(), color.getRandomColor()]
 			var content = el.querySelector(".content")
 
+			console.log(randomcolors)
+
+			// Make colorful background
 			gsap.set(content, {
-				background: 'radial-gradient(at 10% 10%, ' + randomcolors[0] + ' 0%, ' + randomcolors[1] + ' 100%)'
+				background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`,
+				boxShadow: `0 4px 20px $${this.me.name_color}`
 			})
 
+			// Make element appears
 			gsap.to(content, {
 				opacity: 1,
 				duration: length / 2,
@@ -440,6 +446,57 @@ class statistics {
 					toggleActions: "play none none none"
 				})
 			})
+
+			// Graph animation
+			if (hasClass(el, 'drawgraph')) {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelector(".graph"), {
+						y: 100
+					}, {
+						y: 0
+					}, 0)
+
+					tl.fromTo(el.querySelector(".graph i"), {
+						height: "0%"
+					}, {
+						height: el.querySelector(".graph i").getAttribute("data-number") + "%"
+					}, 0)
+
+					return tl
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "50% 100%",
+						end: "100% 100%",
+						animation: tl,
+						scrub: 1
+					})
+				})
+			}
+
+			// Coin animation
+			if (hasClass(el, 'coins')) {
+				scroll.push(tl => {
+					tl.fromTo(el.querySelector(".big"), {
+						y: "50%"
+					}, {
+						y: 0,
+						ease: "power3.out"
+					}, 0)
+					return tl
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "50% 100%",
+						end: "100% 100%",
+						animation: tl,
+						scrub: 2
+					})
+				})
+			}
+
+			// Capture function
+			this.capture(el)
 		} else {
 			// Scroll animation header line section
 			scroll.push(tl => {
@@ -461,55 +518,7 @@ class statistics {
 			})
 		}
 
-		if (hasClass(el, 'drawgraph')) {
-			scroll.push(tl => {
-				tl.fromTo(el.querySelector(".graph"), {
-					y: 100
-				}, {
-					y: 0
-				}, 0)
-
-				tl.fromTo(el.querySelector(".graph i"), {
-					height: "0%"
-				}, {
-					height: el.querySelector(".graph i").getAttribute("data-number") + "%"
-				}, 0)
-
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "50% 100%",
-					end: "100% 100%",
-					animation: tl,
-					scrub: 1
-				})
-			})
-		}
-
-		if (hasClass(el, 'coins')) {
-			scroll.push(tl => {
-				tl.fromTo(el.querySelector(".big"), {
-					y: "50%"
-				}, {
-					y: 0,
-					ease: "power3.out"
-				}, 0)
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "50% 100%",
-					end: "100% 100%",
-					animation: tl,
-					scrub: 2
-				})
-			})
-		}
-
-		// Capture function
-		this.capture(el)
-
+		// Refresh scroll
 		scroll.refresh()
 	}
 

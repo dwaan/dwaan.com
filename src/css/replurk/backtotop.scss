@@ -8,7 +8,7 @@
 	color: var(--black);
 	font-size: 2rem;
 	text-align: center;
-	margin: var(--padxxl) auto 0;
+	margin: calc(var(--pady) * 2) auto var(--pady);
 	cursor: pointer;
 	transition: color .125s ease-in-out;
 
@@ -21,7 +21,7 @@
 		line-height: var(--size);
 
 		@media (min-width: mixins.$screen-small) {
-			--size: calc(1/3 * var(--box));
+			--size: calc(1/4 * var(--box));
 		}
 	}
 
