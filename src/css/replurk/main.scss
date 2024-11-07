@@ -188,16 +188,21 @@
 			height: 100%;
 			padding: var(--padl);
 			background-color: var(--lime);
-			overflow: clip;
 			border-radius: var(--padl);
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
 
-			&.wait {
-				cursor: wait;
+			@media (min-width: mixins.$screen-small) {
+				padding: calc(var(--padm) * 2);
+				border-radius: calc(var(--padm) * 2);
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
+				padding: var(--padl);
 				border-radius: calc(2/3 * var(--padl));
+			}
+
+			&.wait {
+				cursor: wait;
 			}
 
 			p,
@@ -272,14 +277,6 @@
 			}
 		}
 
-		.post i {
-			background-color: transparent;
-			display: inline;
-			font-style: italic;
-			padding: 0;
-			color: inherit;
-		}
-
 		.graph {
 			flex: 1;
 			display: flex;
@@ -300,7 +297,6 @@
 				transition: background-color .5s ease;
 			}
 		}
-
 
 		.link {
 			position: absolute;
@@ -331,6 +327,60 @@
 			.avatar img {
 				height: 24px;
 				margin-right: var(--pads);
+			}
+		}
+
+		.post {
+			i {
+				background-color: transparent;
+				display: inline;
+				font-style: italic;
+				padding: 0;
+				color: inherit;
+			}
+
+			div.meta {
+				border-top: 1px dashed var(--white);
+				display: flex;
+				align-items: center;
+				margin-top: var(--pads);
+				padding-top: var(--padm);
+
+				span {
+					display: block;
+					margin-right: var(--padl);
+				}
+
+				.link {
+					position: relative;
+					margin-left: auto;
+
+					img {
+						display: block;
+					}
+				}
+
+				>span {
+					display: flex;
+					align-items: center;
+					gap: 4px;
+
+					img {
+						display: block;
+						width: 1rem;
+						height: 1rem;
+					}
+				}
+			}
+		}
+
+		.box {
+			.post {
+
+				br,
+				.pictureservices {
+					display: none;
+				}
 			}
 		}
 
@@ -640,8 +690,6 @@
 
 	// Badges
 	.statistics.badges {
-		overflow: clip;
-
 		.big {
 			padding: 0 var(--padm) calc(3/4 * var(--padxl));
 			width: calc(1/2 * var(--box));
@@ -669,19 +717,8 @@
 
 
 		&.badgesmall {
-			height: calc(.4 * var(--box));
-
-			@media (min-width: mixins.$screen-tiny) {
-				height: calc(.6 * var(--box));
-			}
-
-			@media (min-width: mixins.$screen-verysmall) {
-				height: calc(.75 * var(--box));
-			}
-
-			@media (min-width: mixins.$screen-small) {
-				height: calc(.9 * var(--box));
-			}
+			height: auto;
+			aspect-ratio: 1/1.25;
 
 			p {
 				justify-content: space-evenly;
@@ -701,7 +738,7 @@
 			.content {
 				padding: var(--padm);
 
-				@media (min-width: mixins.$screen-verysmall) {
+				@media (min-width: mixins.$screen-abitwide) {
 					padding: var(--padl);
 				}
 			}
@@ -756,7 +793,7 @@
 	}
 
 	// Hashtag style
-	.hashtags {
+	.statistics.hashtags {
 		.html {
 			display: flex;
 			flex-direction: column;
@@ -820,7 +857,7 @@
 	}
 
 	// Bubble style
-	.bubble {
+	.statistics.bubble {
 		.count {
 			display: none;
 		}
@@ -1069,11 +1106,13 @@
 	}
 
 	// Shared links
-	.statistics.previewlinks a {
-		display: block;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		white-space: nowrap;
+	.statistics.previewlinks {
+		a {
+			display: block;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
 	}
 
 	// Shared pics
@@ -1212,56 +1251,6 @@
 		.meta span {
 			font-size: .65rem;
 			margin: 0;
-		}
-	}
-
-	// Box and meta
-	.statistics {
-		.box .post {
-
-			br,
-			img,
-			.pictureservices {
-				display: none;
-			}
-		}
-
-		.post div.meta {
-			border-top: 1px dashed var(--white);
-			display: flex;
-			align-items: center;
-			margin-top: var(--pads);
-			padding-top: var(--padm);
-		}
-
-		.post {
-			div.meta {
-				span {
-					display: block;
-					margin-right: var(--padl);
-				}
-
-				.link {
-					position: relative;
-					margin-left: auto;
-
-					img {
-						display: block;
-					}
-				}
-
-				>span {
-					display: flex;
-					align-items: center;
-					gap: 4px;
-
-					img {
-						display: block;
-						width: 1rem;
-						height: 1rem;
-					}
-				}
-			}
 		}
 	}
 }
