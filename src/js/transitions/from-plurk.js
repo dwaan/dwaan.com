@@ -81,7 +81,7 @@ let transition_from_plurk = {
     },
     after: () => loader.empty(),
     from: {
-        namespace: ['replurk2020', 'replurk2021', 'replurk2022', 'replurk2023', 'replurk2024']
+        namespace: ['replurk']
     }
 }
 
