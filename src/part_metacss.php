@@ -54,8 +54,9 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 	$uri = $_SERVER['REQUEST_URI'];
 	$params = @$_SERVER['QUERY_STRING'];
 
-	if ($params == "") $url = $protocol . '://' . $host . $uri;
-	else $url = $protocol . '://' . $host . $uri . '?' . $params;
+	// if ($params == "") $url = $protocol . '://' . $host . $uri;
+	// else $url = $protocol . '://' . $host . $uri . '?' . $params;
+	$url = $protocol . '://' . $host . $uri;
 	?>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

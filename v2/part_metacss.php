@@ -26,6 +26,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 	$uri = $_SERVER['REQUEST_URI'];
 	$params = @$_SERVER['QUERY_STRING'];
 
-	if ($params == "") $url = $protocol . '://' . $host . $uri;
-	else $url = $protocol . '://' . $host . $uri . '?' . $params;
+	// if ($params == "") $url = $protocol . '://' . $host . $uri;
+	// else $url = $protocol . '://' . $host . $uri . '?' . $params;
+	$url = $protocol . '://' . $host . $uri;
 	?> <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000"><meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><meta name="theme-color" content="#ffffff"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="<?php echo $url; ?>"><meta property="og:title" content="<?php echo $title; ?>"><meta property="og:description" content="<?php echo $description; ?>"><meta property="og:image" content="<?php echo $sharepic; ?>"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="<?php echo $url; ?>"><meta name="twitter:creator" content="@dwaan"><meta name="twitter:title" content="<?php echo $title; ?>"><meta name="twitter:description" content="<?php echo $description; ?>"><meta name="twitter:image" content="<?php echo $sharepic; ?>"> <?php } ?>
