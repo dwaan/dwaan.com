@@ -3,16 +3,16 @@
 
 <head>
 	<?php
-		$title = "Hello!";
-		include_once "part_metacss.php";
+	$title = "Hello!";
+	include_once "part_metacss.php";
 	?>
 </head>
 
-<body>
+<body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
 	<div id="barba-wrapper">
-		<div class="barba-container" data-namespace="home">
+		<div class="barba-container" data-barba="container" data-barba-namespace="home">
 			<main class="block__clear">
 				<div class="stage"></div>
 
@@ -22,8 +22,12 @@
 							<div class="hero__meta">
 								<div>
 									<div class="hero__text">
-										<div class="par_h1"><h1>hello! my name is dwan</h1></div>
-										<div class="par_p"><p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="/me" class="more">read more</a></p></div>
+										<div class="par_h1">
+											<h1>hello! my name is dwan</h1>
+										</div>
+										<div class="par_p">
+											<p>and I do stuff like concept-ing, designing, producing and also delivering UI and UX. <a href="/me" class="more">read more</a></p>
+										</div>
 									</div>
 
 									<div class="stats block">
@@ -129,6 +133,7 @@
 		</div>
 	</div>
 
-<?php include_once "part_script.php"; ?>
+	<?php include_once "part_script.php"; ?>
 </body>
+
 </html>

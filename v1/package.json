@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "dwaan.com source code",
   "main": "js/main.js",
+  "type": "module",
   "directories": {
     "doc": "doc"
   },
@@ -23,20 +24,20 @@
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-connect-php": "^1.0.3",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-postcss": "^8.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-svgmin": "^4.1.0",
-    "gulp-uglify": "^3.0.2",
-    "gulp-webp": "^4.0.1"
+    "gulp-webp": "^4.0.1",
+    "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "barba.js": "^1.0.0",
-    "gsap": "^3.2.2",
-    "gulp-htmlmin": "^5.0.1",
+    "@barba/core": "^2.10.3",
+    "gsap": "^3.12.5",
     "normalize.css": "^8.0.1",
-    "photoswipe": "^4.1.3",
-    "scrollmagic": "^2.0.7",
-    "tiny-slider": "^2.9.2"
+    "photoswipe": "^5.4.4",
+    "scrollmagic": "^2.0.8",
+    "tiny-slider": "^2.9.4"
   },
   "browserslist": [
     "last 100 version",

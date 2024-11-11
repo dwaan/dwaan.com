@@ -1,15 +1,15 @@
 {
   "name": "dwaan",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "dwaan.com source code",
   "main": "js/main.js",
   "type": "module",
   "scripts": {
-    "sitemap": "node src/sitemap.js",
-    "test": "gulp --development",
-    "build": "gulp --production",
-    "image": "gulp image",
-    "update": "npm update"
+    "Update": "npm update",
+    "v2 Test": "gulp --development",
+    "v2 Build": "gulp --production",
+    "v2 Image": "gulp image",
+    "v2 Sitemap": "node src/sitemap.js"
   },
   "repository": {
     "type": "git",

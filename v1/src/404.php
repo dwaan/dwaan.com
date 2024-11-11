@@ -8,11 +8,11 @@
 	?>
 </head>
 
-<body>
+<body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
 	<div id="barba-wrapper">
-		<div class="barba-container" data-namespace="404">
+		<div class="barba-container" data-barba="container" data-barba-namespace="404">
 			<main class="fof block__clear">
 				<img id="mrmonkey" src="/img/mr.monkey.webp" width="" height="" alt="" />
 				<div id="lost">

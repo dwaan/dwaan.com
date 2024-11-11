@@ -15,7 +15,7 @@ const mode = gulpMode()
 const siteUrl = 'http://localhost:8080/'
 
 function js() {
-	return gulp.src(['src/js/main.js'])
+	return gulp.src(['src/v2/js/main.js'])
 		.pipe(mode.development(webpack({
 			devtool: 'source-map',
 			mode: 'production',
@@ -36,59 +36,59 @@ function js() {
 }
 
 function css() {
-	return gulp.src(['node_modules/normalize.css/normalize.css', 'src/css/main.scss'])
+	return gulp.src(['node_modules/normalize.css/normalize.css', 'src/v2/css/main.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("bundle.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'))
+		.pipe(gulp.dest('src/v2/css/cache/'))
 }
 
 function fofcss() {
-	return gulp.src(['src/css/404.scss'])
+	return gulp.src(['src/v2/css/404.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("404.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'))
+		.pipe(gulp.dest('src/v2/css/cache/'))
 }
 
 function replurkcss() {
-	return gulp.src(['src/css/replurk/main.scss'])
+	return gulp.src(['src/v2/css/replurk/main.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("plurk.css"))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'))
+		.pipe(gulp.dest('src/v2/css/cache/'))
 }
 
 function css_vertical() {
-	return gulp.src(['src/css/vertical-screen.scss'])
+	return gulp.src(['src/v2/css/vertical-screen.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'))
+		.pipe(gulp.dest('src/v2/css/cache/'))
 }
 
 function css_horizontal() {
-	return gulp.src(['src/css/horizontal-screen.scss'])
+	return gulp.src(['src/v2/css/horizontal-screen.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(mode.development(sourcemaps.write('.')))
-		.pipe(gulp.dest('src/css/cache/'))
+		.pipe(gulp.dest('src/v2/css/cache/'))
 }
 
 function print() {
-	return gulp.src(['src/css/print.scss'])
+	return gulp.src(['src/v2/css/print.scss'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 		.pipe(concat("print.css"))
 		.pipe(mode.development(sourcemaps.write(".")))
-		.pipe(gulp.dest('src/css/cache/'))
+		.pipe(gulp.dest('src/v2/css/cache/'))
 }
 
 function css_prefix() {
-	return gulp.src(['src/css/cache/*.css'])
+	return gulp.src(['src/v2/css/cache/*.css'])
 		.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 		.pipe(mode.development(sourcemaps.write('.')))
 		.pipe(gulp.dest('v2/css/'))
@@ -96,7 +96,7 @@ function css_prefix() {
 }
 
 function php() {
-	return gulp.src(['src/*.php'])
+	return gulp.src(['src/v2/*.php'])
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
@@ -105,21 +105,21 @@ function php() {
 }
 
 function jpg() {
-	return gulp.src(['src/img/*.jpg', 'src/img/*/*.jpg'], { encoding: false })
+	return gulp.src(['src/v2/img/*.jpg', 'src/v2/img/*/*.jpg'], { encoding: false })
 		.pipe(webp())
 		.pipe(gulp.dest('v2/img/'))
 		.pipe(browserSync.stream())
 }
 
 function png() {
-	return gulp.src(['src/img/*.png', 'src/img/*/*.png'], { encoding: false })
+	return gulp.src(['src/v2/img/*.png', 'src/v2/img/*/*.png'], { encoding: false })
 		.pipe(webp())
 		.pipe(gulp.dest('v2/img/'))
 		.pipe(browserSync.stream())
 }
 
 function svg() {
-	return gulp.src(['src/img/*.svg', 'src/img/*/*.svg'], { encoding: false })
+	return gulp.src(['src/v2/img/*.svg', 'src/v2/img/*/*.svg'], { encoding: false })
 		.pipe(htmlmin({
 			collapseWhitespace: true
 		}))
@@ -128,12 +128,12 @@ function svg() {
 }
 
 function resources() {
-	return gulp.src(['src/fonts/*.*', 'src/*.txt', 'src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { encoding: false })
+	return gulp.src(['src/v2/fonts/*.*', 'src/v2/*.txt', 'src/v2/*.ico', 'src/v2/*.svg', 'src/v2/*.png', 'src/v2/*.jpg', 'src/v2/*.webmanifest', 'src/v2/*.xml'], { encoding: false })
 		.pipe(gulp.dest('v2/'))
 }
 
 function fonts() {
-	return gulp.src(['src/fonts/*.*'], { encoding: false })
+	return gulp.src(['src/v2/fonts/*.*'], { encoding: false })
 		.pipe(gulp.dest('v2/fonts/'))
 }
 
@@ -152,17 +152,17 @@ function run() {
 		})
 	})
 
-	gulp.watch(['src/js/*.js', 'src/js/*/*.js'], { ignoreInitial: false }, js)
-	gulp.watch(['src/css/main.scss', 'src/css/global.scss', 'src/css/nojs.scss', 'src/css/dark.scss'], { ignoreInitial: false }, css)
-	gulp.watch(['src/css/404.scss'], { ignoreInitial: false }, fofcss)
-	gulp.watch(['src/css/replurk/*.scss'], { ignoreInitial: false }, replurkcss)
-	gulp.watch(['src/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical)
-	gulp.watch(['src/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal)
-	gulp.watch(['src/css/print.scss'], { ignoreInitial: false }, print)
-	gulp.watch(['src/css/cache/*.css'], { ignoreInitial: false }, css_prefix)
-	gulp.watch(['src/*.php'], { ignoreInitial: false }, php)
-	gulp.watch(['src/*.txt', 'src/*.ico', 'src/*.svg', 'src/*.png', 'src/*.jpg', 'src/*.webmanifest', 'src/*.xml'], { ignoreInitial: false }, resources)
-	gulp.watch(['src/fonts/*.*'], { ignoreInitial: false }, fonts)
+	gulp.watch(['src/v2/js/*.js', 'src/v2/js/*/*.js'], { ignoreInitial: false }, js)
+	gulp.watch(['src/v2/css/main.scss', 'src/v2/css/global.scss', 'src/v2/css/nojs.scss', 'src/v2/css/dark.scss'], { ignoreInitial: false }, css)
+	gulp.watch(['src/v2/css/404.scss'], { ignoreInitial: false }, fofcss)
+	gulp.watch(['src/v2/css/replurk/*.scss'], { ignoreInitial: false }, replurkcss)
+	gulp.watch(['src/v2/css/vertical-screen.scss'], { ignoreInitial: false }, css_vertical)
+	gulp.watch(['src/v2/css/horizontal-screen.scss'], { ignoreInitial: false }, css_horizontal)
+	gulp.watch(['src/v2/css/print.scss'], { ignoreInitial: false }, print)
+	gulp.watch(['src/v2/css/cache/*.css'], { ignoreInitial: false }, css_prefix)
+	gulp.watch(['src/v2/*.php'], { ignoreInitial: false }, php)
+	gulp.watch(['src/v2/*.txt', 'src/v2/*.ico', 'src/v2/*.svg', 'src/v2/*.png', 'src/v2/*.jpg', 'src/v2/*.webmanifest', 'src/v2/*.xml'], { ignoreInitial: false }, resources)
+	gulp.watch(['src/v2/fonts/*.*'], { ignoreInitial: false }, fonts)
 
 	gulp.watch('gulpfile.js', _ => {
 		connect.closeServer()

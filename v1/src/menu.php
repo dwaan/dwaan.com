@@ -8,11 +8,11 @@
 	?>
 </head>
 
-<body>
+<body data-barba="wrapper">
 	<?php include_once "part_head.php" ?>
 
 	<div id="barba-wrapper">
-		<div class="barba-container" data-namespace="menu">
+		<div class="barba-container" data-barba="container" data-barba-namespace="menu">
 			<main class="block__clear">
 				<div class="menu__item menu__page">
 					<div class="border"><div></div></div>
