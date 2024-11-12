@@ -1,7 +1,6 @@
 'use strict'
 
 import barba from '@barba/core'
-import ScrollMagic from 'scrollmagic'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
@@ -18,7 +17,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // General variables
 var logo_svg = _q(".logo").innerHTML
-var controller = new ScrollMagic.Controller()
 var els = null
 var anim = null
 var tl = null
@@ -367,8 +365,6 @@ var Home = {
 		resizeHeroMeta()
 
 		function scroll() {
-			controller.destroy()
-			controller = new ScrollMagic.Controller()
 			els = null
 			anim = null
 
@@ -654,12 +650,12 @@ var Work = {
 	onImageLoadComplete() {
 		worklist.hover(".work__list a img")
 
-		controller.destroy()
-		controller = new ScrollMagic.Controller({
-			globalSceneOptions: {
-				triggerHook: .95,
-			}
-		})
+		// controller.destroy()
+		// controller = new ScrollMagic.Controller({
+		// 	globalSceneOptions: {
+		// 		triggerHook: .95,
+		// 	}
+		// })
 		els = null
 		anim = null
 
@@ -689,10 +685,10 @@ var Work = {
 					.fromTo(_c_el, { y: _height / 2 }, { y: 0, delay: delay }, 0)
 					.fromTo(_c_el[0].children[0], { y: 25 }, { y: 0 }, .128)
 					.fromTo(_c_el[0].children[1], { y: 25 }, { y: 0 }, .256)
-				new ScrollMagic
-					.Scene({ triggerElement: _el[i] })
-					.setTween(tl)
-					.addTo(controller)
+				// new ScrollMagic
+				// 	.Scene({ triggerElement: _el[i] })
+				// 	.setTween(tl)
+				// 	.addTo(controller)
 			}
 		}
 
@@ -708,10 +704,10 @@ var Work = {
 					amount: .064
 				}
 			})
-			new ScrollMagic
-				.Scene({ triggerElement: els[i] })
-				.setTween(tl)
-				.addTo(controller)
+			// new ScrollMagic
+			// 	.Scene({ triggerElement: els[i] })
+			// 	.setTween(tl)
+			// 	.addTo(controller)
 		}
 
 		new animateNumber(".work__list .stats__content p:first-child b")
@@ -739,12 +735,12 @@ var WorkDetail = {
 		worklist.hover("a img")
 	},
 	onImageLoadComplete() {
-		controller.destroy()
-		controller = new ScrollMagic.Controller({
-			globalSceneOptions: {
-				triggerHook: 1
-			}
-		})
+		// controller.destroy()
+		// controller = new ScrollMagic.Controller({
+		// 	globalSceneOptions: {
+		// 		triggerHook: 1
+		// 	}
+		// })
 		els = null
 		anim = null
 
@@ -816,10 +812,10 @@ var WorkDetail = {
 						amount: .256
 					}
 				})
-				new ScrollMagic
-					.Scene({ triggerElement: els[j] })
-					.setTween(anim)
-					.addTo(controller)
+				// new ScrollMagic
+				// 	.Scene({ triggerElement: els[j] })
+				// 	.setTween(anim)
+				// 	.addTo(controller)
 			}
 		}
 		// Scroll animate staggering from right
@@ -831,19 +827,19 @@ var WorkDetail = {
 					amount: .256
 				}
 			})
-			new ScrollMagic
-				.Scene({ triggerElement: els[j] })
-				.setTween(anim)
-				.addTo(controller)
+			// new ScrollMagic
+			// 	.Scene({ triggerElement: els[j] })
+			// 	.setTween(anim)
+			// 	.addTo(controller)
 		}
 		// Scroll animate immidiete from bottom
 		els = _qAll(".work__detail > blockquote")
 		for (var j = els.length - 1; j >= 0; j--) {
 			anim = gsap.fromTo(els[j], { x: 250 }, { x: 0, ease: "expo.out", duration: 1.024 })
-			new ScrollMagic
-				.Scene({ triggerElement: els[j] })
-				.setTween(anim)
-				.addTo(controller)
+			// new ScrollMagic
+			// 	.Scene({ triggerElement: els[j] })
+			// 	.setTween(anim)
+			// 	.addTo(controller)
 		}
 		// Scroll animate from bottom
 		els = _qAll(".work__detail .block__left, .work__detail .stats__content, .work__timeline")
@@ -854,10 +850,10 @@ var WorkDetail = {
 					amount: .128
 				}
 			})
-			new ScrollMagic
-				.Scene({ triggerElement: els[j] })
-				.setTween(anim)
-				.addTo(controller)
+			// new ScrollMagic
+			// 	.Scene({ triggerElement: els[j] })
+			// 	.setTween(anim)
+			// 	.addTo(controller)
 		}
 
 		new animateNumber(".work__detail .stats__content p:first-child b")
@@ -1044,8 +1040,8 @@ var Me = {
 		worklist.hover("#ig .item a")
 		worklist.hover(".work__list img")
 
-		controller.destroy()
-		controller = new ScrollMagic.Controller()
+		// controller.destroy()
+		// controller = new ScrollMagic.Controller()
 		els = null
 		anim = null
 
@@ -1103,11 +1099,11 @@ var Me = {
 			.to(el, { opacity: 0, duration: .5 }, 5.75)
 
 
-		new ScrollMagic
-			.Scene({ triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight * 4 })
-			.setPin("#firstscene", { pushFollowers: false })
-			.setTween(tl)
-			.addTo(controller)
+		// new ScrollMagic
+		// 	.Scene({ triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight * 4 })
+		// 	.setPin("#firstscene", { pushFollowers: false })
+		// 	.setTween(tl)
+		// 	.addTo(controller)
 		gsap.set("#firstscene", { height: _q("body").offsetHeight * 4 })
 		gsap.set(".us h2, .us p, .us img", { opacity: 0 })
 		gsap.set(".imuiux img", { transformOrigin: "50% 0" })
@@ -1127,11 +1123,11 @@ var Me = {
 			.fromTo(".mrgoat .h24", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1.75)
 			.to(".mrgoat .h24", { y: 0 }, 2)
 
-		new ScrollMagic
-			.Scene({ triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight * 4 })
-			.setPin(".mrgoat")
-			.setTween(tl)
-			.addTo(controller)
+		// new ScrollMagic
+		// 	.Scene({ triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight * 4 })
+		// 	.setPin(".mrgoat")
+		// 	.setTween(tl)
+		// 	.addTo(controller)
 
 		// Make Mr. Goat spinning
 		var obj = {
@@ -1151,10 +1147,10 @@ var Me = {
 				}
 			}
 		anim = gsap.to(obj, rotatinggoat)
-		new ScrollMagic
-			.Scene({ triggerElement: ".me", triggerHook: 1, duration: _q(".me").offsetHeight })
-			.setTween(anim)
-			.addTo(controller)
+		// new ScrollMagic
+		// 	.Scene({ triggerElement: ".me", triggerHook: 1, duration: _q(".me").offsetHeight })
+		// 	.setTween(anim)
+		// 	.addTo(controller)
 
 		gsap.set(".mrgoat", { y: 0, opacity: 0 })
 
@@ -1162,9 +1158,9 @@ var Me = {
 		els = _qAll("#ig .item")
 		for (var i = 0; i < els.length; i++) {
 			anim = gsap.fromTo(els[i].children, 1.024, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, ease: "expo.out" })
-			new ScrollMagic.Scene({ triggerElement: els[i], triggerHook: .75 })
-				.setTween(anim)
-				.addTo(controller)
+			// new ScrollMagic.Scene({ triggerElement: els[i], triggerHook: .75 })
+			// 	.setTween(anim)
+			// 	.addTo(controller)
 		}
 
 		// Scroll capabilities item
@@ -1175,9 +1171,9 @@ var Me = {
 				.fromTo(els[i], { x: 25 + (i * 25) }, { x: 0 }, 0)
 				.fromTo(els[i], { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
 
-			new ScrollMagic.Scene({ triggerElement: els[i], triggerHook: .85 })
-				.setTween(anim)
-				.addTo(controller)
+			// new ScrollMagic.Scene({ triggerElement: els[i], triggerHook: .85 })
+			// 	.setTween(anim)
+			// 	.addTo(controller)
 		}
 
 		// Scroll latest works
@@ -1192,9 +1188,9 @@ var Me = {
 			.fromTo(".work__list, .work__list ul li", { y: 250 }, { y: 0 }, 0)
 			.fromTo(".work__list, .work__list ul li", { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
 
-		new ScrollMagic.Scene({ triggerElement: ".work__list, .work__list ul", triggerHook: .85 })
-			.setTween(anim)
-			.addTo(controller)
+		// new ScrollMagic.Scene({ triggerElement: ".work__list, .work__list ul", triggerHook: .85 })
+		// 	.setTween(anim)
+		// 	.addTo(controller)
 
 		// Scroll cofound
 		el = _qAll(".cofound > div > *")
@@ -1208,10 +1204,10 @@ var Me = {
 						}
 					}, 0)
 
-				new ScrollMagic
-					.Scene({ triggerElement: el[i], triggerHook: .9 })
-					.setTween(anim)
-					.addTo(controller)
+				// new ScrollMagic
+				// 	.Scene({ triggerElement: el[i], triggerHook: .9 })
+				// 	.setTween(anim)
+				// 	.addTo(controller)
 			}
 		}
 

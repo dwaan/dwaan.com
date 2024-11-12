@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@mixin make-it-full-size() {
+	width: 100vw;
+	height: 100vh;
+}
+
 /* Loading fonts */
 @font-face {
 	font-family: 'Rubik';
@@ -425,7 +430,7 @@ html {
 	}
 
 	body {
-		@include mixins.make-it-full-size;
+		@include make-it-full-size;
 		overflow: hidden;
 	}
 
@@ -439,13 +444,13 @@ html {
 	header,
 	main,
 	#barba-wrapper {
-		@include mixins.make-it-full-size;
+		@include make-it-full-size;
 		overflow: hidden;
 		display: none !important;
 	}
 
 	body {
-		@include mixins.make-it-full-size;
+		@include make-it-full-size;
 		overflow: hidden;
 	}
 
@@ -2054,7 +2059,6 @@ main {
 	display: block;
 	width: 100%;
 	text-align: center;
-	vertical-align: middle;
 	pointer-events: none;
 }
 
@@ -2195,7 +2199,9 @@ main {
 	margin-left: 3.125vw;
 }
 
-.work__list .stats p:last-child {}
+.work__list .stats p:last-child {
+	display: initial;
+}
 
 .work__list .stats i {
 	color: #000;
@@ -3292,7 +3298,7 @@ main {
 	cursor: pointer;
 	border-radius: 1000px;
 	transition: background-color ease .128s;
-	appereance: none;
+	appearance: none;
 }
 
 .tns-nav button:hover {
@@ -4084,7 +4090,7 @@ main {
 }
 
 .cofound .splord {
-	/*overflow: hidden;*/
+	display: initial;
 }
 
 @media (max-aspect-ratio: 2/1) {
