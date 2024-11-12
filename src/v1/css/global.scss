@@ -5021,31 +5021,31 @@ main {
 	color: #fff;
 }
 
-.pswp__button,
-.pswp__button--arrow--left:before,
-.pswp__button--arrow--right:before {
-	border-radius: 5px;
-	background-image: url("../img/default-skin.svg") !important;
-}
+// .pswp__button,
+// .pswp__button--arrow--left:before,
+// .pswp__button--arrow--right:before {
+// 	border-radius: 5px;
+// 	background-image: url("../img/default-skin.svg") !important;
+// }
 
-/* TODO: next and prev button doesn't display properly in webos browser */
-.dark .pswp__button,
-.dark .pswp__button--arrow--left:before,
-.dark .pswp__button--arrow--right:before {
-	overflow: hidden;
-	background-image: url("../img/default-skin-light.svg") !important;
-}
+// /* TODO: next and prev button doesn't display properly in webos browser */
+// .dark .pswp__button,
+// .dark .pswp__button--arrow--left:before,
+// .dark .pswp__button--arrow--right:before {
+// 	overflow: hidden;
+// 	background-image: url("../img/default-skin-light.svg") !important;
+// }
 
-@media (-webkit-min-device-pixel-ratio: 1.1),
-(-webkit-min-device-pixel-ratio: 1.09375),
-(min-resolution: 105dpi),
-(min-resolution: 1.1dppx) {
+// @media (-webkit-min-device-pixel-ratio: 1.1),
+// (-webkit-min-device-pixel-ratio: 1.09375),
+// (min-resolution: 105dpi),
+// (min-resolution: 1.1dppx) {
 
-	.pswp--svg .pswp__button--arrow--left,
-	.pswp--svg .pswp__button--arrow--right {
-		background: none !important;
-	}
-}
+// 	.pswp--svg .pswp__button--arrow--left,
+// 	.pswp--svg .pswp__button--arrow--right {
+// 		background: none !important;
+// 	}
+// }
 
 .pswp__button--arrow--left:before,
 .pswp__button--arrow--right:before {

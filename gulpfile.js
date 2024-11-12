@@ -76,13 +76,13 @@ var v1 = {
 	},
 
 	fonts() {
-		return gulp.src(['src/v1/fonts/*'])
+		return gulp.src(['src/v1/fonts/*'], { encoding: false })
 			.pipe(gulp.dest('v1/fonts/'))
 			.pipe(browserSync.stream())
 	},
 
 	resources() {
-		return gulp.src(['src/v1/*.webmanifest', 'src/v1/manifest.json', 'src/v1/*.txt', 'src/v1/*.xml', 'src/v1/*.png', 'src/v1/*.jpg', 'src/v1/*.ico', 'src/v1/*.htaccess'])
+		return gulp.src(['src/v1/*.webmanifest', 'src/v1/manifest.json', 'src/v1/*.txt', 'src/v1/*.xml', 'src/v1/*.png', 'src/v1/*.jpg', 'src/v1/*.ico', 'src/v1/*.htaccess'], { encoding: false })
 			.pipe(gulp.dest('v1/'))
 			.pipe(browserSync.stream())
 	},

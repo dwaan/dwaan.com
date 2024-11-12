@@ -1,6 +1,7 @@
 'use strict'
 
 import { gsap } from 'gsap'
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
 
 // Helper functions
 //
@@ -320,6 +321,20 @@ function parallax(callback) {
 }
 // Photoswipe helper
 function initPhotoSwipeFromDOM(gallerySelector) {
+	_qAll(`${gallerySelector} > a`).forEach(el => {
+		let size = el.dataset.size.split("x")
+		el.dataset.pswpWidth = size[0]
+		el.dataset.pswpHeight = size[1]
+		console.log(el)
+	})
+	const lightbox = new PhotoSwipeLightbox({
+		gallery: gallerySelector,
+		children: 'a',
+		pswpModule: () => import('photoswipe')
+	});
+	lightbox.init();
+}
+function delinitPhotoSwipeFromDOM(gallerySelector) {
 	// parse slide data (url, title, size ...) from DOM elements (children of
 	// gallerySelector)
 	var parseThumbnailElements = function (el) {

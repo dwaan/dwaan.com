@@ -204,7 +204,6 @@ var FadeTransition = {
 		}
 	},
 	enter(data) {
-		console.log("Enter")
 		let next = data.next.container
 		this.next = next
 
@@ -650,75 +649,76 @@ var Work = {
 	onImageLoadComplete() {
 		worklist.hover(".work__list a img")
 
-		// controller.destroy()
-		// controller = new ScrollMagic.Controller({
-		// 	globalSceneOptions: {
-		// 		triggerHook: .95,
-		// 	}
-		// })
-		els = null
-		anim = null
+		setTimeout(() => {
+			// Scroll animate the works
+			var y = 0
+			var prevy = 0
+			_qAll(".works").forEach(el => {
+				el.childNodes.forEach(child => {
+					var delay = 0
+					var height = child.offsetHeight
+					var el = child.childNodes
 
-		// Scroll animate the works
-		var delay = 0,
-			_y = 0,
-			_p_y = 0
-		els = _qAll(".works")
-		for (var j = els.length - 1; j >= 0; j--) {
-			var _el = els[j].children
-			for (var i = 0; i < _el.length; i++) {
-				var _height = _el[i].offsetHeight,
-					_c_el = _el[i].children
+					y = child.offsetTop
+					if (y != prevy) {
+						prevy = y
+						delay = 0
+					} else {
+						delay += .064
+					}
 
-				_y = _el[i].offsetTop
-				if (_y != _p_y) {
-					_p_y = _y
-					delay = 0
-				} else {
-					delay += .064
-				}
-
-				tl = gsap.timeline({
-					defaults: { duration: 1.024, ease: "expo.out" }
+					tl = gsap.timeline({
+						scrollTrigger: {
+							trigger: child,
+							start: '0 100%',
+							end: '100% 100%',
+							scrub: 2
+						},
+						defaults: {
+							duration: 1.024,
+							ease: "expo.out"
+						}
+					})
+					tl.fromTo(el, { y: height / 2 }, { y: 0, delay: delay }, 0)
+					tl.fromTo(el[0].childNodes[0], { y: 25 }, { y: 0 }, .128)
+					tl.fromTo(el[0].childNodes[1], { y: 25 }, { y: 0 }, .256)
 				})
-				tl
-					.fromTo(_c_el, { y: _height / 2 }, { y: 0, delay: delay }, 0)
-					.fromTo(_c_el[0].children[0], { y: 25 }, { y: 0 }, .128)
-					.fromTo(_c_el[0].children[1], { y: 25 }, { y: 0 }, .256)
-				// new ScrollMagic
-				// 	.Scene({ triggerElement: _el[i] })
-				// 	.setTween(tl)
-				// 	.addTo(controller)
-			}
-		}
+			})
 
-		// Scroll animate the words
-		els = _qAll(".words")
-		for (var i = 0; i < els.length; i++) {
-			tl = gsap.timeline({
-				defaults: { duration: 1.024, ease: "expo.out" }
+			// Scroll animate the words
+			_qAll(".words").forEach(el => {
+				tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '100% 100%',
+						scrub: 2
+					},
+					defaults: {
+						duration: 1.024,
+						ease: "expo.out"
+					}
+				})
+				tl.fromTo(el.children, {
+					y: 100
+				}, {
+					y: 0,
+					stagger: {
+						from: 0,
+						amount: .064
+					}
+				})
 			})
-			tl.fromTo(els[i].children, { y: 100 }, {
-				y: 0, stagger: {
-					from: 0,
-					amount: .064
-				}
-			})
-			// new ScrollMagic
-			// 	.Scene({ triggerElement: els[i] })
-			// 	.setTween(tl)
-			// 	.addTo(controller)
-		}
+
+		}, 3000);
 
 		new animateNumber(".work__list .stats__content p:first-child b")
 		new animateNumber(".work__list .stats__content p:last-child b")
 	},
 	onImageLoadAnimateHalfComplete() {
 		anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" } })
-		anim
-			.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 }, 0)
-			.to(".work__list .txt0000", { yPercent: -20 }, .512)
-
+		anim.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 }, 0)
+		anim.to(".work__list .txt0000", { yPercent: -20 }, .512)
 	}
 }
 

@@ -62,9 +62,7 @@ class ImageLoading {
 
 	complete(callback) {
 		if (this.barba != null) {
-			gsap.set(this.el, {
-				visibility: "visible"
-			})
+			if (this.el.style) this.el.style.visibility = "visible"
 			this.barba.async()
 		}
 
