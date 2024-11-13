@@ -43,8 +43,9 @@ var hiview = {
 					});
 				}
 
-				gsap.ç(next.querySelectorAll(this.hint), {
-					y: 50
+				gsap.fromTo(next.querySelectorAll(this.hint), {
+					y: 50,
+					opacity: 0,
 				}, {
 					y: 0,
 					opacity: 1,
@@ -76,6 +77,7 @@ var hiview = {
 		});
 
 		hoverEvents(next.querySelectorAll(".email"), () => {
+			console.log(screenhorizontal)
 			if (screenhorizontal) textanim.show(".email span", ".email small");
 			flare.show("img.yellow, img.red");
 		}, () => {
