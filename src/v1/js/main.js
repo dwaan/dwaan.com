@@ -7,169 +7,21 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js'
 import { tns } from 'tiny-slider'
 
-import { _q, _qAll, removeClass, addClass, animateNumber, animateYear, waitForImg, splitText, hugeText, isTouchSupported, parallax, konami, initPhotoSwipeFromDOM } from './helper.js'
+import { _q, _qAll, animateNumber, animateYear, waitForImg, splitText, hugeText, isTouchSupported, parallax, konami, initPhotoSwipeFromDOM } from './helper.js'
+import Menu from './menu.js'
 import Loading from './loading.js'
 import ImageLoading from './imageloading.js'
-import Menu from './menu.js'
+import Transition from './transition.js'
 import worklist from './worklist.js'
 
 gsap.config({ nullTargetWarn: false })
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // General variables
-var logo_svg = _q(".logo").innerHTML
-var tinysliders = []
-
 let menu = new Menu()
 let loading = new Loading("#loading-cover", menu)
 let imageloading = new ImageLoading(loading)
-
-// Loading animation
-
-var FadeTransition = {
-	name: 'default-transition',
-	once() {
-		removeClass(_q('.menu__pop'), "active")
-
-		// Adding logo to loading and do some hover event
-		var el = _q(loading.el).querySelector(".loading")
-		el.querySelector(".light").innerHTML = logo_svg
-		el.querySelector(".light").style.height = 0
-		el.querySelector(".dark").innerHTML = logo_svg
-
-		// Logo waving animation
-		var logo_wave = gsap.timeline({
-			repeat: -1,
-			defaults: {
-				transformOrigin: "99% 0",
-				duration: .256,
-				ease: "linear",
-				yPercent: 20
-			}
-		})
-		logo_wave.from(".logo .left-hand", {
-			yPercent: 0,
-			rotation: 0,
-			duration: 10
-		})
-		logo_wave.to(".logo .left-hand", {
-			duration: .256,
-			rotation: 70
-		})
-		logo_wave.fromTo(".logo .left-hand", {
-			rotation: 70
-		}, {
-			rotation: 60,
-			repeat: 2,
-			yoyo: true
-		})
-		logo_wave.to(".logo .left-hand", {
-			duration: .256,
-			yPercent: 0,
-			rotation: 0
-		})
-
-		// Safari Mobile: 177
-		// Safari: 38/63
-		// Firefox: 74
-		// Chrome: 79
-		// Safari Tablet: 107
-		// Chrome Tablet: 113
-		if (window.outerHeight - window.innerHeight < 80) {
-			addClass(_q("html"), "desktop")
-		}
-
-		// Run menu
-		menu.run()
-
-		// Wait for all images to be loaded
-		imageloading.run(document, load => {
-			// Check if it's first time or 404 to do some text animation
-			loading.animate((_q(".barba-container").getAttribute("data-barba-namespace") == "404" ? "404" : "first-time"), _ => {
-				if (load != undefined) {
-					load.first.animation = true
-					load.done()
-				}
-
-				// Animate header
-				gsap.fromTo(".logo, .menu > a, #mode, .lang > li", {
-					marginTop: -250
-				}, {
-					marginTop: 0,
-					delay: .512,
-					duration: 2.048,
-					ease: "expo.out",
-					stagger: {
-						from: 0,
-						amount: 1.024
-					}
-				})
-			})
-		})
-	},
-	async before(data) {
-		let done = this.async()
-
-		function animate() {
-			// Make the barba wrapper fix so it won't have jaggy animation
-			_q("#barba-wrapper").style.height = _q("#barba-wrapper").offsetHeight + "px"
-
-			if (data.trigger.innerText == "See All") loading.clicked.text = "See All"
-			else if (data.trigger.innerText == "Back") loading.clicked.text = "Back"
-			else loading.clicked.text = ""
-
-			// Show loading then load the new container
-			loading.show(_ => {
-				gsap.set('.menu__pop .menu__item', {
-					opacity: 0,
-					yPercent: 100
-				}, .768)
-
-				done()
-			})
-		}
-
-		if (menu.active) {
-			removeClass(_q('.menu__pop'), "active")
-
-			animate()
-
-			let tl = gsap.timeline({
-				defaults: {
-					duration: 1.024,
-					ease: "expo.out"
-				}
-			})
-			tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
-				xPercent: 0,
-				opacity: 1
-			}, {
-				xPercent: -200,
-				opacity: 0,
-				stagger: {
-					from: 0,
-					amount: .128
-				}
-			})
-		} else {
-			animate()
-		}
-	},
-	enter(data) {
-		let next = data.next.container
-		this.next = next
-
-		// Hide newContainer for a bit
-		next.style.display = "block"
-		next.style.visibility = "hidden"
-
-		// Remove previous height setting
-		_q("#barba-wrapper").style.height = ""
-
-		// Wait for all image to be loaded
-		imageloading.run(this)
-	}
-}
+let transition = new Transition(loading, imageloading, menu)
 
 // Barba views
 
@@ -701,6 +553,7 @@ var Work = {
 }
 
 var WorkDetail = {
+	tinysliders: [],
 	namespace: 'work-detail',
 	afterEnter() {
 		imageloading.barba = this
@@ -728,19 +581,19 @@ var WorkDetail = {
 				}
 			}
 		}
-		tinysliders = []
+		this.tinysliders = []
 
 		_qAll(".gallery-normal").forEach(el => {
 			var param = globalparam
 			param.container = el
-			tinysliders.push(new tns(param))
+			this.tinysliders.push(new tns(param))
 		})
 
 		_qAll(".gallery-auto-height").forEach(el => {
 			var param = globalparam
 			param.container = el
 			param.autoHeight = true
-			tinysliders.push(new tns(param))
+			this.tinysliders.push(new tns(param))
 		})
 
 		_qAll(".work__timeline .wheel").forEach(el => {
@@ -751,7 +604,7 @@ var WorkDetail = {
 				0: { items: 2 },
 				600: { items: 3 }
 			}
-			tinysliders.push(new tns(param))
+			this.tinysliders.push(new tns(param))
 		})
 
 		_qAll(".gallery__mobile").forEach(el => {
@@ -763,7 +616,7 @@ var WorkDetail = {
 				600: { items: 2 },
 				1200: { items: 3 }
 			}
-			tinysliders.push(new tns(param))
+			this.tinysliders.push(new tns(param))
 		})
 
 		setTimeout(() => {
@@ -871,10 +724,10 @@ var WorkDetail = {
 	},
 	onLeaveCompleted() {
 		// Destroying tinyslider to prevent error
-		for (var i = tinysliders.length - 1; i >= 0; i--) {
-			tinysliders[i].destroy()
-		}
-		tinysliders = []
+		this.tinysliders.forEach(tinyslider => {
+			tinyslider.destroy()
+		})
+		this.tinysliders = []
 	}
 }
 
@@ -1341,9 +1194,9 @@ var Links = {
 
 // Initialized barba.js
 barba.init({
-	debug: true,
-	logLevel: 'debug',
-	transitions: [FadeTransition],
+	// debug: true,
+	// logLevel: 'debug',
+	transitions: [transition.default],
 	views: [Home, Work, WorkDetail, Call, Lost, Me, Links],
 	prevent: ({ el }) => el.classList && el.classList.contains('no-barba')
 })
