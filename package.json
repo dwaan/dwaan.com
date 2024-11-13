@@ -1,15 +1,19 @@
 {
   "name": "dwaan",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "dwaan.com source code",
   "main": "js/main.js",
   "type": "module",
   "scripts": {
-    "sitemap": "node src/sitemap.js",
-    "test": "gulp --development",
-    "build": "gulp --production",
-    "image": "gulp image",
-    "update": "npm update"
+    "Update": "npm update",
+    "v1 Test": "gulp v1 --development",
+    "v1 Build": "gulp v1 --production",
+    "v1 Image": "gulp v1image",
+    "v1 Sitemap": "node src/sitemap.js",
+    "v2 Test": "gulp v1 --development",
+    "v2 Build": "gulp v1 --production",
+    "v2 Image": "gulp v2image",
+    "v2 Sitemap": "node src/sitemap.js"
   },
   "repository": {
     "type": "git",
@@ -43,9 +47,11 @@
   "dependencies": {
     "@barba/core": "^2.10.3",
     "gsap": "^3.12.5",
+    "normalize.css": "^8.0.1",
+    "photoswipe": "^5.4.4",
+    "tiny-slider": "^2.9.4",
     "html2canvas": "^1.4.1",
-    "lz-string": "^1.5.0",
-    "normalize.css": "^8.0.1"
+    "lz-string": "^1.5.0"
   },
   "browserslist": [
     "last 100 version",
