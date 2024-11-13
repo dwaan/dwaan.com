@@ -50,6 +50,7 @@ var v1 = {
 			.pipe(concat("bundle.css"))
 			.pipe(mode.development(sourcemaps.write('.')))
 			.pipe(gulp.dest('v1/css/'))
+			.pipe(browserSync.stream())
 	},
 
 	php() {

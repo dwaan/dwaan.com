@@ -3,8 +3,8 @@
 
 <head>
 	<?php
-		$title = "Yes";
-		include_once "part_metacss.php";
+	$title = "Yes";
+	include_once "part_metacss.php";
 	?>
 </head>
 
@@ -16,49 +16,63 @@
 			<main class="block__clear">
 				<div class="me">
 					<div id="firstscene">
-						<div class="imuiux block__full">
-							<div class="block__middle">
-								<h1>I'm a UI/UX Designer and Strategist</h1>
-								<p>...mostly for website and mobile application. But I like to call myself a web designer. I studied in computer science but decide to follow my dream and becoming <strike>fabulous</strike> web designer.</p>
-								<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+						<div class="pin block__full">
+							<div class="imuiux block__full">
+								<div class="block__middle">
+									<h1>I'm a UI/UX Designer and Strategist</h1>
+									<p>...mostly for website and mobile application. But I like to call myself a web designer. I studied in computer science but decide to follow my dream and becoming <strike>fabulous</strike> web designer.</p>
+									<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+								</div>
 							</div>
-						</div>
 
-						<div class="about us block__full">
-							<div class="block__middle">
-								<h2>me, my partner and <strong>mr. goat</strong> live in tel aviv-yafo</h2>
-								<p>I'm one of the few Indonesian who live in Israel, it's very rare indeed. I haven't seen any Indonesian who live in here, yet. So hit me up if you know anyone.</p>
-								<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+							<div class="about us block__full">
+								<div class="block__middle">
+									<h2>me, my partner and <strong>mr. goat</strong> live in tel aviv-yafo</h2>
+									<p>I'm one of the few Indonesian who live in Israel, it's very rare indeed. I haven't seen any Indonesian who live in here, yet. So hit me up if you know anyone.</p>
+									<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+								</div>
 							</div>
-						</div>
 
-						<div class="know us block__full">
-							<div class="block__middle">
-								<h2><a href="/say-hi">so send me a message</a></h2>
-								<p>if you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to asked something to me.</p>
-								<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+							<div class="know us block__full">
+								<div class="block__middle">
+									<h2><a href="/say-hi">so send me a message</a></h2>
+									<p>if you happened to know any Indonesian living in Tel Aviv-Yafo, <strong>Mr. Goat wants to meet them</strong>. Also if you want to asked something to me.</p>
+									<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+								</div>
 							</div>
-						</div>
 
-						<div class="who us block__full">
-							<div class="block__middle">
-								<h2>and who is this Mr. Goat you asked?</h2>
-								<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+							<div class="who us block__full">
+								<div class="block__middle">
+									<h2>and who is this Mr. Goat you asked?</h2>
+									<img src="/img/roll-eyes-up.webp" width="" height="" alt="Dwan rolling his eyes up" />
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="mrgoat block__full">
-						<div class="mrgate block__full">
-							<div class="h2"><h2 class="h21">this is <b>mr. goat</b></h2></div>
-							<div class="h2"><h3 class="h22">he's a vietnamese</h3></div>
-							<div class="h2"><h3 class="h23">he likes to travel</h3></div>
-							<div class="h2"><h4 class="h24">and here's his instagram post to prove</h4></div>
-							<div class="h4"><h4>and he have his own instagram account, <a href="https://instagram.com/mrgoatofficial" target="_blank" class="no-barba">click here check out his instagram account</a></h4></div>
-							<div class="img">
-								<?php for ($x = 1; $x <= 26; $x++) { ?>
-								<img class="mrgoat<?php echo $x; ?>" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="" height="" alt="Mr. Goat" />
-								<?php } ?>
+						<div class="pin block__full">
+							<div class="block__full">
+								<div class="h2">
+									<h2 class="h21">this is <b>mr. goat</b></h2>
+								</div>
+								<div class="h2">
+									<h3 class="h22">he's a vietnamese</h3>
+								</div>
+								<div class="h2">
+									<h3 class="h23">he likes to travel</h3>
+								</div>
+								<div class="h2">
+									<h4 class="h24">checkout his instagram post</h4>
+								</div>
+								<div class="h4">
+									<h4>and here is his own instagram account, <a href="https://instagram.com/mrgoatofficial" target="_blank" class="no-barba">just click or tap here</a>. You can learn about him over there.</h4>
+								</div>
+								<div class="img">
+									<?php for ($x = 1; $x <= 26; $x++) { ?>
+										<img class="mrgoat<?php echo $x; ?>" src="/img/mrgoat/mrgoat<?php echo $x; ?>.webp" width="" height="" alt="Mr. Goat" />
+									<?php } ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -110,6 +124,7 @@
 		</div>
 	</div>
 
-<?php include_once "part_script.php"; ?>
+	<?php include_once "part_script.php"; ?>
 </body>
+
 </html>

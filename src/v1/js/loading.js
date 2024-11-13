@@ -158,7 +158,7 @@ class Loading {
 			tl.to(_q(this.el).querySelector(".text"), {
 				opacity: 0
 			})
-			tl.fromTo(_(this.el).querySelector(".loading"), {
+			tl.fromTo(_q(this.el).querySelector(".loading"), {
 				opacity: 0,
 				y: "100%"
 			}, {

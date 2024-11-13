@@ -28,14 +28,14 @@ function removeClass(el, className) {
 	}
 }
 function addClass(el, className) {
+	if (typeof el === "string") el = document.querySelector(el)
+
 	if (el.classList) {
-		el
-			.classList
-			.add(className)
+		el.classList.add(className)
 	} else {
-		var current = el.className,
-			found = false;
-		var all = current.split(' ');
+		var current = el.className
+		var found = false
+		var all = current.split(' ')
 		for (var i = 0; i < all.length, !found; i += 1) {
 			found = all[i] === className
 		}
@@ -168,12 +168,14 @@ function splitText(els) {
 }
 // Huge text animation
 class hugeText {
+	element = null
+	tween = null
+	cancelhide = false
+	onshow = false
+
 	constructor(el) {
 		this.element = _q(el);
 		this.element.innerHTML = "<span></span>";
-		this.cancelhide = false;
-		this.onshow = false;
-		this.tween = null;
 
 		gsap.set(this.element.children, { yPercent: 100 });
 		gsap.fromTo(this.element.children, {
@@ -185,42 +187,41 @@ class hugeText {
 			xPercent: -75
 		});
 
-		this.show = function (text) {
-			this.cancelhide = true;
-			this
-				.element
-				.querySelector("span")
-				.innerHTML = "<i>" + text + "</i><i>" + text + "</i><i>" + text + "</i><i>" + text + "</i>";
-			if (this.tween != null)
-				this.tween.kill();
-			this.tween = gsap.to(this.element.children, {
-				duration: .512,
-				ease: "expo",
-				yPercent: 0
-			});
-		};
-
-		this.hide = function () {
-			var that = this;
-			this.tween = gsap.to(this.element.children, {
-				duration: .512,
-				ease: "expo",
-				yPercent: 100,
-				onComplete: function () {
-					if (that.cancelhide) {
-						that.cancelhide = false;
-					} else {
-						that
-							.element
-							.querySelector("span")
-							.innerHTML = "";
-					}
-				}
-			});
-		};
-
 		return this;
 	}
+
+	show(text) {
+		this.cancelhide = true;
+		this
+			.element
+			.querySelector("span")
+			.innerHTML = "<i>" + text + "</i><i>" + text + "</i><i>" + text + "</i><i>" + text + "</i>";
+		if (this.tween != null)
+			this.tween.kill();
+		this.tween = gsap.to(this.element.children, {
+			duration: .512,
+			ease: "expo",
+			yPercent: 0
+		});
+	};
+
+	hide() {
+		this.tween = gsap.to(this.element.children, {
+			duration: .512,
+			ease: "expo",
+			yPercent: 100,
+			onComplete: _ => {
+				if (this.cancelhide) {
+					this.cancelhide = false;
+				} else {
+					this
+						.element
+						.querySelector("span")
+						.innerHTML = "";
+				}
+			}
+		});
+	};
 }
 // Animate Number
 class animateNumber {
@@ -325,7 +326,6 @@ function initPhotoSwipeFromDOM(gallerySelector) {
 		let size = el.dataset.size.split("x")
 		el.dataset.pswpWidth = size[0]
 		el.dataset.pswpHeight = size[1]
-		console.log(el)
 	})
 	const lightbox = new PhotoSwipeLightbox({
 		gallery: gallerySelector,

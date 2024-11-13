@@ -18,7 +18,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 // General variables
 var logo_svg = _q(".logo").innerHTML
 var els = null
-var anim = null
 var tl = null
 var tinysliders = []
 
@@ -232,8 +231,7 @@ var Home = {
 		gsap.set(".work_float", { y: 500 })
 
 		splitText(".hero__text h1, .hero__text p")
-	},
-	after() {
+
 		var fruits = ["empty.webp", "apple.webp", "avocado.webp", "phone.webp", "joycon.webp"]
 		var fruit = _q(".fruit")
 		var index = 0
@@ -249,9 +247,14 @@ var Home = {
 				if (index >= fruits.length) index = 0
 			} while (fruits[index] == "empty.webp")
 
-			if (!anim.isActive()) {
-				anim = gsap.timeline({ defaults: { duration: .512, ease: "elastic" } })
-				anim.fromTo(".poof", {
+			if (!this.anim) {
+				this.anim = gsap.timeline({
+					defaults: {
+						duration: .512,
+						ease: "elastic"
+					}
+				})
+				this.anim.fromTo(".poof", {
 					transformOrigin: "40%",
 					opacity: 1,
 					rotation: 15,
@@ -270,11 +273,18 @@ var Home = {
 						// When fruit is loaded, show it
 						waitForImg(fruit, _ => {
 							gsap.set(fruit, { opacity: 1 })
-							anim.to(".poof", { opacity: 0, rotation: -180, scale: 1, ease: "power3.inOut" })
+							this.anim.to(".poof", {
+								opacity: 0,
+								rotation: -180,
+								scale: 1,
+								ease: "power3.inOut",
+								onComplete: _ => {
+									this.anim = null
+								}
+							})
 						})
 					}
 				})
-
 			}
 
 			e.preventDefault()
@@ -285,7 +295,7 @@ var Home = {
 		var delay = 128
 
 		function runGsap(y) {
-			speed = duration / 1000
+			var speed = duration / 1000
 
 			gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: speed, ease: "power2" })
 
@@ -354,6 +364,8 @@ var Home = {
 		worklist.hover(".work__list a img, .hero__meta .stats b")
 	},
 	onImageLoadComplete() {
+		console.log("onImageLoadComplete")
+
 		// Fixing size
 		function resizeHeroMeta() {
 			_q("#trigger__padder").style.paddingTop = (_q("body").offsetHeight - _q(".work__list").offsetHeight) + "px"
@@ -363,17 +375,14 @@ var Home = {
 		window.onresize = resizeHeroMeta
 		resizeHeroMeta()
 
-		function scroll() {
-			els = null
-			anim = null
-
+		setTimeout(_ => {
 			// Scroll animate the hero wording
 			let hero = gsap.timeline({
 				scrollTrigger: {
 					trigger: 'main',
 					start: '0 0',
 					end: '100% 0',
-					scrub: 1
+					scrub: true
 				},
 				defaults: {
 					duration: 1.024,
@@ -412,7 +421,7 @@ var Home = {
 					trigger: '.work_float',
 					start: '0 100%',
 					end: '10px 100%',
-					scrub: 1
+					scrub: true
 				},
 				defaults: {
 					duration: .256,
@@ -437,7 +446,7 @@ var Home = {
 					trigger: '.wording__trigger',
 					start: '0 100%',
 					end: '0 50%',
-					scrub: 2
+					scrub: 5
 				},
 				defaults: {
 					duration: .768,
@@ -469,7 +478,7 @@ var Home = {
 					trigger: ".scroller__trigger",
 					start: '0 100%',
 					end: '0 75%',
-					scrub: 2
+					scrub: 5
 				}
 			})
 			work.fromTo(".work__list .scroller, .gallery a:not(:last-child)", {
@@ -483,10 +492,7 @@ var Home = {
 					amount: .128
 				}
 			})
-		}
-		setTimeout(_ => {
-			scroll()
-		}, 2000)
+		}, 3000)
 
 		// Some breathe in and breathe out animation for hero image
 		var loop = gsap.timeline({ repeat: -1, ease: "expo" })
@@ -568,6 +574,8 @@ var Home = {
 		detectSwipe('.gallery')
 	},
 	onImageLoadAnimateHalfComplete() {
+		console.log("onImageLoadAnimateHalfComplete")
+
 		// Animate the appearing
 		var anim = gsap.timeline({
 			defaults: {
@@ -628,7 +636,7 @@ var Home = {
 		new animateYear("#year__designer", 2008)
 		new animateYear("#year__managerial", 2011)
 	},
-	onLeave() {
+	leave() {
 		window.onresize = null
 		window.onscroll = null
 		window.ontouchstart = null
@@ -672,7 +680,7 @@ var Work = {
 							trigger: child,
 							start: '0 100%',
 							end: '100% 100%',
-							scrub: 2
+							scrub: 5
 						},
 						defaults: {
 							duration: 1.024,
@@ -692,7 +700,7 @@ var Work = {
 						trigger: el,
 						start: '0 100%',
 						end: '100% 100%',
-						scrub: 2
+						scrub: 5
 					},
 					defaults: {
 						duration: 1.024,
@@ -730,21 +738,14 @@ var WorkDetail = {
 		gsap.set(".work__detail", { y: window.innerHeight })
 
 		splitText(".work__list h1")
-	},
-	after() {
+
 		worklist.hover("a img")
 	},
 	onImageLoadComplete() {
-		// controller.destroy()
-		// controller = new ScrollMagic.Controller({
-		// 	globalSceneOptions: {
-		// 		triggerHook: 1
-		// 	}
-		// })
 		els = null
 		anim = null
 
-		var tnsparam = {
+		var globalparam = {
 			mouseDrag: true,
 			swipeAngle: false,
 			speed: 400,
@@ -762,99 +763,132 @@ var WorkDetail = {
 		}
 		tinysliders = []
 
-		els = _qAll(".gallery-normal")
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam
-			_tnsparam.container = els[i]
-			tinysliders.push(new tns(_tnsparam))
-		}
+		_qAll(".gallery-normal").forEach(el => {
+			var param = globalparam
+			param.container = el
+			tinysliders.push(new tns(param))
+		})
 
-		els = _qAll(".gallery-auto-height")
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam
-			_tnsparam.container = els[i]
-			_tnsparam.autoHeight = true
-			tinysliders.push(new tns(_tnsparam))
-		}
+		_qAll(".gallery-auto-height").forEach(el => {
+			var param = globalparam
+			param.container = el
+			param.autoHeight = true
+			tinysliders.push(new tns(param))
+		})
 
-		els = _qAll(".work__timeline .wheel")
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam
-			_tnsparam.container = els[i]
-			_tnsparam.autoHeight = true
-			_tnsparam.responsive = {
+		_qAll(".work__timeline .wheel").forEach(el => {
+			var param = globalparam
+			param.container = el
+			param.autoHeight = true
+			param.responsive = {
 				0: { items: 2 },
 				600: { items: 3 }
 			}
-			tinysliders.push(new tns(_tnsparam))
-		}
+			tinysliders.push(new tns(param))
+		})
 
-		els = _qAll(".gallery__mobile")
-		for (var i = els.length - 1; i >= 0; i--) {
-			var _tnsparam = tnsparam
-			_tnsparam.container = els[i]
-			_tnsparam.autoHeight = true
-			_tnsparam.responsive = {
+		_qAll(".gallery__mobile").forEach(el => {
+			var param = globalparam
+			param.container = el
+			param.autoHeight = true
+			param.responsive = {
 				0: { items: 1 },
 				600: { items: 2 },
 				1200: { items: 3 }
 			}
-			tinysliders.push(new tns(_tnsparam))
-		}
+			tinysliders.push(new tns(param))
+		})
 
-		// Scroll animate staggering from right of child
-		els = _qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p")
-		for (var j = els.length - 1; j >= 0; j--) {
-			if (els[j].children.length > 0) {
-				anim = gsap.fromTo(els[j].children, { opacity: 0, xPercent: 100 }, {
-					opacity: 1, xPercent: 0, ease: "expo.out", duration: 1.024, stagger: {
+		setTimeout(() => {
+			// Scroll animate staggering from right of child
+			_qAll(".gallery, .wheel, .tns-nav, .tns-controls, .work__spec > p").forEach(el => {
+				let anim = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '30px 100%',
+						scrub: 5
+					}
+				})
+				anim.fromTo(el.children, {
+					opacity: 0,
+					xPercent: 100
+				}, {
+					opacity: 1,
+					xPercent: 0,
+					ease: "expo.out",
+					duration: 1.024,
+					stagger: {
 						from: 0,
 						amount: .256
 					}
 				})
-				// new ScrollMagic
-				// 	.Scene({ triggerElement: els[j] })
-				// 	.setTween(anim)
-				// 	.addTo(controller)
-			}
-		}
-		// Scroll animate staggering from right
-		els = _qAll(".work__detail > hr, .work__detail > h5, .work__detail .work__spec > *")
-		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j], { opacity: 0, x: 250 }, {
-				opacity: 1, x: 0, ease: "expo.out", duration: 1.024, stagger: {
-					from: 0,
-					amount: .256
-				}
 			})
-			// new ScrollMagic
-			// 	.Scene({ triggerElement: els[j] })
-			// 	.setTween(anim)
-			// 	.addTo(controller)
-		}
-		// Scroll animate immidiete from bottom
-		els = _qAll(".work__detail > blockquote")
-		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j], { x: 250 }, { x: 0, ease: "expo.out", duration: 1.024 })
-			// new ScrollMagic
-			// 	.Scene({ triggerElement: els[j] })
-			// 	.setTween(anim)
-			// 	.addTo(controller)
-		}
-		// Scroll animate from bottom
-		els = _qAll(".work__detail .block__left, .work__detail .stats__content, .work__timeline")
-		for (var j = els.length - 1; j >= 0; j--) {
-			anim = gsap.fromTo(els[j].children, { y: 250 }, {
-				y: 0, ease: "expo.out", duration: 1.024, stagger: {
-					from: 0,
-					amount: .128
-				}
+			// Scroll animate staggering from right
+			_qAll(".work__detail > hr, .work__detail > h5, .work__detail .work__spec > *").forEach(el => {
+				let anim = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '30px 100%',
+						scrub: 5
+					}
+				})
+				anim.fromTo(el, {
+					opacity: 0,
+					x: 250
+				}, {
+					opacity: 1,
+					x: 0,
+					ease: "expo.out",
+					duration: 1.024,
+					stagger: {
+						from: 0,
+						amount: .256
+					}
+				})
 			})
-			// new ScrollMagic
-			// 	.Scene({ triggerElement: els[j] })
-			// 	.setTween(anim)
-			// 	.addTo(controller)
-		}
+			// Scroll animate immidiete from bottom
+			_qAll(".work__detail > blockquote").forEach(el => {
+				let anim = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '30px 100%',
+						scrub: 5
+					}
+				})
+				anim.fromTo(el, {
+					x: 250
+				}, {
+					x: 0,
+					ease: "expo.out",
+					duration: 1.024
+				})
+			})
+			// Scroll animate from bottom
+			_qAll(".work__detail .block__left, .work__detail .stats__content, .work__timeline").forEach(el => {
+				let anim = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '30px 100%',
+						scrub: 5
+					}
+				})
+				anim.fromTo(el.children, {
+					y: 250
+				}, {
+					y: 0,
+					ease: "expo.out",
+					duration: 1.024,
+					stagger: {
+						from: 0,
+						amount: .128
+					}
+				})
+			})
+		}, 3000);
 
 		new animateNumber(".work__detail .stats__content p:first-child b")
 		new animateNumber(".work__detail .stats__content p:last-child b")
@@ -885,47 +919,45 @@ var Call = {
 		imageloading.barba = this
 
 		gsap.set(".call", { y: window.innerHeight })
-	},
-	after() {
+
 		// The menu item animation
-		var border = ".bigtext",
-			borderRadius
-		_hugeText = new hugeText(border + " > div ")
+		let border = ".bigtext"
+		let text = new hugeText(border + " > div ")
 
-		elem = _q('.call .email')
-		elem.onmouseenter = function () {
+		let email = _q('.call .email')
+		email.onmouseenter = function () {
 			gsap.to(border, {
 				duration: .386,
 				ease: "expo",
 				borderRadius: this.borderRadius
 			})
-			_hugeText.show("email me")
+			text.show("email me")
 		}
-		elem.onmouseleave = function () {
+		email.onmouseleave = function () {
 			gsap.to(border, {
 				duration: .386,
 				ease: "expo",
 				borderRadius: "2% 2% 2% 2%"
 			})
-			_hugeText.hide()
+			text.hide()
 		}
 
-		elem = _q('.call .search')
-		elem.onmouseenter = function () {
+		let search = _q('.call .search')
+		search.onmouseenter = function () {
 			gsap.to(border, {
 				duration: .386,
 				ease: "expo",
 				borderRadius: this.borderRadius
 			})
-			_hugeText.show("search me")
+			text.show("search me")
 		}
-		elem.onmouseleave = function () {
+		search.onmouseleave = function () {
 			gsap.to(border, {
 				duration: .386,
 				ease: "expo",
 				borderRadius: "2% 2% 2% 2%"
 			})
-			_hugeText.hide()
+			text.hide()
 		}
 
 		// 3D effect
@@ -953,7 +985,7 @@ var Call = {
 
 		gsap.to(".call", { y: 0, ease: "expo.out", duration: 2.048 })
 	},
-	onLeave() {
+	leave() {
 		loading.breath.pause(0)
 		window.onmousemove = null
 	}
@@ -961,7 +993,7 @@ var Call = {
 
 var Lost = {
 	namespace: '404',
-	after() {
+	afterEnter() {
 		imageloading.barba = this
 	},
 	onImageLoadComplete() {
@@ -1029,220 +1061,284 @@ var Lost = {
 
 var Me = {
 	namespace: 'me',
-	after() {
+	afterEnter() {
 		imageloading.barba = this
 
 		gsap.set(".imuiux", { y: window.innerHeight })
 
 		splitText(".imuiux h1, .imuiux p, .cofound h3, .cofound h5, .cofound h4, .cofound p")
-	},
-	onEnterCompleted() {
+
 		worklist.hover("#ig .item a")
 		worklist.hover(".work__list img")
 
-		// controller.destroy()
-		// controller = new ScrollMagic.Controller()
-		els = null
-		anim = null
+		setTimeout(() => {
+			// First text animation
+			_qAll("#firstscene").forEach(el => {
+				gsap.set(el, { height: _q("body").offsetHeight * 4 })
+				gsap.set(".us h2, .us p, .us img", { opacity: 0 })
+				gsap.set(".imuiux img", { transformOrigin: "50% 0" })
 
-		// First text animation
-		tl = gsap.timeline({ defaults: { duration: .5, ease: "linear" } })
+				let text = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 0',
+						end: '100% 0',
+						scrub: true,
+						pin: "#firstscene .pin"
+					},
+					defaults: {
+						duration: 1,
+						ease: "linear"
+					}
+				})
 
-		el = ".imuiux"
-		tl
-			.set(el, { pointerEvents: "none" }, .5)
-			.fromTo(el + " h1", { y: 0 }, { y: -60, duration: .75 }, 0)
-			.fromTo(el + " h1", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
-			.fromTo(el + " p", { y: 0 }, { y: -50, duration: .75 }, 0)
-			.fromTo(el + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
+				var child = ".imuiux"
+				text
+					.set(child, { pointerEvents: "none" }, .5)
+					.fromTo(child + " h1", { y: 0 }, { y: -60, duration: .75 }, 0)
+					.fromTo(child + " h1", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
+					.fromTo(child + " p", { y: 0 }, { y: -50, duration: .75 }, 0)
+					.fromTo(child + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, .5)
 
+				child = ".about"
+				text
+					.set(child, { pointerEvents: "auto" }, .5)
+					.set(child, { pointerEvents: "none" }, 2.25)
+					.fromTo(child + " h2", { y: 60 }, { y: -60, duration: 2 }, .5)
+					.fromTo(child + " h2", { opacity: 0 }, { opacity: 1, duration: .25 }, .5)
+					.fromTo(child + " h2", { opacity: 1 }, { opacity: 0, duration: .25 }, 2.25)
+					.fromTo(child + " p", { y: 50 }, { y: -50, duration: 2 }, .5)
+					.fromTo(child + " p", { opacity: 0 }, { opacity: 1, duration: .25 }, .5)
+					.fromTo(child + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, 2.25)
 
-		el = ".about"
-		tl
-			.set(el, { pointerEvents: "auto" }, .5)
-			.set(el, { pointerEvents: "none" }, 2.25)
-			.fromTo(el + " h2", { y: 60 }, { y: -60, duration: 2 }, .5)
-			.fromTo(el + " h2", { opacity: 0 }, { opacity: 1, duration: .25 }, .5)
-			.fromTo(el + " h2", { opacity: 1 }, { opacity: 0, duration: .25 }, 2.25)
-			.fromTo(el + " p", { y: 50 }, { y: -50, duration: 2 }, .5)
-			.fromTo(el + " p", { opacity: 0 }, { opacity: 1, duration: .25 }, .5)
-			.fromTo(el + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, 2.25)
+				child = ".know"
+				text
+					.set(child, { pointerEvents: "auto" }, 2.25)
+					.set(child, { pointerEvents: "none" }, 2.25)
+					.fromTo(child + " h2", { y: 60 }, { y: -60, duration: 2 }, 2.25)
+					.fromTo(child + " h2", { opacity: 0 }, { opacity: 1, duration: .25 }, 2.25)
+					.fromTo(child + " h2", { opacity: 1 }, { opacity: 0, duration: .5 }, 3.75)
+					.fromTo(child + " p", { y: 50 }, { y: -50, duration: 2 }, 2.25)
+					.fromTo(child + " p", { opacity: 0 }, { opacity: 1, duration: .25 }, 2.25)
+					.fromTo(child + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, 4)
 
+				child = ".who"
+				text
+					.set(child, { pointerEvents: "auto" }, 4)
+					.fromTo(child + " h2", { y: 40 }, { y: -70, duration: 2.25 }, 4)
+					.fromTo(child + " h2", { opacity: 0 }, { opacity: 1, duration: .25 }, 4)
+					.fromTo(child + " h2", { opacity: 1 }, { opacity: 0, duration: .5 }, 5.75)
 
-		el = ".know"
-		tl
-			.set(el, { pointerEvents: "auto" }, 2.25)
-			.set(el, { pointerEvents: "none" }, 2.25)
-			.fromTo(el + " h2", { y: 60 }, { y: -60, duration: 2 }, 2.25)
-			.fromTo(el + " h2", { opacity: 0 }, { opacity: 1, duration: .25 }, 2.25)
-			.fromTo(el + " h2", { opacity: 1 }, { opacity: 0, duration: .5 }, 3.75)
-			.fromTo(el + " p", { y: 50 }, { y: -50, duration: 2 }, 2.25)
-			.fromTo(el + " p", { opacity: 0 }, { opacity: 1, duration: .25 }, 2.25)
-			.fromTo(el + " p", { opacity: 1 }, { opacity: 0, duration: .25 }, 4)
+				child = ".imuiux img"
+				text
+					.fromTo(child, { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
+					.to(child, { scale: .95, duration: 1 }, 0)
+					.to(child, { yPercent: 0, duration: 1.25 }, 1)
+					.to(child, { yPercent: -12.5, duration: 4 }, 2.25)
+					.to(child, { scale: .75, duration: 2 }, 4.25)
+					.to(child, { opacity: 0, duration: .5 }, 5.75)
+			})
 
+			// Scroll animate Mr. Goat text
+			_qAll(".mrgoat").forEach(el => {
+				gsap.set(el, { height: _q("body").offsetHeight * 4 })
+				let textgoat = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 0',
+						end: '100% 100%',
+						scrub: true,
+						pin: ".mrgoat .pin"
+					},
+					defaults: {
+						duration: .25,
+						ease: "linear"
+					}
+				})
+				textgoat.fromTo(el, {
+					opacity: 0
+				}, {
+					opacity: 1
+				}, 0)
+				textgoat.fromTo(el.querySelectorAll(".h21"), {
+					y: 0
+				}, {
+					y: -20
+				}, .25)
+				textgoat.to(el.querySelectorAll(".h21"), {
+					y: -60,
+					opacity: 0
+				}, .5)
+				textgoat.fromTo(el.querySelectorAll(".h22"), {
+					y: 50,
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1
+				}, .5)
+				textgoat.to(el.querySelectorAll(".h22"), {
+					y: -20
+				}, .75)
+				textgoat.to(el.querySelectorAll(".h22"), {
+					y: -60,
+					opacity: 0
+				}, 1)
+				textgoat.fromTo(el.querySelectorAll(".h23"), {
+					y: 50,
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1
+				}, 1)
+				textgoat.to(el.querySelectorAll(".h23"), {
+					y: 0
+				}, 1.25)
+				textgoat.to(el.querySelectorAll(".h23"), {
+					y: -50,
+					opacity: 0
+				}, 1.5)
+				textgoat.fromTo(el.querySelectorAll(".h24"), {
+					y: 50,
+					opacity: 0
+				}, {
+					y: 0,
+					opacity: 1
+				}, 1.75)
+				textgoat.to(el.querySelectorAll(".h24"), {
+					y: -50,
+					opacity: 0
+				}, 2)
+			})
 
-		el = ".who"
-		tl
-			.set(el, { pointerEvents: "auto" }, 4)
-			.fromTo(el + " h2", { y: 40 }, { y: -70, duration: 2.25 }, 4)
-			.fromTo(el + " h2", { opacity: 0 }, { opacity: 1, duration: .25 }, 4)
-			.fromTo(el + " h2", { opacity: 1 }, { opacity: 0, duration: .5 }, 5.75)
-
-
-		el = ".imuiux img"
-		tl
-			.fromTo(el, { yPercent: 0 }, { yPercent: -7.5, duration: 1 }, 0)
-			.to(el, { scale: .95, duration: 1 }, 0)
-			.to(el, { yPercent: 0, duration: 1.25 }, 1)
-			.to(el, { yPercent: -12.5, duration: 4 }, 2.25)
-			.to(el, { scale: .75, duration: 2 }, 4.25)
-			.to(el, { opacity: 0, duration: .5 }, 5.75)
-
-
-		// new ScrollMagic
-		// 	.Scene({ triggerElement: "#firstscene", triggerHook: 0, duration: _q("body").offsetHeight * 4 })
-		// 	.setPin("#firstscene", { pushFollowers: false })
-		// 	.setTween(tl)
-		// 	.addTo(controller)
-		gsap.set("#firstscene", { height: _q("body").offsetHeight * 4 })
-		gsap.set(".us h2, .us p, .us img", { opacity: 0 })
-		gsap.set(".imuiux img", { transformOrigin: "50% 0" })
-
-		// Scroll animate Mr. Goat text
-		tl = gsap.timeline({ defaults: { duration: .25, ease: "linear" } })
-		tl
-			.to(".mrgoat", { y: 0, opacity: 1 }, 0)
-			.fromTo(".mrgoat .h21", { y: 0 }, { y: -20 }, .25)
-			.to(".mrgoat .h21", { y: -60, opacity: 0 }, .5)
-			.fromTo(".mrgoat .h22", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, .5)
-			.to(".mrgoat .h22", { y: -20 }, .75)
-			.to(".mrgoat .h22", { y: -60, opacity: 0 }, 1)
-			.fromTo(".mrgoat .h23", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1)
-			.to(".mrgoat .h23", { y: 0 }, 1.25)
-			.to(".mrgoat .h23", { y: -50, opacity: 0 }, 1.5)
-			.fromTo(".mrgoat .h24", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, 1.75)
-			.to(".mrgoat .h24", { y: 0 }, 2)
-
-		// new ScrollMagic
-		// 	.Scene({ triggerElement: ".mrgoat", triggerHook: 0, duration: _q("body").offsetHeight * 4 })
-		// 	.setPin(".mrgoat")
-		// 	.setTween(tl)
-		// 	.addTo(controller)
-
-		// Make Mr. Goat spinning
-		var obj = {
-			curImg: 1,
-			length: _qAll(".mrgoat .img > img").length
-		},
-			rotatinggoat = {
-				curImg: obj.length,
-				roundProps: "curImg",
-				repeat: 10,
-				immediateRender: true,
-				ease: "linear",
-				duration: .75,
-				onUpdate() {
-					gsap.set(".mrgoat .img > img", { opacity: 0 })
-					gsap.set(".mrgoat" + obj.curImg, { opacity: 1 })
+			// Make Mr. Goat spinning
+			_qAll(".mrgoat").forEach(el => {
+				var goatObject = {
+					curImg: 1,
+					length: el.querySelectorAll(".img > img").length
 				}
-			}
-		anim = gsap.to(obj, rotatinggoat)
-		// new ScrollMagic
-		// 	.Scene({ triggerElement: ".me", triggerHook: 1, duration: _q(".me").offsetHeight })
-		// 	.setTween(anim)
-		// 	.addTo(controller)
-
-		gsap.set(".mrgoat", { y: 0, opacity: 0 })
-
-		// Scroll IG items
-		els = _qAll("#ig .item")
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.fromTo(els[i].children, 1.024, { y: 25 + (i * 25), opacity: 0 }, { y: 0, opacity: 1, ease: "expo.out" })
-			// new ScrollMagic.Scene({ triggerElement: els[i], triggerHook: .75 })
-			// 	.setTween(anim)
-			// 	.addTo(controller)
-		}
-
-		// Scroll capabilities item
-		els = _qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li")
-		for (var i = 0; i < els.length; i++) {
-			anim = gsap.timeline({ defaults: { duration: 1.024, ease: "expo.out" } })
-			anim
-				.fromTo(els[i], { x: 25 + (i * 25) }, { x: 0 }, 0)
-				.fromTo(els[i], { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
-
-			// new ScrollMagic.Scene({ triggerElement: els[i], triggerHook: .85 })
-			// 	.setTween(anim)
-			// 	.addTo(controller)
-		}
-
-		// Scroll latest works
-		anim = gsap.timeline({
-			defaults: {
-				duration: 1.024, ease: "expo", stagger: {
-					from: 0, amount: .256
+				var goatConfig = {
+					curImg: goatObject.length,
+					roundProps: "curImg",
+					repeat: 10,
+					immediateRender: true,
+					ease: "linear",
+					onUpdate() {
+						gsap.set(".mrgoat .img > img", { opacity: 0 })
+						gsap.set(".mrgoat" + goatObject.curImg, { opacity: 1 })
+					}
 				}
-			}
-		})
-		anim
-			.fromTo(".work__list, .work__list ul li", { y: 250 }, { y: 0 }, 0)
-			.fromTo(".work__list, .work__list ul li", { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
+				let goat = gsap.timeline({
+					scrollTrigger: {
+						trigger: ".me",
+						start: '0 0',
+						end: '100% 0',
+						scrub: true
+					}
+				})
+				goat.to(goatObject, goatConfig)
+			})
 
-		// new ScrollMagic.Scene({ triggerElement: ".work__list, .work__list ul", triggerHook: .85 })
-		// 	.setTween(anim)
-		// 	.addTo(controller)
+			// Scroll capabilities item
+			_qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li").forEach((el, index) => {
+				let capabilities = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 85%',
+						end: '100% 85%',
+						scrub: 5
+					},
+					defaults: {
+						duration: 1.024,
+						ease: "expo.out"
+					}
+				})
+				capabilities.fromTo(el, { x: 25 + (index * 25) }, { x: 0 }, 0)
+				capabilities.fromTo(el, { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
+			})
 
-		// Scroll cofound
-		el = _qAll(".cofound > div > *")
-		for (var i = 0; i < el.length; i++) {
-			if (el[i].children.length > 0) {
-				anim = gsap.timeline({ defaults: { duration: 1.024, ease: "power4.out" } })
-				anim
-					.fromTo(el[i].querySelectorAll(".splext"), { y: 200, }, {
-						y: 0, stagger: {
-							from: 0, amount: .128
+			// Scroll latest works
+			_qAll(".work__list, .work__list ul").forEach(el => {
+				let works = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '100% 100%',
+						scrub: 5
+					},
+					defaults: {
+						duration: 1.024,
+						ease: "expo",
+						stagger: {
+							from: 0,
+							amount: .256
 						}
-					}, 0)
+					}
+				})
+				works.fromTo(el, {
+					y: 250
+				}, {
+					y: 0
+				}, 0)
+				works.fromTo(el, {
+					opacity: 0
+				}, {
+					opacity: 1,
+					duration: .128
+				}, 0)
+			})
 
-				// new ScrollMagic
-				// 	.Scene({ triggerElement: el[i], triggerHook: .9 })
-				// 	.setTween(anim)
-				// 	.addTo(controller)
-			}
-		}
-
-		// Adding class to ig images
-		var els = _qAll("#ig img")
-		for (var i = els.length - 1; i >= 0; i--) {
-			if (els[i].offsetWidth > els[i].offsetHeight) {
-				addClass(els[i], "hor")
-			} else if (els[i].offsetWidth < els[i].offsetHeight) {
-				addClass(els[i], "ver")
-			} else {
-				addClass(els[i], "squ")
-			}
-		}
+			// Scroll cofound
+			_qAll(".cofound > div > *").forEach(el => {
+				let cofound = gsap.timeline({
+					scrollTrigger: {
+						trigger: el,
+						start: '0 100%',
+						end: '100% 100%',
+						scrub: 5
+					},
+					defaults: {
+						duration: 1.024,
+						ease: "power4.out"
+					}
+				})
+				cofound.fromTo(el.querySelectorAll(".splext"), { y: 200, }, {
+					y: 0,
+					stagger: {
+						from: 0, amount: .128
+					}
+				}, 0)
+			})
+		}, 3000)
 	},
 	onImageLoadAnimateHalfComplete() {
 		// Animate the appearing
-		anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" } })
-		anim
-			.fromTo(".imuiux h1 .splext", { y: 150 }, {
-				y: 0, stagger: {
-					from: 0,
-					amount: .256
-				}
-			}, 0)
-			.fromTo(".imuiux p .splord", { y: 200 }, {
-				y: 0, stagger: {
-					from: 0,
-					amount: .256
-				}
-			}, 0)
-
+		let anim = gsap.timeline({
+			defaults: {
+				duration: 2.048,
+				ease: "expo.out"
+			}
+		})
+		anim.fromTo(".imuiux h1 .splext", {
+			y: 150
+		}, {
+			y: 0, stagger: {
+				from: 0,
+				amount: .256
+			}
+		}, 0)
+		anim.fromTo(".imuiux p .splord", {
+			y: 200
+		}, {
+			y: 0, stagger: {
+				from: 0,
+				amount: .256
+			}
+		}, 0)
 
 		gsap.to(".imuiux", { y: 0, ease: "expo.out", duration: 2.048 })
-		gsap.fromTo(".imuiux img", { y: 200 }, {
+		gsap.fromTo(".imuiux img", {
+			y: 200
+		}, {
 			y: 0, duration: 2.048, ease: "expo.out", stagger: {
 				from: 0,
 				amount: .386
