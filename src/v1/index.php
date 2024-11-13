@@ -84,7 +84,7 @@
 				<div id="trigger__mover"></div>
 				<div id="trigger"></div>
 				<div id="trigger__padder">
-					<div class="work work_float">
+					<div class="work work__float">
 						<div class="work__container">
 							<div class="scroll">
 								<div>

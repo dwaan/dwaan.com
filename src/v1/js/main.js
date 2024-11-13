@@ -17,8 +17,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // General variables
 var logo_svg = _q(".logo").innerHTML
-var els = null
-var tl = null
 var tinysliders = []
 
 let menu = new Menu()
@@ -164,6 +162,10 @@ var FadeTransition = {
 			// Make the barba wrapper fix so it won't have jaggy animation
 			_q("#barba-wrapper").style.height = _q("#barba-wrapper").offsetHeight + "px"
 
+			if (data.trigger.innerText == "See All") loading.clicked.text = "See All"
+			else if (data.trigger.innerText == "Back") loading.clicked.text = "Back"
+			else loading.clicked.text = ""
+
 			// Show loading then load the new container
 			loading.show(_ => {
 				gsap.set('.menu__pop .menu__item', {
@@ -176,7 +178,7 @@ var FadeTransition = {
 		}
 
 		if (menu.active) {
-			var tl = gsap.timeline({
+			let tl = gsap.timeline({
 				defaults: {
 					duration: 1.024,
 					ease: "expo.out"
@@ -228,7 +230,7 @@ var Home = {
 		gsap.set(".hero", {
 			y: window.innerHeight
 		})
-		gsap.set(".work_float", { y: 500 })
+		gsap.set(".work__float", { y: 500 })
 
 		splitText(".hero__text h1, .hero__text p")
 
@@ -297,17 +299,25 @@ var Home = {
 		function runGsap(y) {
 			var speed = duration / 1000
 
-			gsap.to(window, { scrollTo: { y: y, autoKill: true }, duration: speed, ease: "power2" })
+			gsap.to(window, {
+				scrollTo: {
+					y: y,
+					autoKill: true
+				},
+				duration: speed,
+				ease: "power2"
+			})
 
-			window._top_b = (y == 0) ? 0 : _q(".work_float").offsetHeight
+			if (_q(".work__float")) window._top_b = (y == 0) ? 0 : _q(".work__float").offsetHeight
 		}
 		function finalCheck() {
 			// If the delta is zero, check if it's really on top or bottom
-			if (window._top_b > _q(".work_float").offsetHeight / 2) {
-				if (window._top_b != _q(".work_float").offsetHeight) runGsap("max")
-			} else {
-				if (window._top_b != 0) runGsap(0)
-			}
+			if (_q(".work__float"))
+				if (window._top_b > _q(".work__float").offsetHeight / 2) {
+					if (window._top_b != _q(".work__float").offsetHeight) runGsap("max")
+				} else {
+					if (window._top_b != 0) runGsap(0)
+				}
 		}
 		function runAnimation(delta) {
 			if (delta > 0) runGsap((delta > 50) ? "max" : 0)
@@ -364,8 +374,6 @@ var Home = {
 		worklist.hover(".work__list a img, .hero__meta .stats b")
 	},
 	onImageLoadComplete() {
-		console.log("onImageLoadComplete")
-
 		// Fixing size
 		function resizeHeroMeta() {
 			_q("#trigger__padder").style.paddingTop = (_q("body").offsetHeight - _q(".work__list").offsetHeight) + "px"
@@ -418,7 +426,7 @@ var Home = {
 			// Scroll animate the scroll sign
 			let scroll = gsap.timeline({
 				scrollTrigger: {
-					trigger: '.work_float',
+					trigger: '.work__float',
 					start: '0 100%',
 					end: '10px 100%',
 					scrub: true
@@ -574,8 +582,6 @@ var Home = {
 		detectSwipe('.gallery')
 	},
 	onImageLoadAnimateHalfComplete() {
-		console.log("onImageLoadAnimateHalfComplete")
-
 		// Animate the appearing
 		var anim = gsap.timeline({
 			defaults: {
@@ -627,7 +633,7 @@ var Home = {
 				amount: .256
 			}
 		}, .368)
-		anim.to(".work_float", {
+		anim.to(".work__float", {
 			y: 0
 		}, .768)
 
@@ -675,7 +681,7 @@ var Work = {
 						delay += .064
 					}
 
-					tl = gsap.timeline({
+					let tl = gsap.timeline({
 						scrollTrigger: {
 							trigger: child,
 							start: '0 100%',
@@ -695,7 +701,7 @@ var Work = {
 
 			// Scroll animate the words
 			_qAll(".words").forEach(el => {
-				tl = gsap.timeline({
+				let tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: el,
 						start: '0 100%',
@@ -724,9 +730,21 @@ var Work = {
 		new animateNumber(".work__list .stats__content p:last-child b")
 	},
 	onImageLoadAnimateHalfComplete() {
-		anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" } })
-		anim.to(".work__list__page", { x: 0, y: 0, ease: "expo.out", duration: 2.048 }, 0)
-		anim.to(".work__list .txt0000", { yPercent: -20 }, .512)
+		let anim = gsap.timeline({
+			defaults: {
+				duration: 2.048,
+				ease: "expo.out"
+			}
+		})
+		anim.to(".work__list__page", {
+			x: 0,
+			y: 0,
+			ease: "expo.out",
+			duration: 2.048
+		}, 0)
+		anim.to(".work__list .txt0000", {
+			yPercent: -20
+		}, .512)
 	}
 }
 
@@ -742,9 +760,6 @@ var WorkDetail = {
 		worklist.hover("a img")
 	},
 	onImageLoadComplete() {
-		els = null
-		anim = null
-
 		var globalparam = {
 			mouseDrag: true,
 			swipeAngle: false,
@@ -897,12 +912,10 @@ var WorkDetail = {
 		initPhotoSwipeFromDOM('.gallery')
 	},
 	onImageLoadAnimateHalfComplete() {
-		anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" } })
-		anim
-			.to(".work__detail", { y: 0 })
-			.fromTo(".work .back", { transformOrigin: "0 0", y: -100 }, { y: 0, delay: .256 }, 0)
-			.to(".work__detail .txt0000", { yPercent: -20 }, .512)
-
+		let anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" } })
+		anim.to(".work__detail", { y: 0 })
+		anim.fromTo(".work .back", { transformOrigin: "0 0", y: -100 }, { y: 0, delay: .256 }, 0)
+		anim.to(".work__detail .txt0000", { yPercent: -20 }, .512)
 	},
 	onLeaveCompleted() {
 		// Destroying tinyslider to prevent error

@@ -129,17 +129,13 @@ class Loading {
 		removeClass(_q('.menu__pop'), 'active')
 		this.menu.active = false
 
-		// Hide loading
+		// Show loading
 		if (this.clicked.text == "See All") {
-			var_from = {
-				x: "-100%",
-				y: 0
-			}
+			var_from.x = "-100%"
+			var_from.y = 0
 		} else if (this.clicked.text == "Back") {
-			var_from = {
-				x: "100%",
-				y: 0
-			}
+			var_from.x = "100%"
+			var_from.y = 0
 		}
 
 		if (_q("[data-barba-namespace]").getAttribute("data-barba-namespace") == "call") {
@@ -147,38 +143,47 @@ class Loading {
 
 			window.aspectRatio.onchange = null
 
-			removeClass(_q(this.el), "bubble")
+			_qAll(this.el).forEach(el => {
+				removeClass(el, "bubble")
 
-			tl.set(this.el, {
-				zIndex: 666
+				tl.set(this.el, {
+					zIndex: 666
+				})
+				tl.set(el.querySelector(".light"), {
+					height: 0
+				})
+				tl.to(el.querySelector(".text"), {
+					opacity: 0
+				})
+				tl.fromTo(el.querySelector(".loading"), {
+					opacity: 0,
+					y: "100%"
+				}, {
+					opacity: 1,
+					y: "-50%"
+				}, 0)
+				tl.to(el, {
+					position: "fixed",
+					top: 0,
+					right: 0,
+					width: window.innerWidth,
+					height: window.innerHeight,
+					borderRadius: 0,
+					duration: .768,
+					ease: "expo.inOut",
+					onComplete: function () {
+						gsap.set(el, {
+							top: 0,
+							bottom: 0,
+							left: 0,
+							right: 0,
+							width: "auto",
+							height: "auto"
+						})
+						if (callback != undefined) callback()
+					}
+				}, "-=.512")
 			})
-			tl.set(_q(this.el).querySelector(".light"), {
-				height: 0
-			})
-			tl.to(_q(this.el).querySelector(".text"), {
-				opacity: 0
-			})
-			tl.fromTo(_q(this.el).querySelector(".loading"), {
-				opacity: 0,
-				y: "100%"
-			}, {
-				opacity: 1,
-				y: "-50%"
-			}, 0)
-			tl.to(this.el, {
-				position: "fixed",
-				top: 0,
-				right: 0,
-				width: window.innerWidth,
-				height: window.innerHeight,
-				borderRadius: 0,
-				duration: .768,
-				ease: "expo.inOut",
-				onComplete: function () {
-					gsap.set(this.el, { top: 0, bottom: 0, left: 0, right: 0, width: "auto", height: "auto" })
-					if (callback != undefined) callback()
-				}
-			}, "-=.512")
 		} else {
 			gsap.fromTo(this.el, var_from, var_to)
 		}
