@@ -77,7 +77,6 @@ var hiview = {
 		});
 
 		hoverEvents(next.querySelectorAll(".email"), () => {
-			console.log(screenhorizontal)
 			if (screenhorizontal) textanim.show(".email span", ".email small");
 			flare.show("img.yellow, img.red");
 		}, () => {
