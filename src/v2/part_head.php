@@ -14,7 +14,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 
 	<header>
 		<div class="left">
-			<a href="./" class="logo" id="logo" aria-label="Dwan">
+			<a href="/" class="logo" id="logo" aria-label="Dwan">
 				<object data="/img/dwan-logo.svg#logo" class="dwan-logo" type="image/svg+xml"></object>
 			</a>
 		</div>
@@ -54,7 +54,7 @@ if (!isset($_SERVER['HTTP_X_BARBA'])) {
 						document.getElementById("menu-items").innerHTML += `<?php include "part_menu.php"; ?>`;
 					</script>
 				</div>
-				<a class="switch" href="./menu" data-barba-prevent aria-label="Menu" hidden>
+				<a class="switch" href="/menu" data-barba-prevent aria-label="Menu" hidden>
 					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 						<line class="menu-1" x1="26" y1="8.25" x2="6" y2="8.25" />
 						<line class="menu-2" x1="20" y1="16.25" x2="6" y2="16.25" />

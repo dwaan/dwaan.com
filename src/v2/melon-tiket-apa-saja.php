@@ -195,8 +195,8 @@
 					<a href="https://www.figma.com/proto/JF0wooqckRiEK1CvQxAxrO/Tiket-Apa-Saja-v.2.2?node-id=138%3A8&viewport=382%2C40%2C0.51&scaling=scale-down&starting-point-node-id=138%3A1939" target="_BLANK"><span>mobile</span></a>
 				</div>
 				<div class="continue">
-					<a href="./suzuki" aria-label="Suzuki Indonesia Website Redesign Pitching" class="title"><span><strong>next case study</strong></span></a>
-					<a href="./suzuki" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><i>Suzuki Indonesia Website Redesign Pitching</i></span></a>
+					<a href="/suzuki" aria-label="Suzuki Indonesia Website Redesign Pitching" class="title"><span><strong>next case study</strong></span></a>
+					<a href="/suzuki" aria-label="Suzuki Indonesia Website Redesign Pitching"><span><i>Suzuki Indonesia Website Redesign Pitching</i></span></a>
 				</div>
 			</nav>
 		</div>

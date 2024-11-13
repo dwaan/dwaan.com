@@ -27,7 +27,7 @@
                 <img src="/img/flares/flare5.webp" loading="lazy" width="572" height="190" alt="Flare Number 5" class="flare flare5" />
             </div>
             <div class="main-text">
-                <h1>Hello, my name is <a href="./me" id="to-about">Dwan</a></h1>
+                <h1>Hello, my name is <a href="/me" id="to-about">Dwan</a></h1>
                 <p class="hidden">I'm an UI/UX Designer and Strategist. Here are some of my design portfolio 😙.</p>
             </div>
             <div class="arrow-big" hidden>
@@ -44,14 +44,14 @@
         <section class="middle full home-aai">
             <h2 class="hidden">Asosiasi Antropologi Indonesia Website Solution</h2>
             <div class="padding">
-                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution">
+                <a href="/aai" aria-label="Asosiasi Antropologi Indonesia Website Solution">
                     <svg width="160" height="55" viewBox="0 0 199 68" class="logo aai" aria-label="Asosiasi Antropologi Indonesia's Logo" xmlns="http://www.w3.org/2000/svg">
                         <use href="/img/logo.svg#logo/aai"></use>
                     </svg>
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./aai" aria-label="Asosiasi Antropologi Indonesia Website Solution" class="arrow">
+                <a href="/aai" aria-label="Asosiasi Antropologi Indonesia Website Solution" class="arrow">
                     <span>Website Solution</span>
                 </a>
             </div>
@@ -63,7 +63,7 @@
         <section class="middle full home-bkpm">
             <h2 class="hidden">Ministry of Investment/BKPM Website Redesign</h2>
             <div class="padding">
-                <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
+                <a href="/bkpm" aria-label="Ministry of Investment/BKPM Website Redesign">
                     <svg width="231" height="139" viewBox="0 0 231 139" class="logo bkpm vertical" aria-label="Ministry of Investment/BKPM's Logo" xmlns="http://www.w3.org/2000/svg">
                         <use href="/img/logo.svg#logo/bkpm-square"></use>
                     </svg>
@@ -73,7 +73,7 @@
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="arrow">
+                <a href="/bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="arrow">
                     <span>Website Redesign</span>
                 </a>
             </div>
@@ -85,14 +85,14 @@
         <section class="middle full home-musiku">
             <h2 class="hidden">Musiku Website Concept and Design</h2>
             <div class="padding">
-                <a href="./musiku" aria-label="Musiku Website Concept and Design">
+                <a href="/musiku" aria-label="Musiku Website Concept and Design">
                     <svg width="335" height="45" viewBox="0 0 411 55" aria-label="Musiku's Logo" class="logo musiku" xmlns="http://www.w3.org/2000/svg">
                         <use href="/img/logo.svg#logo/musiku"></use>
                     </svg>
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./musiku" aria-label="Musiku Website Concept and Design" class="arrow">
+                <a href="/musiku" aria-label="Musiku Website Concept and Design" class="arrow">
                     <span>Design Concept</span>
                 </a>
             </div>
@@ -103,10 +103,10 @@
 
         <section class="middle full home-replurk">
             <div class="padding">
-                <h2 class="replurktitle"><a href="./replurk" aria-label="RePlurk">RePlurk</a></h2>
+                <h2 class="replurktitle"><a href="/replurk" aria-label="RePlurk">RePlurk</a></h2>
             </div>
             <div class="arrow-small">
-                <a href="./replurk" class="arrow">
+                <a href="/replurk" class="arrow">
                     <span>Weekend Project</span>
                 </a>
             </div>
@@ -118,14 +118,14 @@
         <section class="middle full home-suzuki">
             <h2 class="hidden">Suzuki Website Redesign</h2>
             <div class="padding">
-                <a href="./suzuki" aria-label="Suzuki Website Redesign" style="border: 1px red;">
+                <a href="/suzuki" aria-label="Suzuki Website Redesign" style="border: 1px red;">
                     <svg width="98" height="120" viewBox="0 0 147 180" aria-label="Suzuki's Logo" xmlns="http://www.w3.org/2000/svg">
                         <use href="/img/logo.svg#logo/suzuki"></use>
                     </svg>
                 </a>
             </div>
             <div class="arrow-small">
-                <a href="./suzuki" aria-label="Suzuki Website Redesign" class="arrow">
+                <a href="/suzuki" aria-label="Suzuki Website Redesign" class="arrow">
                     <span>Concept Pitching</span>
                 </a>
             </div>
@@ -137,7 +137,7 @@
         <section class="middle full home-tas">
             <h2 class="hidden">Melon - Tiket Apa Saja Website Redesign</h2>
             <div class="padding">
-                <a href="./tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
+                <a href="/tiket-apa-saja" aria-label="Melon - Tiket Apa Saja Website Redesign">
                     <svg width="489" height="55" viewBox="0 0 489 55" class="logo tas" aria-label="Tiket Apa Saja's Logo" xmlns="http://www.w3.org/2000/svg">
                         <use href="/img/logo.svg#logo/tiketapasaja"></use>
                     </svg>
@@ -145,7 +145,7 @@
 
             </div>
             <div class="arrow-small">
-                <a href="./tiket-apa-saja" class="arrow">
+                <a href="/tiket-apa-saja" class="arrow">
                     <span>Design Solutions</span>
                 </a>
             </div>
@@ -175,7 +175,7 @@
         <hr />
 
         <div class="footer">
-            <a href="./hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
+            <a href="/hi" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
             <div class="location">
                 <span>Jakarta</span>
                 <svg id="airplane" width="16" height="16" viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg">

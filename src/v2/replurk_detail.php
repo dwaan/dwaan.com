@@ -25,7 +25,7 @@
                 <h1>Waterpark is <strong>RePlurk</strong> 🤷‍♂️</h1>
             </div>
             <p>RePlurk is a web app that I created to review my plurk account in graphical and interesting way. You can also use it if you have plurk account. Long story short it's a Dashboard.</p>
-            <p><a href="./replurk?year=<?php echo $currentyear; ?>" class="cta">Visit RePlurk <?php echo $currentyear; ?></a></p>
+            <p><a href="/replurk?year=<?php echo $currentyear; ?>" class="cta">Visit RePlurk <?php echo $currentyear; ?></a></p>
         </div>
     </section>
 
@@ -120,16 +120,16 @@
     <div class="links snap-bottom">
         <nav>
             <div class="prototype">
-                <a href="./replurk?year=2024" aria-label="RePlurk 2024 - Web App" target="_BLANK" class="title"><span>visit the web app</span></a>
-                <a href="./replurk?year=2020" aria-label="RePlurk 2020 - Web App" target="_BLANK"><span>2020</span></a>
-                <a href="./replurk?year=2021" aria-label="RePlurk 2021 - Web App" target="_BLANK"><span>2021</span></a>
-                <a href="./replurk?year=2022" aria-label="RePlurk 2022 - Web App" target="_BLANK"><span>2022</span></a>
-                <a href="./replurk?year=2023" aria-label="RePlurk 2023 - Web App" target="_BLANK"><span>2023</span></a>
-                <a href="./replurk?year=2024" aria-label="RePlurk 2024 - Web App" target="_BLANK"><span>2024</span></a>
+                <a href="/replurk?year=2024" aria-label="RePlurk 2024 - Web App" target="_BLANK" class="title"><span>visit the web app</span></a>
+                <a href="/replurk?year=2020" aria-label="RePlurk 2020 - Web App" target="_BLANK"><span>2020</span></a>
+                <a href="/replurk?year=2021" aria-label="RePlurk 2021 - Web App" target="_BLANK"><span>2021</span></a>
+                <a href="/replurk?year=2022" aria-label="RePlurk 2022 - Web App" target="_BLANK"><span>2022</span></a>
+                <a href="/replurk?year=2023" aria-label="RePlurk 2023 - Web App" target="_BLANK"><span>2023</span></a>
+                <a href="/replurk?year=2024" aria-label="RePlurk 2024 - Web App" target="_BLANK"><span>2024</span></a>
             </div>
             <div class="continue">
-                <a href="./musiku" class="title"><span>next case study</span></a>
-                <a href="./musiku"><span><i>Musiku</i></span></a>
+                <a href="/musiku" class="title"><span>next case study</span></a>
+                <a href="/musiku"><span><i>Musiku</i></span></a>
             </div>
         </nav>
     </div>

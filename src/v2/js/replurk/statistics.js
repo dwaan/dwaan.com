@@ -399,8 +399,6 @@ class statistics {
 			var randomcolors = [color.getRandomColor(), color.getRandomColor()]
 			var content = el.querySelector(".content")
 
-			console.log(randomcolors)
-
 			// Make colorful background
 			gsap.set(content, {
 				background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`,

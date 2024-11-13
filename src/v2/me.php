@@ -100,7 +100,7 @@
 					</div>
 					<h3>Would&nbsp;<br hidden />You&nbsp;<br hidden />Like To&nbsp;<br hidden /><strong>Say Hi!</strong>?</h3>
 				</div>
-				<p>I happen to live in in Tel Aviv-Yafo right now. If you happened to know any Indonesian living in Tel Aviv-Yafo, Mr. Goat wants to meet them. Other then that, if you wanted to work with me feel free to <a href="./say-hi" class="spring big">say hi</a>.</p>
+				<p>I happen to live in in Tel Aviv-Yafo right now. If you happened to know any Indonesian living in Tel Aviv-Yafo, Mr. Goat wants to meet them. Other then that, if you wanted to work with me feel free to <a href="/say-hi" class="spring big">say hi</a>.</p>
 			</div>
 			<div class="arrow-big" hidden>
 				<a href="#startmrgoat" class="arrow scrollto">
@@ -200,10 +200,10 @@
 		<div class="links snap-bottom">
 			<nav>
 				<div class="prototype">
-					<a href="./say-hi"><span>say hi</span></a>
+					<a href="/say-hi"><span>say hi</span></a>
 				</div>
 				<div class="continue">
-					<a href="./aai"><span><strong>recent case study</strong> <i>- Asosiasi Antropologi Indonesia</i></span></a>
+					<a href="/aai"><span><strong>recent case study</strong> <i>- Asosiasi Antropologi Indonesia</i></span></a>
 				</div>
 			</nav>
 		</div>

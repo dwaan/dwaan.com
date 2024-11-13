@@ -136,7 +136,7 @@ var v2 = {
 					clean: true
 				}
 			})))
-			.pipe(gulp.dest('v1/v2/js/'))
+			.pipe(gulp.dest('v2/js/'))
 			.pipe(browserSync.stream())
 	},
 
@@ -146,7 +146,7 @@ var v2 = {
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("bundle.css"))
 			.pipe(mode.development(sourcemaps.write('.')))
-			.pipe(gulp.dest('v1/src/v2/css/cache/'))
+			.pipe(gulp.dest('src/v2/css/cache/'))
 	},
 
 	fofcss() {
@@ -155,7 +155,7 @@ var v2 = {
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("404.css"))
 			.pipe(mode.development(sourcemaps.write('.')))
-			.pipe(gulp.dest('v1/src/v2/css/cache/'))
+			.pipe(gulp.dest('src/v2/css/cache/'))
 	},
 
 	replurkcss() {
@@ -164,7 +164,7 @@ var v2 = {
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("plurk.css"))
 			.pipe(mode.development(sourcemaps.write('.')))
-			.pipe(gulp.dest('v1/src/v2/css/cache/'))
+			.pipe(gulp.dest('src/v2/css/cache/'))
 	},
 
 	css_vertical() {
@@ -172,7 +172,7 @@ var v2 = {
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(mode.development(sourcemaps.write('.')))
-			.pipe(gulp.dest('v1/src/v2/css/cache/'))
+			.pipe(gulp.dest('src/v2/css/cache/'))
 	},
 
 	css_horizontal() {
@@ -180,7 +180,7 @@ var v2 = {
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(mode.development(sourcemaps.write('.')))
-			.pipe(gulp.dest('v1/src/v2/css/cache/'))
+			.pipe(gulp.dest('src/v2/css/cache/'))
 	},
 
 	print() {
@@ -189,14 +189,14 @@ var v2 = {
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("print.css"))
 			.pipe(mode.development(sourcemaps.write(".")))
-			.pipe(gulp.dest('v1/src/v2/css/cache/'))
+			.pipe(gulp.dest('src/v2/css/cache/'))
 	},
 
 	css_prefix() {
 		return gulp.src(['src/v2/css/cache/*.css'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(mode.development(sourcemaps.write('.')))
-			.pipe(gulp.dest('v1/v2/css/'))
+			.pipe(gulp.dest('v2/css/'))
 			.pipe(browserSync.stream())
 	},
 
@@ -205,21 +205,21 @@ var v2 = {
 			.pipe(htmlmin({
 				collapseWhitespace: true
 			}))
-			.pipe(gulp.dest('v1/v2/'))
+			.pipe(gulp.dest('v2/'))
 			.pipe(browserSync.stream())
 	},
 
 	jpg() {
 		return gulp.src(['src/v2/img/*.jpg', 'src/v2/img/*/*.jpg'], { encoding: false })
 			.pipe(webp())
-			.pipe(gulp.dest('v1/v2/img/'))
+			.pipe(gulp.dest('v2/img/'))
 			.pipe(browserSync.stream())
 	},
 
 	png() {
 		return gulp.src(['src/v2/img/*.png', 'src/v2/img/*/*.png'], { encoding: false })
 			.pipe(webp())
-			.pipe(gulp.dest('v1/v2/img/'))
+			.pipe(gulp.dest('v2/img/'))
 			.pipe(browserSync.stream())
 	},
 
@@ -228,18 +228,18 @@ var v2 = {
 			.pipe(htmlmin({
 				collapseWhitespace: true
 			}))
-			.pipe(gulp.dest('v1/v2/img/'))
+			.pipe(gulp.dest('v2/img/'))
 			.pipe(browserSync.stream())
 	},
 
 	resources() {
 		return gulp.src(['src/v2/fonts/*.*', 'src/v2/*.txt', 'src/v2/*.ico', 'src/v2/*.svg', 'src/v2/*.png', 'src/v2/*.jpg', 'src/v2/*.webmanifest', 'src/v2/*.xml'], { encoding: false })
-			.pipe(gulp.dest('v1/v2/'))
+			.pipe(gulp.dest('v2/'))
 	},
 
 	fonts() {
 		return gulp.src(['src/v2/fonts/*.*'], { encoding: false })
-			.pipe(gulp.dest('v1/v2/fonts/'))
+			.pipe(gulp.dest('v2/fonts/'))
 	},
 
 	run() {

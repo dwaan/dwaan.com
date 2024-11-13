@@ -172,8 +172,8 @@
                     <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK"><span>mobile</span></a>
                 </div>
                 <div class="continue">
-                    <a href="./replurk" class="title"><span>next case study</span></a>
-                    <a href="./replurk"><span><i>RePlurk</i></span></a>
+                    <a href="/replurk" class="title"><span>next case study</span></a>
+                    <a href="/replurk"><span><i>RePlurk</i></span></a>
                 </div>
             </nav>
         </div>

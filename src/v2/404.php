@@ -22,7 +22,7 @@
 			<div id="nomokeybusiness" class="text">
 				<h1>me here to halp</h1>
 				<h4>no 🐵 business, me promise!</h4>
-				<p>me dad said he lazy bring old pages, you come here because him, not me. <a href="./" class="spring">click here continue</a></p>
+				<p>me dad said he lazy bring old pages, you come here because him, not me. <a href="/" class="spring">click here continue</a></p>
 			</div>
 		</section>
 

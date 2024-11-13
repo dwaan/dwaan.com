@@ -175,8 +175,8 @@
                     <a href="https://antropologiindonesia.or.id" aria-label="AAI - Website" target="_BLANK"><span>Asosiasi Antropologi Indonesia</span></a>
                 </div>
                 <div class="continue">
-                    <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="title"><span>next case study</span></a>
-                    <a href="./bkpm" aria-label="Ministry of Investment/BKPM Website Redesign"><span>Ministry of Investment/BKPM Website Redesign</span></a>
+                    <a href="/bkpm" aria-label="Ministry of Investment/BKPM Website Redesign" class="title"><span>next case study</span></a>
+                    <a href="/bkpm" aria-label="Ministry of Investment/BKPM Website Redesign"><span>Ministry of Investment/BKPM Website Redesign</span></a>
                 </div>
             </nav>
         </div>

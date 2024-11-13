@@ -1,6 +1,6 @@
 {
   "name": "dwaan",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "dwaan.com source code",
   "main": "js/main.js",
   "type": "module",
@@ -12,8 +12,8 @@
     "v1 Image": "gulp v1image",
     "v1 Sitemap": "node src/sitemap.js",
     "---v2": "",
-    "v2 Test": "gulp v1 --development",
-    "v2 Build": "gulp v1 --production",
+    "v2 Test": "gulp v2 --development",
+    "v2 Build": "gulp v2 --production",
     "v2 Image": "gulp v2image",
     "v2 Sitemap": "node src/sitemap.js"
   },
