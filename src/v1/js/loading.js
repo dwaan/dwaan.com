@@ -2,7 +2,7 @@
 
 import { gsap } from 'gsap'
 import { _q, _qAll, removeClass, addClass } from './helper.js'
-import { browserBar, toggleSafariAddressBarColor } from "./darkmode.js"
+import { toggleSafariAddressBarColorDark, toggleSafariAddressBarColor } from "./darkmode.js"
 
 // Loading animation
 
@@ -111,7 +111,7 @@ class Loading {
 			duration: .768,
 			ease: "expo.inOut",
 			onComplete: function () {
-				browserBar()
+				toggleSafariAddressBarColorDark()
 				callback()
 			}
 		}
@@ -180,7 +180,10 @@ class Loading {
 							width: "auto",
 							height: "auto"
 						})
-						if (callback != undefined) callback()
+
+						toggleSafariAddressBarColorDark()
+
+						callback()
 					}
 				}, "-=.512")
 			})
@@ -233,19 +236,12 @@ class Loading {
 			var_to.x = "-100%"
 			var_to.y = 0
 		} else if (this.clicked.text == "Back") {
-			var_to.x = 100
+			var_to.x = "100%"
 			var_to.y = 0
 		}
 
 		if (_q("[data-barba-namespace]").getAttribute("data-barba-namespace") == "call") {
-			var tl = gsap.timeline({
-				defaults: {
-					duration: .386,
-					ease: "expo.inOut"
-				}
-			})
 			var size = []
-
 			window.aspectRatio = window.matchMedia("(max-aspect-ratio: 1/1)")
 			window.aspectRatio.size = set => {
 				var size = []
@@ -266,6 +262,12 @@ class Loading {
 				size = window.aspectRatio.size(true)
 			}
 
+			var tl = gsap.timeline({
+				defaults: {
+					duration: .386,
+					ease: "expo.inOut"
+				}
+			})
 			tl.to(_q(this.el).querySelector(".loading"), {
 				opacity: 0
 			}, 0)
@@ -273,10 +275,13 @@ class Loading {
 				margin: 0,
 				onComplete: _ => {
 					addClass(this.el, "bubble")
+
 					gsap.set(_q(this.el).querySelector(".text"), {
 						opacity: 1
 					})
 					_q(this.el).querySelector(".text").innerHTML = "<p class='hi'>hi!</p>"
+
+					callback__half()
 				}
 			}, 0)
 			tl.to(this.el, {
@@ -286,14 +291,18 @@ class Loading {
 				left: "initial",
 				right: "11.5vw",
 				borderRadius: "1000px",
-				duration: .768
-			},
-				0)
+				duration: .768,
+				onComplete: _ => {
+					// Restore safari address bar color
+					toggleSafariAddressBarColor()
+
+					// callback()
+					console.log(callback)
+				}
+			}, 0)
 			tl.set(this.el, {
 				zIndex: 1
 			})
-
-			if (callback != undefined) callback()
 		} else {
 			gsap.fromTo(this.el, {
 				scale: 1
@@ -404,7 +413,8 @@ class Loading {
 	}
 
 	clear() {
-		_q(this.el).querySelector(".text").innerHTML = ""
+		if (_q("[data-barba-namespace]").getAttribute("data-barba-namespace") != "call")
+			_q(this.el).querySelector(".text").innerText = ""
 	}
 }
 
