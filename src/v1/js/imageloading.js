@@ -93,9 +93,6 @@ class ImageLoading {
 				})
 			}
 		})
-
-		// this.el = null
-		// this.barba = null
 	}
 }
 

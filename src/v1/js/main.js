@@ -933,22 +933,26 @@ var Call = {
 			gsap.to(".call a:nth-child(2)", { x: x * 100, y: y * 100 })
 		})
 	},
-	onImageLoadAnimateComplete() {
+	onImageLoadAnimateHalfComplete() {
 		loading.breath.play()
 
 		// Scroll animate the works
-		gsap.fromTo(".call > div > div > *", 1.024, {
+		gsap.fromTo(".call > div > div > *", {
 			y: 250
 		}, {
 			y: 0,
 			ease: "expo",
+			duration: 1.024,
 			stagger: {
 				from: 0,
 				amount: .386
 			}
 		})
-
-		gsap.to(".call", { y: 0, ease: "expo.out", duration: 2.048 })
+		gsap.to(".call", {
+			y: 0,
+			ease: "expo.out",
+			duration: 2.048
+		})
 	},
 	leave() {
 		loading.breath.pause(0)

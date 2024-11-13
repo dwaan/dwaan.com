@@ -15,11 +15,15 @@ if (window.matchMedia) {
 }
 
 function isDarkMode() {
-	return window.matchMedia('(prefers-color-scheme: dark)')
+	return darkMode
 }
 
 function toggleSafariAddressBarColor() {
-	_q("meta[name=theme-color]").setAttribute("content", darkMode ? "#202526" : "#a4cdd6")
+	document.querySelector("meta[name=theme-color]").setAttribute("content", isDarkMode() ? "#202526" : "#a4cdd6")
+}
+
+function toggleSafariAddressBarColorDark() {
+	document.querySelector("meta[name=theme-color]").setAttribute("content", isDarkMode() ? "#111111" : "#202526")
 }
 
 function toggleDarkMode() {
@@ -50,7 +54,6 @@ function toggleDarkMode() {
 		darkMode = true
 		tl.fromTo("#mode svg #moon", {
 			opacity: 0
-
 		}, {
 			opacity: 1,
 			ease: "expo.out"
@@ -65,9 +68,7 @@ function toggleDarkMode() {
 		tl.fromTo("#sky", {
 			scale: 1
 		}, {
-			scale: 100, onComplete: function () {
-				window.darkMode_animate = false
-			}
+			scale: 128
 		}, 0)
 		tl.fromTo("#sky", {
 			opacity: 0
@@ -101,10 +102,10 @@ function toggleDarkMode() {
 			ease: "expo.out"
 		}, 0)
 
-		tl.fromTo("#sky", { scale: 100 }, {
-			scale: 1, onComplete: function () {
-				window.darkMode_animate = false
-			}
+		tl.fromTo("#sky", {
+			scale: 128
+		}, {
+			scale: 1
 		}, 0)
 		tl.fromTo("#sky", {
 			opacity: 1
@@ -126,9 +127,4 @@ function toggleDarkMode() {
 	}
 }
 
-// Browser chrome color
-function browserBar() {
-	document.querySelector("meta[name=theme-color]").setAttribute("content", isDarkMode() ? "#111111" : "#202526")
-}
-
-export { isDarkMode, toggleSafariAddressBarColor, toggleDarkMode, browserBar }
+export { isDarkMode, toggleSafariAddressBarColor, toggleDarkMode, toggleSafariAddressBarColorDark }

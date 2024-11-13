@@ -2,7 +2,7 @@
 
 import { gsap } from 'gsap'
 import { _q, _qAll, removeClass, addClass, nextElementSibling, hugeText } from './helper.js'
-import { toggleSafariAddressBarColor, toggleDarkMode, browserBar } from "./darkmode.js"
+import { toggleSafariAddressBarColor, toggleDarkMode, toggleSafariAddressBarColorDark } from "./darkmode.js"
 
 // Menu Functionality
 
@@ -83,7 +83,7 @@ class Menu {
 				}
 			})
 
-			browserBar()
+			toggleSafariAddressBarColorDark()
 			e.preventDefault()
 		}
 		menu.onmouseenter = function () {
