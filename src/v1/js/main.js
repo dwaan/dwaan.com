@@ -1296,42 +1296,35 @@ var Me = {
 		let anim = gsap.timeline({
 			defaults: {
 				duration: 2.048,
-				ease: "expo.out"
+				ease: "expo.out",
+				stagger: {
+					from: 0,
+					amount: .256
+				}
 			}
 		})
+		anim.to(".imuiux", {
+			y: 0
+		}, 0)
 		anim.fromTo(".imuiux h1 .splext", {
 			y: 150
 		}, {
-			y: 0, stagger: {
-				from: 0,
-				amount: .256
-			}
+			y: 0
 		}, 0)
 		anim.fromTo(".imuiux p .splord", {
 			y: 200
 		}, {
-			y: 0, stagger: {
-				from: 0,
-				amount: .256
-			}
+			y: 0
 		}, 0)
-
-		gsap.to(".imuiux", {
-			y: 0,
-			ease: "expo.out",
-			duration: 2.048
-		})
-		gsap.fromTo(".imuiux img", {
+		anim.fromTo(".imuiux img", {
 			y: 200
 		}, {
 			y: 0,
-			duration: 2.048,
-			ease: "expo.out",
 			stagger: {
 				from: 0,
 				amount: .386
 			}
-		})
+		}, 0)
 	}
 }
 
