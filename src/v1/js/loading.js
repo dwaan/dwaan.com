@@ -2,7 +2,7 @@
 
 import { gsap } from 'gsap'
 import { _q, _qAll, removeClass, addClass } from './helper.js'
-import { isDarkMode, toggleSafariAddressBarColor } from "./darkmode.js"
+import { browserBar, toggleSafariAddressBarColor } from "./darkmode.js"
 
 // Loading animation
 
@@ -111,7 +111,7 @@ class Loading {
 			duration: .768,
 			ease: "expo.inOut",
 			onComplete: function () {
-				document.querySelector("meta[name=theme-color]").setAttribute("content", isDarkMode() ? "#111111" : "#202526")
+				browserBar()
 				callback()
 			}
 		}

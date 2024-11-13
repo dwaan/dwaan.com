@@ -2,7 +2,7 @@
 
 import { gsap } from 'gsap'
 import { _q, _qAll, removeClass, addClass, nextElementSibling, hugeText } from './helper.js'
-import { toggleSafariAddressBarColor, toggleDarkMode, isDarkMode } from "./darkmode.js"
+import { toggleSafariAddressBarColor, toggleDarkMode, browserBar } from "./darkmode.js"
 
 // Menu Functionality
 
@@ -53,7 +53,6 @@ class Menu {
 		menu.onclick = e => {
 			var tl = gsap.timeline()
 
-			console.log(e.target)
 			addClass(e.target.parentNode, "active")
 			this.active = true
 
@@ -84,7 +83,7 @@ class Menu {
 				}
 			})
 
-			document.querySelector("meta[name=theme-color]").setAttribute("content", isDarkMode() ? "#111" : "#202526")
+			browserBar()
 			e.preventDefault()
 		}
 		menu.onmouseenter = function () {

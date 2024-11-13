@@ -126,4 +126,9 @@ function toggleDarkMode() {
 	}
 }
 
-export { isDarkMode, toggleSafariAddressBarColor, toggleDarkMode }
+// Browser chrome color
+function browserBar() {
+	document.querySelector("meta[name=theme-color]").setAttribute("content", isDarkMode() ? "#111111" : "#202526")
+}
+
+export { isDarkMode, toggleSafariAddressBarColor, toggleDarkMode, browserBar }

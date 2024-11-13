@@ -11,6 +11,7 @@ import { _q, _qAll, removeClass, addClass, animateNumber, animateYear, waitForIm
 import Loading from './loading.js'
 import ImageLoading from './imageloading.js'
 import Menu from './menu.js'
+import worklist from './worklist.js'
 
 gsap.config({ nullTargetWarn: false })
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -23,60 +24,11 @@ let menu = new Menu()
 let loading = new Loading("#loading-cover", menu)
 let imageloading = new ImageLoading(loading)
 
-// Menu Functionality
-
-var worklist = {
-	hover: function (el) {
-		el = _qAll(el)
-		for (var i = el.length - 1; i >= 0; i--) {
-			var scale = 1.05
-			if (el[i].offsetWidth < 100) scale = 1.15
-
-			el[i].gsap = gsap.timeline({
-				repeat: -1,
-				ease: "expo"
-			})
-			el[i].gsap.to(el[i], {
-				transformOrigin: "50%",
-				scale: scale,
-				duration: 1.7
-			})
-			el[i].gsap.to(el[i], {
-				scale: scale,
-				duration: .6
-			})
-			el[i].gsap.to(el[i], {
-				scale: 1,
-				duration: 1.7
-			})
-			el[i].gsap.to(el[i], {
-				scale: 1,
-				duration: .9
-			})
-
-			el[i].gsap.pause()
-
-			el[i].onmouseenter = function () {
-				this.gsap.restart()
-			}
-
-			el[i].onmouseleave = function () {
-				this.gsap.pause()
-				gsap.to(this, {
-					transformOrigin: "50%",
-					scale: 1,
-					duration: .512
-				})
-			}
-		}
-	}
-}
-
 // Loading animation
 
 var FadeTransition = {
 	name: 'default-transition',
-	once(data) {
+	once() {
 		removeClass(_q('.menu__pop'), "active")
 
 		// Adding logo to loading and do some hover event
@@ -178,17 +130,16 @@ var FadeTransition = {
 		}
 
 		if (menu.active) {
+			removeClass(_q('.menu__pop'), "active")
+
+			animate()
+
 			let tl = gsap.timeline({
 				defaults: {
 					duration: 1.024,
 					ease: "expo.out"
 				}
 			})
-
-			removeClass(_q('.menu__pop'), "active")
-
-			animate()
-
 			tl.fromTo('.menu__pop .menu__item ul li, .menu__pop .menu__item .border', {
 				xPercent: 0,
 				opacity: 1
@@ -310,6 +261,11 @@ var Home = {
 
 			if (_q(".work__float")) window._top_b = (y == 0) ? 0 : _q(".work__float").offsetHeight
 		}
+		function runAnimation(delta) {
+			if (delta > 0) runGsap((delta > 50) ? "max" : 0)
+			else if (delta < 0) runGsap((delta < -50) ? 0 : "max")
+			else finalCheck()
+		}
 		function finalCheck() {
 			// If the delta is zero, check if it's really on top or bottom
 			if (_q(".work__float"))
@@ -318,11 +274,6 @@ var Home = {
 				} else {
 					if (window._top_b != 0) runGsap(0)
 				}
-		}
-		function runAnimation(delta) {
-			if (delta > 0) runGsap((delta > 50) ? "max" : 0)
-			else if (delta < 0) runGsap((delta < -50) ? 0 : "max")
-			else finalCheck()
 		}
 		function onScroll() {
 			clearTimeout(window._timeout)
@@ -454,7 +405,7 @@ var Home = {
 					trigger: '.wording__trigger',
 					start: '0 100%',
 					end: '0 50%',
-					scrub: 5
+					scrub: 3
 				},
 				defaults: {
 					duration: .768,
@@ -486,7 +437,7 @@ var Home = {
 					trigger: ".scroller__trigger",
 					start: '0 100%',
 					end: '0 75%',
-					scrub: 5
+					scrub: 3
 				}
 			})
 			work.fromTo(".work__list .scroller, .gallery a:not(:last-child)", {
@@ -500,7 +451,7 @@ var Home = {
 					amount: .128
 				}
 			})
-		}, 3000)
+		}, 1500)
 
 		// Some breathe in and breathe out animation for hero image
 		var loop = gsap.timeline({ repeat: -1, ease: "expo" })
@@ -642,7 +593,8 @@ var Home = {
 		new animateYear("#year__designer", 2008)
 		new animateYear("#year__managerial", 2011)
 	},
-	leave() {
+	afterLeave() {
+		clearTimeout(window._timeout)
 		window.onresize = null
 		window.onscroll = null
 		window.ontouchstart = null
@@ -686,7 +638,7 @@ var Work = {
 							trigger: child,
 							start: '0 100%',
 							end: '100% 100%',
-							scrub: 5
+							scrub: 3
 						},
 						defaults: {
 							duration: 1.024,
@@ -706,7 +658,7 @@ var Work = {
 						trigger: el,
 						start: '0 100%',
 						end: '100% 100%',
-						scrub: 5
+						scrub: 3
 					},
 					defaults: {
 						duration: 1.024,
@@ -724,7 +676,7 @@ var Work = {
 				})
 			})
 
-		}, 3000);
+		}, 1500);
 
 		new animateNumber(".work__list .stats__content p:first-child b")
 		new animateNumber(".work__list .stats__content p:last-child b")
@@ -822,7 +774,7 @@ var WorkDetail = {
 						trigger: el,
 						start: '0 100%',
 						end: '30px 100%',
-						scrub: 5
+						scrub: 3
 					}
 				})
 				anim.fromTo(el.children, {
@@ -846,7 +798,7 @@ var WorkDetail = {
 						trigger: el,
 						start: '0 100%',
 						end: '30px 100%',
-						scrub: 5
+						scrub: 3
 					}
 				})
 				anim.fromTo(el, {
@@ -870,7 +822,7 @@ var WorkDetail = {
 						trigger: el,
 						start: '0 100%',
 						end: '30px 100%',
-						scrub: 5
+						scrub: 3
 					}
 				})
 				anim.fromTo(el, {
@@ -888,7 +840,7 @@ var WorkDetail = {
 						trigger: el,
 						start: '0 100%',
 						end: '30px 100%',
-						scrub: 5
+						scrub: 3
 					}
 				})
 				anim.fromTo(el.children, {
@@ -903,7 +855,7 @@ var WorkDetail = {
 					}
 				})
 			})
-		}, 3000);
+		}, 1500)
 
 		new animateNumber(".work__detail .stats__content p:first-child b")
 		new animateNumber(".work__detail .stats__content p:last-child b")
@@ -1252,31 +1204,44 @@ var Me = {
 			})
 
 			// Scroll capabilities item
-			_qAll(".anyway h3, .anyway p, .anyway h4, .anyway ul li").forEach((el, index) => {
+			_qAll(".anyway").forEach(el => {
 				let capabilities = gsap.timeline({
 					scrollTrigger: {
 						trigger: el,
-						start: '0 85%',
-						end: '100% 85%',
-						scrub: 5
+						start: '0% 100%',
+						end: '50% 100%',
+						scrub: 3
 					},
 					defaults: {
 						duration: 1.024,
-						ease: "expo.out"
+						ease: "expo.out",
+						stagger: {
+							from: 0,
+							amount: .512
+						}
 					}
 				})
-				capabilities.fromTo(el, { x: 25 + (index * 25) }, { x: 0 }, 0)
-				capabilities.fromTo(el, { opacity: 0 }, { opacity: 1, duration: .128 }, 0)
+				capabilities.fromTo(el.querySelectorAll("h3, p, h4, ul li"), {
+					x: 250
+				}, {
+					x: 0
+				}, 0)
+				capabilities.fromTo(el.querySelectorAll("h3, p, h4, ul li"), {
+					opacity: 0
+				}, {
+					opacity: 1,
+					duration: .128
+				}, 0)
 			})
 
 			// Scroll latest works
-			_qAll(".work__list, .work__list ul").forEach(el => {
+			_qAll(".work__list").forEach(el => {
 				let works = gsap.timeline({
 					scrollTrigger: {
 						trigger: el,
-						start: '0 100%',
-						end: '100% 100%',
-						scrub: 5
+						start: '25% 100%',
+						end: '75% 100%',
+						scrub: 3
 					},
 					defaults: {
 						duration: 1.024,
@@ -1287,12 +1252,12 @@ var Me = {
 						}
 					}
 				})
-				works.fromTo(el, {
+				works.fromTo(el.querySelectorAll("h5, ul > li"), {
 					y: 250
 				}, {
 					y: 0
 				}, 0)
-				works.fromTo(el, {
+				works.fromTo(el.querySelectorAll("h5, ul > li"), {
 					opacity: 0
 				}, {
 					opacity: 1,
@@ -1307,21 +1272,24 @@ var Me = {
 						trigger: el,
 						start: '0 100%',
 						end: '100% 100%',
-						scrub: 5
+						scrub: 3
 					},
 					defaults: {
 						duration: 1.024,
 						ease: "power4.out"
 					}
 				})
-				cofound.fromTo(el.querySelectorAll(".splext"), { y: 200, }, {
+				cofound.fromTo(el.querySelectorAll(".splext"), {
+					y: 200
+				}, {
 					y: 0,
 					stagger: {
-						from: 0, amount: .128
+						from: 0,
+						amount: .128
 					}
 				}, 0)
 			})
-		}, 3000)
+		}, 1500)
 	},
 	onImageLoadAnimateHalfComplete() {
 		// Animate the appearing
@@ -1348,11 +1316,18 @@ var Me = {
 			}
 		}, 0)
 
-		gsap.to(".imuiux", { y: 0, ease: "expo.out", duration: 2.048 })
+		gsap.to(".imuiux", {
+			y: 0,
+			ease: "expo.out",
+			duration: 2.048
+		})
 		gsap.fromTo(".imuiux img", {
 			y: 200
 		}, {
-			y: 0, duration: 2.048, ease: "expo.out", stagger: {
+			y: 0,
+			duration: 2.048,
+			ease: "expo.out",
+			stagger: {
 				from: 0,
 				amount: .386
 			}
