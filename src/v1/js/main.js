@@ -7,19 +7,21 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js'
 import { tns } from 'tiny-slider'
 
-import { _q, _qAll, animateNumber, animateYear, waitForImg, splitText, hugeText, isTouchSupported, parallax, konami, initPhotoSwipeFromDOM } from './helper.js'
+import { _q, _qAll, animateNumber, animateYear, waitForImg, splitText, hugeText, isTouch, parallax, konami, photoSwipe } from './helper.js'
 import Menu from './menu.js'
 import Loading from './loading.js'
 import ImageLoading from './imageloading.js'
 import Transition from './transition.js'
+import DarkMode from './darkmode.js'
 import worklist from './worklist.js'
 
 gsap.config({ nullTargetWarn: false })
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // General variables
-let menu = new Menu()
-let loading = new Loading("#loading-cover", menu)
+let darkmode = new DarkMode()
+let menu = new Menu(darkmode)
+let loading = new Loading("#loading-cover", menu, darkmode)
 let imageloading = new ImageLoading(loading)
 let transition = new Transition(loading, imageloading, menu)
 
@@ -27,7 +29,15 @@ let transition = new Transition(loading, imageloading, menu)
 
 var Home = {
 	namespace: 'home',
-	afterEnter() {
+	beforeEnter() {
+		// Body can't be scroll while loading scroll again
+		gsap.set("body", {
+			overflow: "hidden"
+		})
+	},
+	afterEnter(data) {
+		let next = data.next.container
+		let work = next.querySelector(".work__float")
 		imageloading.barba = this
 
 		gsap.set(".hero", {
@@ -46,54 +56,57 @@ var Home = {
 		if (gsap.utils.random(0, 10) > 5) gsap.utils.shuffle(fruits)
 		fruit.setAttribute("src", path + fruits[0])
 		// Change fruit when clicked
-		_q(".img").onmousedown = function (e) {
-			do {
-				index++
-				if (index >= fruits.length) index = 0
-			} while (fruits[index] == "empty.webp")
+		next.querySelectorAll(".img").forEach(el => {
+			el.anim = false
+			el.onmousedown = function (e) {
+				do {
+					index++
+					if (index >= fruits.length) index = 0
+				} while (fruits[index] == "empty.webp")
 
-			if (!this.anim) {
-				this.anim = gsap.timeline({
-					defaults: {
-						duration: .512,
-						ease: "elastic"
-					}
-				})
-				this.anim.fromTo(".poof", {
-					transformOrigin: "40%",
-					opacity: 1,
-					rotation: 15,
-					scale: 1,
-					xPercent: -50,
-					yPercent: 50
-				}, {
-					rotation: 0,
-					scale: 1.75,
-					xPercent: 0,
-					yPercent: 0,
-					onComplete: _ => {
-						fruit.setAttribute("src", path + fruits[index])
-						gsap.set(fruit, { opacity: 0 })
+				if (!this.anim) {
+					this.anim = gsap.timeline({
+						defaults: {
+							duration: .512,
+							ease: "elastic"
+						}
+					})
+					this.anim.fromTo(".poof", {
+						transformOrigin: "40%",
+						opacity: 1,
+						rotation: 15,
+						scale: 1,
+						xPercent: -50,
+						yPercent: 50
+					}, {
+						rotation: 0,
+						scale: 1.75,
+						xPercent: 0,
+						yPercent: 0,
+						onComplete: _ => {
+							fruit.setAttribute("src", path + fruits[index])
+							gsap.set(fruit, { opacity: 0 })
 
-						// When fruit is loaded, show it
-						waitForImg(fruit, _ => {
-							gsap.set(fruit, { opacity: 1 })
-							this.anim.to(".poof", {
-								opacity: 0,
-								rotation: -180,
-								scale: 1,
-								ease: "power3.inOut",
-								onComplete: _ => {
-									this.anim = null
-								}
+							// When fruit is loaded, show it
+							waitForImg(fruit, _ => {
+								gsap.set(fruit, { opacity: 1 })
+								this.anim.to(".poof", {
+									opacity: 0,
+									rotation: -180,
+									scale: 1,
+									ease: "power3.inOut",
+									onComplete: _ => {
+										this.anim = null
+									}
+								})
 							})
-						})
-					}
-				})
-			}
+						}
+					})
+				}
 
-			e.preventDefault()
-		}
+				e.preventDefault()
+			}
+		})
 
 		// Auto scroll
 		var duration = 512
@@ -111,7 +124,7 @@ var Home = {
 				ease: "power2"
 			})
 
-			if (_q(".work__float")) window._top_b = (y == 0) ? 0 : _q(".work__float").offsetHeight
+			if (work) window._top_b = (y == 0) ? 0 : work.offsetHeight
 		}
 		function runAnimation(delta) {
 			if (delta > 0) runGsap((delta > 50) ? "max" : 0)
@@ -120,9 +133,9 @@ var Home = {
 		}
 		function finalCheck() {
 			// If the delta is zero, check if it's really on top or bottom
-			if (_q(".work__float"))
-				if (window._top_b > _q(".work__float").offsetHeight / 2) {
-					if (window._top_b != _q(".work__float").offsetHeight) runGsap("max")
+			if (work)
+				if (window._top_b > work.offsetHeight / 2) {
+					if (window._top_b != work.offsetHeight) runGsap("max")
 				} else {
 					if (window._top_b != 0) runGsap(0)
 				}
@@ -142,7 +155,7 @@ var Home = {
 		}
 
 		window._top_b = 0
-		if (isTouchSupported()) {
+		if (isTouch()) {
 			/* Still not properly working
 			window.ontouchstart = function(e) {
 				clearTimeout(window._timeout)
@@ -174,7 +187,7 @@ var Home = {
 			gsap.to(".hero__image .parallax", { x: x * -25, y: y * -25 })
 		})
 
-		worklist.hover(".work__list a img, .hero__meta .stats b")
+		worklist.hover(next.querySelectorAll(".work__list a img, .hero__meta .stats b"))
 	},
 	onImageLoadComplete() {
 		// Fixing size
@@ -187,6 +200,11 @@ var Home = {
 		resizeHeroMeta()
 
 		setTimeout(_ => {
+			// Body can scroll again
+			gsap.set("body", {
+				overflow: "initial"
+			})
+
 			// Scroll animate the hero wording
 			let hero = gsap.timeline({
 				scrollTrigger: {
@@ -385,6 +403,11 @@ var Home = {
 		detectSwipe('.gallery')
 	},
 	onImageLoadAnimateHalfComplete() {
+		// First time need to be delayed a bit
+		new animateYear("#year__living", 1984)
+		new animateYear("#year__designer", 2008)
+		new animateYear("#year__managerial", 2011)
+
 		// Animate the appearing
 		var anim = gsap.timeline({
 			defaults: {
@@ -392,7 +415,9 @@ var Home = {
 				ease: "expo.out"
 			}
 		})
-		anim.to(".hero", { y: 0 }, 0)
+		anim.to(".hero", {
+			y: 0
+		}, 0)
 		anim.fromTo(".hero__image", {
 			transformOrigin: "0 0",
 			y: 500
@@ -439,11 +464,6 @@ var Home = {
 		anim.to(".work__float", {
 			y: 0
 		}, .768)
-
-		// First time need to be delayed a bit
-		new animateYear("#year__living", 1984)
-		new animateYear("#year__designer", 2008)
-		new animateYear("#year__managerial", 2011)
 	},
 	afterLeave() {
 		clearTimeout(window._timeout)
@@ -714,7 +734,7 @@ var WorkDetail = {
 		new animateNumber(".work__detail .stats__content p:last-child b")
 
 		// execute above function
-		initPhotoSwipeFromDOM('.gallery')
+		photoSwipe('.gallery')
 	},
 	onImageLoadAnimateHalfComplete() {
 		let anim = gsap.timeline({ defaults: { duration: 2.048, ease: "expo.out" } })

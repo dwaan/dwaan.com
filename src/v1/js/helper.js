@@ -4,12 +4,6 @@ import { gsap } from 'gsap'
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 
 // Helper functions
-//
-// _q(element)
-// _qAll(elements)
-// removeClass(element, className)
-// addClass(element, className)
-// nextElementSibling(element)
 function _q(argument) {
 	return document.querySelector(argument);
 }
@@ -49,10 +43,8 @@ function addClass(el, className) {
 	}
 }
 function hasClass(el, className) {
-	if (el.classList)
-		return el.classList.contains(className);
-	else
-		return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+	if (el.classList) return el.classList.contains(className);
+	else return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
 }
 function nextElementSibling(el) {
 	do {
@@ -279,7 +271,7 @@ class animateYear {
 	}
 }
 // Check touchevents
-function isTouchSupported() {
+function isTouch() {
 	var msTouchEnabled = window.navigator.msMaxTouchPoints;
 	var generalTouchEnabled = "ontouchstart" in document.createElement("div");
 
@@ -287,7 +279,7 @@ function isTouchSupported() {
 }
 // Parallax on mouse move
 function parallax(callback) {
-	if (isTouchSupported()) {
+	if (isTouch()) {
 		// Do something with gyroscpe
 	} else {
 		window.onmousemove = function (event) {
@@ -321,7 +313,7 @@ function parallax(callback) {
 	}
 }
 // Photoswipe helper
-function initPhotoSwipeFromDOM(gallerySelector) {
+function photoSwipe(gallerySelector) {
 	_qAll(`${gallerySelector} > a`).forEach(el => {
 		let size = el.dataset.size.split("x")
 		el.dataset.pswpWidth = size[0]
@@ -372,13 +364,13 @@ export {
 	addClass,
 	hasClass,
 	nextElementSibling,
+	hugeText,
 	animateNumber,
 	animateYear,
 	waitForImg,
 	splitText,
-	hugeText,
-	isTouchSupported,
+	isTouch,
 	parallax,
 	konami,
-	initPhotoSwipeFromDOM
+	photoSwipe
 }

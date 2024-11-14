@@ -2,14 +2,16 @@
 
 import { gsap } from 'gsap'
 import { _q, _qAll, removeClass, addClass, nextElementSibling, hugeText } from './helper.js'
-import { toggleSafariAddressBarColor, toggleDarkMode, toggleSafariAddressBarColorDark } from "./darkmode.js"
 
 // Menu Functionality
 
 class Menu {
 	active = false
+	darkmode = null
 
-	constructor() {
+	constructor(darkmode) {
+		this.darkmode = darkmode
+
 		_q("header .menu__item").innerHTML = `\
 			<div class="border"><div></div></div>\
 			<div class="menu__pos">\
@@ -27,7 +29,7 @@ class Menu {
 			</div>`
 	}
 
-	run = function () {
+	run() {
 		gsap.set('.menu__pop .menu__item', {
 			opacity: 0
 		})
@@ -37,8 +39,8 @@ class Menu {
 		gsap.set(mode.querySelector("#ray"), {
 			transformOrigin: "center center"
 		})
-		mode.onmousedown = function (e) {
-			toggleDarkMode()
+		mode.onmousedown = e => {
+			this.darkmode.toggle()
 			e.preventDefault()
 		}
 		mode.onmouseenter = function () {
@@ -83,7 +85,7 @@ class Menu {
 				}
 			})
 
-			toggleSafariAddressBarColorDark()
+			this.darkmode.toggleColor(true)
 			e.preventDefault()
 		}
 		menu.onmouseenter = function () {
@@ -150,8 +152,8 @@ class Menu {
 				xPercent: -200, opacity: 0, duration: .512, ease: "expo.in", stagger: {
 					from: 0,
 					amount: .128
-				}, onComplete: function () {
-					toggleSafariAddressBarColor()
+				}, onComplete: _ => {
+					this.darkmode.toggleColor(false)
 				}
 			})
 			tl.to('.menu__pop .menu__item', { opacity: 0, duration: .256, ease: "power2" })

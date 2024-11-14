@@ -2,15 +2,15 @@
 
 import { gsap } from 'gsap'
 import { _q, _qAll, removeClass, addClass } from './helper.js'
-import { toggleSafariAddressBarColorDark, toggleSafariAddressBarColor } from "./darkmode.js"
 
 // Loading animation
 
 class Loading {
 	el = ""
 	menu = null
+	darkmode = null
 
-	constructor(el, menu) {
+	constructor(el, menu, darkmode) {
 		document.querySelector("body").insertAdjacentHTML("beforeend", `
 			<div id="sky"></div>\
 			<div id="click-cover"></div>\
@@ -50,9 +50,10 @@ class Loading {
 			</div>\
 		`)
 
-		this.menu = menu
-
 		this.el = el
+		this.menu = menu
+		this.darkmode = darkmode
+
 		this.breath = gsap.timeline({
 			repeat: -1,
 			ease: "linear"
@@ -110,8 +111,8 @@ class Loading {
 			y: 0,
 			duration: .768,
 			ease: "expo.inOut",
-			onComplete: function () {
-				toggleSafariAddressBarColorDark()
+			onComplete: _ => {
+				this.darkmode.toggleColor(true)
 				callback()
 			}
 		}
@@ -171,7 +172,7 @@ class Loading {
 					borderRadius: 0,
 					duration: .768,
 					ease: "expo.inOut",
-					onComplete: function () {
+					onComplete: _ => {
 						gsap.set(el, {
 							top: 0,
 							bottom: 0,
@@ -181,7 +182,7 @@ class Loading {
 							height: "auto"
 						})
 
-						toggleSafariAddressBarColorDark()
+						this.darkmode.toggleColor(true)
 
 						callback()
 					}
@@ -224,7 +225,7 @@ class Loading {
 				})
 
 				// Restore safari address bar color
-				toggleSafariAddressBarColor()
+				this.darkmode.toggleColor(false)
 
 				// Run callback
 				callback()
@@ -294,10 +295,9 @@ class Loading {
 				duration: .768,
 				onComplete: _ => {
 					// Restore safari address bar color
-					toggleSafariAddressBarColor()
+					this.darkmode.toggleColor(false)
 
-					// callback()
-					console.log(callback)
+					callback()
 				}
 			}, 0)
 			tl.set(this.el, {

@@ -7,7 +7,13 @@ import { _q, _qAll } from './helper.js'
 
 var worklist = {
 	hover: function (el) {
-		_qAll(el).forEach(el => {
+		var els = el
+
+		if (typeof el === "string") els = _qAll(el)
+		else if (typeof el === "object") els = el
+		else return
+
+		els.forEach(el => {
 			var scale = 1.05
 			if (el.offsetWidth < 100) scale = 1.15
 
