@@ -6,15 +6,15 @@
   "type": "module",
   "scripts": {
     "Update": "npm update",
-    "---v1": "",
     "v1 Test": "gulp v1 --development",
-    "v1 Build": "gulp v1 --production",
     "v1 Image": "gulp v1image",
+    "v1 Build": "gulp v1 --production",
+    "v1 Clean Build": "gulp v1cleanrun",
     "v1 Sitemap": "node src/sitemap.js",
-    "---v2": "",
     "v2 Test": "gulp v2 --development",
-    "v2 Build": "gulp v2 --production",
     "v2 Image": "gulp v2image",
+    "v2 Build": "gulp v2 --production",
+    "v2 Clean Build": "gulp v2cleanrun --production",
     "v2 Sitemap": "node src/sitemap.js"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "axios": "^1.7.7",
     "browser-sync": "^3.0.3",
     "cheerio": "^1.0.0",
+    "del": "^8.0.0",
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-connect-php": "^1.0.3",
@@ -49,11 +50,11 @@
   "dependencies": {
     "@barba/core": "^2.10.3",
     "gsap": "^3.12.5",
+    "html2canvas": "^1.4.1",
+    "lz-string": "^1.5.0",
     "normalize.css": "^8.0.1",
     "photoswipe": "^5.4.4",
-    "tiny-slider": "^2.9.4",
-    "html2canvas": "^1.4.1",
-    "lz-string": "^1.5.0"
+    "tiny-slider": "^2.9.4"
   },
   "browserslist": [
     "last 100 version",

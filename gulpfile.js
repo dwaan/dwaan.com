@@ -10,6 +10,7 @@ import webpack from 'webpack-stream'
 import webp from 'gulp-webp'
 import svgmin from 'gulp-svgmin'
 import gulpMode from 'gulp-mode'
+import { deleteAsync } from 'del'
 
 const sass = gulpSass(dartSass)
 const mode = gulpMode()
@@ -17,7 +18,7 @@ const sitePort = 8080
 const siteUrl = `http://localhost:${sitePort}/`
 
 var v1 = {
-	javascript() {
+	js() {
 		return gulp.src(['src/v1/js/main.js'])
 			.pipe(mode.development(webpack({
 				devtool: 'source-map',
@@ -83,7 +84,7 @@ var v1 = {
 	},
 
 	resources() {
-		return gulp.src(['src/v1/*.webmanifest', 'src/v1/manifest.json', 'src/v1/*.txt', 'src/v1/*.xml', 'src/v1/*.png', 'src/v1/*.jpg', 'src/v1/*.ico', 'src/v1/*.htaccess'], { encoding: false })
+		return gulp.src(['src/v1/resources/*'], { encoding: false })
 			.pipe(gulp.dest('v1/'))
 			.pipe(browserSync.stream())
 	},
@@ -103,12 +104,12 @@ var v1 = {
 				proxy: siteUrl
 			})
 		})
-		gulp.watch(['src/v1/js/*.js'], { ignoreInitial: false }, v1.javascript)
+		gulp.watch(['src/v1/js/*.js'], { ignoreInitial: false }, v1.js)
 		gulp.watch(['src/v1/css/*.scss'], { ignoreInitial: false }, v1.css)
-		gulp.watch(['src/v1/img/*.jpg', 'src/v1/img/*.png', 'src/v1/img/**/*.jpg', 'src/v1/img/**/*.png'], { ignoreInitial: false }, v1.img)
+		gulp.watch(['src/v1/img/**/*.{jpg,jpeg,png}'], { ignoreInitial: false }, v1.img)
 		gulp.watch(['src/v1/img/*.svg', 'src/v1/img/**/*.svg'], { ignoreInitial: false }, v1.svg)
 		gulp.watch(['src/v1/fonts/*'], { ignoreInitial: false }, v1.fonts)
-		gulp.watch(['src/v1/*.webmanifest', 'src/v1/manifest.json', 'src/v1/*.txt', 'src/v1/*.xml', 'src/v1/*.png', 'src/v1/*.jpg', 'src/v1/*.ico', 'src/v1/.htaccess'], { ignoreInitial: false }, v1.resources)
+		gulp.watch(['src/v1/resources/*'], { ignoreInitial: false }, v1.resources)
 		gulp.watch(['src/v1/*.php'], { ignoreInitial: false }, v1.php)
 
 		gulp.watch('gulpfile.js', _ => {
@@ -119,6 +120,16 @@ var v1 = {
 }
 
 var v2 = {
+	path: {
+		html: ['src/v2/*.php'],
+		js: ['src/v2/js/**/*.js'],
+		css: ['src/v2/css/{main,global,nojs,dark}.scss'],
+		img: ['src/v2/img/**/*.{jpg,jpeg,png}'],
+		svg: ['src/v2/img/**/*.svg'],
+		fonts: ['src/v2/fonts/*.*'],
+		resources: ['src/v2/resources/*']
+	},
+
 	js() {
 		return gulp.src(['src/v2/js/main.js'])
 			.pipe(mode.development(webpack({
@@ -193,14 +204,14 @@ var v2 = {
 	},
 
 	css_prefix() {
-		return gulp.src(['src/v2/css/cache/*.css'])
+		return gulp.src(['src/v2/css/cache/**/*.css'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(mode.development(sourcemaps.write('.')))
 			.pipe(gulp.dest('v2/css/'))
 			.pipe(browserSync.stream())
 	},
 
-	php() {
+	html() {
 		return gulp.src(['src/v2/*.php'])
 			.pipe(htmlmin({
 				collapseWhitespace: true
@@ -209,22 +220,15 @@ var v2 = {
 			.pipe(browserSync.stream())
 	},
 
-	jpg() {
-		return gulp.src(['src/v2/img/*.jpg', 'src/v2/img/*/*.jpg'], { encoding: false })
-			.pipe(webp())
-			.pipe(gulp.dest('v2/img/'))
-			.pipe(browserSync.stream())
-	},
-
-	png() {
-		return gulp.src(['src/v2/img/*.png', 'src/v2/img/*/*.png'], { encoding: false })
+	img() {
+		return gulp.src(v2.path.img, { encoding: false })
 			.pipe(webp())
 			.pipe(gulp.dest('v2/img/'))
 			.pipe(browserSync.stream())
 	},
 
 	svg() {
-		return gulp.src(['src/v2/img/*.svg', 'src/v2/img/*/*.svg'], { encoding: false })
+		return gulp.src(v2.path.svg, { encoding: false })
 			.pipe(htmlmin({
 				collapseWhitespace: true
 			}))
@@ -233,12 +237,12 @@ var v2 = {
 	},
 
 	resources() {
-		return gulp.src(['src/v2/fonts/*.*', 'src/v2/*.txt', 'src/v2/*.ico', 'src/v2/*.svg', 'src/v2/*.png', 'src/v2/*.jpg', 'src/v2/*.webmanifest', 'src/v2/*.xml'], { encoding: false })
+		return gulp.src(v2.path.resources, { encoding: false })
 			.pipe(gulp.dest('v2/'))
 	},
 
 	fonts() {
-		return gulp.src(['src/v2/fonts/*.*'], { encoding: false })
+		return gulp.src(v2.path.fonts, { encoding: false })
 			.pipe(gulp.dest('v2/fonts/'))
 	},
 
@@ -258,17 +262,19 @@ var v2 = {
 			})
 		})
 
-		gulp.watch(['src/v2/js/*.js', 'src/v2/js/*/*.js'], { ignoreInitial: false }, v2.js)
-		gulp.watch(['src/v2/css/main.scss', 'src/v2/css/global.scss', 'src/v2/css/nojs.scss', 'src/v2/css/dark.scss'], { ignoreInitial: false }, v2.css)
+		gulp.watch(v2.path.js, { ignoreInitial: false }, v2.js)
+		gulp.watch(v2.path.css, { ignoreInitial: false }, v2.css)
 		gulp.watch(['src/v2/css/404.scss'], { ignoreInitial: false }, v2.fofcss)
-		gulp.watch(['src/v2/css/replurk/*.scss'], { ignoreInitial: false }, v2.replurkcss)
+		gulp.watch(['src/v2/css/replurk/**/*.scss'], { ignoreInitial: false }, v2.replurkcss)
 		gulp.watch(['src/v2/css/vertical-screen.scss'], { ignoreInitial: false }, v2.css_vertical)
 		gulp.watch(['src/v2/css/horizontal-screen.scss'], { ignoreInitial: false }, v2.css_horizontal)
 		gulp.watch(['src/v2/css/print.scss'], { ignoreInitial: false }, v2.print)
-		gulp.watch(['src/v2/css/cache/*.css'], { ignoreInitial: false }, v2.css_prefix)
-		gulp.watch(['src/v2/*.php'], { ignoreInitial: false }, v2.php)
-		gulp.watch(['src/v2/*.txt', 'src/v2/*.ico', 'src/v2/*.svg', 'src/v2/*.png', 'src/v2/*.jpg', 'src/v2/*.webmanifest', 'src/v2/*.xml'], { ignoreInitial: false }, v2.resources)
-		gulp.watch(['src/v2/fonts/*.*'], { ignoreInitial: false }, v2.fonts)
+		gulp.watch(['src/v2/css/cache/**/*.css'], { ignoreInitial: false }, v2.css_prefix)
+		gulp.watch(v2.path.img, { ignoreInitial: false }, v2.img)
+		gulp.watch(v2.path.svg, { ignoreInitial: false }, v2.svg)
+		gulp.watch(v2.path.fonts, { ignoreInitial: false }, v2.fonts)
+		gulp.watch(v2.path.resources, { ignoreInitial: false }, v2.resources)
+		gulp.watch(v2.path.html, { ignoreInitial: false }, v2.html)
 
 		gulp.watch('gulpfile.js', _ => {
 			connect.closeServer()
@@ -277,13 +283,22 @@ var v2 = {
 	}
 }
 
+// Cleanup folder
+const v1clean = () => deleteAsync(['v1'])
+const v2clean = () => deleteAsync(['v2'])
+
 // Version 1
-gulp.task('v1image', gulp.series(v1.img, v1.svg))
-gulp.task('v1', gulp.series(v1.run))
+const v1cleanrun = gulp.series(v1clean, v2.img, v2.svg)
+const v1image = gulp.series(v1.img, v1.svg)
+const v1run = gulp.series(v1.run)
 
 // Version 2
-gulp.task('v2image', gulp.series(v2.jpg, v2.png, v2.svg))
-gulp.task('v2', gulp.series(v2.run))
+const v2cleanrun = gulp.series(v2clean, v2.img, v2.svg)
+const v2image = gulp.series(v2.img, v2.svg)
+const v2run = gulp.series(v2.run)
+
+// Export all
+export { v1cleanrun, v1clean, v1image, v1run, v2clean, v2cleanrun, v2image, v2run }
 
 // Default run version 2
-gulp.task('default', gulp.series(v2.run))
+export default v2run
