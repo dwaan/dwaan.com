@@ -11,25 +11,26 @@ async function crawlAndGenerateSitemap() {
 
         async function crawlInternalPage(url) {
             if (visited.has(url) || visited.has(url + '/')) return
-            visited.add(url)
 
             try {
                 const response = await axios.get(url)
                 const $ = cheerio.load(response.data)
 
+                visited.add(url)
+
                 // Find and crawl internal links
                 const internalLinks = []
                 $('a').each((_, element) => {
                     const href = $(element).attr('href')
-                    if (href && href.startsWith('./') && !href.includes('./menu') && !href.includes('./plurk-api')) internalLinks.push(baseUrl + href.replace('./', '/'))
-                    else if (href && href.startsWith('/') && !href.includes('/menu' && !href.includes('./plurk-api')) && !href.includes('/img')) internalLinks.push(baseUrl + href)
+                    if (href && href.startsWith('/') && !href.includes('/menu') && !href.includes('/plurk-api') && !href.includes('/img')) internalLinks.push(baseUrl + href)
                 })
 
                 for (const link of internalLinks) {
                     await crawlInternalPage(link)
                 }
             } catch (error) {
-                console.log(error)
+                if (error.config.url) console.log("Found missing link:", error.config.url)
+                else console.log("Error occured")
             }
         }
 
