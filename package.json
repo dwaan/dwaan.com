@@ -5,17 +5,16 @@
   "main": "js/main.js",
   "type": "module",
   "scripts": {
+    "Sitemap": "node src/sitemap.js",
     "Update": "npm update",
     "v1 Test": "gulp v1 --development",
     "v1 Image": "gulp v1image",
     "v1 Build": "gulp v1 --production",
     "v1 Clean Build": "gulp v1cleanrun",
-    "v1 Sitemap": "node src/sitemap.js",
     "v2 Test": "gulp v2 --development",
     "v2 Image": "gulp v2image",
     "v2 Build": "gulp v2 --production",
-    "v2 Clean Build": "gulp v2cleanrun --production",
-    "v2 Sitemap": "node src/sitemap.js"
+    "v2 Clean Build": "gulp v2cleanrun --production"
   },
   "repository": {
     "type": "git",
@@ -32,6 +31,7 @@
     "browser-sync": "^3.0.3",
     "cheerio": "^1.0.0",
     "del": "^8.0.0",
+    "fs": "^0.0.1-security",
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-connect-php": "^1.0.3",

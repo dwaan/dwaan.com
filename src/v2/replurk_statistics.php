@@ -32,7 +32,7 @@
 			<a href="/replurk?year=<?php echo $prevyear; ?>">Prev</a>
 			<span>&bull;</span>
 		<?php endif; ?>
-		<a href="/replurk<?php echo $year; ?>" class="now"><?php echo $year; ?></a>
+		<a href="/replurk?year=<?php echo $year; ?>" class="now"><?php echo $year; ?></a>
 		<?php if ($shownext) : ?>
 			<span>&bull;</span>
 			<a href="/replurk?year=<?php echo $nextyear; ?>">Next</a>
