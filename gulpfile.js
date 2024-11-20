@@ -288,16 +288,17 @@ const v1clean = () => deleteAsync(['v1'])
 const v2clean = () => deleteAsync(['v2'])
 
 // Version 1
-const v1cleanrun = gulp.series(v1clean, v2.img, v2.svg)
+const v1cleanrun = gulp.series(v1clean, v2.img, v2.svg, v1.run)
 const v1image = gulp.series(v1.img, v1.svg)
 const v1run = gulp.series(v1.run)
 
 // Version 2
-const v2cleanrun = gulp.series(v2clean, v2.img, v2.svg)
+const v2cleanrun = gulp.series(v2clean, v2.img, v2.svg, v2.run)
 const v2image = gulp.series(v2.img, v2.svg)
 const v2run = gulp.series(v2.run)
 
 // Export all
+
 export { v1cleanrun, v1clean, v1image, v1run, v2clean, v2cleanrun, v2image, v2run }
 
 // Default run version 2
