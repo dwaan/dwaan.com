@@ -10,8 +10,10 @@ import webpack from 'webpack-stream'
 import webp from 'gulp-webp'
 import svgmin from 'gulp-svgmin'
 import gulpMode from 'gulp-mode'
+import eleventy from '@11ty/eleventy'
 import { deleteAsync } from 'del'
 
+const elev = new eleventy()
 const sass = gulpSass(dartSass)
 const mode = gulpMode()
 const sitePort = 8080
@@ -121,7 +123,8 @@ var v1 = {
 
 var v2 = {
 	path: {
-		html: ['src/v2/*.php'],
+		liquid: ['src/v2/**/*.liquid'],
+		html: ['src/v2/**/*.php'],
 		js: ['src/v2/js/**/*.js'],
 		css: ['src/v2/css/{main,global,nojs,dark}.scss'],
 		img: ['src/v2/img/**/*.{jpg,jpeg,png}'],
@@ -211,8 +214,14 @@ var v2 = {
 			.pipe(browserSync.stream())
 	},
 
+	async liquid() {
+		await elev.write()
+		return gulp.src(v2.path.liquid)
+			.pipe(browserSync.stream())
+	},
+
 	html() {
-		return gulp.src(['src/v2/*.php'])
+		return gulp.src(v2.path.html)
 			.pipe(htmlmin({
 				collapseWhitespace: true
 			}))
@@ -251,7 +260,6 @@ var v2 = {
 			hostname: "0.0.0.0",
 			port: sitePort,
 			base: "v2/",
-			router: "../router.php",
 			keepalive: true,
 			stdio: "ignore",
 			debug: false
@@ -275,6 +283,7 @@ var v2 = {
 		gulp.watch(v2.path.fonts, { ignoreInitial: false }, v2.fonts)
 		gulp.watch(v2.path.resources, { ignoreInitial: false }, v2.resources)
 		gulp.watch(v2.path.html, { ignoreInitial: false }, v2.html)
+		gulp.watch(v2.path.liquid, { ignoreInitial: false }, v2.liquid)
 
 		gulp.watch('gulpfile.js', _ => {
 			connect.closeServer()

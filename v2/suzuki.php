@@ -1,1 +1,0 @@
-<?php header("Location: ./suzuki-website-redesign-pitching"); ?>

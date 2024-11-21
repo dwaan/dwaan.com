@@ -2,7 +2,7 @@
 
 // API call helper
 var api = {
-	url: "./plurk-api",
+	url: "/replurk/api/",
 	requests: [],
 	storageExceeded: false,
 	call: function (url, wait = 2.5) {

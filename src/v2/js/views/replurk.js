@@ -18,8 +18,37 @@ var replurk = {
 			var year = Number(url.get('year'))
 
 			if (currentmonth >= 1 && currentmonth <= 10) currentyear--
-			if (year < 2008) year = 2008
-			if (year > currentyear) year = currentyear
+
+			if (year < 2008) {
+				year = currentyear
+			}
+			if (year <= 2008) {
+				next.querySelectorAll(".nav-prev").forEach(el => {
+					el.remove()
+				})
+			}
+			if (year >= currentyear) {
+				year = currentyear
+				next.querySelectorAll(".nav-next").forEach(el => {
+					el.remove()
+				})
+			}
+
+			next.querySelectorAll(".nav-prev").forEach(el => {
+				el.setAttribute("href", "/replurk/?year=" + (year - 1))
+			})
+			next.querySelectorAll(".nowyear").forEach(el => {
+				el.setAttribute("href", "/replurk/?year=" + year)
+				el.innerText = year
+			})
+			next.querySelectorAll(".nav-next").forEach(el => {
+				el.setAttribute("href", "/replurk/?year=" + (year + 1))
+			})
+
+			next.querySelectorAll(".shortyear").forEach(el => {
+				let shortyear = year - 2000
+				el.innerText = (shortyear < 10 ? "0" : "") + shortyear
+			})
 
 			replurk.replurk = new events.default(next, year)
 

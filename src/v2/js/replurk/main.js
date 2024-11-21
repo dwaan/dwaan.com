@@ -670,14 +670,18 @@ class replurk {
 		if (this.me.gender == 0) gender = `${icons.draw("crown")} Queen`
 
 		var tiktok = "mirror-ball"
-		if (this.me.gender == 1) tiktok = "man-dancing-medium-dark-skin-tone"
-		if (this.me.gender == 0) tiktok = "woman-dancing-medium-dark-skin-tone"
+		if (this.me.gender == 1) tiktok = "man-dancing"
+		if (this.me.gender == 0) tiktok = "woman-dancing"
 
 		var facebook = "older-person"
 		if (this.me.gender == 1) facebook = "old-man"
 		if (this.me.gender == 0) facebook = "old-woman"
 
-		var plurker = icons.draw("person-bowing-medium")
+		var superhero = "person-superhero"
+		if (this.me.gender == 1) facebook = "man-superhero"
+		if (this.me.gender == 0) facebook = "woman-superhero"
+
+		var plurker = icons.draw("person-bowing")
 		if (this.me.gender == 1) plurker = icons.draw("man-bowing")
 		if (this.me.gender == 0) plurker = icons.draw("woman-bowing")
 
@@ -714,7 +718,7 @@ class replurk {
 		count += this.statistics.drawBadge(this.statistics.porn_count >= 10, 'adultbadges', "face-with-peeking-eye", "<strong>Adult-er</strong>", "Plurk more \"adult\" content")
 		count += this.statistics.drawBadge(this.statistics.replurker_count >= 50, 'plurkerbadges', "trophy", "<strong>Trendsetter</strong>", "Replurk more Plurk")
 		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 1.5, 'plurkerbadges', "military-medal", `<strong>Active Plurker ${plurker}</strong>`, "Plurk more daily")
-		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', "person-superhero-medium", `<strong>Super Active Plurker ${plurker}${plurker}</strong>`, "Plurk even more daily")
+		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', superhero, `<strong>Super Active Plurker ${plurker}${plurker}</strong>`, "Plurk even more daily")
 		this.statistics.drawBadge(count >= 17, 'plurkerbadges', "glowing-star", `<strong>Super Star</strong>`, "Catch them all")
 		this.info()
 	}
