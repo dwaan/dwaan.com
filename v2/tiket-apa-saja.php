@@ -1,1 +1,0 @@
-<?php header("Location: ./melon-tiket-apa-saja"); ?>
