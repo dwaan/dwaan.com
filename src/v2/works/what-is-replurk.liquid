@@ -1,40 +1,20 @@
 ---
-layout: main.liquid
+layout: detail.liquid
 title: RePlurk
 description: Unofficial Plurk Year End Recap for
 namespace: detail
 class: replurk
 time: 32
+
+iconTitle: RePlurk
+qr: replurk
+year: 2021
+type: Weekend Project
+
+date: 2021-10-29
 ---
 
 {% assign now = "now" | date: "%Y" | minus: 0 %}
-
-<img
-  loading="lazy"
-  src="/img/qr/replurk.svg"
-  width="64"
-  height="64"
-  alt="Dwan - RePlurk"
-  class="print qr"
-  hidden />
-
-<hr/>
-
-<section class="middle full snap">
-  <div class="padding">
-    <h2 class="replurktitle">RePlurk</h2>
-  </div>
-  <div class="year">
-    <h4>/{{ now }}</h4>
-  </div>
-  <div class="arrow-big">
-    <a href="#more" class="arrow scrollto">
-      <span>read more</span>
-    </a>
-  </div>
-</section>
-
-<hr/>
 
 <section id="more" class="middle style-plain clip snap">
   <div class="text">
@@ -179,10 +159,10 @@ time: 32
       {% endfor %}
     </div>
     <div class="continue">
-      <a href="/musiku" class="title">
+      <a href="/musiku/" class="title">
         <span>next case study</span>
       </a>
-      <a href="/musiku">
+      <a href="/musiku/">
         <span>
           <i>Musiku</i>
         </span>

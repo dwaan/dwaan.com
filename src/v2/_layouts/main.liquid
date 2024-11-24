@@ -2,8 +2,10 @@
 title: Dwan 😙
 description: 🙋🏽‍♂️ Hello! my name is Dwan 😙, I'm a UI/UX Designer and Strategist. Visit my website to see and learn about my design portfolio. And if you're lucky, some of the website above and below are about me also.
 namespace: home
-class:
-time: 0
+
+# Optional parameters:
+# class
+# time
 ---
 
 <!doctype html>
@@ -334,7 +336,7 @@ time: 0
       class="{{ class }} {{ namespace }}">
       {{ content }}
 
-      {% if time > 0 %}
+      {% if time %}
         <hr/>
 
         <div class="footer">
