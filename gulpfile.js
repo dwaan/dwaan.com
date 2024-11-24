@@ -19,6 +19,12 @@ const mode = gulpMode()
 const sitePort = 8080
 const siteUrl = `http://localhost:${sitePort}/`
 
+var liquid = async () => {
+	await elev.write()
+	elev.watch()
+	elev.serve(sitePort)
+}
+
 var v1 = {
 	js() {
 		return gulp.src(['src/v1/js/main.js'])
@@ -123,8 +129,8 @@ var v1 = {
 
 var v2 = {
 	path: {
-		liquid: ['src/v2/**/*.liquid'],
-		html: ['src/v2/**/*.php'],
+		html: ['v2/**/*.html'],
+		php: ['src/v2/**/*.php'],
 		js: ['src/v2/js/**/*.js'],
 		css: ['src/v2/css/{main,global,nojs,dark}.scss'],
 		img: ['src/v2/img/**/*.{jpg,jpeg,png}'],
@@ -214,18 +220,17 @@ var v2 = {
 			.pipe(browserSync.stream())
 	},
 
-	async liquid() {
-		await elev.write()
-		return gulp.src(v2.path.liquid)
+	php() {
+		return gulp.src(v2.path.php)
+			.pipe(htmlmin({
+				collapseWhitespace: true
+			}))
+			.pipe(gulp.dest('v2/'))
 			.pipe(browserSync.stream())
 	},
 
 	html() {
 		return gulp.src(v2.path.html)
-			.pipe(htmlmin({
-				collapseWhitespace: true
-			}))
-			.pipe(gulp.dest('v2/'))
 			.pipe(browserSync.stream())
 	},
 
@@ -256,6 +261,8 @@ var v2 = {
 	},
 
 	run() {
+		liquid()
+
 		connect.server({
 			hostname: "0.0.0.0",
 			port: sitePort,
@@ -282,8 +289,8 @@ var v2 = {
 		gulp.watch(v2.path.svg, { ignoreInitial: false }, v2.svg)
 		gulp.watch(v2.path.fonts, { ignoreInitial: false }, v2.fonts)
 		gulp.watch(v2.path.resources, { ignoreInitial: false }, v2.resources)
+		gulp.watch(v2.path.php, { ignoreInitial: false }, v2.php)
 		gulp.watch(v2.path.html, { ignoreInitial: false }, v2.html)
-		gulp.watch(v2.path.liquid, { ignoreInitial: false }, v2.liquid)
 
 		gulp.watch('gulpfile.js', _ => {
 			connect.closeServer()

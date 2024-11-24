@@ -1,0 +1,158 @@
+---
+layout: detail.liquid
+title: Suzuki Website Redesign
+description: A short study case of website redesign pitching for Suzuki Indonesia.
+namespace: detail
+class: suzuki
+time: 55
+
+icon: logo/suzuki, 98, 120, 147 180
+iconLabel: Suzuki Indonesia's Logo
+qr: suzuki
+year: 2020
+type: Pitching Concept
+
+date: 2020-10-29
+---
+
+<section id="more" class="middle style-spread clip snap">
+    <div class="text">
+        <div class="titles">
+            <h4>Project Pitching</h4>
+            <h1>Suzuki Indonesia</h1>
+        </div>
+        <p>Suzuki Indonesia just recently redesign their website, but they experience several issues and felt that their website needs more improvement.</p>
+    </div>
+    <div class="thumbs">
+      {% for i in (4..5) %}
+            <picture class="pic-{{ i }}">
+                <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-{{ i }}@2x.webp 2x, /img/suzuki/suzuki-{{ i }}@3x.webp 3x">
+                <img loading="lazy" src="/img/suzuki/suzuki-{{ i }}.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page {{ i }} - by Dwan" />
+            </picture>
+      {% endfor %}
+    </div>
+</section>
+
+<hr />
+
+<section class="middle style-top snap">
+    <div class="text">
+        <h2>Main Key Suggestions</h2>
+        <ol class="zero">
+            <li>Suzuki need to reinforce their corporate color into their website and their marketing materials.
+            </li>
+            <li>Restructuring their website information based on initial user persona is the key vital point for
+                redesign.</li>
+            <li>Further more, suggesting some improvement on their website server infrastructures.</li>
+        </ol>
+    </div>
+    <div class="thumbs">
+      {% for i in (2..9) %}
+        <picture class="pic-{{ i }}">
+                <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-{{ i }}@2x.webp 2x, /img/suzuki/suzuki-{{ i }}@3x.webp 3x">
+                <img loading="lazy" src="/img/suzuki/suzuki-{{ i }}.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page {{ i }} - by Dwan" />
+            </picture>
+      {% endfor %}
+    </div>
+</section>
+
+<hr />
+
+<section class="middle style-flex auto snap">
+    <div class="style-row">
+        <div class="style-column">
+            <div class="meta">
+                <svg width="70" height="85" viewBox="0 0 147 180" aria-label="Suzuki's Logo">
+                    <use href="/img/logo.svg#logo/suzuki"></use>
+                </svg>
+            </div>
+            <div class="text">
+                <h3>Corporate Identity</h3>
+                <p>Reinforcing their corporate identity - in this case their logo - into their website and their
+                    marketing materials to provide consistency on visual elements.</p>
+            </div>
+        </div>
+        <div class="style-column">
+            <div class="meta color">
+                <ul class="flat" hidden>
+                    <li style="background: #E20A17"></li>
+                    <li style="background: #003399"></li>
+                    <li>Primary</li>
+                </ul>
+                <ul class="flat" hidden>
+                    <li style="background: #FFD700"></li>
+                    <li style="background: #fff"></li>
+                    <li style="background: #000"></li>
+                    <li>Secondary</li>
+                </ul>
+            </div>
+            <div class="text">
+                <small>The color scheme derived from logo color with inpiration from super hero color
+                    scheme.</small>
+            </div>
+        </div>
+        <div class="style-column">
+            <div class="meta" hidden>
+                <ul class="bland">
+                    <li style="background: #E20A17"></li>
+                    <li style="background: #003399"></li>
+                </ul>
+            </div>
+            <div class="text">
+                <small>The shape of the S logo provide distinctive look on button element.</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr />
+
+<section class="middle style-masonry snap-center">
+    <div class="thumbs">
+      {% for i in (1..11) %}
+        {% if i == 7 %}
+                <div class="text">
+                    <h3>Optimizing Layout</h3>
+                    <p>Products page layout are more optimized for mobile visitor with clear separation between information.</p>
+                </div>
+        {% endif %}
+            <picture class="pic-{{ i }}">
+                <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-{{ i }}@2x.webp 2x, /img/suzuki/suzuki-{{ i }}@3x.webp 3x">
+                <img loading="lazy" src="/img/suzuki/suzuki-{{ i }}.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page {{ i }} - by Dwan" />
+            </picture>{% endfor %}
+    </div>
+    <div class="shade"></div>
+</section>
+
+<hr />
+
+<section class="middle style-angled snap-bottom clip">
+    <div class="text">
+        <h3>Navigation</h3>
+        <p>Further improvement in navigation means visitor can easily see their latest products with fewer taps.
+        </p>
+    </div>
+    <div class="thumbs">
+      {% for i in (1..11) %}
+            <picture class="pic-{{ i }}">
+                <source media="(min-width: 1024px)" srcset="/img/suzuki/suzuki-{{ i }}@2x.webp 2x, /img/suzuki/suzuki-{{ i }}@3x.webp 3x">
+                <img loading="lazy" src="/img/suzuki/suzuki-{{ i }}.webp" height="250" alt="Suzuki Indonesia Website Redesign - Page {{ i }} - by Dwan" />
+            </picture>
+        {% endfor %}
+    </div>
+</section>
+
+<hr />
+
+<div class="links snap-bottom">
+    <nav>
+        <div class="prototype">
+            <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK" class="title"><span>visit the prototype</span></a>
+            <a href="https://www.figma.com/proto/wHx1vyiae61nxxQ71gyREp/Suzuki?page-id=0%3A1&node-id=2%3A3&viewport=348%2C25%2C0.1&scaling=scale-down&starting-point-node-id=2%3A3" aria-label="Figma Prototype - Suzuki - Website Redesign" target="_BLANK"><span>mobile</span></a>
+        </div>
+        <div class="continue">
+            <a href="/what-is-replurk/" class="title"><span>next case study</span></a>
+            <a href="/what-is-replurk/"><span><i>RePlurk</i></span></a>
+        </div>
+    </nav>
+</div>
