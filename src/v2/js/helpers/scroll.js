@@ -51,8 +51,9 @@ var scroll = {
 				markers: markers,
 				trigger: trigger,
 				start: "0 " + position,
-				end: "+=175 " + position,
-				scrub: reduceMotionFilter(2),
+				end: "0 " + position,
+				toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reverse",
+				scrub: false,
 				animation: this.tl[this.l]
 			}))
 		})

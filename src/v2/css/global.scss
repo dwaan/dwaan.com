@@ -272,6 +272,16 @@ picture {
 
 .grid {
 	display: grid;
+	grid-row-gap: var(--padxl);
+	grid-column-gap: var(--padxxl);
+	align-items: center;
+	justify-content: center;
+
+	>li {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 /* Browser Upgrade Prompt */
@@ -1527,10 +1537,45 @@ header {
 	align-items: center;
 	justify-content: flex-end;
 
+	small {
+		letter-spacing: .05rem;
+		line-height: 140%;
+	}
+
 	picture {
+
 		&,
 		img {
-			box-shadow: initial!important;
+			box-shadow: initial !important;
+		}
+	}
+}
+
+.style-top--static-auto {
+	@extend %style-top;
+	align-items: center;
+	justify-content: space-between;
+
+	small {
+		letter-spacing: .05rem;
+		line-height: 140%;
+	}
+
+	picture {
+
+		&,
+		img {
+			box-shadow: initial !important;
+		}
+	}
+
+	.logos {
+		width: 100%;
+
+		.grid {
+			width: 100%;
+			grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+			place-items: center;
 		}
 	}
 }
@@ -2145,18 +2190,7 @@ header {
 
 	.grid {
 		width: 100%;
-		display: grid;
-		grid-row-gap: var(--padxl);
-		grid-column-gap: var(--padxxl);
 		grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
-		align-items: center;
-		justify-content: center;
-
-		>li {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
 
 		.text {
 			grid-column: span 2;
@@ -2281,7 +2315,7 @@ header {
 // Sagara page
 
 .sagara {
-	.style-top--static {
+	.gray-background {
 		background-color: #f2f2f2;
 	}
 }
@@ -2426,6 +2460,10 @@ ol {
 		list-style: none;
 		@include mixins.zero-margin-padding;
 		flex-flow: column nowrap;
+	}
+
+	&.grid {
+		display: grid
 	}
 }
 

@@ -599,10 +599,10 @@ var detailview = {
 		});
 
 		// Style - Static
-		next.querySelectorAll(".style-top--static").forEach(el => {
+		next.querySelectorAll(".style-top--static, .style-top--static-auto").forEach(el => {
 			// Move text
 			scroll.moveText({
-				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p")
+				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p, .text small")
 			});
 
 			// Move thumbnails
@@ -629,8 +629,41 @@ var detailview = {
 				});
 			});
 
-			// Reset
-			ScrollTrigger.defaults({});
+			// Move the logos
+			el.querySelectorAll(".logos").forEach(el => {
+				scroll.push(tl => {
+					var pictures = el.querySelectorAll("li");
+
+					tl.fromTo(pictures, {
+						opacity: 0
+					}, {
+						opacity: 1,
+						ease: "ease.out",
+						duration: .45,
+						stagger: .05
+					}, 0);
+
+					tl.fromTo(pictures, {
+						scale: .75
+					}, {
+						scale: 1,
+						ease: "elastic.out",
+						duration: 1,
+						stagger: .05
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "0 100%",
+						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reset",
+						scrub: false,
+						animation: tl
+					});
+				});
+			})
 		});
 		// Style - Bottom
 		next.querySelectorAll(".style-bottom-logo").forEach(el => {
@@ -1510,8 +1543,7 @@ var detailview = {
 						end: "0 100%",
 						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reset",
 						scrub: false,
-						animation: tl,
-						markers: true
+						animation: tl
 					});
 				});
 			})

@@ -123,7 +123,8 @@ date: 2023-10-29
 </section>
 
 <hr/>
-<section class="middle style-top--static snap">
+
+<section class="middle style-top--static gray-background snap">
   <div class="thumbs">
     <picture>
       <source media="(min-width: 1024px) and (min-device-pixel-ratio: 2)" srcset="/img/sagara/tote@2x.webp 2x, /img/sagara/tote@3x.webp 3x">
@@ -142,6 +143,34 @@ date: 2023-10-29
 </section>
 
 <hr/>
+
+<section class="middle style-top--static-auto snap">
+  <div class="text">
+    <h3>Adaptiveness</h3>
+    <small>Adaptiveness is a core concept of the redesign, inspiring me to create a logo with multi-language support.</small>
+  </div>
+
+  <div class="logos">
+    <ul class="flat grid">
+      {% for i in (1..8) %}
+        <li>
+          <img
+            src="/img/sagara/logo-text-{{ i }}.svg"
+            width="178"
+            height="59"
+            alt="Sagara's logo in other language {{ i }}" />
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="text">
+    <small>The various implementation of the brand identity provide a fun yet very fresh look if Sagara.</small>
+  </div>
+</section>
+
+<hr/>
+
 
 <div class="links snap-end">
   <nav>
