@@ -301,7 +301,7 @@ class replurk {
 
 		// Snap
 		next.querySelectorAll("section.snap").forEach(el => scroll.snap(el))
-		next.querySelectorAll("section.snap-bottom").forEach(el => scroll.snap(el, "bottom"))
+		next.querySelectorAll("section.snap-end").forEach(el => scroll.snap(el, "end"))
 	}
 	// Logout
 	async logout() {

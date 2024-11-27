@@ -10,7 +10,7 @@ namespace: home
 
 <hr />
 
-<section class="middle full">
+<section class="middle full snap">
   <div id="flares" class="flares" hidden>
     <img src="/img/flares/flare1.webp" loading="lazy" width="572" height="190" alt="Flare Number 1" class="flare flare1" />
     <img src="/img/flares/flare2.webp" loading="lazy" width="572" height="190" alt="Flare Number 2" class="flare flare2" />
@@ -34,7 +34,7 @@ namespace: home
 <div id="casestudy"></div>
 
 {% for item in collections.works reversed %}
-<section class="middle full home-{{ item.data.qr }}">
+<section class="middle full home-{{ item.data.qr }} snap">
   <h2 class="hidden">{{ item.data.title }}</h2>
   <div class="padding">
     {% if item.data.iconTitle %}
@@ -75,7 +75,7 @@ namespace: home
 <hr />
 {% endfor %}
 
-<section class="middle full home-v1">
+<section class="middle full home-v1 snap">
   <h2 class="hidden">Dwan v1</h2>
   <div class="padding">
     <a href="https://v1.dwaan.com" class="v1title" aria-label="Dwan logo" data-barba-prevent>
@@ -95,7 +95,7 @@ namespace: home
 
 <hr />
 
-<div class="footer">
+<div class="footer snap-end">
   <a href="/hi/" class="email" title="me@dwaan.com" aria-label="me@dwaan.com">me@dwaan.com</a>
   <div class="location">
     <span>Jakarta</span>

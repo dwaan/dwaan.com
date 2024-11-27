@@ -51,8 +51,9 @@ var scroll = {
 				markers: markers,
 				trigger: trigger,
 				start: "0 " + position,
-				end: "+=175 " + position,
-				scrub: reduceMotionFilter(2),
+				end: "0 " + position,
+				toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reverse",
+				scrub: false,
 				animation: this.tl[this.l]
 			}))
 		})
@@ -89,12 +90,12 @@ var scroll = {
 			}))
 		})
 	},
-	snap: function (el, type = "regular") {
+	snap: function (el, type = "start") {
 		let start = "0 0"
 		let end = "100% 0"
 
 		type = type.toLowerCase()
-		if (type == "bottom") {
+		if (type == "end") {
 			start = "0 100%"
 			end = "100% 100%"
 		}
@@ -108,10 +109,13 @@ var scroll = {
 			end: end,
 			animation: tl,
 			onUpdate: self => direction = self.direction,
+			// id: el.className,
+			// markers: true,
 			snap: {
 				snapTo: value => {
-					let final = value <= .25 ? 0 : direction <= 0 ? 0 : 1
-					if (type == "center") final = value <= .5 ? .25 : direction <= 0 ? .25 : 1
+					console.log(type, direction < 0 ? "up" : "down", value)
+					let final = value <= .25 ? 0 : direction < 0 ? 1 : 0
+					if (type == "center") final = direction < 0 ? (value < .95 ? 0 : 1) : (value > .05 ? 1 : 0)
 					duration = value / 2
 					return final
 				},

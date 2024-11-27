@@ -562,6 +562,20 @@ div>.vertical {
 	}
 }
 
+.style-top--left {
+	padding: calc(var(--padxxl) * 3) calc(var(--padxxl) * 2);
+}
+
+.style-top--static {
+	@extend .style-top;
+	gap: var(--padxxl);
+}
+
+.style-top--static-auto {
+	@extend .style-top;
+	gap: var(--padxxl);
+}
+
 /* Style text on top without image */
 .style-top--text {
 	.text {
@@ -947,6 +961,14 @@ div>.vertical {
 	// }
 }
 
+.style-center--condensed {
+	@extend .style-center;
+}
+
+.style-center--small {
+	@extend .style-center;
+}
+
 /* Style 3D thumbs */
 .style-3d {
 	flex-direction: column;
@@ -1059,7 +1081,7 @@ div>.vertical {
 		}
 	}
 
-	.style-center-small {
+	.style-center--small {
 		.text {
 			padding: 0 var(--padx);
 		}
@@ -1331,10 +1353,8 @@ div>.vertical {
 	}
 }
 
-/* ol/ul for branding color for Suzuki */
 .detail {
 	.color {
-
 		ul {
 			gap: var(--padx);
 			flex-flow: row wrap;

@@ -12,6 +12,7 @@ import svgmin from 'gulp-svgmin'
 import gulpMode from 'gulp-mode'
 import eleventy from '@11ty/eleventy'
 import { deleteAsync } from 'del'
+import rename from 'gulp-rename'
 
 const elev = new eleventy()
 const sass = gulpSass(dartSass)
@@ -236,6 +237,13 @@ var v2 = {
 
 	img() {
 		return gulp.src(v2.path.img, { encoding: false })
+			.pipe(rename(path => {
+				return {
+					dirname: path.dirname,
+					basename: path.basename.toLowerCase().replace(" ", "-"),
+					extname: path.extname
+				  }
+			}))
 			.pipe(webp())
 			.pipe(gulp.dest('v2/img/'))
 			.pipe(browserSync.stream())
