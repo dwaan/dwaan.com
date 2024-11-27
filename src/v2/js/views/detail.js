@@ -415,47 +415,27 @@ var detailview = {
 		});
 
 		// Style - Top and Top Auto
-		next.querySelectorAll(".style-top, .style-top--auto").forEach(el => {
-			var thumbs = el.querySelector(".thumbs");
+		next.querySelectorAll(".style-top, .style-top--auto, .style-top--left").forEach(el => {
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p")
 			});
+
 			ScrollTrigger.defaults({
 				start: "0 100%",
 				end: "100% 0",
 				scrub: reduceMotionFilter() ? true : .75
 			});
+
 			// Move thumbnails
-			var screen = gsap.matchMedia();
-			screen.add("(max-aspect-ratio: 1/1)", () => {
-				scroll.push(tl => {
-					tl.fromTo(thumbs, {
-						x: 0
-					}, {
-						x: "-50%",
-						ease: "linear"
-					});
-
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						animation: tl
-					});
-				});
-			});
-			screen.add("(min-aspect-ratio: 1/1)", () => {
-				var scrollid = 0;
-				function scrolling() {
-					var computedStyle = getComputedStyle(el);
-					var elWidth = el.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
-
-					scrollid = scroll.push(tl => {
+			el.querySelectorAll(".thumbs").forEach(thumbs => {
+				var screen = gsap.matchMedia();
+				screen.add("(max-aspect-ratio: 1/1)", () => {
+					scroll.push(tl => {
 						tl.fromTo(thumbs, {
 							x: 0
 						}, {
-							x: elWidth - thumbs.offsetWidth,
+							x: "-50%",
 							ease: "linear"
 						});
 
@@ -466,14 +446,64 @@ var detailview = {
 							animation: tl
 						});
 					});
-				}
-				scrolling();
-
-				const resizeObserver = new ResizeObserver(_ => {
-					scroll.kill(scrollid);
-					scrolling();
 				});
-				resizeObserver.observe(thumbs);
+				screen.add("(min-aspect-ratio: 1/1)", () => {
+					var scrollid = 0;
+					function scrolling() {
+						var computedStyle = getComputedStyle(el);
+						var elWidth = el.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
+
+						scrollid = scroll.push(tl => {
+							tl.fromTo(thumbs, {
+								x: 0
+							}, {
+								x: elWidth - thumbs.offsetWidth,
+								ease: "linear"
+							});
+
+							return tl;
+						}, tl => {
+							return ScrollTrigger.create({
+								trigger: el,
+								animation: tl
+							});
+						});
+					}
+					scrolling();
+
+					const resizeObserver = new ResizeObserver(_ => {
+						scroll.kill(scrollid);
+						scrolling();
+					});
+					resizeObserver.observe(thumbs);
+				});
+			});
+
+			// Move column
+			el.querySelectorAll(".style-column").forEach(cols => {
+				scroll.push(tl => {
+					tl.fromTo(cols.children, {
+						opacity: 0,
+						y: 100
+					}, {
+						opacity: 1,
+						y: 0,
+						ease: "ease.out",
+						duration: .5,
+						stagger: .1
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: cols,
+						start: "0 95%",
+						end: "100% 95%",
+						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reset",
+						scrub: false,
+						animation: tl
+					});
+				});
 			});
 			// Reset
 			ScrollTrigger.defaults({});
@@ -568,6 +598,40 @@ var detailview = {
 			ScrollTrigger.defaults({});
 		});
 
+		// Style - Static
+		next.querySelectorAll(".style-top--static").forEach(el => {
+			// Move text
+			scroll.moveText({
+				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p")
+			});
+
+			// Move thumbnails
+			el.querySelectorAll(".thumbs").forEach(thumbs => {
+				scroll.push(tl => {
+					tl.fromTo(thumbs, {
+						scale: .5
+					}, {
+						scale: 1,
+						ease: "expo.out",
+						duration: .75
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						animation: tl,
+						start: "40% 100%",
+						end: "60% 100%",
+						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reverse",
+						scrub: false
+					});
+				});
+			});
+
+			// Reset
+			ScrollTrigger.defaults({});
+		});
 		// Style - Bottom
 		next.querySelectorAll(".style-bottom-logo").forEach(el => {
 			// Move text
@@ -956,7 +1020,7 @@ var detailview = {
 					}, {
 						scale: "2",
 						ease: "linear",
-						duration: reduceMotionFilter() ? 10000: 120,
+						duration: reduceMotionFilter() ? 10000 : 120,
 						yoyo: true
 					});
 				});
@@ -967,7 +1031,8 @@ var detailview = {
 					trigger: el,
 					start: "0% 100%",
 					end: "105% 100%",
-					toggleActions: "play pause resume reset",
+					toggleActions: reduceMotionFilter() ? "none none none none" : "play pause resume reset",
+					scrub: false,
 					animation: tl
 				});
 			});
@@ -1001,7 +1066,8 @@ var detailview = {
 						trigger: el,
 						start: "95% 100%",
 						end: "105% 100%",
-						toggleActions: "play pause resume reverse",
+						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reverse",
+						scrub: false,
 						animation: tl
 					});
 				});
@@ -1407,6 +1473,50 @@ var detailview = {
 				});
 			});
 		});
+		next.querySelectorAll(".style-center--condensed").forEach(el => {
+			// Move the text
+			scroll.moveText({
+				elements: el.querySelectorAll(".text.anim h4, .text.anim h1, .text.anim p")
+			});
+
+			// Move the logos
+			el.querySelectorAll(".logos").forEach(el => {
+				scroll.push(tl => {
+					var pictures = el.querySelectorAll("li");
+
+					tl.fromTo(pictures, {
+						opacity: 0
+					}, {
+						opacity: 1,
+						ease: "ease.out",
+						duration: .45,
+						stagger: .05
+					}, 0);
+
+					tl.fromTo(pictures, {
+						scale: .75
+					}, {
+						scale: 1,
+						ease: "elastic.out",
+						duration: 1,
+						stagger: .05
+					}, 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "0 100%",
+						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reset",
+						scrub: false,
+						animation: tl,
+						markers: true
+					});
+				});
+			})
+		});
+
 
 		// Style - 3D
 		next.querySelectorAll(".style-3d").forEach(el => {
@@ -1477,15 +1587,15 @@ var detailview = {
 		});
 
 		// Snap
-		next.querySelectorAll("section.snap").forEach(el => {
-			scroll.snap(el, "center");
-		});
-		next.querySelectorAll("section.snap-start").forEach(el => {
-			scroll.snap(el, "start");
-		});
-		next.querySelectorAll("section.snap-end").forEach(el => {
-			scroll.snap(el, "end");
-		});
+		// next.querySelectorAll("section.snap").forEach(el => {
+		// 	scroll.snap(el, "center");
+		// });
+		// next.querySelectorAll("section.snap-start").forEach(el => {
+		// 	scroll.snap(el, "start");
+		// });
+		// next.querySelectorAll("section.snap-end").forEach(el => {
+		// 	scroll.snap(el, "end");
+		// });
 	},
 	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!"),
 	beforeLeave: () => {

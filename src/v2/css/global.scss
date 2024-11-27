@@ -1235,12 +1235,25 @@ header {
 	}
 
 	.color {
+		display: flex;
+		flex-flow: row;
+
 		li {
+			display: flex;
+			align-items: center;
 			border: 1px solid var(--black-25);
-			border-radius: 1000px;
+			@include mixins.typography(1rem, false, 15px, .05em);
+
+			&,
+			span {
+				border-radius: 1000px;
+			}
 
 			&:last-child {
 				border: none;
+				width: auto;
+				height: auto;
+				border-radius: initial;
 			}
 		}
 	}
@@ -1478,6 +1491,48 @@ header {
 .style-top--text {
 	@extend %style-top;
 	justify-content: center;
+}
+
+.style-top--left {
+	@extend %style-top;
+	gap: var(--padxxl);
+	height: auto;
+
+	.text {
+		max-width: 480px;
+		align-self: initial;
+	}
+
+	.style-column {
+		align-items: flex-start;
+
+		.meta {
+			display: flex;
+			height: 64px;
+			justify-content: center;
+		}
+
+		.text {
+			max-width: initial;
+
+			small {
+				width: initial;
+			}
+		}
+	}
+}
+
+.style-top--static {
+	@extend %style-top;
+	align-items: center;
+	justify-content: flex-end;
+
+	picture {
+		&,
+		img {
+			box-shadow: initial!important;
+		}
+	}
 }
 
 
@@ -2164,21 +2219,6 @@ header {
 /* BKPM Page */
 
 .bkpm {
-	.color {
-		flex-flow: row nowrap;
-		gap: var(--padm);
-
-		li,
-		li:last-child {
-			display: flex;
-
-			&,
-			span {
-				border-radius: 100%;
-			}
-		}
-	}
-
 	.style-top {
 		.text {
 			max-width: 480px;
@@ -2207,14 +2247,6 @@ header {
 				border: none;
 				font-size: .7rem;
 			}
-
-			.color {
-				li {
-					width: auto;
-					height: auto;
-					line-height: initial;
-				}
-			}
 		}
 	}
 
@@ -2241,6 +2273,16 @@ header {
 				height: calc(var(--pic-h) / 2);
 			}
 		}
+	}
+}
+
+
+
+// Sagara page
+
+.sagara {
+	.style-top--static {
+		background-color: #f2f2f2;
 	}
 }
 
@@ -2384,24 +2426,6 @@ ol {
 		list-style: none;
 		@include mixins.zero-margin-padding;
 		flex-flow: column nowrap;
-	}
-
-	&.color {
-		display: flex;
-		flex-flow: column nowrap;
-
-		li {
-			display: flex;
-			align-items: center;
-			border: 1px solid var(--black-50);
-			@include mixins.typography(1rem, false, 15px, .05em);
-
-			&:last-child {
-				border: none;
-				width: auto;
-				height: auto;
-			}
-		}
 	}
 }
 

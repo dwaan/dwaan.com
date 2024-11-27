@@ -108,6 +108,7 @@ var scroll = {
 			end: end,
 			animation: tl,
 			onUpdate: self => direction = self.direction,
+			markers: true,
 			snap: {
 				snapTo: value => {
 					let final = value <= .25 ? 0 : direction <= 0 ? 0 : 1

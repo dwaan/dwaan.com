@@ -562,6 +562,15 @@ div>.vertical {
 	}
 }
 
+.style-top--left {
+	padding: calc(var(--padxxl) * 3) calc(var(--padxxl) * 2);
+}
+
+.style-top--static {
+	@extend .style-top;
+	gap: var(--padxxl);
+}
+
 /* Style text on top without image */
 .style-top--text {
 	.text {
@@ -1341,7 +1350,6 @@ div>.vertical {
 
 .detail {
 	.color {
-
 		ul {
 			gap: var(--padx);
 			flex-flow: row wrap;

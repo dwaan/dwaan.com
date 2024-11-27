@@ -327,8 +327,8 @@ div>.vertical {
 
 	.color {
 		ul {
-			display: flex;
 			gap: calc(var(--padx) / 2);
+			flex-flow: row nowrap;
 		}
 
 		li {
@@ -642,6 +642,15 @@ div>.vertical {
 	}
 }
 
+.style-top--left {
+	padding: calc(var(--padxxl) * 3) calc(var(--padxxl) * 2);
+}
+
+.style-top--static {
+	@extend .style-top;
+	gap: var(--padxxl);
+}
+
 /* Style text on top without image */
 .style-top--text {
 	padding: calc(var(--padxl) * 4) var(--padx) calc(var(--padxl) * 3); // !important;
@@ -784,6 +793,11 @@ div>.vertical {
 				width: 289px;
 			}
 		}
+	}
+
+	.style-row {
+		margin: initial;
+		width: initial;
 	}
 }
 

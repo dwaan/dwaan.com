@@ -123,6 +123,7 @@
     .style-spread--big {
         @include style-cover();
     }
+
     .links {
         a:last-child:after {
             background-image: url(../img/arrow-white.svg);

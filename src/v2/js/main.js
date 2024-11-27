@@ -56,7 +56,6 @@ barba.hooks.afterEnter(data => {
 // Initialized barba.js
 barba.init({
 	debug: false,
-	logLevel: "off",
 	transitions: transitions,
 	views: views
 });
