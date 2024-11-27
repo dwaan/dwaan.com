@@ -878,7 +878,7 @@ div>.vertical {
 
 	.color {
 		ul {
-			margin: 0; // !important;
+			margin: 0;
 			width: 250px;
 			flex-wrap: wrap;
 
@@ -1010,7 +1010,27 @@ div>.vertical {
 	}
 }
 
-.style-center-small {
+.style-center--condensed {
+	@extend .style-center;
+
+	.thumbs {
+		height: initial;
+	}
+
+	picture {
+		&:nth-child(2) {
+			height: auto;
+		}
+
+		&:nth-child(3) {
+			height: auto;
+		}
+	}
+}
+
+.style-center--small {
+	@extend .style-center;
+
 	.thumbs {
 		gap: 0;
 		height: 20vw;

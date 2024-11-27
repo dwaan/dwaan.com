@@ -947,6 +947,14 @@ div>.vertical {
 	// }
 }
 
+.style-center--condensed {
+	@extend .style-center;
+}
+
+.style-center--small {
+	@extend .style-center;
+}
+
 /* Style 3D thumbs */
 .style-3d {
 	flex-direction: column;
@@ -1059,7 +1067,7 @@ div>.vertical {
 		}
 	}
 
-	.style-center-small {
+	.style-center--small {
 		.text {
 			padding: 0 var(--padx);
 		}
@@ -1331,7 +1339,6 @@ div>.vertical {
 	}
 }
 
-/* ol/ul for branding color for Suzuki */
 .detail {
 	.color {
 

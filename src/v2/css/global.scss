@@ -270,6 +270,10 @@ picture {
 	}
 }
 
+.grid {
+	display: grid;
+}
+
 /* Browser Upgrade Prompt */
 .browserupgrade {
 	margin: 0.2em 0;
@@ -378,19 +382,6 @@ picture {
 .middle {
 	@include mixins.make-it-full-size;
 	display: block;
-	scroll-snap-align: center;
-}
-
-.snap-start {
-	scroll-snap-align: start;
-}
-
-.snap-end {
-	scroll-snap-align: end;
-}
-
-.snap-none {
-	scroll-snap-align: none;
 }
 
 .height-auto {
@@ -623,6 +614,7 @@ picture {
 	color: var(--black);
 	pointer-events: none;
 }
+
 
 
 /* Header style */
@@ -1245,6 +1237,7 @@ header {
 	.color {
 		li {
 			border: 1px solid var(--black-25);
+			border-radius: 1000px;
 
 			&:last-child {
 				border: none;
@@ -1263,14 +1256,6 @@ header {
 
 		&:hover {
 			background-color: var(--red);
-		}
-	}
-}
-
-.detail-aai {
-	.color {
-		li {
-			border-radius: 100%;
 		}
 	}
 }
@@ -1526,6 +1511,14 @@ header {
 	}
 }
 
+.suzuki {
+	.color {
+		li {
+			border-radius: 4px;
+		}
+	}
+}
+
 /* Style with background image */
 .style-background {
 	background-color: var(--gray-light);
@@ -1556,8 +1549,6 @@ header {
 		z-index: 1;
 		position: absolute;
 		display: block;
-		justify-content: center;
-		align-items: center;
 		pointer-events: none;
 
 		img {
@@ -1565,6 +1556,60 @@ header {
 			object-fit: cover;
 			opacity: .35;
 		}
+	}
+}
+
+.style-background--parallax {
+	display: flex;
+	align-items: end;
+	justify-content: end;
+	overflow: clip;
+
+	small {
+		color: #fff;
+		text-align: right;
+		line-height: 130%;
+
+		a {
+			text-decoration: underline;
+		}
+	}
+
+	.text {
+		position: relative;
+		z-index: 2;
+		max-width: 480px;
+	}
+
+	.thumbs {
+		@include mixins.make-it-full-size;
+		z-index: 1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		pointer-events: none;
+		transform-origin: center bottom;
+
+		picture {
+			box-shadow: none;
+			border-radius: 0;
+		}
+
+		img {
+			@include mixins.make-it-full-size;
+			object-fit: cover;
+			height: 110vh;
+			border-radius: 0;
+		}
+	}
+
+	.logos {
+		z-index: 3;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 }
 
@@ -1697,10 +1742,6 @@ header {
 			height: auto;
 			transform: rotate(-5deg);
 		}
-	}
-
-	.color li {
-		border-radius: 100px;
 	}
 }
 
@@ -1965,6 +2006,11 @@ header {
 .style-center {
 	height: auto;
 
+	h1,
+	h4 {
+		text-align: center;
+	}
+
 	.text {
 		display: flex;
 		flex-flow: column nowrap;
@@ -2021,7 +2067,68 @@ header {
 	}
 }
 
-.style-center-small {
+.style-center--condensed {
+	@extend .style-center;
+
+	.text {
+		max-width: 800px;
+	}
+
+	picture {
+		flex: 0;
+	}
+
+	.logos {
+		display: flex;
+		padding: 0 var(--padxxl);
+		width: 100vw;
+
+		img {
+			width: initial;
+		}
+	}
+
+	.grid {
+		width: 100%;
+		display: grid;
+		grid-row-gap: var(--padxl);
+		grid-column-gap: var(--padxxl);
+		grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+		align-items: center;
+		justify-content: center;
+
+		>li {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.text {
+			grid-column: span 2;
+			align-items: flex-start;
+			margin-bottom: 0;
+
+			h4,
+			small {
+				text-align: left
+			}
+
+			h4 {
+				font-size: 1.4rem;
+				margin-bottom: var(--pads);
+			}
+
+			small {
+				letter-spacing: .05rem;
+				line-height: 140%;
+			}
+		}
+	}
+}
+
+.style-center--small {
+	@extend .style-center;
+
 	.text {
 		max-width: 530px;
 		padding: 0;
@@ -2073,7 +2180,6 @@ header {
 	}
 
 	.style-top {
-
 		.text {
 			max-width: 480px;
 
@@ -2280,7 +2386,6 @@ ol {
 		flex-flow: column nowrap;
 	}
 
-	/* ol/ul for branding color for Suzuki */
 	&.color {
 		display: flex;
 		flex-flow: column nowrap;
@@ -2290,7 +2395,6 @@ ol {
 			align-items: center;
 			border: 1px solid var(--black-50);
 			@include mixins.typography(1rem, false, 15px, .05em);
-			border-radius: 4px;
 
 			&:last-child {
 				border: none;

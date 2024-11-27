@@ -89,12 +89,12 @@ var scroll = {
 			}))
 		})
 	},
-	snap: function (el, type = "regular") {
+	snap: function (el, type = "center") {
 		let start = "0 0"
 		let end = "100% 0"
 
 		type = type.toLowerCase()
-		if (type == "bottom") {
+		if (type == "end") {
 			start = "0 100%"
 			end = "100% 100%"
 		}

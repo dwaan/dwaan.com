@@ -927,6 +927,86 @@ var detailview = {
 				});
 			});
 		});
+		next.querySelectorAll(".style-background--parallax").forEach(el => {
+			// Scroll pictures
+			scroll.push(tl => {
+				el.querySelectorAll(".thumbs").forEach(picture => {
+					tl.fromTo(picture, {
+						y: "-50%"
+					}, {
+						y: "50%",
+						ease: "linear"
+					});
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 0",
+					scrub: reduceMotionFilter() ? true : true,
+					animation: tl
+				});
+			});
+			scroll.push(tl => {
+				el.querySelectorAll(".thumbs").forEach(picture => {
+					tl.fromTo(picture, {
+						scale: "1"
+					}, {
+						scale: "2",
+						ease: "linear",
+						duration: reduceMotionFilter() ? 10000: 120,
+						yoyo: true
+					});
+				});
+
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0% 100%",
+					end: "105% 100%",
+					toggleActions: "play pause resume reset",
+					animation: tl
+				});
+			});
+			// Scroll text and logo
+			el.querySelectorAll(".text, .logos").forEach(els => {
+				scroll.push(tl => {
+					tl.fromTo(els.querySelectorAll("img"), {
+						y: "50%",
+						scale: .75,
+						opacity: 0,
+					}, {
+						y: "0%",
+						scale: 1,
+						opacity: 1,
+						ease: "expo.out",
+						duration: 1
+					}, 1);
+					tl.fromTo(els.querySelectorAll("small"), {
+						opacity: 0,
+						y: "50%"
+					}, {
+						opacity: 1,
+						y: "-50%",
+						ease: "expo.out",
+						duration: 1
+					}, .25);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "95% 100%",
+						end: "105% 100%",
+						toggleActions: "play pause resume reverse",
+						animation: tl
+					});
+				});
+			});
+		});
 
 		// Style - Slideshow
 		// Full and big
@@ -1253,7 +1333,7 @@ var detailview = {
 		});
 
 		// Style - Center
-		next.querySelectorAll(".style-center:not(.style-picture-parallax)").forEach(el => {
+		next.querySelectorAll(".style-center:not(.style-picture-parallax), .style-center--small").forEach(el => {
 			// Move the text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text > h2, .text > .meta, .text .zero > li")
@@ -1398,13 +1478,13 @@ var detailview = {
 
 		// Snap
 		next.querySelectorAll("section.snap").forEach(el => {
-			scroll.snap(el);
-		});
-		next.querySelectorAll("section.snap-bottom").forEach(el => {
-			scroll.snap(el, "bottom");
-		});
-		next.querySelectorAll("section.snap-center").forEach(el => {
 			scroll.snap(el, "center");
+		});
+		next.querySelectorAll("section.snap-start").forEach(el => {
+			scroll.snap(el, "start");
+		});
+		next.querySelectorAll("section.snap-end").forEach(el => {
+			scroll.snap(el, "end");
 		});
 	},
 	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!"),
