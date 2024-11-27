@@ -1619,15 +1619,15 @@ var detailview = {
 		});
 
 		// Snap
-		// next.querySelectorAll("section.snap").forEach(el => {
-		// 	scroll.snap(el, "center");
-		// });
-		// next.querySelectorAll("section.snap-start").forEach(el => {
-		// 	scroll.snap(el, "start");
-		// });
-		// next.querySelectorAll("section.snap-end").forEach(el => {
-		// 	scroll.snap(el, "end");
-		// });
+		next.querySelectorAll("section.snap").forEach(el => {
+			scroll.snap(el, "center");
+		});
+		next.querySelectorAll("section.snap-start").forEach(el => {
+			scroll.snap(el, "start");
+		});
+		next.querySelectorAll("section.snap-end").forEach(el => {
+			scroll.snap(el, "end");
+		});
 	},
 	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!"),
 	beforeLeave: () => {
