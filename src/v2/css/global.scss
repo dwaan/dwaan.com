@@ -392,6 +392,10 @@ picture {
 .middle {
 	@include mixins.make-it-full-size;
 	display: block;
+
+	&.colored {
+		background-color: var(--dark-white);
+	}
 }
 
 .height-auto {
@@ -1506,7 +1510,6 @@ header {
 .style-top--left {
 	@extend %style-top;
 	gap: var(--padxxl);
-	height: auto;
 
 	.text {
 		max-width: 480px;
@@ -1569,7 +1572,8 @@ header {
 		}
 	}
 
-	.logos {
+	.logos,
+	.ss {
 		width: 100%;
 
 		.grid {
@@ -1578,8 +1582,41 @@ header {
 			place-items: center;
 		}
 	}
+
+	.ss {
+		.grid {
+			column-gap: var(--padxl);
+			row-gap: var(--padxl);
+			grid-template-columns: repeat(4, 25vw);
+			grid-template-rows: repeat(3, 16vw);
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			border-radius: var(--pads);
+			box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
+			transform: rotate(-2.5deg);
+		}
+	}
 }
 
+.style-top--static-auto-height {
+	@extend .style-top--static-auto;
+	height: auto;
+
+	.logos {
+		.grid {
+			grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+			place-items: center;
+
+			img {
+				width: 96px;
+				height: 96px;
+			}
+		}
+	}
+}
 
 /* Style with mansonry like layout with text on the right */
 .style-masonry {
@@ -1785,8 +1822,14 @@ header {
 	flex-flow: column nowrap;
 	align-items: center;
 	justify-content: flex-start;
-	background-color: var(--dark-white);
 	transition: background-color .5s ease;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--padxl);
+		padding: 0 var(--padxxl);
+	}
 
 	.thumbs {
 		display: flex;
@@ -1849,6 +1892,12 @@ header {
 	.thumbs picture {
 		border-radius: var(--padl);
 	}
+}
+
+.style-angled--auto {
+	@extend .style-angled;
+	height: auto;
+
 }
 
 /* Style with logo on the bottom */

@@ -599,7 +599,7 @@ var detailview = {
 		});
 
 		// Style - Static
-		next.querySelectorAll(".style-top--static, .style-top--static-auto").forEach(el => {
+		next.querySelectorAll(".style-top--static, .style-top--static-auto, .style-top--static-auto-height").forEach(el => {
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p, .text small")
@@ -632,9 +632,9 @@ var detailview = {
 			// Move the logos
 			el.querySelectorAll(".logos").forEach(el => {
 				scroll.push(tl => {
-					var pictures = el.querySelectorAll("li");
+					var logo = el.querySelectorAll("li img");
 
-					tl.fromTo(pictures, {
+					tl.fromTo(logo, {
 						opacity: 0
 					}, {
 						opacity: 1,
@@ -643,7 +643,7 @@ var detailview = {
 						stagger: .05
 					}, 0);
 
-					tl.fromTo(pictures, {
+					tl.fromTo(logo, {
 						scale: .75
 					}, {
 						scale: 1,
@@ -660,6 +660,31 @@ var detailview = {
 						end: "0 100%",
 						toggleActions: reduceMotionFilter() ? "none none none none" : "play none none reset",
 						scrub: false,
+						animation: tl
+					});
+				});
+			})
+			// Move the logos
+			el.querySelectorAll(".ss").forEach(el => {
+				scroll.push(tl => {
+					var pictures = el.querySelectorAll("li img");
+
+					tl.fromTo(pictures, {
+						rotation: -2.5
+					}, {
+						rotation: 2.5,
+						ease: "linear",
+						duration: .45,
+						stagger: .05
+					});
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: el,
+						start: "0 100%",
+						end: "100% 100%",
+						scrub: reduceMotionFilter() ? 1 : 3,
 						animation: tl
 					});
 				});
@@ -834,7 +859,7 @@ var detailview = {
 		});
 
 		// Style - Angled
-		next.querySelectorAll(".style-angled:not(.style-angled-individual)").forEach(el => {
+		next.querySelectorAll(".style-angled:not(.style-angled-individual), .style-angled--auto").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "75%");
@@ -892,7 +917,7 @@ var detailview = {
 			});
 			// Move text
 			scroll.moveText({
-				elements: el.querySelectorAll(" .text > *"),
+				elements: el.querySelectorAll(" .text > *, .zero > *"),
 				position: "85%"
 			});
 		});
@@ -1369,7 +1394,6 @@ var detailview = {
 			});
 		});
 
-
 		// Style - Staggered
 		next.querySelectorAll(".style-staggered").forEach(el => {
 			var pictures = el.querySelectorAll(".thumbs > picture");
@@ -1628,6 +1652,11 @@ var detailview = {
 		next.querySelectorAll("section.snap-end").forEach(el => {
 			scroll.snap(el, "end");
 		});
+
+
+		setTimeout(_ => {
+			ScrollTrigger.refresh()
+		}, 1000)
 	},
 	afterEnter: () => console.info("Right now, you're reading one of my portfolio. Enjoy!"),
 	beforeLeave: () => {
