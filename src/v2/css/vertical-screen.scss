@@ -563,7 +563,7 @@ div>.vertical {
 }
 
 .style-top--left {
-	padding: calc(var(--padxxl) * 3) calc(var(--padxxl) * 2);
+	padding: calc(var(--padxxl) * 2);
 }
 
 .style-top--static {
@@ -574,6 +574,10 @@ div>.vertical {
 .style-top--static-auto {
 	@extend .style-top;
 	gap: var(--padxxl);
+}
+
+.style-top--static-auto-height {
+	@extend .style-top--static-auto;
 }
 
 /* Style text on top without image */
@@ -820,6 +824,11 @@ div>.vertical {
 		}
 	}
 
+}
+
+.style-angled--auto {
+	@extend .style-angled;
+	padding: calc(2 * var(--pady)) calc(4 * var(--padx)) calc(5 * var(--pady));
 }
 
 /* Style with logo on the bottom */
