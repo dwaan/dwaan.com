@@ -2229,17 +2229,43 @@ header {
 
 	.logos {
 		display: flex;
-		padding: 0 var(--padxxl);
+		padding: 0;
 		width: 100vw;
 
+		@media (min-width: mixins.$screen-small) {
+			padding: 0 var(--padl);
+		}
+
+		@media (min-width: mixins.$screen-medium) {
+			padding: 0 var(--padxxl);
+		}
+
 		img {
-			width: initial;
+			width: 40vw;
+			height: initial;
+
+			@media (min-width: mixins.$screen-verysmall) {
+				width: initial;
+			}
+
 		}
 	}
 
 	.grid {
 		width: 100%;
-		grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+		grid-row-gap: var(--padl);
+		grid-column-gap: var(--padl);
+		grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
+
+		@media (min-width: mixins.$screen-small) {
+			grid-template-columns: repeat(auto-fit, minmax(vw, 1fr));
+		}
+
+		@media (min-width: mixins.$screen-medium) {
+			grid-row-gap: var(--padxl);
+			grid-column-gap: var(--padxxl);
+			grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+		}
 
 		.text {
 			grid-column: span 2;
@@ -2356,16 +2382,6 @@ header {
 				height: calc(var(--pic-h) / 2);
 			}
 		}
-	}
-}
-
-
-
-// Sagara page
-
-.sagara {
-	.gray-background {
-		background-color: #f2f2f2;
 	}
 }
 
