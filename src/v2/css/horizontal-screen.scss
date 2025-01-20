@@ -34,8 +34,18 @@ html {
 
 /* Default style */
 h1 {
-	@media screen and (max-width: mixins.$screen-medium) {
+	font-size: 3rem;
+
+	@media screen and (min-width: mixins.$screen-medium) {
 		font-size: 3rem;
+	}
+
+	@media screen and (min-width: mixins.$screen-abitwide) {
+		font-size: 3.5rem;
+	}
+
+	@media screen and (min-width: mixins.$screen-wide) {
+		font-size: 5rem;
 	}
 }
 
@@ -86,6 +96,16 @@ header {
 
 	@media (min-width: mixins.$screen-wide) {
 		padding: calc(2 * var(--padxl)) var(--padx);
+	}
+}
+
+.grid {
+	grid-row-gap: var(--padl);
+	grid-column-gap: var(--padxl);
+
+	@media (min-width: mixins.$screen-medium) {
+		grid-row-gap: var(--padxl);
+		grid-column-gap: var(--padxxl);
 	}
 }
 
@@ -359,6 +379,31 @@ div>.vertical {
 	}
 }
 
+.sagara {
+	.style-column {
+		.meta {
+			width: 20vw;
+
+			@media (min-width: mixins.$screen-medium) {
+				width: 310px;
+			}
+		}
+
+		.style-row {
+			flex: 1;
+			width: auto;
+		}
+	}
+
+	.style-background--parallax {
+		.logos {
+			img {
+				max-width: 12.5vw;
+				height: auto;
+			}
+		}
+	}
+}
 
 /* Style text on the left and image spread like fan */
 %style-spread {
@@ -643,21 +688,69 @@ div>.vertical {
 }
 
 .style-top--left {
-	padding: calc(var(--padxxl) * 2);
+	justify-content: center;
+	gap: var(--padxl);
+	padding: var(--padxl);
+
+	@media (min-width: mixins.$screen-medium) {
+		gap: var(--padxxl);
+		padding: calc(var(--padxxl) * 2);
+	}
 }
 
 .style-top--static {
 	@extend .style-top;
-	gap: var(--padxxl);
+	gap: var(--padl);
+
+	@media (min-width: mixins.$screen-medium) {
+		gap: var(--padxxl);
+	}
 }
 
 .style-top--static-auto {
 	@extend .style-top;
-	gap: var(--padxxl);
+	gap: var(--padxl);
+
+	@media (min-width: mixins.$screen-abitwide) {
+		gap: var(--padxxl);
+	}
+
+	.logos {
+		.grid {
+			grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
+
+			@media (min-width: mixins.$screen-abitwide) {
+				grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+			}
+		}
+	}
+
+	.ss {
+		.grid {
+			column-gap: var(--padxl);
+			row-gap: var(--padxl);
+			grid-template-columns: repeat(4, 25vw);
+			grid-template-rows: repeat(3, 16vw);
+		}
+	}
 }
 
 .style-top--static-auto-height {
 	@extend .style-top--static-auto;
+
+	.logos {
+		.grid {
+			grid-row-gap: 2.5vw;
+			grid-column-gap: 2.5vw;
+			grid-template-columns: repeat(auto-fit, minmax(7.5vw, 1fr));
+			place-items: center;
+
+			img {
+				width: 7.5vw;
+				height: 7.5vw;
+			}
+		}
+	}
 }
 
 /* Style text on top without image */
@@ -822,6 +915,10 @@ div>.vertical {
 
 	@media (min-width: mixins.$screen-wide) {
 		padding: calc(4 * var(--pady)) calc(7 * var(--padx)) 0;
+	}
+
+	.content {
+		gap: var(--padxl);
 	}
 
 	.text {
@@ -1037,6 +1134,14 @@ div>.vertical {
 			height: 70%;
 		}
 	}
+
+	.text {
+		padding: 0 var(--pads);
+
+		@media (min-width: mixins.$screen-small) {
+			padding: 0 var(--padxl);
+		}
+	}
 }
 
 .style-center--condensed {
@@ -1053,6 +1158,40 @@ div>.vertical {
 
 		&:nth-child(3) {
 			height: auto;
+		}
+	}
+
+	.logos {
+		padding: 0 var(--pads);
+
+		@media (min-width: mixins.$screen-small) {
+			padding: 0 var(--padl);
+		}
+
+		@media (min-width: mixins.$screen-medium) {
+			padding: 0 var(--padxxl);
+		}
+	}
+
+	.grid {
+		grid-row-gap: var(--pads);
+		grid-column-gap: var(--pads);
+		grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+
+		@media (min-width: mixins.$screen-small) {
+			grid-row-gap: var(--padl);
+			grid-column-gap: var(--padl);
+			grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+		}
+
+		@media (min-width: mixins.$screen-medium) {
+			grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
+		}
+
+		@media (min-width: mixins.$screen-wide) {
+			grid-row-gap: var(--padxl);
+			grid-column-gap: var(--padxxl);
+			grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
 		}
 	}
 }
