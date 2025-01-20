@@ -1581,14 +1581,7 @@ header {
 
 		}
 	}
-
 	.ss {
-		.grid {
-			column-gap: var(--padxl);
-			row-gap: var(--padxl);
-			grid-template-columns: repeat(4, 25vw);
-			grid-template-rows: repeat(3, 16vw);
-		}
 
 		img {
 			width: 100%;
@@ -1613,13 +1606,7 @@ header {
 
 	.logos {
 		.grid {
-			grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
 			place-items: center;
-
-			img {
-				width: 96px;
-				height: 96px;
-			}
 		}
 	}
 }
@@ -1833,7 +1820,6 @@ header {
 	.content {
 		display: flex;
 		flex-direction: column;
-		gap: var(--padxl);
 		padding: 0;
 
 		@media (min-width: mixins.$screen-medium) {

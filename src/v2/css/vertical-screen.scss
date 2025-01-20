@@ -143,11 +143,11 @@ header {
 }
 
 .grid {
-	grid-row-gap: var(--padxl);
+	grid-row-gap: var(--padl);
 	grid-column-gap: var(--padl);
 
 	@media (min-width: mixins.$screen-medium) {
-		grid-row-gap: var(--padxxl);
+		grid-row-gap: var(--padxl);
 		grid-column-gap: var(--padxl);
 	}
 }
@@ -636,10 +636,41 @@ div>.vertical {
 			}
 		}
 	}
+
+	.ss {
+		.grid {
+			column-gap: var(--padl);
+			row-gap: var(--padl);
+			grid-template-columns: repeat(3, 40vw);
+			grid-template-rows: repeat(4, 24vw);
+		}
+	}
 }
 
 .style-top--static-auto-height {
 	@extend .style-top--static-auto;
+
+	.logos {
+		.grid {
+			grid-row-gap: var(--pady);
+			grid-column-gap: var(--padx);
+			grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+
+			@media (min-width: mixins.$screen-small) {
+				grid-template-columns: repeat(auto-fit, minmax(12.5vw, 1fr));
+			}
+
+			img {
+				width: 20vw;
+				height: 20vw;
+
+				@media (min-width: mixins.$screen-small) {
+					width: 12.5vw;
+					height: 12.5vw;
+				}
+			}
+		}
+	}
 }
 
 /* Style text on top without image */
@@ -825,12 +856,15 @@ div>.vertical {
 /* Style with angled photo on the bottom */
 .style-angled {
 	height: auto;
-	padding: calc(2 * var(--pady)) calc(4 * var(--padx));
-	gap: var(--pady);
+	padding: calc(4 * var(--pady)) calc(4 * var(--padx)) calc(2 * var(--pady));
+	gap: calc(3 * var(--pady));
 
 	@media screen and (min-width: mixins.$screen-verysmall) {
-		padding-top: calc(4 * var(--pady));
 		gap: calc(4 * var(--pady));
+	}
+
+	.content {
+		gap: var(--padl);
 	}
 
 	.text {
@@ -890,7 +924,11 @@ div>.vertical {
 
 .style-angled--auto {
 	@extend .style-angled;
-	padding: calc(2 * var(--pady)) calc(4 * var(--padx)) calc(5 * var(--pady));
+	padding: calc(4 * var(--pady)) var(--padx);
+
+	@media (min-width: mixins.$screen-small) {
+		padding: calc(2 * var(--pady)) calc(4 * var(--padx)) calc(5 * var(--pady));
+	}
 }
 
 /* Style with logo on the bottom */
@@ -1449,7 +1487,7 @@ div>.vertical {
 
 		&:before {
 			margin: calc(var(--pads) / 2) var(--padm) 0 0;
-			min-width: var(--padxl);
+			min-width: var(--padl);
 			font-size: 1.8rem;
 			font-weight: 500;
 		}
@@ -1499,11 +1537,25 @@ div>.vertical {
 	}
 
 	.style-top--static-auto {
-		gap: 0;
+		gap: var(--padxl);
 		justify-content: space-between;
 
 		.text {
 			margin-bottom: 0;
+		}
+	}
+
+	.style-angled--auto {
+		picture {
+
+			&,
+			img {
+				width: var(--pic-w);
+
+				@media (min-width: mixins.$screen-small) {
+					width: calc(1.15 * var(--pic-w));
+				}
+			}
 		}
 	}
 }

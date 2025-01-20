@@ -724,10 +724,33 @@ div>.vertical {
 			}
 		}
 	}
+
+	.ss {
+		.grid {
+			column-gap: var(--padxl);
+			row-gap: var(--padxl);
+			grid-template-columns: repeat(4, 25vw);
+			grid-template-rows: repeat(3, 16vw);
+		}
+	}
 }
 
 .style-top--static-auto-height {
 	@extend .style-top--static-auto;
+
+	.logos {
+		.grid {
+			grid-row-gap: 2.5vw;
+			grid-column-gap: 2.5vw;
+			grid-template-columns: repeat(auto-fit, minmax(7.5vw, 1fr));
+			place-items: center;
+
+			img {
+				width: 7.5vw;
+				height: 7.5vw;
+			}
+		}
+	}
 }
 
 /* Style text on top without image */
@@ -892,6 +915,10 @@ div>.vertical {
 
 	@media (min-width: mixins.$screen-wide) {
 		padding: calc(4 * var(--pady)) calc(7 * var(--padx)) 0;
+	}
+
+	.content {
+		gap: var(--padxl);
 	}
 
 	.text {
