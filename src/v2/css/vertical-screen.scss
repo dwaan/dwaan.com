@@ -536,13 +536,11 @@ div>.vertical {
 	.text {
 		justify-content: flex-end;
 		max-width: 400px;
-		margin-bottom: 60px;
 	}
 
 	h2 {
 		max-width: 315px;
 	}
-
 
 	.thumbs {
 		height: calc(var(--pic-h) + (var(--pic-m) * 3));
@@ -620,7 +618,7 @@ div>.vertical {
 
 .style-top--static {
 	@extend .style-top;
-	gap: var(--padxxl);
+	gap: var(--padxl);
 }
 
 .style-top--static-auto {
@@ -1031,7 +1029,7 @@ div>.vertical {
 
 /* Style with everything in the center */
 .style-center {
-	padding: var(--pady) 0;
+	padding: calc(4 * var(--pady)) var(--padx);
 
 	.text {
 		padding: 0;
@@ -1058,25 +1056,17 @@ div>.vertical {
 	.thumbs {
 		gap: var(--padm);
 	}
-
-	// picture {
-	// 	flex: 0 0 65vw;
-
-	// 	&:nth-child(2) {
-	// 		flex: 0 0 22vw;
-	// 	}
-
-	// 	&:nth-child(3) {
-	// 		flex: 0 0 12vw;
-	// 	}
-	// }
 }
 
 .style-center--condensed {
 	@extend .style-center;
 
 	.logos {
-		padding: 0 var(--pads);
+		padding: 0;
+
+		.text {
+			margin-bottom: 0;
+		}
 
 		@media (min-width: mixins.$screen-small) {
 			padding: 0 var(--padl);
@@ -1090,7 +1080,7 @@ div>.vertical {
 	.grid {
 		grid-row-gap: var(--pads);
 		grid-column-gap: var(--pads);
-		grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
 
 		@media (min-width: mixins.$screen-small) {
 			grid-row-gap: var(--padl);
@@ -1536,9 +1526,26 @@ div>.vertical {
 		}
 	}
 
+	.style-top--static {
+		justify-content: center;
+
+		.thumbs {
+			height: auto;
+			margin: 0 calc(var(--padx) * -1);
+
+			picture {
+				margin: 0;
+
+				img {
+					height: auto;
+				}
+			}
+		}
+	}
+
 	.style-top--static-auto {
 		gap: var(--padxl);
-		justify-content: space-between;
+		justify-content: center;
 
 		.text {
 			margin-bottom: 0;
