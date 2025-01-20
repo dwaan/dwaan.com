@@ -272,8 +272,6 @@ picture {
 
 .grid {
 	display: grid;
-	grid-row-gap: var(--padxl);
-	grid-column-gap: var(--padxxl);
 	align-items: center;
 	justify-content: center;
 
@@ -1509,6 +1507,7 @@ header {
 
 .style-top--left {
 	@extend %style-top;
+	justify-content: center;
 	gap: var(--padxxl);
 
 	.text {
@@ -1557,7 +1556,7 @@ header {
 .style-top--static-auto {
 	@extend %style-top;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 
 	small {
 		letter-spacing: .05rem;
@@ -1578,8 +1577,8 @@ header {
 
 		.grid {
 			width: 100%;
-			grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
 			place-items: center;
+
 		}
 	}
 
@@ -1597,6 +1596,13 @@ header {
 			border-radius: var(--pads);
 			box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
 			transform: rotate(-2.5deg);
+		}
+	}
+
+	.logos {
+		img {
+			width: 100%;
+			height: initial;
 		}
 	}
 }
@@ -1828,7 +1834,11 @@ header {
 		display: flex;
 		flex-direction: column;
 		gap: var(--padxl);
-		padding: 0 var(--padxxl);
+		padding: 0;
+
+		@media (min-width: mixins.$screen-medium) {
+			padding: 0 var(--padxxl);
+		}
 	}
 
 	.thumbs {
@@ -2167,7 +2177,6 @@ header {
 		justify-content: center;
 
 		max-width: 1000px;
-		padding: 0 var(--padxl);
 		margin: 0 0 var(--padxl);
 
 		h2,
@@ -2229,43 +2238,16 @@ header {
 
 	.logos {
 		display: flex;
-		padding: 0;
 		width: 100vw;
 
-		@media (min-width: mixins.$screen-small) {
-			padding: 0 var(--padl);
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			padding: 0 var(--padxxl);
-		}
-
 		img {
-			width: 40vw;
+			width: 100%;
 			height: initial;
-
-			@media (min-width: mixins.$screen-verysmall) {
-				width: initial;
-			}
-
 		}
 	}
 
 	.grid {
 		width: 100%;
-		grid-row-gap: var(--padl);
-		grid-column-gap: var(--padl);
-		grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
-
-		@media (min-width: mixins.$screen-small) {
-			grid-template-columns: repeat(auto-fit, minmax(vw, 1fr));
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			grid-row-gap: var(--padxl);
-			grid-column-gap: var(--padxxl);
-			grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
-		}
 
 		.text {
 			grid-column: span 2;
