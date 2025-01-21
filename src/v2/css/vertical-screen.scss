@@ -1068,11 +1068,11 @@ div>.vertical {
 			margin-bottom: 0;
 		}
 
-		@media (min-width: mixins.$screen-small) {
+		@media (min-width: mixins.$screen-medium) {
 			padding: 0 var(--padl);
 		}
 
-		@media (min-width: mixins.$screen-medium) {
+		@media (min-width: mixins.$screen-abitwide) {
 			padding: 0 var(--padxxl);
 		}
 	}
