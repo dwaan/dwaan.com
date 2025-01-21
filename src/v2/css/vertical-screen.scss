@@ -527,6 +527,7 @@ div>.vertical {
 /* Style text on the and Images in the bottom */
 .style-top {
 	padding: calc(6 * var(--pady)) var(--padx);
+	gap: var(--padl);
 	justify-content: flex-start;
 
 	@media screen and (min-height: mixins.$screen-medium) {
@@ -655,6 +656,8 @@ div>.vertical {
 			grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
 
 			@media (min-width: mixins.$screen-small) {
+				grid-row-gap: var(--padl);
+				grid-column-gap: var(--padl);
 				grid-template-columns: repeat(auto-fit, minmax(12.5vw, 1fr));
 			}
 
@@ -1085,7 +1088,7 @@ div>.vertical {
 		@media (min-width: mixins.$screen-small) {
 			grid-row-gap: var(--padl);
 			grid-column-gap: var(--padl);
-			grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(17.5vw, 1fr));
 		}
 
 		@media (min-width: mixins.$screen-medium) {

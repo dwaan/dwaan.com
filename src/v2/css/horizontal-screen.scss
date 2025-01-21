@@ -740,14 +740,24 @@ div>.vertical {
 
 	.logos {
 		.grid {
-			grid-row-gap: 2.5vw;
-			grid-column-gap: 2.5vw;
+			grid-row-gap: 4vw;
+			grid-column-gap: 4vw;
 			grid-template-columns: repeat(auto-fit, minmax(7.5vw, 1fr));
-			place-items: center;
+
+			@media (min-width: mixins.$screen-verywide) {
+				grid-row-gap: 5vw;
+				grid-column-gap: 5vw;
+				grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+			}
 
 			img {
 				width: 7.5vw;
 				height: 7.5vw;
+
+				@media (min-width: mixins.$screen-verywide) {
+					width: 96px;
+					height: 96px;
+				}
 			}
 		}
 	}
