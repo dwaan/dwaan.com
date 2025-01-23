@@ -3,10 +3,10 @@
 html.no-js {
 	overflow-x: clip;
 	overflow-y: scroll;
-	scroll-snap-type: y mandatory;
-	scroll-snap-stop: always;
-	animation-name: fade-out;
-	animation-duration: 1.28s;
+	// scroll-snap-type: y mandatory;
+	// scroll-snap-stop: always;
+	// animation-name: fade-out;
+	// animation-duration: 1.28s;
 }
 
 @keyframes fade-out {
@@ -125,14 +125,6 @@ html.no-js {
 		&.hidden {
 			display: none;
 			height: 0;
-		}
-
-		img {
-			display: none;
-
-			&:nth-child(4) {
-				display: block;
-			}
 		}
 	}
 
