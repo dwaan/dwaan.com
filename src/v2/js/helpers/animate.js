@@ -50,8 +50,8 @@ var animate = {
 				tl.to(next, { opacity: 1 }, 0);
 
 				// Show current view
-				var els = next.querySelectorAll(".flares:not(.side)")
-				if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
+				var els = null;
+				if (footer) els = next.querySelectorAll(".footer > *");
 				if (!nonsticky) nonsticky = next.querySelectorAll(".main-text > *:not(.hidden), .arrow-big .arrow");
 
 				// Animate text
@@ -62,10 +62,10 @@ var animate = {
 					y: "-=200px",
 					opacity: 1,
 					onComplete: () => {
-						if (nonsticky) { removeStyle(nonsticky) }
+						if (nonsticky) removeStyle(nonsticky)
 					}
 				}, 0);
-				// Animate footer or flares
+				// Animate footer
 				tl.fromTo(els, {
 					y: "+=200px",
 					opacity: 0
@@ -203,12 +203,11 @@ var animate = {
 				if (scrolltop) await this.top(window);
 
 				// Hide current view
-				tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {
+				tl.to(current.querySelectorAll(".menu-page ol > li, .footer > *"), {
 					y: "+=200",
 					opacity: 0
 				}, ">");
-				tl.to(current.querySelectorAll(".flares.side img"), {
-					x: "+=300",
+				tl.to(current.querySelectorAll(".flares img"), {
 					opacity: 0,
 					delay: .1
 				}, "<");

@@ -120,7 +120,6 @@
 	transform: translate3d(-50%, 0, 0);
 }
 
-
 body,
 html {
 	font-family: fonts.$fontname, system-ui, -apple-system, sans-serif;
@@ -129,6 +128,14 @@ html {
 	letter-spacing: 0.02em;
 	color: var(--black);
 	background-color: var(--white);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	position: relative;
 }
 
 /* Common styles */
@@ -390,6 +397,7 @@ picture {
 .middle {
 	@include mixins.make-it-full-size;
 	display: block;
+	background-color: var(--white);
 
 	&.colored {
 		background-color: var(--dark-white);
@@ -561,18 +569,17 @@ picture {
 
 
 /* Arrow links */
-.arrow-big,
+
 .arrow {
-	z-index: 2;
+	position: sticky;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
 	padding: 0;
 	color: var(--black);
 	white-space: nowrap;
-}
+	pointer-events: all;
 
-.arrow {
 	&:after {
 		@include mixins.make-it-block();
 		transition: filter 1s ease;
@@ -586,35 +593,55 @@ picture {
 		align-self: center;
 		pointer-events: none;
 	}
-}
 
-.arrow-big-center {
-	right: 50%;
-	transform: translate3d(-50%, 0, 0);
-
-	.arrow:after {
-		width: 50px;
-	}
-}
-
-.arrow-small {
-	z-index: 2;
-
-	.arrow {
+	&-big,
+	&-small {
+		z-index: 2;
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
 		flex-flow: row nowrap;
-
-		&:before,
-		&:after {
-			@include mixins.make-it-block();
-			margin: 0;
-			pointer-events: none;
-		}
-
-		&:after {
-			transform: none;
-		}
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		pointer-events: none;
 	}
+
+	// &-big {
+	// 	z-index: 2;
+
+	// 	&-center {
+	// 		right: 50%;
+	// 		transform: translate3d(-50%, 0, 0);
+
+	// 		.arrow:after {
+	// 			width: 50px;
+	// 		}
+	// 	}
+	// }
+
+	// &-small {
+	// 	z-index: 2;
+
+	// 	.arrow {
+	// 		flex-flow: row nowrap;
+
+	// 		&:before,
+	// 		&:after {
+	// 			@include mixins.make-it-block();
+	// 			margin: 0;
+	// 			pointer-events: none;
+	// 		}
+
+	// 		&:after {
+	// 			transform: none;
+	// 		}
+	// 	}
+	// }
 }
+
 
 /* Year information */
 .year {
@@ -631,34 +658,37 @@ picture {
 
 /* Header style */
 header {
-	opacity: 0;
 	position: fixed;
 	z-index: 101;
-	height: 45px;
+	top: 0;
+	opacity: 0;
+	pointer-events: none;
+
+	&,
+	.sticky {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		width: 100vw;
+	}
+
+	.sticky {
+		padding: var(--pady) var(--padx) 0;
+	}
 
 	.left,
 	.right {
-		mix-blend-mode: inherit;
-	}
-
-	.left {
 		display: flex;
 		flex-direction: row;
-		position: absolute;
-		left: 0px;
-	}
-
-	.right {
-		display: flex;
-		flex-direction: row;
-		position: absolute;
-		height: 44px;
-		right: 0px;
+		pointer-events: all;
 	}
 }
 
 /* Logo item */
 .logo {
+	display: flex;
+	align-items: center;
 	fill: var(--black);
 	transition: fill 1s ease;
 
@@ -672,18 +702,6 @@ header {
 		height: 40px;
 		pointer-events: none;
 	}
-
-	&.horizontal {
-		display: none;
-	}
-
-	&.vertical {
-		display: block;
-	}
-}
-
-[hidden] {
-	display: block;
 }
 
 .print {
@@ -1022,7 +1040,7 @@ header {
 
 /* Homepage footer */
 .footer {
-	@include mixins.block(fixed, initial, 0, 100%, $zindex: 100);
+	@include mixins.block(fixed, initial, 0, 100vw, $zindex: 100);
 	bottom: 0;
 	display: flex;
 	flex-flow: row nowrap;
@@ -1581,6 +1599,7 @@ header {
 
 		}
 	}
+
 	.ss {
 
 		img {
@@ -2353,6 +2372,158 @@ header {
 	}
 }
 
+/* Home page */
+
+.home {
+	a {
+		transition: color .5s ease;
+	}
+
+	#to-about {
+		&:hover {
+			color: var(--red);
+		}
+	}
+
+	.home-flares {
+		@keyframes anim1 {
+			0% {
+				transform: translate(-115%, 5%) scale(1) rotate(5deg);
+			}
+
+			25% {
+				transform: translate(150%, -15%) scale(2) rotate(-7deg);
+			}
+
+			50% {
+				transform: translate(-100%, 25%) scale(1) rotate(12deg);
+			}
+
+			75% {
+				transform: translate(125%, 5%) scale(2.25) rotate(2deg);
+			}
+
+			100% {
+				transform: translate(-75%, -15%) scale(1.25) rotate(-8deg);
+			}
+		}
+
+		@keyframes anim2 {
+			0% {
+				transform: translate(120%, -15%) scale(2);
+			}
+
+			25% {
+				transform: translate(-115%, 5%) scale(1.5);
+			}
+
+			50% {
+				transform: translate(185%, 15%) scale(2.25);
+			}
+
+			75% {
+				transform: translate(-100%, -25%) scale(1);
+			}
+
+			100% {
+				transform: translate(125%, 5%) scale(1.25);
+			}
+		}
+
+		@keyframes anim3 {
+			0% {
+				transform: translate(-50%, -2.5%) scale(1);
+			}
+
+			25% {
+				transform: translate(-150%, 15%) scale(2);
+			}
+
+			50% {
+				transform: translate(125%, -25%) scale(1.75);
+			}
+
+			75% {
+				transform: translate(-125%, 15%) scale(1.25);
+			}
+
+			100% {
+				transform: translate(75%, 5%) scale(2.25);
+			}
+		}
+
+		@keyframes anim4 {
+			0% {
+				transform: translate(-120%, 15%) scale(1.5);
+			}
+
+			25% {
+				transform: translate(115%, -5%) scale(1);
+			}
+
+			50% {
+				transform: translate(-185%, -15%) scale(2.25);
+			}
+
+			75% {
+				transform: translate(100%, 25%) scale(1);
+			}
+
+			100% {
+				transform: translate(-125%, -5%) scale(1.25);
+			}
+		}
+
+		@keyframes anim4 {
+			0% {
+				transform: translate(0%, 15%) scale(1) rotate(12deg);
+			}
+
+			25% {
+				transform: translate(-115%, -15%) scale(1.25) rotate(-10deg);
+			}
+
+			50% {
+				transform: translate(25%, 10%) scale(2.25) rotate(-23deg);
+			}
+
+			75% {
+				transform: translate(130%, -5%) scale(1.2) rotate(4deg);
+			}
+
+			100% {
+				transform: translate(-125%, -25%) scale(1.75) rotate(16deg);
+			}
+		}
+
+		&:has(#to-about) {
+			#flares {
+				display: block;
+				opacity: 0;
+				transition: opacity 1.6s ease;
+				will-change: opacity;
+
+				.flare {
+					opacity: 1;
+					will-change: animation, transform;
+
+					@for $i from 1 through 5 {
+						&.flare#{$i} {
+							animation: anim#{$i} (($i * 2) + 30s) linear alternate infinite;
+						}
+					}
+				}
+			}
+		}
+
+		&:has(#to-about:hover) {
+			#flares {
+				opacity: 1;
+			}
+		}
+	}
+}
+
 
 
 /* Footer links in every detail page */
@@ -2549,6 +2720,11 @@ ol {
 		will-change: transform, background;
 	}
 
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
 	h1 strong {
 		position: relative;
 		display: inline-block;
@@ -2590,8 +2766,15 @@ ol {
 		margin-bottom: var(--padm);
 	}
 
-	.arrow-big a {
-		color: var(--black);
+	.arrow {
+		&-big {
+			top: 50vh;
+			height: 50vh;
+
+			a {
+				color: var(--black);
+			}
+		}
 	}
 }
 

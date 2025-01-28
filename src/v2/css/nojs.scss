@@ -1,14 +1,5 @@
 /* For those who disable js */
 
-html.no-js {
-	overflow-x: clip;
-	overflow-y: scroll;
-	// scroll-snap-type: y mandatory;
-	// scroll-snap-stop: always;
-	// animation-name: fade-out;
-	// animation-duration: 1.28s;
-}
-
 @keyframes fade-out {
 	from {
 		opacity: 0;
@@ -19,14 +10,39 @@ html.no-js {
 	}
 }
 
-.no-js {
+html.no-js {
+	overflow-x: clip;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+	scroll-snap-type: y mandatory;
+	animation-name: fade-out;
+	animation-duration: 2.56s;
 
-	.middle {
-		border-bottom: 1px dashed var(--gray-light);
+	.snap {
+		scroll-snap-align: center;
+
+		&-start {
+			scroll-snap-align: start;
+		}
+
+		&-end {
+			scroll-snap-align: end;
+		}
 	}
 
-	.arrow-big {
-		margin-top: var(--padm);
+	#loader,
+	#mode {
+		display: none;
+	}
+
+	main,
+	header,
+	.footer {
+		opacity: 1;
+	}
+
+	.middle {
+		background-color: transparent;
 	}
 
 	.size,
@@ -107,10 +123,6 @@ html.no-js {
 	}
 
 	.me {
-		.middle {
-			overflow: hidden;
-		}
-
 		.text {
 			padding: 0;
 		}
@@ -122,15 +134,20 @@ html.no-js {
 	}
 
 	.mrgoat {
-		&.hidden {
+
+		&.hidden,
+		.hidden {
 			display: none;
 			height: 0;
+		}
+
+		picture {
+			opacity: 1;
 		}
 	}
 
 
-
-	/* email movevent */
+	/* email movement */
 
 	.hi {
 		a {
@@ -179,7 +196,6 @@ html.no-js {
 		}
 	}
 
-
 	.imuiux,
 	.follow,
 	.us,
@@ -198,8 +214,15 @@ html.no-js {
 	#credits {
 		display: none;
 	}
-}
 
+	#nojs {
+		display: flex;
+	}
+
+	#statistics {
+		display: none !important;
+	}
+}
 
 #nojs {
 	position: relative;
@@ -207,7 +230,7 @@ html.no-js {
 	background: url(../img/honocoroko.webp) center top no-repeat;
 	background-size: cover;
 
-	&::before{
+	&::before {
 		position: absolute;
 		display: block;
 		content: "";
@@ -224,12 +247,4 @@ html.no-js {
 		max-width: 300px;
 		padding: var(--padl);
 	}
-}
-
-.no-js #nojs {
-	display: flex;
-}
-
-.no-js #statistics {
-	display: none!important;
 }

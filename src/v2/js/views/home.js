@@ -2,9 +2,9 @@
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
-import { hoverEvents, _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
+import { _q, _qAll, reduceMotionFilter } from '../helpers/helper.js';
 import scroll from "../helpers/scroll.js";
-import flare from "../helpers/flares.js";
+// import flare from "../helpers/flares.js";
 
 let homeview = {
 	namespace: 'home',
@@ -12,7 +12,7 @@ let homeview = {
 		var next = data.next.container;
 
 		// Hover "Dwan" to show flare in main text
-		hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
+		// hoverEvents(next.querySelectorAll("#to-about"), () => flare.show(".flares .flare"), () => flare.hide());
 
 		// Scroll text
 		var screen = gsap.matchMedia();

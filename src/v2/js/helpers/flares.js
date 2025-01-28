@@ -9,6 +9,10 @@ var flare = {
     show: function (elements) {
         if (elements) this.elements = _qAll(elements);
 
+        gsap.set("#flares", {
+            display: "block"
+        });
+
         gsap.killTweensOf(this.elements);
         if (elements) {
             gsap.to(this.elements, {
