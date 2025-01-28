@@ -122,27 +122,60 @@ html.no-js {
 		}
 	}
 
+
 	.me {
 		.text {
 			padding: 0;
 		}
-	}
 
-	#mrgoat {
-		transform: translate(0, 0);
-		pointer-events: all;
-	}
-
-	.mrgoat {
-
-		&.hidden,
-		.hidden {
-			display: none;
-			height: 0;
+		#about {
+			strong {
+				color: var(--red);
+				text-decoration: underline;
+			}
 		}
 
-		picture {
-			opacity: 1;
+		#now {
+			.thumbs {
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				height: 200vh;
+
+				picture {
+					position: sticky;
+					top: var(--pady);
+					display: flex;
+					height: calc(100vh - (2 * var(--pady)));
+				}
+
+				img {
+					position: relative;
+					top: 0;
+					left: 0;
+					transform: initial;
+				}
+			}
+		}
+
+		#webdesigner {
+			picture {
+				opacity: 0;
+			}
+		}
+
+		#mrgoat {
+			transform: translate(0, 0);
+			pointer-events: all;
+		}
+
+		.mrgoat {
+
+			&.hidden,
+			.hidden {
+				display: none;
+				height: 0;
+			}
 		}
 	}
 

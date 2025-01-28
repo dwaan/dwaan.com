@@ -579,23 +579,6 @@ var meview = {
 
 		// Animate cofounder
 		next.querySelectorAll(".cofound").forEach(el => {
-			// Hover
-			var picture = el.querySelector("picture");
-			hoverEvents(el.querySelectorAll("a"), () => {
-				gsap.killTweensOf(picture);
-				gsap.to(picture, {
-					scale: 2,
-					ease: "linear",
-					duration: reduceMotionFilter(120)
-				});
-			}, () => {
-				gsap.killTweensOf(picture);
-				gsap.to(picture, {
-					scale: 1,
-					ease: "expo.out",
-					duration: reduceMotionFilter(1)
-				});
-			});
 			// Animate
 			var eltext = el.querySelectorAll(".text");
 			scroll.push(tl => {
