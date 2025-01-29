@@ -7,7 +7,6 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
 import barba from '@barba/core';
 // Helper
 import { _q, _qAll, konami, removeClass } from './helpers/helper.js';
-import displayRoundedCorner from './helpers/roundedcorner.js';
 import header from './helpers/header.js';
 import scroll from './helpers/scroll.js';
 import scrollto from './helpers/scrollto.js';
@@ -60,18 +59,4 @@ barba.init({
 	views: views
 });
 
-displayRoundedCorner();
 konami();
-
-// Prevent error in older browser for console
-(function () {
-	var method;
-	var noop = function () { };
-	var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
-	while (length--) {
-		method = methods[length];
-		if (!console[method]) console[method] = noop
-	}
-}());

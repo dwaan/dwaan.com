@@ -9,7 +9,6 @@ import darkmode from "./darkmode.js";
 let header = {
     init: function () {
         this.show();
-        this.waving();
         this.slide();
         this.hamburger();
         this.moonsun();
@@ -62,50 +61,6 @@ let header = {
                 delay: length / 5,
                 stagger: length / 5,
                 onComplete: () => resolve()
-            });
-        });
-    },
-
-    // Logo events animations - waving
-    waving: (logo = 'header .logo') => {
-        var length = 1;
-
-        gsap.utils.toArray(logo).forEach(el => {
-            // Waving animation
-            var svg = el.querySelector('.dwan-logo').contentDocument;
-            if (!svg) return;
-
-            var lefthand = svg.querySelector(".left-hand");
-            var waving = gsap.timeline({ repeat: -1, defaults: { transformOrigin: "99% 0", duration: length / 4, ease: "linear", yPercent: 20 } });
-
-            waving
-                .set(lefthand, { yPercent: 0, rotation: 0 })
-                .to(lefthand, { duration: length / 4, rotation: 70 })
-                .fromTo(lefthand, { rotation: 70 }, { rotation: 60, repeat: 2, yoyo: true })
-                .to(lefthand, { duration: length / 4, yPercent: 0, rotation: 0 })
-                .to(lefthand, { yPercent: 0, duration: length * 10 });
-
-            // Hat move on hover
-            var hat = svg.querySelector(".hat");
-            hoverEvents([el], () => {
-                gsap.to(hat, {
-                    transformOrigin: "50% 75%",
-                    yPercent: -3,
-                    xPercent: -1,
-                    rotation: 5,
-                    duration: length,
-                    ease: "elastic.out"
-                });
-                waving.restart();
-            }, () => {
-                gsap.to(hat, {
-                    transformOrigin: "50% 75%",
-                    yPercent: 0,
-                    xPercent: 0,
-                    rotation: 0,
-                    duration: length,
-                    ease: "elastic.out"
-                });
             });
         });
     },

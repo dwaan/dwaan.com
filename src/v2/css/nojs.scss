@@ -11,6 +11,8 @@
 }
 
 html.no-js {
+	animation-name: fade-out;
+
 	#loader,
 	#mode {
 		display: none;
