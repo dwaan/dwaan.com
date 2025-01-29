@@ -16,7 +16,7 @@ time: 121
   hidden />
 <hr/>
 
-<section id="about" class="about snap middle">
+<section id="about" class="about middle">
   <div class="main-text">
     <h1>Hello, my name is
       <strong>Dwan</strong>
@@ -31,7 +31,7 @@ time: 121
 
 <hr/>
 
-<section id="usedto" class="intro snap middle">
+<section id="usedto" class="intro middle">
   <div class="anim middle">
     <div class="text">
       <h2>I'm a UI/UX Designer and Strategist</h2>
@@ -47,7 +47,7 @@ time: 121
 
 <hr/>
 
-<section id="now" class="intro snap middle">
+<section id="now" class="intro middle">
   <div class="text">
     <div hidden>1
       <hr/> 3
@@ -82,7 +82,7 @@ time: 121
 
 <hr/>
 
-<section id="webdesigner" class="intro snap middle">
+<section id="webdesigner" class="intro middle">
   <div class="text">
     <div hidden>2
       <hr/> 3
@@ -114,7 +114,7 @@ time: 121
 
 <hr/>
 
-<section id="sayhi" class="intro snap middle">
+<section id="sayhi" class="intro middle">
   <div class="text">
     <div class="title">
       <div hidden>3
@@ -127,7 +127,7 @@ time: 121
       <a href="/say-hi" class="spring big">say hi</a>.</p>
   </div>
   <div class="arrow-big" hidden>
-    <a href="#startmrgoat" class="arrow scrollto">
+    <a href="#mrgoat" class="arrow scrollto">
       <span>mr. goat?</span>
     </a>
   </div>
@@ -135,76 +135,65 @@ time: 121
 
 <hr/>
 
-<div id="startmrgoat" class="mrgoat middle hidden"></div>
-<div class="mrgoat middle hidden"></div>
-<div class="mrgoat middle hidden"></div>
-<div class="mrgoat middle hidden"></div>
-<div class="mrgoat middle hidden"></div>
-<section id="mrgoat" class="mrgoat snap middle">
-  <div class="text">
-    <div class="h2">
-      <h2>This is
-        <b>Mr. Goat</b>
-      </h2>
+<section id="mrgoat" class="middle">
+  <div class="middle mrgoat">
+    <div class="text">
+      <div class="h2">
+        <h2>This is
+          <b>Mr. Goat</b>
+        </h2>
+      </div>
+    </div>
+    <div class="thumbs">
+      {% for x in (1..26) %}
+        <picture
+          {% if x != 6 %}
+          hidden{% endif %}
+          class="mrgoat{{ x }}">
+          <source media="(min-width: 1024px)" srcset="/img/mrgoat/mrgoat{{ x }}@2x.webp 2x">
+          <img
+            loading="lazy"
+            src="/img/mrgoat/mrgoat{{ x }}.webp"
+            height="200"
+            alt="Mr. Goat" />
+        </picture>
+      {% endfor %}
     </div>
   </div>
-  <div class="thumbs">
-    {% for x in (1..26) %}
-      <picture
-        {% if x != 6 %}
-        hidden{% endif %}
-        class="mrgoat{{ x }}">
-        <source media="(min-width: 1024px)" srcset="/img/mrgoat/mrgoat{{ x }}@2x.webp 2x">
-        <img
-          loading="lazy"
-          src="/img/mrgoat/mrgoat{{ x }}.webp"
-          height="200"
-          alt="Mr. Goat" />
-      </picture>
-    {% endfor %}
-  </div>
-  <div class="text textoverlay">
+  <div class="middle textoverlay">
     <div id="viet" class="float">
-      <div class="dot">
-        <hr hidden /><i></i>
+      <div class="dot"><hr hidden /><i></i>
       </div>
-      <div class="line">
-        <hr hidden />
-      </div>
-      <p>
-        <noscript>1.&nbsp;</noscript>He's a vietnamese</p>
+      <div class="line"><hr hidden /></div>
+      <p>He's a vietnamese</p>
     </div>
+  </div>
+  <div class="middle textoverlay">
     <div id="nyc" class="float">
-      <div class="dot">
-        <hr hidden /><i></i>
+      <div class="dot"><hr hidden /><i></i>
       </div>
-      <div class="line">
-        <hr hidden />
-      </div>
-      <p>
-        <noscript>2.&nbsp;</noscript>He got this neckles in NYC</p>
+      <div class="line"><hr hidden /></div>
+      <p>He got this neckles in NYC</p>
     </div>
+  </div>
+  <div class="middle textoverlay">
     <div id="food" class="float">
-      <div class="dot">
-        <hr hidden /><i></i>
+      <div class="dot"><hr hidden /><i></i>
       </div>
-      <div class="line">
-        <hr hidden />
-      </div>
-      <p>
-        <noscript>3.&nbsp;</noscript>He likes to eat fancy food</p>
+      <div class="line"><hr hidden /></div>
+      <p>He likes to eat fancy food</p>
     </div>
+  </div>
+  <div class="middle textoverlay">
     <div id="travel" class="float">
-      <div class="dot">
-        <hr hidden /><i></i>
+      <div class="dot"><hr hidden /><i></i>
       </div>
-      <div class="line">
-        <hr hidden />
-      </div>
-      <p>
-        <noscript>4.&nbsp;</noscript>He travel all over the world</p>
+      <div class="line"><hr hidden /></div>
+      <p>He travel all over the world</p>
     </div>
-    <div id="post" class="float">
+  </div>
+  <div class="middle textoverlay">
+    <div id="post" class="float column">
       <a
         href="https://gram.social/mrgoat"
         data-barba-prevent
@@ -217,63 +206,63 @@ time: 121
           viewBox="0 0 27 54"
           fill="black"
           xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M21 0C24.3142 0 27 2.68584 27 6L27 48C27 51.3142 24.3142 54 21 54L6 54C2.68584 54 0 51.3142 0 48L0 6C0 2.68584 2.68584 0 6 0L21 0ZM12 3C14.2094 3 16 4.79056 16 7L16 13C16 15.2094 14.2094 17 12 17L7 17C4.79056 17 3 15.2094 3 13L3 7C3 4.79056 4.79056 3 7 3L12 3ZM4 13.264C4 11.6506 5.30792 10.3427 6.92133 10.3427C8.53473 10.3427 9.84266 11.6506 9.84266 13.264C9.84266 14.8774 8.53473 16.1853 6.92133 16.1853C5.30792 16.1853 4 14.8774 4 13.264ZM9.84266 9.92133C9.84266 8.30792 11.1506 7 12.764 7C14.3774 7 15.6853 8.30792 15.6853 9.92133C15.6853 11.5347 14.3774 12.8427 12.764 12.8427C11.1506 12.8427 9.84266 11.5347 9.84266 9.92133ZM11.764 5C11.764 4.44772 12.2117 4 12.764 4C13.3163 4 13.764 4.44772 13.764 5C13.764 5.55228 13.3163 6 12.764 6C12.2117 6 11.764 5.55228 11.764 5ZM4 6.92133C4 5.30792 5.30792 4 6.92133 4C8.53473 4 9.84266 5.30792 9.84266 6.92133C9.84266 8.53473 8.53473 9.84266 6.92133 9.84266C5.30792 9.84266 4 8.53473 4 6.92133Z" />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M21 0C24.3142 0 27 2.68584 27 6L27 48C27 51.3142 24.3142 54 21 54L6 54C2.68584 54 0 51.3142 0 48L0 6C0 2.68584 2.68584 0 6 0L21 0ZM12 3C14.2094 3 16 4.79056 16 7L16 13C16 15.2094 14.2094 17 12 17L7 17C4.79056 17 3 15.2094 3 13L3 7C3 4.79056 4.79056 3 7 3L12 3ZM4 13.264C4 11.6506 5.30792 10.3427 6.92133 10.3427C8.53473 10.3427 9.84266 11.6506 9.84266 13.264C9.84266 14.8774 8.53473 16.1853 6.92133 16.1853C5.30792 16.1853 4 14.8774 4 13.264ZM9.84266 9.92133C9.84266 8.30792 11.1506 7 12.764 7C14.3774 7 15.6853 8.30792 15.6853 9.92133C15.6853 11.5347 14.3774 12.8427 12.764 12.8427C11.1506 12.8427 9.84266 11.5347 9.84266 9.92133ZM11.764 5C11.764 4.44772 12.2117 4 12.764 4C13.3163 4 13.764 4.44772 13.764 5C13.764 5.55228 13.3163 6 12.764 6C12.2117 6 11.764 5.55228 11.764 5ZM4 6.92133C4 5.30792 5.30792 4 6.92133 4C8.53473 4 9.84266 5.30792 9.84266 6.92133C9.84266 8.53473 8.53473 9.84266 6.92133 9.84266C5.30792 9.84266 4 8.53473 4 6.92133Z" />
         </svg>
-        <a
-          href="https://gram.social/mrgoat"
-          data-barba-prevent
-          target="BLANK"
-          rel='noopener noreferrer'>Say hi to Mr. Goat in Pixelfed</a>
-      </div>
-    </div>
-  </section>
-  <div id="endmrgoat" class="mrgoat middle hidden"></div>
-
-  <hr/>
-
-  {% assign now = "now" | date: "%Y" | minus: 2010 %}
-  <section id="cofound" class="cofound middle clip snap">
-    <div class="text">
-      <h2>and {{ now }} Years Ago</h2>
-      <p>My friend and I decide to build Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner and mentor.</p>
+      </a>
       <a
-        href="http://sagara.id"
-        class="spring"
+        href="https://gram.social/mrgoat"
         data-barba-prevent
         target="BLANK"
-        rel='noopener noreferrer'>More about sagara.id</a>
+        rel='noopener noreferrer'>Say hi to Mr. Goat in Pixelfed</a>
     </div>
-    <div class="thumbs" hidden>
-      <picture>
-        <source media="(min-width: 1024px)" srcset="/img/sagara/sagara@2x.webp 2x">
-        <img
-          loading="lazy"
-          src="/img/sagara/sagara.webp"
-          height="200"
-          alt="Sagara" />
-      </picture>
-    </div>
-  </section>
-
-  <hr/>
-
-  <div class="links snap-end">
-    <nav>
-      <div class="prototype">
-        <a href="/say-hi">
-          <span>say hi</span>
-        </a>
-      </div>
-      <div class="continue">
-        <a href="/asosiasi-antropologi-indonesia">
-          <span>
-            <strong>recent case study</strong>
-            <i>- Asosiasi Antropologi Indonesia</i>
-          </span>
-        </a>
-      </div>
-    </nav>
   </div>
+</section>
+
+<hr/>
+
+{% assign now = "now" | date: "%Y" | minus: 2010 %}
+<section id="cofound" class="cofound middle clip">
+  <div class="text">
+    <h2>and {{ now }} Years Ago</h2>
+    <p>My friend and I decide to build Sagara, an I.T. Solutions company based in Jakarta, where I work there full-time since 2010 until I moved to Tel Aviv. I still own small part of the company and act as their business partner and mentor.</p>
+    <a
+      href="http://sagara.id"
+      class="spring"
+      data-barba-prevent
+      target="BLANK"
+      rel='noopener noreferrer'>More about sagara.id</a>
+  </div>
+  <div class="thumbs" hidden>
+    <picture>
+      <source media="(min-width: 1024px)" srcset="/img/sagara/sagara@2x.webp 2x">
+      <img
+        loading="lazy"
+        src="/img/sagara/sagara.webp"
+        height="200"
+        alt="Sagara" />
+    </picture>
+  </div>
+</section>
+
+<hr/>
+
+<div class="links">
+  <nav>
+    <div class="prototype">
+      <a href="/say-hi">
+        <span>say hi</span>
+      </a>
+    </div>
+    <div class="continue">
+      <a href="/asosiasi-antropologi-indonesia">
+        <span>
+          <strong>recent case study</strong>
+          <i>- Asosiasi Antropologi Indonesia</i>
+        </span>
+      </a>
+    </div>
+  </nav>
+</div>

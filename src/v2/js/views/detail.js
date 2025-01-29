@@ -1642,18 +1642,6 @@ var detailview = {
 			});
 		});
 
-		// Snap
-		next.querySelectorAll("section.snap").forEach(el => {
-			scroll.snap(el, "center");
-		});
-		next.querySelectorAll("section.snap-start").forEach(el => {
-			scroll.snap(el, "start");
-		});
-		next.querySelectorAll("section.snap-end").forEach(el => {
-			scroll.snap(el, "end");
-		});
-
-
 		setTimeout(_ => {
 			ScrollTrigger.refresh()
 		}, 1000)

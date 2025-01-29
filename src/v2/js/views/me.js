@@ -237,7 +237,7 @@ var meview = {
 					position: "fixed",
 					opacity: 0,
 					x: -40,
-					y: (window.innerHeight * - 1/4),
+					y: (window.innerHeight * - 1 / 4),
 				}, {
 					opacity: 1,
 					x: -10,
@@ -265,7 +265,7 @@ var meview = {
 				}, {
 					opacity: 0,
 					x: 20,
-					y: (window.innerHeight * 1/4) + 25,
+					y: (window.innerHeight * 1 / 4) + 25,
 					ease: 'linear',
 					duration: 1
 				});
@@ -391,45 +391,6 @@ var meview = {
 			var prev = false;
 			// Defining
 			var repeat = 5;
-			// hide
-			scroll.push(tl => {
-				tl.fromTo(element, {
-					y: "0%"
-				}, {
-					y: "-100%",
-					ease: "linear"
-				});
-
-				return tl;
-			}, tl => ScrollTrigger.create({
-				trigger: "#endmrgoat",
-				start: "0 0",
-				end: "100% 0",
-				animation: tl,
-				scrub: true
-			}));
-			// Show
-			scroll.push(tl => {
-				tl.set(element, {
-					position: "fixed",
-					top: 0
-				});
-
-				tl.fromTo(element, {
-					y: "100%"
-				}, {
-					y: "0%",
-					ease: "linear"
-				});
-
-				return tl;
-			}, tl => ScrollTrigger.create({
-				trigger: "#startmrgoat",
-				start: "0 100%",
-				end: "100% 100%",
-				animation: tl,
-				scrub: true
-			}));
 			// Spinning
 			gsap.set(imgs, { opacity: 0 });
 			scroll.push(tl => {
@@ -455,8 +416,7 @@ var meview = {
 
 				return tl;
 			}, tl => ScrollTrigger.create({
-				trigger: "#startmrgoat",
-				endTrigger: "#endmrgoat",
+				trigger: "#mrgoat",
 				start: "0 100%",
 				end: "100% 0",
 				animation: tl,
@@ -519,8 +479,8 @@ var meview = {
 				var array = [0, 1, 2, 3];
 				gsap.utils.shuffle(array);
 				tl.add(facts(element.querySelectorAll("#viet")), (duration * array[0]));
-				tl.add(facts(element.querySelectorAll("#food")), (duration * array[2]));
 				tl.add(facts(element.querySelectorAll("#nyc")), (duration * array[1]));
+				tl.add(facts(element.querySelectorAll("#food")), (duration * array[2]));
 				tl.add(facts(element.querySelectorAll("#travel")), (duration * array[3]));
 
 				tl.to(el, {
@@ -530,49 +490,12 @@ var meview = {
 				return tl;
 			}, tl => {
 				return ScrollTrigger.create({
-					// scroller: next,
-					trigger: "#startmrgoat",
-					endTrigger: "#endmrgoat",
+					trigger: "#mrgoat",
 					start: "0 0",
 					end: "100% 100%",
 					animation: tl,
+					markers: true,
 					scrub: .5
-				});
-			});
-			// Pinning
-			scroll.push(tl => {
-				tl.fromTo(element.querySelectorAll("#post > *"), {
-					opacity: 0
-				}, {
-					opacity: 1,
-					ease: "power3.out",
-					duration: reduceMotionFilter(duration)
-				}, (duration * 4));
-				tl.fromTo(element.querySelectorAll("#post > *"), {
-					y: window.innerHeight
-				}, {
-					y: 0,
-					ease: "linear",
-					duration: reduceMotionFilter(duration)
-				}, (duration * 4));
-				tl.fromTo(element.querySelectorAll(".text .h2"), {
-					opacity: 1
-				}, {
-					opacity: 0,
-					ease: "power3.in",
-					duration: reduceMotionFilter(duration)
-				}, (duration * 4));
-
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					// scroller: next,
-					trigger: "#startmrgoat",
-					endTrigger: "#endmrgoat",
-					start: "0 0",
-					end: "100% 100%",
-					animation: tl,
-					scrub: true
 				});
 			});
 		});
@@ -627,11 +550,6 @@ var meview = {
 				elements: el.querySelectorAll("nav > *"),
 				position: "100%"
 			});
-		});
-
-		// Snap
-		next.querySelectorAll("section.middle, div.middle, .links").forEach(el => {
-			scroll.snap(el);
 		});
 
 		// Refresh

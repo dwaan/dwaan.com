@@ -11,25 +11,6 @@
 }
 
 html.no-js {
-	overflow-x: clip;
-	overflow-y: auto;
-	scroll-behavior: smooth;
-	scroll-snap-type: y mandatory;
-	animation-name: fade-out;
-	animation-duration: 2.56s;
-
-	.snap {
-		scroll-snap-align: center;
-
-		&-start {
-			scroll-snap-align: start;
-		}
-
-		&-end {
-			scroll-snap-align: end;
-		}
-	}
-
 	#loader,
 	#mode {
 		display: none;
@@ -232,8 +213,7 @@ html.no-js {
 	.imuiux,
 	.follow,
 	.us,
-	.know,
-	.mrgoat {
+	.know {
 		position: relative;
 		pointer-events: auto;
 	}
