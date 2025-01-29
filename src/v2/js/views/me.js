@@ -390,14 +390,14 @@ var meview = {
 			};
 			var prev = false;
 			// Defining
-			var repeat = 5;
+			var repeat = 8;
 			// Spinning
 			gsap.set(imgs, { opacity: 0 });
 			scroll.push(tl => {
 				tl.to(mrgoat, {
 					frame: imgs.length,
 					snap: "frame",
-					repeat: repeat + 2,
+					repeat: repeat,
 					ease: "linear",
 					onUpdate: () => {
 						var frame = mrgoat.frame + 4;
@@ -411,7 +411,7 @@ var meview = {
 
 						prev = el;
 					},
-					duration: reduceMotionFilter((repeat + 2) * duration)
+					duration: reduceMotionFilter(repeat * duration)
 				}, 0);
 
 				return tl;
@@ -423,79 +423,90 @@ var meview = {
 				scrub: .5
 			}));
 			// Facts
-			scroll.push(tl => {
-				var el = element.querySelectorAll(".thumbs, .text");
-				var facts = function (els) {
-					var dur = duration / 7.5;
-					var tl = gsap.timeline();
+			var facts = function (els) {
+				var tl = gsap.timeline();
 
-					tl.fromTo(els, {
+				// Fade in
+				tl.fromTo(els, {
+					opacity: 0
+				}, {
+					opacity: 1,
+					ease: "power3.in",
+					duration: reduceMotionFilter(duration)
+				});
+				// Diagonal line animation
+				els.forEach(el => {
+					tl.fromTo(el.querySelectorAll(".dot hr"), {
+						width: "0%"
+					}, {
+						width: "100%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Horizontal line animation
+				els.forEach(el => {
+					tl.fromTo(el.querySelectorAll(".line hr"), {
+						width: "0%"
+					}, {
+						width: "100%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Show text
+				els.forEach(el => {
+					tl.fromTo(el.querySelectorAll("p"), {
 						opacity: 0
 					}, {
 						opacity: 1,
-						ease: "power3.in",
-						duration: reduceMotionFilter(dur)
+						duration: reduceMotionFilter(duration)
 					});
-					els.forEach(function (el) {
-						tl.fromTo(el.querySelectorAll(".dot hr"), {
-							width: "0%"
-						}, {
-							width: "100%",
-							duration: reduceMotionFilter(dur)
-						});
-					});
-					els.forEach(function (el) {
-						tl.fromTo(el.querySelectorAll(".line hr"), {
-							width: "0%"
-						}, {
-							width: "100%",
-							duration: reduceMotionFilter(dur)
-						});
-					});
-					els.forEach(function (el) {
-						tl.fromTo(el.querySelectorAll("p"), {
-							opacity: 0
-						}, {
-							opacity: 1,
-							duration: reduceMotionFilter(dur)
-						});
-					});
-					tl.fromTo(els, {
-						y: 100
-					}, {
-						y: -100,
-						ease: "linear",
-						duration: reduceMotionFilter((dur * 10))
-					}, 0);
-					tl.to(els, {
+				});
+
+				// Middle of animation
+
+				// hide text
+				els.forEach(el => {
+					tl.to(el.querySelectorAll("p"), {
 						opacity: 0,
-						ease: "power3.out",
-						duration: reduceMotionFilter(dur)
-					}, (dur * 9));
-
-					return tl;
-				}
-
-				var array = [0, 1, 2, 3];
-				gsap.utils.shuffle(array);
-				tl.add(facts(element.querySelectorAll("#viet")), (duration * array[0]));
-				tl.add(facts(element.querySelectorAll("#nyc")), (duration * array[1]));
-				tl.add(facts(element.querySelectorAll("#food")), (duration * array[2]));
-				tl.add(facts(element.querySelectorAll("#travel")), (duration * array[3]));
-
-				tl.to(el, {
-					duration: reduceMotionFilter(repeat * duration)
-				}, 0);
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Horizontal line animation
+				els.forEach(el => {
+					tl.to(el.querySelectorAll(".line hr"), {
+						width: "0%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Diagonal line animation
+				els.forEach(el => {
+					tl.to(el.querySelectorAll(".dot hr"), {
+						width: "0%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Fade out
+				tl.to(els, {
+					opacity: 0,
+					ease: "power3.out",
+					duration: reduceMotionFilter(duration)
+				});
 
 				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: "#mrgoat",
-					start: "0 0",
-					end: "100% 100%",
-					animation: tl,
-					markers: true,
-					scrub: .5
+			}
+			element.querySelectorAll(".facts").forEach(fact => {
+				scroll.push(tl => {
+					tl.add(facts([fact]), 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: fact,
+						start: "25% 50%",
+						end: "75% 50%",
+						animation: tl,
+						scrub: .5
+					});
 				});
 			});
 		});

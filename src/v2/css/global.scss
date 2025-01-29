@@ -2903,6 +2903,7 @@ ol {
 		pointer-events: none;
 		padding: 0;
 		height: auto;
+		scroll-snap-align: initial;
 
 		.mrgoat {
 			position: sticky;
