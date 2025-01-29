@@ -37,66 +37,6 @@ html.no-js {
 		position: absolute;
 	}
 
-	.menu {
-		.overlay {
-			display: block;
-			opacity: 0;
-			transition: opacity .32s ease-in-out;
-			pointer-events: none;
-			background-color: rgba(0, 0, 0, .24);
-		}
-
-		.close {
-			display: none;
-		}
-
-		.items {
-			margin-left: auto;
-			transform: translate3d(100%, 0, 0);
-			transition: transform .16s ease-in;
-			pointer-events: all;
-
-			noscript {
-				display: flex;
-				flex-direction: column;
-			}
-
-			ul,
-			ol {
-				margin-top: auto;
-				height: 100%;
-
-				li {
-					margin-bottom: var(--padm);
-				}
-			}
-
-			&:hover {
-				transform: translate3d(0, 0, 0);
-			}
-
-			a {
-				margin: 0;
-			}
-
-			p {
-				margin-top: auto;
-			}
-		}
-
-		&:hover {
-			.items {
-				transform: translate3d(0, 0, 0);
-				transition: transform .32s ease-out;
-			}
-
-			.overlay {
-				opacity: 1;
-			}
-		}
-	}
-
-
 	.home {
 		.middle {
 			.cover {
@@ -104,7 +44,6 @@ html.no-js {
 			}
 		}
 	}
-
 
 	.me {
 		.text {

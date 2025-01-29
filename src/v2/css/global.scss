@@ -154,6 +154,13 @@ html {
 
 body {
 	position: relative;
+
+	// Menu is shown
+	&:has(#menu-switcher:checked) {
+		main {
+			transform: translate(-10%, 0);
+		}
+	}
 }
 
 /* Common styles */
@@ -163,6 +170,8 @@ main {
 	position: relative;
 	opacity: 0;
 	overflow: clip;
+	transition: transform .64s cubic-bezier(.23, .8, .37, 1);
+	will-change: transform;
 
 	>hr {
 		display: none;
@@ -725,6 +734,7 @@ header {
 	}
 }
 
+// Print style
 .print {
 	display: none;
 }
@@ -780,11 +790,53 @@ header {
 .menu {
 	order: 2;
 
+	// The checkbox
+	#menu-switcher {
+		+.overlay {
+			@include mixins.block-spread(flex, fixed, 1000, rgba(0, 0, 0, .24));
+			align-items: flex-start;
+			justify-content: flex-end;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity .24s ease-in-out;
+			will-change: opacity;
+
+			.items {
+				display: flex;
+				padding: calc((2 * var(--pady)) + 44px) calc(2 * var(--padx)) calc(2 * var(--pady));
+				height: 100%;
+				width: calc(2 * var(--pic-w));
+				max-width: 100%;
+				background-color: var(--white);
+				transform: translate3d(100%, 0, 0);
+				transition: transform .64s cubic-bezier(.23, .8, .37, 1);
+				pointer-events: all;
+				will-change: transform;
+			}
+		}
+
+		&:checked {
+			+.overlay {
+				opacity: 1;
+
+				.items {
+					transform: translate3d(0, 0, 0);
+				}
+			}
+		}
+	}
+
 	.switch {
 		position: relative;
+		cursor: pointer;
 		z-index: 2;
 		display: flex;
 		flex-direction: row;
+
+		svg,
+		span {
+			pointer-events: none;
+		}
 	}
 }
 
@@ -812,24 +864,6 @@ header {
 }
 
 /* Slide right menu items */
-.menu {
-	.overlay {
-		@include mixins.block-spread(none, fixed, 1000, rgba(0, 0, 0, 0));
-		align-items: flex-start;
-		justify-content: flex-end;
-	}
-
-	.items {
-		display: flex;
-		height: 100%;
-		width: calc(2 * var(--pic-w));
-		max-width: 100%;
-		padding: calc((2 * var(--pady)) + 44px) calc(2 * var(--padx)) calc(2 * var(--pady));
-		background-color: var(--white);
-		will-change: transform, opacity;
-	}
-}
-
 .items {
 	.close {
 		@include mixins.block(absolute, var(--pady), initial, initial, 36px);

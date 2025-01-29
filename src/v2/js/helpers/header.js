@@ -10,7 +10,6 @@ let header = {
     init: function () {
         this.show();
         this.slide();
-        this.hamburger();
         this.moonsun();
         this.darkmodeswitch();
         this.textswitch();
@@ -45,6 +44,7 @@ let header = {
             });
         });
     },
+
     // Animate header hiding
     hide: () => {
         return new Promise(resolve => {
@@ -95,105 +95,6 @@ let header = {
             });
             tl.pause(length / 10);
             hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
-        });
-    },
-
-    // Main menu - menu actions
-    hamburger: () => {
-        gsap.utils.toArray("header .menu").forEach(el => {
-            var overlay = el.querySelector(".overlay");
-            var items = el.querySelector(".items");
-            var length = reduceMotionFilter(1);
-
-            // Show menu animation
-            el.querySelector(".switch").addEventListener("click", e => {
-                e.preventDefault();
-
-                // Don't animate when it still animating
-                if (gsap.isTweening(items)) return;
-
-                // Animate main element
-                gsap.to("main > .middle", {
-                    left: "-=100",
-                    ease: "power3.out",
-                    duration: length * 3 / 4
-                });
-                gsap.to("main .middle > .text", {
-                    left: "-=50",
-                    ease: "power3.out",
-                    duration: length * 3 / 4
-                });
-                gsap.to("main .links, main .flares", {
-                    left: "-=25",
-                    ease: "power3.out",
-                    duration: length * 3 / 4
-                });
-                // Animate overlay background
-                gsap.to(overlay, {
-                    backgroundColor: "rgba(0,0,0,.5)",
-                    ease: "power3.out",
-                    duration: length
-                });
-                // Animate menu showing
-                gsap.set(overlay, {
-                    display: "flex",
-                    onComplete: () => {
-                        gsap.fromTo(items.querySelectorAll("li"), {
-                            x: 50,
-                            opacity: 0
-                        }, {
-                            x: 0,
-                            opacity: 1,
-                            ease: "expo.out",
-                            delay: length / 4,
-                            stagger: length / 10,
-                            duration: length * 13 / 20
-                        });
-
-                        gsap.fromTo(items, {
-                            x: "100%"
-                        }, {
-                            x: 0,
-                            ease: "power3.out",
-                            duration: length * 3 / 4
-                        });
-                    }
-                });
-            });
-
-            // Hide menu animation
-            el.querySelectorAll(".overlay, li a, .close").forEach(link => {
-                link.addEventListener("click", function (e) {
-                    e.preventDefault();
-
-                    // Don't animate when it still animating or not target
-                    if (this != e.target || gsap.isTweening(items)) return;
-
-                    // Animate main element
-                    gsap.to("main > .middle, main .middle > .text, main .links, main .flares", {
-                        left: 0,
-                        duration: length * 3 / 4,
-                        ease: "power3.out"
-                    });
-                    // Animate overlay background
-                    gsap.to(overlay, {
-                        backgroundColor: "rgba(0,0,0,0)",
-                        duration: length,
-                        ease: "power3.out"
-                    });
-                    // Animate menu
-                    gsap.fromTo(items, {
-                        x: 0
-                    }, {
-                        x: "100%",
-                        ease: "power3.out",
-                        duration: length * 3 / 4,
-                        onComplete: () => gsap.set(overlay, {
-                            display: "none"
-                        })
-                    });
-                });
-            });
         });
     },
 
