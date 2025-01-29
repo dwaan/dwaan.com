@@ -9,7 +9,6 @@ import darkmode from "./darkmode.js";
 let header = {
     init: function () {
         this.show();
-        this.slide();
         this.moonsun();
         this.darkmodeswitch();
         this.textswitch();
@@ -62,39 +61,6 @@ let header = {
                 stagger: length / 5,
                 onComplete: () => resolve()
             });
-        });
-    },
-
-    // Menu menu - hamburger slide
-    slide: () => {
-        var length = 1;
-
-        gsap.utils.toArray('header .switch').forEach(el => {
-            // Menu icon move on hover
-            var menu = el.querySelectorAll("svg line");
-            var tl = gsap.timeline();
-            tl.set(menu, {
-                x: 0
-            });
-            tl.to(menu, {
-                x: -32,
-                duration: length / 4,
-                ease: "expo.in",
-                stagger: length / 10
-            });
-            tl.fromTo(menu, {
-                x: 32
-            }, {
-                x: 0,
-                duration: length / 4,
-                ease: "expo.out",
-                stagger: length / 10
-            });
-            tl.to(menu, {
-                duration: length,
-            });
-            tl.pause(length / 10);
-            hoverEvents([el], () => tl.repeat(-1).restart(), () => tl.repeat(0));
         });
     },
 
