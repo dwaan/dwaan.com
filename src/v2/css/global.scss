@@ -73,6 +73,9 @@
 	--red: #FF0F1E;
 	--lime: #60e670;
 
+	// Animation
+	--ease-smooth: cubic-bezier(.28, .01, .24, 1);
+
 	// Media screen
 
 	@media screen and (min-width: mixins.$screen-small) {
@@ -170,7 +173,7 @@ main {
 	position: relative;
 	opacity: 0;
 	overflow: clip;
-	transition: transform .64s cubic-bezier(.23, .8, .37, 1);
+	transition: transform .8s var(--ease-smooth);
 	will-change: transform;
 
 	>hr {
@@ -431,10 +434,6 @@ picture {
 	}
 }
 
-.height-auto {
-	height: auto;
-}
-
 .auto {
 	min-height: auto;
 }
@@ -693,23 +692,23 @@ header {
 				}
 
 				70% {
-					transform: rotate(210deg);
-				}
-
-				75% {
-					transform: rotate(190deg);
-				}
-
-				80% {
-					transform: rotate(210deg);
-				}
-
-				85% {
 					transform: rotate(200deg);
 				}
 
+				75% {
+					transform: rotate(180deg);
+				}
+
+				80% {
+					transform: rotate(200deg);
+				}
+
+				85% {
+					transform: rotate(190deg);
+				}
+
 				90% {
-					transform: rotate(210deg);
+					transform: rotate(200deg);
 				}
 
 				100% {
@@ -790,42 +789,6 @@ header {
 .menu {
 	order: 2;
 
-	// The checkbox
-	#menu-switcher {
-		+.overlay {
-			@include mixins.block-spread(flex, fixed, 1000, var(--black-15));
-			align-items: flex-start;
-			justify-content: flex-end;
-			opacity: 0;
-			pointer-events: none;
-			transition: opacity .24s ease-in-out;
-			will-change: opacity;
-
-			.items {
-				display: flex;
-				padding: calc((2 * var(--pady)) + 44px) calc(2 * var(--padx)) calc(2 * var(--pady));
-				height: 100%;
-				width: calc(2 * var(--pic-w));
-				max-width: 100%;
-				background-color: var(--white);
-				transform: translate3d(100%, 0, 0);
-				transition: transform .64s cubic-bezier(.23, .8, .37, 1);
-				pointer-events: all;
-				will-change: transform;
-			}
-		}
-
-		&:checked {
-			+.overlay {
-				opacity: 1;
-
-				.items {
-					transform: translate3d(0, 0, 0);
-				}
-			}
-		}
-	}
-
 	// The hamburger
 	.switch {
 		position: relative;
@@ -849,72 +812,35 @@ header {
 			}
 		}
 
+		// Sliding animation
 		&:hover {
-			@keyframes slide {
-				0% {
-					transform: translateX(0)
-				}
-
-				50% {
-					transform: translateX(-100px)
-				}
-
-				50.01% {
-					transform: translateX(100px)
-				}
-
-				100% {
-					transform: translateX(0)
-				}
-			}
-
 			svg {
+				@keyframes slide {
+					0% {
+						transform: translateX(0)
+					}
+
+					50% {
+						transform: translateX(-32px)
+					}
+
+					50.01% {
+						transform: translateX(32px)
+					}
+				}
+
 				@for $i from 1 through 3 {
 					line:nth-child(#{$i}) {
-						animation: slide .48s ease-in-out;
-						animation-delay: (($i - 1) * .064s);
+						animation: slide .32s ease-in-out;
+						animation-delay: (($i - 1) * .048s);
 					}
 				}
 			}
 		}
 	}
 
-	// Slide right menu items
+	// Menu items
 	.items {
-		.close {
-			@include mixins.block(absolute, var(--pady), initial, initial, 36px);
-			right: var(--padx);
-			padding: 0 12px 0 48px;
-			margin: 4px -12px;
-			line-height: 35px;
-			border-radius: 8px;
-			transition: all .15s ease;
-			will-change: background-color;
-
-			&:before {
-				@include mixins.make-it-block();
-			}
-
-			span {
-				display: inline-block;
-				text-indent: -666rem;
-
-				&:after,
-				&:before {
-					@include mixins.make-it-exist();
-					@include mixins.block(absolute, 50%, 24px, 20px, 2px);
-					background-color: var(--black);
-					border-radius: 2px;
-					transform-origin: center;
-					transform: translate3d(-50%, -50%, 0) rotate(45deg);
-				}
-
-				&:before {
-					transform: translate3d(-50%, -50%, 0) rotate(-45deg);
-				}
-			}
-		}
-
 		ol {
 			@include mixins.zero-margin-padding;
 			display: flex;
@@ -1027,6 +953,40 @@ header {
 				}
 			}
 		}
+
+		.close {
+			@include mixins.block(absolute, var(--pady), initial, initial, 36px);
+			right: var(--padx);
+			padding: 0 12px 0 48px;
+			margin: 4px -12px;
+			line-height: 35px;
+			border-radius: 8px;
+			transition: all .15s ease;
+			will-change: background-color;
+
+			&:before {
+				@include mixins.make-it-block();
+			}
+
+			span {
+				display: inline-block;
+				text-indent: -666rem;
+
+				&:after,
+				&:before {
+					@include mixins.make-it-exist();
+					@include mixins.block(absolute, 50%, 24px, 20px, 2px);
+					background-color: var(--black);
+					border-radius: 2px;
+					transform-origin: center;
+					transform: translate3d(-50%, -50%, 0) rotate(45deg);
+				}
+
+				&:before {
+					transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+				}
+			}
+		}
 	}
 
 	// Common style
@@ -1036,6 +996,75 @@ header {
 	.items .close {
 		height: 44px;
 		@include mixins.typography(.9rem, inherit, 44px, .05rem, var(--black));
+	}
+
+	// The checkbox action for displaying menu
+	#menu-switcher {
+		+.overlay {
+			@include mixins.block-spread(flex, fixed, 1000, transparent);
+			align-items: flex-start;
+			justify-content: flex-end;
+
+			&,
+			&::before {
+				pointer-events: none;
+			}
+
+			&::before {
+				@include mixins.make-it-full-size();
+				@include mixins.block-spread(block, absolute, 1, var(--black-25));
+				content: "";
+				opacity: 0;
+				transition: opacity .48s var(--ease-smooth);
+				transition-delay: .32s;
+				will-change: opacity;
+			}
+
+			li {
+				opacity: 0;
+				transform: translate3d(200px, 0, 0);
+			}
+
+			.items {
+				z-index: 2;
+				display: flex;
+				padding: calc((2 * var(--pady)) + 44px) calc(2 * var(--padx)) calc(2 * var(--pady));
+				height: 100%;
+				width: calc(2 * var(--pic-w));
+				max-width: 100%;
+				background-color: var(--white);
+				transform: translate3d(100%, 0, 0);
+				pointer-events: all;
+			}
+
+			li,
+			.items {
+				transition: transform .8s var(--ease-smooth), opacity .8s var(--ease-smooth);
+				will-change: transform, opacity;
+			}
+
+			@for $i from 1 through 5 {
+				li:nth-child(#{$i}) {
+					transition-delay: (($i + 1) * .064s);
+				}
+			}
+		}
+
+		// Menu displayed
+		&:checked {
+			+.overlay {
+
+				&::before,
+				li {
+					opacity: 1;
+				}
+
+				li,
+				.items {
+					transform: translate3d(0, 0, 0);
+				}
+			}
+		}
 	}
 }
 
