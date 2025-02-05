@@ -946,6 +946,7 @@ div>.vertical {
 	}
 
 	.thumbs {
+		transform: none;
 		picture {
 			width: calc(var(--pic-w) * 7/6);
 		}
