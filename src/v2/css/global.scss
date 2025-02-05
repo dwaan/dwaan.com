@@ -2012,31 +2012,6 @@ header {
 	justify-content: flex-start;
 	overflow: clip;
 
-	.before,
-	.after {
-		@include mixins.make-it-exist();
-		@include mixins.block(absolute, 50vh, 50vw, 100px, 30px, 2);
-		margin-top: -15px;
-		background: url(../img/arrow.svg) right center no-repeat;
-		background-size: contain;
-		cursor: pointer;
-	}
-
-	.before {
-		left: calc(50vw - 32.5vw - 100px);
-		right: initial;
-		transform: rotate(180deg);
-	}
-
-	.after {
-		left: initial;
-		right: calc(50vw - 32.5vw - 100px);
-	}
-
-	picture {
-		width: 65vw;
-	}
-
 	%hundred-percent {
 		width: 100%;
 		height: 100%;
@@ -2058,14 +2033,41 @@ header {
 		scroll-snap-align: start;
 	}
 
+	picture {
+		width: 65vw;
+	}
+
 	.thumbs {
 		@extend %hundred-percent;
 		position: relative;
 		z-index: 1;
 		overflow-y: hidden;
 		overflow-x: auto;
-		margin-bottom: -50px;
+		height: calc(100vh + 50px);
 		scroll-snap-type: x mandatory;
+	}
+
+	// Start JS navigation
+
+	.before,
+	.after {
+		@include mixins.make-it-exist();
+		@include mixins.block(absolute, 50vh, 50vw, 100px, 30px, 2);
+		margin-top: -15px;
+		background: url(../img/arrow.svg) right center no-repeat;
+		background-size: contain;
+		cursor: pointer;
+	}
+
+	.before {
+		left: calc(50vw - 32.5vw - 100px);
+		right: initial;
+		transform: rotate(180deg);
+	}
+
+	.after {
+		left: initial;
+		right: calc(50vw - 32.5vw - 100px);
 	}
 }
 
@@ -2361,7 +2363,7 @@ header {
 
 /* BKPM Page */
 
-.bkpm {
+main.bkpm {
 	.style-top {
 		.text {
 			max-width: 480px;
@@ -2399,6 +2401,14 @@ header {
 				top: 80%;
 				left: 85%;
 			}
+		}
+	}
+
+	.color {
+		gap: var(--pads);
+
+		li {
+			border-radius: 1000px !important;
 		}
 	}
 }

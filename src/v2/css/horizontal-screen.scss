@@ -1219,6 +1219,7 @@ div>.vertical {
 	flex-direction: row;
 
 	.text {
+		max-width: 30vw;
 		padding-left: var(--padxl);
 	}
 
