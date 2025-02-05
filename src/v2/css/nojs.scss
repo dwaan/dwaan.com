@@ -11,7 +11,19 @@
 }
 
 html.no-js {
-	animation-name: fade-out;
+	&.page-home {
+		animation-name: fade-out;
+		animation-duration: 2.56s;
+
+		main {
+			animation-name: none;
+		}
+	}
+
+	main {
+		animation-name: fade-out;
+		animation-duration: 2.56s;
+	}
 
 	#loader,
 	#mode {
