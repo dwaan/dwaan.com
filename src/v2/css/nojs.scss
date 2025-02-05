@@ -11,6 +11,8 @@
 }
 
 html.no-js {
+
+	// Animate appereang
 	&.page-home {
 		animation-name: fade-out;
 		animation-duration: 2.56s;
@@ -25,15 +27,22 @@ html.no-js {
 		animation-duration: 2.56s;
 	}
 
-	#loader,
-	#mode {
-		display: none;
-	}
-
+	// Display hidden tags
 	main,
 	header,
 	.footer {
 		opacity: 1;
+	}
+
+	.year {
+		position: absolute;
+	}
+
+	// Hide javascript button and action
+
+	#loader,
+	#mode {
+		display: none;
 	}
 
 	.size,
@@ -41,11 +50,8 @@ html.no-js {
 		display: none;
 	}
 
-	.year {
-		position: absolute;
-	}
-
-	.home {
+	// Hide cover
+	main.home {
 		.middle {
 			.cover {
 				display: none;
@@ -53,7 +59,8 @@ html.no-js {
 		}
 	}
 
-	.me {
+	// Sticky animation when JS is not available
+	main.me {
 		.text {
 			padding: 0;
 		}
@@ -109,64 +116,7 @@ html.no-js {
 		}
 	}
 
-
-	/* email movement */
-
-	.hi {
-		a {
-			span {
-				position: relative;
-				display: block;
-				transition: margin .24s ease-out;
-			}
-
-			small {
-				transform: translate3d(0, 25%, 0);
-				transition: opacity .32s ease-in, transform .32s ease-in;
-			}
-		}
-
-		.email:hover span {
-			margin-right: var(--padl);
-		}
-
-		.social:hover span:first-child,
-		h1:hover .social span:nth-child(2) {
-			margin-left: var(--padl);
-		}
-
-		h1 .email:hover+.social span:nth-child(2),
-		h1 .social:hover span:nth-child(2) {
-			margin-left: 0;
-		}
-
-		.social:hover span:nth-child(2) {
-			margin-right: var(--padl);
-		}
-
-		.email:hover small,
-		.social:hover span:first-child small,
-		h1:hover .social span:nth-child(2) small {
-			transform: translate3d(0, 0, 0);
-			opacity: 1;
-			transition: opacity .16s ease-out, transform .16s ease-out;
-		}
-
-		h1 .social:hover span:nth-child(2) small,
-		h1 .email:hover+.social span:nth-child(2) small {
-			transform: translate3d(0, 25%, 0);
-			opacity: 0;
-		}
-	}
-
-	.imuiux,
-	.follow,
-	.us,
-	.know {
-		position: relative;
-		pointer-events: auto;
-	}
-
+	// Replurk page
 	#permission,
 	.grant,
 	#statistics,
@@ -184,29 +134,29 @@ html.no-js {
 	#statistics {
 		display: none !important;
 	}
-}
 
-#nojs {
-	position: relative;
-	display: none;
-	background: url(../img/honocoroko.webp) center top no-repeat;
-	background-size: cover;
+	#nojs {
+		position: relative;
+		display: none;
+		background: url(../img/honocoroko.webp) center top no-repeat;
+		background-size: cover;
 
-	&::before {
-		position: absolute;
-		display: block;
-		content: "";
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: rgba(0, 0, 0, .5);
-	}
+		&::before {
+			position: absolute;
+			display: block;
+			content: "";
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, .5);
+		}
 
-	.text {
-		text-align: center;
-		background-color: var(--white);
-		max-width: 300px;
-		padding: var(--padl);
+		.text {
+			text-align: center;
+			background-color: var(--white);
+			max-width: 300px;
+			padding: var(--padl);
+		}
 	}
 }

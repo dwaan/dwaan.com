@@ -3224,6 +3224,52 @@ main.hi {
 	a em {
 		font-style: normal;
 	}
+
+	// Hover animation
+	a {
+		span {
+			position: relative;
+			display: block;
+			transition: margin .24s ease-out;
+		}
+
+		small {
+			transform: translate3d(0, 25%, 0);
+			transition: opacity .32s ease-in, transform .32s ease-in;
+		}
+	}
+
+	.email:hover span {
+		margin-right: var(--padl);
+	}
+
+	.social:hover span:first-child,
+	h1:hover .social span:nth-child(2) {
+		margin-left: var(--padl);
+	}
+
+	h1 .email:hover+.social span:nth-child(2),
+	h1 .social:hover span:nth-child(2) {
+		margin-left: 0;
+	}
+
+	.social:hover span:nth-child(2) {
+		margin-right: var(--padl);
+	}
+
+	.email:hover small,
+	.social:hover span:first-child small,
+	h1:hover .social span:nth-child(2) small {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+		transition: opacity .16s ease-out, transform .16s ease-out;
+	}
+
+	h1 .social:hover span:nth-child(2) small,
+	h1 .email:hover+.social span:nth-child(2) small {
+		transform: translate3d(0, 25%, 0);
+		opacity: 0;
+	}
 }
 
 

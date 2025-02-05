@@ -40,19 +40,19 @@ namespace: home
       media="screen and (max-aspect-ratio: 1/1)"
       href="/css/vertical-screen.css">
 
-      {% comment %} <script>
-                      var classcollection = "no-js";
-                      /* See if it's in dark mode */
-                      h = document.querySelector("html");
-                      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection = "dark";
+    <script>
+      var classcollection = "no-js";
+      /* See if it's in dark mode */
+      h = document.querySelector("html");
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection = "dark";
 
-                      // Displaying rounded corner only on fullscreen
-                      if (window.innerWidth == screen.width && window.innerHeight == screen.height) classcollection += " rounded";
+      // Displaying rounded corner only on fullscreen
+      if (window.innerWidth == screen.width && window.innerHeight == screen.height) classcollection += " rounded";
 
-                      // Set the class
-                      h.setAttribute('class', classcollection);
-                    </script>
-                <script src="/js/bundle.js" async></script> {% endcomment %}
+      // Set the class
+      h.setAttribute('class', classcollection);
+    </script>
+    <script src="/js/bundle.js" async></script>
 
     <link
       rel="apple-touch-icon"
