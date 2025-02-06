@@ -7,7 +7,6 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
 import barba from '@barba/core';
 // Helper
 import { _q, _qAll, konami, addClass, removeClass } from './helpers/helper.js';
-import header from './helpers/header.js';
 import scroll from './helpers/scroll.js';
 import scrollto from './helpers/scrollto.js';
 
