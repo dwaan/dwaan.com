@@ -13,13 +13,15 @@ var animate = {
 			var scroll = top / (window.outerHeight * 2);
 			var speed = reduceMotionFilter() ? .5 : 2;
 			if (scroll > 0) {
-				removeClass(_q("html"), "snap");
 				gsap.to(el, {
 					scrollTo: 0,
 					duration: (scroll > speed) ? speed : scroll,
 					ease: "expo.inOut",
-					onComplete: function () {
-						addClass(_q("html"), "snap");
+					onStart: _ => {
+						addClass(_q("html"), "nosnap");
+					},
+					onComplete: _ => {
+						removeClass(_q("html"), "nosnap");
 						resolve();
 					}
 				});

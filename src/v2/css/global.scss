@@ -139,7 +139,6 @@ html {
 	overflow-y: auto;
 	scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
-	scroll-behavior: smooth;
 
 	.snap {
 		scroll-snap-align: center;
@@ -153,6 +152,12 @@ html {
 		}
 	}
 
+	// Use this with ScrollToPlugin in scrollto.js
+	.nosnap,
+	&.nosnap {
+		scroll-behavior: auto!important;
+		scroll-snap-type: none!important;
+	}
 }
 
 body {

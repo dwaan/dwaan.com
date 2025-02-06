@@ -1228,7 +1228,13 @@ var detailview = {
 						x: this.pos * this.slideshowChild[this.pos].offsetWidth
 					},
 					ease: "expo.out",
-					onComplete: this.navigationHide
+					onStart: _ => {
+						addClass(this.slideshowScroll, "nosnap");
+					},
+					onComplete: _ => {
+						removeClass(this.slideshowScroll, "nosnap");
+						this.navigationHide();
+					}
 				});
 			}
 			that.before.addEventListener("click", _ => {
