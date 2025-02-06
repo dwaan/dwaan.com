@@ -51,9 +51,10 @@ var animate = {
 				// Unhide main element
 				tl.to(next, { opacity: 1 }, 0);
 
+
 				// Show current view
-				var els = null;
-				if (footer) els = next.querySelectorAll(".footer > *");
+				var footerEls = null;
+				if (footer) footerEls = next.querySelectorAll(".footer > *");
 				if (!nonsticky) nonsticky = next.querySelectorAll(".main-text > *:not(.hidden), .arrow-big .arrow");
 
 				// Animate text
@@ -68,21 +69,13 @@ var animate = {
 					}
 				}, 0);
 				// Animate footer
-				tl.fromTo(els, {
+				tl.fromTo(footerEls, {
 					y: "+=200px",
 					opacity: 0
 				}, {
 					y: "-=200px",
 					opacity: 1
 				}, "<+=" + length / 8);
-				// Animate flares
-				tl.fromTo(next.querySelectorAll(".flares.side > img"), {
-					x: "+=" + (window.innerWidth * 1 / 2) + "px",
-					opacity: 0
-				}, {
-					x: "-=" + (window.innerWidth * 1 / 2) + "px",
-					opacity: 1
-				}, 0);
 				// Run done after all all animation complete
 				tl.set(next, {
 					onComplete: () => resolve()

@@ -186,8 +186,6 @@ div>.vertical {
 /* Arrow links */
 
 .arrow {
-	bottom: var(--pady);
-	right: var(--padx);
 	margin: var(--pady) var(--padx);
 
 	&:after {
@@ -1312,7 +1310,7 @@ div>.vertical {
 
 
 /* Me Page */
-.me {
+main.me {
 
 	h2,
 	h3 {

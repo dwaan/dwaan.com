@@ -606,38 +606,6 @@ picture {
 		height: 100vh;
 		pointer-events: none;
 	}
-
-	// &-big {
-	// 	z-index: 2;
-
-	// 	&-center {
-	// 		right: 50%;
-	// 		transform: translate3d(-50%, 0, 0);
-
-	// 		.arrow:after {
-	// 			width: 50px;
-	// 		}
-	// 	}
-	// }
-
-	// &-small {
-	// 	z-index: 2;
-
-	// 	.arrow {
-	// 		flex-flow: row nowrap;
-
-	// 		&:before,
-	// 		&:after {
-	// 			@include mixins.make-it-block();
-	// 			margin: 0;
-	// 			pointer-events: none;
-	// 		}
-
-	// 		&:after {
-	// 			transform: none;
-	// 		}
-	// 	}
-	// }
 }
 
 
@@ -2652,7 +2620,7 @@ ol {
 
 /* Me page */
 
-.me {
+main.me {
 	.middle {
 		position: relative;
 		z-index: 2;
@@ -2714,9 +2682,6 @@ ol {
 
 	.arrow {
 		&-big {
-			top: 50vh;
-			height: 50vh;
-
 			a {
 				color: var(--black);
 			}

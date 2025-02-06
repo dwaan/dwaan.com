@@ -3,7 +3,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import scroll from "../helpers/scroll.js";
-import { addClass, removeClass, hoverEvents, reduceMotionFilter } from "../helpers/helper.js";
+import { addClass, removeClass, reduceMotionFilter } from "../helpers/helper.js";
 
 var meview = {
 	namespace: 'me',

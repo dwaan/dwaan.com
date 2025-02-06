@@ -33,6 +33,9 @@ barba.hooks.before(_ => api.abort());
 barba.hooks.beforeEnter(_ => {
 	document.body.style.overflow = "hidden";
 
+	// Prevent scroll to scroll down unexpectedly because CSS scroll-behavior
+	addClass(_q("html"), "nosnap");
+
 	scroll.destroy();
 
 	// Scroll to top
@@ -44,18 +47,21 @@ barba.hooks.afterEnter(data => {
 	// Read more
 	next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
 
-	// Scroll animation for arrows
-	if (!next.namespace.includes("replurk")) header.arrow(next.container);
+	// Default "scroll animation" for arrow and year
+	if (!next.namespace.includes("replurk")) scroll.arrowAndYear(next.container);
 
 	ScrollTrigger.refresh();
 	gsap.matchMediaRefresh();
 
 	document.body.style.overflow = "";
+
+	// Restore CSS scroll-behavior
+	removeClass(_q("html"), "nosnap");
 });
 
 // Initialized barba.js
 barba.init({
-	debug: false,
+	debug: true,
 	transitions: transitions,
 	views: views
 });
