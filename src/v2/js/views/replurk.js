@@ -55,7 +55,13 @@ var replurk = {
 			next.querySelector("#backtotop").onclick = () => gsap.to(window, {
 				duration: reduceMotionFilter(2),
 				ease: "expo.inOut",
-				scrollTo: "#statistics"
+				scrollTo: "#statistics",
+				onStart: _ => {
+					addClass(_q("html"), "nosnap");
+				},
+				onComplete: _ => {
+					removeClass(_q("html"), "nosnap");
+				}
 			})
 			next.querySelectorAll("#permission, .grant").forEach(el => el.style.display = "none")
 		},

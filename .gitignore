@@ -1,3 +1,4 @@
 node_modules/
 .vscode/
-src/css/cache/
+src/v1/css/cache/
+src/v2/css/cache/

@@ -86,10 +86,6 @@ function hoverEvents(els, over, out) {
 function removeStyle(el) {
 	if (el.style) {
 		el.style = {};
-	} else {
-		// gsap.utils.toArray(el).forEach(function (el) {
-		// 	removeStyle(el);
-		// });
 	}
 }
 // Add plural to word

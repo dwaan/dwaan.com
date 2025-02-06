@@ -6,9 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
 import barba from '@barba/core';
 // Helper
-import { _q, _qAll, konami, removeClass } from './helpers/helper.js';
-import displayRoundedCorner from './helpers/roundedcorner.js';
-import header from './helpers/header.js';
+import { _q, _qAll, konami, addClass, removeClass } from './helpers/helper.js';
 import scroll from './helpers/scroll.js';
 import scrollto from './helpers/scrollto.js';
 
@@ -24,14 +22,18 @@ import views from "./views/views.js";
 
 removeClass(_q("html"), "no-js");
 
+// Configure to remove scroll-smooth CSS before running
 gsap.config({ nullTargetWarn: false });
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Global default barba hooks, abort any plurk api calls
 barba.hooks.before(_ => api.abort());
 // Destroy prev scroll
-barba.hooks.beforeEnter(() => {
+barba.hooks.beforeEnter(_ => {
 	document.body.style.overflow = "hidden";
+
+	// Prevent scroll to scroll down unexpectedly because CSS scroll-behavior
+	addClass(_q("html"), "nosnap");
 
 	scroll.destroy();
 
@@ -44,34 +46,23 @@ barba.hooks.afterEnter(data => {
 	// Read more
 	next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
 
-	// Scroll animation for arrows
-	if (!next.namespace.includes("replurk")) header.arrow(next.container);
+	// Default "scroll animation" for arrow and year
+	if (!next.namespace.includes("replurk")) scroll.arrowAndYear(next.container);
 
 	ScrollTrigger.refresh();
 	gsap.matchMediaRefresh();
 
 	document.body.style.overflow = "";
+
+	// Restore CSS scroll-behavior
+	removeClass(_q("html"), "nosnap");
 });
 
 // Initialized barba.js
 barba.init({
-	debug: false,
+	debug: true,
 	transitions: transitions,
 	views: views
 });
 
-displayRoundedCorner();
 konami();
-
-// Prevent error in older browser for console
-(function () {
-	var method;
-	var noop = function () { };
-	var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
-	while (length--) {
-		method = methods[length];
-		if (!console[method]) console[method] = noop
-	}
-}());

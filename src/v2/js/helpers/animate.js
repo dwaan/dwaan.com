@@ -13,13 +13,15 @@ var animate = {
 			var scroll = top / (window.outerHeight * 2);
 			var speed = reduceMotionFilter() ? .5 : 2;
 			if (scroll > 0) {
-				removeClass(_q("html"), "snap");
 				gsap.to(el, {
 					scrollTo: 0,
 					duration: (scroll > speed) ? speed : scroll,
 					ease: "expo.inOut",
-					onComplete: function () {
-						addClass(_q("html"), "snap");
+					onStart: _ => {
+						addClass(_q("html"), "nosnap");
+					},
+					onComplete: _ => {
+						removeClass(_q("html"), "nosnap");
 						resolve();
 					}
 				});
@@ -49,9 +51,10 @@ var animate = {
 				// Unhide main element
 				tl.to(next, { opacity: 1 }, 0);
 
+
 				// Show current view
-				var els = next.querySelectorAll(".flares:not(.side)")
-				if (footer) els = next.querySelectorAll(".flares:not(.side), .footer > *");
+				var footerEls = null;
+				if (footer) footerEls = next.querySelectorAll(".footer > *");
 				if (!nonsticky) nonsticky = next.querySelectorAll(".main-text > *:not(.hidden), .arrow-big .arrow");
 
 				// Animate text
@@ -62,25 +65,17 @@ var animate = {
 					y: "-=200px",
 					opacity: 1,
 					onComplete: () => {
-						if (nonsticky) { removeStyle(nonsticky) }
+						if (nonsticky) removeStyle(nonsticky)
 					}
 				}, 0);
-				// Animate footer or flares
-				tl.fromTo(els, {
+				// Animate footer
+				tl.fromTo(footerEls, {
 					y: "+=200px",
 					opacity: 0
 				}, {
 					y: "-=200px",
 					opacity: 1
 				}, "<+=" + length / 8);
-				// Animate flares
-				tl.fromTo(next.querySelectorAll(".flares.side > img"), {
-					x: "+=" + (window.innerWidth * 1 / 2) + "px",
-					opacity: 0
-				}, {
-					x: "-=" + (window.innerWidth * 1 / 2) + "px",
-					opacity: 1
-				}, 0);
 				// Run done after all all animation complete
 				tl.set(next, {
 					onComplete: () => resolve()
@@ -203,12 +198,11 @@ var animate = {
 				if (scrolltop) await this.top(window);
 
 				// Hide current view
-				tl.to(current.querySelectorAll(".flares:not(.side), .menu-page ol > li, .footer > *"), {
+				tl.to(current.querySelectorAll(".menu-page ol > li, .footer > *"), {
 					y: "+=200",
 					opacity: 0
 				}, ">");
-				tl.to(current.querySelectorAll(".flares.side img"), {
-					x: "+=300",
+				tl.to(current.querySelectorAll(".flares img"), {
 					opacity: 0,
 					delay: .1
 				}, "<");

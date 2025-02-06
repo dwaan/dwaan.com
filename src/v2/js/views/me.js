@@ -3,7 +3,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import scroll from "../helpers/scroll.js";
-import { addClass, removeClass, hoverEvents, reduceMotionFilter } from "../helpers/helper.js";
+import { addClass, removeClass, reduceMotionFilter } from "../helpers/helper.js";
 
 var meview = {
 	namespace: 'me',
@@ -237,7 +237,7 @@ var meview = {
 					position: "fixed",
 					opacity: 0,
 					x: -40,
-					y: (window.innerHeight * - 1/4),
+					y: (window.innerHeight * - 1 / 4),
 				}, {
 					opacity: 1,
 					x: -10,
@@ -265,7 +265,7 @@ var meview = {
 				}, {
 					opacity: 0,
 					x: 20,
-					y: (window.innerHeight * 1/4) + 25,
+					y: (window.innerHeight * 1 / 4) + 25,
 					ease: 'linear',
 					duration: 1
 				});
@@ -390,53 +390,14 @@ var meview = {
 			};
 			var prev = false;
 			// Defining
-			var repeat = 5;
-			// hide
-			scroll.push(tl => {
-				tl.fromTo(element, {
-					y: "0%"
-				}, {
-					y: "-100%",
-					ease: "linear"
-				});
-
-				return tl;
-			}, tl => ScrollTrigger.create({
-				trigger: "#endmrgoat",
-				start: "0 0",
-				end: "100% 0",
-				animation: tl,
-				scrub: true
-			}));
-			// Show
-			scroll.push(tl => {
-				tl.set(element, {
-					position: "fixed",
-					top: 0
-				});
-
-				tl.fromTo(element, {
-					y: "100%"
-				}, {
-					y: "0%",
-					ease: "linear"
-				});
-
-				return tl;
-			}, tl => ScrollTrigger.create({
-				trigger: "#startmrgoat",
-				start: "0 100%",
-				end: "100% 100%",
-				animation: tl,
-				scrub: true
-			}));
+			var repeat = 8;
 			// Spinning
 			gsap.set(imgs, { opacity: 0 });
 			scroll.push(tl => {
 				tl.to(mrgoat, {
 					frame: imgs.length,
 					snap: "frame",
-					repeat: repeat + 2,
+					repeat: repeat,
 					ease: "linear",
 					onUpdate: () => {
 						var frame = mrgoat.frame + 4;
@@ -450,152 +411,108 @@ var meview = {
 
 						prev = el;
 					},
-					duration: reduceMotionFilter((repeat + 2) * duration)
+					duration: reduceMotionFilter(repeat * duration)
 				}, 0);
 
 				return tl;
 			}, tl => ScrollTrigger.create({
-				trigger: "#startmrgoat",
-				endTrigger: "#endmrgoat",
+				trigger: "#mrgoat",
 				start: "0 100%",
 				end: "100% 0",
 				animation: tl,
 				scrub: .5
 			}));
 			// Facts
-			scroll.push(tl => {
-				var el = element.querySelectorAll(".thumbs, .text");
-				var facts = function (els) {
-					var dur = duration / 7.5;
-					var tl = gsap.timeline();
+			var facts = function (els) {
+				var tl = gsap.timeline();
 
-					tl.fromTo(els, {
-						opacity: 0
-					}, {
-						opacity: 1,
-						ease: "power3.in",
-						duration: reduceMotionFilter(dur)
-					});
-					els.forEach(function (el) {
-						tl.fromTo(el.querySelectorAll(".dot hr"), {
-							width: "0%"
-						}, {
-							width: "100%",
-							duration: reduceMotionFilter(dur)
-						});
-					});
-					els.forEach(function (el) {
-						tl.fromTo(el.querySelectorAll(".line hr"), {
-							width: "0%"
-						}, {
-							width: "100%",
-							duration: reduceMotionFilter(dur)
-						});
-					});
-					els.forEach(function (el) {
-						tl.fromTo(el.querySelectorAll("p"), {
-							opacity: 0
-						}, {
-							opacity: 1,
-							duration: reduceMotionFilter(dur)
-						});
-					});
-					tl.fromTo(els, {
-						y: 100
-					}, {
-						y: -100,
-						ease: "linear",
-						duration: reduceMotionFilter((dur * 10))
-					}, 0);
-					tl.to(els, {
-						opacity: 0,
-						ease: "power3.out",
-						duration: reduceMotionFilter(dur)
-					}, (dur * 9));
-
-					return tl;
-				}
-
-				var array = [0, 1, 2, 3];
-				gsap.utils.shuffle(array);
-				tl.add(facts(element.querySelectorAll("#viet")), (duration * array[0]));
-				tl.add(facts(element.querySelectorAll("#food")), (duration * array[2]));
-				tl.add(facts(element.querySelectorAll("#nyc")), (duration * array[1]));
-				tl.add(facts(element.querySelectorAll("#travel")), (duration * array[3]));
-
-				tl.to(el, {
-					duration: reduceMotionFilter(repeat * duration)
-				}, 0);
-
-				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					// scroller: next,
-					trigger: "#startmrgoat",
-					endTrigger: "#endmrgoat",
-					start: "0 0",
-					end: "100% 100%",
-					animation: tl,
-					scrub: .5
-				});
-			});
-			// Pinning
-			scroll.push(tl => {
-				tl.fromTo(element.querySelectorAll("#post > *"), {
+				// Fade in
+				tl.fromTo(els, {
 					opacity: 0
 				}, {
 					opacity: 1,
-					ease: "power3.out",
-					duration: reduceMotionFilter(duration)
-				}, (duration * 4));
-				tl.fromTo(element.querySelectorAll("#post > *"), {
-					y: window.innerHeight
-				}, {
-					y: 0,
-					ease: "linear",
-					duration: reduceMotionFilter(duration)
-				}, (duration * 4));
-				tl.fromTo(element.querySelectorAll(".text .h2"), {
-					opacity: 1
-				}, {
-					opacity: 0,
 					ease: "power3.in",
 					duration: reduceMotionFilter(duration)
-				}, (duration * 4));
+				});
+				// Diagonal line animation
+				els.forEach(el => {
+					tl.fromTo(el.querySelectorAll(".dot hr"), {
+						width: "0%"
+					}, {
+						width: "100%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Horizontal line animation
+				els.forEach(el => {
+					tl.fromTo(el.querySelectorAll(".line hr"), {
+						width: "0%"
+					}, {
+						width: "100%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Show text
+				els.forEach(el => {
+					tl.fromTo(el.querySelectorAll("p"), {
+						opacity: 0
+					}, {
+						opacity: 1,
+						duration: reduceMotionFilter(duration)
+					});
+				});
+
+				// Middle of animation
+
+				// hide text
+				els.forEach(el => {
+					tl.to(el.querySelectorAll("p"), {
+						opacity: 0,
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Horizontal line animation
+				els.forEach(el => {
+					tl.to(el.querySelectorAll(".line hr"), {
+						width: "0%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Diagonal line animation
+				els.forEach(el => {
+					tl.to(el.querySelectorAll(".dot hr"), {
+						width: "0%",
+						duration: reduceMotionFilter(duration)
+					});
+				});
+				// Fade out
+				tl.to(els, {
+					opacity: 0,
+					ease: "power3.out",
+					duration: reduceMotionFilter(duration)
+				});
 
 				return tl;
-			}, tl => {
-				return ScrollTrigger.create({
-					// scroller: next,
-					trigger: "#startmrgoat",
-					endTrigger: "#endmrgoat",
-					start: "0 0",
-					end: "100% 100%",
-					animation: tl,
-					scrub: true
+			}
+			element.querySelectorAll(".facts").forEach(fact => {
+				scroll.push(tl => {
+					tl.add(facts([fact]), 0);
+
+					return tl;
+				}, tl => {
+					return ScrollTrigger.create({
+						trigger: fact,
+						start: "25% 50%",
+						end: "75% 50%",
+						animation: tl,
+						scrub: .5
+					});
 				});
 			});
 		});
 
 		// Animate cofounder
 		next.querySelectorAll(".cofound").forEach(el => {
-			// Hover
-			var picture = el.querySelector("picture");
-			hoverEvents(el.querySelectorAll("a"), () => {
-				gsap.killTweensOf(picture);
-				gsap.to(picture, {
-					scale: 2,
-					ease: "linear",
-					duration: reduceMotionFilter(120)
-				});
-			}, () => {
-				gsap.killTweensOf(picture);
-				gsap.to(picture, {
-					scale: 1,
-					ease: "expo.out",
-					duration: reduceMotionFilter(1)
-				});
-			});
 			// Animate
 			var eltext = el.querySelectorAll(".text");
 			scroll.push(tl => {
@@ -644,11 +561,6 @@ var meview = {
 				elements: el.querySelectorAll("nav > *"),
 				position: "100%"
 			});
-		});
-
-		// Snap
-		next.querySelectorAll("section.middle, div.middle, .links").forEach(el => {
-			scroll.snap(el);
 		});
 
 		// Refresh

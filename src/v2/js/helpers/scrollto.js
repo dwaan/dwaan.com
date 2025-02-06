@@ -12,14 +12,16 @@ function scrollto(el) {
         var length = reduceMotionFilter(1);
 
         e.preventDefault();
-        removeClass(_q("html"), "snap");
 
         gsap.to(window, {
             duration: length * 3 / 4,
             ease: "expo.inOut",
             scrollTo: e.target.getAttribute("href"),
-            onComplete: function () {
-                addClass(_q("html"), "snap");
+            onStart: _ => {
+                addClass(_q("html"), "nosnap");
+            },
+            onComplete: _ => {
+                removeClass(_q("html"), "nosnap");
             }
         });
     });

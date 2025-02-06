@@ -1,14 +1,5 @@
 /* For those who disable js */
 
-html.no-js {
-	overflow-x: clip;
-	overflow-y: scroll;
-	// scroll-snap-type: y mandatory;
-	// scroll-snap-stop: always;
-	// animation-name: fade-out;
-	// animation-duration: 1.28s;
-}
-
 @keyframes fade-out {
 	from {
 		opacity: 0;
@@ -19,14 +10,39 @@ html.no-js {
 	}
 }
 
-.no-js {
+html.no-js {
 
-	.middle {
-		border-bottom: 1px dashed var(--gray-light);
+	// Animate appereang
+	&.page-home {
+		animation-name: fade-out;
+		animation-duration: 2.56s;
+
+		main {
+			animation-name: none;
+		}
 	}
 
-	.arrow-big {
-		margin-top: var(--padm);
+	main {
+		animation-name: fade-out;
+		animation-duration: 2.56s;
+	}
+
+	// Display hidden tags
+	main,
+	header,
+	.footer {
+		opacity: 1;
+	}
+
+	.year {
+		position: absolute;
+	}
+
+	// Hide javascript button and action
+
+	#loader,
+	#mode {
+		display: none;
 	}
 
 	.size,
@@ -34,71 +50,8 @@ html.no-js {
 		display: none;
 	}
 
-	.year {
-		position: absolute;
-	}
-
-	.menu {
-		.overlay {
-			display: block;
-			opacity: 0;
-			transition: opacity .32s ease-in-out;
-			pointer-events: none;
-			background-color: rgba(0, 0, 0, .24);
-		}
-
-		.close {
-			display: none;
-		}
-
-		.items {
-			margin-left: auto;
-			transform: translate3d(100%, 0, 0);
-			transition: transform .16s ease-in;
-			pointer-events: all;
-
-			noscript {
-				display: flex;
-				flex-direction: column;
-			}
-
-			ul,
-			ol {
-				margin-top: auto;
-				height: 100%;
-
-				li {
-					margin-bottom: var(--padm);
-				}
-			}
-
-			&:hover {
-				transform: translate3d(0, 0, 0);
-			}
-
-			a {
-				margin: 0;
-			}
-
-			p {
-				margin-top: auto;
-			}
-		}
-
-		&:hover {
-			.items {
-				transform: translate3d(0, 0, 0);
-				transition: transform .32s ease-out;
-			}
-
-			.overlay {
-				opacity: 1;
-			}
-		}
-	}
-
-
-	.home {
+	// Hide cover
+	main.home {
 		.middle {
 			.cover {
 				display: none;
@@ -106,89 +59,64 @@ html.no-js {
 		}
 	}
 
-	.me {
-		.middle {
-			overflow: hidden;
-		}
-
+	// Sticky animation when JS is not available
+	main.me {
 		.text {
 			padding: 0;
 		}
-	}
 
-	#mrgoat {
-		transform: translate(0, 0);
-		pointer-events: all;
-	}
-
-	.mrgoat {
-		&.hidden {
-			display: none;
-			height: 0;
-		}
-	}
-
-
-
-	/* email movevent */
-
-	.hi {
-		a {
-			span {
-				position: relative;
-				display: block;
-				transition: margin .24s ease-out;
-			}
-
-			small {
-				transform: translate3d(0, 25%, 0);
-				transition: opacity .32s ease-in, transform .32s ease-in;
+		#about {
+			strong {
+				color: var(--red);
+				text-decoration: underline;
 			}
 		}
 
-		.email:hover span {
-			margin-right: var(--padl);
+		#now {
+			.thumbs {
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				height: 200vh;
+
+				picture {
+					position: sticky;
+					top: var(--pady);
+					display: flex;
+					height: calc(100vh - (2 * var(--pady)));
+				}
+
+				img {
+					position: relative;
+					top: 0;
+					left: 0;
+					transform: initial;
+				}
+			}
 		}
 
-		.social:hover span:first-child,
-		h1:hover .social span:nth-child(2) {
-			margin-left: var(--padl);
+		#webdesigner {
+			picture {
+				opacity: 0;
+			}
 		}
 
-		h1 .email:hover+.social span:nth-child(2),
-		h1 .social:hover span:nth-child(2) {
-			margin-left: 0;
+		#mrgoat {
+			transform: translate(0, 0);
+			pointer-events: all;
 		}
 
-		.social:hover span:nth-child(2) {
-			margin-right: var(--padl);
-		}
+		.mrgoat {
 
-		.email:hover small,
-		.social:hover span:first-child small,
-		h1:hover .social span:nth-child(2) small {
-			transform: translate3d(0, 0, 0);
-			opacity: 1;
-			transition: opacity .16s ease-out, transform .16s ease-out;
-		}
-
-		h1 .social:hover span:nth-child(2) small,
-		h1 .email:hover+.social span:nth-child(2) small {
-			transform: translate3d(0, 25%, 0);
-			opacity: 0;
+			&.hidden,
+			.hidden {
+				display: none;
+				height: 0;
+			}
 		}
 	}
 
-
-	.imuiux,
-	.follow,
-	.us,
-	.know,
-	.mrgoat {
-		position: relative;
-		pointer-events: auto;
-	}
-
+	// Replurk page
 	#permission,
 	.grant,
 	#statistics,
@@ -198,38 +126,37 @@ html.no-js {
 	#credits {
 		display: none;
 	}
-}
 
-
-#nojs {
-	position: relative;
-	display: none;
-	background: url(../img/honocoroko.webp) center top no-repeat;
-	background-size: cover;
-
-	&::before{
-		position: absolute;
-		display: block;
-		content: "";
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: rgba(0, 0, 0, .5);
+	#nojs {
+		display: flex;
 	}
 
-	.text {
-		text-align: center;
-		background-color: var(--white);
-		max-width: 300px;
-		padding: var(--padl);
+	#statistics {
+		display: none !important;
 	}
-}
 
-.no-js #nojs {
-	display: flex;
-}
+	#nojs {
+		position: relative;
+		display: none;
+		background: url(../img/honocoroko.webp) center top no-repeat;
+		background-size: cover;
 
-.no-js #statistics {
-	display: none!important;
+		&::before {
+			position: absolute;
+			display: block;
+			content: "";
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, .5);
+		}
+
+		.text {
+			text-align: center;
+			background-color: var(--white);
+			max-width: 300px;
+			padding: var(--padl);
+		}
+	}
 }

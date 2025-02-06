@@ -58,6 +58,135 @@ var scroll = {
 			}))
 		})
 	},
+    // Scroll animate arrow
+    // Parameter:
+    // 1. el: main element
+    arrowAndYear: next => {
+        var middle = next.querySelectorAll("section.middle, div.middle");
+        middle.forEach((el, idx) => {
+            // Animate arrow
+            var screen = gsap.matchMedia();
+            // Vertical Screen
+            screen.add("(max-aspect-ratio: 1/1)", () => {
+                var arrow = el.querySelectorAll(".arrow-big, .arrow-small");
+                var year = el.querySelectorAll(".year");
+
+                // Animate arrow
+                // Middle, disappear
+                scroll.push(tl => {
+                    tl.fromTo(arrow, {
+                        opacity: 1
+                    }, {
+                        opacity: 0,
+                        ease: "power3.out"
+                    });
+
+                    return tl;
+                }, tl => ScrollTrigger.create({
+                    trigger: el,
+                    start: "75% 50%",
+                    end: "100% 50%",
+                    scrub: 1,
+                    animation: tl
+                }));
+
+                // Animate year in detail page
+                // Slide down an disappear with fix position
+                scroll.push(tl => {
+                    tl.fromTo(year, {
+                        position: "fixed",
+                        x: 0,
+                        y: 0,
+                        opacity: 1
+                    }, {
+                        x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
+                        y: (idx == 0) ? window.innerHeight * -1 / 10 : 0,
+                        opacity: (idx < middle.length - 1) ? 0 : 1,
+                        ease: "power3.in",
+                        duration: reduceMotionFilter(3)
+                    }, "<");
+                    tl.set(year, {
+                        position: "absolute"
+                    });
+
+                    return tl;
+                }, tl => ScrollTrigger.create({
+                    trigger: el,
+                    start: "0 50%",
+                    end: "100% 50%",
+                    scrub: true,
+                    animation: tl
+                }));
+
+                // Clean up
+                return () => {
+                    arrow.forEach(el => {
+                        el.style = "";
+                    });
+                    year.forEach(el => {
+                        el.style = "";
+                    });
+                }
+            });
+            // Horizontal Screen
+            screen.add("(min-aspect-ratio: 1/1)", () => {
+                var arrow = el.querySelectorAll(".year, .arrow-big, .arrow-small");
+
+                scroll.push(tl => {
+                    // Show
+                    tl.fromTo(arrow, {
+                        position: "",
+                        x: (idx > 0) ? -50 : 0,
+                        opacity: 0
+                    }, {
+                        position: "fixed",
+                        x: 0,
+                        opacity: 1,
+                        duration: reduceMotionFilter(3),
+                        ease: "power3.out"
+                    });
+                    // Delay
+                    tl.to(arrow, {
+                        duration: reduceMotionFilter(2)
+                    });
+                    // Hide
+                    tl.fromTo(arrow, {
+                        position: "fixed",
+                        x: 0,
+                        y: 0,
+                        opacity: 1
+                    }, {
+                        x: (idx > 0 && idx < middle.length - 1) ? 50 : 0,
+                        y: (idx == 0) ? window.innerHeight * -1 / 5 : 0,
+                        opacity: (idx < middle.length - 1) ? 0 : 1,
+                        ease: "power3.in",
+                        duration: reduceMotionFilter(3)
+                    });
+                    tl.set(arrow, {
+                        position: ""
+                    });
+
+                    return tl;
+                }, tl => ScrollTrigger.create({
+                    trigger: el,
+                    start: "0% 50%",
+                    end: "100% 50%",
+                    scrub: true,
+                    animation: tl
+                }));
+
+                // Clean up
+                return () => {
+                    arrow.forEach(el => {
+                        el.style = "";
+                        el.querySelectorAll(".arrow").forEach(child => {
+                            child.style = "";
+                        })
+                    });
+                }
+            });
+        });
+    },
 	// Move elements up without scrub
 	moveThumbs: function (elements, position, scroller) {
 		var that = this

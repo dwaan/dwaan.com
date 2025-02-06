@@ -47,7 +47,7 @@ let transition_home_to_me = {
         removeStyle(current.querySelectorAll(".main-text, .main-text > h1"));
 
         // Animate Next view
-        await animate.show(next, next.querySelectorAll(".arrow, .arrow-big"));
+        await animate.show(next, next.querySelectorAll(".arrow-big .arrow"));
 
         done();
     },
@@ -65,7 +65,7 @@ let transition_home_to_me = {
         namespace: ['home', "me"]
     },
     to: {
-        namespace: ['home', 'me']
+        namespace: ['me', 'home']
     }
 }
 

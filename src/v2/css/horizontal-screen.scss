@@ -72,11 +72,6 @@ p {
 }
 
 /* Header style */
-header {
-	left: var(--padx);
-	right: var(--padx);
-	top: var(--pady);
-}
 
 .size,
 .lamp,
@@ -189,33 +184,12 @@ div>.vertical {
 
 
 /* Arrow links */
-%arrow {
-	flex-flow: row nowrap;
-	position: absolute;
-	bottom: calc(var(--pady) - 10px);
-	right: var(--padx);
-	transform-origin: right top;
-}
-
-.arrow-big {
-	@extend %arrow;
-
-	.arrow {
-		bottom: 0;
-		right: 0;
-	}
-}
-
-.no-js .arrow-big {
-	position: absolute;
-}
 
 .arrow {
-	@extend %arrow;
-	transform: rotate(90deg);
+	margin: var(--pady) var(--padx);
 
 	&:after {
-		margin: 0 0 0 25px;
+		margin: 0 0 0 24px;
 		width: 100px;
 		height: 16px;
 	}
@@ -227,47 +201,46 @@ div>.vertical {
 			display: block;
 		}
 	}
-}
 
-.arrow-small {
-	position: absolute;
-	bottom: var(--pady);
-	right: var(--padx);
-
-	.arrow {
-		position: relative;
-		left: 0;
-		top: 0;
-		bottom: initial;
-		right: inherit;
-		transform: none;
-
-		@media screen and (min-width: mixins.$screen-medium) {
-			padding-right: 120px;
-			margin-right: -20px;
-		}
-
-		&:after {
-			position: absolute;
-			top: 50%;
-			right: 20px;
-			width: 50px;
-			height: 16px;
-			transform: translateY(-50%);
-			transition: width .16s cubic-bezier(0.175, 0.885, 0.32, 1.275), right .16s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-			@media screen and (min-width: mixins.$screen-medium) {
-				width: 80px;
-			}
+	&-big {
+		.arrow {
+			flex-flow: row nowrap;
+			transform: rotate(90deg) translateY(100%);
+			transform-origin: right bottom;
 		}
 	}
 
-	&:hover {
-		.arrow:after {
-			right: 0;
+	&-small {
+		.arrow {
+			transform: none;
 
 			@media screen and (min-width: mixins.$screen-medium) {
-				width: 100px;
+				padding-right: 120px;
+			}
+
+			&:after {
+				position: absolute;
+				top: 50%;
+				right: 20px;
+				width: 50px;
+				height: 16px;
+				margin-right: -20px;
+				transform: translateY(-50%);
+				transition: width .16s cubic-bezier(0.175, 0.885, 0.32, 1.275), right .16s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+				@media screen and (min-width: mixins.$screen-medium) {
+					width: 80px;
+				}
+			}
+		}
+
+		&:hover {
+			.arrow:after {
+				right: 0;
+
+				@media screen and (min-width: mixins.$screen-medium) {
+					width: 100px;
+				}
 			}
 		}
 	}
@@ -288,8 +261,8 @@ div>.vertical {
 	left: 0;
 
 	img {
-		width: 100vw;
-		height: 50vw;
+		width: 120vw;
+		height: 40vw;
 	}
 }
 
@@ -305,8 +278,11 @@ div>.vertical {
 		top: initial;
 		left: 0;
 		bottom: 0;
-		background-color: var(--white);
 		pointer-events: none;
+	}
+
+	.cover {
+		background-color: var(--white);
 	}
 
 	.cover {
@@ -968,6 +944,7 @@ div>.vertical {
 	}
 
 	.thumbs {
+		transform: none;
 		picture {
 			width: calc(var(--pic-w) * 7/6);
 		}
@@ -1241,6 +1218,7 @@ div>.vertical {
 	flex-direction: row;
 
 	.text {
+		max-width: 30vw;
 		padding-left: var(--padxl);
 	}
 
@@ -1332,7 +1310,7 @@ div>.vertical {
 
 
 /* Me Page */
-.me {
+main.me {
 
 	h2,
 	h3 {
@@ -1344,60 +1322,61 @@ div>.vertical {
 	.text {
 		padding: 0 calc(2 * var(--padx));
 	}
-}
 
-.intro {
-	p {
-		font-size: .9rem;
-	}
-}
-
-#sayhi {
-	.title {
-		width: 350px;
-		transform-origin: 100% 100%;
-		transform: translate(0, -350px) rotate(-90deg);
-	}
-}
-
-#now,
-#webdesigner {
-	padding-left: calc(2 * var(--padx));
-
-	.text {
-		max-width: 50vw;
-	}
-}
-
-#usedto {
-	h2 {
-		font-size: 10vh;
+	.intro {
+		p {
+			font-size: .9rem;
+		}
 	}
 
-	p {
-		font-size: 2.5vh;
-	}
-}
-
-#webdesigner {
-	p {
-		max-width: 450px;
-	}
-}
-
-#sayhi {
-	.text {
-		display: flex;
-		text-align: left;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: flex-end;
-		padding: 0;
+	#sayhi {
+		.title {
+			width: 350px;
+			transform-origin: 100% 100%;
+			transform: translate(0, -350px) rotate(-90deg);
+		}
 	}
 
-	p {
-		margin-left: var(--padm);
-		max-width: 300px;
+	#now,
+	#webdesigner {
+		padding-left: calc(2 * var(--padx));
+
+		.text {
+			width: 50%;
+			max-width: 50vw;
+		}
+	}
+
+	#usedto {
+		h2 {
+			font-size: 10vh;
+		}
+
+		p {
+			font-size: 2.5vh;
+		}
+	}
+
+	#webdesigner {
+		p {
+			max-width: 450px;
+		}
+	}
+
+	#sayhi {
+		.text {
+			display: flex;
+			text-align: left;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			align-items: flex-end;
+			padding: 0;
+		}
+
+		p {
+			margin-left: var(--padm);
+			max-width: 300px;
+		}
 	}
 }
 

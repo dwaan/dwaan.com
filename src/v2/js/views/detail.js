@@ -1228,7 +1228,13 @@ var detailview = {
 						x: this.pos * this.slideshowChild[this.pos].offsetWidth
 					},
 					ease: "expo.out",
-					onComplete: this.navigationHide
+					onStart: _ => {
+						addClass(this.slideshowScroll, "nosnap");
+					},
+					onComplete: _ => {
+						removeClass(this.slideshowScroll, "nosnap");
+						this.navigationHide();
+					}
 				});
 			}
 			that.before.addEventListener("click", _ => {
@@ -1641,18 +1647,6 @@ var detailview = {
 				position: "100%"
 			});
 		});
-
-		// Snap
-		next.querySelectorAll("section.snap").forEach(el => {
-			scroll.snap(el, "center");
-		});
-		next.querySelectorAll("section.snap-start").forEach(el => {
-			scroll.snap(el, "start");
-		});
-		next.querySelectorAll("section.snap-end").forEach(el => {
-			scroll.snap(el, "end");
-		});
-
 
 		setTimeout(_ => {
 			ScrollTrigger.refresh()
