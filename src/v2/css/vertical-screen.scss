@@ -107,12 +107,16 @@ p {
 
 .middle {
 	gap: calc(2 * var(--pady));
-	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) var(--pady);
+	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
 	min-height: 100vh;
 	min-height: 100svh;
 
 	.middle {
-		padding: var(--pady) var(--padx);
+		padding: 0 var(--padx);
+	}
+
+	&.full {
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx));
 	}
 
 	@media screen and (min-height: mixins.$screen-abitwide) {
@@ -144,7 +148,7 @@ p {
 	padding: calc(2 * var(--padxl)) var(--padxl);
 
 	@media screen and (min-height: mixins.$screen-small) {
-		padding: calc(4 * var(--pady)) var(--padxl);
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
 	}
 }
 
@@ -549,7 +553,7 @@ div>.vertical {
 	}
 
 	.thumbs {
-		height: calc(var(--pic-h) + (var(--pic-m) * 3));
+		height: initial;
 	}
 
 	picture {
@@ -796,8 +800,6 @@ div>.vertical {
 
 /* Style that look like table */
 .style-flex {
-	padding: 100px 30px;
-
 	.style-column {
 		flex-direction: column;
 	}
@@ -863,8 +865,9 @@ div>.vertical {
 /* Style with angled photo on the bottom */
 .style-angled {
 	height: auto;
-	padding: calc(4 * var(--pady)) calc(4 * var(--padx)) calc(2 * var(--pady));
+	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
 	gap: calc(3 * var(--pady));
+	justify-content: center;
 
 	@media screen and (min-width: mixins.$screen-verysmall) {
 		gap: calc(4 * var(--pady));
@@ -877,16 +880,14 @@ div>.vertical {
 	.text {
 		display: flex;
 		flex-flow: column nowrap;
-		flex: 1;
 		justify-content: flex-end;
 
 		@media screen and (min-width: mixins.$screen-verysmall) {
-			width: 50vw;
+			padding: 0 var(--padx);
 		}
 	}
 
 	.thumbs {
-		flex: 2;
 		gap: var(--padx);
 
 		@media screen and (min-height: mixins.$screen-small) {
@@ -912,18 +913,12 @@ div>.vertical {
 	// Variations
 
 
-	&-individual {
+	&--individual {
 		@media screen and (min-width: mixins.$screen-small) {
 			gap: calc(4 * var(--pady));
 		}
 
 		.meta {
-			margin-bottom: var(--pads);
-
-			@media screen and (min-width: mixins.$screen-small) {
-				margin-bottom: var(--padm);
-			}
-
 			ul {
 				gap: var(--pads);
 			}
@@ -1164,6 +1159,15 @@ div>.vertical {
 	}
 }
 
+// Style single image
+.style-single-image {
+	min-height: initial;
+
+	.text {
+		padding: calc(5 * var(--pady)) calc(2 * var(--padx)) var(--pady);
+	}
+}
+
 
 /* Footer links in every detail page */
 .links {
@@ -1215,22 +1219,32 @@ div>.vertical {
 	}
 }
 
-.detail {
+
+// Global detail page
+
+main.detail {
 	.color {
 		ul {
 			gap: var(--padx);
-			flex-flow: row wrap;
+			flex-flow: row nowrap;
 			align-items: center;
 		}
 
 		li {
-			width: 16px;
-			height: 16px;
 			font-size: .75rem;
 
 			&:last-child {
-				flex: 100px;
+				flex: initial;
 				height: initial;
+			}
+
+			&,
+			span {
+				width: var(--padx);
+			}
+
+			span {
+				height: var(--padx);
 			}
 		}
 	}
@@ -1247,7 +1261,9 @@ div>.vertical {
 	}
 }
 
-.sagara {
+
+// Sagara page
+main.sagara {
 	.style-background--parallax {
 		.logos {
 			img {
@@ -1349,11 +1365,18 @@ main.bkpm {
 				margin: 0;
 			}
 		}
-	}
 
-	.style-top--coverflow {
-		.thumbs {
-			height: 40vw;
+		&--coverflow {
+			justify-content: center;
+
+			.thumbs {
+				gap: var(--padx);
+				height: 40vw;
+
+				picture {
+					margin: 0;
+				}
+			}
 		}
 	}
 
@@ -1390,30 +1413,30 @@ main.bkpm {
 				height: 70%;
 			}
 		}
-	}
 
-	.style-center--small {
-		.text {
-			padding: 0 var(--padx);
-		}
-
-		.thumbs {
-			height: 45vw;
-			margin: 30vw 0;
-		}
-
-		picture {
-			order: initial;
-			margin: -30vw -35vw 0;
-
-			&:nth-child(2) {
-				margin-top: 0;
-				height: 100%;
+		&--small {
+			.text {
+				padding: 0 var(--padx);
 			}
 
-			&:nth-child(3) {
-				margin-top: 30vw;
-				height: 100%;
+			.thumbs {
+				height: 45vw;
+				margin: 10vw 0;
+			}
+
+			picture {
+				order: initial;
+				margin: -30vw -30vw 0;
+
+				&:nth-child(2) {
+					margin-top: 0;
+					height: 100%;
+				}
+
+				&:nth-child(3) {
+					margin-top: 30vw;
+					height: 100%;
+				}
 			}
 		}
 	}

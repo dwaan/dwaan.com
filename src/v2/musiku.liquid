@@ -21,16 +21,13 @@ date: 2021-10-29
                 <h4>Concept and Design</h4>
                 <h1>Music Royalty</h1>
             </div>
-            <p>
-                Musiku was an internal codename for this design concept of music royalty system. As a new concept in Indonesia,
-                it need to teach visitors about the system itself. The project launched at of 2021, but the concept already
-                started since 2019.
-            </p>
+            <p>Musiku was an internal codename for this design concept of music royalty system. As a new concept in Indonesia, it need to teach visitors about the system itself. The project launched at of 2021, but the concept already started since 2019.</p>
         </div>
         <div class="thumbs">
             {% for i in (1..5) %}
             <picture class="pic-1-{{ i  }}">
                 <source media="(min-width:1024px)" srcset="/img/musiku/musiku-1-{{ i  }}@2x.webp 2x, /img/musiku/musiku-1-{{ i  }}@3x.webp 3x">
+                <img loading="lazy" src="/img/musiku/musiku-1-{{ i }}.webp" width="" height="200" alt="Musiku Design - Page {{ i }} - by Dwan">
             </picture>
             {% endfor %}
         </div>
@@ -66,7 +63,7 @@ date: 2021-10-29
 
 <hr>
 
-<section class="middle auto style-angled style-angled-individual snap-start">
+<section class="middle auto style-angled style-angled--individual snap-start">
     <div class="text">
         <div class="meta color" hidden>
             <ul class="flat">

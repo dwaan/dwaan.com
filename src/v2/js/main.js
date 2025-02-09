@@ -33,7 +33,7 @@ barba.hooks.beforeEnter(_ => {
 	document.body.style.overflow = "hidden";
 
 	// Prevent scroll to scroll down unexpectedly because CSS scroll-behavior
-	addClass(_q("html"), "nosnap");
+	removeClass(_q("html"), "scroll-snap");
 
 	scroll.destroy();
 
@@ -55,7 +55,7 @@ barba.hooks.afterEnter(data => {
 	document.body.style.overflow = "";
 
 	// Restore CSS scroll-behavior
-	removeClass(_q("html"), "nosnap");
+	addClass(_q("html"), "scroll-snap");
 });
 
 // Initialized barba.js

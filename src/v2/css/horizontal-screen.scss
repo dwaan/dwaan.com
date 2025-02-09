@@ -1265,6 +1265,15 @@ div>.vertical {
 	}
 }
 
+// Style single image
+
+.style-single-image {
+	.text {
+		padding: calc(3 * var(--pady)) var(--padx) var(--pady);
+		max-width: 500px;
+	}
+}
+
 /* BKPM Page */
 .bkpm {
 	.color {

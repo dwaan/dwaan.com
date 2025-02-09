@@ -57,10 +57,10 @@ var replurk = {
 				ease: "expo.inOut",
 				scrollTo: "#statistics",
 				onStart: _ => {
-					addClass(_q("html"), "nosnap");
+					removeClass(_q("html"), "scroll-snap");
 				},
 				onComplete: _ => {
-					removeClass(_q("html"), "nosnap");
+					addClass(_q("html"), "scroll-snap");
 				}
 			})
 			next.querySelectorAll("#permission, .grant").forEach(el => el.style.display = "none")

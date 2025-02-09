@@ -11,6 +11,8 @@
 }
 
 html.no-js {
+	scroll-behavior: smooth;
+	scroll-snap-type: y mandatory;
 
 	// Animate appereang
 	&.page-home {
