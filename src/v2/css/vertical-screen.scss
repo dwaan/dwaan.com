@@ -106,7 +106,10 @@ p {
 /* Common middle content */
 
 .middle {
+	gap: calc(2 * var(--pady));
 	padding: var(--pady) var(--padx);
+	height: 100vh;
+	height: 100svh;
 
 	@media screen and (min-height: mixins.$screen-abitwide) {
 		padding: calc(3 * var(--pady)) var(--padx);
@@ -114,6 +117,10 @@ p {
 		&.full {
 			min-height: 100%;
 		}
+	}
+
+	.cover {
+		display: none;
 	}
 
 	.logo {
@@ -196,7 +203,6 @@ div>.vertical {
 
 /* Homepage content */
 .main-text {
-	margin: 0 0 calc(2 * var(--pady));
 	padding: 0 var(--padx);
 	max-width: 450px;
 	align-items: flex-start;
@@ -261,16 +267,25 @@ div>.vertical {
 /* Arrow links */
 .arrow {
 
-	&,
-	&-big {
-		height: calc(5 * var(--pady));
-	}
-
 	&:after {
 		width: var(--padxl);
 		height: var(--padxl);
-		margin: var(--padm) 0 0;
-		transform: rotate(90deg);
+	}
+
+
+	&-big,
+	&-small {
+		height: calc(4 * var(--pady));
+	}
+
+	&-big {
+		.arrow {
+			gap: var(--pady);
+
+			&:after {
+				transform: rotate(90deg);
+			}
+		}
 	}
 
 	&-small {
@@ -284,17 +299,7 @@ div>.vertical {
 			background-color: var(--black);
 			border-radius: 100%;
 		}
-
-		.arrow:after {
-			width: 24px;
-			height: 16px;
-			margin-left: 8px;
-		}
 	}
-}
-
-.detail .arrow-big {
-	padding-top: calc(2 * var(--pady));
 }
 
 /* Year information */
@@ -1257,7 +1262,12 @@ div>.vertical {
 
 /* Me page */
 
-.me {
+main.me {
+	h1 {
+		strong::after {
+			bottom: -8px;
+		}
+	}
 
 	h2,
 	h3 {
@@ -1352,44 +1362,52 @@ div>.vertical {
 
 	/* Mr. Goat */
 
-	#mrgoat h2 b {
-		display: block;
-	}
+	#mrgoat {
+		.mrgoat {
+			display: flex;
 
-	.mrgoat {
-		h2 {
-			line-height: 80%;
-			font-size: 3.5rem;
-			margin: 0;
-			padding: 0;
+			h2 {
+				line-height: 80%;
+				font-size: 3.5rem;
+				margin: 0;
+				padding: 0;
 
-			@media screen and (min-width: mixins.$screen-small) {
-				font-size: 5rem;
-				max-width: 400px;
+				b {
+					display: block;
+				}
+
+				@media screen and (min-width: mixins.$screen-small) {
+					font-size: 5rem;
+					max-width: 400px;
+				}
 			}
-		}
 
-		picture,
-		picture img {
-			width: 400px;
-			max-width: 65vw;
-			height: auto;
-		}
+			.thumbs,
+			picture,
+			picture img {
+				width: 400px;
+				max-width: 65vw;
+			}
 
-		.thumbs {
-			padding-top: calc(4 * var(--pady));
-			padding-bottom: 35vh;
-			justify-content: flex-end;
-		}
+			picture,
+			picture img {
+				height: auto;
+			}
 
-		.text {
-			padding-top: 65vh;
-			padding-bottom: calc(4 * var(--pady));
-		}
+			.thumbs {
+				order: 1;
+				height: 75vw;
+				justify-content: center;
+			}
 
-		.arrow {
-			order: 3;
-			flex: 0;
+			.text {
+				order: 2;
+			}
+
+			.arrow {
+				order: 3;
+				flex: 0;
+			}
 		}
 	}
 }
@@ -1422,7 +1440,6 @@ div>.vertical {
 		}
 	}
 }
-
 
 
 .float {

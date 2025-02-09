@@ -16,41 +16,41 @@ tags: works
 <img loading="lazy" src="/img/qr/{{ qr }}.svg" width="64" height="64" alt="Dwan - {{ title }}" class="print qr" hidden />
 <hr />
 
-<section class="middle full snap">
-  <div class="padding">
-    {% if iconTitle %}
-      <h2 class="{{ qr }}title">{{ iconTitle }}</h2>
-    {% else %}
-      <span>
-        {% if icon %}
-          {% assign icon = icon | split: ", " %}
-          <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }}" aria-label="{{ iconLabel }}">
-            <use href="/img/logo.svg#{{ icon[0] }}"></use>
-          </svg>
-        {% endif %}
+<section class="middle full snap-start">
+    <div class="padding">
+        {% if iconTitle %}
+        <h2 class="{{ qr }}title">{{ iconTitle }}</h2>
+        {% else %}
+        <span>
+            {% if icon %}
+            {% assign icon = icon | split: ", " %}
+            <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }}" aria-label="{{ iconLabel }}">
+                <use href="/img/logo.svg#{{ icon[0] }}"></use>
+            </svg>
+            {% endif %}
 
-        {% if iconVertical %}
-          {% assign icon = iconVertical | split: ", " %}
-          <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }} vertical" aria-label="{{ iconLabel }}">
-            <use href="/img/logo.svg#{{ icon[0] }}"></use>
-          </svg>
-        {% endif %}
+            {% if iconVertical %}
+            {% assign icon = iconVertical | split: ", " %}
+            <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }} vertical" aria-label="{{ iconLabel }}">
+                <use href="/img/logo.svg#{{ icon[0] }}"></use>
+            </svg>
+            {% endif %}
 
-        {% if iconHorizontal %}
-          {% assign icon = iconHorizontal | split: ", " %}
-          <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }} horizontal" aria-label="{{ iconLabel }}">
-            <use href="/img/logo.svg#{{ icon[0] }}"></use>
-          </svg>
+            {% if iconHorizontal %}
+            {% assign icon = iconHorizontal | split: ", " %}
+            <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }} horizontal" aria-label="{{ iconLabel }}">
+                <use href="/img/logo.svg#{{ icon[0] }}"></use>
+            </svg>
+            {% endif %}
+        </span>
         {% endif %}
-      </span>
-    {% endif %}
-  </div>
-  <h4 class="year">/{{ year }}</h4>
-  <div class="arrow-big">
-    <a href="#more" class="arrow scrollto">
-      <span>read more</span>
-    </a>
-  </div>
+    </div>
+    <h4 class="year">/{{ year }}</h4>
+    <div class="arrow-big">
+        <a href="#more" class="arrow scrollto">
+            <span>read more</span>
+        </a>
+    </div>
 </section>
 
 <hr />

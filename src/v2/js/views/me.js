@@ -420,9 +420,10 @@ var meview = {
 				start: "0 100%",
 				end: "100% 0",
 				animation: tl,
-				scrub: .5
+				scrub: .5,
+				markers: true
 			}));
-			// Facts
+			// Facts text
 			var facts = function (els) {
 				var tl = gsap.timeline();
 
@@ -459,6 +460,13 @@ var meview = {
 					}, {
 						opacity: 1,
 						duration: reduceMotionFilter(duration)
+					});
+				});
+
+				// Do nothing
+				els.forEach(el => {
+					tl.to(el.querySelectorAll("p"), {
+						duration: reduceMotionFilter(2 * duration)
 					});
 				});
 
