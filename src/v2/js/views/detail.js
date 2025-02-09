@@ -1229,10 +1229,10 @@ var detailview = {
 					},
 					ease: "expo.out",
 					onStart: _ => {
-						addClass(this.slideshowScroll, "nosnap");
+						removeClass(this.slideshowScroll, "scroll-snap");
 					},
 					onComplete: _ => {
-						removeClass(this.slideshowScroll, "nosnap");
+						addClass(this.slideshowScroll, "scroll-snap");
 						this.navigationHide();
 					}
 				});

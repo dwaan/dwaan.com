@@ -18,10 +18,10 @@ function scrollto(el) {
             ease: "expo.inOut",
             scrollTo: e.target.getAttribute("href"),
             onStart: _ => {
-                addClass(_q("html"), "nosnap");
+                removeClass(_q("html"), "scroll-snap");
             },
             onComplete: _ => {
-                removeClass(_q("html"), "nosnap");
+                addClass(_q("html"), "scroll-snap");
             }
         });
     });

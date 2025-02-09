@@ -107,7 +107,7 @@ p {
 
 .middle {
 	gap: calc(2 * var(--pady));
-	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) var(--pady);
+	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
 	min-height: 100vh;
 	min-height: 100svh;
 
@@ -1215,22 +1215,32 @@ div>.vertical {
 	}
 }
 
-.detail {
+
+// Global detail page
+
+main.detail {
 	.color {
 		ul {
 			gap: var(--padx);
-			flex-flow: row wrap;
+			flex-flow: row nowrap;
 			align-items: center;
 		}
 
 		li {
-			width: 16px;
-			height: 16px;
 			font-size: .75rem;
 
 			&:last-child {
-				flex: 100px;
+				flex: initial;
 				height: initial;
+			}
+
+			&,
+			span {
+				width: var(--padx);
+			}
+
+			span {
+				height: var(--padx);
 			}
 		}
 	}
@@ -1247,7 +1257,9 @@ div>.vertical {
 	}
 }
 
-.sagara {
+
+// Sagara page
+main.sagara {
 	.style-background--parallax {
 		.logos {
 			img {
@@ -1349,11 +1361,18 @@ main.bkpm {
 				margin: 0;
 			}
 		}
-	}
 
-	.style-top--coverflow {
-		.thumbs {
-			height: 40vw;
+		&--coverflow {
+			justify-content: center;
+
+			.thumbs {
+				gap: var(--padx);
+				height: 40vw;
+
+				picture {
+					margin: 0;
+				}
+			}
 		}
 	}
 
@@ -1390,30 +1409,30 @@ main.bkpm {
 				height: 70%;
 			}
 		}
-	}
 
-	.style-center--small {
-		.text {
-			padding: 0 var(--padx);
-		}
-
-		.thumbs {
-			height: 45vw;
-			margin: 30vw 0;
-		}
-
-		picture {
-			order: initial;
-			margin: -30vw -35vw 0;
-
-			&:nth-child(2) {
-				margin-top: 0;
-				height: 100%;
+		&--small {
+			.text {
+				padding: 0 var(--padx);
 			}
 
-			&:nth-child(3) {
-				margin-top: 30vw;
-				height: 100%;
+			.thumbs {
+				height: 45vw;
+				margin: 10vw 0;
+			}
+
+			picture {
+				order: initial;
+				margin: -30vw -30vw 0;
+
+				&:nth-child(2) {
+					margin-top: 0;
+					height: 100%;
+				}
+
+				&:nth-child(3) {
+					margin-top: 30vw;
+					height: 100%;
+				}
 			}
 		}
 	}

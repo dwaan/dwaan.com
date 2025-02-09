@@ -18,10 +18,10 @@ var animate = {
 					duration: (scroll > speed) ? speed : scroll,
 					ease: "expo.inOut",
 					onStart: _ => {
-						addClass(_q("html"), "nosnap");
+						removeClass(_q("html"), "scroll-snap");
 					},
 					onComplete: _ => {
-						removeClass(_q("html"), "nosnap");
+						addClass(_q("html"), "scroll-snap");
 						resolve();
 					}
 				});
