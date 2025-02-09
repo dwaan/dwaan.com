@@ -2,6 +2,7 @@
 
 @use 'sass:math';
 @use 'mixins';
+@use 'flares';
 
 :root {
 	@media screen and (min-width: mixins.$screen-medium) {
@@ -186,6 +187,7 @@ div>.vertical {
 /* Arrow links */
 
 .arrow {
+	position: sticky;
 	margin: var(--pady) var(--padx);
 
 	&:after {
@@ -200,6 +202,17 @@ div>.vertical {
 		@media screen and (min-width: mixins.$screen-medium) {
 			display: block;
 		}
+	}
+
+	&-big,
+	&-small {
+		align-items: flex-end;
+		justify-content: flex-end;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
 	}
 
 	&-big {
@@ -945,6 +958,7 @@ div>.vertical {
 
 	.thumbs {
 		transform: none;
+
 		picture {
 			width: calc(var(--pic-w) * 7/6);
 		}
@@ -1329,6 +1343,65 @@ main.me {
 		}
 	}
 
+	// Mr. Goat section
+
+	#mrgoat {
+		.mrgoat {
+			.spin {
+				height: 100vh;
+			}
+
+			h2 {
+				font-size: 5rem;
+
+				@media (min-width: mixins.$screen-wide) {
+					font-size: 6rem;
+				}
+			}
+
+			p {
+				font-size: 2rem;
+				line-height: 120%;
+				max-width: 1000px;
+				padding: 0 var(--padx);
+			}
+
+			picture,
+			picture img {
+				width: auto;
+				height: 400px;
+				max-height: 90vh;
+			}
+
+			.arrow {
+				position: relative;
+				top: 0;
+				left: 0;
+				transform: initial;
+			}
+
+			.h2 {
+				padding: 0 var(--padx) var(--padm);
+				line-height: 80%;
+				letter-spacing: -.075em;
+			}
+
+			.text,
+			.thumbs {
+				@include mixins.block(absolute, 0, 0, 100vw, 100%);
+			}
+		}
+
+		.float {
+			p {
+				font-size: 1rem;
+			}
+		}
+	}
+
+
+	// Other sections
+
 	#sayhi {
 		.title {
 			width: 350px;
@@ -1382,7 +1455,7 @@ main.me {
 
 /* Musiku page */
 
-.musiku {
+main.musiku {
 	.style-row {
 		width: auto;
 		padding: calc(2 * var(--padxxl));
@@ -1422,7 +1495,7 @@ main.me {
 
 /* AAI page */
 
-.aai {
+main.aai {
 	.style-column {
 		.meta {
 			width: 180px;
@@ -1434,70 +1507,6 @@ main.me {
 	}
 }
 
-/* Mr. Goat */
-
-.mrgoat {
-	.spin {
-		height: 100vh;
-	}
-
-	h2 {
-		font-size: 5rem;
-
-		@media (min-width: mixins.$screen-wide) {
-			font-size: 6rem;
-		}
-	}
-
-	p {
-		font-size: 2rem;
-		line-height: 120%;
-		max-width: 1000px;
-		padding: 0 var(--padx);
-	}
-
-	picture,
-	picture img {
-		width: auto;
-		height: 400px;
-		max-height: 90vh;
-	}
-
-	.arrow {
-		position: relative;
-		top: 0;
-		left: 0;
-		transform: initial;
-	}
-
-	.h2 {
-		padding: 0 var(--padx) var(--padm);
-		line-height: 80%;
-		letter-spacing: -.075em;
-	}
-}
-
-.float {
-	p {
-		font-size: 1rem;
-	}
-}
-
-#viet {
-	top: 20vh;
-}
-
-#nyc {
-	bottom: 20vh;
-}
-
-#food {
-	top: 30vh;
-}
-
-#travel {
-	bottom: 30vh;
-}
 
 // Plurk Page
 

@@ -3,7 +3,6 @@
 @use 'mixins';
 @use 'fonts';
 @use 'selection';
-@use 'flares';
 
 %transition {
 	transition: color .5s ease;
@@ -569,7 +568,6 @@ picture {
 /* Arrow links */
 
 .arrow {
-	position: sticky;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
@@ -596,14 +594,7 @@ picture {
 	&-small {
 		z-index: 2;
 		display: flex;
-		align-items: flex-end;
-		justify-content: flex-end;
 		flex-flow: row nowrap;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
 		pointer-events: none;
 	}
 }
@@ -2823,7 +2814,6 @@ main.me {
 
 			.text,
 			.thumbs {
-				@include mixins.block(absolute, 0, 0, 100vw, 100%);
 				max-width: initial;
 				display: flex;
 				flex-flow: column;
