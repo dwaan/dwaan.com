@@ -112,7 +112,7 @@ p {
 	min-height: 100svh;
 
 	.middle {
-		padding: var(--pady) var(--padx);
+		padding: 0 var(--padx);
 	}
 
 	&.full {
@@ -148,7 +148,7 @@ p {
 	padding: calc(2 * var(--padxl)) var(--padxl);
 
 	@media screen and (min-height: mixins.$screen-small) {
-		padding: calc(4 * var(--pady)) var(--padxl);
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
 	}
 }
 
@@ -800,8 +800,6 @@ div>.vertical {
 
 /* Style that look like table */
 .style-flex {
-	padding: 100px 30px;
-
 	.style-column {
 		flex-direction: column;
 	}
