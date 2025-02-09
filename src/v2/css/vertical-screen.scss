@@ -867,8 +867,9 @@ div>.vertical {
 /* Style with angled photo on the bottom */
 .style-angled {
 	height: auto;
-	padding: calc(4 * var(--pady)) calc(4 * var(--padx)) calc(2 * var(--pady));
+	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
 	gap: calc(3 * var(--pady));
+	justify-content: center;
 
 	@media screen and (min-width: mixins.$screen-verysmall) {
 		gap: calc(4 * var(--pady));
@@ -881,16 +882,14 @@ div>.vertical {
 	.text {
 		display: flex;
 		flex-flow: column nowrap;
-		flex: 1;
 		justify-content: flex-end;
 
 		@media screen and (min-width: mixins.$screen-verysmall) {
-			width: 50vw;
+			padding: 0 var(--padx);
 		}
 	}
 
 	.thumbs {
-		flex: 2;
 		gap: var(--padx);
 
 		@media screen and (min-height: mixins.$screen-small) {
@@ -916,18 +915,12 @@ div>.vertical {
 	// Variations
 
 
-	&-individual {
+	&--individual {
 		@media screen and (min-width: mixins.$screen-small) {
 			gap: calc(4 * var(--pady));
 		}
 
 		.meta {
-			margin-bottom: var(--pads);
-
-			@media screen and (min-width: mixins.$screen-small) {
-				margin-bottom: var(--padm);
-			}
-
 			ul {
 				gap: var(--pads);
 			}
