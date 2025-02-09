@@ -420,8 +420,7 @@ var meview = {
 				start: "0 100%",
 				end: "100% 0",
 				animation: tl,
-				scrub: .5,
-				markers: true
+				scrub: .5
 			}));
 			// Facts text
 			var facts = function (els) {
