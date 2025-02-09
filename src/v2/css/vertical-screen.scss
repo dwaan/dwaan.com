@@ -115,6 +115,10 @@ p {
 		padding: var(--pady) var(--padx);
 	}
 
+	&.full {
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx));
+	}
+
 	@media screen and (min-height: mixins.$screen-abitwide) {
 		padding: calc(3 * var(--pady)) var(--padx);
 
@@ -549,7 +553,7 @@ div>.vertical {
 	}
 
 	.thumbs {
-		height: calc(var(--pic-h) + (var(--pic-m) * 3));
+		height: initial;
 	}
 
 	picture {
@@ -1161,6 +1165,15 @@ div>.vertical {
 		br[hidden] {
 			display: block;
 		}
+	}
+}
+
+// Style single image
+.style-single-image {
+	min-height: initial;
+
+	.text {
+		padding: calc(5 * var(--pady)) calc(2 * var(--padx)) var(--pady);
 	}
 }
 

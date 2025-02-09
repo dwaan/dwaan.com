@@ -2132,11 +2132,6 @@ header {
 	padding: 0 !important;
 	height: auto !important;
 
-	.text {
-		padding: calc(3 * var(--pady)) var(--padx) var(--pady);
-		max-width: 500px;
-	}
-
 	picture,
 	img {
 		width: 100%;
