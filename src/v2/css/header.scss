@@ -1,0 +1,450 @@
+@charset "UTF-8";
+
+@use 'mixins';
+
+/* Header style */
+header {
+	position: fixed;
+	z-index: 101;
+	top: 0;
+	opacity: 0;
+	pointer-events: none;
+
+	&,
+	.sticky {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		width: 100vw;
+	}
+
+	.sticky {
+		padding: var(--pady) var(--padx) 0;
+	}
+
+	.left,
+	.right {
+		display: flex;
+		flex-direction: row;
+		pointer-events: all;
+	}
+
+	/* Logo item */
+	.logo {
+		display: flex;
+		align-items: center;
+		fill: var(--black);
+		transition: fill 1s ease;
+
+		svg {
+			transition: filter 1s ease;
+			width: 25.6px;
+			height: 40px;
+			pointer-events: none;
+
+			@keyframes waving {
+				0% {
+					transform: rotate(135deg);
+				}
+
+				65% {
+					transform: rotate(135deg);
+				}
+
+				70% {
+					transform: rotate(200deg);
+				}
+
+				75% {
+					transform: rotate(180deg);
+				}
+
+				80% {
+					transform: rotate(200deg);
+				}
+
+				85% {
+					transform: rotate(190deg);
+				}
+
+				90% {
+					transform: rotate(200deg);
+				}
+
+				100% {
+					transform: rotate(135deg);
+				}
+			}
+
+			.left-hand {
+				transform: rotate(135deg);
+				transform-origin: 16.5px 27.175px;
+				animation: waving 5s ease-in-out infinite;
+			}
+
+			.hat {
+				transform-origin: 50% 75%;
+				transition: transform .48s cubic-bezier(.49, 2.07, .4, .65);
+			}
+		}
+
+		&:hover {
+			svg {
+				.hat {
+					transform: translate(-4px, -1.5px) rotate(6.5deg);
+				}
+			}
+		}
+	}
+
+	/* Common styles between items */
+	.size,
+	.lamp,
+	.menu {
+		flex: none;
+		align-self: center;
+
+		svg {
+			pointer-events: none;
+		}
+	}
+
+	/* Text size item */
+	.size {
+		margin-left: 0;
+		color: var(--black);
+	}
+
+	/* Dark mode item */
+	.lamp {
+		svg {
+			width: 44px;
+			height: 44px;
+			mix-blend-mode: normal;
+		}
+
+		#sun,
+		#moon {
+			display: block;
+			opacity: 0;
+			transition: opacity .5s ease;
+		}
+
+		#sun {
+			stroke: var(--black);
+			opacity: 1;
+
+			circle {
+				fill: var(--yellow);
+			}
+		}
+	}
+}
+
+/* Menu item and switch */
+.menu {
+
+	// The hamburger
+	.switch {
+		position: relative;
+		cursor: pointer;
+		z-index: 2;
+		display: flex;
+		flex-direction: row;
+
+		svg,
+		span {
+			pointer-events: none;
+		}
+
+		svg {
+			stroke: var(--black);
+			width: 32px;
+			margin-right: var(--padm);
+
+			line {
+				transition: transform .48s ease-in-out;
+			}
+		}
+
+		// Sliding animation
+		&:hover {
+			svg {
+				@keyframes slide {
+					0% {
+						transform: translateX(0)
+					}
+
+					50% {
+						transform: translateX(-32px)
+					}
+
+					50.01% {
+						transform: translateX(32px)
+					}
+				}
+
+				@for $i from 1 through 3 {
+					line:nth-child(#{$i}) {
+						animation: slide .32s ease-in-out;
+						animation-delay: (($i - 1) * .048s);
+					}
+				}
+			}
+		}
+	}
+
+	// Menu items
+	.items {
+		ol {
+			@include mixins.zero-margin-padding;
+			display: flex;
+			width: 100%;
+			flex-direction: column;
+		}
+
+		li {
+			position: relative;
+			display: block;
+			flex-direction: row;
+			margin: 0 0 var(--padl);
+			padding: 0;
+			list-style: none;
+			@include mixins.typography(1.6rem, $letterspacing: .025em);
+
+			&.hr {
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: var(--black-50);
+				flex: none;
+			}
+
+			&:before,
+			&:after {
+				@include mixins.make-it-exist();
+				@include mixins.block(absolute, 50%, 0, $zindex: 2);
+				pointer-events: none;
+				transform: translate3d(0, -50%, 0);
+			}
+
+			&:before {
+				&:nth-child(1) {
+					content: "00."
+				}
+
+				&:nth-child(2) {
+					content: "01."
+				}
+
+				&:nth-child(4) {
+					content: "02."
+				}
+			}
+
+			&:last-child {
+				@include mixins.zero-margin-padding;
+				height: auto;
+
+				p {
+					margin-top: var(--pads);
+					font-size: .9rem;
+				}
+			}
+
+			&:first-child,
+			&:last-child {
+				margin-top: auto;
+			}
+
+			a {
+				position: relative;
+				z-index: 1;
+				display: block;
+				margin: calc(-1 * var(--pads)) calc(-2 * var(--pads));
+				padding-left: calc(44px + (4 * var(--pads)));
+				line-height: calc(var(--padl) + (2 * var(--pads)));
+				height: calc(var(--padl) + (2 * var(--pads)));
+				border-radius: 8px;
+			}
+
+			p {
+				&.social {
+					display: none;
+					margin-left: calc(-1 * var(--pads));
+				}
+
+				a {
+					display: inline-block;
+					padding: calc(var(--pads) / 2) var(--pads);
+					margin: 0;
+					margin-right: var(--padm);
+					line-height: calc(var(--padm) * .75);
+					height: auto;
+					border: 1px dotted transparent;
+
+					text-decoration: none;
+					font-weight: bold;
+					color: var(--black-75);
+
+					transition: border-color .2s ease-in-out, color .2s ease-in-out;
+
+					svg {
+						width: auto;
+						margin-right: calc(var(--pads) / 4);
+						fill: var(--black-75);
+						height: calc(var(--padm) * .75);
+						display: inline-block;
+					}
+
+					&:hover {
+						color: var(--red);
+						border: 1px dotted var(--black-50);
+
+						svg {
+							fill: var(--red);
+						}
+					}
+				}
+			}
+		}
+
+		.close {
+			@include mixins.block(absolute, var(--pady), initial, initial, 36px);
+			right: var(--padx);
+			padding: 0 12px 0 48px;
+			margin: 4px -12px;
+			line-height: 35px;
+			border-radius: 8px;
+			transition: all .15s ease;
+			will-change: background-color;
+
+			&:before {
+				@include mixins.make-it-block();
+			}
+
+			span {
+				display: inline-block;
+				text-indent: -666rem;
+
+				&:after,
+				&:before {
+					@include mixins.make-it-exist();
+					@include mixins.block(absolute, 50%, 24px, 20px, 2px);
+					background-color: var(--black);
+					border-radius: 2px;
+					transform-origin: center;
+					transform: translate3d(-50%, -50%, 0) rotate(45deg);
+				}
+
+				&:before {
+					transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+				}
+			}
+		}
+	}
+
+	// Common style
+	.switch,
+	.switch svg,
+	.switch span,
+	.items .close {
+		height: 44px;
+		@include mixins.typography(.9rem, inherit, 44px, .05rem, var(--black));
+	}
+
+	// The checkbox action for displaying menu
+	#menu-switcher {
+		display: none;
+
+		+.overlay {
+			@include mixins.block-spread(flex, fixed, 1000, transparent);
+			align-items: flex-start;
+			justify-content: flex-end;
+
+			&,
+			&::before {
+				pointer-events: none;
+			}
+
+			&::before {
+				@include mixins.make-it-full-size();
+				@include mixins.block-spread(block, absolute, 1, var(--black-25));
+				content: "";
+				opacity: 0;
+				transition: opacity .48s var(--ease-smooth);
+				transition-delay: .32s;
+				will-change: opacity;
+			}
+
+			li {
+				opacity: 0;
+				transform: translate3d(200px, 0, 0);
+			}
+
+			.items {
+				z-index: 2;
+				display: flex;
+				padding: calc((2 * var(--pady)) + 44px) calc(2 * var(--padx)) calc(2 * var(--pady));
+				height: 100%;
+				width: 100vw;
+				max-width: 100%;
+				background-color: var(--white);
+				transform: translate3d(100%, 0, 0);
+				pointer-events: all;
+
+				@media (min-width: mixins.$screen-small) {
+					width: calc(1.75 * var(--pic-w));
+				}
+
+			}
+
+			li,
+			.items {
+				transition: transform .8s var(--ease-smooth), opacity .8s var(--ease-smooth);
+				will-change: transform, opacity;
+			}
+
+			@for $i from 1 through 5 {
+				li:nth-child(#{$i}) {
+					transition-delay: (($i + 1) * .064s);
+				}
+			}
+		}
+
+		// Menu displayed
+		&:checked {
+			+.overlay {
+
+				&::before,
+				li {
+					opacity: 1;
+				}
+
+				li,
+				.items {
+					transform: translate3d(0, 0, 0);
+				}
+			}
+		}
+	}
+}
+
+// Section and footer to be on the side when menu is shown
+body {
+
+	section,
+	.footer {
+		transition: transform .8s var(--ease-smooth);
+	}
+
+	// Menu is shown
+	&:has(#menu-switcher:checked) {
+
+		section,
+		.footer {
+			transform: translate(-10%, 0);
+		}
+	}
+}

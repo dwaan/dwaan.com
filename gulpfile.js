@@ -133,7 +133,7 @@ var v2 = {
 		html: ['v2/**/*.html'],
 		php: ['src/v2/**/*.php'],
 		js: ['src/v2/js/**/*.js'],
-		css: ['src/v2/css/{main,global,flares,nojs,dark}.scss'],
+		css: ['src/v2/css/{main,global,header,flares,nojs,dark}.scss'],
 		img: ['src/v2/img/**/*.{jpg,jpeg,png}'],
 		svg: ['src/v2/img/**/*.svg'],
 		fonts: ['src/v2/fonts/*.*'],

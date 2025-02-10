@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* For those who disable js */
 
 @keyframes fade-out {
@@ -13,6 +15,10 @@
 html.no-js {
 	scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
+
+	[hidden] {
+		display: none;
+	}
 
 	// Animate appereang
 	&.page-home {
