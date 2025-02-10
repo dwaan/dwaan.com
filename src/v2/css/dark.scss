@@ -26,6 +26,10 @@
 }
 
 @mixin dark {
+    .forcebright {
+        background-color: #4f4f4f;
+    }
+
     .lamp {
         #sun {
             opacity: 0;
@@ -71,34 +75,12 @@
         }
     }
 
-    .detail {
-        picture {
-            box-shadow: none;
-
-            img {
-                position: relative;
-                z-index: 1;
-            }
-
-            .shadow {
-                @include mixins.make-it-block;
-                @include mixins.positions;
-                position: absolute;
-                z-index: 0;
-                opacity: .4;
-                background-size: 100%;
-                transform: translate3d(-10px, 30px, 0);
-                filter: blur(40px);
-            }
-        }
-    }
-
     .style-spread {
         @include style-cover();
-    }
 
-    .forcebright {
-        background-color: #4f4f4f;
+        &--big {
+            @include style-cover();
+        }
     }
 
     .style-slideshow {
@@ -109,18 +91,14 @@
         }
     }
 
-    .style-background-cover,
-    .style-background-basic {
+    .style-background--cover,
+    .style-background--basic {
         .text {
             background-color: rgba(0, 0, 0, .9);
         }
     }
 
     .style-staggered {
-        @include style-cover();
-    }
-
-    .style-spread--big {
         @include style-cover();
     }
 
@@ -140,6 +118,28 @@
 
             &:hover {
                 color: var(--black);
+            }
+        }
+    }
+
+    main.detail {
+        picture {
+            box-shadow: none;
+
+            img {
+                position: relative;
+                z-index: 1;
+            }
+
+            .shadow {
+                @include mixins.make-it-block;
+                @include mixins.positions;
+                position: absolute;
+                z-index: 0;
+                opacity: .4;
+                background-size: 100%;
+                transform: translate3d(-10px, 30px, 0);
+                filter: blur(40px);
             }
         }
     }

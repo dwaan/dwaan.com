@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* For those who disable js */
 
 @keyframes fade-out {
@@ -14,7 +16,11 @@ html.no-js {
 	scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
 
-	// Animate appereang
+	[hidden] {
+		display: none;
+	}
+
+	// Animate appearing
 	&.page-home {
 		animation-name: fade-out;
 		animation-duration: 2.56s;
@@ -42,13 +48,8 @@ html.no-js {
 
 	// Hide javascript button and action
 
-	#loader,
-	#mode {
-		display: none;
-	}
-
-	.size,
-	.lamp {
+	#mode,
+	#textsize {
 		display: none;
 	}
 
@@ -119,8 +120,8 @@ html.no-js {
 	}
 
 	// Replurk page
-	#permission,
 	.grant,
+	#permission,
 	#statistics,
 	#hello,
 	#permission,

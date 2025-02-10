@@ -19,55 +19,29 @@ var detailview = {
 			});
 		});
 
-		next.querySelectorAll(".style-plain-single").forEach(el => {
-			var screen = gsap.matchMedia();
-
-			screen.add("(max-aspect-ratio: 1/1)", () => {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
-						y: "50%",
-						opacity: 0
-					}, {
-						y: "0%",
-						opacity: 1,
-						ease: "expo"
-					});
-
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el.querySelectorAll(".thumbs"),
-						start: "0 100%",
-						end: "50% 100%",
-						scrub: reduceMotionFilter() ? true : 5,
-						animation: tl
-					});
+		next.querySelectorAll(".style-plain--single").forEach(el => {
+			scroll.push(tl => {
+				tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
+					opacity: 1,
+					x: "25vw"
+				}, {
+					x: "0",
+					ease: "power4.out"
 				});
-			});
-			screen.add("(min-aspect-ratio: 1/1)", () => {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
-						opacity: 1,
-						y: "25%"
-					}, {
-						y: "-25%",
-						ease: "linear"
-					});
 
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "0 100%",
-						end: "100% 0",
-						scrub: reduceMotionFilter() ? true : 1,
-						animation: tl
-					});
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 100%",
+					scrub: reduceMotionFilter() ? true : 3,
+					animation: tl
 				});
 			});
 		});
 
-		next.querySelectorAll(".style-plain-sticky").forEach(el => {
+		next.querySelectorAll(".style-plain--sticky").forEach(el => {
 			var pictures = el.querySelectorAll("picture");
 
 			// Scroll animation
@@ -154,7 +128,7 @@ var detailview = {
 			});
 		});
 
-		next.querySelectorAll(".style-plain-scroll").forEach(el => {
+		next.querySelectorAll(".style-plain--scroll").forEach(el => {
 			// Move thumbnail again
 			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"), null);
 
@@ -195,7 +169,7 @@ var detailview = {
 						trigger: el,
 						start: "50% 100%",
 						end: "100% 100%",
-						scrub: reduceMotionFilter() ? true : 3,
+						scrub: reduceMotionFilter() ? true : 5,
 						animation: tl
 					});
 				});
@@ -691,7 +665,7 @@ var detailview = {
 			})
 		});
 		// Style - Bottom
-		next.querySelectorAll(".style-bottom-logo").forEach(el => {
+		next.querySelectorAll(".style-logo").forEach(el => {
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text > *")
@@ -859,7 +833,7 @@ var detailview = {
 		});
 
 		// Style - Angled
-		next.querySelectorAll(".style-angled:not(.style-angled-individual), .style-angled--auto").forEach(el => {
+		next.querySelectorAll(".style-angled:not(.style-angled--individual), .style-angled--auto").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "75%");
@@ -921,7 +895,7 @@ var detailview = {
 				position: "85%"
 			});
 		});
-		next.querySelectorAll(".style-angled-individual").forEach(el => {
+		next.querySelectorAll(".style-angled--individual").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "100%");
@@ -955,7 +929,7 @@ var detailview = {
 		});
 
 		// Style - Background
-		next.querySelectorAll(".style-background:not(.style-background-basic)").forEach(el => {
+		next.querySelectorAll(".style-background:not(.style-background--basic)").forEach(el => {
 			var elPicture = el.querySelectorAll(".thumbs");
 			// Scroll pictures
 			scroll.push(tl => {
@@ -1002,7 +976,7 @@ var detailview = {
 				});
 			});
 		});
-		next.querySelectorAll(".style-background-basic").forEach(el => {
+		next.querySelectorAll(".style-background--basic").forEach(el => {
 			var elPicture = el.querySelectorAll(".thumbs");
 			// Scroll pictures
 			scroll.push(tl => {

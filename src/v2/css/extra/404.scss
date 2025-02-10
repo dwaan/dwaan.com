@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@use 'mixins';
+@use '../mixins';
 
 .lost {
 	@include mixins.block-spread(block, fixed, );
