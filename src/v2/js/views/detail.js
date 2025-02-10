@@ -19,7 +19,7 @@ var detailview = {
 			});
 		});
 
-		next.querySelectorAll(".style-plain-single").forEach(el => {
+		next.querySelectorAll(".style-plain--single").forEach(el => {
 			var screen = gsap.matchMedia();
 
 			screen.add("(max-aspect-ratio: 1/1)", () => {
@@ -67,7 +67,7 @@ var detailview = {
 			});
 		});
 
-		next.querySelectorAll(".style-plain-sticky").forEach(el => {
+		next.querySelectorAll(".style-plain--sticky").forEach(el => {
 			var pictures = el.querySelectorAll("picture");
 
 			// Scroll animation
@@ -154,7 +154,7 @@ var detailview = {
 			});
 		});
 
-		next.querySelectorAll(".style-plain-scroll").forEach(el => {
+		next.querySelectorAll(".style-plain--scroll").forEach(el => {
 			// Move thumbnail again
 			scroll.moveThumbs(el.querySelectorAll(".thumbs > picture"), null);
 
@@ -691,7 +691,7 @@ var detailview = {
 			})
 		});
 		// Style - Bottom
-		next.querySelectorAll(".style-bottom-logo").forEach(el => {
+		next.querySelectorAll(".style-logo").forEach(el => {
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text > *")
@@ -859,7 +859,7 @@ var detailview = {
 		});
 
 		// Style - Angled
-		next.querySelectorAll(".style-angled:not(.style-angled-individual), .style-angled--auto").forEach(el => {
+		next.querySelectorAll(".style-angled:not(.style-angled--individual), .style-angled--auto").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "75%");
@@ -921,7 +921,7 @@ var detailview = {
 				position: "85%"
 			});
 		});
-		next.querySelectorAll(".style-angled-individual").forEach(el => {
+		next.querySelectorAll(".style-angled--individual").forEach(el => {
 			var elPicture = el.querySelectorAll(" .thumbs > picture");
 			// Move pictures
 			scroll.moveThumbs(elPicture, "100%");
@@ -955,7 +955,7 @@ var detailview = {
 		});
 
 		// Style - Background
-		next.querySelectorAll(".style-background:not(.style-background-basic)").forEach(el => {
+		next.querySelectorAll(".style-background:not(.style-background--basic)").forEach(el => {
 			var elPicture = el.querySelectorAll(".thumbs");
 			// Scroll pictures
 			scroll.push(tl => {
@@ -1002,7 +1002,7 @@ var detailview = {
 				});
 			});
 		});
-		next.querySelectorAll(".style-background-basic").forEach(el => {
+		next.querySelectorAll(".style-background--basic").forEach(el => {
 			var elPicture = el.querySelectorAll(".thumbs");
 			// Scroll pictures
 			scroll.push(tl => {

@@ -7,7 +7,7 @@
 	}
 }
 
-/* Defining the font size based on aspect ratio */
+// Defining the font size based on aspect ratio
 html {
 	font-size: 16px;
 
@@ -20,7 +20,7 @@ html {
 	}
 }
 
-/* Default style */
+// Default style
 h1 {
 	font-size: 3.25rem;
 	line-height: 90%;
@@ -67,7 +67,7 @@ p {
 }
 
 
-/* Header style */
+// Header style
 
 .size,
 .lamp,
@@ -75,9 +75,11 @@ p {
 	margin: 0 0 0 var(--padl);
 }
 
-.logo svg {
-	width: 30.6px;
-	height: 47px;
+.logo {
+	svg {
+		width: 30.6px;
+		height: 47px;
+	}
 }
 
 .switch {
@@ -90,20 +92,22 @@ p {
 	}
 }
 
-/* Menu item */
-.menu .items {
-	width: calc(1.5 * var(--pic-w));
+// Menu item
+.menu {
+	.items {
+		width: calc(1.5 * var(--pic-w));
 
-	@media (min-width: mixins.$screen-verysmall) {
-		width: calc(2 * var(--pic-w));
-	}
+		@media (min-width: mixins.$screen-verysmall) {
+			width: calc(2 * var(--pic-w));
+		}
 
-	li a {
-		padding-left: calc(2 * var(--pads));
+		li a {
+			padding-left: calc(2 * var(--pads));
+		}
 	}
 }
 
-/* Common middle content */
+// Common middle content styke
 
 .middle {
 	gap: calc(2 * var(--pady));
@@ -162,54 +166,78 @@ p {
 	}
 }
 
-// end .middle
+.padding {
+	display: flex;
+	flex-direction: column;
+	margin: calc(3 * var(--pady)) 0 0;
+	max-width: calc(100vw - (2 * var(--padx)));
+	justify-content: center;
 
-.home-aai,
-.aai .middle {
+	.replurktitle {
+		font-size: 3.5rem;
+		letter-spacing: -.25rem;
+		line-height: 100%;
+		text-align: center;
+	}
+
+	.replurksubtitle {
+		margin-top: 0;
+		font-size: 1.25rem;
+	}
+}
+
+
+// Homepage and related pages logo matching position
+
+section.home-aai,
+main.aai .middle {
 	img.logo {
 		max-height: 6vh;
 	}
 }
 
-.home-musiku,
-.musiku .middle {
+section.home-musiku,
+main.musiku .middle {
 	img.logo {
 		max-height: 3.5vh;
 	}
 }
 
-.home-suzuki,
-.suzuki .middle {
+section.home-suzuki,
+main.suzuki .middle {
 	img.logo {
 		max-height: 14vh;
 	}
 }
 
-.home-tas,
-.tas .middle {
+section.home-tas,
+main.tas .middle {
 	img.logo {
 		max-height: 6vh;
 	}
 }
 
-.home-v1 {
+section.home-v1 {
 	object {
 		max-height: 10vh;
 	}
 }
 
+
+// Toggle to display item in horizontal screen
 .horizontal,
 div>.horizontal {
 	display: none;
 }
 
+// Toggle to display item in vertical screen
 .vertical,
 div>.vertical {
 	display: block;
 }
 
 
-/* Homepage content */
+// Homepage content
 .main-text {
 	padding: 0 var(--padx);
 	max-width: 450px;
@@ -242,7 +270,7 @@ div>.vertical {
 	}
 }
 
-/* Homepage footer */
+// Homepage footer
 .footer {
 	padding: var(--pady) var(--padx);
 
@@ -251,28 +279,7 @@ div>.vertical {
 	}
 }
 
-/* Homepage listing item */
-.padding {
-	display: flex;
-	flex-direction: column;
-	margin: calc(3 * var(--pady)) 0 0;
-	max-width: calc(100vw - (2 * var(--padx)));
-	justify-content: center;
-
-	.replurktitle {
-		font-size: 3.5rem;
-		letter-spacing: -.25rem;
-		line-height: 100%;
-		text-align: center;
-	}
-
-	.replurksubtitle {
-		margin-top: 0;
-		font-size: 1.25rem;
-	}
-}
-
-/* Arrow links */
+// Arrow links
 .arrow {
 
 	&:after {
@@ -310,14 +317,14 @@ div>.vertical {
 	}
 }
 
-/* Year information */
+// Year information
 .year {
 	right: var(--padx);
 	bottom: var(--pady);
 }
 
 
-/* Background flare */
+// Background flare
 .flares {
 	@include mixins.make-it-full-size;
 	@include mixins.position;
@@ -328,26 +335,79 @@ div>.vertical {
 }
 
 
-/* Detail page common style */
-.detail picture {
-	box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.25);
-
-	&.logo {
-		box-shadow: none;
-	}
-
-	&,
-	img {
-		border-radius: 6px;
-	}
-
-	@media (prefers-color-scheme: dark) {
-		box-shadow: none;
+// Browser size suppoer
+.support {
+	.content {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }
 
-/* Style text on the left and image spread like fan */
+// Style that look like table
+.style-flex {
+	.style-column {
+		flex-direction: column;
+	}
+}
 
+.style-row {
+	gap: calc(2 * var(--pady));
+
+	@media screen and (min-width: mixins.$screen-verysmall) {
+		width: 315px;
+	}
+
+	@media screen and (min-width: mixins.$screen-small) {
+		width: 515px;
+	}
+}
+
+.style-column {
+	align-items: stretch;
+	gap: var(--pady);
+
+	&.big {
+		gap: var(--padxxl);
+
+		@media screen and (min-width: mixins.$screen-small) {
+			gap: var(--padxl);
+		}
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.meta {
+		width: 114px;
+		gap: calc(var(--pady) / 2);
+
+		@media screen and (min-width: mixins.$screen-verysmall) {
+			flex: 1;
+		}
+
+		@media screen and (min-width: mixins.$screen-small) {
+			gap: var(--pady);
+		}
+
+		img {
+			margin-top: var(--pads);
+			max-width: 90%;
+			height: auto;
+		}
+	}
+
+	.text {
+		flex: 2;
+
+		small {
+			font-size: .75rem;
+		}
+	}
+}
+
+
+// Style text on the left and image spread like fan
 %style-spread {
 	flex-direction: column;
 	padding: calc(2 * var(--padxl)) var(--padxl);
@@ -398,24 +458,54 @@ div>.vertical {
 			}
 		}
 	}
-}
 
-.style-spread--big {
-	@extend .style-spread;
+	// Variants
 
-	picture {
-		transform-origin: bottom center;
-		width: calc(1.25 * var(--pic-w));
+	&--left {
+		@extend %style-spread;
+		flex-direction: column-reverse;
 
-		@media (min-width: mixins.$screen-verysmall) {
-			width: calc(2 * var(--pic-w));
+		.text,
+		.thumbs {
+			width: calc((37.5vw * 2) + var(--padx));
+			max-width: none;
+		}
+
+		.thumbs {
+			margin: 0 0 -10vh;
+			align-self: center;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: space-between;
+
+			picture {
+				width: 37.5vw;
+
+				&:last-child {
+					margin-top: var(--padl);
+				}
+			}
 		}
 	}
 
-	.wide {
+	&--big {
+		@extend .style-spread;
+
 		picture {
+			transform-origin: bottom center;
+			width: calc(1.25 * var(--pic-w));
+
 			@media (min-width: mixins.$screen-verysmall) {
-				width: calc(1.5 * var(--pic-w));
+				width: calc(2 * var(--pic-w));
+			}
+		}
+
+		.wide {
+			picture {
+				@media (min-width: mixins.$screen-verysmall) {
+					width: calc(1.5 * var(--pic-w));
+				}
 			}
 		}
 	}
@@ -437,35 +527,7 @@ div>.vertical {
 	}
 }
 
-/* Style spread left */
-.style-spread--left {
-	@extend %style-spread;
-	flex-direction: column-reverse;
-
-	.text,
-	.thumbs {
-		width: calc((37.5vw * 2) + var(--padx));
-		max-width: none;
-	}
-
-	.thumbs {
-		margin: 0 0 -10vh;
-		align-self: center;
-		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		justify-content: space-between;
-
-		picture {
-			width: 37.5vw;
-
-			&:last-child {
-				margin-top: var(--padl);
-			}
-		}
-	}
-}
-
+// Style plain
 .style-plain {
 	height: auto;
 
@@ -533,7 +595,7 @@ div>.vertical {
 	}
 }
 
-/* Style text on the and Images in the bottom */
+// Style text on the and Images in the bottom
 .style-top {
 	padding: calc(6 * var(--pady)) calc(2 * var(--padx));
 	gap: var(--padl);
@@ -684,7 +746,7 @@ div>.vertical {
 		}
 	}
 
-	/* Style text on top without image */
+	// Style text on top without image
 	&--text {
 		.text {
 			width: 100%;
@@ -700,7 +762,7 @@ div>.vertical {
 	}
 }
 
-/* Style text on top without image */
+// Style text on top without image
 .style-trunc {
 	padding: calc(2 * var(--padxl)) calc(2 * var(--padl)); // bottom 0
 	margin-bottom: calc(-1 * var(--padxl));
@@ -730,7 +792,7 @@ div>.vertical {
 	}
 }
 
-/* Style with mansonry like layout with text on the right */
+// Style with mansonry like layout with text on the right
 .style-masonry {
 	padding: 100px 0;
 
@@ -755,7 +817,7 @@ div>.vertical {
 	}
 }
 
-/* Style staggered */
+// Style staggered
 .style-staggered {
 	flex-direction: column;
 	height: auto;
@@ -776,8 +838,7 @@ div>.vertical {
 	}
 }
 
-
-/* Style with background image */
+// Style with background image
 .style-background {
 	.text {
 		width: calc(1.25 * var(--pic-w));
@@ -798,71 +859,7 @@ div>.vertical {
 	}
 }
 
-/* Style that look like table */
-.style-flex {
-	.style-column {
-		flex-direction: column;
-	}
-}
-
-.style-row {
-	gap: calc(2 * var(--pady));
-
-	@media screen and (min-width: mixins.$screen-verysmall) {
-		width: 315px;
-	}
-
-	@media screen and (min-width: mixins.$screen-small) {
-		width: 515px;
-	}
-}
-
-.style-column {
-	align-items: stretch;
-	gap: var(--pady);
-
-	&.big {
-		gap: var(--padxxl);
-
-		@media screen and (min-width: mixins.$screen-small) {
-			gap: var(--padxl);
-		}
-	}
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-
-	.meta {
-		width: 114px;
-		gap: calc(var(--pady) / 2);
-
-		@media screen and (min-width: mixins.$screen-verysmall) {
-			flex: 1;
-		}
-
-		@media screen and (min-width: mixins.$screen-small) {
-			gap: var(--pady);
-		}
-
-		img {
-			margin-top: var(--pads);
-			max-width: 90%;
-			height: auto;
-		}
-	}
-
-	.text {
-		flex: 2;
-
-		small {
-			font-size: .75rem;
-		}
-	}
-}
-
-
-/* Style with angled photo on the bottom */
+// Style with angled photo on the bottom
 .style-angled {
 	height: auto;
 	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
@@ -939,7 +936,7 @@ div>.vertical {
 	}
 }
 
-/* Style with logo on the bottom */
+// Style with logo on the bottom
 .style-bottom-logo {
 	.text {
 		max-width: 400px;
@@ -973,7 +970,7 @@ div>.vertical {
 	}
 }
 
-/* Style slideshow */
+// Style slideshow
 .style-slideshow {
 	padding: 0;
 
@@ -1019,25 +1016,27 @@ div>.vertical {
 	picture {
 		width: auto;
 	}
-}
 
-.style-slideshow--small {
-	@extend .style-slideshow;
+	// Variants
 
-	picture {
-		width: calc((100vw - (3 * var(--padx))) / 2);
-	}
+	&--small {
+		@extend .style-slideshow;
 
-	li {
-		padding: 0 0 0 var(--padx);
+		picture {
+			width: calc((100vw - (3 * var(--padx))) / 2);
+		}
 
-		&:last-child {
-			padding-right: var(--padx);
+		li {
+			padding: 0 0 0 var(--padx);
+
+			&:last-child {
+				padding-right: var(--padx);
+			}
 		}
 	}
 }
 
-/* Style with everything in the center */
+// Style with everything in the center
 .style-center {
 	padding: calc(4 * var(--pady)) var(--padx);
 
@@ -1112,7 +1111,7 @@ div>.vertical {
 	}
 }
 
-/* Style 3D thumbs */
+// Style 3D thumbs
 .style-3d {
 	flex-direction: column;
 
@@ -1160,7 +1159,7 @@ div>.vertical {
 }
 
 // Style single image
-.style-single-image {
+.style-image {
 	min-height: initial;
 
 	.text {
@@ -1169,7 +1168,7 @@ div>.vertical {
 }
 
 
-/* Footer links in every detail page */
+// Footer links in every detail page
 .links {
 	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(6 * var(--pady));
 
@@ -1198,7 +1197,7 @@ div>.vertical {
 }
 
 
-/* List style with zero leading decimal */
+// List style with zero leading decimal
 .zero {
 	flex-direction: column;
 
@@ -1221,8 +1220,24 @@ div>.vertical {
 
 
 // Global detail page
-
 main.detail {
+	picture {
+		box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.25);
+
+		&.logo {
+			box-shadow: none;
+		}
+
+		&,
+		img {
+			border-radius: 6px;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			box-shadow: none;
+		}
+	}
+
 	.color {
 		ul {
 			gap: var(--padx);
@@ -1260,7 +1275,6 @@ main.detail {
 		}
 	}
 }
-
 
 // Sagara page
 main.sagara {
@@ -1314,16 +1328,7 @@ main.sagara {
 	}
 }
 
-/* support */
-.support {
-	.content {
-		flex-direction: column;
-		align-items: flex-start;
-	}
-}
-
-
-/* Say Hi page */
+// Say Hi page
 main.hi {
 	.main-text {
 		margin: 0;
@@ -1343,8 +1348,7 @@ main.hi {
 	}
 }
 
-
-/* BKPM Page */
+// BKPM Page
 main.bkpm {
 	.style-top {
 		.meta {
@@ -1456,8 +1460,7 @@ main.bkpm {
 	}
 }
 
-
-/* Me page */
+// Me page
 main.me {
 	h1 {
 		strong::after {
@@ -1562,7 +1565,7 @@ main.me {
 		}
 	}
 
-	/* Mr. Goat */
+	// Mr. Goat
 
 	#mrgoat {
 		.mrgoat {
@@ -1620,8 +1623,7 @@ main.me {
 	}
 }
 
-
-/* Musiku page */
+// Musiku page
 main.musiku {
 	.style-row {
 		width: 100%;

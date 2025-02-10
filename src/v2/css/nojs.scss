@@ -48,13 +48,8 @@ html.no-js {
 
 	// Hide javascript button and action
 
-	#loader,
-	#mode {
-		display: none;
-	}
-
-	.size,
-	.lamp {
+	#mode,
+	#textsize {
 		display: none;
 	}
 
@@ -125,8 +120,8 @@ html.no-js {
 	}
 
 	// Replurk page
-	#permission,
 	.grant,
+	#permission,
 	#statistics,
 	#hello,
 	#permission,
