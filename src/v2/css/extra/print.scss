@@ -1,7 +1,7 @@
 @use "sass:math";
 
-@use 'fonts';
-@use 'mixins';
+@use '../fonts';
+@use '../mixins';
 
 $padx: 20px;
 $pady: 17.5px;
@@ -496,7 +496,6 @@ $red: #FF0F1E;
 			display: none;
 		}
 	}
-
 
 	main+main {
 		display: none;

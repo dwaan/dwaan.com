@@ -20,49 +20,23 @@ var detailview = {
 		});
 
 		next.querySelectorAll(".style-plain--single").forEach(el => {
-			var screen = gsap.matchMedia();
-
-			screen.add("(max-aspect-ratio: 1/1)", () => {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
-						y: "50%",
-						opacity: 0
-					}, {
-						y: "0%",
-						opacity: 1,
-						ease: "expo"
-					});
-
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el.querySelectorAll(".thumbs"),
-						start: "0 100%",
-						end: "50% 100%",
-						scrub: reduceMotionFilter() ? true : 5,
-						animation: tl
-					});
+			scroll.push(tl => {
+				tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
+					opacity: 1,
+					x: "25vw"
+				}, {
+					x: "0",
+					ease: "power4.out"
 				});
-			});
-			screen.add("(min-aspect-ratio: 1/1)", () => {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelectorAll(".thumbs > picture"), {
-						opacity: 1,
-						y: "25%"
-					}, {
-						y: "-25%",
-						ease: "linear"
-					});
 
-					return tl;
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "0 100%",
-						end: "100% 0",
-						scrub: reduceMotionFilter() ? true : 1,
-						animation: tl
-					});
+				return tl;
+			}, tl => {
+				return ScrollTrigger.create({
+					trigger: el,
+					start: "0 100%",
+					end: "100% 100%",
+					scrub: reduceMotionFilter() ? true : 3,
+					animation: tl
 				});
 			});
 		});
@@ -195,7 +169,7 @@ var detailview = {
 						trigger: el,
 						start: "50% 100%",
 						end: "100% 100%",
-						scrub: reduceMotionFilter() ? true : 3,
+						scrub: reduceMotionFilter() ? true : 5,
 						animation: tl
 					});
 				});

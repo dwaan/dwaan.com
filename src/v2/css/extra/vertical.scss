@@ -1,4 +1,4 @@
-@use 'mixins';
+@use '../mixins';
 
 :root {
 	@media screen and (min-height: mixins.$screen-small) {
@@ -146,6 +146,18 @@ p {
 			height: 100%; // !important;
 		}
 	}
+
+	// Toggle to display item in horizontal screen
+	.horizontal,
+	div>.horizontal {
+		display: none;
+	}
+
+	// Toggle to display item in vertical screen
+	.vertical,
+	div>.vertical {
+		display: block;
+	}
 }
 
 .auto {
@@ -221,19 +233,6 @@ section.home-v1 {
 	object {
 		max-height: 10vh;
 	}
-}
-
-
-// Toggle to display item in horizontal screen
-.horizontal,
-div>.horizontal {
-	display: none;
-}
-
-// Toggle to display item in vertical screen
-.vertical,
-div>.vertical {
-	display: block;
 }
 
 
@@ -531,7 +530,7 @@ div>.vertical {
 .style-plain {
 	height: auto;
 
-	&-sticky {
+	&--sticky {
 		.middle {
 			gap: var(--padxl);
 			align-self: center;
@@ -572,11 +571,11 @@ div>.vertical {
 		}
 	}
 
-	&-single {
+	&--single {
 		flex-direction: column;
 	}
 
-	&-scroll {
+	&--scroll {
 		gap: var(--padxl);
 		flex-direction: column;
 

@@ -77,6 +77,10 @@
 
     .style-spread {
         @include style-cover();
+
+        &--big {
+            @include style-cover();
+        }
     }
 
     .style-slideshow {
@@ -95,10 +99,6 @@
     }
 
     .style-staggered {
-        @include style-cover();
-    }
-
-    .style-spread--big {
         @include style-cover();
     }
 

@@ -288,17 +288,15 @@ picture {
 	}
 }
 
-[hidden] {
-	display: initial;
+
+// Hidden with css
+.hidden {
+	display: none;
 }
 
-#log {
-	@include mixins.block(fixed, 10px, 50%, $zindex: 9999);
-	@include mixins.typography($fontsize: .5rem, $color: white);
-	padding: 0 16px;
-	background-color: black;
-	border-radius: 4px;
-	transform: translate3d(-50%, 0, 0);
+// Hidden without javascript
+[hidden] {
+	display: initial;
 }
 
 // Stylized browserSync script notification
@@ -532,11 +530,6 @@ picture {
 	color: var(--red);
 }
 
-#back {
-	@include mixins.block-spread(none, fixed, 999999);
-	pointer-events: none;
-}
-
 // Grid style
 .grid {
 	display: grid;
@@ -550,15 +543,6 @@ picture {
 	}
 }
 
-
-// Hidden and Fixed
-.hidden {
-	display: none;
-}
-
-.fixed {
-	@include mixins.block-spread(block, fixed);
-}
 
 
 // Arrow links
@@ -837,20 +821,20 @@ picture {
 	.thumbs {
 		position: relative;
 		flex: 1;
-	}
 
-	picture {
-		position: absolute;
-		display: none;
+		picture {
+			position: absolute;
+			display: none;
 
-		&.pic-4 {
-			z-index: 2;
-			display: block;
-		}
+			&.pic-4 {
+				z-index: 2;
+				display: block;
+			}
 
-		&.pic-5 {
-			z-index: 1;
-			display: block;
+			&.pic-5 {
+				z-index: 1;
+				display: block;
+			}
 		}
 	}
 
@@ -859,19 +843,21 @@ picture {
 	&--big {
 		@extend .style-spread;
 
-		picture {
-			display: block;
+		.thumbs {
+			picture {
+				display: block;
 
-			&.pic-1 {
-				z-index: 3;
-			}
+				&.pic-1 {
+					z-index: 3;
+				}
 
-			&.pic-2 {
-				z-index: 2;
-			}
+				&.pic-2 {
+					z-index: 2;
+				}
 
-			&.pic-3 {
-				z-index: 1;
+				&.pic-3 {
+					z-index: 1;
+				}
 			}
 		}
 	}
@@ -899,13 +885,13 @@ picture {
 
 	// Variants
 
-	.style-plain--sticky {
+	&--sticky {
 		picture {
 			transform-origin: center;
 		}
 	}
 
-	.style-plain--scroll {
+	&--scroll {
 		background-color: var(--dark-white);
 
 		.text {
@@ -929,7 +915,7 @@ picture {
 		}
 	}
 
-	.style-plain--single {
+	&--single {
 		gap: var(--padx);
 
 		@media screen and (min-width: mixins.$screen-medium) {
@@ -1339,7 +1325,7 @@ picture {
 
 	// Variants
 
-	.style-angled--individual {
+	&--individual {
 		height: auto;
 		background-color: transparent;
 		gap: calc(3 * var(--pady));
@@ -1368,13 +1354,13 @@ picture {
 		}
 	}
 
-	.style-angled--straight {
+	&--straight {
 		.thumbs picture {
 			border-radius: var(--padl);
 		}
 	}
 
-	.style-angled--auto {
+	&--auto {
 		@extend .style-angled;
 		height: auto;
 
@@ -1584,11 +1570,28 @@ picture {
 
 // Style revealing its content
 .style-reveal {
-	display: block;
 	position: relative;
+	display: block;
 	z-index: 1;
 	overflow: clip;
 	background-color: var(--yellow);
+	width: 100vw;
+	height: 100vh;
+	padding: 0 !important;
+
+	.thumbs {
+		picture {
+
+			&,
+			img {
+				width: 100vw;
+				height: 100vh;
+				object-fit: cover;
+				border-radius: 0;
+				box-shadow: none;
+			}
+		}
+	}
 }
 
 // Style staggered content

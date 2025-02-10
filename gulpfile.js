@@ -133,7 +133,7 @@ var v2 = {
 		html: ['v2/**/*.html'],
 		php: ['src/v2/**/*.php'],
 		js: ['src/v2/js/**/*.js'],
-		css: ['src/v2/css/{main,global,header,flares,nojs,dark}.scss'],
+		css: ['src/v2/css/*.scss'],
 		img: ['src/v2/img/**/*.{jpg,jpeg,png}'],
 		svg: ['src/v2/img/**/*.svg'],
 		fonts: ['src/v2/fonts/*.*'],
@@ -171,7 +171,7 @@ var v2 = {
 	},
 
 	fofcss() {
-		return gulp.src(['src/v2/css/404.scss'])
+		return gulp.src(['src/v2/css/extra/404.scss'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("404.css"))
@@ -189,7 +189,7 @@ var v2 = {
 	},
 
 	css_vertical() {
-		return gulp.src(['src/v2/css/vertical-screen.scss'])
+		return gulp.src(['src/v2/css/extra/vertical.scss'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(mode.development(sourcemaps.write('.')))
@@ -197,7 +197,7 @@ var v2 = {
 	},
 
 	css_horizontal() {
-		return gulp.src(['src/v2/css/horizontal-screen.scss'])
+		return gulp.src(['src/v2/css/extra/horizontal.scss'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(mode.development(sourcemaps.write('.')))
@@ -205,7 +205,7 @@ var v2 = {
 	},
 
 	print() {
-		return gulp.src(['src/v2/css/print.scss'])
+		return gulp.src(['src/v2/css/extra/print.scss'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("print.css"))
@@ -287,11 +287,11 @@ var v2 = {
 
 		gulp.watch(v2.path.js, { ignoreInitial: false }, v2.js)
 		gulp.watch(v2.path.css, { ignoreInitial: false }, v2.css)
-		gulp.watch(['src/v2/css/404.scss'], { ignoreInitial: false }, v2.fofcss)
+		gulp.watch(['src/v2/css/extra/404.scss'], { ignoreInitial: false }, v2.fofcss)
+		gulp.watch(['src/v2/css/extra/vertical.scss'], { ignoreInitial: false }, v2.css_vertical)
+		gulp.watch(['src/v2/css/extra/horizontal.scss'], { ignoreInitial: false }, v2.css_horizontal)
+		gulp.watch(['src/v2/css/extra/print.scss'], { ignoreInitial: false }, v2.print)
 		gulp.watch(['src/v2/css/replurk/**/*.scss'], { ignoreInitial: false }, v2.replurkcss)
-		gulp.watch(['src/v2/css/vertical-screen.scss'], { ignoreInitial: false }, v2.css_vertical)
-		gulp.watch(['src/v2/css/horizontal-screen.scss'], { ignoreInitial: false }, v2.css_horizontal)
-		gulp.watch(['src/v2/css/print.scss'], { ignoreInitial: false }, v2.print)
 		gulp.watch(['src/v2/css/cache/**/*.css'], { ignoreInitial: false }, v2.css_prefix)
 		gulp.watch(v2.path.img, { ignoreInitial: false }, v2.img)
 		gulp.watch(v2.path.svg, { ignoreInitial: false }, v2.svg)
