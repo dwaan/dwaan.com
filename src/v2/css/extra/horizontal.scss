@@ -438,7 +438,6 @@ p {
 				width: 428px;
 			}
 		}
-
 	}
 
 }
@@ -628,7 +627,7 @@ p {
 		gap: var(--padxl);
 		padding: var(--padxl);
 
-		@media (min-width: mixins.$screen-medium) {
+		@media (min-width: mixins.$screen-wide) {
 			gap: var(--padxxl);
 			padding: calc(var(--padxxl) * 2);
 		}
@@ -1275,10 +1274,38 @@ main.detail {
 main.sagara {
 	.style-column {
 		.meta {
-			width: 20vw;
+			width: auto;
 
-			@media (min-width: mixins.$screen-medium) {
-				width: 310px;
+			.style-row {
+				flex: 1;
+			}
+
+			&.color {
+				align-items: center;
+				justify-content: flex-start;
+
+				ul {
+					--size: 16px;
+
+					flex-wrap: wrap;
+					gap: calc(var(--size) * 3/5);
+
+					li {
+						width: var(--size);
+						height: var(--size);
+						list-style: var(--size);
+					}
+
+					@media screen and (min-width: mixins.$screen-medium) {
+						--size: 24px;
+					}
+
+					@media screen and (min-width: mixins.$screen-wide) {
+						--size: 32px;
+
+						flex-wrap: nowrap;
+					}
+				}
 			}
 		}
 
