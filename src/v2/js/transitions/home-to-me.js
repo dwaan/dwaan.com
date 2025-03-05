@@ -36,7 +36,6 @@ let transition_home_to_me = {
     enter: async function (data) {
         var current = data.current.container;
         var next = data.next.container;
-        var done = this.async();
 
         current.style.zIndex = 1;
         current.style.position = "fixed";
@@ -49,7 +48,7 @@ let transition_home_to_me = {
         // Animate Next view
         await animate.show(next, next.querySelectorAll(".arrow-big .arrow"));
 
-        done();
+        this.async();
     },
     after: function (data) {
         var next = data.next.container;

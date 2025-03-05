@@ -112,7 +112,6 @@ p {
 .middle {
 	gap: calc(2 * var(--pady));
 	padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
-	min-height: 100vh;
 	min-height: 100svh;
 
 	.middle {
@@ -1217,6 +1216,11 @@ section.home-v1 {
 	}
 }
 
+main.home {
+	.flares {
+		display: none;
+	}
+}
 
 // Global detail page
 main.detail {
