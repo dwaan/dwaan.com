@@ -1109,6 +1109,8 @@ var detailview = {
 		// Style - Slideshow
 		// Full and big
 		next.querySelectorAll(".style-slideshow, .style-slideshow--small").forEach(el => {
+			var screen = gsap.matchMedia();
+
 			// Add navigation
 			el.insertAdjacentHTML('beforeend', "<div class='before'></div><div class='after'></div>");
 			// Variables
@@ -1138,16 +1140,21 @@ var detailview = {
 				});
 
 				gsap.set(that.slideshowParent, {
-					height: that.offsetHeight,
+					// height: that.offsetHeight,
 					width: width
 				});
 				gsap.set(that.slideshowScroll, {
-					height: that.offsetHeight + 50,
+					// height: that.offsetHeight + 50,
 					width: that.offsetWidth
 				});
 			}
 			that.fixedSize();
 			window.addEventListener("resize", that.fixedSize);
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				gsap.set(that, {
+					marginBottom: "calc(2 * var(--padxl))"
+				});
+			});
 			// Check position
 			that.checkPos = function () {
 				var rect = this.slideshowParent.getBoundingClientRect();
@@ -1225,7 +1232,6 @@ var detailview = {
 				});
 				that.moveScroll(that.pos - 1);
 			});
-			var screen = gsap.matchMedia();
 
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				hoverEvents([that.before], _ => {
