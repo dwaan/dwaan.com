@@ -574,6 +574,8 @@ var detailview = {
 
 		// Style - Static
 		next.querySelectorAll(".style-top--static, .style-top--static-auto, .style-top--static-auto-height").forEach(el => {
+			var that = el;
+
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p, .text small")
@@ -644,9 +646,9 @@ var detailview = {
 					var pictures = el.querySelectorAll("li img");
 
 					tl.fromTo(pictures, {
-						rotation: -2.5
+						rotation: -5
 					}, {
-						rotation: 2.5,
+						rotation: 5,
 						ease: "linear",
 						duration: .45,
 						stagger: .05
@@ -655,9 +657,9 @@ var detailview = {
 					return tl;
 				}, tl => {
 					return ScrollTrigger.create({
-						trigger: el,
+						trigger: that,
 						start: "0 100%",
-						end: "100% 100%",
+						end: "100% 0",
 						scrub: reduceMotionFilter() ? 1 : 3,
 						animation: tl
 					});
