@@ -574,6 +574,8 @@ var detailview = {
 
 		// Style - Static
 		next.querySelectorAll(".style-top--static, .style-top--static-auto, .style-top--static-auto-height").forEach(el => {
+			var that = el;
+
 			// Move text
 			scroll.moveText({
 				elements: el.querySelectorAll(".text h1, .text h4, .text h2, .text h3, .text li, .text p, .text small")
@@ -644,9 +646,9 @@ var detailview = {
 					var pictures = el.querySelectorAll("li img");
 
 					tl.fromTo(pictures, {
-						rotation: -2.5
+						rotation: -5
 					}, {
-						rotation: 2.5,
+						rotation: 5,
 						ease: "linear",
 						duration: .45,
 						stagger: .05
@@ -655,9 +657,9 @@ var detailview = {
 					return tl;
 				}, tl => {
 					return ScrollTrigger.create({
-						trigger: el,
+						trigger: that,
 						start: "0 100%",
-						end: "100% 100%",
+						end: "100% 0",
 						scrub: reduceMotionFilter() ? 1 : 3,
 						animation: tl
 					});
@@ -1109,6 +1111,8 @@ var detailview = {
 		// Style - Slideshow
 		// Full and big
 		next.querySelectorAll(".style-slideshow, .style-slideshow--small").forEach(el => {
+			var screen = gsap.matchMedia();
+
 			// Add navigation
 			el.insertAdjacentHTML('beforeend', "<div class='before'></div><div class='after'></div>");
 			// Variables
@@ -1138,16 +1142,21 @@ var detailview = {
 				});
 
 				gsap.set(that.slideshowParent, {
-					height: that.offsetHeight,
+					// height: that.offsetHeight,
 					width: width
 				});
 				gsap.set(that.slideshowScroll, {
-					height: that.offsetHeight + 50,
+					// height: that.offsetHeight + 50,
 					width: that.offsetWidth
 				});
 			}
 			that.fixedSize();
 			window.addEventListener("resize", that.fixedSize);
+			screen.add("(max-aspect-ratio: 1/1)", () => {
+				gsap.set(that, {
+					marginBottom: "calc(2 * var(--padxl))"
+				});
+			});
 			// Check position
 			that.checkPos = function () {
 				var rect = this.slideshowParent.getBoundingClientRect();
@@ -1225,7 +1234,6 @@ var detailview = {
 				});
 				that.moveScroll(that.pos - 1);
 			});
-			var screen = gsap.matchMedia();
 
 			screen.add("(min-aspect-ratio: 1/1)", () => {
 				hoverEvents([that.before], _ => {

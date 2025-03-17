@@ -145,7 +145,7 @@ html {
 	.scroll-snap,
 	&.scroll-snap {
 		scroll-behavior: smooth;
-		scroll-snap-type: y mandatory;
+		scroll-snap-type: y proximity;
 	}
 }
 
@@ -428,6 +428,9 @@ picture {
 		background-color: var(--dark-white);
 	}
 
+	svg {
+		fill: var(--black);
+	}
 }
 
 .auto {
@@ -1363,46 +1366,28 @@ picture {
 	&--auto {
 		@extend .style-angled;
 		height: auto;
-
 	}
 }
 
 // Style with logo on the bottom
 .style-logo {
 
-	.text,
 	.thumbs {
-		max-width: 964px;
-	}
 
-	.text {
-		margin-top: 110px;
-		padding-right: 495px;
-	}
+		&,
+		ul {
+			display: flex;
+			width: 100%;
+		}
 
-	.thumbs ul {
-		pointer-events: none;
-		margin: -300px 0 -85px;
-		display: flex;
-		align-items: flex-end;
+		ul {
+			pointer-events: none;
+			display: flex;
+			align-items: flex-end;
 
-		li {
-			flex: 1;
-			padding-bottom: 160px;
-
-			picture {
-				box-shadow: none;
-				padding-right: var(--padl);
-			}
-
-			&:last-child {
-				padding-bottom: 0;
-				margin-right: -40px;
-
+			li {
 				picture {
-					width: 495px;
-					margin: 0;
-					padding-right: 0;
+					box-shadow: none;
 				}
 			}
 		}
@@ -1412,9 +1397,8 @@ picture {
 // Style slideshow
 .style-slideshow {
 	display: block;
-	height: 100vh;
 	justify-content: flex-start;
-	overflow: clip;
+	overflow: hidden;
 
 	%hundred-percent {
 		width: 100%;
@@ -1447,7 +1431,6 @@ picture {
 		z-index: 1;
 		overflow-y: hidden;
 		overflow-x: auto;
-		height: calc(100vh + 50px);
 		scroll-snap-type: x mandatory;
 	}
 
@@ -1796,7 +1779,7 @@ main.detail {
 
 	.color {
 		display: flex;
-		flex-flow: row;
+		gap: var(--padm);
 
 		li {
 			display: flex;
@@ -1934,10 +1917,6 @@ main.home {
 
 	.middle {
 		background-color: var(--white);
-
-		svg {
-			fill: var(--black);
-		}
 	}
 }
 

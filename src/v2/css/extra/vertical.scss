@@ -163,7 +163,7 @@ p {
 	padding: calc(2 * var(--padxl)) var(--padxl);
 
 	@media screen and (min-height: mixins.$screen-small) {
-		padding: calc(4 * var(--pady)) calc(2 * var(--padx)) calc(2 * var(--pady));
+		padding: calc(4 * var(--pady)) calc(2 * var(--padx));
 	}
 }
 
@@ -709,7 +709,7 @@ section.home-v1 {
 		.ss {
 			.grid {
 				column-gap: var(--padl);
-				row-gap: var(--padl);
+				row-gap: var(--padxxl);
 				grid-template-columns: repeat(3, 40vw);
 				grid-template-rows: repeat(4, 24vw);
 			}
@@ -762,8 +762,7 @@ section.home-v1 {
 
 // Style text on top without image
 .style-trunc {
-	padding: calc(2 * var(--padxl)) calc(2 * var(--padl)); // bottom 0
-	margin-bottom: calc(-1 * var(--padxl));
+	padding: calc(2 * var(--padxl)) calc(2 * var(--padl)) 0;
 	min-height: auto;
 
 	.wrap {
@@ -784,7 +783,8 @@ section.home-v1 {
 		}
 
 		>.meta {
-			margin-left: var(--padm);
+			display: block;
+			margin-top: var(--padm);
 		}
 
 	}
@@ -935,6 +935,28 @@ section.home-v1 {
 }
 
 // Style with logo on the bottom
+.style-logo {
+	.thumbs {
+		ul {
+			display: grid;
+			gap: var(--padl);
+
+			li {
+				&:last-child {
+					grid-column: 1 / span 2;
+					padding-bottom: 0;
+					margin-right: -40px;
+
+					picture {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Style with logo on the bottom
 .style-bottom-logo {
 	.text {
 		max-width: 400px;
@@ -971,22 +993,12 @@ section.home-v1 {
 // Style slideshow
 .style-slideshow {
 	padding: 0;
-
-	&,
-	.thumbs,
-	ul li {
-		min-height: initial;
-		height: auto;
-	}
-
-	ul {
-		height: 100%; // !important;
-	}
+	min-height: auto;
+	height: auto;
 
 	.thumbs {
-		padding: calc(2.5 * var(--padxl)) 0 calc((2 * var(--padxl)) + 50px);
+		padding: calc(2 * var(--padxl)) 0 calc((2 * var(--padxl)) + 50px);
 		margin-bottom: -50px;
-		height: 100%; // !important;
 	}
 
 	.before,
@@ -1242,6 +1254,8 @@ main.detail {
 	}
 
 	.color {
+		flex-flow: column;
+
 		ul {
 			gap: var(--padx);
 			flex-flow: row nowrap;
@@ -1650,6 +1664,18 @@ main.musiku {
 					width: 30vw;
 				}
 			}
+		}
+	}
+}
+
+// Tiket apa saja
+main.tas {
+	.style-top--text {
+		height: auto;
+		min-height: auto;
+
+		.text {
+			max-width: initial;
 		}
 	}
 }

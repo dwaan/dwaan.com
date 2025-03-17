@@ -870,6 +870,38 @@ p {
 	}
 }
 
+// Style with logo on the bottom
+.style-logo {
+
+	.text,
+	.thumbs {
+		max-width: 964px;
+	}
+
+	.text {
+		margin-top: 110px;
+		padding-right: 495px;
+	}
+
+	.thumbs {
+		ul {
+			gap: var(--padxl);
+			margin: -300px 0 -85px;
+
+			li {
+				padding-bottom: 160px;
+
+				&:last-child {
+					padding-bottom: 0;
+
+					picture {
+						width: 495px;
+					}
+				}
+			}
+		}
+	}
+}
 
 // Style truncate
 .style-trunc {
@@ -936,7 +968,12 @@ p {
 
 // Style slideshow
 .style-slideshow {
+	height: 100vh;
 	padding: 0;
+
+	.thumbs {
+		height: calc(100vh + 50px);
+	}
 
 	// Variants
 
@@ -1237,6 +1274,8 @@ main.detail {
 	}
 
 	.color {
+		flex-flow: row;
+
 		ul {
 			gap: calc(var(--padx) / 2);
 			flex-flow: row nowrap;
