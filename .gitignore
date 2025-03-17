@@ -5,6 +5,8 @@ src/v2/css/cache/
 v2/js/*.bundle.js
 v2/js/*.map
 v2/css/*.map
+v2/css/*.bundle.*.LICENSE.*
 v1/js/*.bundle.js
 v1/js/*.map
 v1/css/*.map
+v1/css/*.bundle.*.LICENSE.*
