@@ -1,7 +1,7 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { _q, _qAll, reduceMotionFilter } from '../helpers/helper.js'
+import { _q, _qAll, addClass, reduceMotionFilter } from '../helpers/helper.js'
 
 var replurk = {
 	replurk: false,

@@ -275,6 +275,7 @@ var v2 = {
 			hostname: "0.0.0.0",
 			port: sitePort,
 			base: "v2/",
+			router: "../router.php",
 			keepalive: true,
 			stdio: "ignore",
 			debug: false
