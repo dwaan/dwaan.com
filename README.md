@@ -6,18 +6,16 @@ Repository for dwaan.com website
 
 Information regarding directories structure
 
-- **v1/** : The 2019 version
-- **src/** : Where I put all the HTML files
-- **css/src/** : Where I put all the source code of the Stylesheet
-- **js/src/** : Where I put all the source code of the JavaScript
-- **fonts/** : Where I put all the webfonts file
+- **src/v1/** : Older version
+- **src/v2/** : Newer version
 
 ## How to run
 
 1. Install node.js and npm.
 2. Do **npm update** in this folder.
-3. Run **gulp** to start the server and automatic source code compressing process.
-4. Open **http://localhost:3000/dwaan/** in your browser. This repo use browsersync for development, so you can sync page scroll between browsers.
+3. Run **npm run "v2 Test"** to start testing server and ouput files with mapping for testing.
+4. Run **npm run "v2 Build"** to start testing server with optimized output files for production.
+5. Open **http://localhost:3000/** in your browser. This repo use browsersync for development, so you can sync page scroll between browsers.
 
 ## Side notes
 
