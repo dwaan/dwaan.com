@@ -98,7 +98,7 @@ var v1 = {
 			.pipe(browserSync.stream())
 	},
 
-	run() {
+	async run() {
 		connect.server({
 			hostname: "0.0.0.0",
 			port: sitePort,
@@ -125,6 +125,16 @@ var v1 = {
 			connect.closeServer()
 			process.exit(0)
 		})
+	},
+
+	async build() {
+		v1.js()
+		v1.css()
+		v1.img()
+		v1.svg()
+		v1.fonts()
+		v1.resources()
+		v1.php()
 	}
 }
 
@@ -268,7 +278,7 @@ var v2 = {
 			.pipe(gulp.dest('v2/fonts/'))
 	},
 
-	run() {
+	async run() {
 		liquid()
 
 		connect.server({
@@ -305,6 +315,23 @@ var v2 = {
 			connect.closeServer()
 			process.exit(0)
 		})
+	},
+
+	async build() {
+		await elev.write()
+		v2.js()
+		v2.css()
+		v2.fofcss()
+		v2.css_vertical()
+		v2.css_horizontal()
+		v2.print()
+		v2.replurkcss()
+		v2.css_prefix()
+		v2.img()
+		v2.svg()
+		v2.fonts()
+		v2.resources()
+		v2.php()
 	}
 }
 
@@ -315,16 +342,18 @@ const v2clean = () => deleteAsync(['v2'])
 // Version 1
 const v1cleanrun = gulp.series(v1clean, v2.img, v2.svg, v1.run)
 const v1image = gulp.series(v1.img, v1.svg)
+const v1build = gulp.series(v1.build)
 const v1run = gulp.series(v1.run)
 
 // Version 2
 const v2cleanrun = gulp.series(v2clean, v2.img, v2.svg, v2.run)
 const v2image = gulp.series(v2.img, v2.svg)
+const v2build = gulp.series(v2.build)
 const v2run = gulp.series(v2.run)
 
 // Export all
 
-export { v1cleanrun, v1clean, v1image, v1run, v2clean, v2cleanrun, v2image, v2run }
+export { v1cleanrun, v1clean, v1image, v1run, v1build, v2clean, v2cleanrun, v2image, v2run, v2build }
 
 // Default run version 2
 export default v2run
