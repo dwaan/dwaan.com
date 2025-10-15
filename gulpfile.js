@@ -73,6 +73,7 @@ var v1 = {
 	},
 
 	img() {
+		console.log("Exporting images, this will takes awhile...")
 		return gulp.src(['src/v1/img/*.jpg', 'src/v1/img/*.png', 'src/v1/img/**/*.jpg', 'src/v1/img/**/*.png'], { encoding: false })
 			.pipe(webp())
 			.pipe(gulp.dest('v1/img/'))

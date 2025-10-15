@@ -41,7 +41,11 @@ namespace: home
         </h2>
         {% else %}
         <a href="{{ item.url }}" aria-label="{{ item.data.title }}">
-            {% if item.data.icon %}
+            
+            {% if item.data.iconSpecial %}
+            {% assign icon = item.data.iconSpecial | split: ', ' %}
+            <img src="/img/{{ icon[0] }}.svg" width="{{ icon[1] }}" height="{{ icon[2] }}" class="logo {{ item.data.qr }}" alt="{{ item.data.iconLabel }}" aria-label="{{ item.data.iconLabel }}" />
+            {% elsif item.data.icon %}
             {% assign icon = item.data.icon | split: ', ' %}
             <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ item.data.qr }}" aria-label="{{ item.data.iconLabel }}">
                 <use href="/img/logo.svg#{{ icon[0] }}"></use>

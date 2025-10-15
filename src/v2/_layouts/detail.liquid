@@ -4,6 +4,7 @@ tags: works
 
 # Mandantory/Optional parameters:
 # icon
+# iconSpecial
 # iconVertical
 # iconHorizontal
 # iconTitle
@@ -22,7 +23,10 @@ tags: works
         <h2 class="{{ qr }}title">{{ iconTitle }}</h2>
         {% else %}
         <span>
-            {% if icon %}
+            {% if iconSpecial %}
+            {% assign icon = iconSpecial | split: ", " %}
+            <img src="/img/{{ icon[0] }}.svg" width="{{ icon[1] }}" height="{{ icon[2] }}" class="logo {{ item.data.qr }}" alt="{{ item.data.iconLabel }}" aria-label="{{ item.data.iconLabel }}" />
+            {% elsif icon %}
             {% assign icon = icon | split: ", " %}
             <svg width="{{ icon[1] }}" height="{{ icon[2] }}" viewBox="0 0 {{ icon[3] }}" class="logo {{ qr }}" aria-label="{{ iconLabel }}">
                 <use href="/img/logo.svg#{{ icon[0] }}"></use>
