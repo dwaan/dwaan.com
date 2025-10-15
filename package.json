@@ -10,10 +10,12 @@
     "v1 Test": "gulp v1run --development",
     "v1 Image": "gulp v1image",
     "v1 Build": "gulp v1run --production",
+    "v1 Build Only": "gulp v1build --production",
     "v1 Clean Build": "gulp v1cleanrun",
     "v2 Test": "gulp v2run --development",
     "v2 Image": "gulp v2image",
     "v2 Build": "gulp v2run --production",
+    "v2 Build Only": "gulp v2build --production",
     "v2 Clean Build": "gulp v2cleanrun --production"
   },
   "repository": {
