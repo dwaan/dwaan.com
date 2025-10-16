@@ -34,7 +34,8 @@ html {
 
 
 // Default style
-h1 {
+h1,
+.h1 {
 	font-size: 3rem;
 
 	@media screen and (min-width: mixins.$screen-medium) {
@@ -147,7 +148,8 @@ p {
 		max-width: initial;
 	}
 
-	h1 {
+	h1,
+	.h1 {
 		margin: 0 var(--padl);
 
 		@media (max-width: mixins.$screen-wide) {

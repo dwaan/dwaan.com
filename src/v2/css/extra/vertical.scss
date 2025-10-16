@@ -21,7 +21,8 @@ html {
 }
 
 // Default style
-h1 {
+h1,
+.h1 {
 	font-size: 3.25rem;
 	line-height: 90%;
 
@@ -253,7 +254,8 @@ section.home-v1 {
 		max-width: 550px;
 	}
 
-	h1 {
+	h1,
+	.h1 {
 		font-size: 3.5rem;
 		text-align: center;
 		margin: 0;

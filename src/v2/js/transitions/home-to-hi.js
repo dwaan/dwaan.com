@@ -90,7 +90,7 @@ let transition_home_to_hi = {
             });
             // Show next elements
             next.querySelector(".footer").style.opacity = 1;
-            gsap.fromTo(next.querySelectorAll(".main-text h1 > *"), {
+            gsap.fromTo(next.querySelectorAll(".main-text h1 > *, .main-text .h1 > *"), {
                 x: -100,
                 opacity: 0
             }, {
