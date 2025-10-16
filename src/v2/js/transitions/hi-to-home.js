@@ -56,7 +56,7 @@ let transition_hi_to_home = {
 
         // For vertical screen, just fade in.
         if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
-            tl.fromTo(current.querySelectorAll(".main-text h1.text > *"), {
+            tl.fromTo(current.querySelectorAll(".main-text h1.text > *, .main-text .h1.text > *"), {
                 x: 0,
                 opacity: 1
             }, {
@@ -66,7 +66,7 @@ let transition_hi_to_home = {
                 stagger: length / 10,
                 ease: "power3.in"
             }, 0);
-        } else tl.fromTo(current.querySelector(".main-text h1.text"), from, to, 0);
+        } else tl.fromTo(current.querySelector(".main-text h1.text, .main-text .h1.text"), from, to, 0);
 
         // Show next container
         tl.set(current, {

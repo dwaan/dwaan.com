@@ -634,13 +634,15 @@ picture {
 	display: flex;
 	flex-flow: column;
 
-	h1 {
+	h1,
+	.h1 {
 		@include mixins.typography(4.75rem, false, 85%, false, var(--black));
+		font-weight: 800;
 		padding: 0 !important;
 		max-width: 720px;
 
 		@media (min-width: mixins.$screen-wide) {
-			@include mixins.typography(5.75rem, false, 80%, false, var(--black));
+			@include mixins.typography(5.75rem, false, 85%, false, var(--black));
 		}
 
 		&.hidden {
@@ -2441,7 +2443,9 @@ main.me {
 
 // Say Hi page
 main.hi {
-	h1 {
+
+	h1,
+	.h1 {
 
 		&,
 		a,
@@ -2491,10 +2495,12 @@ main.hi {
 	.main-text {
 		z-index: 2;
 
-		h1 {
+		h1,
+		.h1 {
 			margin: 0;
 			letter-spacing: -0.06em;
 			max-width: initial;
+			opacity: 1;
 
 			@media (min-width: mixins.$screen-ultrawide) {
 				& {
@@ -2510,6 +2516,8 @@ main.hi {
 
 	// Hover animation
 	a {
+		text-decoration: none;
+
 		span {
 			position: relative;
 			display: block;
@@ -2527,12 +2535,15 @@ main.hi {
 	}
 
 	.social:hover span:first-child,
-	h1:hover .social span:nth-child(2) {
+	h1:hover .social span:nth-child(2),
+	.h1:hover .social span:nth-child(2) {
 		margin-left: var(--padl);
 	}
 
 	h1 .email:hover+.social span:nth-child(2),
-	h1 .social:hover span:nth-child(2) {
+	h1 .social:hover span:nth-child(2),
+	.h1 .email:hover+.social span:nth-child(2),
+	.h1 .social:hover span:nth-child(2) {
 		margin-left: 0;
 	}
 
@@ -2542,14 +2553,17 @@ main.hi {
 
 	.email:hover small,
 	.social:hover span:first-child small,
-	h1:hover .social span:nth-child(2) small {
+	h1:hover .social span:nth-child(2) small,
+	.h1:hover .social span:nth-child(2) small {
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
 		transition: opacity .16s ease-out, transform .16s ease-out;
 	}
 
 	h1 .social:hover span:nth-child(2) small,
-	h1 .email:hover+.social span:nth-child(2) small {
+	h1 .email:hover+.social span:nth-child(2) small,
+	.h1 .social:hover span:nth-child(2) small,
+	.h1 .email:hover+.social span:nth-child(2) small {
 		transform: translate3d(0, 25%, 0);
 		opacity: 0;
 	}
