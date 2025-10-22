@@ -290,7 +290,7 @@ var meview = {
 		// Now, Webdesigner, and Sayhi sections
 		next.querySelectorAll("#now, #webdesigner, #sayhi").forEach(element => {
 			var isSayHi = element.getAttribute('id') == "sayhi";
-			var el = isSayHi ? element.querySelectorAll('.text > div > *, .text > p') : element.querySelectorAll('.text > *');
+			var el = isSayHi ? element.querySelectorAll('.text > div > *') : element.querySelectorAll('.text > *');
 			var animation = function (horizontal = true) {
 				isSayHi = horizontal ? isSayHi : false;
 

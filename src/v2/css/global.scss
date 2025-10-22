@@ -499,7 +499,7 @@ picture {
 	}
 }
 
-// 3nd .middle
+// 3rd .middle
 
 .spring {
 	@extend %inline-block;
@@ -1069,7 +1069,7 @@ picture {
 	&--static-auto {
 		@extend %style-top;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
 
 		small {
 			letter-spacing: .05rem;
@@ -1116,6 +1116,7 @@ picture {
 
 	&--static-auto-height {
 		@extend .style-top--static-auto;
+		justify-content: center;
 		height: auto;
 
 		.logos {
@@ -2084,7 +2085,7 @@ main.me {
 		z-index: 1;
 
 		p {
-			margin-bottom: 0;
+			margin: var(--padm) 0 0;
 		}
 	}
 
