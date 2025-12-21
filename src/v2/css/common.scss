@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+@use 'mixins';
+@use 'variables';
+@use 'fonts';
+
+%transition {
+    transition: color .5s ease;
+}
+
+%gray-color {
+    color: var(--black-gray-light);
+}
+
+%zero-margin-padding-will-change {
+    @include mixins.zero-margin-padding;
+    will-change: opacity, transform;
+}
+
+%bold-child-initial-transiton {
+    font-weight: 700;
+
+    a,
+    span,
+    strong {
+        transition: initial;
+    }
+
+    strong {
+        text-decoration: underline;
+    }
+}
+
+// Giving persitent size for all tags
+* {
+    box-sizing: border-box;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: fonts.$fontname, system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    background-color: var(--white);
+}
+
+html {
+    overflow-x: clip;
+    overflow-y: auto;
+
+    .snap {
+        scroll-snap-align: center;
+
+        &-start {
+            scroll-snap-align: start;
+        }
+
+        &-end {
+            scroll-snap-align: end;
+        }
+    }
+
+    // Use this with ScrollToPlugin in scrollto.js
+    .scroll-snap,
+    &.scroll-snap {
+        // scroll-behavior: smooth;
+        // scroll-snap-type: y proximity;
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+    }
+}
+
+body {
+    position: relative;
+}
+
+main {
+    display: block;
+    position: relative;
+    opacity: 0;
+    overflow: clip;
+
+    >hr {
+        display: none;
+    }
+}
+
+h1 {
+    @extend %zero-margin-padding-will-change;
+    @extend %transition;
+    @extend %bold-child-initial-transiton;
+    margin: 0 0 var(--padl) 0;
+    @include mixins.typography(5rem, false, 80%, -0.06em);
+}
+
+h2 {
+    @extend %zero-margin-padding-will-change;
+    @extend %transition;
+    @extend %bold-child-initial-transiton;
+    @extend %gray-color;
+    margin: 0 0 var(--padl);
+    @include mixins.typography(3.2rem, false, 90%, -0.02em);
+}
+
+h3 {
+    @extend %zero-margin-padding-will-change;
+    @extend %transition;
+    @extend %bold-child-initial-transiton;
+    @extend %gray-color;
+    margin: 0 0 var(--padm);
+    @include mixins.typography(2rem, false, 100%);
+}
+
+h4 {
+    @extend %zero-margin-padding-will-change;
+    @extend %transition;
+    @extend %bold-child-initial-transiton;
+    @extend %gray-color;
+    margin: 0 0 var(--padm);
+    @include mixins.typography(1.4rem, false, 110%);
+}
+
+p {
+    @extend %zero-margin-padding-will-change;
+    @extend %transition;
+    @extend %gray-color;
+    @include mixins.typography(1rem, 500, 175%, .02em);
+    opacity: .8;
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+span {
+    @extend %transition;
+}
+
+li {
+    @extend %transition;
+}
+
+a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+small {
+    display: inline-block;
+    @include mixins.typography(.8rem, inherit, 12px, .14em);
+}
+
+// Basic HR styling
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--gray-light);
+    margin: 1em 0;
+    padding: 0;
+
+    &.horizontal {
+        height: var(--padxxl);
+        border-top: 0;
+        border-left: 1px solid var(--gray-light);
+    }
+}
+
+//  Remove the gap between audio, canvas, iframes,
+//  images, videos and the bottom of their containers:
+//  https://github.com/h5bp/html5-boilerplate/issues/440
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+// Remove default fieldset styles
+fieldset {
+    border: 0;
+    @include mixins.zero-margin-padding;
+}
+
+// Allow only vertical resizing of textareas.
+textarea {
+    resize: vertical;
+}
+
+// make img inside picture tag follow picture size
+img {
+    // Do not change to non inline
+    // or it will messed up html2canvas rendering
+    display: inline-block;
+
+    &.rounded {
+        border-radius: var(--pads);
+    }
+}
+
+picture {
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+
+// Screen width is too small to be usable
+@media (max-width: 300px) {
+
+    header,
+    main,
+    #barba-wrapper {
+        display: none;
+    }
+}
+
+// Screen height is too thin to be usable
+@media (min-aspect-ratio: 3/1) {
+
+    header,
+    main,
+    #barba-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: clip;
+        display: none !important;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: clip;
+    }
+}

@@ -191,45 +191,52 @@ class statistics {
 		var html = ""
 		var max = users.length >= 5 ? 5 : users.length
 		var length = reduceMotionFilter(1)
+		var userToDraw = []
+		var index = 0
 
 		this.drawHTML(`${style} userlist ${id}`, title, "<span class='info'>Downloading user data</span>")
-		for (var index = 0; index < max; index++) {
+		while (userToDraw.length < max && users[index]) {
 			let user = users[index]
 			let friend = await this.friends.find(user.id)
-			if (friend) {
-				var plurker = new element(user.id, friend, "", plurker => {
-					plurker.avatar = new span()
-						.class("avatar")
-						.html(`<img src="${this.friends.getAvatar(plurker.user.id)}" />`)
-					if (number) {
-						var medal = `sports-medal`
-						if (index == 0) medal = `1st-place-medal`
-						else if (index == 1) medal = `2nd-place-medal`
-						else if (index == 2) medal = `3rd-place-medal`
 
-						plurker.badge = new span()
-							.class("medal")
-							.html(icons.draw(medal))
-						plurker.avatar.el.appendChild(plurker.badge.el)
-					}
-					plurker.name = new span()
-						.class("name")
-						.html(`${plurker.user.display_name}`)
-					plurker.counts = new span()
-						.class("count")
-						.html(`${user.count}`)
-
-					plurker.el.appendChild(plurker.avatar.el)
-					plurker.el.appendChild(plurker.name.el)
-					plurker.el.appendChild(plurker.counts.el)
-					plurker.el.setAttribute("href", `https://plurk.com/${plurker.user.nick_name}`)
-				})
-				plurker.create()
-				html += plurker.el.outerHTML
-			} else {
-				max++
+			if (friend && !api.ignoreduser(friend.nick_name)) {
+				friend.count = user.count
+				userToDraw.push(friend)
 			}
+			index++
 		}
+
+		userToDraw.forEach(user => {
+			var plurker = new element(user.id, user, "", plurker => {
+				plurker.avatar = new span()
+					.class("avatar")
+					.html(`<img src="${this.friends.getAvatar(plurker.user.id)}" />`)
+				if (number) {
+					var medal = `sports-medal`
+					if (index == 0) medal = `1st-place-medal`
+					else if (index == 1) medal = `2nd-place-medal`
+					else if (index == 2) medal = `3rd-place-medal`
+
+					plurker.badge = new span()
+						.class("medal")
+						.html(icons.draw(medal))
+					plurker.avatar.el.appendChild(plurker.badge.el)
+				}
+				plurker.name = new span()
+					.class("name")
+					.html(`${plurker.user.display_name}`)
+				plurker.counts = new span()
+					.class("count")
+					.html(`${user.count}`)
+
+				plurker.el.appendChild(plurker.avatar.el)
+				plurker.el.appendChild(plurker.name.el)
+				plurker.el.appendChild(plurker.counts.el)
+				plurker.el.setAttribute("href", `https://plurk.com/${plurker.user.nick_name}`)
+			})
+			plurker.create()
+			html += plurker.el.outerHTML
+		})
 		this.el.querySelector(`.${id} .html`).innerHTML = html
 
 		// Stagger animation
@@ -281,6 +288,8 @@ class statistics {
 				})
 			})
 		}
+
+		ScrollTrigger.refresh()
 	}
 
 	async drawAll(plurks) {
@@ -400,10 +409,15 @@ class statistics {
 			var content = el.querySelector(".content")
 
 			// Make colorful background
-			gsap.set(content, {
-				background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`,
-				boxShadow: `0 4px 20px $${this.me.name_color}`
-			})
+			if (randomcolors.length >= 2) {
+				gsap.set(content, {
+					background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`
+				})
+			} else {
+				gsap.set(content, {
+					background: `${randomcolors[0]}`
+				})
+			}
 
 			// Make element appears
 			gsap.to(content, {

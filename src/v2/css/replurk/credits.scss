@@ -4,7 +4,7 @@
 
 /* Credits style */
 .plurk #credits {
-	background-color: var(--yellow);
+	// background-color: var(--yellow);
 	opacity: 0;
 	position: fixed;
 	z-index: 1;
@@ -134,7 +134,8 @@
 			}
 
 			&:hover {
-				background-color: var(--white);
+				color: var(--black);
+				background-color: var(--black-50);
 			}
 
 			i {

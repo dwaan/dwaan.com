@@ -65,14 +65,19 @@ let header = {
     },
 
     moonsun: () => {
-        var el = _q('.lamp');
         var length = 1;
+        var el = _q('.lamp');
+        if (el) {
+            var ray = el.querySelector("#ray");
 
-        gsap.set(el.querySelector("#ray"), { transformOrigin: "center center" })
-        hoverEvents([el],
-            () => gsap.to(el.querySelector("#ray"), { rotation: 90, scale: 1.1, duration: length, ease: "elastic.out" }),
-            () => gsap.to(el.querySelector("#ray"), { rotation: 0, scale: 1, duration: length, ease: "elastic.out" })
-        );
+            if (ray) {
+                gsap.set(ray, { transformOrigin: "center center" })
+                hoverEvents([el],
+                    () => gsap.to(ray, { rotation: 90, scale: 1.1, duration: length, ease: "elastic.out" }),
+                    () => gsap.to(ray, { rotation: 0, scale: 1, duration: length, ease: "elastic.out" })
+                );
+            }
+        }
     },
 
     // Dark mode switcher event

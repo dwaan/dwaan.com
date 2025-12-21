@@ -7,6 +7,13 @@
 
 	/* Replurk footer */
 	.footer {
+		position: fixed;
+		z-index: 666;
+		top: initial;
+		left: var(--padx);
+		right: var(--padx);
+		bottom: var(--pady);
+		display: flex;
 		align-items: center;
 
 		div {
@@ -35,10 +42,12 @@
 
 	#logout {
 		height: auto;
-		background-color: var(--yellow);
+		background-color: var(--black-15);
 		color: var(--black);
 		padding: var(--pads) var(--padm);
-		border-radius: 8px;
+		border-radius: 20px;
+		backdrop-filter: blur(32px) saturate(1.2) brightness(1.2);
+		box-shadow: 0 8px 32px #0007, inset .5px 1px 2px #fff4;
 		pointer-events: auto;
 		cursor: pointer;
 		transition: background .25s ease;

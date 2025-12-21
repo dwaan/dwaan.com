@@ -394,12 +394,10 @@ class replurk {
 		var extra = ""
 		var length = reduceMotionFilter(1)
 
-		// gsap.set(next.querySelector("#background"), {
-		// 	backgroundImage: `url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`
-		// })
-		// gsap.set(next.querySelector("#statistics"), {
-		// 	backgroundColor: `#${plurker.name_color}`
-		// })
+		gsap.set(next.querySelectorAll("#background"), {
+			backgroundImage: `url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`,
+			backgroundColor: `#${plurker.name_color}`
+		});
 
 		// plurks_count
 		var days = (plurker.anniversary.years * 365) + plurker.anniversary.days
@@ -410,7 +408,7 @@ class replurk {
 		if (this.year == 2021) text = `If ${this.year} have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories.`
 		else if (this.year == 2022) text = `It's 2020 v2, and this is your year end RePlurk recap. Hopefully it will bring lots of good memories.`
 		else if (this.year == 2024) text = `With crazy things happening around the world right now, hopefully RePlurk will bring back the good memories.`
-		next.querySelector("#hello .text").innerHTML = `<h1>Hello ${plurker.display_name}</h1><p style="max-width: 500px; margin: 0 auto">${text}</p>`
+		next.querySelector("#hello .text").innerHTML = `<h1>Henlo ${plurker.display_name}</h1><p style="max-width: 500px; margin: 0 auto">${text}</p>`
 
 		// Draw statistic
 		this.statistics.title('All Time', 'alltime')
@@ -588,7 +586,7 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		this.statistics.title('Dig Deeper', 'digdeeper')
+		this.statistics.title('Deeper Statistic', 'digdeeper')
 		this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>")
 
 		// Load each post responses and calculate statistics
@@ -684,7 +682,7 @@ class replurk {
 		this.statistics.title('RePlurk Badges', 'replurkbadges')
 		this.statistics.body(`\
 			<h4>What are RePlurk Badges?</h4>\
-			<p>They’re badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\
+			<p>RePlurk Badges are badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\
 			<ol>\
 				<li>Creating a ton of polls (Polling ${gender})</li>\
 				<li>Getting a bunch of coins (Plurk Coins Billionaire)</li>\

@@ -55,6 +55,27 @@ class scrolls {
 			animation: tl,
 			scrub: .5
 		}))
+
+		scroll.push(tl => {
+			tl.fromTo(this.next.querySelector("#background"), {
+				opacity: 1,
+				scale: 1
+			}, {
+				opacity: 0,
+				scale: 1.75,
+				ease: "power3.inOut"
+			}, 0)
+
+			return tl
+		}, tl => {
+			return ScrollTrigger.create({
+				trigger: this.next.querySelector("#hello"),
+				start: "100% 75%",
+				end: "100% 75%",
+				toggleActions: "play none none reverse",
+				animation: tl
+			})
+		})
 	}
 
 	permisions() {

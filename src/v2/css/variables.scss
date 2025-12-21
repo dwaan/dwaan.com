@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+@use 'mixins';
+
+// Variables
+:root {
+    --pic-w: 181px;
+    --pic-h: 309px;
+    --pic-m: 10px;
+
+    --padx: 20px;
+    --pady: 17.5px;
+
+    --pads: 7.5px;
+    --padm: 15px;
+    --padl: 30px;
+    --padxl: 40px;
+    --padxxl: 60px;
+
+    --animation: background-color .5s ease, color .25s ease;
+
+    // Color Schemes
+
+    --black: #333;
+    --white: #fff;
+    --dark-white: #E8EAEB;
+    --yellow: #FFD700;
+    --black-75: rgba(0, 0, 0, 0.5);
+    --black-50: rgba(0, 0, 0, 0.25);
+    --black-25: rgba(0, 0, 0, 0.15);
+    --black-15: rgba(0, 0, 0, 0.05);
+    --black-gray: #111;
+    --black-gray-light: #131313;
+    --gray-light: #C4C4C4;
+    --red: #FF0F1E;
+    --lime: #60e670;
+
+    // Animation
+    --ease-smooth: cubic-bezier(.28, .01, .24, 1);
+
+    // Media screen
+
+    @media screen and (min-width: mixins.$screen-small) {
+        --padx: 30px;
+        --pady: 25px;
+
+        --pads: 1vh;
+        --padm: 2vh;
+        --padl: 6vh;
+        --padxl: 12.5vh;
+        --padxxl: 17.5vh;
+    }
+
+    @media screen and (min-width: mixins.$screen-medium) {
+        --pic-w: 271.5px;
+        --pic-h: 463.5px;
+        --pic-m: 20px;
+
+        --padx: 40px;
+        --pady: 35px;
+
+        --pads: 10px;
+        --padm: 20px;
+        --padl: 40px;
+        --padxl: 65px;
+        --padxxl: 100px;
+    }
+}
+
+@mixin root {
+    --black: #aaa;
+    --white: #090909;
+    --dark-white: #111;
+    --yellow: #705f02;
+    --black-75: rgba(255, 255, 255, 0.50);
+    --black-50: rgba(255, 255, 255, 0.25);
+    --black-25: rgba(255, 255, 255, 0.15);
+    --black-15: rgba(255, 255, 255, 0.05);
+    --black-gray: #bbb;
+    --black-gray-light: #aaa;
+    --gray-light: #333;
+    --red: #B4352C;
+    --lime: #0d4f03;
+}
+
+.dark {
+    &:root {
+        @include root();
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .no-js {
+        @include root();
+    }
+}

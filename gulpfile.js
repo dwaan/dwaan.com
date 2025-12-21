@@ -23,7 +23,7 @@ const siteUrl = `http://localhost:${sitePort}/`
 var liquid = async () => {
 	await elev.write()
 	elev.watch()
-	elev.serve(sitePort)
+	elev.serve(sitePort + 1)
 }
 
 var v1 = {
@@ -253,7 +253,7 @@ var v2 = {
 					dirname: path.dirname,
 					basename: path.basename.toLowerCase().replace(" ", "-"),
 					extname: path.extname
-				  }
+				}
 			}))
 			.pipe(webp())
 			.pipe(gulp.dest('v2/img/'))

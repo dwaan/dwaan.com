@@ -7,6 +7,7 @@
 	z-index: 2;
 	padding: calc(4.5 * var(--pady)) var(--padx) calc(2 * var(--pady));
 	height: auto;
+	max-width: 100vw;
 	min-height: 100vh;
 
 	@media (min-width: mixins.$screen-small) {
@@ -133,6 +134,7 @@
 	}
 
 	a {
+		display: inline-flex;
 		flex: 1;
 		color: var(--white);
 		margin-top: var(--pads);

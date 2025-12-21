@@ -18,7 +18,7 @@ var loader = {
 		})
 	},
 	clean: function () {
-		this.el.innerHTML = "";
+		if (this.el) this.el.innerHTML = "";
 	},
 	init: function (simplestyle) {
 		if (this.disableLoading) return;

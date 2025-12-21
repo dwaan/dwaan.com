@@ -1,13 +1,16 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
-@use './credits.scss';
-@use './permission.scss';
-@use './hello.scss';
-@use './footer.scss';
-@use './backtotop.scss';
-@use './column.scss';
-@use './order.scss';
+@use '../mixins';
+@use '../common';
+@use '../support';
+@use '../variables';
+@use 'credits';
+@use 'permission';
+@use 'hello';
+@use 'footer';
+@use 'backtotop';
+@use 'column';
+@use 'order';
 
 :root {
 	--box: 50vmax;
@@ -35,6 +38,12 @@
 
 // Plurk Statistics
 .plurk {
+	* {
+		font-optical-sizing: auto;
+		font-weight: normal;
+		font-style: normal;
+		line-height: 140%;
+	}
 
 	sub,
 	sup {
@@ -110,10 +119,27 @@
 		position: relative;
 		z-index: 3;
 		height: initial;
-		padding: var(--pady) var(--padl);
+		// padding: var(--pady) var(--padl);
+		padding: 1px;
 		background-color: var(--white);
+		background-repeat: no-repeat;
+		background-attachment: fixed;
 		transition: background-color .5s ease;
 		scroll-snap-align: end;
+		overflow: hidden;
+	}
+
+	#background {
+		z-index: 1;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-position: center;
+		background-size: cover;
+		transition: none;
+		pointer-events: none;
 	}
 
 	// Start .statistics
@@ -134,14 +160,14 @@
 
 		i {
 			display: inline-block;
-			padding: 2px 8px;
+			padding: 2px 10px;
 			margin: 2px 0;
 			color: var(--black);
 			font-size: inherit;
 			font-style: normal;
 			white-space: nowrap;
 			background-color: var(--white);
-			border-radius: 6px;
+			border-radius: 1000px;
 			transition: background-color .5s ease;
 
 			img {
@@ -188,17 +214,20 @@
 			height: 100%;
 			padding: var(--padl);
 			background-color: var(--lime);
-			border-radius: var(--padl);
+			// backdrop-filter: blur(48px) saturate(1.5) brightness(1.2);
+			// box-shadow: 0 8px 32px #0007, inset .5px 1px 2px #fff4;
+			color: var(--black);
+			// border-radius: var(--padl);
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
 
 			@media (min-width: mixins.$screen-small) {
 				padding: calc(var(--padm) * 2);
-				border-radius: calc(var(--padm) * 2);
+				// border-radius: calc(var(--padm) * 2);
 			}
 
 			@media (min-width: mixins.$screen-abitwide) {
 				padding: var(--padl);
-				border-radius: calc(2/3 * var(--padl));
+				// border-radius: calc(4/3 * var(--padl));
 			}
 
 			&.wait {
@@ -208,7 +237,6 @@
 			p,
 			a,
 			span {
-				color: var(--white);
 				opacity: 1;
 			}
 
@@ -231,9 +259,8 @@
 			}
 
 			.big {
-				font-weight: 600;
+				font-weight: 800;
 				line-height: 100%;
-				color: var(--white);
 				display: block;
 				margin-bottom: auto;
 			}
@@ -258,19 +285,16 @@
 
 		.chart {
 			flex: 1;
-			margin-bottom: var(--padl);
 		}
 
 		.title {
 			font-size: .8rem;
 			line-height: 120%;
-			color: var(--white);
 
 			strong {
 				font-weight: 500;
 				display: block;
 				text-transform: initial;
-				color: var(--white);
 				letter-spacing: .05rem;
 				opacity: .75;
 				padding: 2px 0 0;
@@ -307,7 +331,7 @@
 			text-transform: uppercase;
 
 			svg {
-				fill: var(--white);
+				fill: var(--black);
 				transition: fill .5s ease;
 			}
 		}
@@ -387,11 +411,10 @@
 		&.users {
 			img {
 				height: 64px;
-				border-radius: 10000px;
+				border-radius: 4px;
 			}
 
 			.title {
-				color: var(--white);
 				display: inline;
 				font-size: 1rem;
 				text-transform: none;
@@ -428,29 +451,24 @@
 
 		&.replurkbadges {
 			&.description {
-				padding-top: var(--padxxl);
+				z-index: 2;
+				background-color: var(--black-15);
 
 				.body {
 					padding: var(--padl);
 					margin: 0 auto;
-					max-width: 800px;
-					background-color: var(--black-15);
-					opacity: .75;
-					border-radius: var(--padm);
+					max-width: 640px;
 				}
 
 				h4 {
 					font-size: 1.2rem;
-					line-height: 140%;
+					font-weight: 600;
 				}
 
 				p,
 				li {
 					color: var(--black);
-					font-size: .9rem;
-					line-height: 140%;
-					letter-spacing: .02em;
-					opacity: .8;
+					font-size: .8rem;
 
 					img {
 						display: inline-block;
@@ -459,19 +477,14 @@
 				}
 
 				li {
-					margin: 0 0 var(--pads);
+					margin: 0 0 calc(var(--pads) / 2);
 					margin-left: var(--padm);
 				}
 
 				ol,
 				ul {
-					columns: 1;
 					padding: 0;
 					margin: var(--pads) 0 0;
-
-					@media (min-width: 400px) {
-						columns: 2;
-					}
 				}
 			}
 		}
@@ -485,9 +498,6 @@
 		&-title,
 		&-loading i {
 			display: flex;
-			line-height: 140%;
-			font-size: .6rem;
-			letter-spacing: .1rem;
 		}
 
 		&-title {
@@ -497,6 +507,7 @@
 			align-items: baseline;
 			font-size: 2rem;
 			color: var(--black);
+			padding: 0 var(--pads);
 			padding-top: var(--padl);
 			scroll-snap-align: none;
 
@@ -509,6 +520,8 @@
 			span {
 				display: flex;
 				align-items: flex-start;
+				letter-spacing: -.1rem;
+				font-weight: 600;
 			}
 
 			.line {
@@ -685,6 +698,10 @@
 
 		.text {
 			text-align: center;
+
+			strong {
+				font-weight: 600;
+			}
 		}
 	}
 
@@ -725,7 +742,7 @@
 			}
 
 			.text {
-				line-height: 130%;
+				line-height: 100%;
 
 				img {
 					display: inline;
@@ -757,7 +774,7 @@
 
 				img {
 					display: block;
-					filter: drop-shadow(rgba(0, 0, 0, .24) 4px 4px 16px);
+					filter: drop-shadow(rgba(0, 0, 0, .1) 4px 4px 16px);
 				}
 			}
 
@@ -769,18 +786,18 @@
 		&.nobackground {
 			cursor: pointer;
 			pointer-events: none;
-			user-select: none;
 
 			.text {
 				font-size: .8rem;
 				line-height: 130%;
-				color: var(--black-50);
+				color: #3333;
 			}
 
 			.content {
 				background-image: none !important;
-				background-color: var(--black-15) !important;
-				border: 1px dashed var(--black-50);
+				background-color: transparent !important;
+				backdrop-filter: brightness(.9);
+				box-shadow: none;
 			}
 
 			.big {
@@ -814,7 +831,7 @@
 			}
 
 			strong {
-				display: block;
+				display: none;
 				text-align: center;
 				margin: 0 auto auto;
 				font-size: var(--padl);
@@ -940,7 +957,6 @@
 		}
 
 		.title {
-			color: var(--white);
 			text-transform: none;
 			font-size: 1rem;
 		}
@@ -1144,7 +1160,6 @@
 			position: relative;
 			z-index: 2;
 			text-transform: uppercase;
-			color: var(--white);
 			margin: 0 0 auto;
 		}
 
@@ -1160,7 +1175,7 @@
 				z-index: 1;
 				width: 100%;
 				height: 100%;
-				background-size: contain;
+				background-size: cover;
 
 				&::before {
 					position: absolute;
@@ -1180,7 +1195,6 @@
 				z-index: 2;
 				padding: var(--padxl) var(--padl) var(--padl);
 				margin-top: auto;
-				color: var(--white);
 				line-height: 120%;
 				background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5) 75%);
 			}
@@ -1195,6 +1209,7 @@
 
 			.text,
 			.meta {
+				color: var(--white);
 				position: relative;
 				z-index: 1;
 			}
@@ -1208,6 +1223,7 @@
 
 				img {
 					margin-right: 6px;
+					max-height: 48px;
 				}
 			}
 		}
@@ -1226,7 +1242,6 @@
 		.post {
 			margin-top: auto;
 			line-height: 150%;
-			color: var(--white);
 			font-size: .75rem;
 
 			br {
@@ -1261,17 +1276,59 @@
 			font-size: .65rem;
 			margin: 0;
 		}
+
+		img {
+			margin-right: 4px;
+			max-height: 48px;
+		}
+	}
+}
+
+.middle {
+	@include mixins.make-it-full-size;
+	z-index: 2;
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+
+	&.colored {
+		background-color: var(--dark-white);
+	}
+
+	svg {
+		fill: var(--black);
+	}
+
+	&.clip {
+		overflow: clip;
+	}
+
+	.shade {
+		position: absolute;
+		background-color: var(--black);
+		visibility: hidden;
+		opacity: 0;
+		@include mixins.positions;
 	}
 }
 
 // Vertical screen
 @media screen and (min-aspect-ratio: 1/1) {
+	.plurk {
+		.arrow-big .arrow {
+			transform: rotate(90deg) translateY(100%) !important;
+			margin-bottom: var(--padxxl);
+		}
+	}
+
 	.statistics {
 		.chart {
-			margin: var(--padm) 0;
+			margin: var(--padm) 0 var(--padxl);
 
 			@media (min-width: mixins.$screen-ultrawide) {
-				margin-bottom: var(--padxl);
+				margin-bottom: var(--padxxl);
 			}
 		}
 

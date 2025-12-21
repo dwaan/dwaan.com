@@ -26,13 +26,14 @@ let browser = {
 	},
 
 	set: function (state, duration, ease) {
-		this.get(state);
-		darkmode.setDarkMode(duration, ease);
+		// Disable because it's not working in Safari 26
+		// this.get(state);
+		// darkmode.setDarkMode(duration, ease);
 	},
 
 	reset: function () {
-		this.get();
-		darkmode.setDarkMode(1);
+		// this.get();
+		// darkmode.setDarkMode(1);
 	}
 }
 
