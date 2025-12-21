@@ -1,7 +1,6 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import api from "./api.js"
 import scroll from "../helpers/scroll.js"
 import animate from "../helpers/animate.js"
@@ -271,6 +270,7 @@ class replurk {
 
 			// Scroll animate statistics
 			this.scrolls.statistics()
+
 			// Scroll browser bar
 			this.scrolls.browserBar()
 		} else {
@@ -392,7 +392,6 @@ class replurk {
 		var plurker = this.me
 		var next = this.next
 		var extra = ""
-		var length = reduceMotionFilter(1)
 
 		gsap.set(next.querySelectorAll("#background"), {
 			backgroundImage: `url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`,
@@ -408,7 +407,11 @@ class replurk {
 		if (this.year == 2021) text = `If ${this.year} have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories.`
 		else if (this.year == 2022) text = `It's 2020 v2, and this is your year end RePlurk recap. Hopefully it will bring lots of good memories.`
 		else if (this.year == 2024) text = `With crazy things happening around the world right now, hopefully RePlurk will bring back the good memories.`
-		next.querySelector("#hello .text").innerHTML = `<h1>Henlo ${plurker.display_name}</h1><p style="max-width: 500px; margin: 0 auto">${text}</p>`
+		next.querySelector("#hello .text").innerHTML = `<h1>Henlo ${plurker.display_name}</h1><p style="max-width: 500px; margin: 0 auto">${text}</p><p class="next">&#8595;</p>`
+
+		gsap.set(next.querySelectorAll("#hello .text .next"), {
+			backgroundColor: `#${plurker.name_color}`
+		});
 
 		// Draw statistic
 		this.statistics.title('All Time', 'alltime')
@@ -428,55 +431,6 @@ class replurk {
 			this.statistics.draw('', '-', "There is no data in my timeline")
 			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now")
 		}
-
-		// Scroll animation hello section
-		scroll.push(tl => {
-			tl.fromTo(next.querySelectorAll("#hello .text, #hello .thumbs"), {
-				y: 0
-			}, {
-				y: window.innerHeight * -3 / 4,
-				ease: "linear",
-				duration: length,
-			}, 0)
-			tl.fromTo(next.querySelectorAll("#hello .bgtext sup"), {
-				y: 0,
-				x: 0,
-				rotation: 0
-			}, {
-				y: window.innerHeight * -1 / 4,
-				x: window.innerHeight * -1 / 10,
-				rotation: -10,
-				ease: "linear",
-				duration: length,
-			}, 0)
-			tl.fromTo(next.querySelectorAll("#hello .bgtext sub"), {
-				y: 0,
-				x: 0,
-				rotation: 0
-			}, {
-				y: window.innerHeight * -1 / 4,
-				x: window.innerHeight * 1 / 10,
-				rotation: 10,
-				ease: "linear",
-				duration: length,
-			}, 0)
-			tl.fromTo(next.querySelectorAll("#hello .arrow-big"), {
-				y: 0,
-				opacity: 1
-			}, {
-				y: window.innerHeight * 1 / 4,
-				opacity: 0,
-				ease: "linear",
-				duration: length / 4,
-			}, 0)
-			return tl
-		}, tl => ScrollTrigger.create({
-			trigger: next.querySelectorAll("#hello"),
-			start: "0 0",
-			end: "100% 0",
-			animation: tl,
-			scrub: true
-		}))
 	}
 	// Display statistics
 	async displayStatistics() {

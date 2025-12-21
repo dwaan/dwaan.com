@@ -9,38 +9,36 @@
 @use 'hello';
 @use 'footer';
 @use 'backtotop';
-@use 'column';
+// @use 'column';
 @use 'order';
 
 :root {
-	--box: 50vmax;
+	--pic-w: 9vh;
+	--pic-h: 16vh;
+	--pic-m: 10vh;
 
-	@media screen and (min-aspect-ratio: 1/1) {
-		--box: 40vmax;
+	--padx: 2.5vh;
+	--pady: 2.5vh;
 
-		@media (min-width: mixins.$screen-small) {
-			--box: 38.5vmax;
-		}
+	--pads: 2vh;
+	--padm: 2.5vh;
+	--padl: 4vh;
+	--padxl: 6vh;
+	--padxxl: 9vh;
 
-		@media (min-width: mixins.$screen-abitwide) {
-			--box: 30vmax;
-		}
+	--box: 50vh;
+}
 
-		@media (min-width: mixins.$screen-wide) {
-			--box: 27.5vmax;
-		}
-
-		@media (min-width: mixins.$screen-verywide) {
-			--box: 20vmax;
-		}
-	}
+body,
+html {
+	font-size: 2.5vh;
 }
 
 // Plurk Statistics
 .plurk {
 	* {
 		font-optical-sizing: auto;
-		font-weight: normal;
+		font-weight: 600;
 		font-style: normal;
 		line-height: 140%;
 	}
@@ -55,7 +53,7 @@
 	}
 
 	img {
-		border-radius: 4px;
+		border-radius: .25rem;
 	}
 
 	// Plurk - First section
@@ -114,21 +112,6 @@
 		}
 	}
 
-	// Plurk - Statistics
-	#statistics {
-		position: relative;
-		z-index: 3;
-		height: initial;
-		// padding: var(--pady) var(--padl);
-		padding: 1px;
-		background-color: var(--white);
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		transition: background-color .5s ease;
-		scroll-snap-align: end;
-		overflow: hidden;
-	}
-
 	#background {
 		z-index: 1;
 		position: fixed;
@@ -142,17 +125,41 @@
 		pointer-events: none;
 	}
 
+	// Plurk - Statistics
+	#statistics {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--padxl);
+		flex-wrap: nowrap;
+		z-index: 5;
+		height: initial;
+		padding: 0;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		transition: background-color .5s ease;
+		overflow: initial;
+	}
+
 	// Start .statistics
 	.statistics {
 		position: relative;
 		display: flex;
-		padding: calc(2.5 * var(--padl)) 0 calc(5 * var(--padl));
-		width: initial;
-		height: initial;
-		min-height: initial;
-		transition: background-color .5s ease;
+		justify-content: center;
+		align-items: center;
+		width: 100vw;
+		height: 100vh;
+
+		p,
+		a,
+		span,
+		.content {
+			color: var(--white);
+		}
 
 		p {
+
 			.text {
 				line-height: 165%;
 			}
@@ -181,7 +188,7 @@
 		img {
 			display: inline-block;
 			width: auto;
-			height: auto;
+			height: 3rem;
 		}
 
 		// Chart user list
@@ -208,27 +215,19 @@
 		}
 
 		.content {
+			display: block;
 			z-index: 2;
 			opacity: 0;
-			width: 100%;
-			height: 100%;
-			padding: var(--padl);
+			width: auto;
+			height: 90vh;
+			aspect-ratio: 9/16;
+			padding: var(--padxl);
 			background-color: var(--lime);
-			// backdrop-filter: blur(48px) saturate(1.5) brightness(1.2);
-			// box-shadow: 0 8px 32px #0007, inset .5px 1px 2px #fff4;
-			color: var(--black);
-			// border-radius: var(--padl);
+			border-radius: 2.5rem;
+			overflow: hidden;
+			transition: background-color .5s ease;
+			box-shadow: 0 .25rem 2rem #0007, inset .05rem .05rem .05rem #fff4;
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
-
-			@media (min-width: mixins.$screen-small) {
-				padding: calc(var(--padm) * 2);
-				// border-radius: calc(var(--padm) * 2);
-			}
-
-			@media (min-width: mixins.$screen-abitwide) {
-				padding: var(--padl);
-				// border-radius: calc(4/3 * var(--padl));
-			}
 
 			&.wait {
 				cursor: wait;
@@ -246,7 +245,7 @@
 				position: relative;
 				display: flex;
 				flex-flow: column;
-				justify-content: flex-end;
+				justify-content: center;
 				opacity: 1;
 				height: 100%;
 			}
@@ -285,6 +284,7 @@
 
 		.chart {
 			flex: 1;
+			margin: var(--padxl) 0 var(--padxxl);
 		}
 
 		.title {
@@ -310,11 +310,13 @@
 			background-color: var(--white);
 			margin-bottom: var(--padm);
 			border-radius: 10000px;
-			width: var(--padxxl);
+			width: calc(var(--padxxl) * 2);
 			overflow: hidden;
 			transition: background-color .5s ease;
 
 			i {
+				margin: 0;
+				padding: 0;
 				background-color: var(--yellow);
 				border-radius: 0;
 				height: 100%;
@@ -331,7 +333,7 @@
 			text-transform: uppercase;
 
 			svg {
-				fill: var(--black);
+				fill: var(--white);
 				transition: fill .5s ease;
 			}
 		}
@@ -339,6 +341,7 @@
 		.plurkers {
 			display: flex;
 			justify-content: space-around;
+			align-items: center;
 			flex: 1;
 
 			.name {
@@ -348,65 +351,64 @@
 				text-overflow: ellipsis;
 			}
 
-			.avatar img {
-				height: 24px;
-				margin-right: var(--pads);
+			.avatar {
+				margin-right: .5rem;
+
+				img {
+					height: 3rem;
+					border-radius: .5rem;
+				}
+			}
+
+			.count {
+				margin-left: .5rem;
 			}
 		}
 
-		.post {
-			i {
-				background-color: transparent;
-				display: inline;
-				font-style: italic;
-				padding: 0;
-				color: inherit;
-			}
-
-			div.meta {
-				border-top: 1px dashed var(--white);
-				display: flex;
-				align-items: center;
-				margin-top: var(--pads);
-				padding-top: var(--padm);
-
-				span {
-					display: block;
-					margin-right: var(--padl);
-				}
-
-				.link {
-					position: relative;
-					margin-left: auto;
-
-					img {
-						display: block;
-					}
-				}
-
-				>span {
-					display: flex;
-					align-items: center;
-					gap: 4px;
-
-					img {
-						display: block;
-						width: 1rem;
-						height: 1rem;
-					}
-				}
+		.info {
+			img {
+				height: 1rem;
 			}
 		}
 
 		.box {
-			.post {
+			.plurkbox {
+				div.meta {
+					border-top: 1px dashed var(--white);
+					display: flex;
+					align-items: center;
+					margin-top: var(--pads);
+					padding-top: var(--padm);
 
-				br,
-				.pictureservices {
-					display: none;
+					span {
+						display: block;
+						margin-right: var(--padl);
+					}
+
+					.link {
+						position: relative;
+						margin-left: auto;
+
+						img {
+							display: block;
+						}
+					}
+
+					>span {
+						display: flex;
+						align-items: center;
+						gap: 4px;
+
+						img {
+							display: block;
+							width: 1rem;
+							height: 1rem;
+						}
+					}
 				}
 			}
 		}
+
 
 		&.users {
 			img {
@@ -501,55 +503,12 @@
 		}
 
 		&-title {
-			position: relative;
-			display: block;
-			height: auto;
-			align-items: baseline;
-			font-size: 2rem;
-			color: var(--black);
-			padding: 0 var(--pads);
-			padding-top: var(--padl);
-			scroll-snap-align: none;
-
-			h3 {
-				display: flex;
-				flex-flow: row;
-				align-items: center;
-			}
-
-			span {
-				display: flex;
-				align-items: flex-start;
-				letter-spacing: -.1rem;
-				font-weight: 600;
-			}
-
-			.line {
-				flex: 1;
-				height: 1px;
-				margin-left: var(--pads);
-				overflow: hidden;
-				background-color: transparent;
-				border-radius: 1px;
-
-				i {
-					opacity: .5;
-					display: flex;
-					width: 100%;
-					height: 100%;
-					background-color: var(--black-25);
-					border-radius: 1px;
-					transition: background-color .5s ease;
-				}
-			}
+			display: none;
 		}
 
 		&-wrap {
-			padding: 0;
-			height: calc(3/2 * var(--box));
 			transition: background-color .5s ease;
 			scroll-snap-align: center;
-
 		}
 
 		&-loading {
@@ -572,6 +531,23 @@
 				text-transform: uppercase;
 			}
 		}
+
+		// Numbers
+
+		&,
+		&.mediumnumber,
+		&.largenumber {
+			.big {
+				font-size: 5rem;
+				letter-spacing: -.25vw;
+			}
+		}
+
+		&.mediumnumber {
+			.big {
+				font-size: 3.5rem;
+			}
+		}
 	}
 
 	// Spacer
@@ -586,7 +562,7 @@
 			flex-flow: row;
 			flex-wrap: wrap;
 			align-items: center;
-			justify-content: center;
+			justify-content: space-around;
 			margin: auto calc(-1 * var(--padm));
 
 			@media (min-width: mixins.$screen-verysmall) {
@@ -638,12 +614,6 @@
 
 	// Plurk - Statistics - Spesific Style
 	.postcontent {
-		img {
-			width: auto;
-			max-width: 64px;
-			margin-right: 4px;
-		}
-
 		.title {
 			font-size: .6rem;
 			display: flex;
@@ -665,6 +635,54 @@
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			overflow: hidden;
+
+		}
+	}
+
+	.post {
+		img {
+			width: auto;
+			height: initial;
+			max-height: 3rem;
+			margin-right: .25rem;
+
+			&.emoticon {
+				max-height: initial;
+			}
+		}
+
+		a {
+			pointer-events: none;
+		}
+
+		i {
+			background-color: transparent;
+			display: inline;
+			font-style: italic;
+			padding: 0;
+			color: inherit;
+		}
+
+		.ex_link.meta {
+			display: flex;
+			align-items: center;
+			border-radius: 0;
+
+			&:hover {
+				background: none;
+			}
+		}
+
+		.ex_link.meta,
+		.ex_link,
+		.hashtag {
+			color: var(--yellow) !important;
+		}
+
+		.ex_link,
+		.hashtag {
+			margin-right: .5rem;
+			text-decoration: none;
 		}
 	}
 
@@ -734,9 +752,6 @@
 
 
 		&.badgesmall {
-			height: auto;
-			aspect-ratio: 1/1.25;
-
 			p {
 				justify-content: space-evenly;
 			}
@@ -774,6 +789,7 @@
 
 				img {
 					display: block;
+					height: 8rem;
 					filter: drop-shadow(rgba(0, 0, 0, .1) 4px 4px 16px);
 				}
 			}
@@ -796,8 +812,7 @@
 			.content {
 				background-image: none !important;
 				background-color: transparent !important;
-				backdrop-filter: brightness(.9);
-				box-shadow: none;
+				backdrop-filter: blur(2rem) saturate(1.2) brightness(1.2);
 			}
 
 			.big {
@@ -890,9 +905,10 @@
 
 		.html {
 			display: flex;
+			gap: 1rem;
 			flex-direction: row;
 			flex-wrap: wrap;
-			justify-content: space-evenly;
+			justify-content: space-between;
 			align-items: center;
 			margin: auto 0;
 		}
@@ -900,59 +916,39 @@
 		.html .plurkers {
 			display: flex;
 			flex-direction: column;
-			margin: auto 0 var(--pads);
 		}
 
 		.plurkers {
-			&:nth-child(1) {
-				order: 3
-			}
-
-			&:nth-child(2) {
-				order: 2
-			}
-
-			&:nth-child(3) {
-				order: 3
-			}
-
-			&:nth-child(4) {
-				order: 4
-			}
-
-			&:nth-child(5) {
-				order: 1
-			}
-
 			span {
 				width: 100%;
 				text-align: center;
 			}
 
 			.avatar {
+				margin-right: 0;
 				margin-bottom: var(--pads);
 
 				img {
-					width: 6vmin;
+					width: 6vh;
 					height: auto;
 					border-radius: 100%;
 				}
 			}
 
 			&:nth-child(1) .avatar img {
-				width: 12vmin
+				width: 15vh
 			}
 
 			&:nth-child(2) .avatar img {
-				width: 10.5vmin
+				width: 12.5vh
 			}
 
 			&:nth-child(3) .avatar img {
-				width: 9vmin
+				width: 10vh
 			}
 
 			&:nth-child(4) .avatar img {
-				width: 7.5vmin
+				width: 7.5vh
 			}
 		}
 
@@ -976,7 +972,6 @@
 		}
 
 		.text {
-			margin: auto var(--padxl);
 			text-align: center;
 			font-size: 1.5rem;
 			line-height: 150%;
@@ -1009,18 +1004,11 @@
 			content: "";
 			bottom: 0;
 			right: 0;
-			border-left: var(--padm) solid transparent;
-			border-right: var(--padm) solid transparent;
-			border-top: var(--padxl) solid var(--yellow);
-			border-bottom: var(--padxl) solid transparent;
+			border-left: 2vh solid transparent;
+			border-right: 2vh solid transparent;
+			border-top: 4vh solid var(--yellow);
+			border-bottom: 4vh solid transparent;
 			transform: translate(20%, 50%) rotate(-45deg);
-
-			@media (min-width: mixins.$screen-abitwide) {
-				border-left: var(--padm) solid transparent;
-				border-right: var(--padm) solid transparent;
-				border-top: var(--padl) solid var(--yellow);
-				border-bottom: var(--padl) solid transparent;
-			}
 		}
 	}
 
@@ -1029,9 +1017,9 @@
 		.big {
 			background-color: var(--yellow);
 			color: var(--black);
-			width: calc(var(--box) - (2 * var(--padl)));
-			height: calc(var(--box) - (2 * var(--padl)));
-			line-height: calc(var(--box) - (2 * var(--padl)));
+			width: 30vh;
+			height: 30vh;
+			line-height: 30vh;
 			border-radius: 100%;
 		}
 	}
@@ -1089,25 +1077,24 @@
 			display: flex;
 			flex-direction: column;
 			width: calc(1/2 * var(--box));
-			height: calc(4/7 * var(--box));
 			background-color: var(--yellow);
 			overflow: hidden;
-			border-radius: var(--padm);
+			border-radius: 1.5rem;
+			box-shadow: 0 .125rem 1rem #0003, inset .05rem .05rem .05rem #fff4;
 
 			strong {
 				display: flex;
 				flex-direction: row;
-				padding: var(--pads) var(--padm);
-				font-size: 1rem;
+				padding: .5rem 1rem;
+				font-size: 1.2rem;
 				letter-spacing: .015rem;
 				line-height: 100%;
 				text-transform: uppercase;
-				border-bottom: 1px solid var(--black-25);
 
 				i {
 					display: flex;
 					padding: 0;
-					font-weight: 500;
+					font-weight: 600;
 					background-color: transparent;
 					margin: 0 0 0 auto;
 					color: var(--black);
@@ -1123,6 +1110,9 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				font-size: 7rem;
+				line-height: 115%;
+				font-weight: 800;
 				color: var(--black);
 				background-color: var(--white);
 				font-style: normal;
@@ -1153,7 +1143,7 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			margin: calc(-1 * var(--padl));
+			margin: calc(-1 * var(--padxl));
 		}
 
 		.title {
@@ -1175,7 +1165,7 @@
 				z-index: 1;
 				width: 100%;
 				height: 100%;
-				background-size: cover;
+				background-size: contain;
 
 				&::before {
 					position: absolute;
@@ -1190,10 +1180,10 @@
 				}
 			}
 
-			.post {
+			.plurkbox {
 				position: relative;
 				z-index: 2;
-				padding: var(--padxl) var(--padl) var(--padl);
+				padding: calc(1.5 * var(--padl));
 				margin-top: auto;
 				line-height: 120%;
 				background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5) 75%);
@@ -1205,26 +1195,9 @@
 
 			a {
 				color: inherit;
-			}
-
-			.text,
-			.meta {
-				color: var(--white);
-				position: relative;
-				z-index: 1;
-			}
-
-			.ex_link.meta {
-				display: inline-block;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				max-width: 100%;
-				overflow: hidden;
-
-				img {
-					margin-right: 6px;
-					max-height: 48px;
-				}
+				padding: 0;
+				margin: 0;
+				border: none;
 			}
 		}
 	}
@@ -1240,30 +1213,11 @@
 		}
 
 		.post {
-			margin-top: auto;
-			line-height: 150%;
-			font-size: .75rem;
-
-			br {
-				display: inline-block;
-			}
+			margin-top: var(--padl);
 		}
 
-		.info a {
-			display: inline-block;
-			color: inherit;
-			padding: 2px 6px;
-			background-color: var(--white);
-			color: var(--black);
-			border-radius: 4px;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			max-width: 100%;
-			overflow: hidden;
-
-			&:hover {
-				background-color: var(--yellow);
-			}
+		.plurkbox {
+			margin-top: auto;
 		}
 
 		div.meta {
@@ -1279,7 +1233,6 @@
 
 		img {
 			margin-right: 4px;
-			max-height: 48px;
 		}
 	}
 }
@@ -1298,7 +1251,7 @@
 	}
 
 	svg {
-		fill: var(--black);
+		fill: var(--white);
 	}
 
 	&.clip {
@@ -1311,355 +1264,5 @@
 		visibility: hidden;
 		opacity: 0;
 		@include mixins.positions;
-	}
-}
-
-// Vertical screen
-@media screen and (min-aspect-ratio: 1/1) {
-	.plurk {
-		.arrow-big .arrow {
-			transform: rotate(90deg) translateY(100%) !important;
-			margin-bottom: var(--padxxl);
-		}
-	}
-
-	.statistics {
-		.chart {
-			margin: var(--padm) 0 var(--padxl);
-
-			@media (min-width: mixins.$screen-ultrawide) {
-				margin-bottom: var(--padxxl);
-			}
-		}
-
-		&.sharedlinks {
-			.post {
-				@media (max-width: mixins.$screen-wide) {
-					font-size: .65rem;
-				}
-			}
-		}
-
-		&.responded {
-			.text {
-				@media (min-width: mixins.$screen-wide) {
-					font-size: 1.15rem;
-					margin: auto;
-					line-height: 175%;
-				}
-			}
-		}
-
-		&.postcontent {
-			.post {
-				line-clamp: 8;
-
-				@media (min-width: mixins.$screen-wide) {
-					line-clamp: 6;
-				}
-			}
-		}
-
-		&.mediumnumber,
-		&.largenumber {
-			.big {
-				font-size: 6vw;
-			}
-		}
-
-		&,
-		&.mediumnumber,
-		&.largenumber {
-			.big {
-				font-size: 7vw;
-				letter-spacing: -.25vw;
-			}
-
-			&.span2 {
-				.big {
-					@media (min-width: mixins.$screen-wide) {
-						font-size: 5vw;
-					}
-				}
-			}
-		}
-
-		&.mediumnumber {
-			.big {
-				@media (min-width: mixins.$screen-wide) {
-					font-size: 4vw;
-				}
-			}
-		}
-
-		&.largenumber {
-			.big {
-				@media (min-width: mixins.$screen-wide) {
-					font-size: 3.5vw;
-				}
-			}
-		}
-
-		&.typed {
-			.content {
-				position: relative;
-
-				&::before {
-					content: "";
-					position: absolute;
-					top: 50%;
-					left: 50%;
-					display: block;
-					width: 50%;
-					height: 50%;
-					background: url(https://api.iconify.design/fluent-emoji/open-book.svg?width=512&height=512&box=1) center center no-repeat;
-					background-size: contain;
-					transform: translate(-50%, -50%);
-				}
-
-				.big,
-				.text {
-					text-align: center;
-				}
-			}
-		}
-
-		&-wrap {
-			@media (max-width: mixins.$screen-wide) {
-				height: calc(var(--box) * 1.85);
-			}
-		}
-	}
-}
-
-// Horizontal screen
-@media screen and (max-aspect-ratio: 1/1) {
-	.plurk {
-		.bgtext {
-			display: flex;
-			flex-flow: column;
-			font-size: 70vh;
-			letter-spacing: -7.5vh;
-
-			sup {
-				margin: 0 0 -10vh -30vh;
-			}
-
-			sub {
-				margin: -10vh -30vh 0 0;
-			}
-		}
-
-		.statistics {
-			.big {
-				font-size: 20vw;
-				letter-spacing: -.05rem;
-			}
-
-			.graph {
-				width: 50%;
-				margin: 0 auto var(--padm);
-			}
-
-			.title {
-				margin-top: var(--pads);
-
-				@media (min-width: mixins.$screen-verysmall) {
-					margin-top: var(--padm);
-				}
-
-				img {
-					border-radius: 0;
-					width: auto;
-					height: 1rem;
-				}
-			}
-
-			.content {
-				.post {
-					@media (max-width: mixins.$screen-small) {
-						margin-bottom: auto;
-					}
-				}
-			}
-
-			.chart {
-				margin: var(--padm) 0 var(--padl);
-
-				@media (min-width: mixins.$screen-tiny) {
-					margin: var(--padl) 0 var(--padxl);
-				}
-
-				@media (min-width: mixins.$screen-verysmall) {
-					margin: var(--padm) 0;
-				}
-
-				@media (min-width: mixins.$screen-small) {
-					margin: var(--pads) 0;
-				}
-			}
-
-			.meta {
-				span {
-					@media (max-width: mixins.$screen-tiny) {
-						display: flex;
-						margin-right: var(--pads);
-					}
-				}
-			}
-
-			.grid {
-				.html div {
-					@media (max-width: mixins.$screen-verysmall) {
-						margin: calc(var(--pads) * 2/3);
-					}
-				}
-			}
-
-			.emoticons {
-				.html div {
-					@media (max-width: mixins.$screen-verysmall) {
-						margin: var(--padm);
-					}
-				}
-			}
-
-			.bubble {
-				.plurkers {
-					@media (max-width: mixins.$screen-verysmall) {
-						max-width: 30vw;
-					}
-
-					@for $i from 1 through 5 {
-						&:nth-child(#{$i}) .avatar img {
-							@media (max-width: mixins.$screen-verysmall) {
-								width: calc((2.25 - (.25 * $i)) * var(--padl))
-							}
-						}
-					}
-				}
-			}
-
-			&-wrap {
-				height: calc(1.35 * var(--box));
-				max-height: 500px;
-
-				&.span2 {
-					height: calc(1.4 * var(--box));
-				}
-
-				&.bubble {
-					height: calc(1.5 * var(--box));
-
-					@media (min-width: mixins.$screen-tiny) {
-						height: calc(1.4 * var(--box));
-					}
-				}
-
-				&.hashtags {
-					height: calc(1.25 * var(--box));
-
-					@media (min-width: mixins.$screen-small) {
-						height: calc(1.35 * var(--box));
-					}
-				}
-
-				&.mediumnumber {
-					height: calc(1.25 * var(--box));
-				}
-
-
-				&.sharedlinks {
-					@media (max-width: mixins.$screen-tiny) {
-						height: calc(1.5 * var(--box));
-					}
-				}
-
-				&.span2.emoticons {
-					@media (max-width: mixins.$screen-verysmall) {
-						height: calc(var(--box) * 1.75);
-					}
-				}
-			}
-
-			&.mediumnumber {
-				.big {
-					font-size: 14vw;
-				}
-			}
-
-			&.largenumber {
-				.big {
-					font-size: 12vw;
-				}
-			}
-
-			&.coins {
-				.big {
-					@media (max-width: mixins.$screen-small) {
-						width: calc(var(--box) - var(--padxl) * 3);
-						height: calc(var(--box) - var(--padxl) * 3);
-						line-height: calc(var(--box) - var(--padxl) * 3);
-					}
-				}
-			}
-
-			&.responded {
-				.text {
-					@media (max-width: mixins.$screen-tiny) {
-						margin: auto 0;
-					}
-				}
-			}
-
-			&.postcontent {
-				.post {
-					line-clamp: 7;
-				}
-			}
-
-			&.avatar {
-				.html {
-					@media (max-width: mixins.$screen-verysmall) {
-						margin-bottom: var(--padm);
-					}
-				}
-			}
-
-			&.center,
-			&.badges {
-				.big {
-					margin: auto;
-				}
-			}
-
-			&,
-			&.mediumnumber,
-			&.largenumber {
-				.big {
-					@media (min-width: mixins.$screen-small) {
-						font-size: 7.5vw;
-					}
-				}
-
-				&.span2 {
-					.big {
-						@media (min-width: mixins.$screen-small) {
-							font-size: 10vw;
-							letter-spacing: -.5vw;
-						}
-					}
-				}
-			}
-
-			&.previewpics,
-			&.sharedlinks {
-				.post {
-					@media (max-width: mixins.$screen-small) {
-						margin-bottom: 0;
-					}
-				}
-			}
-		}
 	}
 }

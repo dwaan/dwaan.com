@@ -206,8 +206,8 @@ class most {
 				while (index < this.data.length && max > 0) {
 					if (this.data[index].links.length > 0) {
 						var link = this.data[index].links[0]
-						result += `<div class="post">\
-							<div class="info">${this.data[index].content}</div>
+						result += `<div class="plurkbox">\
+							<p class="post">${this.data[index].content}</p>
 							${this.drawMeta(link, this.data[index].id)}
 						</div>`
 						max--
@@ -226,8 +226,8 @@ class most {
 						var pics = this.data[index].pics[0]
 						result += `<div class="box">\
 							<div class="image" style="background-image: url(${api.url}?img=${pics.url})"></div>\
-							<div class="post">\
-								<div class="text">${this.data[index].content}</div>\
+							<div class="plurkbox">\
+								<p class="post">${this.data[index].content}</p>\
 								${this.drawMeta(pics, this.data[index].id)}
 							</div>\
 						</div>`

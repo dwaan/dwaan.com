@@ -106,11 +106,11 @@ class statistics {
 
 	// Drawing functions
 
-	draw(style, number, text, background) {
-		if (typeof number == "string" || (typeof number == "number" && number > 0)) {
+	draw(style, big, text, background) {
+		if (typeof big == "string" || (typeof big == "big" && big > 0)) {
 			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, `\
 				<p>\
-					<span class="big">${number}</span>\
+					<span class="big">${big}</span>\
 					<span class="text">${text}</span>\
 				</p>\
 			`), background)
@@ -124,7 +124,7 @@ class statistics {
 			this.draw(style, icons.draw(icon, false), text)
 			return 1
 		} else {
-			this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
+			// this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
 			return 0
 		}
 	}
@@ -260,8 +260,8 @@ class statistics {
 			}, tl => {
 				return ScrollTrigger.create({
 					trigger: this.el.querySelector("." + id),
-					start: "0% 75%",
-					end: "100% 75%",
+					start: "0% 100%",
+					end: "100% 100%",
 					scrub: 2,
 					animation: tl
 				})
@@ -283,7 +283,7 @@ class statistics {
 					trigger: this.el.querySelector("." + id),
 					start: "0% 100%",
 					end: "100% 100%",
-					scrub: 1,
+					scrub: 2,
 					animation: tl
 				})
 			})

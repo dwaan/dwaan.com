@@ -46,6 +46,21 @@ class scrolls {
 		return tl
 	}
 
+	background(tl) {
+		var scale = reduceMotionFilter() ? 1 : 1.75
+
+		tl.fromTo(this.next.querySelector("#background"), {
+			opacity: 1,
+			scale: 1
+		}, {
+			opacity: 0,
+			scale: scale,
+			ease: "expo.inOut"
+		}, 0)
+
+		return tl
+	}
+
 	statistics() {
 		// Scroll animate statistics
 		scroll.push(tl => this.credits(tl), tl => ScrollTrigger.create({
@@ -56,26 +71,34 @@ class scrolls {
 			scrub: .5
 		}))
 
+		scroll.push(tl => this.background(tl), tl => ScrollTrigger.create({
+			trigger: this.next.querySelector("#statistics"),
+			start: "100% 75%",
+			end: "100% 75%",
+			toggleActions: "play none none reverse",
+			animation: tl
+		}))
+
 		scroll.push(tl => {
-			tl.fromTo(this.next.querySelector("#background"), {
-				opacity: 1,
-				scale: 1
+			tl.fromTo(this.next.querySelector("#hello .animate"), {
+				x: 0,
+				y: 0,
+				rotation: 0
 			}, {
-				opacity: 0,
-				scale: 1.75,
-				ease: "power3.inOut"
+				x: "-100vw",
+				y: "150vh",
+				rotation: -45,
+				ease: "linear",
 			}, 0)
 
 			return tl
-		}, tl => {
-			return ScrollTrigger.create({
-				trigger: this.next.querySelector("#hello"),
-				start: "100% 75%",
-				end: "100% 75%",
-				toggleActions: "play none none reverse",
-				animation: tl
-			})
-		})
+		}, tl => ScrollTrigger.create({
+			trigger: this.next.querySelector("#hello"),
+			start: "100% 100%",
+			end: "100% 50%",
+			scrub: 1,
+			animation: tl
+		}))
 	}
 
 	permisions() {

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
+@use '../mixins';
 
 /* Plurk - Statistics - Costum Page Style */
 .plurk #hello {
@@ -10,95 +10,50 @@
 	background: none;
 
 	.animate {
+		width: auto;
+		height: 90vh;
+		aspect-ratio: 9/16;
+		padding: 3rem;
 		pointer-events: auto;
 		transition: background .5s ease;
+		border-radius: 2.5rem;
+		backdrop-filter: blur(2rem) saturate(1.2) brightness(1.2);
+		box-shadow: 0 .25rem 2rem #0007, inset .05rem .05rem .05rem #fff4;
+	}
+
+	.thumbs {
+		margin: 3rem 0 0;
 	}
 
 	img {
 		border-radius: 100%;
+		width: 12rem;
+		height: 12rem;
 	}
 
 	h1 {
-		font-weight: 600;
+		font-weight: 700;
 		margin-bottom: 0;
 		line-height: 100%;
+		margin: 3rem 0 .5rem;
+		font-size: 3rem;
 	}
 
 	p {
-		font-weight: 400;
-		line-height: 120%;
-	}
+		font-weight: 500;
+		line-height: 130%;
+		font-size: 1.125rem;
 
-	@media screen and (min-aspect-ratio: 1/1) {
-		img {
-			width: 100px;
-			height: 100px;
-
-			@media (min-width: mixins.$screen-small) {
-				width: 160px;
-				height: 160px;
-			}
-		}
-
-		h1 {
-			text-align: left;
-			margin-top: var(--pads);
-			font-size: 4rem;
-
-			@media (min-width: mixins.$screen-small) {
-				margin-top: var(--padl);
-				font-size: 6rem;
-			}
-		}
-
-		p {
-			text-align: left;
-		}
-	}
-
-	@media screen and (max-aspect-ratio: 1/1) {
-		justify-content: flex-end;
-
-		@media (min-width: mixins.$screen-small) {
+		&.next {
+			margin: 2rem auto 0;
+			display: flex;
+			align-items: center;
 			justify-content: center;
-		}
-
-		img {
-			width: 128px;
-			height: 128px;
-		}
-
-		h1 {
+			width: 2.5rem;
+			height: 2.5rem;
 			font-size: 2rem;
-			line-height: 100%;
-
-			@media (min-width: mixins.$screen-tiny) {
-				font-size: 2.5rem;
-			}
-
-			@media (min-width: mixins.$screen-verysmall) {
-				font-size: 3rem;
-			}
-
-			@media (min-width: mixins.$screen-small) {
-				font-size: 4rem;
-			}
-		}
-
-		.arrow-big {
-			margin: var(--padm) 0;
-
-			@media (min-width: mixins.$screen-tiny) {
-				margin: var(--padm) 0 calc(-1 * var(--padxxl));
-			}
-
-			@media (min-width: mixins.$screen-small) {
-				margin: var(--padl) 0 var(--padm);
-			}
-		}
-
-		.arrow:after {
-			margin: var(--pads) 0 0;
+			border-radius: 100%;
+			box-shadow: 0 .25rem 2rem #0007, inset .05rem .05rem .05rem #fff4;
 		}
 	}
 }

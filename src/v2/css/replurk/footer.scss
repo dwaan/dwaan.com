@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
+@use '../mixins';
 
 /* Plurk - Footer */
 .plurk {
@@ -44,16 +44,18 @@
 		height: auto;
 		background-color: var(--black-15);
 		color: var(--black);
-		padding: var(--pads) var(--padm);
-		border-radius: 20px;
-		backdrop-filter: blur(32px) saturate(1.2) brightness(1.2);
-		box-shadow: 0 8px 32px #0007, inset .5px 1px 2px #fff4;
+		padding: .5rem 1rem;
+		border-radius: 1rem;
+		backdrop-filter: blur(2rem) saturate(1.2) brightness(1.2);
+		box-shadow: 0 .25rem 2rem #0007, inset .05rem .05rem .05rem #fff4;
 		pointer-events: auto;
 		cursor: pointer;
 		transition: background .25s ease;
 
 		svg {
-			margin-right: var(--pads);
+			width: 1.5rem;
+			height: 1.5rem;
+			margin-right: .25rem;
 
 			rect {
 				stroke: var(--black);
