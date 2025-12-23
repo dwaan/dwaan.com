@@ -14,71 +14,8 @@ class scrolls {
 		this.next = next
 	}
 
-	credits(tl) {
-		var length = reduceMotionFilter(1)
-
-		tl.fromTo(this.next.querySelectorAll("#credits .like, #credits .noaffiliation, #credits .made"), {
-			y: window.innerHeight * 1 / 8
-		}, {
-			y: 0,
-			ease: "linear",
-			duration: length * 2,
-		}, 0)
-		tl.fromTo(this.next.querySelectorAll("#credits .like, #credits .noaffiliation"), {
-			opacity: 0
-		}, {
-			opacity: 1,
-			stagger: {
-				from: 'end',
-				amount: length / 10
-			},
-			duration: length,
-			ease: "power3.in"
-		}, 0)
-		tl.fromTo(this.next.querySelectorAll("#credits .made"), {
-			opacity: 0
-		}, {
-			opacity: 1,
-			duration: length,
-			ease: "power3.in"
-		}, length * 3 / 10)
-
-		return tl
-	}
-
-	background(tl) {
-		var scale = reduceMotionFilter() ? 1 : 1.75
-
-		tl.fromTo(this.next.querySelector("#background"), {
-			opacity: 1,
-			scale: 1
-		}, {
-			opacity: 0,
-			scale: scale,
-			ease: "expo.inOut"
-		}, 0)
-
-		return tl
-	}
-
 	statistics() {
 		// Scroll animate statistics
-		scroll.push(tl => this.credits(tl), tl => ScrollTrigger.create({
-			trigger: this.next.querySelectorAll("#statistics"),
-			start: "100%-=" + window.innerHeight + " 0",
-			end: "100% 0",
-			animation: tl,
-			scrub: .5
-		}))
-
-		scroll.push(tl => this.background(tl), tl => ScrollTrigger.create({
-			trigger: this.next.querySelector("#statistics"),
-			start: "100% 75%",
-			end: "100% 75%",
-			toggleActions: "play none none reverse",
-			animation: tl
-		}))
-
 		scroll.push(tl => {
 			tl.fromTo(this.next.querySelector("#hello .animate"), {
 				x: 0,
@@ -96,7 +33,7 @@ class scrolls {
 			trigger: this.next.querySelector("#hello"),
 			start: "100% 100%",
 			end: "100% 50%",
-			scrub: 1,
+			scrub: true,
 			animation: tl
 		}))
 	}
@@ -141,44 +78,6 @@ class scrolls {
 				end: "0 -100%",
 				animation: tl,
 				scrub: .5
-			})
-		})
-
-		scroll.push((tl) => {
-			tl = this.credits(tl)
-
-			return tl
-		}, (tl) => {
-			return ScrollTrigger.create({
-				trigger: this.next.querySelectorAll("#permission"),
-				start: "0 0",
-				end: "100% 0",
-				animation: tl,
-				scrub: .5
-			})
-		})
-	}
-
-	menu() {
-		// Scroll animation menu and logout
-		scroll.push(tl => tl, tl => {
-			return ScrollTrigger.create({
-				trigger: 'main',
-				start: "0 0",
-				end: "100% 0",
-				animation: tl,
-				onUpdate: update => {
-					var el1 = '.logo, .size, .lamp, .switch'
-					var el2 = el1 + ", .footer > *"
-
-					if (update.direction > 0) {
-						gsap.killTweensOf(_qAll(el2))
-						gsap.to(_qAll(el1), { y: -100, opacity: 0 })
-						gsap.to(_qAll('.footer > *'), { y: 100, opacity: 0 })
-					} else {
-						gsap.to(_qAll(el2), { y: 0, opacity: 1 })
-					}
-				}
 			})
 		})
 	}

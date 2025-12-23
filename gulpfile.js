@@ -172,6 +172,27 @@ var v2 = {
 			.pipe(browserSync.stream())
 	},
 
+	jsreplurk() {
+		return gulp.src(['src/v2/js/replurk.js'])
+			.pipe(mode.development(webpack({
+				devtool: 'source-map',
+				mode: 'production',
+				output: {
+					filename: 'replurk.bundle.js',
+					clean: true
+				}
+			})))
+			.pipe(mode.production(webpack({
+				mode: 'production',
+				output: {
+					filename: 'replurk.bundle.js',
+					clean: true
+				}
+			})))
+			.pipe(gulp.dest('v2/js/'))
+			.pipe(browserSync.stream())
+	},
+
 	css() {
 		return gulp.src(['node_modules/normalize.css/normalize.css', 'src/v2/css/main.scss'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
@@ -298,6 +319,7 @@ var v2 = {
 		})
 
 		gulp.watch(v2.path.js, { ignoreInitial: false }, v2.js)
+		gulp.watch(v2.path.js, { ignoreInitial: false }, v2.jsreplurk)
 		gulp.watch(v2.path.css, { ignoreInitial: false }, v2.css)
 		gulp.watch(['src/v2/css/extra/404.scss'], { ignoreInitial: false }, v2.fofcss)
 		gulp.watch(['src/v2/css/extra/vertical.scss'], { ignoreInitial: false }, v2.css_vertical)
@@ -321,6 +343,7 @@ var v2 = {
 	async build() {
 		await elev.write()
 		v2.js()
+		v2.jsreplurk()
 		v2.css()
 		v2.fofcss()
 		v2.css_vertical()

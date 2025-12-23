@@ -3,83 +3,142 @@
 @use '../mixins';
 
 /* Plurk - Footer */
-.plurk {
+.footer {
+	position: fixed;
+	z-index: 666;
+	top: initial;
+	left: 5vh;
+	right: 5vh;
+	bottom: 5vh;
+	display: flex;
+	pointer-events: none;
 
-	/* Replurk footer */
-	.footer {
-		position: fixed;
-		z-index: 666;
-		top: initial;
-		left: var(--padx);
-		right: var(--padx);
-		bottom: var(--pady);
-		display: flex;
-		align-items: center;
-
-		div {
-			margin-right: auto;
-		}
-
-		a {
-			pointer-events: all;
-
-			&.now {
-				font-weight: 500;
-				pointer-events: none;
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-
-		a,
-		span {
-			font-weight: 400;
-			margin-right: var(--padm);
-		}
+	a,
+	span {
+		font-weight: 400;
+		margin-right: var(--padm);
 	}
 
-	#logout {
-		height: auto;
-		background-color: var(--black-15);
-		color: var(--black);
-		padding: .5rem 1rem;
-		border-radius: 1rem;
-		backdrop-filter: blur(2rem) saturate(1.2) brightness(1.2);
-		box-shadow: 0 .25rem 2rem #0007, inset .05rem .05rem .05rem #fff4;
-		pointer-events: auto;
+	#menu {
+		--size: 2.5rem;
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		margin: 0 0 0 auto;
+		padding: 0;
+		border-radius: 1.5rem;
+		color: black;
+		background-color: white;
+		box-shadow: inset .05rem .05rem .05rem #fff4;
 		cursor: pointer;
 		transition: background .25s ease;
+		min-width: var(--size);
+		min-height: var(--size);
 
-		svg {
-			width: 1.5rem;
-			height: 1.5rem;
-			margin-right: .25rem;
+		hr {
+			margin: 0;
+			padding: 0;
+			height: 0;
+		}
 
-			rect {
-				stroke: var(--black);
-				transition: stroke .25s ease;
-			}
+		label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			pointer-events: all;
 
-			path {
-				fill: var(--black);
-				transition: fill .25s ease;
+			&,
+			span {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0;
 			}
 		}
 
-		&:hover {
-			background-color: var(--black);
-			color: var(--white);
+		.submenu {
+			display: block;
+			flex-direction: column;
+			padding: 0;
+			width: 0;
+			height: 0;
+			opacity: 0;
+			pointer-events: none;
+			transition: all .25s ease-in-out;
+			overflow: clip;
 
-			svg {
-				rect {
-					stroke: var(--white);
-				}
+			>div {
+				white-space: nowrap;
+			}
+		}
 
-				path {
-					fill: var(--white);
+		.handle {
+			position: absolute;
+			top: initial;
+			bottom: 0;
+			left: initial;
+			right: 0;
+			display: block;
+			margin: 0 !important;
+			width: var(--size);
+			height: var(--size);
+			opacity: 1;
+			border-radius: 1rem;
+			cursor: pointer;
+			pointer-events: all;
+			appearance: none;
+			-webkit-appearance: none;
+			transition: all .25s ease-in-out;
+
+			&:checked {
+				opacity: 0;
+
+				+.submenu {
+					position: relative;
+					z-index: 2;
+					display: flex;
+					justify-content: space-evenly;
+					opacity: 1;
+					padding: .5rem 1rem;
+					width: calc(var(--size) * 3);
+					height: 8rem;
+					opacity: 1;
+
+					+label {
+						position: fixed;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						z-index: 1;
+					}
+
+					a,
+					.about,
+					.logout {
+						pointer-events: all;
+						transition: color .125s ease;
+
+						&.now {
+							font-weight: 500;
+							pointer-events: none;
+						}
+
+						&:hover {
+							color: var(--yellow);
+						}
+					}
 				}
+			}
+		}
+
+		.years {
+			display: flex;
+			gap: .5rem;
+
+			>a {
+				margin: 0;
 			}
 		}
 	}

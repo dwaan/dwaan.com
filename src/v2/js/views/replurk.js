@@ -1,7 +1,7 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { _q, _qAll, addClass, reduceMotionFilter } from '../helpers/helper.js'
+import { _q, _qAll, reduceMotionFilter } from '../helpers/helper.js'
 
 var replurk = {
 	replurk: false,
@@ -55,18 +55,12 @@ var replurk = {
 			next.querySelector("#backtotop").onclick = () => gsap.to(window, {
 				duration: reduceMotionFilter(2),
 				ease: "expo.inOut",
-				scrollTo: "#statistics",
-				onStart: _ => {
-					removeClass(_q("html"), "scroll-snap");
-				},
-				onComplete: _ => {
-					addClass(_q("html"), "scroll-snap");
-				}
+				scrollTo: "#statistics"
 			})
 			next.querySelectorAll("#permission, .grant").forEach(el => el.style.display = "none")
 		},
 		afterEnter: async function (data) {
-			await replurk.replurk.run(data.next.container)
+			if (replurk.replurk.run) await replurk.replurk.run(data.next.container)
 			this.async()
 		}
 	}

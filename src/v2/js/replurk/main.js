@@ -9,7 +9,6 @@ import { _q, _qAll, plural, monthNames, reduceMotionFilter } from '../helpers/he
 import friends from "./friends.js"
 import loading from './loading.js'
 import scrolls from './scrolls.js'
-import browser from './browser.js'
 import icons from './icons.js'
 import statistics from "./statistics.js"
 
@@ -52,8 +51,7 @@ class replurk {
 		}, {
 			opacity: 1,
 			duration: length,
-			ease: "power3.in",
-			onStart: browser.set("green", length) // correct
+			ease: "power3.in"
 		})
 		tl.fromTo(next.querySelectorAll("#permission .bgtext *"), {
 			display: "",
@@ -120,46 +118,31 @@ class replurk {
 			var length = reduceMotionFilter(1)
 			var tl = gsap.timeline()
 
-			browser.set("green", length)
+			tl.set(next.querySelectorAll("#hello"), {
+				display: ""
+			}, 0)
 
 			tl.fromTo(next.querySelectorAll("#hello"), {
-				display: "",
-				opacity: 0
+				x: "100vw",
+				y: "100vh",
+				rotation: 90
 			}, {
-				opacity: 1,
-				ease: "power3.in",
-				duration: length
+				x: 0,
+				y: 0,
+				rotation: 0,
+				ease: "power4.out",
+				duration: length * 3 / 4
 			}, length / 4)
-			tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
-				display: "",
-				opacity: 0,
-				y: 200
-			}, {
-				opacity: 1,
-				y: 0,
-				duration: length,
-				stagger: length / 5,
-				ease: "power3.out"
-			}, length / 2)
-			tl.fromTo(next.querySelectorAll("#hello .thumbs, #hello .text > *, #hello .arrow-big"), {
-				display: "",
-				opacity: 0,
-				y: 200
-			}, {
-				opacity: 1,
-				y: 0,
-				duration: length,
-				stagger: length / 5,
-				ease: "power3.out"
-			}, length / 2)
+
 			tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
 				display: "",
 				opacity: 0
 			}, {
 				opacity: 1,
-				duration: length / 2,
+				duration: length / 4,
+				ease: "power4.out",
 				onComplete: () => resolve()
-			}, length / 2)
+			}, 0)
 		})
 	}
 	hideStatisticPages() {
@@ -192,7 +175,6 @@ class replurk {
 				opacity: 0,
 				duration: length,
 				ease: "power3.in",
-				onStart: browser.set("yellow", length + (length / 2)), // correct
 				onComplete: () => {
 					gsap.set(next.querySelectorAll(".grant"), { display: "none" })
 					resolve()
@@ -202,6 +184,7 @@ class replurk {
 	}
 
 	// Access logic
+
 	// Login messages
 	message(message, quick) {
 		var next = this.next
@@ -232,9 +215,6 @@ class replurk {
 		scroll.destroy()
 
 		window.scrollTo(0, 0)
-
-		// Scroll animation menu and logout
-		this.scrolls.menu()
 
 		// Check is server have open session
 		var tl = gsap.timeline()
@@ -393,11 +373,6 @@ class replurk {
 		var next = this.next
 		var extra = ""
 
-		gsap.set(next.querySelectorAll("#background"), {
-			backgroundImage: `url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`,
-			backgroundColor: `#${plurker.name_color}`
-		});
-
 		// plurks_count
 		var days = (plurker.anniversary.years * 365) + plurker.anniversary.days
 		var responses = Math.round(plurker.response_count / days)
@@ -407,15 +382,29 @@ class replurk {
 		if (this.year == 2021) text = `If ${this.year} have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories.`
 		else if (this.year == 2022) text = `It's 2020 v2, and this is your year end RePlurk recap. Hopefully it will bring lots of good memories.`
 		else if (this.year == 2024) text = `With crazy things happening around the world right now, hopefully RePlurk will bring back the good memories.`
-		next.querySelector("#hello .text").innerHTML = `<h1>Henlo ${plurker.display_name}</h1><p style="max-width: 500px; margin: 0 auto">${text}</p><p class="next">&#8595;</p>`
+		next.querySelector("#hello .text").innerHTML = `<h1>Henlo ${plurker.display_name}</h1><p>${plurker.page_title}</p>`
+		next.querySelector("#hello .greet").innerHTML = `${text}`
+		next.querySelector("#hello .since .title").innerHTML = `RePlurk ${this.year}`
+		next.querySelector("#hello .karma").innerHTML = `<div>${plurker.karma}</div><div>${plurker.karma}</div><div>${plurker.karma}</div>`
 
-		gsap.set(next.querySelectorAll("#hello .text .next"), {
-			backgroundColor: `#${plurker.name_color}`
+		console.log(plurker)
+
+		var color = gsap.utils.splitColor(`#${plurker.name_color}`)
+		gsap.set(next.querySelectorAll("#hello .animate, .footer #menu"), {
+			color: `rgb(${color[0] - 90}, ${color[1] - 90}, ${color[2] - 90})`,
+			backgroundColor: `rgb(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70})`
+		});
+
+		gsap.set(next.querySelectorAll("#background"), {
+			backgroundImage: `linear-gradient(to bottom, rgba(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70}, 0) 50%,
+              rgba(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70}, 1)), url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`
 		});
 
 		// Draw statistic
-		this.statistics.title('All Time', 'alltime')
 		if (plurker.anniversary.years && plurker.anniversary.days) {
+			// var join = new Date(plurker.join_date)
+			next.querySelector("#hello .since .when").innerHTML = `Plurking since <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`
+
 			this.statistics.draw('center posted', Math.round(plurker.plurks_count / days), `I posted around <i>${icons.draw("left-speech-bubble")} ${plural(Math.round(plurker.plurks_count / days), "plurk")} per day</i>`)
 
 			// Responses
@@ -424,17 +413,17 @@ class replurk {
 			else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>'
 			this.statistics.draw('span2 center responded', responses, `I responded around <i>${icons.draw("left-speech-bubble")} ${plural(responses, "time")}</i> per day. ${extra} when I'm not sleeping`)
 
-			var join = new Date(plurker.join_date)
-			this.statistics.draw('center anniversary', `<strong><i>${monthNames[join.getMonth()]}</i> <i>${join.getFullYear()}</i></strong> <em>${join.getDate()}</em>`, `I joined Plurk <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`)
+			// this.statistics.draw('center anniversary', `<strong><i>${monthNames[join.getMonth()]}</i> <i>${join.getFullYear()}</i></strong> <em>${join.getDate()}</em>`, `I joined Plurk <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`)
 			this.statistics.draw('center badges', plurker.badges.length, `I have <i>${icons.draw("shield")} ${plural(plurker.badges.length, "badge")}</i> right now`)
 		} else {
 			this.statistics.draw('', '-', "There is no data in my timeline")
 			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now")
 		}
 	}
+
 	// Display statistics
 	async displayStatistics() {
-		this.statistics.title('This Year', 'thisyear')
+		// this.statistics.title('This Year', 'thisyear')
 		this.statistics.draw("statistics-loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.")
 
 		this.loading = new loading(this.next)
@@ -528,7 +517,7 @@ class replurk {
 			}
 
 			// Display extended statistics
-			this.displayExtendedStatistics()
+			// this.displayExtendedStatistics()
 		} else {
 			if (this.plurks[0]) {
 				var date = new Date(plurk[0].posted)
@@ -540,7 +529,7 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		this.statistics.title('Deeper Statistic', 'digdeeper')
+		// this.statistics.title('Deeper Statistic', 'digdeeper')
 		this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>")
 
 		// Load each post responses and calculate statistics
@@ -679,13 +668,12 @@ class replurk {
 			this.next = el
 
 			// Run the login
-			gsap.fromTo(this.next.querySelectorAll('#credits'), {
+			gsap.fromTo(this.next.querySelectorAll('#permission'), {
 				opacity: 0
 			}, {
 				opacity: 1,
 				duration: length,
 				ease: "power3.in",
-				onStart: browser.set("yellow", length), // correct
 				onComplete: async () => {
 					// Display login
 					await this.login(true)

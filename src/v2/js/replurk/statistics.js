@@ -427,7 +427,7 @@ class statistics {
 			}, 0)
 
 			// Animate number
-			scroll.push(function (tl) {
+			scroll.push(tl => {
 				if (el.querySelector(".big")) {
 					var number = Number(el.querySelector(".big").textContent)
 					if (number > 0) {

@@ -9,7 +9,7 @@ namespace: replurk
 ---
 
 <!doctype html>
-<html class="no-js page-{{ namespace }}" lang="{{ page.lang }}">
+<html class="no-js" lang="{{ page.lang }}">
 
 <head>
     <meta charset="utf-8">
@@ -27,19 +27,18 @@ namespace: replurk
     <meta name="title" content="{{ title }}">
     <meta name="description" content="{{ description }}">
 
+    <link rel="stylesheet" media="screen" href="/css/plurk.css">
+
     <script>
-        var classcollection = "no-js";
+        var classcollection = "page-{{ namespace }}";
         /* See if it's in dark mode */
         h = document.querySelector("html");
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection = "dark";
-
-        // Displaying rounded corner only on fullscreen
-        if (window.innerWidth == screen.width && window.innerHeight == screen.height) classcollection += " rounded";
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection += " dark";
 
         // Set the class
         h.setAttribute('class', classcollection);
     </script>
-    <script src="/js/bundle.js" async></script>
+    <script src="/js/replurk.bundle.js" async></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -94,8 +93,6 @@ namespace: replurk
           <p>Please rotate your 📱 screen or resize your 💻 browser for better looking layout.</p>\
         </div>`
     </script>
-
-    <link rel="stylesheet" media="print" href="/css/print.css">
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
+@use '../mixins';
 
 /* Back to top */
-.plurk #backtotop {
+#backtotop {
 	position: relative;
 	color: var(--black);
 	font-size: 2rem;

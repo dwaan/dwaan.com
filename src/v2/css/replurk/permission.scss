@@ -1,32 +1,21 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
-
 /*  Plurk - Login */
-.plurk #permission {
+#permission {
 	z-index: 2;
-	padding: calc(4.5 * var(--pady)) var(--padx) calc(2 * var(--pady));
-	height: auto;
-	max-width: 100vw;
-	min-height: 100vh;
-
-	@media (min-width: mixins.$screen-small) {
-		padding: calc(2 * var(--pady)) var(--padx) var(--pady);
-	}
+	padding: 0;
 
 	form {
 		margin: 0;
-		padding: var(--padm);
-		max-width: 500px;
+		padding: var(--padl);
+		width: auto;
+		height: 36rem;
+		aspect-ratio: 9/16;
 		background-color: var(--white);
 		border-radius: var(--padm);
 		overflow: hidden;
 		box-shadow: -10px 30px 60px rgba(0, 0, 0, 0.25);
 		transition: background-color .5s ease;
-
-		@media (min-width: mixins.$screen-tiny) {
-			padding: var(--padl);
-		}
 	}
 
 	h1 {
@@ -37,44 +26,28 @@
 		font-size: 2.5rem;
 		letter-spacing: -.25rem;
 
-		@media (min-width: mixins.$screen-tiny) {
-			font-size: 2.75rem;
-		}
-
-		@media (min-width: mixins.$screen-verysmall) {
-			font-size: 3.5rem;
-			letter-spacing: -.35rem;
-			line-height: 100%;
-		}
-
-		@media (min-width: mixins.$screen-verywide) {
-			font-size: 5rem;
-			letter-spacing: -.5rem;
-		}
-
 		sub,
 		sup {
-			font-size: 75%;
+			font-size: 2rem;
 			top: 0rem;
 		}
 
 		sup {
-			top: -1rem;
+			top: -2rem;
 		}
 	}
 
 	ol {
 		display: flex;
 		flex-flow: column;
-		z-index: -1;
 		text-align: left;
 		margin: 0;
 		padding: 0;
 	}
 
 	li {
-		font-size: .9rem;
-		line-height: 140%;
+		font-size: .85rem;
+		line-height: 110%;
 		position: relative;
 		margin: 0;
 		padding: var(--pads) 0 var(--pads) var(--padl);
@@ -84,6 +57,7 @@
 		&:before {
 			font-size: inherit;
 			position: absolute;
+			top: .8rem;
 			left: 0;
 		}
 
@@ -93,20 +67,14 @@
 			}
 		}
 
-		@media (min-width: mixins.$screen-verysmall) {
-			padding: var(--padm) 0 var(--padm) var(--padl);
-			font-size: 1rem;
-			line-height: 150%;
-		}
-
 		p {
 			font-size: inherit;
 		}
 
 		&.small {
 			font-size: .6rem;
-			line-height: 160%;
-			opacity: .8;
+			line-height: 150%;
+			opacity: .75;
 			padding-left: 0;
 			padding-bottom: 0;
 
@@ -116,11 +84,6 @@
 
 			* {
 				font-size: inherit;
-			}
-
-			@media (min-width: mixins.$screen-verysmall) {
-				font-size: .7rem;
-				line-height: 150%;
 			}
 		}
 	}

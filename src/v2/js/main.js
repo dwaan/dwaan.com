@@ -6,11 +6,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
 import barba from '@barba/core';
 // Helper
-import { _q, _qAll, konami, addClass, removeClass } from './helpers/helper.js';
+import { _q, _qAll, konami, removeClass } from './helpers/helper.js';
 import scroll from './helpers/scroll.js';
 import scrollto from './helpers/scrollto.js';
-
-import api from './replurk/api.js';
 
 // Transitions
 import transitions from './transitions/transitions.js';
@@ -33,7 +31,7 @@ barba.hooks.beforeEnter(_ => {
 	document.body.style.overflow = "hidden";
 
 	// Prevent scroll to scroll down unexpectedly because CSS scroll-behavior
-	removeClass(_q("html"), "scroll-snap");
+	// removeClass(_q("html"), "scroll-snap");
 
 	scroll.destroy();
 
@@ -47,7 +45,7 @@ barba.hooks.afterEnter(data => {
 	next.container.querySelectorAll("a.scrollto").forEach(el => scrollto(el));
 
 	// Default "scroll animation" for arrow and year
-	if (!next.namespace.includes("replurk")) scroll.arrowAndYear(next.container);
+	scroll.arrowAndYear(next.container);
 
 	ScrollTrigger.refresh();
 	gsap.matchMediaRefresh();
@@ -55,7 +53,7 @@ barba.hooks.afterEnter(data => {
 	document.body.style.overflow = "";
 
 	// Restore CSS scroll-behavior
-	addClass(_q("html"), "scroll-snap");
+	// addClass(_q("html"), "scroll-snap");
 });
 
 // Initialized barba.js
