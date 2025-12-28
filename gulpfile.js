@@ -146,6 +146,7 @@ var v2 = {
 		js: ['src/v2/js/**/*.js'],
 		css: ['src/v2/css/*.scss'],
 		img: ['src/v2/img/**/*.{jpg,jpeg,png}'],
+		gif: ['src/v2/img/**/*.gif'],
 		svg: ['src/v2/img/**/*.svg'],
 		fonts: ['src/v2/fonts/*.*'],
 		resources: ['src/v2/resources/*']
@@ -278,7 +279,11 @@ var v2 = {
 			}))
 			.pipe(webp())
 			.pipe(gulp.dest('v2/img/'))
-			.pipe(browserSync.stream())
+	},
+
+	gif() {
+		return gulp.src(v2.path.gif, { encoding: false })
+			.pipe(gulp.dest('v2/img/'))
 	},
 
 	svg() {
@@ -287,7 +292,6 @@ var v2 = {
 				collapseWhitespace: true
 			}))
 			.pipe(gulp.dest('v2/img/'))
-			.pipe(browserSync.stream())
 	},
 
 	resources() {
@@ -328,6 +332,7 @@ var v2 = {
 		gulp.watch(['src/v2/css/replurk/**/*.scss'], { ignoreInitial: false }, v2.replurkcss)
 		gulp.watch(['src/v2/css/cache/**/*.css'], { ignoreInitial: false }, v2.css_prefix)
 		gulp.watch(v2.path.img, { ignoreInitial: false }, v2.img)
+		gulp.watch(v2.path.gif, { ignoreInitial: false }, v2.gif)
 		gulp.watch(v2.path.svg, { ignoreInitial: false }, v2.svg)
 		gulp.watch(v2.path.fonts, { ignoreInitial: false }, v2.fonts)
 		gulp.watch(v2.path.resources, { ignoreInitial: false }, v2.resources)
@@ -352,6 +357,7 @@ var v2 = {
 		v2.replurkcss()
 		v2.css_prefix()
 		v2.img()
+		v2.gif()
 		v2.svg()
 		v2.fonts()
 		v2.resources()
@@ -364,14 +370,14 @@ const v1clean = () => deleteAsync(['v1'])
 const v2clean = () => deleteAsync(['v2'])
 
 // Version 1
-const v1cleanrun = gulp.series(v1clean, v2.img, v2.svg, v1.run)
+const v1cleanrun = gulp.series(v1clean, v1.img, v1.svg, v1.run)
 const v1image = gulp.series(v1.img, v1.svg)
 const v1build = gulp.series(v1.build)
 const v1run = gulp.series(v1.run)
 
 // Version 2
-const v2cleanrun = gulp.series(v2clean, v2.img, v2.svg, v2.run)
-const v2image = gulp.series(v2.img, v2.svg)
+const v2cleanrun = gulp.series(v2clean, v2.img, v2.gif, v2.svg, v2.run)
+const v2image = gulp.series(v2.img, v2.gif, v2.svg)
 const v2build = gulp.series(v2.build)
 const v2run = gulp.series(v2.run)
 

@@ -93,7 +93,7 @@ class statistics {
 
 	body(text, style = "") {
 		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics statistics-title ${style}">\
+			<div class="statistics ${style}">\
 				<div class="body">${text}</div>\
 			</div>`)
 	}

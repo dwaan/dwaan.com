@@ -533,15 +533,19 @@ class replurk {
 			// Sort based on date
 			this.plurks.sort((a, b) => new Date(b.posted) - new Date(a.posted))
 
+			// 
 			// Draw statistics
+			// 
 			try {
 				await this.statistics.drawAll(this.plurks)
 			} catch (error) {
 				console.info("Error while counting statistics", error)
 			}
 
+			// 
 			// Display extended statistics
-			// this.displayExtendedStatistics()
+			// 
+			this.displayExtendedStatistics()
 		} else {
 			if (this.plurks[0]) {
 				var date = new Date(plurk[0].posted)
@@ -593,18 +597,22 @@ class replurk {
 
 		// Display How Many Links
 		this.statistics.most.links.drawLinks()
+
 		// Display How Many Pictures
 		this.statistics.most.links.drawPics()
 
+		// 
 		// Draw Results
+		// 
+
 		// Display Most Responder
 		// this.statistics.most.responders.draw()
 
-		// Display Most Interaction
-		this.statistics.most.interaction.draw()
-
 		// Display Most Mentioned by me
 		// this.statistics.most.mentions.draw()
+
+		// Display Most Interaction
+		this.statistics.most.interaction.draw()
 
 		// Display How Many Words-Characters
 		this.statistics.most.types.draw()
@@ -645,20 +653,28 @@ class replurk {
 		if (this.me.gender == 1) plurker = icons.draw("man-bowing")
 		if (this.me.gender == 0) plurker = icons.draw("woman-bowing")
 
-		this.statistics.body(`\
-			<h4>What are RePlurk Badges?</h4>\
-			<p>RePlurk Badges are badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\
-			<ol>\
-				<li>Creating a ton of polls (Polling ${gender})</li>\
-				<li>Getting a bunch of coins (Plurk Coins Billionaire)</li>\
-				<li>Writing a kilo of plurks (Novelist and Keyboard Warrior)</li>\
-				<li>Posting a ton of \"adult\" posts (Adult-er)</li>\
-				<li>Sharing social media URLs other than Plurk (there are 7 badges)</li>\
-				<li>Sharing an olympic size of pictures and links (Meme Lord & Missing Link)</li>\
-				<li>Getting a bunch of Replurk (Trendsetter)</li>\
-				<li>and, posting almost every day on Plurk (2 badges for Active Plurker)</li>\
-			</ol>\
-			`, `replurkbadges description`)
+		this.statistics.newdraw({
+			class: `replurkbadges description`,
+			html: [{
+				class: `title`,
+				html: `<h4>What are RePlurk Badges?</h4>`
+			}, {
+				class: `text`,
+				html: `\
+					<p>RePlurk Badges are badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\
+					<ol>\
+						<li>Creating a ton of polls (Polling ${gender})</li>\
+						<li>Getting a bunch of coins (Plurk Coins Billionaire)</li>\
+						<li>Writing a kilo of plurks (Novelist and Keyboard Warrior)</li>\
+						<li>Posting a ton of \"adult\" posts (Adult-er)</li>\
+						<li>Sharing social media URLs other than Plurk (there are 7 badges)</li>\
+						<li>Sharing an olympic size of pictures and links (Meme Lord & Missing Link)</li>\
+						<li>Getting a bunch of Replurk (Trendsetter)</li>\
+						<li>and, posting almost every day on Plurk (2 badges for Active Plurker)</li>\
+					</ol>\
+				`
+			}]
+		})
 
 		var count = 0
 		count += this.statistics.drawBadge(this.statistics.poll_count >= 5, 'pollbadges', "ballot-box-with-ballot", "<strong>Polling " + gender + "</strong>", "Create more pollings")

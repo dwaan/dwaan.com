@@ -38,17 +38,23 @@ class most {
 					this.data[i].position = this.data.length
 					if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++
-						this.parent.statistics.attach(`<i>Top ${icons.draw("left-speech-bubble")} Responders</i> <strong>of My Timeline</strong>`, this.data[i], 5)
+						this.parent.statistics.attach(`\
+							<small>${this.parent.me.display_name}'s Next</small><h2>\
+							<em>top</em> models</h2>\
+							<h3>responders</h3>\
+							<span>cycle ${this.parent.year}</span>\
+							<p>all other plurkers please immediately return to the house.. pack your belongings.. and go home.</p>\
+						`, this.data[i], 5)
 					}
 				}
 			},
-			draw: function () {
-				var index = 0
-				if (this.data.length > 0) {
-					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++
-					if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count)
-				}
-			}
+			// draw: function () {
+			// 	var index = 0
+			// 	if (this.data.length > 0) {
+			// 		while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++
+			// 		if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count)
+			// 	}
+			// }
 		}
 
 		this.mentions = {
@@ -70,7 +76,7 @@ class most {
 							var user = await this.parent.friends.findByUsername(this.data[idx].value)
 
 							if (this.data[idx].el == undefined) {
-								this.data[idx] = new element('mostmentionedbyme', user, "", plurker => {
+								this.data[idx] = new element('mostmentioned', user, "", plurker => {
 									plurker.avatar = new span().class("avatar").html(`<img src="${this.parent.friends.getAvatar(plurker.user_id)}" />`)
 									plurker.name = new span().class("name").html(`@${plurker.nick_name}`)
 									plurker.counts = new span().class("count").html(plurker.count)
@@ -83,7 +89,11 @@ class most {
 
 							if (user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++
-								this.parent.statistics.attach(`<i>Most ${icons.draw("person-raising-hand-light")} Mentioned</i> <strong>in My Timeline</strong>`, this.data[idx], max)
+								this.parent.statistics.attach(`\
+									<h2>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h2>
+									<h3>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h3>
+									<p>by @${this.parent.me.nick_name} in ${this.parent.year}</p>\
+								`, this.data[idx], max)
 							}
 						}
 
@@ -91,13 +101,13 @@ class most {
 					}
 				}
 			},
-			draw: function () {
-				var index = 0
-				if (this.data.length > 0) {
-					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++
-					if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count)
-				}
-			}
+			// draw: function () {
+			// 	var index = 0
+			// 	if (this.data.length > 0) {
+			// 		while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++
+			// 		if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count)
+			// 	}
+			// }
 		}
 
 		this.myemoticons = {
