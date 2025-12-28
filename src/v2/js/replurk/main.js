@@ -118,21 +118,24 @@ class replurk {
 			var length = reduceMotionFilter(1)
 			var tl = gsap.timeline()
 
-			tl.set(next.querySelectorAll("#hello"), {
-				display: ""
-			}, 0)
-
-			tl.fromTo(next.querySelectorAll("#hello"), {
-				x: "100vw",
-				y: "100vh",
-				rotation: 90
-			}, {
-				x: 0,
-				y: 0,
-				rotation: 0,
-				ease: "power4.out",
-				duration: length * 3 / 4
-			}, length / 4)
+			tl
+				.set(next.querySelectorAll("#hello"), {
+					display: ""
+				}, 0)
+				.fromTo(next.querySelectorAll("#hello"), {
+					opacity: 0,
+				}, {
+					opacity: 1,
+					ease: "power4.out",
+					duration: length * 1 / 4
+				}, 0)
+				.fromTo(next.querySelectorAll("#hello"), {
+					scale: .5,
+				}, {
+					scale: 1,
+					ease: "elastic",
+					duration: length
+				}, 0)
 
 			tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
 				display: "",
@@ -218,9 +221,6 @@ class replurk {
 
 		// Check is server have open session
 		var tl = gsap.timeline()
-		tl.set(next.querySelector("#hello .arrow-big"), {
-			opacity: 0
-		})
 
 		let data = await api.call("?")
 		var interval = null
@@ -387,8 +387,6 @@ class replurk {
 		next.querySelector("#hello .since .title").innerHTML = `RePlurk ${this.year}`
 		next.querySelector("#hello .karma").innerHTML = `<div>${plurker.karma}</div><div>${plurker.karma}</div><div>${plurker.karma}</div>`
 
-		console.log(plurker)
-
 		var color = gsap.utils.splitColor(`#${plurker.name_color}`)
 		gsap.set(next.querySelectorAll("#hello .animate, .footer #menu"), {
 			color: `rgb(${color[0] - 90}, ${color[1] - 90}, ${color[2] - 90})`,
@@ -405,16 +403,43 @@ class replurk {
 			// var join = new Date(plurker.join_date)
 			next.querySelector("#hello .since .when").innerHTML = `Plurking since <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`
 
-			this.statistics.draw('center posted', Math.round(plurker.plurks_count / days), `I posted around <i>${icons.draw("left-speech-bubble")} ${plural(Math.round(plurker.plurks_count / days), "plurk")} per day</i>`)
-
 			// Responses
 			var oneday = 16
-			if (responses <= oneday) extra = "That's almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>'
-			else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>'
-			this.statistics.draw('span2 center responded', responses, `I responded around <i>${icons.draw("left-speech-bubble")} ${plural(responses, "time")}</i> per day. ${extra} when I'm not sleeping`)
+			if (responses <= oneday) extra = "Almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>'
+			else extra = "Almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>'
+			var sentence = `You posted <i>${icons.draw("left-speech-bubble")} ${plural(Math.round(plurker.plurks_count / days), "plurk")} per day</i>, responded <i>${icons.draw("left-speech-bubble")} ${plural(responses, "response")}</i> per day, ${extra} when you're not sleeping.`
 
-			// this.statistics.draw('center anniversary', `<strong><i>${monthNames[join.getMonth()]}</i> <i>${join.getFullYear()}</i></strong> <em>${join.getDate()}</em>`, `I joined Plurk <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`)
-			this.statistics.draw('center badges', plurker.badges.length, `I have <i>${icons.draw("shield")} ${plural(plurker.badges.length, "badge")}</i> right now`)
+			// Badge
+			var imagebadge = ``
+			for (let index = 0; index < plurker.badges.length; index++) imagebadge += `<img src="/img/replurk/braceyourself.webp" style="z-index: ${plurker.badges.length - index}; bottom: -${index / 2}rem; left: ${index}rem;" />`
+
+			// Draw data
+			this.statistics.newdraw({
+				class: `responded meme`,
+				html: [{
+					class: `big`,
+					html: sentence
+				}, {
+					class: `image`,
+					html: `<img src="/img/replurk/pigeon.webp" />`
+				}, {
+					class: `text`,
+					html: sentence
+				}]
+			}, {
+				class: `badgeinfo meme inter`,
+				html: [{
+					class: `big`,
+					html: `Brace yourself!`
+				}, {
+					class: `text`,
+					html: `You have ${plural(plurker.badges.length, "badge")} `,
+					repeat: 10
+				}, {
+					class: `image`,
+					html: imagebadge
+				}]
+			})
 		} else {
 			this.statistics.draw('', '-', "There is no data in my timeline")
 			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now")
@@ -423,7 +448,6 @@ class replurk {
 
 	// Display statistics
 	async displayStatistics() {
-		// this.statistics.title('This Year', 'thisyear')
 		this.statistics.draw("statistics-loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.")
 
 		this.loading = new loading(this.next)
@@ -529,7 +553,6 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		// this.statistics.title('Deeper Statistic', 'digdeeper')
 		this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>")
 
 		// Load each post responses and calculate statistics
@@ -622,7 +645,6 @@ class replurk {
 		if (this.me.gender == 1) plurker = icons.draw("man-bowing")
 		if (this.me.gender == 0) plurker = icons.draw("woman-bowing")
 
-		this.statistics.title('RePlurk Badges', 'replurkbadges')
 		this.statistics.body(`\
 			<h4>What are RePlurk Badges?</h4>\
 			<p>RePlurk Badges are badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\

@@ -81,17 +81,12 @@ class loading {
 				var el = this.next.querySelector(".statistics.statistics-loading")
 				this.clean = false
 				if (el) {
-					gsap.to(el, {
-						opacity: 0,
-						width: 0,
-						height: 0,
-						padding: 0,
-						margin: 0,
-						overflow: "hidden",
+					gsap.to(el.querySelectorAll(".content p"), {
+						// opacity: 0,
 						duration: length / 2,
 						ease: "power3.out",
 						onComplete: () => {
-							el.remove()
+							// el.remove()
 							scroll.refresh()
 							resolve()
 						}

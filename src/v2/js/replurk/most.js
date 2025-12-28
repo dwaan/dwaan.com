@@ -263,7 +263,7 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, `<i>${icons.draw("left-speech-bubble")} Most Responded</i> ${datediff(post.posted)}`, post.content, post.response_count)
+					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, `Remember this Plurk from <strong>${datediff(post.posted)}</strong>? It got lots of reponses, ${post.response_count} of them.`, post.content, `${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>`)
 				}
 			}
 		}
@@ -275,7 +275,10 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.replurkers_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostreplurked', post.plurk_id, `<i>${icons.draw("megaphone")} Most Replurked</i> ${datediff(post.posted)}`, post.content, post.replurkers_count)
+					var replurk = `<span class="replurk">This plurk got ${post.replurkers_count} ${post.replurkers_count > 1 ? "replurks" : "replurk"}</span>`
+					var famous = `<span class="famous">You're famous</span>`
+					var warning = `<span class="warning">Achtung! Achtung! Achtung! Achtung! Achtung! Achtung!</span>`
+					this.parent.statistics.drawPost('mostreplurked outfit', post.plurk_id, `<span>This famous plurk is from ${datediff(post.posted)}</span>`, post.content, replurk + replurk + warning + famous + famous)
 				}
 			}
 		}
@@ -287,7 +290,13 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.favorite_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostfavorited', post.plurk_id, `<i>${icons.draw("red-heart")} Most Loved</i> ${datediff(post.posted)}`, post.content, post.favorite_count)
+					this.parent.statistics.drawPostAdvanced(
+						'postcontent span2 mostfavorited',
+						post.plurk_id,
+						`<p class="love">Everybody loves this Plurk</p><br/><p class="date">From ${datediff(post.posted)}</p>`,
+						`<img src="/img/replurk/love.webp" class="loveshadow" /><img src="/img/replurk/love.webp" class="loveshadow two" /><img src="/img/replurk/love.webp" class="love" /><p>${post.content}</p>`,
+						post.favorite_count
+					)
 				}
 			}
 		}

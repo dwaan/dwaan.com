@@ -16,26 +16,26 @@ class scrolls {
 
 	statistics() {
 		// Scroll animate statistics
-		scroll.push(tl => {
-			tl.fromTo(this.next.querySelector("#hello .animate"), {
-				x: 0,
-				y: 0,
-				rotation: 0
-			}, {
-				x: "-100vw",
-				y: "150vh",
-				rotation: -45,
-				ease: "linear",
-			}, 0)
+		// scroll.push(tl => {
+		// 	tl.fromTo(this.next.querySelector("#hello .animate"), {
+		// 		x: 0,
+		// 		y: 0,
+		// 		rotation: 0
+		// 	}, {
+		// 		x: "-100vw",
+		// 		y: "150vh",
+		// 		rotation: -45,
+		// 		ease: "linear",
+		// 	}, 0)
 
-			return tl
-		}, tl => ScrollTrigger.create({
-			trigger: this.next.querySelector("#hello"),
-			start: "100% 100%",
-			end: "100% 50%",
-			scrub: true,
-			animation: tl
-		}))
+		// 	return tl
+		// }, tl => ScrollTrigger.create({
+		// 	trigger: this.next.querySelector("#hello"),
+		// 	start: "100% 100%",
+		// 	end: "100% 50%",
+		// 	scrub: true,
+		// 	animation: tl
+		// }))
 	}
 
 	permisions() {
@@ -93,12 +93,12 @@ class scrolls {
 					end: "100% 10px",
 					animation: tl,
 					scrub: true,
-					onLeave: () => {
-						browser.set()
-					},
-					onEnterBack: () => {
-						browser.set("green")
-					}
+					// onLeave: () => {
+					// 	browser.set()
+					// },
+					// onEnterBack: () => {
+					// 	browser.set("green")
+					// }
 				})
 			})
 
@@ -111,15 +111,15 @@ class scrolls {
 					end: "100% 10px",
 					animation: tl,
 					scrub: true,
-					onLeave: () => {
-						browser.set("yellow")
-					},
-					onEnter: () => {
-						browser.set()
-					},
-					onEnterBack: () => {
-						browser.set()
-					}
+					// onLeave: () => {
+					// 	browser.set("yellow")
+					// },
+					// onEnter: () => {
+					// 	browser.set()
+					// },
+					// onEnterBack: () => {
+					// 	browser.set()
+					// }
 				})
 			})
 		} else {

@@ -98,23 +98,58 @@ class statistics {
 			</div>`)
 	}
 
-	wrapper(style, text, background) {
+	wrapper(style, html, background) {
 		return `<div class="statistics statistics-wrap ${style}">\
-			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${text}</div>\
+			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${html}</div>\
 		</div>`
 	}
 
-	// Drawing functions
+	// Helper to draw
 
-	draw(style, big, text, background) {
-		if (typeof big == "string" || (typeof big == "big" && big > 0)) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, `\
+	draw(classes, big, text, background) {
+		if (typeof big == "string" || (typeof big == "number" && big > 0)) {
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(classes, `\
 				<p>\
 					<span class="big">${big}</span>\
 					<span class="text">${text}</span>\
 				</p>\
-			`), background)
+			`, background))
 		}
+	}
+
+	newdraw() {
+		if (arguments.length === 0) return
+
+		for (let index = 0; index < arguments.length; index++) {
+			const argument = arguments[index]
+
+			if (argument.show !== false) {
+				var content = ""
+				const classes = argument.class ? argument.class : ""
+				const background = argument.background ? argument.background : ""
+
+				if (typeof argument.html == "object") {
+					argument.html.forEach((html, index) => {
+						if (typeof html == "object") {
+							var repeatedhtml = ``
+							const length = typeof html.repeat == "number" && html.repeat > 0 ? html.repeat : 1
+							for (let index = 0; index < length; index++) repeatedhtml += `${html.html}`
+							content += `<div class="content${index} ${html.class}">${repeatedhtml}</div>`
+						} else content += `<div class="content${index}">${html}</div>`
+					})
+				}
+
+				this.el.insertAdjacentHTML('beforeend', this.wrapper(classes, content, background))
+			}
+		}
+	}
+
+	drawMeme(style, big, text, meme) {
+		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + ` meme`, `\
+			<p class="big">${big}</p>\
+			<p class="image">${meme}</p>\
+			<p class="text">${text}</p>\
+		`, background))
 	}
 
 	drawBadge(condition, style, icon, text, textempty) {
@@ -180,9 +215,22 @@ class statistics {
 		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", `\
 			<div>\
 				<a href="${url}" class="link" target="_BLANK">${icons.link}</a>\
-				<span class="big">${badge}</span>\
-				<p class="post">${text}</p>\
-				<span class="title">${title}</span>\
+				<div class="big">${badge}</div>\
+				<div class="post"><p>${text}</p></div>\
+				<div class="title">${title}</div>\
+			</div>\
+		`))
+	}
+
+	drawPostAdvanced(style, id, title, text, badge) {
+		var url = ""
+		if (id) url = 'https://plurk.com/p/' + id.toString(36)
+		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", `\
+			<div>\
+				<a href="${url}" class="link" target="_BLANK">${icons.link}</a>\
+				<div class="big">${badge}</div>\
+				<div class="post">${text}</div>\
+				<div class="title">${title}</div>\
 			</div>\
 		`))
 	}
@@ -190,7 +238,6 @@ class statistics {
 	async drawUserList(style, id, title, users, number = false) {
 		var html = ""
 		var max = users.length >= 5 ? 5 : users.length
-		var length = reduceMotionFilter(1)
 		var userToDraw = []
 		var index = 0
 
@@ -239,7 +286,10 @@ class statistics {
 		})
 		this.el.querySelector(`.${id} .html`).innerHTML = html
 
+		/*
 		// Stagger animation
+		var length = reduceMotionFilter(1)
+
 		if (id == 'mostinteraction' || id == 'mvp') {
 			scroll.push(tl => {
 				tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
@@ -290,29 +340,139 @@ class statistics {
 		}
 
 		ScrollTrigger.refresh()
+		*/
 	}
 
+	// Draw statistics
+
 	async drawAll(plurks) {
+		// Percentage responses
 		var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100)
+		var half = response_percentage > 50 ? "Your glass is half full" : "Your glass is half empty"
+		this.newdraw({
+			class: `meme percentage`,
+			html: [{
+				class: `big`,
+				html: half
+			}, {
+				class: `graph`,
+				html: `<i style="height: ${response_percentage}%"></i>`
+			}, {
+				class: `text`,
+				html: `${response_percentage}% of your plurks in ${this.year} recieved ${icons.draw("left-speech-bubble")} responses ${(response_percentage <= 50) ? `${icons.draw("crying-face")}` : `${icons.draw("star-struck")}`}`
+			}, {
+				class: `image`,
+				html: `<img src="/img/replurk/glass.webp">`
+			}]
+		})
 
+		// Private, whisper, and "porn" count
+		var privatewhisper = `<span>In ${this.year},</span><span>I didn't post<br />any private and<br />whisper plurk</i></span>`
+		if (this.private_count > 0) {
+			privatewhisper += `<span>In ${this.year},<br/>I posted <i>${plural(this.private_count, 'private plurk')}</i></span>`
+			if (this.whispers_count > 0) privatewhisper += `<span>I also posted <i>${plural(this.whispers_count, 'whisper')}</i></span>`
+		} else {
+			if (this.whispers_count > 0) privatewhisper += `<span>In ${this.year},<br/>I posted <i>${plural(this.whispers_count, 'whisper')}</i></span>`
+		}
+		this.newdraw({
+			class: `meme privatewhisper outfit`,
+			html: [{
+				class: `image`,
+				html: `<img src="/img/replurk/theydidntknow.webp">`
+			}, {
+				class: `big`,
+				html: `They<br/>dind't<br/>know`
+			}, {
+				class: `text`,
+				html: privatewhisper
+			}]
+		})
+
+		// Porn count
+		var posted = `I'm old enough to not post adult plurk this year`
+		if (this.porn_count > 0) {
+			posted = `I posted <i>${plural(this.porn_count, 'adult plurk')}</i> this year`
+		}
+		this.newdraw({
+			class: `porn meme inter`,
+			html: [{
+				class: `year big`,
+				html: `${this.year},<br/>`,
+				repeat: 20
+			}, {
+				class: `ninetyfive big`,
+				html: `1995 is 5 years ago</br>`,
+				repeat: 20
+			}, {
+				class: `image`,
+				html: `<img src="/img/replurk/grandma.webp">`
+			}, {
+				class: `text`,
+				html: posted
+			}]
+		})
+
+		// Coin count
+		this.newdraw({
+			class: `coins meme outfit`,
+			html: [{
+				class: `text`,
+				html: `${plural(this.coins_count, 'plurk coin')}<br/>`,
+				repeat: 20
+			}, {
+				class: `image`,
+				html: `<img src="/img/replurk/confuse.webp">`
+			}, {
+				class: `big`,
+				html: `Wait, you guys got <i>${plural(this.coins_count, 'plurk coin')}</i> in ${this.year}?`
+			}],
+			show: this.coins_count > 0
+		})
+
+		// Response, Love, and Replurk
+		this.newdraw({
+			class: `count meme`,
+			html: [{
+				class: `image`,
+				html: `<img src="/img/replurk/liveloughlove.webp">`
+			}, {
+				class: `big`,
+				html: `More like: Response, Resback, Replurk!`
+			}, {
+				class: `text`,
+				html: `PS: This year you received <i>${this.response_count} responses</i>, <i>${this.replurker_count} replurks</i>, and <i>${this.favourite_count} loves</i> from Plurkers.`
+			}]
+		})
+
+		// Most response, replurked, love post
 		this.most.responses.draw(plurks)
-		this.drawGraph('center graph percentage', response_percentage, `Around <i>${response_percentage}%</i> of my plurks got ${icons.draw("left-speech-bubble")} responses ${(response_percentage <= 50) ? `${icons.draw("crying-face")}` : `${icons.draw("star-struck")}`}`)
-
-		this.draw('recievereplurk', this.replurker_count, `I received <i>${icons.draw("megaphone")} ${plural(this.replurker_count, 'replurk')}</i>`)
 		this.most.replurk.draw(plurks)
-
 		this.most.favorite.draw(plurks)
-		this.draw('recievelove', this.favourite_count, `I recieved <i>${icons.draw("red-heart")} ${plural(this.favourite_count, 'love')}</i>`)
 
-		this.draw('privateplurk', this.private_count, `I posted <i>${icons.draw("lip")} ${plural(this.private_count, 'private plurk')}</i>`)
-		this.draw('whisper', this.whispers_count, `I posted <i>${icons.draw("face-in-clouds")} ${plural(this.whispers_count, 'whisper')}</i>`)
-		this.draw('porn', this.porn_count, `I posted <i>${icons.draw("face-with-peeking-eye")} ${plural(this.porn_count, 'adult plurk')}</i>`)
-
-		this.draw('span2 responsecount', `${this.plurks_count} &rarr; ${this.response_count}`, `I received <i>${icons.draw("left-speech-bubble")} ${plural(this.response_count, 'response')}</i> from <i>${plural(this.plurks_count, 'plurk')}</i>`)
-		this.draw('center coins', this.coins_count, `I recieved <i>${icons.draw("coin")} ${plural(this.coins_count, 'coin')}</i>`)
-
-		if (this.favorite_list.length > 0) this.drawUserList("users", "loved", `These Plurkers <i>${icons.draw("red-heart")} Loved</i> My Posts`, this.favorite_list.sort(this.most.sort))
-		if (this.replurker_list.length > 0) this.drawUserList("users", "replurked", `These Plurkers likes to <i>${icons.draw("megaphone")} Replurked</i> My Posts`, this.replurker_list.sort(this.most.sort))
+		if (this.favorite_list.length > 0) this.drawUserList(
+			`inter`,
+			`lovers`,
+			`\
+			<img class="meme" src="/img/replurk/notsure.webp" />\
+			<small>is this the real love? is this just fantasy?</small>\
+			<h2>Top <strong>Lovers</strong></h2>\
+			<p>Not sure if this plurkers like your plurk, or if they accidentaly like your plurk. Or maybe they really likes your plurk, you should asked them for sure.</p>\
+			`,
+			this.favorite_list.sort(this.most.sort)
+		)
+		if (this.replurker_list.length > 0) this.drawUserList(
+			`lexend`,
+			`replurkers`,
+			`\
+			<h2>RE<br/>PLURK<br/>ERS</h2>\
+			<p>the one who made your plurk</p>\
+			<p>famous in the year of ${this.year}</p>\
+			<img class="meme" src="/img/replurk/distracted.webp" />\
+			<p class="also">also starring</p>\
+			<p class="rick">Never gonna give you up, Never gonna let you down, Never gonna run around and desert you. Never gonna make you cry, Never gonna say goodbye, Never gonna tell a lie, and hurt you.</p>\
+			`,
+			this.replurker_list.sort(this.most.sort)
+		)
 	}
 
 	// For animating user chart
@@ -412,6 +572,9 @@ class statistics {
 			if (randomcolors.length >= 2) {
 				gsap.set(content, {
 					background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`
+				})
+				gsap.set(el.querySelector(".content .big, .content .title"), {
+					color: `${randomcolors[1]}`
 				})
 			} else {
 				gsap.set(content, {
