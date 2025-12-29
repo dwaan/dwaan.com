@@ -261,7 +261,7 @@ class statistics {
 			index++
 		}
 
-		userToDraw.forEach(user => {
+		userToDraw.forEach((user, index) => {
 			var plurker = new element(user.id, user, "", plurker => {
 				plurker.avatar = new span()
 					.class("avatar")

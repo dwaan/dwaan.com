@@ -472,11 +472,11 @@ class most {
 				}
 				this.data.sort(this.parent.sort)
 			},
-			draw: function () {
+			draw: async function () {
 				var result = []
 				var length = 0
 				var index = 0
-				while (this.data[index] && length <= 5) {
+				while (this.data[index] && length < 10) {
 					if (this.data[index].id != this.parent.me.id) {
 						result.push(this.data[index])
 						length++
@@ -485,7 +485,15 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", `My ${this.parent.year} <i>${icons.draw("biting-lip")} MVP</i>, Most Valuable Plurker!`, result, true)
+					if (result.length > 0) this.parent.statistics.drawUserList(
+						`meme lexend`,
+						`mvp`,
+						`<h2>Your Most Vibing Plurker in ${this.parent.year}</h2>\
+						<p>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing</p>\
+						<h3>MVP</h3>`,
+						result,
+						true
+					)
 				} catch (error) {
 					console.info("Error while counting my mvp", error)
 				}
