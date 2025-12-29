@@ -192,10 +192,8 @@ class statistics {
 
 	drawHTML(style, title, html) {
 		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawhtml", '\
-			<div>\
-				<div class="html">' + html + '</div>\
-				<div class="title">' + title + '</div>\
-			</div>\
+			<div class="html">' + html + '</div>\
+			<div class="title">' + title + '</div>\
 		'))
 	}
 
@@ -241,7 +239,17 @@ class statistics {
 		var userToDraw = []
 		var index = 0
 
-		this.drawHTML(`${style} userlist ${id}`, title, "<span class='info'>Downloading user data</span>")
+		this.newdraw({
+			class: `${id} ${style} userlist`,
+			html: [{
+				class: `title`,
+				html: `${title}`
+			}, {
+				class: `list`,
+				html: `<span class='loading'>Downloading user data</span>`
+			}]
+		})
+
 		while (userToDraw.length < max && users[index]) {
 			let user = users[index]
 			let friend = await this.friends.find(user.id)
@@ -284,7 +292,7 @@ class statistics {
 			plurker.create()
 			html += plurker.el.outerHTML
 		})
-		this.el.querySelector(`.${id} .html`).innerHTML = html
+		this.el.querySelector(`.${id} .list`).innerHTML = html
 	}
 
 	// Draw statistics

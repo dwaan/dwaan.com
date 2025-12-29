@@ -448,7 +448,7 @@ class replurk {
 
 	// Display statistics
 	async displayStatistics() {
-		this.statistics.draw("statistics-loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.")
+		this.statistics.draw("statistics-loading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.")
 
 		this.loading = new loading(this.next)
 		this.loading.loop(this.fulldays)
@@ -557,7 +557,7 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>")
+		_q(".statistics-loading .text").innerHTML = `<i class='month'>Data from ${this.year}</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>`
 
 		// Load each post responses and calculate statistics
 		this.loading = new loading(this.next)

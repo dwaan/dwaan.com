@@ -109,8 +109,23 @@ class most {
 				var max = 9
 				this.data.sort(this.parent.sort)
 				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
-					if (this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>'
-				if (html != "") this.parent.statistics.drawHTML("grid emoticons", `Most Used <i>${icons.draw("beaming-face-with-smiling-eyes")} My Emoticons</i>`, html)
+					if (this.data[i].count > 1) html += '\
+						<div><img src="' + this.data[i].value + '" />\
+						<span class="count">' + this.data[i].count + '</span>\
+						</div>\
+					'
+
+				this.parent.statistics.newdraw({
+					class: "emoticons inter",
+					html: [{
+						class: `list`,
+						html: html
+					}, {
+						class: `title`,
+						html: `${this.parent.year} Vibes`
+					}],
+					show: html != ""
+				})
 			}
 		}
 
@@ -127,11 +142,29 @@ class most {
 				var max = 5
 				this.data.sort(this.parent.sort)
 				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
-					if (this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>'
-				if (html != "") {
-					html = "<strong>#</strong>" + html
-					this.parent.statistics.drawHTML("hashtags", `Most Used <i>${icons.draw("keycap-hashtag")} Hashtags</i>`, html)
-				}
+					if (this.data[i].count >= 0) html += `<a href="https://plurk.com/search?q=${this.data[i].value}" target="_BLANK" /><span class="count">${this.data[i].count}</span> #${this.data[i].value}</a>`
+
+				this.parent.statistics.newdraw({
+					class: "hashtags meme lexend",
+					html: [{
+						class: `title big`,
+						html: `#${this.parent.year}<br/>`,
+						repeat: 20
+					}, {
+						class: `image`,
+						html: `<img src="/img/replurk/toy.webp" />`
+					}, {
+						class: `title`,
+						html: `Hashtags`
+					}, {
+						class: `text`,
+						html: html
+					}, {
+						class: `title`,
+						html: `Hashtags everywhere`
+					}],
+					show: html != ""
+				})
 			}
 		}
 
@@ -297,7 +330,25 @@ class most {
 				this.words += words.length
 			},
 			draw: function () {
-				if (this.chars > 0) this.parent.statistics.draw('span2 typed mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year')
+				this.parent.statistics.newdraw({
+					class: `typed meme`,
+					html: [{
+						class: `title`,
+						html: `${this.chars}<br />`,
+						repeat: 20
+					}, {
+						class: `image`,
+						html: `<img src="/img/replurk/stephenking.webp" />`
+					}, {
+						class: `text`,
+						html: `\
+							<p>Dear Stephen king,</p>\
+							<p>In 2025 I typed around <strong>${this.chars} characters</strong> in Plurk, approx. <strong>${Math.floor(this.chars / 250000)} horror novels</strong>.</p>\
+							<p>Now you can retired from writing, you’re welcome\
+						`
+					}],
+					show: this.chars > 0
+				})
 			}
 		}
 
@@ -382,9 +433,9 @@ class most {
 
 				try {
 					if (result.length > 0) this.parent.statistics.drawUserList(
-						`bubble`,
+						``,
 						`mostinteraction`,
-						`These plurkers surely like to interact with you`,
+						`These plurkers like to interact with you`,
 						result
 					)
 				} catch {
