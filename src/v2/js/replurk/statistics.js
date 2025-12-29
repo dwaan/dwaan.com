@@ -285,62 +285,6 @@ class statistics {
 			html += plurker.el.outerHTML
 		})
 		this.el.querySelector(`.${id} .html`).innerHTML = html
-
-		/*
-		// Stagger animation
-		var length = reduceMotionFilter(1)
-
-		if (id == 'mostinteraction' || id == 'mvp') {
-			scroll.push(tl => {
-				tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
-					scale: .3,
-					opacity: 0
-				}, {
-					scale: 1,
-					opacity: 1,
-					duration: length,
-					ease: "elastic(1.2, 0.5)",
-					stagger: {
-						amount: length / 3,
-						from: "end"
-					}
-				}, 0)
-
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: this.el.querySelector("." + id),
-					start: "0% 100%",
-					end: "100% 100%",
-					scrub: 2,
-					animation: tl
-				})
-			})
-		} else {
-			scroll.push(tl => {
-				tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
-					y: 50,
-					opacity: 0
-				}, {
-					y: 0,
-					opacity: 1,
-					duration: length,
-					stagger: length / 3
-				}, 0)
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: this.el.querySelector("." + id),
-					start: "0% 100%",
-					end: "100% 100%",
-					scrub: 2,
-					animation: tl
-				})
-			})
-		}
-
-		ScrollTrigger.refresh()
-		*/
 	}
 
 	// Draw statistics
