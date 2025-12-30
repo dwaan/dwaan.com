@@ -1405,6 +1405,10 @@ main.replurk {
 
 			img {
 				margin: 0 .5rem .5rem 0;
+
+				&.emoticon {
+					margin: 0;
+				}
 			}
 		}
 
@@ -2092,6 +2096,10 @@ main.replurk {
 			line-height: 130%;
 			letter-spacing: -.075rem;
 		}
+
+		.emoticon {
+			margin: 0;
+		}
 	}
 
 	.text {
@@ -2676,8 +2684,6 @@ main.replurk {
 			}
 		}
 
-
-
 		.list {
 			display: grid;
 			gap: .75rem;
@@ -2733,10 +2739,8 @@ main.replurk {
 
 			.inactive {
 
-				.title,
-				.badge img {
+				.title {
 					color: var(--black-50) !important;
-					mix-blend-mode: difference;
 				}
 			}
 		}

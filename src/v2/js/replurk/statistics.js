@@ -83,7 +83,9 @@ class statistics {
 		return list
 	}
 
+	//
 	// Helper
+	// 
 
 	wrapper(style, html, background) {
 		return `<div class="statistics statistics-wrap ${style}">\
@@ -243,7 +245,6 @@ class statistics {
 	}
 
 	// Draw statistics
-
 	async drawAll(plurks) {
 		// Percentage responses
 		var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100)
@@ -375,7 +376,6 @@ class statistics {
 	}
 
 	// For animating user chart
-
 	attach(charttitle, node, max) {
 		var id = node.id
 		var chart
@@ -457,11 +457,10 @@ class statistics {
 	}
 
 	// Events after html is attach to DOM
-
 	afterDraw(el) {
-		var length = reduceMotionFilter(1)
+		var length = reduceMotionFilter(.25)
 
-		if (hasClass(el, 'statistics-wrap')) {
+		if (hasClass(el, 'statistics')) {
 			// Content
 			var color = new colors()
 			var randomcolors = [color.getRandomColor(), color.getRandomColor()]
@@ -472,8 +471,11 @@ class statistics {
 				gsap.set(content, {
 					background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`
 				})
-				gsap.set(el.querySelector(".content .big, .content .title"), {
+				gsap.set(el.querySelector(".content .big, .content .title, .content .color1"), {
 					color: `${randomcolors[1]}`
+				})
+				gsap.set(el.querySelector(".content .color2"), {
+					color: `${randomcolors[2]}`
 				})
 			} else {
 				gsap.set(content, {
@@ -482,165 +484,68 @@ class statistics {
 			}
 
 			// Make element appears
-			gsap.to(content, {
+			gsap.fromTo(content, {
+				y: 200,
+				opacity: 0
+			}, {
+				y: 0,
 				opacity: 1,
-				duration: length / 2,
-				ease: "power3.out"
-			}, 0)
-
-			// Animate number
-			scroll.push(tl => {
-				if (el.querySelector(".big")) {
-					var number = Number(el.querySelector(".big").textContent)
-					if (number > 0) {
-						var load = { progress: 0 }
-						var duration = 1
-						if (number >= 500 && number < 1000) duration = 2
-						else if (number >= 1000 && number < 99999) duration = 3
-						else if (number >= 99999) duration = 4
-						tl.to(load, {
-							progress: number,
-							snap: "progress",
-							ease: "power3.out",
-							duration: duration,
-							onUpdate: () => {
-								el.querySelector(".big").textContent = plural(load.progress)
-							}
-						}, 0)
-					}
-				}
-
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "0 100%-=100px",
-					end: "100px 100%-=100px",
-					animation: tl,
-					toggleActions: "play none none none"
-				})
+				duration: length,
+				ease: "expo.out"
 			})
-
-			// Graph animation
-			if (hasClass(el, 'drawgraph')) {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelector(".graph"), {
-						y: 100
-					}, {
-						y: 0
-					}, 0)
-
-					tl.fromTo(el.querySelector(".graph i"), {
-						height: "0%"
-					}, {
-						height: el.querySelector(".graph i").getAttribute("data-number") + "%"
-					}, 0)
-
-					return tl
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "50% 100%",
-						end: "100% 100%",
-						animation: tl,
-						scrub: 1
-					})
-				})
-			}
-
-			// Coin animation
-			if (hasClass(el, 'coins')) {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelector(".big"), {
-						y: "50%"
-					}, {
-						y: 0,
-						ease: "power3.out"
-					}, 0)
-					return tl
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "50% 100%",
-						end: "100% 100%",
-						animation: tl,
-						scrub: 2
-					})
-				})
-			}
 
 			// Capture function
-			this.capture(el)
-		} else {
-			// Scroll animation header line section
-			scroll.push(tl => {
-				tl.fromTo(el.querySelectorAll("i"), {
-					x: "-100%"
-				}, {
-					x: "0%",
-					ease: "ease.out"
-				}, 0)
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "100% 100%",
-					end: "100% 0",
-					animation: tl,
-					scrub: 1
-				})
-			})
+			const capture = el.querySelector(".content")
+			if (capture) capture.onclick = async () => {
+				// this.capture(capture)
+				console.log("Capturing...")
+			}
 		}
 
 		// Refresh scroll
 		scroll.refresh()
 	}
 
-	capture(el) {
-		var capture = el.querySelector(".content")
-		if (!capture) return
+	async capture(capture) {
+		if (capture.generating) return
 
-		capture.onclick = async () => {
-			if (capture.generating) return
+		// Informing user the process is starting
+		capture.generating = true
+		addClass(capture, "wait")
+		document.body.style.cursor = "wait"
 
-			// Informing user the process is starting
-			capture.generating = true
-			addClass(capture, "wait")
-			document.body.style.cursor = "wait"
+		capture.querySelectorAll("img").forEach(img => {
+			if (!img.src.includes("plurk-api")) {
+				img.dataset.src = img.src
+				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+			} else if (img.dataset.src) {
+				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+			}
+		})
+		await waitForImg(capture)
 
-			capture.querySelectorAll("img").forEach(img => {
-				if (!img.src.includes("plurk-api")) {
-					img.dataset.src = img.src
-					img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
-				} else if (img.dataset.src) {
-					img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
-				}
-			})
-			await waitForImg(capture)
+		// HTML to Canvas magic
+		var canvas = await html2canvas(capture, {
+			backgroundColor: null,
+			logging: false
+		})
 
-			// HTML to Canvas magic
-			var canvas = await html2canvas(capture, {
-				backgroundColor: null,
-				logging: false
-			})
+		// Download the output
+		var link = document.createElement("a")
+		link.style.display = "none"
+		link.download = "replurk" + this.year + "-" + Date.now() + ".png"
+		link.href = canvas.toDataURL()
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+		link.remove()
 
-			// Download the output
-			var link = document.createElement("a")
-			link.style.display = "none"
-			link.download = "replurk" + this.year + "-" + Date.now() + ".png"
-			link.href = canvas.toDataURL()
-			document.body.appendChild(link)
-			link.click()
-			document.body.removeChild(link)
-			link.remove()
-
-			// Reset button after 3s
-			document.body.style.cursor = ""
-			removeClass(capture, "wait")
-			setTimeout(() => {
-				capture.generating = false
-			}, 3000)
-		}
+		// Reset button after 3s
+		document.body.style.cursor = ""
+		removeClass(capture, "wait")
+		setTimeout(() => {
+			capture.generating = false
+		}, 3000)
 	}
 }
 

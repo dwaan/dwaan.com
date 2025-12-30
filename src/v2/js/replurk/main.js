@@ -216,9 +216,6 @@ class replurk {
 
 			// Scroll animate statistics
 			this.scrolls.statistics()
-
-			// Scroll browser bar
-			this.scrolls.browserBar()
 		} else {
 			// Hide statistic pages
 			if (clear) next.querySelectorAll(".grant").forEach(function (el) { el.style.display = "none" })
@@ -229,8 +226,6 @@ class replurk {
 
 			// Scroll animation permission section
 			this.scrolls.permisions()
-			// Scroll browser bar
-			this.scrolls.browserBar(false)
 
 			// Automatic login
 			interval = setInterval(async () => {

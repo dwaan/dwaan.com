@@ -81,67 +81,6 @@ class scrolls {
 			})
 		})
 	}
-
-	browserBar(login = true) {
-		if (login) {
-			scroll.push((tl) => {
-				return tl
-			}, (tl) => {
-				return ScrollTrigger.create({
-					trigger: '#hello',
-					start: "0 0",
-					end: "100% 10px",
-					animation: tl,
-					scrub: true,
-					// onLeave: () => {
-					// 	browser.set()
-					// },
-					// onEnterBack: () => {
-					// 	browser.set("green")
-					// }
-				})
-			})
-
-			scroll.push((tl) => {
-				return tl
-			}, (tl) => {
-				return ScrollTrigger.create({
-					trigger: '#statistics',
-					start: "0 0",
-					end: "100% 10px",
-					animation: tl,
-					scrub: true,
-					// onLeave: () => {
-					// 	browser.set("yellow")
-					// },
-					// onEnter: () => {
-					// 	browser.set()
-					// },
-					// onEnterBack: () => {
-					// 	browser.set()
-					// }
-				})
-			})
-		} else {
-			scroll.push((tl) => {
-				return tl
-			}, (tl) => {
-				return ScrollTrigger.create({
-					trigger: '#permission',
-					start: "0 0",
-					end: "100% 10px",
-					animation: tl,
-					scrub: true,
-					onLeave: () => {
-						browser.set("yellow")
-					},
-					onEnterBack: () => {
-						browser.set("green")
-					}
-				})
-			})
-		}
-	}
 }
 
 export default scrolls
