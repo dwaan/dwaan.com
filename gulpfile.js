@@ -213,7 +213,7 @@ var v2 = {
 	},
 
 	replurkcss() {
-		return gulp.src(['src/v2/css/replurk/main.scss'])
+		return gulp.src(['node_modules/swiper/swiper-bundle.css', 'src/v2/css/replurk/main.scss'])
 			.pipe(mode.development(sourcemaps.init({ loadMaps: true })))
 			.pipe(sass.sync({ outputStyle: 'compressed', silenceDeprecations: ['legacy-js-api'] }).on('error', sass.logError))
 			.pipe(concat("plurk.css"))

@@ -104,8 +104,9 @@ main.replurk {
 	right: 0;
 	bottom: 0;
 	display: flex;
-	overflow: auto;
-	overflow-y: hidden;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 }
 
 .middle {
@@ -151,24 +152,25 @@ main.replurk {
 	}
 }
 
+// Common size
+#statistics,
+#statistics>div,
+.statistics,
+.statistics .content {
+	width: 20.25rem;
+	height: 36rem;
+	aspect-ratio: 9/16;
+}
 
 // Statistics
-#statistics {
+#statistics>div {
 	position: relative;
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
 	flex-wrap: nowrap;
-	gap: 2rem;
-	z-index: 5;
-	height: 100vh;
-	padding: 0 2rem;
-	background-color: transparent;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	transition: background-color .5s ease;
-	overflow: initial;
+	gap: 0;
 }
 
 .statistics {
@@ -224,9 +226,6 @@ main.replurk {
 		justify-content: space-between;
 		z-index: 2;
 		opacity: 0;
-		width: auto;
-		height: 36rem;
-		aspect-ratio: 9/16;
 		overflow: hidden;
 		padding: var(--padl);
 		color: var(--white);
@@ -236,6 +235,10 @@ main.replurk {
 		box-shadow: inset .05rem .05rem .05rem #fff4;
 		transition: background-color .5s ease;
 		cursor: grab;
+
+		>div {
+			pointer-events: none;
+		}
 
 		&.capture {
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:var(--black);font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
@@ -502,8 +505,6 @@ main.replurk {
 	}
 
 	&.loading {
-		order: 998;
-
 		.content {
 			font-family: "Lexend Giga", sans-serif;
 			color: var(--white);

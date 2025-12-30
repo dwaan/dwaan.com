@@ -7,25 +7,27 @@ class: plurk
     <h2>Henlo, please wait...</h2>
 </section>
 
-<section id="statistics" class="grant middle first">
-    <div id="backtotop" class="grant middle">&larr;</div>
+<section id="statistics">
+    <div class="grant middle swiper-wrapper">
+        {% comment %} <div id="backtotop" class="grant middle">&larr;</div> {% endcomment %}
 
-    <div id="hello" class="statistics">
-        <div class="animate middle">
-            <div id="background"></div>
-            <div class="since">
-                <p class="title">RePlurk</p>
-                <p class="when"></p>
+        <div id="hello" class="statistics swiper-slide">
+            <div class="content">
+                <div id="background"></div>
+                <div class="since">
+                    <p class="title">RePlurk</p>
+                    <p class="when"></p>
+                </div>
+                <div class="thumbs"></div>
+                <div class="text"></div>
+                <div class="greet"></div>
+                <div class="karma"></div>
             </div>
-            <div class="thumbs"></div>
-            <div class="text"></div>
-            <div class="greet"></div>
-            <div class="karma"></div>
         </div>
     </div>
 </section>
 
-<section id="permission" class="middle first">
+<section id="permission" class="middle">
     <div class="text">
         <form action="./replurk<?php echo $now; ?>" method="GET">
             <h1>

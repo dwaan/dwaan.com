@@ -6,6 +6,8 @@ import html2canvas from "html2canvas"
 import api from "./api.js"
 import scroll from "../helpers/scroll.js"
 import { addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
+import Swiper from 'swiper'
+import { EffectCoverflow, Keyboard, Mousewheel } from 'swiper/modules'
 
 import span from "./span.js"
 import colors from "./colors.js"
@@ -42,13 +44,26 @@ class statistics {
 		this.friends = friends
 		this.year = year
 
+		// Swiper
+		this.swiper = new Swiper("#statistics", {
+			modules: [Mousewheel, Keyboard, EffectCoverflow],
+			effect: "coverflow",
+			grabCursor: true,
+			mousewheel: true,
+			centeredSlides: true,
+			spaceBetween: 30,
+			keyboard: {
+				enabled: true,
+			},
+		})
+
 		// Most statistics object renderer
 		this.most = new most(this)
 
 		// Inactive timeline
 		this.inactive = new inactive(this)
 
-		this.el = this.next.querySelector("#statistics")
+		this.el = this.next.querySelector("#statistics > div")
 
 		// Obverse when element is added to DOM
 		var observer = new MutationObserver((mutationsList) => {
@@ -87,7 +102,7 @@ class statistics {
 	// 
 
 	wrapper(style, html, background) {
-		return `<div class="statistics statistics-wrap ${style}">\
+		return `<div class="statistics statistics-wrap swiper-slide ${style}">\
 			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${html}</div>\
 		</div>`
 	}
@@ -412,7 +427,7 @@ class statistics {
 			content.appendChild(text)
 
 			wrapper = document.createElement('div')
-			wrapper.classList.add("statistics", "statistics-wrap", "attach", id)
+			wrapper.classList.add("statistics", "statistics-wrap", "swiper-slide", "attach", id)
 			wrapper.appendChild(content)
 
 			this.el.insertAdjacentElement("beforeend", wrapper)
@@ -459,50 +474,52 @@ class statistics {
 	afterDraw(el) {
 		var length = reduceMotionFilter(.25)
 
-		if (hasClass(el, 'statistics')) {
-			// Content
-			var color = new colors()
-			var randomcolors = [color.getRandomColor(), color.getRandomColor()]
-			var content = el.querySelector(".content")
+		// Content
+		var color = new colors()
+		var randomcolors = [color.getRandomColor(), color.getRandomColor()]
+		var content = el.querySelector(".content")
 
-			// Make colorful background
-			if (randomcolors.length >= 2) {
-				gsap.set(content, {
-					background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`
-				})
-				gsap.set(el.querySelector(".content .big, .content .title, .content .color1"), {
-					color: `${randomcolors[1]}`
-				})
-				gsap.set(el.querySelector(".content .color2"), {
-					color: `${randomcolors[2]}`
-				})
-			} else {
-				gsap.set(content, {
-					background: `${randomcolors[0]}`
-				})
-			}
-
-			// Make element appears
-			gsap.fromTo(content, {
-				y: 200,
-				opacity: 0
-			}, {
-				y: 0,
-				opacity: 1,
-				duration: length,
-				ease: "expo.out"
+		// Make colorful background
+		if (randomcolors.length >= 2) {
+			gsap.set(content, {
+				background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`
 			})
+			gsap.set(el.querySelector(".content .big, .content .title, .content .color1"), {
+				color: `${randomcolors[1]}`
+			})
+			gsap.set(el.querySelector(".content .color2"), {
+				color: `${randomcolors[2]}`
+			})
+		} else {
+			gsap.set(content, {
+				background: `${randomcolors[0]}`
+			})
+		}
 
-			// Capture function
-			const capture = el.querySelector(".content")
-			if (capture) capture.onclick = async () => {
-				// this.capture(capture)
-				console.log("Capturing...")
-			}
+		// Make element appears
+		gsap.fromTo(content, {
+			y: 200,
+			opacity: 0
+		}, {
+			y: 0,
+			opacity: 1,
+			duration: length,
+			ease: "expo.out"
+		})
+
+		// Capture function
+		const capture = el.querySelector(".content")
+		if (capture) capture.onclick = async () => {
+			// this.capture(capture)
+			console.log("Capturing...")
 		}
 
 		// Refresh scroll
 		scroll.refresh()
+
+		// refresh swiper
+		console.log("Updating swiper...", el)
+		this.swiper.update()
 	}
 
 	async capture(capture) {

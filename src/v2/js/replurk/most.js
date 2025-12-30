@@ -60,6 +60,11 @@ class most {
 				var index = 1
 
 				if (result) {
+					const title = `\
+						<h2>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h2>
+						<h3>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h3>
+						<p>by @${this.parent.me.nick_name} in ${this.parent.year}</p>\
+					`
 					// Update top 5
 					this.data.sort(this.parent.sort)
 					for (var idx = 0; idx < this.data.length; idx++) {
@@ -82,15 +87,11 @@ class most {
 
 							if (user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++
-								this.parent.statistics.attach(`\
-									<h2>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h2>
-									<h3>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h3>
-									<p>by @${this.parent.me.nick_name} in ${this.parent.year}</p>\
-								`, this.data[idx], max)
+								this.parent.statistics.attach(title, this.data[idx], max)
 							}
 						}
 
-						if (this.data[idx].el) this.parent.statistics.attach(`<i>Most ${icons.draw("person-raising-hand-light")} Mentioned</i> <strong>in My Timeline</strong>`, this.data[idx], max)
+						if (this.data[idx].el) this.parent.statistics.attach(title, this.data[idx], max)
 					}
 				}
 			}
@@ -357,9 +358,10 @@ class most {
 			sort: (a, b) => b.response_count - a.response_count,
 			draw: function (posts) {
 				var post
-				var text = `${post.response_count} responses<br />Most Responded<br/>`
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
+					const text = `${post.response_count} responses<br />Most Responded<br/>`
+
 					this.parent.statistics.drawPost(
 						'mostresponded',
 						post.plurk_id,

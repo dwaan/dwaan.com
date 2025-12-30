@@ -19,30 +19,53 @@
 		font-weight: 600;
 	}
 
-	.animate {
-		width: auto;
-		height: 36rem;
-		aspect-ratio: 9/16;
+	.content {
+		align-items: center;
 		padding: 3rem;
 		overflow: clip;
-		pointer-events: auto;
+		text-align: center;
 		background-color: var(--white);
+		opacity: 1 !important;
+		pointer-events: auto;
 		transition: background .5s ease;
 		border-radius: 1rem;
 		box-shadow: inset .05rem .05rem .05rem #fff4;
 	}
 
-	.greet {
+	#background {
 		position: absolute;
-		bottom: 1.5rem;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 20.25rem;
+		height: 18rem;
+		background-repeat: repeat;
+		background-size: cover;
+		background-position: center;
+		pointer-events: none;
+	}
+
+	.since {
+		position: absolute;
+		top: 1rem;
 		left: 1rem;
 		right: 1rem;
+		z-index: 2;
+		flex: none;
+		gap: .5rem;
+		flex-direction: row;
+		justify-content: space-between;
+
+		p {
+			margin: 0;
+			white-space: nowrap;
+		}
 	}
 
 	.thumbs {
 		position: relative;
 		z-index: 2;
-		margin: 0;
+		margin: auto 0 0;
 		width: 8rem;
 		height: 8rem;
 		transform: rotate(1deg);
@@ -57,12 +80,14 @@
 	.text {
 		position: relative;
 		z-index: 2;
+		align-items: center;
+		margin: 1.5rem 0 auto;
 
 		h1 {
 			font-weight: 700;
 			margin-bottom: 0;
 			line-height: 100%;
-			margin: 2rem 0 0;
+			margin: 0;
 			font-size: 3rem;
 		}
 
@@ -75,14 +100,12 @@
 		}
 	}
 
-	.since {
+	.greet {
 		position: absolute;
-		z-index: 2;
-		top: 1.5rem;
 		left: 1rem;
 		right: 1rem;
-		display: flex;
-		justify-content: space-between;
+		top: initial;
+		bottom: 1rem;
 	}
 
 	.karma {
@@ -107,18 +130,5 @@
 				transform: translateX(-5rem);
 			}
 		}
-	}
-
-	#background {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 22rem;
-		height: 18rem;
-		z-index: 1;
-		background-repeat: repeat;
-		background-size: cover;
-		background-position: center;
-		pointer-events: none;
 	}
 }

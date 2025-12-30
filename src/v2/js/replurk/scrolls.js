@@ -14,7 +14,7 @@ class scrolls {
 	statistics() {
 		// Scroll animate statistics
 		// scroll.push(tl => {
-		// 	tl.fromTo(this.next.querySelector("#hello .animate"), {
+		// 	tl.fromTo(this.next.querySelector("#hello .content"), {
 		// 		x: 0,
 		// 		y: 0,
 		// 		rotation: 0

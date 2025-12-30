@@ -72,14 +72,6 @@ namespace: replurk
 
     <main data-barba="container" data-barba-namespace="{{ namespace }}" class="{{ class }} {{ namespace }}">
         {{ content }}
-
-        {% if time %}
-        <hr />
-
-        <div class="footer">
-            <p class="reading">Reading time: {{ time }} seconds</p>
-        </div>
-        {% endif %}
     </main>
 
     <div id="support" class="support"></div>

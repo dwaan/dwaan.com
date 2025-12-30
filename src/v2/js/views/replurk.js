@@ -52,7 +52,8 @@ var replurk = {
 
 			replurk.replurk = new events.default(next, year)
 
-			next.querySelector("#backtotop").onclick = () => gsap.to(window, {
+			const backtotop = next.querySelector("#backtotop")
+			if (backtotop) backtotop.onclick = () => gsap.to(window, {
 				duration: reduceMotionFilter(2),
 				ease: "expo.inOut",
 				scrollTo: "#statistics"
