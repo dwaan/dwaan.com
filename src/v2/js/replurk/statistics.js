@@ -7,7 +7,7 @@ import api from "./api.js"
 import scroll from "../helpers/scroll.js"
 import { addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
 import Swiper from 'swiper'
-import { EffectCoverflow, Keyboard, Mousewheel } from 'swiper/modules'
+import { Autoplay, EffectCoverflow, Keyboard, Mousewheel } from 'swiper/modules'
 
 import span from "./span.js"
 import colors from "./colors.js"
@@ -46,12 +46,13 @@ class statistics {
 
 		// Swiper
 		this.swiper = new Swiper("#statistics", {
-			modules: [Mousewheel, Keyboard, EffectCoverflow],
+			modules: [Mousewheel, Keyboard, EffectCoverflow, Autoplay],
+			speed: 2500,
 			effect: "coverflow",
 			grabCursor: true,
 			mousewheel: true,
 			centeredSlides: true,
-			spaceBetween: 30,
+			autoplay: true,
 			keyboard: {
 				enabled: true,
 			},

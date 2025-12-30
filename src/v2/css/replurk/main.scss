@@ -234,11 +234,7 @@ main.replurk {
 		border-radius: 1rem;
 		box-shadow: inset .05rem .05rem .05rem #fff4;
 		transition: background-color .5s ease;
-		cursor: grab;
-
-		>div {
-			pointer-events: none;
-		}
+		pointer-events: none;
 
 		&.capture {
 			cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewport='0 0 100 100' style='fill:var(--black);font-size:24px;'><text y='50%'>📷</text></svg>") 16 16, pointer;
@@ -252,6 +248,12 @@ main.replurk {
 		a,
 		span {
 			opacity: 1;
+		}
+
+		a.link,
+		.plurkers,
+		a[target] {
+			pointer-events: fill;
 		}
 
 		>div {
@@ -592,10 +594,6 @@ main.replurk {
 		}
 	}
 
-	a {
-		pointer-events: none;
-	}
-
 	i {
 		background-color: transparent;
 		display: inline;
@@ -729,7 +727,6 @@ main.replurk {
 		right: 1.5rem;
 		display: inline;
 		text-align: right;
-		pointer-events: none;
 
 		&,
 		i {
@@ -831,8 +828,6 @@ main.replurk {
 	}
 
 	.image {
-		pointer-events: none;
-
 		img {
 			width: 18rem;
 			height: auto;
@@ -1070,7 +1065,6 @@ main.replurk {
 		opacity: .75;
 		font-weight: 700;
 		line-height: 90%;
-		pointer-events: none;
 		text-transform: uppercase;
 		white-space: nowrap;
 		transform: rotate(5deg);
@@ -1109,7 +1103,6 @@ main.replurk {
 	}
 
 	.link {
-		pointer-events: all;
 		top: calc(var(--padxl) * -.5);
 		right: calc(var(--padxl) * -.5);
 	}
@@ -1219,7 +1212,6 @@ main.replurk {
 	.post {
 		display: block;
 		text-align: center;
-		pointer-events: none;
 
 		p,
 		a {
@@ -1318,7 +1310,6 @@ main.replurk {
 		height: calc(var(--size)*3/4);
 		font-size: calc(var(--size)* 2/5);
 		color: white !important;
-		pointer-events: none;
 
 		&:before,
 		&:after {
@@ -1753,7 +1744,6 @@ main.replurk {
 			height: 18rem;
 			background-repeat: no-repeat;
 			background-position: top center;
-			pointer-events: none;
 		}
 
 		&::before {
@@ -1780,7 +1770,6 @@ main.replurk {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		pointer-events: none;
 		margin: 2rem 0 0;
 
 		small,
@@ -2691,7 +2680,6 @@ main.replurk {
 				text-transform: uppercase;
 				opacity: 0;
 				transform: translate(0, -.5rem);
-				pointer-events: none;
 				transition: all .25s ease;
 
 				img {
