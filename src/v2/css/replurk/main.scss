@@ -502,6 +502,8 @@ main.replurk {
 	}
 
 	&.loading {
+		order: 998;
+
 		.content {
 			font-family: "Lexend Giga", sans-serif;
 			color: var(--white);
