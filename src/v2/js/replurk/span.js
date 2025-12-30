@@ -1,7 +1,5 @@
 "use strict"
 
-import { _q, _qAll, animateNumber } from '../helpers/helper.js'
-
 /*
     Simple span element object:
 
@@ -27,9 +25,7 @@ class span {
     }
 
     update(text) {
-        animateNumber(this.el.textContent, text, (text) => {
-            this.el.textContent = text
-        })
+        this.el.textContent = text
         return this
     }
 }

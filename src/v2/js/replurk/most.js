@@ -359,7 +359,7 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, `Remember this Plurk from <strong>${datediff(post.posted)}</strong>? It got lots of reponses, ${post.response_count} of them.`, post.content, `${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>`)
+					this.parent.statistics.drawPost('mostresponded', post.plurk_id, `Remember this Plurk from <strong>${datediff(post.posted)}</strong>? It got lots of reponses, ${post.response_count} of them.`, post.content, `${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>`)
 				}
 			}
 		}
@@ -387,7 +387,7 @@ class most {
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.favorite_count > 0) {
 					this.parent.statistics.drawPostAdvanced(
-						'postcontent span2 mostfavorited',
+						'mostfavorited',
 						post.plurk_id,
 						`<p class="love">Everybody loves this Plurk</p><br/><p class="date">From ${datediff(post.posted)}</p>`,
 						`<img src="/img/replurk/love.webp" class="loveshadow" /><img src="/img/replurk/love.webp" class="loveshadow two" /><img src="/img/replurk/love.webp" class="love" /><p>${post.content}</p>`,

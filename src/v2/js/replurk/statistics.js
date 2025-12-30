@@ -83,28 +83,13 @@ class statistics {
 		return list
 	}
 
-	title(text, style = "", loading = false) {
-		let span = loading ? `<span class="loading"><i/>` : `<span class="line"><i></i></span>`
-		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics statistics-title ${style}">\
-				<h3><span>${text}</span>${span}</h3>\
-			</div>`)
-	}
-
-	body(text, style = "") {
-		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics ${style}">\
-				<div class="body">${text}</div>\
-			</div>`)
-	}
+	// Helper
 
 	wrapper(style, html, background) {
 		return `<div class="statistics statistics-wrap ${style}">\
 			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${html}</div>\
 		</div>`
 	}
-
-	// Helper to draw
 
 	draw(classes, big, text, background) {
 		if (typeof big == "string" || (typeof big == "number" && big > 0)) {
@@ -144,67 +129,29 @@ class statistics {
 		}
 	}
 
-	drawMeme(style, big, text, meme) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + ` meme`, `\
-			<p class="big">${big}</p>\
-			<p class="image">${meme}</p>\
-			<p class="text">${text}</p>\
-		`, background))
-	}
+	drawBadge(id, show, style, icon, text, textempty) {
+		style = `badges ${style}`
 
-	drawBadge(condition, style, icon, text, textempty) {
-		style = `span1 badges badgesmall ${style}`
+		if (show) {
+			if (this.el.querySelector(`${id} .content .list`)) {
+				this.el.querySelector(`${id} .content .list`).insertAdjacentHTML('beforeend', `\
+					<div class="${style}">\
+						<span class="badge">${icons.draw(icon, false)}</span>\
+						<span class="title">${text}</span>\
+					</div>\
+				`)
 
-		if (condition) {
-			this.draw(style, icons.draw(icon, false), text)
-			return 1
+				return 1
+			}
 		} else {
-			// this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
-			return 0
+			if (this.el.querySelector(`${id} .content .list`)) this.el.querySelector(`${id} .content .list`).insertAdjacentHTML('beforeend', `\
+				<div class="${style} inactive">\
+					<span class="badge">${icons.draw(icon, true)}</span>\
+					<span class="title">${textempty ? textempty : ""}</span>\
+				</div>\
+			`)
 		}
-	}
-
-	drawDiv(style, text) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="box">' + text + '</div>'))
-	}
-
-	drawGraph(style, number, text) {
-		if (typeof number == "string" || (typeof number == "number" && number > 0)) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawgraph", '\
-				<p>\
-					<span class="graph"><i data-number="' + number + '"></i></span>\
-					<span class="info">' + text + '</span>\
-				</p>\
-			'))
-		}
-	}
-
-	drawImage(style, image, link, title, text, badge) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawimage", '\
-			<a href="' + link + '" target="_BLANK">\
-				<span class="big">' + badge + '</span>\
-				<span class="avatar"><img src="' + image + '" /></span>\
-				<span class="text">' + text + '</span>\
-				<span class="title">' + title + '</span>\
-			</a>\
-		'))
-	}
-
-	drawHTML(style, title, html) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawhtml", '\
-			<div class="html">' + html + '</div>\
-			<div class="title">' + title + '</div>\
-		'))
-	}
-
-	drawLink(style, link, title, text, badge) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawlink", '\
-			<a href="' + link + '" target="_BLANK">\
-				<span class="big">' + badge + '</span>\
-				<span>' + text + '</span>\
-				<span class="title">' + title + '</span>\
-			</a>\
-		'))
+		return 0
 	}
 
 	drawPost(style, id, title, text, badge) {

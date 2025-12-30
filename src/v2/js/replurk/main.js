@@ -654,10 +654,10 @@ class replurk {
 		if (this.me.gender == 0) plurker = icons.draw("woman-bowing")
 
 		this.statistics.newdraw({
-			class: `replurkbadges description`,
+			class: `replurkbadges description inter`,
 			html: [{
 				class: `title`,
-				html: `<h4>What are RePlurk Badges?</h4>`
+				html: `What are RePlurk Badges?`
 			}, {
 				class: `text`,
 				html: `\
@@ -674,27 +674,35 @@ class replurk {
 					</ol>\
 				`
 			}]
+		}, {
+			class: `replurkbadges list lexend`,
+			html: [{
+				class: `title`,
+				html: `RePlurk Badges`
+			}, {
+				class: `list`,
+				html: ``
+			}]
 		})
-
 		var count = 0
-		count += this.statistics.drawBadge(this.statistics.poll_count >= 5, 'pollbadges', "ballot-box-with-ballot", "<strong>Polling " + gender + "</strong>", "Create more pollings")
-		count += this.statistics.drawBadge(this.statistics.coins_count >= 5, 'coinbadges', "coin", "<strong>Plurk Coins Billionaire</strong>", "Receive lots of coins")
-		count += this.statistics.drawBadge(this.statistics.most.types.words >= 50000, 'novelistbadges', "orange-book", "<strong>Novelist</strong>", "Post more plurk")
-		count += this.statistics.drawBadge(this.statistics.most.types.chars >= 1000000, 'keyboardbadges', "keyboard", "<strong>Keyboard Warrior</strong>", "Response more plurk")
-		count += this.statistics.drawBadge(this.statistics.most.links.pics.length >= 356, 'memebadges', "cat", "<strong>Meme Lord</strong>", "Share more images")
-		count += this.statistics.drawBadge(this.statistics.most.links.links.length >= 356 / 2, 'missingbadges', "orangutan", "<strong>The Missing Link</strong>", "Share more links")
-		count += this.statistics.drawBadge(this.statistics.instagrammer_count >= 10, 'socmedbadges', "camera", "<strong>Instagrammer</strong>", "Share more Instagram")
-		count += this.statistics.drawBadge(this.statistics.facebooker_count >= 10, 'socmedbadges', facebook, "<strong>Facebooker</strong>", "Share more Facebook")
-		count += this.statistics.drawBadge(this.statistics.twitterer_count >= 10, 'socmedbadges', "hatching-chick", "<strong>The Real Chief Twit</strong>", "Share more Twitter")
-		count += this.statistics.drawBadge(this.statistics.redditor_count >= 10, 'socmedbadges', "robot", "<strong>/r</strong>", "Share more Reddit")
-		count += this.statistics.drawBadge(this.statistics.tiktoker_count >= 10, 'socmedbadges', tiktok, "<strong>Tiktoker</strong>", "Share more TikTok")
-		count += this.statistics.drawBadge(this.statistics.imgurer_count >= 10, 'socmedbadges', "framed-picture", "<strong>Imgur-er</strong>", "Share more Imgur")
-		count += this.statistics.drawBadge(this.statistics.youtuber_count >= 10, 'socmedbadges', "movie-camera", `<strong>Youtuber ${icons.draw("sleepy-face")}`, "Share more YouTube")
-		count += this.statistics.drawBadge(this.statistics.porn_count >= 10, 'adultbadges', "face-with-peeking-eye", "<strong>Adult-er</strong>", "Plurk more \"adult\" content")
-		count += this.statistics.drawBadge(this.statistics.replurker_count >= 50, 'plurkerbadges', "trophy", "<strong>Trendsetter</strong>", "Replurk more Plurk")
-		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 1.5, 'plurkerbadges', "military-medal", `<strong>Active Plurker ${plurker}</strong>`, "Plurk more daily")
-		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', superhero, `<strong>Super Active Plurker ${plurker}${plurker}</strong>`, "Plurk even more daily")
-		this.statistics.drawBadge(count >= 17, 'plurkerbadges', "glowing-star", `<strong>Super Star</strong>`, "Catch them all")
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.poll_count >= 5, 'pollbadges', `ballot-box-with-ballot`, `Polling ${gender}`, `Create more pollings`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.coins_count >= 5, 'coinbadges', `coin`, `Plurk Coins Billionaire`, `Receive lots of coins`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.types.words >= 50000, 'novelistbadges', `orange-book`, `Novelist`, `Post more plurk`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.types.chars >= 1000000, 'keyboardbadges', `keyboard`, `Keyboard Warrior`, `Response more plurk`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.links.pics.length >= 356, 'memebadges', `cat`, `Meme Lord`, `Share more images`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.links.links.length >= 356 / 2, 'missingbadges', `orangutan`, `The Missing Link`, `Share more links`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.instagrammer_count >= 10, 'socmedbadges', `camera`, `Instagrammer`, `Share more Instagram`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.facebooker_count >= 10, 'socmedbadges', facebook, `Facebooker`, `Share more Facebook`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.twitterer_count >= 10, 'socmedbadges', `hatching-chick`, `The Real Chief Twit`, `Share more Twitter`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.redditor_count >= 10, 'socmedbadges', `robot`, `/r`, `Share more Reddit`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.tiktoker_count >= 10, 'socmedbadges', tiktok, `Tiktoker`, `Share more TikTok`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.imgurer_count >= 10, 'socmedbadges', `framed-picture`, `Imgur-er`, `Share more Imgur`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.youtuber_count >= 10, 'socmedbadges', `movie-camera`, `Youtuber ${icons.draw(`sleepy-face`)}`, `Share more YouTube`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.porn_count >= 10, 'adultbadges', `face-with-peeking-eye`, `Adult-er`, `Plurk more \`adult\` content`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.replurker_count >= 50, 'plurkerbadges', `trophy`, `Trendsetter`, `Replurk more Plurk`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.plurks_count >= 356 * 1.5, 'plurkerbadges', `military-medal`, `Active Plurker ${plurker}`, `Plurk more daily`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', superhero, `Super Active Plurker ${plurker}${plurker}`, `Plurk even more daily`)
+		this.statistics.drawBadge(`.replurkbadges.list`, count >= 17, 'plurkerbadges', `glowing-star`, `Super Star`, `Catch them all`)
 		this.info()
 	}
 
