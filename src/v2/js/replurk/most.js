@@ -357,9 +357,16 @@ class most {
 			sort: (a, b) => b.response_count - a.response_count,
 			draw: function (posts) {
 				var post
+				var text = `${post.response_count} responses<br />Most Responded<br/>`
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
-					this.parent.statistics.drawPost('mostresponded', post.plurk_id, `Remember this Plurk from <strong>${datediff(post.posted)}</strong>? It got lots of reponses, ${post.response_count} of them.`, post.content, `${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>${post.response_count} responses<br />Most Responded<br/>`)
+					this.parent.statistics.drawPost(
+						'mostresponded',
+						post.plurk_id,
+						`Remember this Plurk from <strong>${datediff(post.posted)}</strong>? It got lots of reponses, ${post.response_count} of them.`,
+						post.content,
+						text + text + text + text + text + text + text + text + text + text
+					)
 				}
 			}
 		}
@@ -374,7 +381,12 @@ class most {
 					var replurk = `<span class="replurk">This plurk got ${post.replurkers_count} ${post.replurkers_count > 1 ? "replurks" : "replurk"}</span>`
 					var famous = `<span class="famous">You're famous</span>`
 					var warning = `<span class="warning">Achtung! Achtung! Achtung! Achtung! Achtung! Achtung!</span>`
-					this.parent.statistics.drawPost('mostreplurked outfit', post.plurk_id, `<span>This famous plurk is from ${datediff(post.posted)}</span>`, post.content, replurk + replurk + warning + famous + famous)
+					this.parent.statistics.drawPost(
+						'mostreplurked outfit',
+						post.plurk_id,
+						`<span>This famous plurk is from ${datediff(post.posted)}</span>`,
+						post.content,
+						replurk + replurk + warning + famous + famous)
 				}
 			}
 		}

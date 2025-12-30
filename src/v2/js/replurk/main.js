@@ -5,6 +5,7 @@ import api from "./api.js"
 import scroll from "../helpers/scroll.js"
 import animate from "../helpers/animate.js"
 import { _q, _qAll, plural, monthNames, reduceMotionFilter } from '../helpers/helper.js'
+import swiper from 'swiper'
 
 import friends from "./friends.js"
 import loading from './loading.js'
