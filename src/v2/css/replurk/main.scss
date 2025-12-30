@@ -50,11 +50,16 @@
 // Giving persitent size for all tags
 * {
 	box-sizing: border-box;
+	font-optical-sizing: auto;
+	font-weight: 600;
+	font-style: normal;
+	line-height: 140%;
 	outline: none;
 	-webkit-font-smoothing: antialiased;
 }
 
 
+// Common tags
 body,
 html {
 	margin: 0;
@@ -76,20 +81,31 @@ a {
 	cursor: pointer;
 }
 
-// Fonts
-.inter {
-	font-family: "Inter", sans-serif;
-	font-weight: 400;
+sub,
+sup {
+	font-size: inherit;
+	font-weight: 700;
+	top: initial;
+	bottom: initial;
+	line-height: 100%;
 }
 
-.outfit {
-	font-family: "Outfit", sans-serif;
-	font-weight: 400;
+img {
+	border-radius: .25rem;
+	image-rendering: pixelated;
 }
 
-.lexend {
-	font-family: "Lexend Giga", sans-serif;
-	font-weight: 400;
+
+// RePlurk
+main.replurk {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	overflow: auto;
+	overflow-y: hidden;
 }
 
 .middle {
@@ -122,49 +138,6 @@ a {
 	}
 }
 
-// Plurk Statistics
-* {
-	font-optical-sizing: auto;
-	font-weight: 600;
-	font-style: normal;
-	line-height: 140%;
-}
-
-sub,
-sup {
-	font-size: inherit;
-	font-weight: 700;
-	top: initial;
-	bottom: initial;
-	line-height: 100%;
-}
-
-img {
-	border-radius: .25rem;
-	image-rendering: pixelated;
-}
-
-main.replurk {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	overflow: auto;
-	overflow-y: hidden;
-}
-
-// Plurk - First section
-.first {
-	text-align: center;
-	transition: background-color .5s ease;
-
-	h1 {
-		margin: var(--padl) 0 var(--padm) 0;
-	}
-}
-
 .links {
 	.icon {
 		background-color: red;
@@ -178,21 +151,8 @@ main.replurk {
 	}
 }
 
-#background {
-	z-index: 1;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-position: center;
-	background-size: cover;
-	transition: none;
-	pointer-events: none;
-}
 
-
-// Plurk - Statistics
+// Statistics
 #statistics {
 	position: relative;
 	display: flex;
@@ -211,7 +171,6 @@ main.replurk {
 	overflow: initial;
 }
 
-// Start .statistics
 .statistics {
 	position: relative;
 	display: flex;
@@ -589,33 +548,7 @@ main.replurk {
 	}
 }
 
-// Plurk - Statistics - Spesific Style
-.postcontent {
-	.title {
-		font-size: .6rem;
-		display: flex;
-		align-items: center;
-		margin-top: var(--padm);
-		line-height: initial;
-	}
-
-	.title i {
-		margin-right: auto;
-		text-transform: uppercase;
-	}
-
-	.emoticon_my {
-		max-width: initial;
-	}
-
-	.post {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-
-	}
-}
-
+// Spesific Style
 .post {
 	img {
 		width: auto;
@@ -679,6 +612,7 @@ main.replurk {
 	}
 }
 
+// Attached user list
 .statistics.attach {
 	.text {
 		justify-content: stretch;
@@ -733,7 +667,7 @@ main.replurk {
 	}
 }
 
-// Responsed style
+// Responded
 .statistics.responded {
 	.content {
 		display: flex;
@@ -1772,7 +1706,6 @@ main.replurk {
 }
 
 // Top responders
-
 .statistics.mostresponders {
 	.content {
 		font-family: "Inter", sans-serif;
@@ -1934,7 +1867,6 @@ main.replurk {
 }
 
 // Top mentioned
-
 .statistics.mostmentioned {
 	--size: 5.15rem;
 

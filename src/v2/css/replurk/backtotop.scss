@@ -10,7 +10,7 @@
 	text-align: center;
 	margin: calc(var(--pady) * 2) auto var(--pady);
 	cursor: pointer;
-	transition: color .125s ease-in-out;
+	transition: color .25s ease-in-out;
 
 	&,
 	&::before {
@@ -32,7 +32,7 @@
 		z-index: -1;
 		border: 1px dashed var(--black-75);
 		border-radius: 100%;
-		transition: background-color .125s ease-in-out;
+		transition: background-color .25s ease-in-out;
 	}
 
 	&:hover {

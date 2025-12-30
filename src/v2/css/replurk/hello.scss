@@ -8,6 +8,7 @@
 	padding: 0;
 	pointer-events: none;
 	background: none;
+	text-align: center;
 
 	p,
 	.greet {
@@ -110,10 +111,14 @@
 
 	#background {
 		position: absolute;
-		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 100vw;
 		height: 50%;
+		z-index: 1;
 		background-repeat: repeat;
 		background-size: cover;
 		background-position: center;
+		pointer-events: none;
 	}
 }
