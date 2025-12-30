@@ -44,6 +44,15 @@ class loading {
 		})
 	}
 
+	async hidemainloading() {
+		var length = reduceMotionFilter(.25)
+		gsap.to("#loading", {
+			opacity: 0,
+			duration: length,
+			ease: "power3.out"
+		}, 0)
+	}
+
 	async loop(length) {
 		this.clean = true
 		this.counts = length

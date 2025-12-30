@@ -3,6 +3,10 @@ layout: replurk.liquid
 class: plurk
 ---
 
+<section id="loading">
+    <h2>Henlo, please wait...</h2>
+</section>
+
 <section id="statistics" class="grant middle first">
     <div id="hello">
         <div class="animate middle">
@@ -21,62 +25,21 @@ class: plurk
     <div id="backtotop" class="grant middle">&larr;</div>
 </section>
 
-<section class="footer">
-    <div id="menu">
-        <input class="handle" id="menutoggler" type="checkbox" />
-        <div class="submenu">
-            <div class="grant years">
-                <a href="/replurk/?year=2020" class="nav-prev">&larr;</a>
-                <a href="/replurk/?year=2020" class="now nowyear">2020</a>
-                <a href="/replurk/?year=2020" class="nav-next">&rarr;</a>
-            </div>
-            <hr class="grant" />
-            <div class="about">About</div>
-            <div id="logout" class="grant logout">Logout</div>
-        </div>
-        <label for="menutoggler"></label>
-    </div>
-</section>
-
 <section id="permission" class="middle first">
     <div class="text">
         <form action="./replurk<?php echo $now; ?>" method="GET">
             <h1>
-                RePlurk<br>
+                <span>RePlurk</span>
                 <sup>20</sup>
                 <sub class="shortyear">20</sub>
             </h1>
             <ol>
-                <li>
-                    <p>
-                        Grant
-                        <strong>RePlurk</strong>
-                        access to your timeline <br>
-                        <a href="#" id="tokenurl" data-barba-prevent target="BLANK" rel="opener">Loading...</a>
-                    </p>
-                </li>
-                <li>
-                    <p>It's best to open this web app in desktop browser.</p>
-                </li>
-                <li>
-                    <p>It will take about 17 minutes to download your timeline, and your data will be processed locally.</p>
-                </li>
-                <li class="small">
-                    <p>
-                        <strong>Note for mobile user!</strong>
-                        An authorization error may occur when opening this web app on a mobile phone with the official Plurk app
-                        installed. When it happens,
-                        <u>refresh this page and open
-                            <strong>“Grant Access”</strong>
-                            link in a new tab.</u>
-                    </p>
-                    <p>
-                        <strong>IMPORTANT!</strong>
-                        After using this web application, log out to ensure your privacy. RePlurk doesn’t store Plurk data on the
-                        server beyond session data which will be deleted once you close this tab.
-                    </p>
-                </li>
+                <li><p>Grant <strong>RePlurk</strong> access to your timeline</p></li>
+                <li><p>It will take about 17 minutes to download your timeline, and your data will be processed locally without any help from "GenAI".</p></li>
+                <li><p><strong>For mobile app user!</strong> An authorization error may occur when opening this web app from mobile phone with the official Plurk app installed. When it happens, <u>refresh this page and open <strong>“Grant Access”</strong> link in a new tab.</u></p></li>
+                <li><p><strong>IMPORTANT!</strong> To ensure your privacy, it's advisable to log out after using this web application. RePlurk doesn’t store Plurk data on the server beyond session data which will be deleted upon you closing this tab.</p></li>
             </ol>
+            <a href="#" id="tokenurl" data-barba-prevent target="BLANK" rel="opener">Loading...</a>
         </form>
     </div>
 </section>
@@ -99,6 +62,23 @@ class: plurk
         </p>
         <p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="/replurk/api/" data-barba-prevent target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="/hi/">contact me</a> for removal</p>
         <p class="noaffiliation">You can clone this web app source code from <a href="https://github.com/replurk" target="_BLANK">GitHub</a></p>
+    </div>
+</section>
+
+<section class="footer">
+    <div id="menu">
+        <input class="handle" id="menutoggler" type="checkbox" />
+        <div class="submenu">
+            <div class="years">
+                <a href="/replurk/?year=2020" class="nav-prev">&larr;</a>
+                <a href="/replurk/?year=2020" class="now nowyear">2020</a>
+                <a href="/replurk/?year=2020" class="nav-next">&rarr;</a>
+            </div>
+            <hr />
+            <div class="about">About</div>
+            <div id="logout" class="logout">Logout</div>
+        </div>
+        <label for="menutoggler"></label>
     </div>
 </section>
 

@@ -20,17 +20,16 @@
 	}
 
 	#menu {
-		--size: 2.5rem;
+		--size: 1.5rem;
 
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
 		margin: 0 0 0 auto;
 		padding: 0;
-		border-radius: 1.5rem;
+		border-radius: 1rem;
 		color: black;
 		background-color: white;
-		box-shadow: inset .05rem .05rem .05rem #fff4;
 		cursor: pointer;
 		transition: background .25s ease;
 		min-width: var(--size);
@@ -40,6 +39,9 @@
 			margin: 0;
 			padding: 0;
 			height: 0;
+			opacity: .15;
+			border: none;
+			border-bottom: 1px solid var(--black);
 		}
 
 		label {
@@ -100,8 +102,8 @@
 					display: flex;
 					justify-content: space-evenly;
 					opacity: 1;
-					padding: .5rem 1rem;
-					width: calc(var(--size) * 3);
+					padding: .5rem 1.5rem;
+					width: 8rem;
 					height: 8rem;
 					opacity: 1;
 
@@ -117,6 +119,7 @@
 					a,
 					.about,
 					.logout {
+						font-size: .8rem;
 						pointer-events: all;
 						transition: color .125s ease;
 
@@ -126,7 +129,7 @@
 						}
 
 						&:hover {
-							color: var(--yellow);
+							color: var(--red);
 						}
 					}
 				}

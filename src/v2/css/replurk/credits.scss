@@ -1,7 +1,5 @@
 @charset "utf-8";
 
-@use '../mixins';
-
 /* Credits style */
 #credits {
 	display: none;
@@ -32,60 +30,30 @@
 
 	img {
 		width: auto;
-		height: 24px;
-
-		@media (min-width: mixins.$screen-small) {
-			height: 32px;
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			height: 48px;
-		}
+		height: 48px;
 	}
 
 	.text {
 		padding: 0 2rem;
-		max-width: initial;
-
-		@media (min-width: mixins.$screen-medium) {
-			max-width: mixins.$screen-small;
-		}
+		max-width: 20rem;
 	}
 
 	.made {
-		font-size: 1.5rem;
+		font-size: 2rem;
 		font-weight: 700;
-
-		@media (min-width: mixins.$screen-small) {
-			font-size: 1.75rem;
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			font-size: 2rem;
-		}
 	}
 
 	.like {
-		font-size: .85rem;
-		line-height: 140%;
+		font-size: 1rem;
+		line-height: 150%;
 		color: var(--black-75);
-
-		@media (min-width: mixins.$screen-small) {
-			font-size: 1rem;
-			line-height: 150%;
-		}
 	}
 
 	.noaffiliation {
-		font-size: .6rem;
-		line-height: 140%;
+		font-size: .7rem;
+		line-height: 150%;
 		letter-spacing: .025rem;
 		color: var(--black-75);
-
-		@media (min-width: mixins.$screen-small) {
-			font-size: .7rem;
-			line-height: 150%;
-		}
 
 		a {
 			border-bottom: 1px dashed var(--black-75);
@@ -96,19 +64,10 @@
 		display: flex;
 		gap: var(--pads);
 		justify-content: space-between;
-		flex-direction: column;
-		margin: var(--pads) 0;
-		padding-bottom: var(--pads);
+		flex-direction: row;
+		margin: var(--padm) 0 var(--padm);
+		padding-bottom: var(--padm);
 		border-bottom: 1px dotted var(--black-50);
-
-		@media (min-width: mixins.$screen-small) {
-			flex-direction: row;
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			margin: var(--padm) 0 var(--padm);
-			padding-bottom: var(--padm);
-		}
 
 		a,
 		i {
@@ -121,18 +80,11 @@
 			flex-flow: row;
 			align-items: center;
 			justify-content: flex-start;
-			padding: var(--pads) var(--padl);
+			flex-flow: column;
+			padding: var(--padm);
 			background-color: var(--black-15);
 			border-radius: var(--padm);
 			transition: background-color .125s ease-in-out;
-
-			@media (min-width: mixins.$screen-small) {
-				padding: var(--padm);
-			}
-
-			@media (min-width: mixins.$screen-medium) {
-				flex-flow: column;
-			}
 
 			&:hover {
 				color: var(--black);
@@ -141,13 +93,9 @@
 
 			i {
 				display: block;
-				text-align: left;
+				text-align: center;
 				font-size: .75rem;
 				line-height: 130%;
-
-				@media (min-width: mixins.$screen-medium) {
-					text-align: center;
-				}
 			}
 		}
 	}

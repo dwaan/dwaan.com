@@ -41,7 +41,7 @@ class replurk {
 	// Login Pages
 	showLoginPage(tl) {
 		var next = this.next
-		var length = reduceMotionFilter(1)
+		var length = reduceMotionFilter(.25)
 
 		tl.fromTo(next.querySelectorAll("#permission"), {
 			position: "fixed",
@@ -75,13 +75,13 @@ class replurk {
 	}
 	hideLoginPage(tl) {
 		var next = this.next
-		var length = reduceMotionFilter(1)
+		var length = reduceMotionFilter(.25)
 
 		tl.set(next.querySelectorAll("#permission"), {
 			position: "fixed",
 			top: 0,
 		})
-		tl.fromTo(next.querySelectorAll("#permission .bgtext *, #permission form"), {
+		tl.fromTo(next.querySelectorAll("#permission form"), {
 			y: 0,
 			opacity: 1,
 		}, {
@@ -115,64 +115,29 @@ class replurk {
 	showStatisticPages() {
 		return new Promise(resolve => {
 			var next = this.next
-			var length = reduceMotionFilter(1)
+			var length = reduceMotionFilter(.25)
 			var tl = gsap.timeline()
 
-			tl
-				.set(next.querySelectorAll("#hello"), {
-					display: ""
-				}, 0)
-				.fromTo(next.querySelectorAll("#hello"), {
-					opacity: 0,
-				}, {
-					opacity: 1,
-					ease: "power4.out",
-					duration: length * 1 / 4
-				}, 0)
-				.fromTo(next.querySelectorAll("#hello"), {
-					scale: .5,
-				}, {
-					scale: 1,
-					ease: "elastic",
-					duration: length
-				}, 0)
-
-			tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
+			tl.fromTo(next.querySelectorAll(".grant"), {
 				display: "",
 				opacity: 0
 			}, {
 				opacity: 1,
-				duration: length / 4,
-				ease: "power4.out",
+				duration: length,
+				ease: "power3.out",
 				onComplete: () => resolve()
-			}, 0)
+			})
 		})
 	}
 	hideStatisticPages() {
 		return new Promise(async resolve => {
 			var next = this.next
-			var length = reduceMotionFilter(1)
+			var length = reduceMotionFilter(.25)
 			var tl = gsap.timeline()
 
 			await animate.top(next)
 
-			tl.fromTo(next.querySelectorAll(".footer > *, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
-				opacity: 1,
-				y: 0
-			}, {
-				opacity: 0,
-				y: 200,
-				duration: length,
-				stagger: {
-					from: "end",
-					amount: length / 5
-				},
-				ease: "power3.in"
-			}, length / 5)
-			tl.set(next.querySelectorAll(".grant:not(#hello), .statistics"), {
-				opacity: 0
-			}, length / 2)
-			tl.fromTo(next.querySelectorAll("#hello"), {
+			tl.fromTo(next.querySelectorAll(".grant"), {
 				opacity: 1
 			}, {
 				opacity: 0,
@@ -182,7 +147,7 @@ class replurk {
 					gsap.set(next.querySelectorAll(".grant"), { display: "none" })
 					resolve()
 				}
-			}, length / 2)
+			}, length)
 		})
 	}
 
@@ -223,6 +188,7 @@ class replurk {
 		var tl = gsap.timeline()
 
 		let data = await api.call("?")
+
 		var interval = null
 		if (data.success) {
 			this.me = data.message
@@ -277,6 +243,7 @@ class replurk {
 			}, 1000)
 		}
 
+		this.loading.hidemainloading()
 		scroll.refresh()
 	}
 	// Logout
@@ -310,7 +277,7 @@ class replurk {
 		var tl = gsap.timeline()
 		tl.fromTo(next.querySelectorAll("#permission form"), {
 			display: "",
-			y: 200,
+			y: "3rem",
 			opacity: 0,
 		}, {
 			y: 0,
@@ -318,15 +285,15 @@ class replurk {
 			duration: length,
 			ease: "power3.out"
 		}, length)
-		tl.fromTo(next.querySelectorAll("#permission h1, #permission li"), {
+		tl.fromTo(next.querySelectorAll("#permission h1, #permission li, #tokenurl"), {
 			display: "",
-			y: 50,
+			y: "1rem",
 			opacity: 0,
 		}, {
 			y: 0,
 			opacity: 1,
-			stagger: length / 10,
-			duration: length,
+			stagger: length / 25,
+			duration: length * 3 / 4,
 			ease: "power3.out"
 		}, length)
 
@@ -334,7 +301,7 @@ class replurk {
 			if (text) {
 				this.message(text)
 			} else {
-				tokenlink.textContent = "Grant Access"
+				tokenlink.textContent = "Grant Access →"
 				tokenlink.setAttribute("href", api.url + "?redirect=" + data.message.url)
 			}
 		}, () => {
@@ -708,26 +675,8 @@ class replurk {
 
 	// Main entry
 	// Run this to start the API
-	run(el) {
-		return new Promise(resolve => {
-			var length = reduceMotionFilter(1)
-			this.next = el
-
-			// Run the login
-			gsap.fromTo(this.next.querySelectorAll('#permission'), {
-				opacity: 0
-			}, {
-				opacity: 1,
-				duration: length,
-				ease: "power3.in",
-				onComplete: async () => {
-					// Display login
-					await this.login(true)
-
-					resolve()
-				}
-			})
-		})
+	run() {
+		this.login(true)
 	}
 }
 
