@@ -1,7 +1,7 @@
 "use strict"
 
 import api from "./api.js"
-import { plural, datediff, pluralinwords } from '../helpers/helper.js'
+import { plural, datediff } from '../helpers/helper.js'
 
 import span from "./span.js"
 import icons from "./icons.js"

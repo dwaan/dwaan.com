@@ -2,8 +2,7 @@
 
 import { gsap } from 'gsap'
 
-import scroll from "../helpers/scroll.js"
-import { reduceMotionFilter } from '../helpers/helper.js'
+import { addClass, delay, reduceMotionFilter, removeClass } from '../helpers/helper.js'
 
 class loading {
 	constructor(next) {
@@ -21,10 +20,6 @@ class loading {
 			var length = reduceMotionFilter(1)
 			this.prev_count = item
 
-			if (!this.next.querySelector(".statistics.statistics-loading")) {
-				this.parent.statistics.draw("statistics-loading", item + "%", "<i class='month'>Data from " + this.year + "</i>. Loading. <small>As long as you didn't close this browser tab, You can resume later by refreshing this page.</small>")
-			}
-
 			// Animate loading
 			var load = { progress: this.prev_count }
 			gsap.to(load, {
@@ -33,7 +28,7 @@ class loading {
 				ease: "linear",
 				duration: length / 4,
 				onUpdate: () => {
-					var el = this.next.querySelector(".statistics-loading .big")
+					var el = this.next.querySelector(".statistics.loading .big")
 					if (el) el.innerHTML = load.progress + "%"
 				},
 				onComplete: async () => {
@@ -60,8 +55,10 @@ class loading {
 	}
 
 	async update(month, value) {
-		var el = this.next.querySelector(".statistics-loading .month")
+		var el = this.next.querySelector(".statistics.loading .month")
 		if (month && el) el.innerHTML = month
+
+		removeClass(this.next.querySelector(".statistics.loading .content"), "done")
 
 		if (this.counts >= 0) {
 			this.count = value ? value : this.count + 1
@@ -82,27 +79,19 @@ class loading {
 		await this.draw(100)
 	}
 
-	done() {
-		return new Promise(resolve => {
-			var length = reduceMotionFilter(1)
+	async done() {
+		if (this.isComplete()) {
+			var el = this.next.querySelector(".statistics.loading .content")
+			this.clean = false
 
-			if (this.isComplete()) {
-				var el = this.next.querySelector(".statistics.statistics-loading")
-				this.clean = false
-				if (el) {
-					gsap.to(el.querySelectorAll(".content p"), {
-						// opacity: 0,
-						duration: length / 2,
-						ease: "power3.out",
-						onComplete: () => {
-							// el.remove()
-							scroll.refresh()
-							resolve()
-						}
-					})
-				}
-			} else resolve()
-		})
+			await delay(250)
+
+			if (el) {
+				addClass(el, "done")
+				el.querySelector(".big").innerHTML = `Done`
+				el.querySelector(".month").innerHTML = `All loaded,<br/><strong>enjoy!</strong`
+			}
+		}
 	}
 }
 

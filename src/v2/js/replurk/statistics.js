@@ -1,7 +1,6 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import html2canvas from "html2canvas"
 
 import api from "./api.js"

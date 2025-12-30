@@ -1,12 +1,9 @@
 "use strict";
 
-import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger.js'
 
 import scroll from "../helpers/scroll.js"
-import { _qAll, reduceMotionFilter } from '../helpers/helper.js'
-
-import browser from './browser.js'
+import { _qAll } from '../helpers/helper.js'
 
 // Scroll Animation
 class scrolls {

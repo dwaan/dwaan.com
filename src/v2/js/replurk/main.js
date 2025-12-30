@@ -365,30 +365,18 @@ class replurk {
 			// var join = new Date(plurker.join_date)
 			next.querySelector("#hello .since .when").innerHTML = `Plurking since <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`
 
+			// Badge
+			var imagebadge = ``
+			for (let index = 0; index < plurker.badges.length; index++) imagebadge += `<img src="/img/replurk/braceyourself.webp" style="z-index: ${plurker.badges.length - index}; bottom: -${index / 2}rem; left: ${index}rem;" />`
+
 			// Responses
 			var oneday = 16
 			if (responses <= oneday) extra = "Almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>'
 			else extra = "Almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>'
 			var sentence = `You posted <i>${icons.draw("left-speech-bubble")} ${plural(Math.round(plurker.plurks_count / days), "plurk")} per day</i>, responded <i>${icons.draw("left-speech-bubble")} ${plural(responses, "response")}</i> per day, ${extra} when you're not sleeping.`
 
-			// Badge
-			var imagebadge = ``
-			for (let index = 0; index < plurker.badges.length; index++) imagebadge += `<img src="/img/replurk/braceyourself.webp" style="z-index: ${plurker.badges.length - index}; bottom: -${index / 2}rem; left: ${index}rem;" />`
-
-			// Draw data
+			// Draw Badge and responses
 			this.statistics.newdraw({
-				class: `responded meme`,
-				html: [{
-					class: `big`,
-					html: sentence
-				}, {
-					class: `image`,
-					html: `<img src="/img/replurk/pigeon.webp" />`
-				}, {
-					class: `text`,
-					html: sentence
-				}]
-			}, {
 				class: `badgeinfo meme inter`,
 				html: [{
 					class: `big`,
@@ -401,6 +389,18 @@ class replurk {
 					class: `image`,
 					html: imagebadge
 				}]
+			}, {
+				class: `responded meme`,
+				html: [{
+					class: `big`,
+					html: sentence
+				}, {
+					class: `image`,
+					html: `<img src="/img/replurk/pigeon.webp" />`
+				}, {
+					class: `text`,
+					html: sentence
+				}]
 			})
 		} else {
 			this.statistics.draw('', '-', "There is no data in my timeline")
@@ -410,8 +410,22 @@ class replurk {
 
 	// Display statistics
 	async displayStatistics() {
-		this.statistics.draw("statistics-loading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.")
-
+		this.statistics.newdraw({
+			class: "loading",
+			html: [{
+				class: `big`,
+				html: `0%`
+			}, {
+				class: `month`,
+				html: ``
+			}, {
+				class: `text`,
+				html: `1 of 2. Loading ${this.year} timeline`
+			}, {
+				class: `note`,
+				html: `It can take up to 1 minute`
+			}]
+		})
 		this.loading = new loading(this.next)
 		this.loading.loop(this.fulldays)
 
@@ -519,7 +533,9 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		_q(".statistics-loading .text").innerHTML = `<i class='month'>Data from ${this.year}</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>`
+		_q(".statistics.loading .month").innerHTML = `Data from ${this.year}</i>`
+		_q(".statistics.loading .text").innerHTML = `2 of 2. Loading all responses.`
+		_q(".statistics.loading .note").innerHTML = `If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>`
 
 		// Load each post responses and calculate statistics
 		this.loading = new loading(this.next)
