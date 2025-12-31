@@ -578,12 +578,6 @@ class replurk {
 		// Draw Results
 		// 
 
-		// Display Most Responder
-		// this.statistics.most.responders.draw()
-
-		// Display Most Mentioned by me
-		// this.statistics.most.mentions.draw()
-
 		// Display Most Interaction
 		this.statistics.most.interaction.draw()
 

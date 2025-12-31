@@ -920,6 +920,19 @@ main.replurk {
 		}
 	}
 
+	.avatar {
+		position: absolute;
+		top: 13.5rem;
+		left: 6.5rem;
+
+		img {
+			width: 2.75rem;
+			height: 2rem;
+			object-fit: cover;
+			border-radius: 100%;
+		}
+	}
+
 	.text {
 		position: absolute;
 		top: 20rem;
@@ -1673,8 +1686,20 @@ main.replurk {
 			line-height: 3.5rem;
 			margin: 0 0 1rem 0;
 
-			+p,
-			+p+p {
+			+img {
+				position: absolute;
+				z-index: 2;
+				top: 13rem;
+				left: 1.4rem;
+				width: 3rem;
+				height: 4.5rem;
+				object-fit: cover;
+				border-radius: 100%;
+				filter: blur(.1rem);
+			}
+
+			+img+p,
+			+img+p+p {
 				position: absolute;
 				top: .5rem;
 				left: initial;
@@ -1686,11 +1711,13 @@ main.replurk {
 				text-align: right;
 			}
 
-			+p+p {
+			+img+p+p {
 				top: 9rem;
 				width: 40%;
 			}
 		}
+
+
 
 		p {
 			margin: 0;
@@ -2438,11 +2465,49 @@ main.replurk {
 		justify-content: stretch;
 	}
 
+
+	.title,
+	.list {
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			z-index: 3;
+			left: 2rem;
+			top: 18.5rem;
+			background: lime;
+			width: .125rem;
+			height: 8rem;
+			transform: rotate(-30deg);
+			transform-origin: center;
+		}
+
+		&::after {
+			left: 2.25rem;
+			transform: rotate(30deg);
+		}
+	}
+
 	.title {
 		position: absolute;
 		top: 3rem;
 		left: 2rem;
 		right: 2rem;
+
+		&::before,
+		&::after {
+			left: initial;
+			right: 0;
+			top: 15.8rem;
+			height: 7.75rem;
+			transform: rotate(-32.5deg);
+		}
+
+		&::after {
+			right: .25rem;
+			transform: rotate(32.5deg);
+		}
 
 		h2 {
 			text-transform: uppercase;
@@ -2454,6 +2519,18 @@ main.replurk {
 			color: var(--white) !important;
 			transform-origin: center center;
 			transform: scale(.75, 2);
+		}
+
+		img {
+			position: absolute;
+			z-index: 3;
+			left: 2.75rem;
+			top: 9.25rem;
+			width: 3rem;
+			height: 4rem;
+			object-fit: cover;
+			border-radius: 100%;
+			transform: rotate(5deg);
 		}
 
 		p {
@@ -2506,6 +2583,11 @@ main.replurk {
 
 			.avatar img {
 				border-radius: 100%;
+				width: 3rem;
+				height: 4rem;
+				object-fit: cover;
+				border-radius: 100%;
+				transform: rotate(-5deg);
 			}
 
 			.name {
@@ -2517,6 +2599,12 @@ main.replurk {
 				text-shadow: 0 0 .5rem var(--red);
 				transform-origin: 0 0;
 				transform: scaleX(.5);
+			}
+
+			&:hover {
+				.avatar img {
+					transform: scale(1.2) rotate(-5deg);
+				}
 			}
 		}
 

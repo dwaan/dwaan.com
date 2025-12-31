@@ -503,6 +503,7 @@ class most {
 						`meme lexend`,
 						`mvp`,
 						`<h2>Your Most Vibing Plurker in ${this.parent.year}</h2>\
+						<img src="${this.parent.friends.getAvatar(this.parent.me.id)}" >\
 						<p>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing</p>\
 						<h3>MVP</h3>`,
 						result,

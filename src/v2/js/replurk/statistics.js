@@ -371,6 +371,9 @@ class statistics {
 				class: `image`,
 				html: `<img src="/img/replurk/grandma.webp">`
 			}, {
+				class: `avatar`,
+				html: `<img src="${this.friends.getAvatar(this.me.id)}" >`
+			}, {
 				class: `text`,
 				html: posted
 			}]
@@ -429,6 +432,7 @@ class statistics {
 			`replurkers`,
 			`\
 			<h2>RE<br/>PLURK<br/>ERS</h2>\
+			<img src="${this.friends.getAvatar(this.me.id)}" >\
 			<p>the one who made your plurk</p>\
 			<p>famous in the year of ${this.year}</p>\
 			<img class="meme" src="/img/replurk/distracted.webp" />\
