@@ -126,7 +126,12 @@ class statistics {
 	}
 
 	clear() {
-		this.el.innerHTML = ""
+		this.el.querySelectorAll(".statistics").forEach(el => {
+			if (el.id != "hello") el.remove()
+		})
+
+		// refresh swiper
+		this.swiper.update()
 	}
 
 	listCount(list, collection) {

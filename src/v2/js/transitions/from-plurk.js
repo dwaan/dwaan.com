@@ -20,9 +20,6 @@ let transition_from_plurk = {
         // Display loading
         await loader.init();
 
-        // Scroll top
-        await animate.top(window);
-
         // Hide current view
         var tl = gsap.timeline();
         tl.set(current.querySelectorAll("#credits, #statistics"), {

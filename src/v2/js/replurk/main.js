@@ -135,8 +135,6 @@ class replurk {
 			var length = reduceMotionFilter(.25)
 			var tl = gsap.timeline()
 
-			await animate.top(next)
-
 			tl.fromTo(next.querySelectorAll(".grant"), {
 				opacity: 1
 			}, {
@@ -200,9 +198,6 @@ class replurk {
 
 			// Display the rest of the statistics
 			this.displayStatistics()
-
-			// Scroll top top
-			await animate.top(next)
 
 			// Hide login page
 			if (clear) next.querySelector("#permission").style.display = "none"
