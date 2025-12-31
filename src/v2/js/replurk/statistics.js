@@ -579,11 +579,11 @@ class statistics {
 		document.body.style.cursor = "wait"
 
 		el.querySelectorAll("img").forEach(img => {
-			if (!img.src.includes("plurk-api")) {
+			if (!img.src.includes("plurk-api") && !img.src.includes("https://dwaan.com")) {
 				img.dataset.src = img.src
 				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
 			} else if (img.dataset.src) {
-				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+				img.src = `${img.dataset.src}`
 			}
 		})
 		await waitForImg(el)
