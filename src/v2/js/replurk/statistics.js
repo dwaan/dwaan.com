@@ -5,9 +5,9 @@ import html2canvas from "html2canvas"
 
 import api from "./api.js"
 import scroll from "../helpers/scroll.js"
-import { addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
+import { _q, addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
 import Swiper from 'swiper'
-import { Autoplay, EffectCoverflow, Keyboard, Mousewheel } from 'swiper/modules'
+import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Pagination } from 'swiper/modules'
 
 import span from "./span.js"
 import colors from "./colors.js"
@@ -45,17 +45,30 @@ class statistics {
 		this.year = year
 
 		// Swiper
-		this.swiper = new Swiper("#statistics", {
-			modules: [Mousewheel, Keyboard, EffectCoverflow, Autoplay],
-			speed: 1000,
+		this.swiper = new Swiper("#swiper", {
+			modules: [Mousewheel, Keyboard, EffectCoverflow, Pagination, Autoplay],
+			speed: 500,
 			effect: "coverflow",
 			grabCursor: true,
 			mousewheel: true,
 			centeredSlides: true,
-			autoplay: true,
+			autoplay: {
+				delay: 5000,
+				disableOnInteraction: false
+			},
+			pagination: {
+				el: "#pagination",
+				clickable: true
+			},
 			keyboard: {
 				enabled: true,
 			},
+			on: {
+				autoplayTimeLeft(swiper, time, progress) {
+					_q("#progress svg").style.setProperty("--progress", 1 - progress)
+					_q("#progress span").textContent = `${Math.ceil(time / 1000)}s`
+				}
+			}
 		})
 
 		// Most statistics object renderer
@@ -64,7 +77,7 @@ class statistics {
 		// Inactive timeline
 		this.inactive = new inactive(this)
 
-		this.el = this.next.querySelector("#statistics > div")
+		this.el = this.next.querySelector("#statistics .swiper-wrapper")
 
 		// Obverse when element is added to DOM
 		var observer = new MutationObserver((mutationsList) => {
@@ -519,7 +532,6 @@ class statistics {
 		scroll.refresh()
 
 		// refresh swiper
-		console.log("Updating swiper...", el)
 		this.swiper.update()
 	}
 

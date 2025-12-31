@@ -8,24 +8,26 @@ class: plurk
 </section>
 
 <section id="statistics">
-    <div class="grant middle swiper-wrapper">
-        {% comment %} <div id="backtotop" class="grant middle">&larr;</div> {% endcomment %}
-
-        <div id="hello" class="statistics swiper-slide">
-            <div class="content">
-                <div id="background"></div>
-                <div class="since">
-                    <p class="title">RePlurk</p>
-                    <p class="when"></p>
+    <div id="swiper" class="middle">
+        <div class="swiper-wrapper grant middle">
+            <div id="hello" class="statistics swiper-slide">
+                <div class="content">
+                    <div id="background"></div>
+                    <div class="since">
+                        <p class="title">RePlurk</p>
+                        <p class="when"></p>
+                    </div>
+                    <div class="thumbs"></div>
+                    <div class="text"></div>
+                    <div class="greet"></div>
+                    <div class="karma"></div>
                 </div>
-                <div class="thumbs"></div>
-                <div class="text"></div>
-                <div class="greet"></div>
-                <div class="karma"></div>
             </div>
         </div>
     </div>
+
 </section>
+
 
 <section id="permission" class="middle">
     <div class="text">
@@ -68,6 +70,15 @@ class: plurk
 </section>
 
 <section class="footer">
+    <div id="progress" class="grant">
+        <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20"></circle>
+        </svg>
+        <span></span>
+    </div>
+    
+    <div id="pagination" class="grant"></div>
+
     <div id="menu">
         <input class="handle" id="menutoggler" type="checkbox" />
         <div class="submenu">
