@@ -1,0 +1,105 @@
+@charset "utf-8";
+
+@use 'mixins';
+
+// Hidden with css
+.hidden {
+    display: none;
+}
+
+// Hidden without javascript
+[hidden] {
+    display: initial;
+}
+
+// Stylized browserSync script notification
+#__bs_notify__ {
+    font-size: .75rem !important;
+    color: var(--white) !important;
+    background-color: var(--black) !important;
+    padding: 0 16px !important;
+    right: initial !important;
+    top: 16px !important;
+    left: 50% !important;
+    border-radius: 8px !important;
+    transform: translate(-50%, 0) !important;
+}
+
+// Browser Upgrade Prompt
+.browserupgrade {
+    margin: 0.2em 0;
+    background: var(--yellow);
+    color: var(--black);
+    padding: 0.2em 0;
+}
+
+// Browser size support
+.support {
+    @include mixins.block-spread(none, fixed, 999999, inherit);
+    padding: 40px;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+
+    .content {
+        position: relative;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Screen width is too small to be usable
+@media (max-width: 300px) {
+    .support {
+        display: flex;
+    }
+}
+
+// Screen height is too thin to be usable
+@media (min-aspect-ratio: 3/1) {
+    .support {
+        display: flex;
+
+        h2 {
+            margin: 0 var(--padl) 0 0;
+            @include mixins.typography(20vh, false, 20vh);
+        }
+
+        h3 {
+            margin: 0 var(--padl) 0 0;
+        }
+
+        p,
+        h4 {
+            padding: 0;
+        }
+
+        h4 {
+            margin: 0;
+            font-size: 8vh;
+        }
+
+        p {
+            margin: 0 0 0 var(--padl);
+            font-size: 5vh;
+        }
+    }
+}
+
+@media (min-aspect-ratio: 5/1) {
+    .support {
+        h2 {
+            @include mixins.typography(30vh, false, 30vh);
+        }
+
+        h4 {
+            font-size: 12vh;
+        }
+
+        p {
+            font-size: 10vh;
+        }
+    }
+}

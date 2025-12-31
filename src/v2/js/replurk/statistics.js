@@ -1,12 +1,13 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import html2canvas from "html2canvas"
 
 import api from "./api.js"
 import scroll from "../helpers/scroll.js"
-import { addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
+import { _q, addClass, hasClass, plural, reduceMotionFilter, removeClass, waitForImg } from '../helpers/helper.js'
+import Swiper from 'swiper'
+import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Pagination } from 'swiper/modules'
 
 import span from "./span.js"
 import colors from "./colors.js"
@@ -43,13 +44,71 @@ class statistics {
 		this.friends = friends
 		this.year = year
 
+		// Swiper
+		this.swiper = new Swiper("#swiper", {
+			modules: [Mousewheel, Keyboard, EffectCoverflow, Pagination, Autoplay],
+			speed: 500,
+			effect: "coverflow",
+			coverflowEffect: {
+				rotate: 35,
+				scale: .9
+			},
+			grabCursor: true,
+			mousewheel: true,
+			centeredSlides: true,
+			autoplay: {
+				delay: 10000,
+				disableOnInteraction: false,
+				pauseOnMouseEnter: true
+			},
+			pagination: {
+				el: "#pagination .pages",
+				clickable: true,
+				// bulletClass: "page",
+				// bulletActiveClass: "active",
+				dynamicBullets: true,
+				dynamicMainBullets: 10
+			},
+			keyboard: {
+				enabled: true,
+			},
+			on: {
+				autoplayTimeLeft(swiper, time, progress) {
+					_q("#progress svg").style.setProperty("--progress", 1 - progress)
+					_q("#progress span").textContent = `${Math.ceil(time / 1000)}s`
+				}
+			}
+		})
+		const playpause = this.next.querySelector("#playpause")
+		var play = true
+		if (playpause) playpause.onclick = () => {
+			if (play) {
+				play = false
+				removeClass(playpause, "play")
+				addClass(playpause, "pause")
+				this.swiper.autoplay.stop()
+			} else {
+				play = true
+				removeClass(playpause, "pause")
+				addClass(playpause, "play")
+				this.swiper.autoplay.start()
+			}
+		}
+
+		// Capture function
+		const capture = this.next.querySelector("#capture")
+		if (capture) capture.onclick = async () => {
+			var activecapture = this.next.querySelector(".swiper-slide-active")
+			if (activecapture) this.capture(activecapture)
+		}
+
 		// Most statistics object renderer
 		this.most = new most(this)
 
 		// Inactive timeline
 		this.inactive = new inactive(this)
 
-		this.el = this.next.querySelector("#statistics")
+		this.el = this.next.querySelector("#statistics .swiper-wrapper")
 
 		// Obverse when element is added to DOM
 		var observer = new MutationObserver((mutationsList) => {
@@ -67,7 +126,12 @@ class statistics {
 	}
 
 	clear() {
-		this.el.innerHTML = ""
+		this.el.querySelectorAll(".statistics").forEach(el => {
+			if (el.id != "hello") el.remove()
+		})
+
+		// refresh swiper
+		this.swiper.update()
 	}
 
 	listCount(list, collection) {
@@ -83,95 +147,77 @@ class statistics {
 		return list
 	}
 
-	title(text, style = "", loading = false) {
-		let span = loading ? `<span class="loading"><i/>` : `<span class="line"><i></i></span>`
-		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics statistics-title ${style}">\
-				<h3><span>${text}</span>${span}</h3>\
-			</div>`)
-	}
+	//
+	// Helper
+	// 
 
-	body(text, style = "") {
-		this.el.insertAdjacentHTML('beforeend', `\
-			<div class="statistics statistics-title ${style}">\
-				<div class="body">${text}</div>\
-			</div>`)
-	}
-
-	wrapper(style, text, background) {
-		return `<div class="statistics statistics-wrap ${style}">\
-			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${text}</div>\
+	wrapper(style, html, background) {
+		return `<div class="statistics statistics-wrap swiper-slide ${style}">\
+			<div class="content" ${background ? `style="background-images:url(${background})"` : ``}>${html}</div>\
 		</div>`
 	}
 
-	// Drawing functions
-
-	draw(style, number, text, background) {
-		if (typeof number == "string" || (typeof number == "number" && number > 0)) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style, `\
+	draw(classes, big, text, background) {
+		if (typeof big == "string" || (typeof big == "number" && big > 0)) {
+			this.el.insertAdjacentHTML('beforeend', this.wrapper(classes, `\
 				<p>\
-					<span class="big">${number}</span>\
+					<span class="big">${big}</span>\
 					<span class="text">${text}</span>\
 				</p>\
-			`), background)
+			`, background))
 		}
 	}
 
-	drawBadge(condition, style, icon, text, textempty) {
-		style = `span1 badges badgesmall ${style}`
+	newdraw() {
+		if (arguments.length === 0) return
 
-		if (condition) {
-			this.draw(style, icons.draw(icon, false), text)
-			return 1
+		for (let index = 0; index < arguments.length; index++) {
+			const argument = arguments[index]
+
+			if (argument.show !== false) {
+				var content = ""
+				const classes = argument.class ? argument.class : ""
+				const background = argument.background ? argument.background : ""
+
+				if (typeof argument.html == "object") {
+					argument.html.forEach((html, index) => {
+						if (typeof html == "object") {
+							var repeatedhtml = ``
+							const length = typeof html.repeat == "number" && html.repeat > 0 ? html.repeat : 1
+							for (let index = 0; index < length; index++) repeatedhtml += `${html.html}`
+							content += `<div class="content${index} ${html.class}">${repeatedhtml}</div>`
+						} else content += `<div class="content${index}">${html}</div>`
+					})
+				}
+
+				this.el.insertAdjacentHTML('beforeend', this.wrapper(classes, content, background))
+			}
+		}
+	}
+
+	drawBadge(id, show, style, icon, text, textempty) {
+		style = `badges ${style}`
+
+		if (show) {
+			if (this.el.querySelector(`${id} .content .list`)) {
+				this.el.querySelector(`${id} .content .list`).insertAdjacentHTML('beforeend', `\
+					<div class="${style}">\
+						<span class="badge">${icons.draw(icon, false)}</span>\
+						<span class="title">${text}</span>\
+					</div>\
+				`)
+
+				return 1
+			}
 		} else {
-			this.draw(`${style} nobackground`, icons.draw(icon, true), textempty ? textempty : "")
-			return 0
+			if (this.el.querySelector(`${id} .content .list`)) this.el.querySelector(`${id} .content .list`).insertAdjacentHTML('beforeend', `\
+				<div class="${style} inactive">\
+					<span class="badge">${icons.draw(icon, true)}</span>\
+					<span class="title">${textempty ? textempty : ""}</span>\
+				</div>\
+			`)
 		}
-	}
-
-	drawDiv(style, text) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style, '<div class="box">' + text + '</div>'))
-	}
-
-	drawGraph(style, number, text) {
-		if (typeof number == "string" || (typeof number == "number" && number > 0)) {
-			this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawgraph", '\
-				<p>\
-					<span class="graph"><i data-number="' + number + '"></i></span>\
-					<span class="info">' + text + '</span>\
-				</p>\
-			'))
-		}
-	}
-
-	drawImage(style, image, link, title, text, badge) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawimage", '\
-			<a href="' + link + '" target="_BLANK">\
-				<span class="big">' + badge + '</span>\
-				<span class="avatar"><img src="' + image + '" /></span>\
-				<span class="text">' + text + '</span>\
-				<span class="title">' + title + '</span>\
-			</a>\
-		'))
-	}
-
-	drawHTML(style, title, html) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawhtml", '\
-			<div>\
-				<div class="html">' + html + '</div>\
-				<div class="title">' + title + '</div>\
-			</div>\
-		'))
-	}
-
-	drawLink(style, link, title, text, badge) {
-		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawlink", '\
-			<a href="' + link + '" target="_BLANK">\
-				<span class="big">' + badge + '</span>\
-				<span>' + text + '</span>\
-				<span class="title">' + title + '</span>\
-			</a>\
-		'))
+		return 0
 	}
 
 	drawPost(style, id, title, text, badge) {
@@ -180,9 +226,22 @@ class statistics {
 		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", `\
 			<div>\
 				<a href="${url}" class="link" target="_BLANK">${icons.link}</a>\
-				<span class="big">${badge}</span>\
-				<p class="post">${text}</p>\
-				<span class="title">${title}</span>\
+				<div class="big">${badge}</div>\
+				<div class="post"><p>${text}</p></div>\
+				<div class="title">${title}</div>\
+			</div>\
+		`))
+	}
+
+	drawPostAdvanced(style, id, title, text, badge) {
+		var url = ""
+		if (id) url = 'https://plurk.com/p/' + id.toString(36)
+		this.el.insertAdjacentHTML('beforeend', this.wrapper(style + " drawpost", `\
+			<div>\
+				<a href="${url}" class="link" target="_BLANK">${icons.link}</a>\
+				<div class="big">${badge}</div>\
+				<div class="post">${text}</div>\
+				<div class="title">${title}</div>\
 			</div>\
 		`))
 	}
@@ -190,124 +249,201 @@ class statistics {
 	async drawUserList(style, id, title, users, number = false) {
 		var html = ""
 		var max = users.length >= 5 ? 5 : users.length
-		var length = reduceMotionFilter(1)
+		var userToDraw = []
+		var index = 0
 
-		this.drawHTML(`${style} userlist ${id}`, title, "<span class='info'>Downloading user data</span>")
-		for (var index = 0; index < max; index++) {
+		this.newdraw({
+			class: `${id} ${style} userlist`,
+			html: [{
+				class: `title`,
+				html: `${title}`
+			}, {
+				class: `list`,
+				html: `<span class='loading'>Downloading user data</span>`
+			}]
+		})
+
+		while (userToDraw.length < max && users[index]) {
 			let user = users[index]
 			let friend = await this.friends.find(user.id)
-			if (friend) {
-				var plurker = new element(user.id, friend, "", plurker => {
-					plurker.avatar = new span()
-						.class("avatar")
-						.html(`<img src="${this.friends.getAvatar(plurker.user.id)}" />`)
-					if (number) {
-						var medal = `sports-medal`
-						if (index == 0) medal = `1st-place-medal`
-						else if (index == 1) medal = `2nd-place-medal`
-						else if (index == 2) medal = `3rd-place-medal`
 
-						plurker.badge = new span()
-							.class("medal")
-							.html(icons.draw(medal))
-						plurker.avatar.el.appendChild(plurker.badge.el)
-					}
-					plurker.name = new span()
-						.class("name")
-						.html(`${plurker.user.display_name}`)
-					plurker.counts = new span()
-						.class("count")
-						.html(`${user.count}`)
-
-					plurker.el.appendChild(plurker.avatar.el)
-					plurker.el.appendChild(plurker.name.el)
-					plurker.el.appendChild(plurker.counts.el)
-					plurker.el.setAttribute("href", `https://plurk.com/${plurker.user.nick_name}`)
-				})
-				plurker.create()
-				html += plurker.el.outerHTML
-			} else {
-				max++
+			if (friend && !api.ignoreduser(friend.nick_name)) {
+				friend.count = user.count
+				userToDraw.push(friend)
 			}
+			index++
 		}
-		this.el.querySelector(`.${id} .html`).innerHTML = html
 
-		// Stagger animation
-		if (id == 'mostinteraction' || id == 'mvp') {
-			scroll.push(tl => {
-				tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
-					scale: .3,
-					opacity: 0
-				}, {
-					scale: 1,
-					opacity: 1,
-					duration: length,
-					ease: "elastic(1.2, 0.5)",
-					stagger: {
-						amount: length / 3,
-						from: "end"
-					}
-				}, 0)
+		userToDraw.forEach((user, index) => {
+			var plurker = new element(user.id, user, "", plurker => {
+				plurker.avatar = new span()
+					.class("avatar")
+					.html(`<img src="${this.friends.getAvatar(plurker.user.id)}" />`)
+				if (number) {
+					var medal = `sports-medal`
+					if (index == 0) medal = `1st-place-medal`
+					else if (index == 1) medal = `2nd-place-medal`
+					else if (index == 2) medal = `3rd-place-medal`
 
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: this.el.querySelector("." + id),
-					start: "0% 75%",
-					end: "100% 75%",
-					scrub: 2,
-					animation: tl
-				})
+					plurker.badge = new span()
+						.class("medal")
+						.html(icons.draw(medal))
+					plurker.avatar.el.appendChild(plurker.badge.el)
+				}
+				plurker.name = new span()
+					.class("name")
+					.html(`${plurker.user.display_name}`)
+				plurker.counts = new span()
+					.class("count")
+					.html(`${user.count}`)
+
+				plurker.el.appendChild(plurker.avatar.el)
+				plurker.el.appendChild(plurker.name.el)
+				plurker.el.appendChild(plurker.counts.el)
+				plurker.el.setAttribute("href", `https://plurk.com/${plurker.user.nick_name}`)
 			})
-		} else {
-			scroll.push(tl => {
-				tl.fromTo(this.el.querySelectorAll("." + id + " .plurkers"), {
-					y: 50,
-					opacity: 0
-				}, {
-					y: 0,
-					opacity: 1,
-					duration: length,
-					stagger: length / 3
-				}, 0)
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: this.el.querySelector("." + id),
-					start: "0% 100%",
-					end: "100% 100%",
-					scrub: 1,
-					animation: tl
-				})
-			})
-		}
+			plurker.create()
+			html += plurker.el.outerHTML
+		})
+		this.el.querySelector(`.${id} .list`).innerHTML = html
 	}
 
+	// Draw statistics
 	async drawAll(plurks) {
+		// Percentage responses
 		var response_percentage = Math.round((this.plurks_count - this.noresponse_count) / this.plurks_count * 100)
+		var half = response_percentage > 50 ? "Your glass is half full" : "Your glass is half empty"
+		this.newdraw({
+			class: `meme percentage`,
+			html: [{
+				class: `big`,
+				html: half
+			}, {
+				class: `graph`,
+				html: `<i style="height: ${response_percentage}%"></i>`
+			}, {
+				class: `text`,
+				html: `${response_percentage}% of your plurks in ${this.year} recieved ${icons.draw("left-speech-bubble")} responses ${(response_percentage <= 50) ? `${icons.draw("crying-face")}` : `${icons.draw("star-struck")}`}`
+			}, {
+				class: `image`,
+				html: `<img src="/img/replurk/glass.webp">`
+			}]
+		})
 
+		// Private, whisper, and "porn" count
+		var privatewhisper = `<span>In ${this.year},</span><span>I didn't post<br />any private and<br />whisper plurk</i></span>`
+		if (this.private_count > 0) {
+			privatewhisper += `<span>In ${this.year},<br/>I posted <i>${plural(this.private_count, 'private plurk')}</i></span>`
+			if (this.whispers_count > 0) privatewhisper += `<span>I also posted <i>${plural(this.whispers_count, 'whisper')}</i></span>`
+		} else {
+			if (this.whispers_count > 0) privatewhisper += `<span>In ${this.year},<br/>I posted <i>${plural(this.whispers_count, 'whisper')}</i></span>`
+		}
+		this.newdraw({
+			class: `meme privatewhisper outfit`,
+			html: [{
+				class: `image`,
+				html: `<img src="/img/replurk/theydidntknow.webp">`
+			}, {
+				class: `big`,
+				html: `They<br/>dind't<br/>know`
+			}, {
+				class: `text`,
+				html: privatewhisper
+			}]
+		})
+
+		// Porn count
+		var posted = `I'm old enough to not post adult plurk this year`
+		if (this.porn_count > 0) {
+			posted = `I posted <i>${plural(this.porn_count, 'adult plurk')}</i> this year`
+		}
+		this.newdraw({
+			class: `porn meme inter`,
+			html: [{
+				class: `year big`,
+				html: `${this.year},<br/>`,
+				repeat: 20
+			}, {
+				class: `ninetyfive big`,
+				html: `1995 is 5 years ago</br>`,
+				repeat: 20
+			}, {
+				class: `image`,
+				html: `<img src="/img/replurk/grandma.webp">`
+			}, {
+				class: `avatar`,
+				html: `<img src="${this.friends.getAvatar(this.me.id)}" >`
+			}, {
+				class: `text`,
+				html: posted
+			}]
+		})
+
+		// Coin count
+		this.newdraw({
+			class: `coins meme outfit`,
+			html: [{
+				class: `text`,
+				html: `${plural(this.coins_count, 'plurk coin')}<br/>`,
+				repeat: 20
+			}, {
+				class: `image`,
+				html: `<img src="/img/replurk/confuse.webp">`
+			}, {
+				class: `big`,
+				html: `Wait, you guys got <i>${plural(this.coins_count, 'plurk coin')}</i> in ${this.year}?`
+			}],
+			show: this.coins_count > 0
+		})
+
+		// Response, Love, and Replurk
+		this.newdraw({
+			class: `count meme`,
+			html: [{
+				class: `image`,
+				html: `<img src="/img/replurk/liveloughlove.webp">`
+			}, {
+				class: `big`,
+				html: `More like: Response, Resback, Replurk!`
+			}, {
+				class: `text`,
+				html: `PS: This year you received <i>${this.response_count} responses</i>, <i>${this.replurker_count} replurks</i>, and <i>${this.favourite_count} loves</i> from Plurkers.`
+			}]
+		})
+
+		// Most response, replurked, love post
 		this.most.responses.draw(plurks)
-		this.drawGraph('center graph percentage', response_percentage, `Around <i>${response_percentage}%</i> of my plurks got ${icons.draw("left-speech-bubble")} responses ${(response_percentage <= 50) ? `${icons.draw("crying-face")}` : `${icons.draw("star-struck")}`}`)
-
-		this.draw('recievereplurk', this.replurker_count, `I received <i>${icons.draw("megaphone")} ${plural(this.replurker_count, 'replurk')}</i>`)
 		this.most.replurk.draw(plurks)
-
 		this.most.favorite.draw(plurks)
-		this.draw('recievelove', this.favourite_count, `I recieved <i>${icons.draw("red-heart")} ${plural(this.favourite_count, 'love')}</i>`)
 
-		this.draw('privateplurk', this.private_count, `I posted <i>${icons.draw("lip")} ${plural(this.private_count, 'private plurk')}</i>`)
-		this.draw('whisper', this.whispers_count, `I posted <i>${icons.draw("face-in-clouds")} ${plural(this.whispers_count, 'whisper')}</i>`)
-		this.draw('porn', this.porn_count, `I posted <i>${icons.draw("face-with-peeking-eye")} ${plural(this.porn_count, 'adult plurk')}</i>`)
-
-		this.draw('span2 responsecount', `${this.plurks_count} &rarr; ${this.response_count}`, `I received <i>${icons.draw("left-speech-bubble")} ${plural(this.response_count, 'response')}</i> from <i>${plural(this.plurks_count, 'plurk')}</i>`)
-		this.draw('center coins', this.coins_count, `I recieved <i>${icons.draw("coin")} ${plural(this.coins_count, 'coin')}</i>`)
-
-		if (this.favorite_list.length > 0) this.drawUserList("users", "loved", `These Plurkers <i>${icons.draw("red-heart")} Loved</i> My Posts`, this.favorite_list.sort(this.most.sort))
-		if (this.replurker_list.length > 0) this.drawUserList("users", "replurked", `These Plurkers likes to <i>${icons.draw("megaphone")} Replurked</i> My Posts`, this.replurker_list.sort(this.most.sort))
+		if (this.favorite_list.length > 0) this.drawUserList(
+			`inter`,
+			`lovers`,
+			`\
+			<img class="meme" src="/img/replurk/notsure.webp" />\
+			<small>is this the real love? is this just fantasy?</small>\
+			<h2>Top <strong>Lovers</strong></h2>\
+			<p>Not sure if this plurkers like your plurk, or if they accidentaly like your plurk. Or maybe they really likes your plurk, you should asked them for sure.</p>\
+			`,
+			this.favorite_list.sort(this.most.sort)
+		)
+		if (this.replurker_list.length > 0) this.drawUserList(
+			`lexend`,
+			`replurkers`,
+			`\
+			<h2>RE<br/>PLURK<br/>ERS</h2>\
+			<img src="${this.friends.getAvatar(this.me.id)}" >\
+			<p>the one who made your plurk</p>\
+			<p>famous in the year of ${this.year}</p>\
+			<img class="meme" src="/img/replurk/distracted.webp" />\
+			<p class="also">also starring</p>\
+			<p class="rick">Never gonna give you up, Never gonna let you down, Never gonna run around and desert you. Never gonna make you cry, Never gonna say goodbye, Never gonna tell a lie, and hurt you.</p>\
+			`,
+			this.replurker_list.sort(this.most.sort)
+		)
 	}
 
 	// For animating user chart
-
 	attach(charttitle, node, max) {
 		var id = node.id
 		var chart
@@ -345,7 +481,7 @@ class statistics {
 			content.appendChild(text)
 
 			wrapper = document.createElement('div')
-			wrapper.classList.add("statistics", "statistics-wrap", "attach", id)
+			wrapper.classList.add("statistics", "statistics-wrap", "swiper-slide", "attach", id)
 			wrapper.appendChild(content)
 
 			this.el.insertAdjacentElement("beforeend", wrapper)
@@ -389,182 +525,91 @@ class statistics {
 	}
 
 	// Events after html is attach to DOM
-
 	afterDraw(el) {
-		var length = reduceMotionFilter(1)
+		var length = reduceMotionFilter(.25)
 
-		if (hasClass(el, 'statistics-wrap')) {
-			// Content
-			var color = new colors()
-			var randomcolors = [color.getRandomColor(), color.getRandomColor()]
-			var content = el.querySelector(".content")
+		// Content
+		var color = new colors()
+		var randomcolors = [color.getRandomColor(), color.getRandomColor()]
+		var content = el.querySelector(".content")
 
-			// Make colorful background
+		// Make colorful background
+		if (randomcolors.length >= 2) {
 			gsap.set(content, {
-				background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`,
-				boxShadow: `0 4px 20px $${this.me.name_color}`
+				background: `radial-gradient(at 10% 10%, ${randomcolors[0]} 0%, ${randomcolors[1]} 100%)`
 			})
-
-			// Make element appears
-			gsap.to(content, {
-				opacity: 1,
-				duration: length / 2,
-				ease: "power3.out"
-			}, 0)
-
-			// Animate number
-			scroll.push(function (tl) {
-				if (el.querySelector(".big")) {
-					var number = Number(el.querySelector(".big").textContent)
-					if (number > 0) {
-						var load = { progress: 0 }
-						var duration = 1
-						if (number >= 500 && number < 1000) duration = 2
-						else if (number >= 1000 && number < 99999) duration = 3
-						else if (number >= 99999) duration = 4
-						tl.to(load, {
-							progress: number,
-							snap: "progress",
-							ease: "power3.out",
-							duration: duration,
-							onUpdate: () => {
-								el.querySelector(".big").textContent = plural(load.progress)
-							}
-						}, 0)
-					}
-				}
-
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "0 100%-=100px",
-					end: "100px 100%-=100px",
-					animation: tl,
-					toggleActions: "play none none none"
-				})
+			gsap.set(el.querySelector(".content .big, .content .title, .content .color1"), {
+				color: `${randomcolors[1]}`
 			})
-
-			// Graph animation
-			if (hasClass(el, 'drawgraph')) {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelector(".graph"), {
-						y: 100
-					}, {
-						y: 0
-					}, 0)
-
-					tl.fromTo(el.querySelector(".graph i"), {
-						height: "0%"
-					}, {
-						height: el.querySelector(".graph i").getAttribute("data-number") + "%"
-					}, 0)
-
-					return tl
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "50% 100%",
-						end: "100% 100%",
-						animation: tl,
-						scrub: 1
-					})
-				})
-			}
-
-			// Coin animation
-			if (hasClass(el, 'coins')) {
-				scroll.push(tl => {
-					tl.fromTo(el.querySelector(".big"), {
-						y: "50%"
-					}, {
-						y: 0,
-						ease: "power3.out"
-					}, 0)
-					return tl
-				}, tl => {
-					return ScrollTrigger.create({
-						trigger: el,
-						start: "50% 100%",
-						end: "100% 100%",
-						animation: tl,
-						scrub: 2
-					})
-				})
-			}
-
-			// Capture function
-			this.capture(el)
+			gsap.set(el.querySelector(".content .color2"), {
+				color: `${randomcolors[2]}`
+			})
 		} else {
-			// Scroll animation header line section
-			scroll.push(tl => {
-				tl.fromTo(el.querySelectorAll("i"), {
-					x: "-100%"
-				}, {
-					x: "0%",
-					ease: "ease.out"
-				}, 0)
-				return tl
-			}, tl => {
-				return ScrollTrigger.create({
-					trigger: el,
-					start: "100% 100%",
-					end: "100% 0",
-					animation: tl,
-					scrub: 1
-				})
+			gsap.set(content, {
+				background: `${randomcolors[0]}`
 			})
 		}
+
+		// Make element appears
+		gsap.fromTo(content, {
+			y: 200,
+			opacity: 0
+		}, {
+			y: 0,
+			opacity: 1,
+			duration: length,
+			ease: "expo.out"
+		})
 
 		// Refresh scroll
 		scroll.refresh()
+
+		// refresh swiper
+		this.swiper.update()
 	}
 
-	capture(el) {
-		var capture = el.querySelector(".content")
-		if (!capture) return
+	async capture(el) {
+		if (el.generating) return
 
-		capture.onclick = async () => {
-			if (capture.generating) return
+		console.log("Caputring", el)
 
-			// Informing user the process is starting
-			capture.generating = true
-			addClass(capture, "wait")
-			document.body.style.cursor = "wait"
+		// Informing user the process is starting
+		el.generating = true
+		addClass(el, "wait")
+		document.body.style.cursor = "wait"
 
-			capture.querySelectorAll("img").forEach(img => {
-				if (!img.src.includes("plurk-api")) {
-					img.dataset.src = img.src
-					img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
-				} else if (img.dataset.src) {
-					img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
-				}
-			})
-			await waitForImg(capture)
+		el.querySelectorAll("img").forEach(img => {
+			if (!img.src.includes("plurk-api")) {
+				img.dataset.src = img.src
+				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+			} else if (img.dataset.src) {
+				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
+			}
+		})
+		await waitForImg(el)
 
-			// HTML to Canvas magic
-			var canvas = await html2canvas(capture, {
-				backgroundColor: null,
-				logging: false
-			})
+		// HTML to Canvas magic
+		var canvas = await html2canvas(el, {
+			backgroundColor: null,
+			logging: false
+		})
 
-			// Download the output
-			var link = document.createElement("a")
-			link.style.display = "none"
-			link.download = "replurk" + this.year + "-" + Date.now() + ".png"
-			link.href = canvas.toDataURL()
-			document.body.appendChild(link)
-			link.click()
-			document.body.removeChild(link)
-			link.remove()
+		// Download the output
+		var link = document.createElement("a")
+		link.style.display = "none"
+		link.download = "replurk" + this.year + "-" + Date.now() + ".png"
+		link.href = canvas.toDataURL()
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+		link.remove()
 
-			// Reset button after 3s
-			document.body.style.cursor = ""
-			removeClass(capture, "wait")
-			setTimeout(() => {
-				capture.generating = false
-			}, 3000)
-		}
+		// Reset button after 3s
+		document.body.style.cursor = ""
+		removeClass(el, "wait")
+		setTimeout(() => {
+			el.generating = false
+		}, 3000)
 	}
 }
 

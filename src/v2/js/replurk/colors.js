@@ -16,15 +16,15 @@ class colors {
 
         const allColorArrays = [
             [
-                'rgb(63,94,251)',     // Dodger Blue
-                'rgb(252,70,107)',    // Radical Red
-                'rgb(34,193,195)',    // Light Sea Green
-                'rgb(253,187,45)',    // Goldenrod
-                'rgb(195,34,190)',    // Deep Pink
-                'rgb(219,158,0)',     // Golden Yellow
-                'rgb(75,231,152)',    // Medium Spring Green
-                'rgb(195,34,103)',    // Cerise
-                'rgb(45,182,253)'     // Dodger Blue (Lighter)
+                'rgba(63,94,251,1)',     // Dodger Blue
+                'rgba(252,70,107,1)',    // Radical Red
+                'rgba(34,193,195,1)',    // Light Sea Green
+                'rgba(253,187,45,1)',    // Goldenrod
+                'rgba(195,34,190,1)',    // Deep Pink
+                'rgba(219,158,0,1)',     // Golden Yellow
+                'rgba(75,231,152,1)',    // Medium Spring Green
+                'rgba(195,34,103,1)',    // Cerise
+                'rgba(45,182,253,1)'     // Dodger Blue (Lighter)
             ]
         ];
 

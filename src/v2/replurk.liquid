@@ -1,103 +1,59 @@
 ---
-layout: main.liquid
-title: RePlurk 2024
-description: Unofficial Plurk Year End Recap for 2024
-namespace: replurk
+layout: replurk.liquid
 class: plurk
 ---
-<link rel="stylesheet" media="screen" href="/css/plurk.css">
 
-<div id="hello" class="grant middle first">
-    <div class="animate middle">
-        <div class="thumbs"></div>
-        <div class="text">
-            <p>Loading your plurk</p>
-        </div>
-        <div class="bgtext">
-            <sup>20</sup>
-            <sub class="shortyear">20</sub>
-        </div>
-        <div class="arrow-big">
-            <a href="#statistics" class="arrow scrollto">scroll</a>
+<section id="loading">
+    <h2>Henlo, please wait...</h2>
+</section>
+
+<section id="statistics">
+    <div id="swiper" class="middle">
+        <div class="swiper-wrapper grant middle">
+            <div id="hello" class="statistics swiper-slide">
+                <div class="content">
+                    <div id="background"></div>
+                    <div class="since">
+                        <p class="title">RePlurk</p>
+                        <p class="when"></p>
+                    </div>
+                    <div class="thumbs"></div>
+                    <div class="text"></div>
+                    <div class="greet"></div>
+                    <div class="karma"></div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div id="statistics" class="grant middle">
-    <div id="backtotop" class="grant middle">&uarr;</div>
-</div>
+</section>
 
-<div class="grant footer">
-    <div id="logout" class="logout">
-        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="5" y="4" width="14" height="24" rx="2" stroke="black" stroke-width="2" />
-            <path d="M29.7071 16.7071C30.0976 16.3166 30.0976 15.6834 29.7071 15.2929L23.3431 8.92893C22.9526 8.53841 22.3195 8.53841 21.9289 8.92893C21.5384 9.31946 21.5384 9.95262 21.9289 10.3431L27.5858 16L21.9289 21.6569C21.5384 22.0474 21.5384 22.6805 21.9289 23.0711C22.3195 23.4616 22.9526 23.4616 23.3431 23.0711L29.7071 16.7071ZM10 17L29 17L29 15L10 15L10 17Z" fill="black" />
-        </svg>
-        Logout
-    </div>
-    <a href="/replurk/?year=2020" class="nav-prev">Prev</a>
-    <span class="nav-prev">&bull;</span>
-    <a href="/replurk/?year=2020" class="now nowyear">2020</a>
-    <span class="nav-next">&bull;</span>
-    <a href="/replurk/?year=2020" class="nav-next">Next</a>
-</div>
-
-<section id="permission" class="middle first">
+<section id="permission" class="middle">
     <div class="text">
         <form action="./replurk<?php echo $now; ?>" method="GET">
             <h1>
-                RePlurk<br>
+                <span>RePlurk</span>
                 <sup>20</sup>
                 <sub class="shortyear">20</sub>
             </h1>
             <ol>
-                <li>
-                    <p>
-                        Grant
-                        <strong>RePlurk</strong>
-                        access to your timeline <br>
-                        <a href="#" id="tokenurl" data-barba-prevent target="BLANK" rel="opener">Loading...</a>
-                    </p>
-                </li>
-                <li>
-                    <p>It's best to open this web app in desktop browser.</p>
-                </li>
-                <li>
-                    <p>It will take about 17 minutes to download your timeline, and your data will be processed locally.</p>
-                </li>
-                <li class="small">
-                    <p>
-                        <strong>Note for mobile user!</strong>
-                        An authorization error may occur when opening this web app on a mobile phone with the official Plurk app
-                        installed. When it happens,
-                        <u>refresh this page and open
-                            <strong>“Grant Access”</strong>
-                            link in a new tab.</u>
-                    </p>
-                    <p>
-                        <strong>IMPORTANT!</strong>
-                        After using this web application, log out to ensure your privacy. RePlurk doesn’t store Plurk data on the
-                        server beyond session data which will be deleted once you close this tab.
-                    </p>
-                </li>
+                <li><p>Grant <strong>RePlurk</strong> access to your timeline</p></li>
+                <li><p>It will take about 17 minutes to download your timeline, and your data will be processed locally without any help from "GenAI".</p></li>
+                <li><p><strong>For mobile app user!</strong> An authorization error may occur when opening this web app from mobile phone with the official Plurk app installed. When it happens, <u>refresh this page and open <strong>“Grant Access”</strong> link in a new tab.</u></p></li>
+                <li><p><strong>IMPORTANT!</strong> To ensure your privacy, it's advisable to log out after using this web application. RePlurk doesn’t store Plurk data on the server beyond session data which will be deleted upon you closing this tab.</p></li>
             </ol>
+            <a href="#" id="tokenurl" data-barba-prevent target="BLANK" rel="opener">Loading...</a>
         </form>
-    </div>
-    <div class="bgtext">
-        <sup>20</sup>
-        <sub class="shortyear">20</sub>
     </div>
 </section>
 
-<!-- <section id="background" class="grant middle"></section> -->
-
-<div id="spacer" class="middle"></div>
+<input class="handle" id="creditstoggler" type="checkbox" />
 <section id="credits" class="middle">
     <div class="text">
-        <h2 class="hidden">Made with &hearts;</h2>
-        <p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
-        <p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
-        <p class="like likeandsupport">
+        <p class="close">Tap/click any where to close this message</p>
+        <p class="made">Made with <span>&hearts;</span> in TLV, hosted in Paris</p>
+        <p>Thank you for visiting. If you like this web app and want to support for further improvement:</p>
+        <p class="likeandsupport">
             <a href="https://www.plurk.com/p/3gjv3og6eu" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/person-bowing-medium.svg" width="64" height="64" alt="">
                 <i>Say Hi! to me in Plurk</i>
             </a>
@@ -105,11 +61,56 @@ class: plurk
                 <i>Send me a Plurk Coin</i>
             </a>
             <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/soft-ice-cream.svg" width="64" height="64" alt="">
-                <i>Buy me an Ice Cream</i>
+                <i>Buy me a Sorbet</i>
             </a>
         </p>
         <p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="/replurk/api/" data-barba-prevent target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="/hi/">contact me</a> for removal</p>
         <p class="noaffiliation">You can clone this web app source code from <a href="https://github.com/replurk" target="_BLANK">GitHub</a></p>
+    </div>
+
+    <label for="creditstoggler"></label>
+</section>
+
+<section class="footer">
+    <div id="progress" class="grant">
+        <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20"></circle>
+        </svg>
+        <span></span>
+    </div>
+    <div id="playpause" class="grant play">
+        <img src="https://api.iconify.design/fluent/play-circle-20-regular.svg?color=%23ffffff" width="24" height="24" alt="">
+        <img src="https://api.iconify.design/fluent/pause-circle-20-regular.svg?color=%23ffffff" width="24" height="24" alt="">
+    </div>
+
+    <div id="pagination" class="grant">
+        <div class="pages"></div>
+    </div>
+
+    <div id="capture" class="grant">
+        <img src="https://api.iconify.design/fluent/camera-20-regular.svg?color=%23ffffff" width="24" height="24" alt="">
+        <img src="https://api.iconify.design/fluent/camera-sparkles-20-regular.svg?color=%23ffffff" width="24" height="24" alt="">
+    </div>
+    <div id="menu">
+        <input class="handle" id="menutoggler" type="checkbox" />
+        <div class="submenu">
+            <div class="years">
+                <a href="/replurk/?year=2020" class="nav-prev">&larr;</a>
+                <a href="/replurk/?year=2020" class="now nowyear">2020</a>
+                <a href="/replurk/?year=2020" class="nav-next">&rarr;</a>
+            </div>
+            <hr />
+            <label class="about" for="creditstoggler">About</label>
+            <div id="logout" class="logout">Logout</div>
+        </div>
+        <label for="menutoggler"></label>
+        <div class="label">
+            <svg width="100%" height="100%" viewBox="0 0 24 24" stroke="#000000" xmlns="http://www.w3.org/2000/svg">
+                <path id="menu1" d="M4 18L20 18" stroke-width="2" stroke-linecap="round"></path>
+                <path id="menu1" d="M4 12L20 12" stroke-width="2" stroke-linecap="round"></path>
+                <path id="menu1" d="M4 6L20 6" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+        </div>
     </div>
 </section>
 

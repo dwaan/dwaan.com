@@ -1,151 +1,165 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
-
 /* Credits style */
-.plurk #credits {
-	background-color: var(--yellow);
-	opacity: 0;
+#credits {
 	position: fixed;
-	z-index: 1;
+	z-index: -1;
+	opacity: 0;
+	z-index: 1000;
 	left: 0;
-	top: initial;
+	right: 0;
+	top: 0;
 	bottom: 0;
 	justify-content: flex-end;
-
-	p {
-		font-size: .9rem;
-		margin: var(--pads) 0;
-		line-height: 150%;
-	}
-
-	a {
-		text-decoration: none;
-		color: var(--black);
-		columns: inherit;
-		transition: color .125s ease-in-out, background-color .125s ease-in-out;
-
-		&:hover {
-			color: var(--red);
-		}
-	}
-
-	img {
-		width: auto;
-		height: 24px;
-
-		@media (min-width: mixins.$screen-small) {
-			height: 32px;
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			height: 48px;
-		}
-	}
+	font-family: "Lexend Giga", sans-serif;
+	color: var(--white);
+	background: var(--black-75);
+	pointer-events: none;
+	transition: opacity .35s ease;
+	backdrop-filter: blur(1rem) saturate(0.8);
 
 	.text {
-		max-width: initial;
-
-		@media (min-width: mixins.$screen-medium) {
-			max-width: mixins.$screen-small;
-		}
-	}
-
-	.made {
-		font-size: 1.5rem;
-		font-weight: 700;
-
-		@media (min-width: mixins.$screen-small) {
-			font-size: 1.75rem;
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			font-size: 2rem;
-		}
-	}
-
-	.like {
-		font-size: .85rem;
-		line-height: 140%;
-		color: var(--black-75);
-
-		@media (min-width: mixins.$screen-small) {
-			font-size: 1rem;
-			line-height: 150%;
-		}
-	}
-
-	.noaffiliation {
-		font-size: .6rem;
-		line-height: 140%;
-		letter-spacing: .025rem;
-		color: var(--black-75);
-
-		@media (min-width: mixins.$screen-small) {
-			font-size: .7rem;
-			line-height: 150%;
-		}
-
-		a {
-			border-bottom: 1px dashed var(--black-75);
-		}
-	}
-
-	.likeandsupport {
+		position: relative;
+		z-index: 2;
 		display: flex;
-		gap: var(--pads);
-		justify-content: space-between;
 		flex-direction: column;
-		margin: var(--pads) 0;
-		padding-bottom: var(--pads);
-		border-bottom: 1px dotted var(--black-50);
-
-		@media (min-width: mixins.$screen-small) {
-			flex-direction: row;
-		}
-
-		@media (min-width: mixins.$screen-medium) {
-			margin: var(--padm) 0 var(--padm);
-			padding-bottom: var(--padm);
-		}
+		height: 100%;
+		max-width: 20rem;
+		padding: 1rem;
+		gap: .25rem;
+		filter: blur(1rem);
+		transition: filter .5s ease;
 
 		a,
 		i {
-			font-style: initial;
+			font-size: inherit;
+			font-weight: inherit;
+			font-size: inherit;
+		}
+
+		p {
+			margin: var(--pads) 0;
+			font-size: .75rem;
+			font-weight: 400;
+			line-height: 130%;
+			letter-spacing: -.025rem;
+			text-transform: lowercase;
 		}
 
 		a {
+			color: var(--yellow);
+			text-decoration: none;
+			transition: color .25s ease;
+		}
+
+		.close {
+			text-align: center;
+			font-size: .5rem;
+			letter-spacing: .1rem;
+			margin: 0 0 auto;
+		}
+
+		.made {
+			position: absolute;
+			top: 2rem;
+			bottom: 1rem;
+			left: 1rem;
+			right: 1rem;
+			font-size: 2.5rem;
+			line-height: 2.5rem;
+			font-weight: 100;
+			text-transform: uppercase;
+			letter-spacing: -.125rem;
+			transform-origin: 0 bottom;
+
+			span {
+				display: inline-block;
+				font-size: 80%;
+				line-height: inherit;
+				color: var(--red);
+			}
+		}
+
+		.likeandsupport {
 			display: flex;
-			gap: var(--padm);
-			flex-flow: row;
-			align-items: center;
-			justify-content: flex-start;
-			padding: var(--pads) var(--padl);
-			background-color: var(--black-15);
-			border-radius: var(--padm);
-			transition: background-color .125s ease-in-out;
+			gap: .5rem;
+			flex-direction: row;
 
-			@media (min-width: mixins.$screen-small) {
-				padding: var(--padm);
-			}
+			a {
+				z-index: 1;
+				display: flex;
+				flex: 1;
+				gap: .5rem;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+				padding: .25rem;
+				color: var(--white);
+				border-radius: .5rem;
+				transition: color .25s ease, transform .25s ease, background .25s ease;
 
-			@media (min-width: mixins.$screen-medium) {
-				flex-flow: column;
-			}
+				&:hover {
+					z-index: 2;
+					color: var(--yellow);
+					background: var(--black-50);
+					transform: scale(1.05);
+				}
 
-			&:hover {
-				background-color: var(--white);
-			}
-
-			i {
-				display: block;
-				text-align: left;
-				font-size: .75rem;
-				line-height: 130%;
-
-				@media (min-width: mixins.$screen-medium) {
+				i {
+					font-size: .4rem;
+					font-weight: 700;
+					text-transform: uppercase;
 					text-align: center;
 				}
+			}
+
+			img {
+				width: 100%;
+				height: auto;
+				aspect-ratio: 1;
+			}
+		}
+
+		.noaffiliation {
+			font-size: .5rem;
+			font-weight: 300;
+			line-height: 150%;
+			letter-spacing: -.005rem;
+
+			a {
+				border-bottom: 1px dashed var(--yellow);
+			}
+		}
+	}
+
+	>label {
+		z-index: 1;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+}
+
+#creditstoggler {
+	opacity: 0;
+
+	&:checked {
+
+		+#credits {
+			opacity: 1;
+
+			.text {
+				filter: none;
+
+				a {
+					pointer-events: all;
+				}
+			}
+
+			>label {
+				pointer-events: all;
 			}
 		}
 	}

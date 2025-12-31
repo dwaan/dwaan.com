@@ -1,7 +1,7 @@
 "use strict"
 
 import api from "./api.js"
-import { plural, datediff, pluralinwords } from '../helpers/helper.js'
+import { plural, datediff } from '../helpers/helper.js'
 
 import span from "./span.js"
 import icons from "./icons.js"
@@ -38,15 +38,14 @@ class most {
 					this.data[i].position = this.data.length
 					if (this.data[i].user_id != this.parent.me.id && this.data[i].user_id != 99999) {
 						this.data[i].position = index++
-						this.parent.statistics.attach(`<i>Top ${icons.draw("left-speech-bubble")} Responders</i> <strong>of My Timeline</strong>`, this.data[i], 5)
+						this.parent.statistics.attach(`\
+							<small>${this.parent.me.display_name}'s Next</small><h2>\
+							<em>top</em> models</h2>\
+							<h3>responders</h3>\
+							<span>cycle ${this.parent.year}</span>\
+							<p>all other plurkers please immediately return to the house.. pack your belongings.. and go home.</p>\
+						`, this.data[i], 5)
 					}
-				}
-			},
-			draw: function () {
-				var index = 0
-				if (this.data.length > 0) {
-					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++
-					if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatar(this.data[index].user_id), 'https://plurk.com/' + this.data[index].user.nick_name, '<i>Most Responder</i>', this.data[index].user.display_name, this.data[index].count)
 				}
 			}
 		}
@@ -61,6 +60,11 @@ class most {
 				var index = 1
 
 				if (result) {
+					const title = `\
+						<h2>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h2>
+						<h3>Mo<br/>st<br/><br/>Me<br/>nt<br/>io<br/>ne<br/>d</h3>
+						<p>by @${this.parent.me.nick_name} in ${this.parent.year}</p>\
+					`
 					// Update top 5
 					this.data.sort(this.parent.sort)
 					for (var idx = 0; idx < this.data.length; idx++) {
@@ -70,7 +74,7 @@ class most {
 							var user = await this.parent.friends.findByUsername(this.data[idx].value)
 
 							if (this.data[idx].el == undefined) {
-								this.data[idx] = new element('mostmentionedbyme', user, "", plurker => {
+								this.data[idx] = new element('mostmentioned', user, "", plurker => {
 									plurker.avatar = new span().class("avatar").html(`<img src="${this.parent.friends.getAvatar(plurker.user_id)}" />`)
 									plurker.name = new span().class("name").html(`@${plurker.nick_name}`)
 									plurker.counts = new span().class("count").html(plurker.count)
@@ -83,19 +87,12 @@ class most {
 
 							if (user.id != this.parent.me.id && user.id != 99999) {
 								this.data[idx].position = index++
-								this.parent.statistics.attach(`<i>Most ${icons.draw("person-raising-hand-light")} Mentioned</i> <strong>in My Timeline</strong>`, this.data[idx], max)
+								this.parent.statistics.attach(title, this.data[idx], max)
 							}
 						}
 
-						if (this.data[idx].el) this.parent.statistics.attach(`<i>Most ${icons.draw("person-raising-hand-light")} Mentioned</i> <strong>in My Timeline</strong>`, this.data[idx], max)
+						if (this.data[idx].el) this.parent.statistics.attach(title, this.data[idx], max)
 					}
-				}
-			},
-			draw: function () {
-				var index = 0
-				if (this.data.length > 0) {
-					while ((this.data[index].user_id == this.parent.me.id || this.data[index].user_id == 99999) && index < this.data.length) index++
-					if (this.data[index]) this.parent.statistics.drawImage("avatar", this.parent.friends.getAvatarByUsername(this.data[index].value), 'https://plurk.com/' + this.data[index].value, '<i>Most Mentioned</i> by me', "@" + this.data[index].value, this.data[index].count)
 				}
 			}
 		}
@@ -113,8 +110,23 @@ class most {
 				var max = 9
 				this.data.sort(this.parent.sort)
 				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
-					if (this.data[i].count > 1) html += '<div><img src="' + this.data[i].value + '" /> <span class="count">' + this.data[i].count + '</span></div>'
-				if (html != "") this.parent.statistics.drawHTML("grid emoticons", `Most Used <i>${icons.draw("beaming-face-with-smiling-eyes")} My Emoticons</i>`, html)
+					if (this.data[i].count > 1) html += '\
+						<div><img src="' + this.data[i].value + '" />\
+						<span class="count">' + this.data[i].count + '</span>\
+						</div>\
+					'
+
+				this.parent.statistics.newdraw({
+					class: "emoticons inter",
+					html: [{
+						class: `list`,
+						html: html
+					}, {
+						class: `title`,
+						html: `${this.parent.year} Vibes`
+					}],
+					show: html != ""
+				})
 			}
 		}
 
@@ -131,11 +143,29 @@ class most {
 				var max = 5
 				this.data.sort(this.parent.sort)
 				for (var i = 0; i < (this.data.length < max ? this.data.length : max) && this.data[i]; i++)
-					if (this.data[i].count > 1) html += '<div><a href="https://plurk.com/search?q=' + this.data[i].value + '" target="_BLANK" /><span class="count">' + this.data[i].count + '</span> #' + this.data[i].value + '</a></div>'
-				if (html != "") {
-					html = "<strong>#</strong>" + html
-					this.parent.statistics.drawHTML("hashtags", `Most Used <i>${icons.draw("keycap-hashtag")} Hashtags</i>`, html)
-				}
+					if (this.data[i].count >= 0) html += `<a href="https://plurk.com/search?q=${this.data[i].value}" target="_BLANK" /><span class="count">${this.data[i].count}</span> #${this.data[i].value}</a>`
+
+				this.parent.statistics.newdraw({
+					class: "hashtags meme lexend",
+					html: [{
+						class: `title big`,
+						html: `#${this.parent.year}<br/>`,
+						repeat: 20
+					}, {
+						class: `image`,
+						html: `<img src="/img/replurk/toy.webp" />`
+					}, {
+						class: `title`,
+						html: `Hashtags`
+					}, {
+						class: `text`,
+						html: html
+					}, {
+						class: `title`,
+						html: `Hashtags everywhere`
+					}],
+					show: html != ""
+				})
 			}
 		}
 
@@ -191,12 +221,12 @@ class most {
 				})
 			},
 			drawMeta: function (link, id) {
-				return `<div class="meta">\
+				return `
 					<span class="response">${icons.draw("left-speech-bubble")} ${link.response}</span>\
 					<span class="replurk">${icons.draw("megaphone")} ${link.replurk}</span>\
 					<span class="loved">${icons.draw("red-heart")} ${link.loved}</span>\
 					<a href="https://plurk.com/p/${id.toString(36)}" class="link" target="_BLANK">${icons.link}</a>\
-				</div>`
+				`
 			},
 			drawLinks: function () {
 				var max = 1
@@ -206,38 +236,87 @@ class most {
 				while (index < this.data.length && max > 0) {
 					if (this.data[index].links.length > 0) {
 						var link = this.data[index].links[0]
-						result += `<div class="post">\
-							<div class="info">${this.data[index].content}</div>
-							${this.drawMeta(link, this.data[index].id)}
-						</div>`
+						result += `<p>${this.data[index].content}</p>`
 						max--
 					}
 					index++
 				}
-				if (this.links.length > 0) this.parent.statistics.drawDiv('sharedlinks', "<div class='title'>I shared <i>🔗 " + plural(this.links.length, 'link') + '</i> and this is the most popular one</div>' + result)
+				this.parent.statistics.newdraw({
+					class: `sharedlinks meme lexend`,
+					html: [{
+						class: `image`,
+						html: `<img src="/img/replurk/huh.webp" >`
+					}, {
+						class: `big`,
+						html: `wat<br/>`,
+						repeat: 20
+					}, {
+						class: `text`,
+						html: `You shared ${plural(this.links.length, 'link')} links in ${this.parent.year} and this was the popular one?`
+					}, {
+						class: `post`,
+						html: result
+					}, {
+						class: `text`,
+						html: `and it got ${link.response} comments, ${link.replurk} replurks, and ${link.loved} loves? Well here's the <a href="https://plurk.com/p/${this.data[0].id.toString(36)}" target="_BLANK">link</a>.`
+					}],
+					show: this.links.length > 0
+				})
 			},
 			drawPics: function () {
 				var max = 1
 				var index = 0
-				var result = ""
+				var result = ``
+
 				this.data.sort(this.parent.sort)
 				while (index < this.data.length && max > 0) {
 					if (this.data[index].pics.length > 0) {
 						var pics = this.data[index].pics[0]
-						result += `<div class="box">\
-							<div class="image" style="background-image: url(${api.url}?img=${pics.url})"></div>\
-							<div class="post">\
-								<div class="text">${this.data[index].content}</div>\
-								${this.drawMeta(pics, this.data[index].id)}
-							</div>\
-						</div>`
+						result += `<img src="${api.url}?img=${pics.url}" />`
 						max--
 					}
 					index++
 				}
 
-				if (this.pics.length > 0) this.parent.statistics.draw('sharedpictures', this.pics.length, `I shared <i>${icons.draw("framed-picture")} ${plural(this.pics.length, 'image')}</i>`)
-				if (result != "") this.parent.statistics.drawHTML('span2 previewpics', `<i>${icons.draw("framed-picture")} Most Popular Image</i>`, result)
+				this.parent.statistics.newdraw({
+					class: `sharedpictures meme inter`,
+					html: [{
+						class: `image`,
+						html: `<img src="/img/replurk/daddychill.webp" >`
+					}, {
+						class: `avatar`,
+						html: `<img src="${this.parent.friends.getAvatar(this.parent.me.id)}" >`
+					}, {
+						class: `title`,
+						html: `<p>${this.parent.year}</p>`,
+						repeat: 2
+					}, {
+						class: `text`,
+						html: `Daddy chill!</br>I only share <strong>${plural(this.pics.length, 'image')}</strong> this year`
+					}],
+					show: this.pics.length > 0
+				})
+
+				this.parent.statistics.newdraw({
+					class: `previewpics meme outfit`,
+					html: [{
+						class: `image`,
+						html: `<img src="/img/replurk/painting.webp" >`
+					}, {
+						class: `meta`,
+						html: this.drawMeta(pics, this.data[0].id)
+					}, {
+						class: `text`,
+						html: `Your most popular image in ${this.parent.year}`
+					}, {
+						class: `picture`,
+						html: result
+					}, {
+						class: `text`,
+						html: `should be Hang among this popular painting`
+					}],
+					show: result != ""
+				})
 			}
 		}
 
@@ -252,7 +331,25 @@ class most {
 				this.words += words.length
 			},
 			draw: function () {
-				if (this.chars > 0) this.parent.statistics.draw('span2 typed mediumnumber', this.chars, 'I typed more than  <i>' + pluralinwords(this.chars, 'character') + '</i>, around <i>' + pluralinwords(this.words, 'word') + '</i> this year')
+				this.parent.statistics.newdraw({
+					class: `typed meme`,
+					html: [{
+						class: `title`,
+						html: `${this.chars}<br />`,
+						repeat: 20
+					}, {
+						class: `image`,
+						html: `<img src="/img/replurk/stephenking.webp" />`
+					}, {
+						class: `text`,
+						html: `\
+							<p>Dear Stephen king,</p>\
+							<p>In 2025 I typed around <strong>${this.chars} characters</strong> in Plurk, approx. <strong>${Math.floor(this.chars / 250000)} horror novels</strong>.</p>\
+							<p>Now you can retired from writing, you’re welcome\
+						`
+					}],
+					show: this.chars > 0
+				})
 			}
 		}
 
@@ -263,7 +360,15 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.response_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostresponded', post.plurk_id, `<i>${icons.draw("left-speech-bubble")} Most Responded</i> ${datediff(post.posted)}`, post.content, post.response_count)
+					const text = `${post.response_count} responses<br />Most Responded<br/>`
+
+					this.parent.statistics.drawPost(
+						'mostresponded',
+						post.plurk_id,
+						`Remember this Plurk from <strong>${datediff(post.posted)}</strong>? It got lots of reponses, ${post.response_count} of them.`,
+						post.content,
+						text + text + text + text + text + text + text + text + text + text
+					)
 				}
 			}
 		}
@@ -275,7 +380,15 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.replurkers_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostreplurked', post.plurk_id, `<i>${icons.draw("megaphone")} Most Replurked</i> ${datediff(post.posted)}`, post.content, post.replurkers_count)
+					var replurk = `<span class="replurk">This plurk got ${post.replurkers_count} ${post.replurkers_count > 1 ? "replurks" : "replurk"}</span>`
+					var famous = `<span class="famous">You're famous</span>`
+					var warning = `<span class="warning">Achtung! Achtung! Achtung! Achtung! Achtung! Achtung!</span>`
+					this.parent.statistics.drawPost(
+						'mostreplurked outfit',
+						post.plurk_id,
+						`<span>This famous plurk is from ${datediff(post.posted)}</span>`,
+						post.content,
+						replurk + replurk + warning + famous + famous)
 				}
 			}
 		}
@@ -287,7 +400,13 @@ class most {
 				var post
 				posts.sort(this.sort)
 				if (post = posts[0], post.owner_id == this.parent.me.id && post.plurk_type != 3 && post.favorite_count > 0) {
-					this.parent.statistics.drawPost('postcontent span2 mostfavorited', post.plurk_id, `<i>${icons.draw("red-heart")} Most Loved</i> ${datediff(post.posted)}`, post.content, post.favorite_count)
+					this.parent.statistics.drawPostAdvanced(
+						'mostfavorited',
+						post.plurk_id,
+						`<p class="love">Everybody loves this Plurk</p><br/><p class="date">From ${datediff(post.posted)}</p>`,
+						`<img src="/img/replurk/love.webp" class="loveshadow" /><img src="/img/replurk/love.webp" class="loveshadow two" /><img src="/img/replurk/love.webp" class="love" /><p>${post.content}</p>`,
+						post.favorite_count
+					)
 				}
 			}
 		}
@@ -327,7 +446,12 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span2", "mostinteraction", `Plurkers who really like to <i>${icons.draw("handshake")} interact</i> with me`, result)
+					if (result.length > 0) this.parent.statistics.drawUserList(
+						``,
+						`mostinteraction`,
+						`These plurkers like to interact with you`,
+						result
+					)
 				} catch {
 					console.info("Error while counting most interacted plurker")
 				}
@@ -362,11 +486,11 @@ class most {
 				}
 				this.data.sort(this.parent.sort)
 			},
-			draw: function () {
+			draw: async function () {
 				var result = []
 				var length = 0
 				var index = 0
-				while (this.data[index] && length <= 5) {
+				while (this.data[index] && length < 10) {
 					if (this.data[index].id != this.parent.me.id) {
 						result.push(this.data[index])
 						length++
@@ -375,7 +499,16 @@ class most {
 				}
 
 				try {
-					if (result.length > 0) this.parent.statistics.drawUserList("bubble span3", "mvp", `My ${this.parent.year} <i>${icons.draw("biting-lip")} MVP</i>, Most Valuable Plurker!`, result, true)
+					if (result.length > 0) this.parent.statistics.drawUserList(
+						`meme lexend`,
+						`mvp`,
+						`<h2>Your Most Vibing Plurker in ${this.parent.year}</h2>\
+						<img src="${this.parent.friends.getAvatar(this.parent.me.id)}" >\
+						<p>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing<br/>vibing</p>\
+						<h3>MVP</h3>`,
+						result,
+						true
+					)
 				} catch (error) {
 					console.info("Error while counting my mvp", error)
 				}

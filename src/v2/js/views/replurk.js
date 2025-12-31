@@ -24,13 +24,13 @@ var replurk = {
 			}
 			if (year <= 2008) {
 				next.querySelectorAll(".nav-prev").forEach(el => {
-					el.remove()
+					addClass(el, "inactive")
 				})
 			}
 			if (year >= currentyear) {
 				year = currentyear
 				next.querySelectorAll(".nav-next").forEach(el => {
-					el.remove()
+					addClass(el, "inactive")
 				})
 			}
 
@@ -52,21 +52,16 @@ var replurk = {
 
 			replurk.replurk = new events.default(next, year)
 
-			next.querySelector("#backtotop").onclick = () => gsap.to(window, {
+			const backtotop = next.querySelector("#backtotop")
+			if (backtotop) backtotop.onclick = () => gsap.to(window, {
 				duration: reduceMotionFilter(2),
 				ease: "expo.inOut",
-				scrollTo: "#statistics",
-				onStart: _ => {
-					removeClass(_q("html"), "scroll-snap");
-				},
-				onComplete: _ => {
-					addClass(_q("html"), "scroll-snap");
-				}
+				scrollTo: "#statistics"
 			})
 			next.querySelectorAll("#permission, .grant").forEach(el => el.style.display = "none")
 		},
 		afterEnter: async function (data) {
-			await replurk.replurk.run(data.next.container)
+			if (replurk.replurk.run) await replurk.replurk.run(data.next.container)
 			this.async()
 		}
 	}

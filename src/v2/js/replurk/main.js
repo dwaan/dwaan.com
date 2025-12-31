@@ -1,7 +1,6 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import api from "./api.js"
 import scroll from "../helpers/scroll.js"
 import animate from "../helpers/animate.js"
@@ -10,7 +9,6 @@ import { _q, _qAll, plural, monthNames, reduceMotionFilter } from '../helpers/he
 import friends from "./friends.js"
 import loading from './loading.js'
 import scrolls from './scrolls.js'
-import browser from './browser.js'
 import icons from './icons.js'
 import statistics from "./statistics.js"
 
@@ -43,7 +41,7 @@ class replurk {
 	// Login Pages
 	showLoginPage(tl) {
 		var next = this.next
-		var length = reduceMotionFilter(1)
+		var length = reduceMotionFilter(.25)
 
 		tl.fromTo(next.querySelectorAll("#permission"), {
 			position: "fixed",
@@ -53,8 +51,7 @@ class replurk {
 		}, {
 			opacity: 1,
 			duration: length,
-			ease: "power3.in",
-			onStart: browser.set("green", length) // correct
+			ease: "power3.in"
 		})
 		tl.fromTo(next.querySelectorAll("#permission .bgtext *"), {
 			display: "",
@@ -78,13 +75,13 @@ class replurk {
 	}
 	hideLoginPage(tl) {
 		var next = this.next
-		var length = reduceMotionFilter(1)
+		var length = reduceMotionFilter(.25)
 
 		tl.set(next.querySelectorAll("#permission"), {
 			position: "fixed",
 			top: 0,
 		})
-		tl.fromTo(next.querySelectorAll("#permission .bgtext *, #permission form"), {
+		tl.fromTo(next.querySelectorAll("#permission form"), {
 			y: 0,
 			opacity: 1,
 		}, {
@@ -118,91 +115,42 @@ class replurk {
 	showStatisticPages() {
 		return new Promise(resolve => {
 			var next = this.next
-			var length = reduceMotionFilter(1)
+			var length = reduceMotionFilter(.25)
 			var tl = gsap.timeline()
 
-			browser.set("green", length)
-
-			tl.fromTo(next.querySelectorAll("#hello"), {
+			tl.fromTo(next.querySelectorAll(".grant"), {
 				display: "",
 				opacity: 0
 			}, {
 				opacity: 1,
-				ease: "power3.in",
-				duration: length
-			}, length / 4)
-			tl.fromTo(next.querySelectorAll("#hello .bgtext > *"), {
-				display: "",
-				opacity: 0,
-				y: 200
-			}, {
-				opacity: 1,
-				y: 0,
 				duration: length,
-				stagger: length / 5,
-				ease: "power3.out"
-			}, length / 2)
-			tl.fromTo(next.querySelectorAll("#hello .thumbs, #hello .text > *, #hello .arrow-big"), {
-				display: "",
-				opacity: 0,
-				y: 200
-			}, {
-				opacity: 1,
-				y: 0,
-				duration: length,
-				stagger: length / 5,
-				ease: "power3.out"
-			}, length / 2)
-			tl.fromTo(next.querySelectorAll(".grant:not(#hello), .statistics"), {
-				display: "",
-				opacity: 0
-			}, {
-				opacity: 1,
-				duration: length / 2,
+				ease: "power3.out",
 				onComplete: () => resolve()
-			}, length / 2)
+			})
 		})
 	}
 	hideStatisticPages() {
 		return new Promise(async resolve => {
 			var next = this.next
-			var length = reduceMotionFilter(1)
+			var length = reduceMotionFilter(.25)
 			var tl = gsap.timeline()
 
-			await animate.top(next)
-
-			tl.fromTo(next.querySelectorAll(".footer > *, #hello .bgtext > *, #hello .thumbs, #hello .text > *, #hello .arrow-big"), {
-				opacity: 1,
-				y: 0
-			}, {
-				opacity: 0,
-				y: 200,
-				duration: length,
-				stagger: {
-					from: "end",
-					amount: length / 5
-				},
-				ease: "power3.in"
-			}, length / 5)
-			tl.set(next.querySelectorAll(".grant:not(#hello), .statistics"), {
-				opacity: 0
-			}, length / 2)
-			tl.fromTo(next.querySelectorAll("#hello"), {
+			tl.fromTo(next.querySelectorAll(".grant"), {
 				opacity: 1
 			}, {
 				opacity: 0,
 				duration: length,
 				ease: "power3.in",
-				onStart: browser.set("yellow", length + (length / 2)), // correct
 				onComplete: () => {
 					gsap.set(next.querySelectorAll(".grant"), { display: "none" })
 					resolve()
 				}
-			}, length / 2)
+			}, length)
 		})
 	}
 
 	// Access logic
+
 	// Login messages
 	message(message, quick) {
 		var next = this.next
@@ -234,30 +182,22 @@ class replurk {
 
 		window.scrollTo(0, 0)
 
-		// Scroll animation menu and logout
-		this.scrolls.menu()
-
 		// Check is server have open session
 		var tl = gsap.timeline()
-		tl.set(next.querySelector("#hello .arrow-big"), {
-			opacity: 0
-		})
 
 		let data = await api.call("?")
+
 		var interval = null
 		if (data.success) {
 			this.me = data.message
 			this.friends = new friends()
-			this.statistics = new statistics(next, this.me, this.friends, this.year)
+			this.statistics = new statistics(next, this.me, this.friends, this.year, this.swiper)
 
 			// Initial Plurk statistics
 			await this.displayPlurkerData()
 
 			// Display the rest of the statistics
 			this.displayStatistics()
-
-			// Scroll top top
-			await animate.top(next)
 
 			// Hide login page
 			if (clear) next.querySelector("#permission").style.display = "none"
@@ -271,8 +211,6 @@ class replurk {
 
 			// Scroll animate statistics
 			this.scrolls.statistics()
-			// Scroll browser bar
-			this.scrolls.browserBar()
 		} else {
 			// Hide statistic pages
 			if (clear) next.querySelectorAll(".grant").forEach(function (el) { el.style.display = "none" })
@@ -283,8 +221,6 @@ class replurk {
 
 			// Scroll animation permission section
 			this.scrolls.permisions()
-			// Scroll browser bar
-			this.scrolls.browserBar(false)
 
 			// Automatic login
 			interval = setInterval(async () => {
@@ -297,6 +233,7 @@ class replurk {
 			}, 1000)
 		}
 
+		this.loading.hidemainloading()
 		scroll.refresh()
 	}
 	// Logout
@@ -330,7 +267,7 @@ class replurk {
 		var tl = gsap.timeline()
 		tl.fromTo(next.querySelectorAll("#permission form"), {
 			display: "",
-			y: 200,
+			y: "3rem",
 			opacity: 0,
 		}, {
 			y: 0,
@@ -338,15 +275,15 @@ class replurk {
 			duration: length,
 			ease: "power3.out"
 		}, length)
-		tl.fromTo(next.querySelectorAll("#permission h1, #permission li"), {
+		tl.fromTo(next.querySelectorAll("#permission h1, #permission li, #tokenurl"), {
 			display: "",
-			y: 50,
+			y: "1rem",
 			opacity: 0,
 		}, {
 			y: 0,
 			opacity: 1,
-			stagger: length / 10,
-			duration: length,
+			stagger: length / 25,
+			duration: length * 3 / 4,
 			ease: "power3.out"
 		}, length)
 
@@ -354,7 +291,7 @@ class replurk {
 			if (text) {
 				this.message(text)
 			} else {
-				tokenlink.textContent = "Grant Access"
+				tokenlink.textContent = "Grant Access →"
 				tokenlink.setAttribute("href", api.url + "?redirect=" + data.message.url)
 			}
 		}, () => {
@@ -392,14 +329,6 @@ class replurk {
 		var plurker = this.me
 		var next = this.next
 		var extra = ""
-		var length = reduceMotionFilter(1)
-
-		// gsap.set(next.querySelector("#background"), {
-		// 	backgroundImage: `url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`
-		// })
-		// gsap.set(next.querySelector("#statistics"), {
-		// 	backgroundColor: `#${plurker.name_color}`
-		// })
 
 		// plurks_count
 		var days = (plurker.anniversary.years * 365) + plurker.anniversary.days
@@ -410,81 +339,88 @@ class replurk {
 		if (this.year == 2021) text = `If ${this.year} have been a rough year you, hopefully RePlurk will cheer you by bringing some good memories.`
 		else if (this.year == 2022) text = `It's 2020 v2, and this is your year end RePlurk recap. Hopefully it will bring lots of good memories.`
 		else if (this.year == 2024) text = `With crazy things happening around the world right now, hopefully RePlurk will bring back the good memories.`
-		next.querySelector("#hello .text").innerHTML = `<h1>Hello ${plurker.display_name}</h1><p style="max-width: 500px; margin: 0 auto">${text}</p>`
+		next.querySelector("#hello .text").innerHTML = `<h1>Henlo ${plurker.display_name}</h1><p>${plurker.page_title}</p>`
+		next.querySelector("#hello .greet").innerHTML = `${text}`
+		next.querySelector("#hello .since .title").innerHTML = `RePlurk ${this.year}`
+		next.querySelector("#hello .karma").innerHTML = `<div>${plurker.karma}</div><div>${plurker.karma}</div><div>${plurker.karma}</div>`
+
+		var color = gsap.utils.splitColor(`#${plurker.name_color}`)
+		gsap.set(next.querySelectorAll("#hello .content"), {
+			color: `rgb(${color[0] - 90}, ${color[1] - 90}, ${color[2] - 90})`,
+			backgroundColor: `rgb(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70})`
+		});
+
+		gsap.set(next.querySelectorAll("#background"), {
+			backgroundImage: `linear-gradient(to bottom, rgba(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70}, 0) 50%,
+              rgba(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70}, 1)), url(https://images.plurk.com/bg/${plurker.id}-${plurker.background_id}.jpg)`
+		});
 
 		// Draw statistic
-		this.statistics.title('All Time', 'alltime')
 		if (plurker.anniversary.years && plurker.anniversary.days) {
-			this.statistics.draw('center posted', Math.round(plurker.plurks_count / days), `I posted around <i>${icons.draw("left-speech-bubble")} ${plural(Math.round(plurker.plurks_count / days), "plurk")} per day</i>`)
+			// var join = new Date(plurker.join_date)
+			next.querySelector("#hello .since .when").innerHTML = `Plurking since <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`
+
+			// Badge
+			var imagebadge = ``
+			for (let index = 0; index < plurker.badges.length; index++) imagebadge += `<img src="/img/replurk/braceyourself.webp" style="z-index: ${plurker.badges.length - index}; bottom: -${index / 2}rem; left: ${index}rem;" />`
 
 			// Responses
 			var oneday = 16
-			if (responses <= oneday) extra = "That's almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>'
-			else extra = "That's almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>'
-			this.statistics.draw('span2 center responded', responses, `I responded around <i>${icons.draw("left-speech-bubble")} ${plural(responses, "time")}</i> per day. ${extra} when I'm not sleeping`)
+			if (responses <= oneday) extra = "Almost 1 response every <i>" + plural(Math.round(oneday / responses), "hour") + '</i>'
+			else extra = "Almost 1 response every <i>" + plural(Math.round(oneday * 60 / responses), "minute") + '</i>'
+			var sentence = `You posted <i>${icons.draw("left-speech-bubble")} ${plural(Math.round(plurker.plurks_count / days), "plurk")} per day</i>, responded <i>${icons.draw("left-speech-bubble")} ${plural(responses, "response")}</i> per day, ${extra} when you're not sleeping.`
 
-			var join = new Date(plurker.join_date)
-			this.statistics.draw('center anniversary', `<strong><i>${monthNames[join.getMonth()]}</i> <i>${join.getFullYear()}</i></strong> <em>${join.getDate()}</em>`, `I joined Plurk <i>${plural(plurker.anniversary.years, "year")}</i> and <i>${plural(plurker.anniversary.days, "day")}</i> ago`)
-			this.statistics.draw('center badges', plurker.badges.length, `I have <i>${icons.draw("shield")} ${plural(plurker.badges.length, "badge")}</i> right now`)
+			// Draw Badge and responses
+			this.statistics.newdraw({
+				class: `badgeinfo meme inter`,
+				html: [{
+					class: `big`,
+					html: `Brace yourself!`
+				}, {
+					class: `text`,
+					html: `You have ${plural(plurker.badges.length, "badge")} to protect you from lousy year end design `,
+					repeat: 10
+				}, {
+					class: `image`,
+					html: imagebadge
+				}]
+			}, {
+				class: `responded meme`,
+				html: [{
+					class: `big`,
+					html: sentence
+				}, {
+					class: `image`,
+					html: `<img src="/img/replurk/pigeon.webp" />`
+				}, {
+					class: `text`,
+					html: sentence
+				}]
+			})
 		} else {
 			this.statistics.draw('', '-', "There is no data in my timeline")
 			this.statistics.draw('', plurker.badges.length, "But at least I have <i>" + plural(plurker.badges.length, "badge") + "</i> right now")
 		}
-
-		// Scroll animation hello section
-		scroll.push(tl => {
-			tl.fromTo(next.querySelectorAll("#hello .text, #hello .thumbs"), {
-				y: 0
-			}, {
-				y: window.innerHeight * -3 / 4,
-				ease: "linear",
-				duration: length,
-			}, 0)
-			tl.fromTo(next.querySelectorAll("#hello .bgtext sup"), {
-				y: 0,
-				x: 0,
-				rotation: 0
-			}, {
-				y: window.innerHeight * -1 / 4,
-				x: window.innerHeight * -1 / 10,
-				rotation: -10,
-				ease: "linear",
-				duration: length,
-			}, 0)
-			tl.fromTo(next.querySelectorAll("#hello .bgtext sub"), {
-				y: 0,
-				x: 0,
-				rotation: 0
-			}, {
-				y: window.innerHeight * -1 / 4,
-				x: window.innerHeight * 1 / 10,
-				rotation: 10,
-				ease: "linear",
-				duration: length,
-			}, 0)
-			tl.fromTo(next.querySelectorAll("#hello .arrow-big"), {
-				y: 0,
-				opacity: 1
-			}, {
-				y: window.innerHeight * 1 / 4,
-				opacity: 0,
-				ease: "linear",
-				duration: length / 4,
-			}, 0)
-			return tl
-		}, tl => ScrollTrigger.create({
-			trigger: next.querySelectorAll("#hello"),
-			start: "0 0",
-			end: "100% 0",
-			animation: tl,
-			scrub: true
-		}))
 	}
+
 	// Display statistics
 	async displayStatistics() {
-		this.statistics.title('This Year', 'thisyear')
-		this.statistics.draw("statistics-loading thisyearloading", "", "<i class='month'>Data from December</i>1 of 2. Loading " + this.year + " timeline. It can take up to 1 minute.")
-
+		this.statistics.newdraw({
+			class: "loading",
+			html: [{
+				class: `big`,
+				html: `0%`
+			}, {
+				class: `month`,
+				html: ``
+			}, {
+				class: `text`,
+				html: `1 of 2. Loading ${this.year} timeline`
+			}, {
+				class: `note`,
+				html: `It can take up to 1 minute`
+			}]
+		})
 		this.loading = new loading(this.next)
 		this.loading.loop(this.fulldays)
 
@@ -568,14 +504,18 @@ class replurk {
 			// Sort based on date
 			this.plurks.sort((a, b) => new Date(b.posted) - new Date(a.posted))
 
+			// 
 			// Draw statistics
+			// 
 			try {
 				await this.statistics.drawAll(this.plurks)
 			} catch (error) {
 				console.info("Error while counting statistics", error)
 			}
 
+			// 
 			// Display extended statistics
+			// 
 			this.displayExtendedStatistics()
 		} else {
 			if (this.plurks[0]) {
@@ -588,8 +528,9 @@ class replurk {
 	// Display extended statistics
 	async displayExtendedStatistics() {
 		// Deeper user statistics
-		this.statistics.title('Dig Deeper', 'digdeeper')
-		this.statistics.draw("statistics-loading digdeeperloading", "", "<i class='month'>Data from " + this.year + "</i> 2 of 2. Loading all responses. <small>If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>")
+		_q(".statistics.loading .month").innerHTML = `Data from ${this.year}</i>`
+		_q(".statistics.loading .text").innerHTML = `2 of 2. Loading all responses.`
+		_q(".statistics.loading .note").innerHTML = `If the loading seems to stop, refresh your browser tab to resume your download. Closing your browser tab will clear all downloaded data.</small>`
 
 		// Load each post responses and calculate statistics
 		this.loading = new loading(this.next)
@@ -629,18 +570,16 @@ class replurk {
 
 		// Display How Many Links
 		this.statistics.most.links.drawLinks()
+
 		// Display How Many Pictures
 		this.statistics.most.links.drawPics()
 
+		// 
 		// Draw Results
-		// Display Most Responder
-		// this.statistics.most.responders.draw()
+		// 
 
 		// Display Most Interaction
 		this.statistics.most.interaction.draw()
-
-		// Display Most Mentioned by me
-		// this.statistics.most.mentions.draw()
 
 		// Display How Many Words-Characters
 		this.statistics.most.types.draw()
@@ -681,67 +620,63 @@ class replurk {
 		if (this.me.gender == 1) plurker = icons.draw("man-bowing")
 		if (this.me.gender == 0) plurker = icons.draw("woman-bowing")
 
-		this.statistics.title('RePlurk Badges', 'replurkbadges')
-		this.statistics.body(`\
-			<h4>What are RePlurk Badges?</h4>\
-			<p>They’re badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\
-			<ol>\
-				<li>Creating a ton of polls (Polling ${gender})</li>\
-				<li>Getting a bunch of coins (Plurk Coins Billionaire)</li>\
-				<li>Writing a kilo of plurks (Novelist and Keyboard Warrior)</li>\
-				<li>Posting a ton of \"adult\" posts (Adult-er)</li>\
-				<li>Sharing social media URLs other than Plurk (there are 7 badges)</li>\
-				<li>Sharing an olympic size of pictures and links (Meme Lord & Missing Link)</li>\
-				<li>Getting a bunch of Replurk (Trendsetter)</li>\
-				<li>and, posting almost every day on Plurk (2 badges for Active Plurker)</li>\
-			</ol>\
-			`, `replurkbadges description`)
-
+		this.statistics.newdraw({
+			class: `replurkbadges list lexend`,
+			html: [{
+				class: `title`,
+				html: `RePlurk Badges`
+			}, {
+				class: `list`,
+				html: ``
+			}]
+		}, {
+			class: `replurkbadges description inter`,
+			html: [{
+				class: `title`,
+				html: `What are RePlurk Badges?`
+			}, {
+				class: `text`,
+				html: `\
+					<p>RePlurk Badges are badges based on your daily activities on Plurk. There are currently 18 badges in total, for things like:</p>\
+					<ol>\
+						<li>Creating a ton of polls (Polling ${gender})</li>\
+						<li>Getting a bunch of coins (Plurk Coins Billionaire)</li>\
+						<li>Writing a kilo of plurks (Novelist and Keyboard Warrior)</li>\
+						<li>Posting a ton of \"adult\" posts (Adult-er)</li>\
+						<li>Sharing social media URLs other than Plurk (there are 7 badges)</li>\
+						<li>Sharing an olympic size of pictures and links (Meme Lord & Missing Link)</li>\
+						<li>Getting a bunch of Replurk (Trendsetter)</li>\
+						<li>and, posting almost every day on Plurk (2 badges for Active Plurker)</li>\
+					</ol>\
+				`
+			}]
+		})
 		var count = 0
-		count += this.statistics.drawBadge(this.statistics.poll_count >= 5, 'pollbadges', "ballot-box-with-ballot", "<strong>Polling " + gender + "</strong>", "Create more pollings")
-		count += this.statistics.drawBadge(this.statistics.coins_count >= 5, 'coinbadges', "coin", "<strong>Plurk Coins Billionaire</strong>", "Receive lots of coins")
-		count += this.statistics.drawBadge(this.statistics.most.types.words >= 50000, 'novelistbadges', "orange-book", "<strong>Novelist</strong>", "Post more plurk")
-		count += this.statistics.drawBadge(this.statistics.most.types.chars >= 1000000, 'keyboardbadges', "keyboard", "<strong>Keyboard Warrior</strong>", "Response more plurk")
-		count += this.statistics.drawBadge(this.statistics.most.links.pics.length >= 356, 'memebadges', "cat", "<strong>Meme Lord</strong>", "Share more images")
-		count += this.statistics.drawBadge(this.statistics.most.links.links.length >= 356 / 2, 'missingbadges', "orangutan", "<strong>The Missing Link</strong>", "Share more links")
-		count += this.statistics.drawBadge(this.statistics.instagrammer_count >= 10, 'socmedbadges', "camera", "<strong>Instagrammer</strong>", "Share more Instagram")
-		count += this.statistics.drawBadge(this.statistics.facebooker_count >= 10, 'socmedbadges', facebook, "<strong>Facebooker</strong>", "Share more Facebook")
-		count += this.statistics.drawBadge(this.statistics.twitterer_count >= 10, 'socmedbadges', "hatching-chick", "<strong>The Real Chief Twit</strong>", "Share more Twitter")
-		count += this.statistics.drawBadge(this.statistics.redditor_count >= 10, 'socmedbadges', "robot", "<strong>/r</strong>", "Share more Reddit")
-		count += this.statistics.drawBadge(this.statistics.tiktoker_count >= 10, 'socmedbadges', tiktok, "<strong>Tiktoker</strong>", "Share more TikTok")
-		count += this.statistics.drawBadge(this.statistics.imgurer_count >= 10, 'socmedbadges', "framed-picture", "<strong>Imgur-er</strong>", "Share more Imgur")
-		count += this.statistics.drawBadge(this.statistics.youtuber_count >= 10, 'socmedbadges', "movie-camera", `<strong>Youtuber ${icons.draw("sleepy-face")}`, "Share more YouTube")
-		count += this.statistics.drawBadge(this.statistics.porn_count >= 10, 'adultbadges', "face-with-peeking-eye", "<strong>Adult-er</strong>", "Plurk more \"adult\" content")
-		count += this.statistics.drawBadge(this.statistics.replurker_count >= 50, 'plurkerbadges', "trophy", "<strong>Trendsetter</strong>", "Replurk more Plurk")
-		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 1.5, 'plurkerbadges', "military-medal", `<strong>Active Plurker ${plurker}</strong>`, "Plurk more daily")
-		count += this.statistics.drawBadge(this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', superhero, `<strong>Super Active Plurker ${plurker}${plurker}</strong>`, "Plurk even more daily")
-		this.statistics.drawBadge(count >= 17, 'plurkerbadges', "glowing-star", `<strong>Super Star</strong>`, "Catch them all")
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.poll_count >= 5, 'pollbadges', `ballot-box-with-ballot`, `Polling ${gender}`, `Create more pollings`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.coins_count >= 5, 'coinbadges', `coin`, `Plurk Coins Billionaire`, `Receive lots of coins`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.types.words >= 50000, 'novelistbadges', `orange-book`, `Novelist`, `Post more plurk`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.types.chars >= 1000000, 'keyboardbadges', `keyboard`, `Keyboard Warrior`, `Response more plurk`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.links.pics.length >= 356, 'memebadges', `cat`, `Meme Lord`, `Share more images`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.most.links.links.length >= 356 / 2, 'missingbadges', `orangutan`, `The Missing Link`, `Share more links`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.instagrammer_count >= 10, 'socmedbadges', `camera`, `Instagrammer`, `Share more Instagram`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.facebooker_count >= 10, 'socmedbadges', facebook, `Facebooker`, `Share more Facebook`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.twitterer_count >= 10, 'socmedbadges', `hatching-chick`, `The Real Chief Twit`, `Share more Twitter`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.redditor_count >= 10, 'socmedbadges', `robot`, `/r`, `Share more Reddit`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.tiktoker_count >= 10, 'socmedbadges', tiktok, `Tiktoker`, `Share more TikTok`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.imgurer_count >= 10, 'socmedbadges', `framed-picture`, `Imgur-er`, `Share more Imgur`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.youtuber_count >= 10, 'socmedbadges', `movie-camera`, `Youtuber ${icons.draw(`sleepy-face`)}`, `Share more YouTube`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.porn_count >= 10, 'adultbadges', `face-with-peeking-eye`, `Adult-er`, `Plurk more \`adult\` content`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.replurker_count >= 50, 'plurkerbadges', `trophy`, `Trendsetter`, `Replurk more Plurk`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.plurks_count >= 356 * 1.5, 'plurkerbadges', `military-medal`, `Active Plurker ${plurker}`, `Plurk more daily`)
+		count += this.statistics.drawBadge(`.replurkbadges.list`, this.statistics.plurks_count >= 356 * 2, 'plurkerbadges', superhero, `Super Active Plurker ${plurker}${plurker}`, `Plurk even more daily`)
+		this.statistics.drawBadge(`.replurkbadges.list`, count >= 17, 'plurkerbadges', `glowing-star`, `Super Star`, `Catch them all`)
 		this.info()
 	}
 
 	// Main entry
 	// Run this to start the API
-	run(el) {
-		return new Promise(resolve => {
-			var length = reduceMotionFilter(1)
-			this.next = el
-
-			// Run the login
-			gsap.fromTo(this.next.querySelectorAll('#credits'), {
-				opacity: 0
-			}, {
-				opacity: 1,
-				duration: length,
-				ease: "power3.in",
-				onStart: browser.set("yellow", length), // correct
-				onComplete: async () => {
-					// Display login
-					await this.login(true)
-
-					resolve()
-				}
-			})
-		})
+	run() {
+		this.login(true)
 	}
 }
 

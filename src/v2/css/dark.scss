@@ -2,22 +2,6 @@
 
 @use 'mixins';
 
-@mixin root {
-    --black: #aaa;
-    --white: #090909;
-    --dark-white: #111;
-    --yellow: #705f02;
-    --black-75: rgba(255, 255, 255, 0.50);
-    --black-50: rgba(255, 255, 255, 0.25);
-    --black-25: rgba(255, 255, 255, 0.15);
-    --black-15: rgba(255, 255, 255, 0.05);
-    --black-gray: #bbb;
-    --black-gray-light: #aaa;
-    --gray-light: #333;
-    --red: #B4352C;
-    --lime: #0d4f03;
-}
-
 @mixin style-cover {
     &:after {
         background: transparent;
@@ -148,17 +132,11 @@
 }
 
 .dark {
-    &:root {
-        @include root();
-    }
-
     @include dark();
 }
 
 @media (prefers-color-scheme: dark) {
     .no-js {
-        @include root();
-
         @include dark();
     }
 }

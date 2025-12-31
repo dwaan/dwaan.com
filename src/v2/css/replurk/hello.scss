@@ -1,89 +1,134 @@
 @charset "utf-8";
 
-@use '../mixins.scss';
+@use '../mixins';
 
 /* Plurk - Statistics - Costum Page Style */
-.plurk #hello {
+#hello {
 	z-index: 4;
 	padding: 0;
 	pointer-events: none;
-	background-color: transparent;
+	background: none;
+	text-align: center;
 
-	.animate {
+	p,
+	.greet {
+		color: inherit;
+		line-height: 130%;
+		font-size: .55rem;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	.content {
+		align-items: center;
+		padding: 3rem;
+		overflow: clip;
+		text-align: center;
+		background-color: var(--white);
+		opacity: 1 !important;
 		pointer-events: auto;
-		background-color: var(--lime);
 		transition: background .5s ease;
+		border-radius: 1rem;
+		box-shadow: inset .05rem .05rem .05rem #fff4;
 	}
 
-	img {
-		border-radius: 100%;
+	#background {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 20.25rem;
+		height: 18rem;
+		background-repeat: repeat;
+		background-size: cover;
+		background-position: center;
+		pointer-events: none;
 	}
 
-	@media screen and (min-aspect-ratio: 1/1) {
-		img {
-			width: 100px;
-			height: 100px;
+	.since {
+		position: absolute;
+		top: 1rem;
+		left: 1rem;
+		right: 1rem;
+		z-index: 2;
+		flex: none;
+		gap: .5rem;
+		flex-direction: row;
+		justify-content: space-between;
 
-			@media (min-width: mixins.$screen-small) {
-				width: 160px;
-				height: 160px;
-			}
+		p {
+			margin: 0;
+			white-space: nowrap;
 		}
+	}
+
+	.thumbs {
+		position: relative;
+		z-index: 2;
+		margin: auto 0 0;
+		width: 8rem;
+		height: 8rem;
+		transform: rotate(1deg);
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.text {
+		position: relative;
+		z-index: 2;
+		align-items: center;
+		margin: 1.5rem 0 auto;
 
 		h1 {
-			margin-top: var(--pads);
-			font-size: 3rem;
-
-			@media (min-width: mixins.$screen-small) {
-				margin-top: var(--padl);
-				font-size: 5rem;
-			}
-		}
-	}
-
-	@media screen and (max-aspect-ratio: 1/1) {
-		justify-content: flex-end;
-
-		@media (min-width: mixins.$screen-small) {
-			justify-content: center;
-		}
-
-		img {
-			width: 128px;
-			height: 128px;
-		}
-
-		h1 {
-			font-size: 2rem;
+			font-weight: 700;
+			margin-bottom: 0;
 			line-height: 100%;
-
-			@media (min-width: mixins.$screen-tiny) {
-				font-size: 2.5rem;
-			}
-
-			@media (min-width: mixins.$screen-verysmall) {
-				font-size: 3rem;
-			}
-
-			@media (min-width: mixins.$screen-small) {
-				font-size: 4rem;
-			}
+			margin: 0;
+			font-size: 3rem;
 		}
 
-		.arrow-big {
-			margin: var(--padm) 0;
-
-			@media (min-width: mixins.$screen-tiny) {
-				margin: var(--padm) 0 calc(-1 * var(--padxxl));
-			}
-
-			@media (min-width: mixins.$screen-small) {
-				margin: var(--padl) 0 var(--padm);
-			}
+		p {
+			margin: 0;
+			padding: 0;
+			font-size: 1rem;
+			font-weight: 800;
+			text-transform: none;
 		}
+	}
 
-		.arrow:after {
-			margin: var(--pads) 0 0;
+	.greet {
+		position: absolute;
+		left: 1rem;
+		right: 1rem;
+		top: initial;
+		bottom: 1rem;
+	}
+
+	.karma {
+		z-index: 1;
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		opacity: .05;
+		letter-spacing: -2rem;
+		transform: rotate(65deg);
+
+		div {
+			font-weight: 700;
+			font-size: 18rem;
+			line-height: 80%;
+
+			&:nth-child(1) {
+				transform: translateX(5rem);
+			}
+
+			&:nth-child(3) {
+				transform: translateX(-5rem);
+			}
 		}
 	}
 }

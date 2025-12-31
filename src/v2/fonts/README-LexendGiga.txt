@@ -1,22 +1,26 @@
-Quicksand Variable Font
-=======================
+Lexend Giga Variable Font
+=========================
 
-This download contains Quicksand as both a variable font and static fonts.
+This download contains Lexend Giga as both a variable font and static fonts.
 
-Quicksand is a variable font with this axis:
+Lexend Giga is a variable font with this axis:
   wght
 
 This means all the styles are contained in a single file:
-  Quicksand-VariableFont_wght.ttf
+  Lexend_Giga/LexendGiga-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
 that aren’t available as static fonts. Not all apps support variable fonts, and
-in those cases you can use the static font files for Quicksand:
-  static/Quicksand-Light.ttf
-  static/Quicksand-Regular.ttf
-  static/Quicksand-Medium.ttf
-  static/Quicksand-SemiBold.ttf
-  static/Quicksand-Bold.ttf
+in those cases you can use the static font files for Lexend Giga:
+  Lexend_Giga/static/LexendGiga-Thin.ttf
+  Lexend_Giga/static/LexendGiga-ExtraLight.ttf
+  Lexend_Giga/static/LexendGiga-Light.ttf
+  Lexend_Giga/static/LexendGiga-Regular.ttf
+  Lexend_Giga/static/LexendGiga-Medium.ttf
+  Lexend_Giga/static/LexendGiga-SemiBold.ttf
+  Lexend_Giga/static/LexendGiga-Bold.ttf
+  Lexend_Giga/static/LexendGiga-ExtraBold.ttf
+  Lexend_Giga/static/LexendGiga-Black.ttf
 
 Get started
 -----------

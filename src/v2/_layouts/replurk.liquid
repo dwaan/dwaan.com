@@ -1,0 +1,90 @@
+---
+title: RePlurk
+description: Unofficial Plurk Year End Recap
+namespace: replurk
+
+# Optional parameters:
+# class
+# time
+---
+
+<!doctype html>
+<html class="no-js" lang="{{ page.lang }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Primary Meta Tags -->
+    {% assign titleDefault = "Dwan 😙" %}
+    {% if title == titleDefault %}
+    {% capture title %}{{ title }}{% endcapture %}
+    {% else %}
+    {% capture title %}{{ title }} - {{ titleDefault }}{% endcapture %}
+    {% endif %}
+    <title>{{ title }}</title>
+    <meta name="title" content="{{ title }}">
+    <meta name="description" content="{{ description }}">
+
+    <link rel="stylesheet" media="screen" href="/css/plurk.css">
+
+    <script>
+        var classcollection = "page-{{ namespace }}";
+        /* See if it's in dark mode */
+        h = document.querySelector("html");
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) classcollection += " dark";
+
+        // Set the class
+        h.setAttribute('class', classcollection);
+    </script>
+    <script src="/js/replurk.bundle.js" async></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:image" content="/sharepic.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ page.url }}">
+    <meta name="twitter:creator" content="@dwaan">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="/sharepic.jpg">
+</head>
+
+<body data-barba="wrapper">
+    <header>
+    </header>
+
+    <main data-barba="container" data-barba-namespace="{{ namespace }}" class="{{ class }} {{ namespace }}">
+        {{ content }}
+    </main>
+
+    <div id="support" class="support"></div>
+
+    <script>
+        document.getElementById("support").innerHTML = `\
+        <div class="content">\
+          <h2>😭</h2>\
+          <h3>Please don't squeeze me 😱.</h3>\
+          <p>I think your screen is just to small for me to support it.</p>\
+          <p>Please rotate your 📱 screen or resize your 💻 browser for better looking layout.</p>\
+        </div>`
+    </script>
+</body>
+
+</html>

@@ -63,6 +63,11 @@ var api = {
 	abort: function () {
 		this.requests.forEach(request => request.abort())
 		this.requests = []
+	},
+	ignoreduser: function (usertofind) {
+		var users = ["StopDNPMarxDEIRaceSexHustlers"]
+		var index = users.findIndex(user => user == usertofind)
+		return index < 0 ? false : true
 	}
 }
 
