@@ -350,7 +350,7 @@ class replurk {
 		next.querySelector("#hello .karma").innerHTML = `<div>${plurker.karma}</div><div>${plurker.karma}</div><div>${plurker.karma}</div>`
 
 		var color = gsap.utils.splitColor(`#${plurker.name_color}`)
-		gsap.set(next.querySelectorAll("#hello .content, .footer #menu"), {
+		gsap.set(next.querySelectorAll("#hello .content"), {
 			color: `rgb(${color[0] - 90}, ${color[1] - 90}, ${color[2] - 90})`,
 			backgroundColor: `rgb(${color[0] + 70}, ${color[1] + 70}, ${color[2] + 70})`
 		});
@@ -632,6 +632,15 @@ class replurk {
 		if (this.me.gender == 0) plurker = icons.draw("woman-bowing")
 
 		this.statistics.newdraw({
+			class: `replurkbadges list lexend`,
+			html: [{
+				class: `title`,
+				html: `RePlurk Badges`
+			}, {
+				class: `list`,
+				html: ``
+			}]
+		}, {
 			class: `replurkbadges description inter`,
 			html: [{
 				class: `title`,
@@ -651,15 +660,6 @@ class replurk {
 						<li>and, posting almost every day on Plurk (2 badges for Active Plurker)</li>\
 					</ol>\
 				`
-			}]
-		}, {
-			class: `replurkbadges list lexend`,
-			html: [{
-				class: `title`,
-				html: `RePlurk Badges`
-			}, {
-				class: `list`,
-				html: ``
 			}]
 		})
 		var count = 0

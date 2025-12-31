@@ -244,12 +244,12 @@ class most {
 				this.parent.statistics.newdraw({
 					class: `sharedlinks meme lexend`,
 					html: [{
+						class: `image`,
+						html: `<img src="/img/replurk/huh.webp" >`
+					}, {
 						class: `big`,
 						html: `wat<br/>`,
 						repeat: 20
-					}, {
-						class: `image`,
-						html: `<img src="/img/replurk/huh.webp" >`
 					}, {
 						class: `text`,
 						html: `You shared ${plural(this.links.length, 'link')} links in ${this.parent.year} and this was the popular one?`

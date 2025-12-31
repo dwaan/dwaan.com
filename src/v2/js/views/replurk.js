@@ -1,7 +1,7 @@
 "use strict"
 
 import { gsap } from 'gsap'
-import { _q, _qAll, reduceMotionFilter } from '../helpers/helper.js'
+import { _q, _qAll, addClass, reduceMotionFilter } from '../helpers/helper.js'
 
 var replurk = {
 	replurk: false,
@@ -24,13 +24,13 @@ var replurk = {
 			}
 			if (year <= 2008) {
 				next.querySelectorAll(".nav-prev").forEach(el => {
-					el.remove()
+					addClass(el, "inactive")
 				})
 			}
 			if (year >= currentyear) {
 				year = currentyear
 				next.querySelectorAll(".nav-next").forEach(el => {
-					el.remove()
+					addClass(el, "inactive")
 				})
 			}
 

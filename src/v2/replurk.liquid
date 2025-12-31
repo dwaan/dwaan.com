@@ -48,12 +48,13 @@ class: plurk
     </div>
 </section>
 
+<input class="handle" id="creditstoggler" type="checkbox" />
 <section id="credits" class="middle">
     <div class="text">
-        <h2 class="hidden">Made with &hearts;</h2>
-        <p class="made">Made with <span class="red">&hearts;</span> in TLV</p>
-        <p class="like">Thank you for visiting. If you like this web app and want to support for further improvement:</p>
-        <p class="like likeandsupport">
+        <p class="close">Tap/click any where to close this message</p>
+        <p class="made">Made with <span>&hearts;</span> in TLV, hosted in Paris</p>
+        <p>Thank you for visiting. If you like this web app and want to support for further improvement:</p>
+        <p class="likeandsupport">
             <a href="https://www.plurk.com/p/3gjv3og6eu" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/person-bowing-medium.svg" width="64" height="64" alt="">
                 <i>Say Hi! to me in Plurk</i>
             </a>
@@ -61,12 +62,14 @@ class: plurk
                 <i>Send me a Plurk Coin</i>
             </a>
             <a href="https://www.buymeacoffee.com/dwaan" target="_BLANK"><img src="https://api.iconify.design/fluent-emoji/soft-ice-cream.svg" width="64" height="64" alt="">
-                <i>Buy me an Ice Cream</i>
+                <i>Buy me a Sorbet</i>
             </a>
         </p>
         <p class="noaffiliation">This web app doesn't have any affiliation with Plurk HQ. All of your data from Plurk are processed locally in your browser via <a href="/replurk/api/" data-barba-prevent target="_BLANK">web api proxy</a>. If there's some copyrighted materials that shouldn't be in this web app, feel free to <a href="/hi/">contact me</a> for removal</p>
         <p class="noaffiliation">You can clone this web app source code from <a href="https://github.com/replurk" target="_BLANK">GitHub</a></p>
     </div>
+
+    <label for="creditstoggler"></label>
 </section>
 
 <section class="footer">
@@ -76,8 +79,10 @@ class: plurk
         </svg>
         <span></span>
     </div>
-    
-    <div id="pagination" class="grant"></div>
+
+    <div id="pagination" class="grant">
+        <div class="pages"></div>
+    </div>
 
     <div id="menu">
         <input class="handle" id="menutoggler" type="checkbox" />
@@ -88,10 +93,17 @@ class: plurk
                 <a href="/replurk/?year=2020" class="nav-next">&rarr;</a>
             </div>
             <hr />
-            <div class="about">About</div>
+            <label class="about" for="creditstoggler">About</label>
             <div id="logout" class="logout">Logout</div>
         </div>
         <label for="menutoggler"></label>
+        <div class="label">
+            <svg width="100%" height="100%" viewBox="0 0 24 24" stroke="#000000" xmlns="http://www.w3.org/2000/svg">
+                <path id="menu1" d="M4 18L20 18" stroke-width="2" stroke-linecap="round"></path>
+                <path id="menu1" d="M4 12L20 12" stroke-width="2" stroke-linecap="round"></path>
+                <path id="menu1" d="M4 6L20 6" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+        </div>
     </div>
 </section>
 

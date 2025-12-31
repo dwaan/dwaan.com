@@ -49,16 +49,25 @@ class statistics {
 			modules: [Mousewheel, Keyboard, EffectCoverflow, Pagination, Autoplay],
 			speed: 500,
 			effect: "coverflow",
+			coverflowEffect: {
+				rotate: 35,
+				scale: .9
+			},
 			grabCursor: true,
 			mousewheel: true,
 			centeredSlides: true,
 			autoplay: {
-				delay: 5000,
-				disableOnInteraction: false
+				delay: 10000,
+				disableOnInteraction: false,
+				pauseOnMouseEnter: true
 			},
 			pagination: {
-				el: "#pagination",
-				clickable: true
+				el: "#pagination .pages",
+				clickable: true,
+				// bulletClass: "page",
+				// bulletActiveClass: "active",
+				dynamicBullets: true,
+				dynamicMainBullets: 10
 			},
 			keyboard: {
 				enabled: true,

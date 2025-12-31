@@ -2004,6 +2004,14 @@ main.replurk {
 		gap: 1rem;
 	}
 
+	.image {
+		align-self: flex-end;
+
+		img {
+			mix-blend-mode: multiply;
+		}
+	}
+
 	.big {
 		position: absolute;
 		left: -1rem;
@@ -2015,15 +2023,6 @@ main.replurk {
 		opacity: .5;
 		-webkit-text-stroke-width: 1px;
 		-webkit-text-stroke-color: var(--black);
-	}
-
-	.image {
-		top: initial;
-		bottom: 0;
-
-		img {
-			mix-blend-mode: multiply;
-		}
 	}
 
 	.post {
@@ -2736,4 +2735,10 @@ main.replurk {
 			height: 1rem;
 		}
 	}
+}
+
+
+// Hidden
+.hidden {
+	display: none !important;
 }
