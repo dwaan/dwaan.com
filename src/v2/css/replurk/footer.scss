@@ -15,10 +15,13 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	height: 1.5rem;
 }
 
 #progress {
-	position: relative;
+	position: absolute;
+	left: 0;
+	top: 0;
 	z-index: 2;
 	flex: none;
 
@@ -52,34 +55,26 @@
 }
 
 #pagination {
-	--size: 1.25vmin;
-
 	z-index: 1;
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	justify-content: center;
+	padding: 0 2rem;
 	width: auto;
 	flex: 1;
+	pointer-events: none;
 
 	.pages {
 		transform: none;
+		pointer-events: all;
 
 		.swiper-pagination-bullet.swiper-pagination-bullet-active-main {
-			margin: 0 .125rem;
-			padding: 0;
-			width: var(--size);
-			height: var(--size);
 			background: var(--dark-white);
-			opacity: .5;
-			transition: width .25s ease;
-			border-radius: var(--size);
 			cursor: pointer;
 
 			&.swiper-pagination-bullet-active {
-				opacity: 1;
 				background: var(--yellow);
-				width: calc(4 * var(--size));
 			}
 		}
 	}
@@ -104,7 +99,6 @@
 	border-radius: 1rem;
 	transition: all .25s ease;
 	box-shadow: 0 .25rem 2rem var(--black-50);
-
 
 	hr {
 		margin: 0;
@@ -158,7 +152,7 @@
 		opacity: 0;
 		filter: blur(1rem);
 		pointer-events: none;
-		transition: all .25s ease-in-out;
+		transition: all .25s ease;
 		overflow: clip;
 
 		>div,
@@ -184,7 +178,7 @@
 		pointer-events: all;
 		appearance: none;
 		-webkit-appearance: none;
-		transition: all .25s ease-in-out;
+		transition: all .25s ease;
 
 		&:checked {
 			opacity: 0;
@@ -222,6 +216,7 @@
 					font-size: .8rem;
 					pointer-events: all;
 					transition: color .125s ease;
+					text-align: center;
 
 					&.now {
 						font-weight: 500;
@@ -229,7 +224,7 @@
 					}
 
 					&:hover {
-						color: var(--red);
+						color: var(--yellow);
 					}
 				}
 			}

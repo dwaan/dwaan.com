@@ -383,7 +383,7 @@ class replurk {
 					html: `Brace yourself!`
 				}, {
 					class: `text`,
-					html: `You have ${plural(plurker.badges.length, "badge")} `,
+					html: `You have ${plural(plurker.badges.length, "badge")} to protect you from lousy year end design `,
 					repeat: 10
 				}, {
 					class: `image`,
