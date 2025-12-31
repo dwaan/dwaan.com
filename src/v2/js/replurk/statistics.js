@@ -79,6 +79,28 @@ class statistics {
 				}
 			}
 		})
+		const playpause = this.next.querySelector("#playpause")
+		var play = true
+		if (playpause) playpause.onclick = () => {
+			if (play) {
+				play = false
+				removeClass(playpause, "play")
+				addClass(playpause, "pause")
+				this.swiper.autoplay.stop()
+			} else {
+				play = true
+				removeClass(playpause, "pause")
+				addClass(playpause, "play")
+				this.swiper.autoplay.start()
+			}
+		}
+
+		// Capture function
+		const capture = this.next.querySelector("#capture")
+		if (capture) capture.onclick = async () => {
+			var activecapture = this.next.querySelector(".swiper-slide-active")
+			if (activecapture) this.capture(activecapture)
+		}
 
 		// Most statistics object renderer
 		this.most = new most(this)
@@ -530,13 +552,6 @@ class statistics {
 			ease: "expo.out"
 		})
 
-		// Capture function
-		const capture = el.querySelector(".content")
-		if (capture) capture.onclick = async () => {
-			// this.capture(capture)
-			console.log("Capturing...")
-		}
-
 		// Refresh scroll
 		scroll.refresh()
 
@@ -544,15 +559,17 @@ class statistics {
 		this.swiper.update()
 	}
 
-	async capture(capture) {
-		if (capture.generating) return
+	async capture(el) {
+		if (el.generating) return
+
+		console.log("Caputring", el)
 
 		// Informing user the process is starting
-		capture.generating = true
-		addClass(capture, "wait")
+		el.generating = true
+		addClass(el, "wait")
 		document.body.style.cursor = "wait"
 
-		capture.querySelectorAll("img").forEach(img => {
+		el.querySelectorAll("img").forEach(img => {
 			if (!img.src.includes("plurk-api")) {
 				img.dataset.src = img.src
 				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
@@ -560,10 +577,10 @@ class statistics {
 				img.src = `${api.url}?img=${img.dataset.src}?width=${img.clientWidth}&height=${img.clientHeight}&box=1`
 			}
 		})
-		await waitForImg(capture)
+		await waitForImg(el)
 
 		// HTML to Canvas magic
-		var canvas = await html2canvas(capture, {
+		var canvas = await html2canvas(el, {
 			backgroundColor: null,
 			logging: false
 		})
@@ -580,9 +597,9 @@ class statistics {
 
 		// Reset button after 3s
 		document.body.style.cursor = ""
-		removeClass(capture, "wait")
+		removeClass(el, "wait")
 		setTimeout(() => {
-			capture.generating = false
+			el.generating = false
 		}, 3000)
 	}
 }

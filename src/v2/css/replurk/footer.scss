@@ -19,10 +19,9 @@
 }
 
 #progress {
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 2;
+	--size: 1.5rem;
+
+	position: relative;
 	flex: none;
 
 	&,
@@ -30,8 +29,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 1.5rem;
-		height: 1.5rem;
+		width: var(--size);
+		height: var(--size);
 		font-size: .5rem;
 		font-weight: 800;
 	}
@@ -60,8 +59,7 @@
 	flex-flow: row wrap;
 	align-items: center;
 	justify-content: center;
-	padding: 0 2rem;
-	width: auto;
+	padding: 0;
 	flex: 1;
 	pointer-events: none;
 
@@ -80,25 +78,87 @@
 	}
 }
 
+#capture,
+#playpause {
+	--size: 1.5rem;
+
+	width: var(--size);
+	height: var(--size);
+	padding: .125rem;
+	cursor: pointer;
+	transition: padding .25s ease;
+
+	&:hover {
+		padding: 0;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+#capture {
+
+	&,
+	img {
+		display: flex;
+	}
+
+	img {
+		+img {
+			display: none;
+		}
+	}
+
+	&:hover {
+
+		img {
+			display: none;
+
+			+img {
+				display: block;
+			}
+		}
+	}
+}
+
+#playpause {
+	&.play {
+
+		img {
+			display: block;
+
+			+img {
+				display: none;
+			}
+		}
+	}
+
+	&.pause {
+
+		img {
+			display: none;
+
+			+img {
+				display: block;
+			}
+		}
+	}
+}
+
 #menu {
 	--size: 1.5rem;
 
-	position: absolute;
-	z-index: 2;
-	right: 0;
-	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	margin: 0 0 0 auto;
 	padding: 0;
-	overflow: hidden;
-	min-width: var(--size);
-	min-height: var(--size);
+	width: var(--size);
+	height: var(--size);
 	cursor: pointer;
-	border-radius: 1rem;
 	transition: all .25s ease;
-	box-shadow: 0 .25rem 2rem var(--black-50);
 
 	hr {
 		margin: 0;
@@ -144,8 +204,14 @@
 	}
 
 	.submenu {
+		position: absolute;
+		top: initial;
+		bottom: 0;
+		left: initial;
+		right: 0;
 		display: block;
 		flex-direction: column;
+		flex: none;
 		padding: 0;
 		width: 0;
 		height: 0;
@@ -153,7 +219,10 @@
 		filter: blur(1rem);
 		pointer-events: none;
 		transition: all .25s ease;
-		overflow: clip;
+		overflow: hidden;
+		border-radius: 1rem;
+		box-shadow: 0 .25rem 2rem var(--black-50);
+
 
 		>div,
 		>label {
@@ -184,7 +253,6 @@
 			opacity: 0;
 
 			+.submenu {
-				position: relative;
 				z-index: 2;
 				display: flex;
 				justify-content: space-evenly;
