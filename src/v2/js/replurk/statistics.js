@@ -47,7 +47,7 @@ class statistics {
 		// Swiper
 		this.swiper = new Swiper("#statistics", {
 			modules: [Mousewheel, Keyboard, EffectCoverflow, Autoplay],
-			speed: 2500,
+			speed: 1000,
 			effect: "coverflow",
 			grabCursor: true,
 			mousewheel: true,
